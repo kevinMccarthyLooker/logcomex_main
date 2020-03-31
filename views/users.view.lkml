@@ -1,0 +1,112 @@
+view: users {
+  sql_table_name: public.users ;;
+  drill_fields: [id]
+
+  dimension: id {
+    primary_key: yes
+    type: number
+    sql: ${TABLE}."id" ;;
+  }
+
+  dimension: clear_prefs {
+    type: yesno
+    sql: ${TABLE}."clear_prefs" ;;
+  }
+
+  dimension: country_phone_code {
+    type: string
+    sql: ${TABLE}."country_phone_code" ;;
+  }
+
+  dimension_group: created {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."created_at" ;;
+  }
+
+  dimension: customer_profile_default_id {
+    type: number
+    sql: ${TABLE}."customer_profile_default_id" ;;
+  }
+
+  dimension_group: date_birth {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}."date_birth" ;;
+  }
+
+  dimension_group: deleted {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."deleted_at" ;;
+  }
+
+  dimension: email {
+    type: string
+    sql: ${TABLE}."email" ;;
+  }
+
+  dimension: name {
+    type: string
+    sql: ${TABLE}."name" ;;
+  }
+
+  dimension: password {
+    type: string
+    sql: ${TABLE}."password" ;;
+  }
+
+  dimension: phone_number {
+    type: string
+    sql: ${TABLE}."phone_number" ;;
+  }
+
+  dimension: remember_token {
+    type: string
+    sql: ${TABLE}."remember_token" ;;
+  }
+
+  dimension_group: updated {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."updated_at" ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [id, name, report_log.count, user_profile_customer.count]
+  }
+}
