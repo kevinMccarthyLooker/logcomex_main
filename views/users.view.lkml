@@ -3,12 +3,14 @@ view: users {
   drill_fields: [id]
 
   dimension: id {
+    hidden: yes
     primary_key: yes
     type: number
     sql: ${TABLE}."id" ;;
   }
 
   dimension: clear_prefs {
+    label: "Clear Preferences"
     type: yesno
     sql: ${TABLE}."clear_prefs" ;;
   }
@@ -107,6 +109,10 @@ view: users {
 
   measure: count {
     type: count
-    drill_fields: [id, name, report_log.count, user_profile_customer.count]
+    drill_fields: [basic_drills*]
   }
+
+
+  set: basic_drills {fields:[id, name, report_log.count, user_profile_customer.count]}
+
 }

@@ -168,9 +168,35 @@ view: customer_plan {
     sql: ${TABLE}."updated_at" ;;
   }
 
+#custom status fields
+#trial
+#active
+#not in trial
+
+  dimension: active {
+    type: yesno
+    sql: current_date between ${start_raw} and ${expiration_raw} ;;
+  }
+
+  dimension: trial {
+    type: yesno
+    sql: current_date between ${trial_start_raw} and ${trial_end_raw}  ;;
+  }
+
+
   measure: count {
+    label: "Plan Count"
     type: count
     drill_fields: [detail*]
+    filters:{
+      field: id
+      value: "NOT NULL"
+    }
+  }
+
+  measure: active_plan_count {
+    type: count
+    filters: [active: "Yes"]
   }
 
   # ----- Sets of fields for drilling ------
