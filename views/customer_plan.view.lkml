@@ -175,12 +175,16 @@ view: customer_plan {
 
   dimension: active {
     type: yesno
-    sql: current_date between ${start_raw} and ${expiration_raw} ;;
+    sql: current_date between ${start_raw} and ${expiration_raw}
+        and ${deleted_raw} is null
+    ;;
   }
 
   dimension: trial {
     type: yesno
-    sql: current_date between ${trial_start_raw} and ${trial_end_raw}  ;;
+    sql: current_date between ${trial_start_raw} and ${trial_end_raw}
+    and ${deleted_raw} is null
+    ;;
   }
 
 

@@ -13,6 +13,7 @@ view: report_log {
     timeframes: [
       raw,
       time,
+      hour,
       date,
       week,
       month,
