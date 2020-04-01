@@ -100,6 +100,10 @@ select 30 as days_to_add,false as daily,false as weekly
       url: "{{weekly_active_users_detail_drill._link}}"
       label: "Report Log Details"
     }
+    link: {
+      url: "//google.com?{{period_end_date._value}}"
+      label: "test"
+    }
     #using liquid to make a nicely formatted html rendering for a table or tooltip
     html: {{weekly_active_users._linked_value}}<br>
       {{weekly_active_users_list._value | replace: ';','<br>'}} ;;
