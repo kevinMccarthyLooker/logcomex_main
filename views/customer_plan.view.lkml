@@ -200,6 +200,7 @@ view: customer_plan {
 
   measure: active_plan_count {
     type: count
+    drill_fields: [customer_detail*]
     filters: [active: "Yes"]
   }
 
@@ -213,6 +214,12 @@ view: customer_plan {
       plan_complete.id,
       plan_info.id,
       report_log.count
+    ]
+  }
+  set: customer_detail {
+    fields: [
+      customer.id,
+      customer.name,
     ]
   }
 }
