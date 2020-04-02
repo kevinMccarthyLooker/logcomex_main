@@ -70,7 +70,7 @@ view: customer_trial_derived_info {
       sql: ${TABLE}."customer_plan.active_trial_count" ;;
     }
 
-    dimension: has_active_plan {
+    dimension: has_active_trial {
       type: yesno
       sql:  ${customer_plan_active_trial_count}>0;;
     }
