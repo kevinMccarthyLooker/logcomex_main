@@ -99,13 +99,13 @@ view: report_log {
   measure: count_api_logs {
     type:  count
     filters: [api_log: " True"]
-    drill_fields: [customer.name, count_api_logs]
+    drill_fields: [customer.name, count]
   }
 
   measure: count_excel_logs {
     type:  count
     filters: [excel_log: " True"]
-    drill_fields: [customer.name, count_api_logs]
+    drill_fields: [customer.name, count]
     }
 
 
