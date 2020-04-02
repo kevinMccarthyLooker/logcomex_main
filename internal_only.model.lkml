@@ -47,6 +47,8 @@ explore: dau_wau_mau {
 
 
 include: "/**/customer_derived_info.view.lkml"
+include: "/**/customer_trial_derived_info.view.lkml"
+
 explore: usage {
   sql_always_where: ${customer.fake_customer}=false ;;
 #   always_filter: {}
@@ -62,6 +64,13 @@ explore: usage {
   view_name: customer
 
   join: customer_derived_info {
+    view_label: "Customer"
+    sql_on: ${customer.id}=${customer_derived_info.customer_id} ;;
+    type: left_outer
+    relationship: one_to_one
+  }
+
+  join: customer_trial_derived_info {
     view_label: "Customer"
     sql_on: ${customer.id}=${customer_derived_info.customer_id} ;;
     type: left_outer
