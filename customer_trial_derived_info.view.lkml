@@ -64,7 +64,6 @@ view: customer_trial_derived_info {
       sql: ${TABLE}.customer_id ;;
     }
 
-
     dimension: customer_plan_active_trial_count {
       type: number
       sql: ${TABLE}."customer_plan.active_trial_count" ;;

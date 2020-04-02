@@ -42,6 +42,7 @@ view: plan {
   }
 
   dimension: name {
+    label: "Plan Name"
     type: string
     sql: ${TABLE}."name" ;;
   }
