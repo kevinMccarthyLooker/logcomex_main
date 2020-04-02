@@ -170,12 +170,7 @@ view: customer {
   set: detail {
     fields: [
       id,
-      name,
-      custom_name,
-      customer_type.id,
-      customer_type.name,
-      customer_plan.count,
-      user_profile_customer.count
+      name
     ]
   }
 }
