@@ -59,6 +59,18 @@ view: report_log {
     sql: ${TABLE}."report_type_id" ;;
   }
 
+  dimension: api_log {
+    type: yesno
+    sql: ${report_type_id} <> 2
+    ;;
+  }
+
+  dimension: excel_log {
+    type: yesno
+    sql: ${report_type_id} = 2
+      ;;
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [
@@ -83,6 +95,20 @@ view: report_log {
     type: count
     drill_fields: [id, customer_plan.id, users.id, users.name]
   }
+
+  measure: count_api_logs {
+    type:  count
+    filters: [api_log: " True"]
+    drill_fields: [customer.name, count_api_logs]
+  }
+
+  measure: count_excel_logs {
+    type:  count
+    filters: [excel_log: " True"]
+    drill_fields: [customer.name, count_api_logs]
+    }
+
+
   measure: total_line_numbers {
     type: sum
     sql:  ${line_numbers};;
