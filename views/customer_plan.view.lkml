@@ -204,6 +204,12 @@ view: customer_plan {
     filters: [active: "Yes"]
   }
 
+  measure: active_trial_count {
+    type: count
+    drill_fields: [customer_detail*]
+    filters: [trial: "Yes"]
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
