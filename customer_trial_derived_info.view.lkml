@@ -20,7 +20,7 @@ view: customer_trial_derived_info {
     --WHEN customer_plan."expiration" < current_date + 60  --expiring soon
     WHEN customer_plan."trial_end" < current_date + {{expiration_threshold._parameter_value}}  --expiring soon
     and
-    (current_date between (customer_plan."trial_start") and (customer_plan."trial_expiration")
+    (current_date between (customer_plan."trial_start") and (customer_plan."trial_end")
     and (customer_plan."deleted_at") is null
     ) --active
     and
