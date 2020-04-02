@@ -72,7 +72,7 @@ explore: usage {
 
   join: customer_trial_derived_info {
     view_label: "Customer"
-    sql_on: ${customer.id}=${customer_derived_info.customer_id} ;;
+    sql_on: ${customer.id}=${customer_trial_derived_info.customer_id} ;;
     type: left_outer
     relationship: one_to_one
   }
