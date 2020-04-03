@@ -18,7 +18,6 @@ datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
 }
 
-
 explore: dau_wau_mau {
   view_name: report_log
   join: dau_wau_mau_dates {
@@ -50,7 +49,7 @@ include: "/**/customer_derived_plan_info.view.lkml"
 include: "/**/customer_derived_trial_info.view.lkml"
 
 explore: usage {
-  sql_always_where: ${customer.fake_customer}=false ;;
+  sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
 #   always_filter: {}
 #   access_filter: {
 #     field: customer.id
@@ -90,6 +89,13 @@ explore: usage {
   join: report_log {
     sql_on: ${users.id}=${report_log.user_id} ;;
     relationship: one_to_many
+    type: left_outer
+  }
+  join: service_log {
+    from: service
+    view_label: "Report Log"
+    sql_on: cast(cast(${report_log.serviceId} as text) as integer)=${service.id};;
+    relationship: one_to_one
     type: left_outer
   }
   #better understand customer plan.

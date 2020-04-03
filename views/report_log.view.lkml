@@ -44,6 +44,11 @@ view: report_log {
     sql: ${TABLE}."json_filter" ;;
   }
 
+  dimension: serviceId {
+    type: number
+    sql: ${json_filter} ->> 'serviceId';;
+  }
+
   dimension: line_numbers {
     type: number
     sql: ${TABLE}."line_numbers" ;;
