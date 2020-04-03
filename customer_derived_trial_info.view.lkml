@@ -1,4 +1,4 @@
-view: customer_trial_derived_info {
+view: customer_derived_trial_info {
   derived_table: {
     sql:
     with customer_has_active_trial as(

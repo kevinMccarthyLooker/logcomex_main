@@ -1,4 +1,4 @@
-view: customer_derived_info {
+view: customer_derived_plan_info {
   derived_table: {
     sql:
 with customer_has_active_plan as(
