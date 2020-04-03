@@ -10,6 +10,7 @@ view: service {
   }
 
   dimension_group: created {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -24,6 +25,7 @@ view: service {
   }
 
   dimension_group: deleted {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -58,11 +60,13 @@ view: service {
   }
 
   dimension: slug {
+    hidden: yes
     type: string
     sql: ${TABLE}."slug" ;;
   }
 
   dimension_group: updated {
+    hidden: yes
     type: time
     timeframes: [
       raw,
