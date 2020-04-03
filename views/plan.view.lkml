@@ -67,6 +67,7 @@ view: plan {
   }
 
   measure: count {
+    label: "Plan Count"
     type: count
     drill_fields: [id, name, plan_complete.count]
   }
