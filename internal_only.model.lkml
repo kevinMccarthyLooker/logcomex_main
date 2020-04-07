@@ -94,7 +94,7 @@ explore: usage {
   join: service_log {
     from: service
     view_label: "Report Log"
-    sql_on: cast(cast(${report_log.serviceId} as text) as integer)=${service.id};;
+    sql_on: cast(cast(${report_log.serviceId} as text) as integer)=${service_log.id};;
     relationship: one_to_one
     type: left_outer
   }

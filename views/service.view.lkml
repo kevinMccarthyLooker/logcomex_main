@@ -83,6 +83,6 @@ view: service {
   measure: count {
     label: "Service Count"
     type: count
-    drill_fields: [id, name, plan_complete.count]
+    drill_fields: [id, name]
   }
 }
