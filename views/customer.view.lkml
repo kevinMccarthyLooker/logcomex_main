@@ -170,7 +170,8 @@ view: customer {
   set: detail {
     fields: [
       id,
-      name
+      name,
+      report_log.count
     ]
   }
 }

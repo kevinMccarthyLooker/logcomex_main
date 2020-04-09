@@ -3,12 +3,14 @@ view: customer_type {
   drill_fields: [id]
 
   dimension: id {
+    hidden: yes
     primary_key: yes
     type: number
     sql: ${TABLE}."id" ;;
   }
 
   dimension_group: created {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -23,6 +25,7 @@ view: customer_type {
   }
 
   dimension_group: deleted {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -36,22 +39,24 @@ view: customer_type {
     sql: ${TABLE}."deleted_at" ;;
   }
 
-  dimension: description {
+  dimension: customer_type_description {
     type: string
     sql: ${TABLE}."description" ;;
   }
 
-  dimension: name {
+  dimension: customer_type_name {
     type: string
     sql: ${TABLE}."name" ;;
   }
 
   dimension: slug {
+    hidden: yes
     type: string
     sql: ${TABLE}."slug" ;;
   }
 
   dimension_group: updated {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -63,10 +68,5 @@ view: customer_type {
       year
     ]
     sql: ${TABLE}."updated_at" ;;
-  }
-
-  measure: count {
-    type: count
-    drill_fields: [id, name, customer.count, plan_complete.count]
   }
 }

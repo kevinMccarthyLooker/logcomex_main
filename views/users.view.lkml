@@ -113,6 +113,6 @@ view: users {
   }
 
 
-  set: basic_drills {fields:[id, name, report_log.count, user_profile_customer.count]}
+  set: basic_drills {fields:[id, name, customer.name, report_log.count]}
 
 }

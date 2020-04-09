@@ -98,7 +98,7 @@ view: report_log {
 
   measure: count {
     type: count
-    drill_fields: [id, customer_plan.id, users.id, users.name]
+    drill_fields: [id, customer.name, users.name, count]
   }
 
   measure: count_api_logs {

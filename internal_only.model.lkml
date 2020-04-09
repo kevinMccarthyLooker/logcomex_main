@@ -9,6 +9,7 @@ include: "/**/users.view.lkml"
 include: "/**/user_profile_customer.view.lkml"
 include: "/**/customer.view.lkml"
 include: "/**/customer_plan.view.lkml"
+include: "/**/customer_type.view.lkml"
 include: "/**/plan_complete.view.lkml"
 include: "/**/service.view.lkml"
 include: "/**/plan.view.lkml"
@@ -60,6 +61,13 @@ explore: usage {
   group_label: "Usage"
   view_name: customer
 
+  join: customer_type {
+    view_label: "Customer"
+    sql_on: ${customer.customer_type_id}=${customer_type.id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
+
   join: customer_derived_plan_info {
     view_label: "Customer"
     sql_on: ${customer.id}=${customer_derived_plan_info.customer_id} ;;
@@ -79,7 +87,6 @@ explore: usage {
     relationship: many_to_one
     type: left_outer
   }
-
 
   join: users {
     sql_on: ${user_profile_customer.user_id}=${users.id} ;;
