@@ -13,6 +13,7 @@ include: "/**/customer_type.view.lkml"
 include: "/**/plan_complete.view.lkml"
 include: "/**/service.view.lkml"
 include: "/**/plan.view.lkml"
+include: "/**/tickets_movidesk.view.lkml"
 include: "/**/dau_wau_mau_dates.view.lkml"
 
 datagroup: my_datagroup {
@@ -86,6 +87,12 @@ explore: usage {
 
   join: user_profile_customer {
     sql_on: ${user_profile_customer.customer_id}=${customer.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: tickets_movidesk {
+    sql_on: ${tickets_movidesk.id_customer}=${customer.id} ;;
     relationship: many_to_one
     type: left_outer
   }

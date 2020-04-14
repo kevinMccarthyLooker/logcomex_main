@@ -187,7 +187,6 @@ view: customer_plan {
     ;;
   }
 
-
   measure: count {
     label: "Plan Count"
     type: count
