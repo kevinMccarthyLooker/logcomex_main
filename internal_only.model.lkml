@@ -48,6 +48,8 @@ explore: dau_wau_mau {
 
 include: "/**/customer_derived_plan_info.view.lkml"
 include: "/**/customer_derived_trial_info.view.lkml"
+include: "/**/user_derived_info.view.lkml"
+
 
 explore: usage {
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
@@ -93,6 +95,14 @@ explore: usage {
     relationship: many_to_one
     type: left_outer
   }
+
+  join: user_derived_info {
+    view_label: "Users"
+    sql_on: ${users.id}=${user_derived_info.user_id} ;;
+    type: left_outer
+    relationship: one_to_one
+  }
+
   join: report_log {
     sql_on: ${users.id}=${report_log.user_id} ;;
     relationship: one_to_many
