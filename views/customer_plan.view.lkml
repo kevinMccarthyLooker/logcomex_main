@@ -224,8 +224,10 @@ view: customer_plan {
   }
   set: customer_detail {
     fields: [
-      customer.id,
-      customer.name,
+      service.product,
+      service.name,
+      plan.name
+
     ]
   }
 }
