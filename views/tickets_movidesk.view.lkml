@@ -112,17 +112,9 @@ view: tickets_movidesk {
 
   dimension_group: tempo_fechamento {
     type: duration
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
     sql_start: ${ticket_created_date_raw};;
     sql_end: ${ticket_closing_date_raw} ;;
+    intervals: [day, hour, minute]
   }
 
   dimension_group: updated {
@@ -167,6 +159,10 @@ view: tickets_movidesk {
     filters: [ticket_status: "Cancelado"]
   }
 
+measure: tempo_medio_fechamento_em_dias {
+  type: average
+  sql: ${days_tempo_fechamento} ;;
+}
 
 # ----- Sets of fields for drilling ------
   set: detail {
