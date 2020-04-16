@@ -1,9 +1,8 @@
 view: tickets_movidesk {
   sql_table_name: public.tickets_movidesk ;;
-  drill_fields: [id]
+  drill_fields: [id_ticket_movidesk]
 
-  dimension: id {
-    hidden: yes
+  dimension: id_ticket_movidesk {
     primary_key: yes
     type: number
     sql: ${TABLE}."id" ;;
@@ -29,7 +28,6 @@ view: tickets_movidesk {
   }
 
   dimension_group: created {
-    hidden:  yes
     type: time
     timeframes: [
       raw,
@@ -104,7 +102,11 @@ view: tickets_movidesk {
 
   dimension: ticket_aberto {
     type: yesno
-    sql: case when tickets_movidesk.closing_date is null then true else false end
+    sql: case
+          when tickets_movidesk.closing_date is not null then false
+          when tickets_movidesk.category is null then false
+          else true
+          end
     ;;
   }
 
