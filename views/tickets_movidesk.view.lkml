@@ -162,6 +162,7 @@ view: tickets_movidesk {
 measure: tempo_medio_fechamento_em_dias {
   type: average
   sql: ${days_tempo_fechamento} ;;
+  value_format: "0.00 \" Days\""
 }
 
 # ----- Sets of fields for drilling ------
