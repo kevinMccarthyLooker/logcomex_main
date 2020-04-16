@@ -100,12 +100,12 @@ view: tickets_movidesk {
     sql: ${TABLE}."subject" ;;
   }
 
-  dimension: ticket_aberto {
-    type: yesno
+  dimension: ticket_status {
+    type: string
     sql: case
-          when tickets_movidesk.closing_date is not null then false
-          when tickets_movidesk.category is null then false
-          else true
+          when tickets_movidesk.closing_date is not null then 'Fechado'
+          when tickets_movidesk.category is null then 'Cancelado'
+          else 'Aberto'
           end
     ;;
   }
@@ -131,6 +131,36 @@ view: tickets_movidesk {
 
   measure: count {
     type: count
-    drill_fields: [service_first, service_second, service_third, users.name, users.email, created_date]
+    drill_fields: [detail*]
+  }
+
+  measure: tickets_abertos_count {
+    type: count
+    drill_fields: [detail*]
+    filters: [ticket_status: "Aberto"]
+  }
+
+  measure: tickets_fechados_count {
+    type: count
+    drill_fields: [detail*]
+    filters: [ticket_status: "Fechado"]
+  }
+
+  measure: tickets_cancelados_count {
+    type: count
+    drill_fields: [detail*]
+    filters: [ticket_status: "Cancelado"]
+  }
+
+# ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      service_first,
+      service_second,
+      service_third,
+      subject,
+      ticket_created_date_raw,
+      ticket_closing_date_raw
+    ]
   }
 }
