@@ -4,6 +4,7 @@ connection: "api"
 # include: "/**/view.lkml"                   # include all views in this project
 # include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
+include: "/**/access_log.view.lkml"
 include: "/**/report_log.view.lkml"
 include: "/**/users.view.lkml"
 include: "/**/user_profile_customer.view.lkml"
@@ -112,6 +113,11 @@ explore: usage {
 
   join: report_log {
     sql_on: ${users.id}=${report_log.user_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+  join: access_log {
+    sql_on: ${customer.id}=${access_log.customer_id} ;;
     relationship: one_to_many
     type: left_outer
   }
