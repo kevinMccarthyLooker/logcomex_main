@@ -78,8 +78,8 @@ view: access_log {
     sql: ${TABLE}."user_id" ;;
   }
 
-  measure: count {
+  measure: count_access_log {
     type: count
-    drill_fields: [id]
+    drill_fields: [users.name]
   }
 }

@@ -121,6 +121,13 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+  join: access_log_user {
+    from: access_log
+    view_label: "Access Log Users"
+    sql_on: ${users.id}=${access_log_user.user_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
   join: service_log {
     from: service
     view_label: "Report Log"
