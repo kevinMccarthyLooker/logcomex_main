@@ -100,11 +100,17 @@ view: tickets_movidesk {
     sql: ${TABLE}."subject" ;;
   }
 
+  dimension: status {
+    type: string
+    sql: ${TABLE}."status" ;;
+  }
+
   dimension: ticket_status {
     type: string
     sql: case
-          when tickets_movidesk.closing_date is not null then 'Fechado'
-          when tickets_movidesk.category is null then 'Cancelado'
+          when tickets_movidesk.status = 'Fechado' then 'Fechado'
+          when tickets_movidesk.status = 'Cancelado' then 'Cancelado'
+          when tickets_movidesk.status is null then 'Cancelado'
           else 'Aberto'
           end
     ;;
