@@ -1,7 +1,8 @@
-connection: "api"
+connection: "aereo"
 
-include: "/views/*.view.lkml"                # include all views in the views/ folder in this project
-# include: "/**/view.lkml"                   # include all views in this project
+include: "/**/di_pu.view.lkml"
+include: "/**/di_pu_addition.view.lkml"
+
 # include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
 # # Select the views that should be a part of this model,
@@ -18,3 +19,12 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 #     sql_on: ${users.id} = ${orders.user_id} ;;
 #   }
 # }
+
+explore: di_pu {}
+
+explore: di_pu_addition {
+  join: di_pu {
+    relationship: many_to_one
+    sql_on:  ${di_pu.di_number} = ${di_pu_addition.di_number} ;;
+  }
+}
