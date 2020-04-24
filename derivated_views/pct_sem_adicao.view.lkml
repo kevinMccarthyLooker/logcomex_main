@@ -19,7 +19,7 @@ ORDER BY 1
 
   dimension: count {
     type: number
-    label: "Qtd S/Adição"
+    label: "Qtd S/ Adição"
     sql: ${TABLE}."count" ;;
   }
 

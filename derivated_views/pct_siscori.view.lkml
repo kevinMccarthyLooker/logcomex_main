@@ -25,7 +25,7 @@ GROUP BY 1
 
   dimension: num_siscori {
     type: number
-    label: "Siscori"
+    label: "Num Ord Siscori"
     sql: ${TABLE}."num_siscori" ;;
   }
 
