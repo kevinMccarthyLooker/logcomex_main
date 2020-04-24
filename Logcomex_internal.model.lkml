@@ -16,6 +16,9 @@ include: "/**/service.view.lkml"
 include: "/**/plan.view.lkml"
 include: "/**/tickets_movidesk.view.lkml"
 include: "/**/dau_wau_mau_dates.view.lkml"
+include: "/**/customer_derived_plan_info.view.lkml"
+include: "/**/customer_derived_trial_info.view.lkml"
+include: "/**/user_derived_info.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -46,12 +49,6 @@ explore: dau_wau_mau {
   #did not join customer_plan because users can't be directly associated to one plan amongst their customer's plans
 
 }
-
-
-include: "/**/customer_derived_plan_info.view.lkml"
-include: "/**/customer_derived_trial_info.view.lkml"
-include: "/**/user_derived_info.view.lkml"
-
 
 explore: usage {
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
