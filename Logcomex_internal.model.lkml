@@ -1,9 +1,5 @@
 connection: "api"
 
-# include: "/views/*.view.lkml"                # include all views in the views/ folder in this project
-# include: "/**/view.lkml"                   # include all views in this project
-# include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
-
 include: "/**/access_log.view.lkml"
 include: "/**/report_log.view.lkml"
 include: "/**/users.view.lkml"
@@ -59,7 +55,6 @@ explore: usage {
 #   }
 
   persist_with: my_datagroup
-  group_label: "Usage"
   view_name: customer
 
   join: customer_type {
