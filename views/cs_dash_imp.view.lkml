@@ -1,5 +1,7 @@
 view: cs_dash_imp {
   derived_table: {
+    indexes: ["dtoperacao"]
+    persist_for: "24 hours"
     sql: select db_maritimo.id AS "ID",
            db_maritimo.dtoperacao AS "ETA",
            db_cad_porto_origem.nome_real AS "PORTO ORIGEM",
@@ -103,8 +105,8 @@ view: cs_dash_imp {
     sql: ${TABLE}."NOTIFICADO" ;;
   }
 
-  dimension: volumes {
-    type: number
+   measure: volumes {
+    type: sum
     sql: ${TABLE}."VOLUMES" ;;
     label: "VOLUME"
   }
