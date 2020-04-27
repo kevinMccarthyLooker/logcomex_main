@@ -5,6 +5,8 @@ include: "/views/antaq_carga.view.lkml"
 include: "/views/antaq_atracacao.view.lkml"
 include: "/views/aereo_dados_no_tempo.view.lkml"
 include: "/views/health_data.view.lkml"
+include: "/views/antaqxmaritimo.view.lkml"
+include: "/views/cs_dash_imp.view.lkml"
 
 
 explore: view_AntaqMaritimo {
@@ -21,3 +23,9 @@ explore: antaq_carga  {
 }
 
 explore: health_data {}
+
+explore: antaqxmaritimo {
+  label: " Imp AntaqMaritimo"
+}
+
+explore: cs_dash_imp {}

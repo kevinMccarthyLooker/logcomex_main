@@ -1,5 +1,6 @@
 view: health_data {
   derived_table: {
+    indexes: ["dtoperacao"]
     sql: select
        d.col,
        count(*) filter (where value is null) as null_count,
@@ -73,7 +74,6 @@ GROUP BY db_ce_history.dt_entregue, db_consignatarios.atv_principal_text, db_con
 group by d.col
  ;;
     sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW())/(168*60*60)) ;;
-    indexes: ["data_registro"]
   }
 
 
