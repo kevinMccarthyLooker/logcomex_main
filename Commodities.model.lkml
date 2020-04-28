@@ -1,20 +1,36 @@
-connection: "api"
+connection: "aereo"
 
-include: "/views/*.view.lkml"                # include all views in the views/ folder in this project
-# include: "/**/view.lkml"                   # include all views in this project
-# include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
+include: "/derivated_views/pct_match_search.view.lkml"
+include: "/derivated_views/pct_sem_adicao.view.lkml"
+include: "/derivated_views/pct_di_pu.view.lkml"
+include: "/derivated_views/pct_siscori.view.lkml"
 
-# # Select the views that should be a part of this model,
-# # and define the joins that connect them together.
-#
-# explore: order_items {
-#   join: orders {
-#     relationship: many_to_one
-#     sql_on: ${orders.id} = ${order_items.order_id} ;;
-#   }
-#
-#   join: users {
-#     relationship: many_to_one
-#     sql_on: ${users.id} = ${orders.user_id} ;;
-#   }
-# }
+explore: pct_match_search {
+
+}
+
+explore: pct_sem_adicao {
+
+}
+
+explore: pct_di_pu {
+  join: pct_match_search {
+    relationship: one_to_one
+    sql_on:  ${pct_match_search.anomes} = ${pct_di_pu.ano_mes} ;;
+  }
+}
+
+explore: pct_siscori {
+  join: pct_di_pu {
+    relationship: one_to_one
+    sql_on:  ${pct_siscori.anomes} = ${pct_di_pu.ano_mes} ;;
+  }
+  join: pct_match_search{
+    relationship: one_to_one
+    sql_on:  ${pct_siscori.anomes} = ${pct_match_search.anomes} ;;
+  }
+  join: pct_sem_adicao{
+    relationship: one_to_one
+    sql_on:  ${pct_siscori.anomes} = ${pct_sem_adicao.anomes} ;;
+  }
+}
