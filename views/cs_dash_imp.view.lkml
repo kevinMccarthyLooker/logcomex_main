@@ -1,7 +1,7 @@
 view: cs_dash_imp {
   derived_table: {
-    indexes: ["dtoperacao"]
-    persist_for: "24 hours"
+    #persist_for: "24 hours"
+    #indexes: ["ETA"]
     sql: select db_maritimo.id AS "ID",
            db_maritimo.dtoperacao AS "ETA",
            db_cad_porto_origem.nome_real AS "PORTO ORIGEM",
@@ -13,9 +13,12 @@ view: cs_dash_imp {
            db_maritimo_consig.nmconsignatario AS "CONSIGNATARIO FINAL",
            db_cad_notify.nome_real AS "NOTIFICADO",
            db_maritimo.vlcubagem AS "VOLUMES",
-           db_cad_pais_origem.trade as "TRADE LINE"
+           db_cad_pais_origem.trade as "TRADE LINE",
+           db_consignatarios.atv_principal_text AS "ATIVIDADE",
+           db_maritimo_consig.teus AS "TEUS"
       FROM db_maritimo
       LEFT JOIN db_maritimo AS db_maritimo_consig ON db_maritimo_consig.nrcemaster = LPAD(db_maritimo.nrcemercante::TEXT, 15, '0')
+      LEFT JOIN vw_db_consignatarios AS db_consignatarios ON db_consignatarios.cnpj = db_maritimo_consig.cdconsignatario
       LEFT JOIN db_cad_consig ON db_maritimo.id_consig = db_cad_consig.id
       LEFT JOIN db_cad_notify ON db_maritimo.id_notify = db_cad_notify.id
       LEFT JOIN db_cad_pais as db_cad_pais_origem ON db_maritimo.id_pais_origem = db_cad_pais_origem.id
@@ -26,7 +29,7 @@ view: cs_dash_imp {
       WHERE db_maritimo.dtoperacao >= '2019-01-01 00:00:00'-- and db_maritimo.dtoperacao < '2020-03-16 00:00:00'
       AND db_maritimo.categoriacarga = 'I'
       AND db_maritimo.deleted_at IS NULL
-      GROUP BY "ID","ETA","PORTO DESCARGA","PORTO DESTINO","PORTO EMBARQUE","PORTO ORIGEM", "CNPJ CONSIGNATARIO","CONSIGNATARIO","CONSIGNATARIO FINAL","NOTIFICADO", "VOLUMES", "TRADE LINE"
+      GROUP BY "ID","ETA","PORTO DESCARGA","PORTO DESTINO","PORTO EMBARQUE","PORTO ORIGEM", "CNPJ CONSIGNATARIO","CONSIGNATARIO","CONSIGNATARIO FINAL","NOTIFICADO", "VOLUMES", "TRADE LINE", "ATIVIDADE","TEUS"
        ;;
   }
 
@@ -50,12 +53,17 @@ view: cs_dash_imp {
     label: "PERÍODO"
   }
 
+  dimension: atv_principal_text {
+    type: string
+    label: "ATIVIDADE"
+    sql: ${TABLE}."ATIVIDADE" ;;
+  }
+
   dimension: trade {
     type: string
     label: "TRADE LINE"
     sql: ${TABLE}."TRADE LINE" ;;
   }
-
 
 
   dimension: porto_origem {
@@ -91,7 +99,7 @@ view: cs_dash_imp {
   dimension: consignatario {
     type: string
     sql: ${TABLE}."CONSIGNATARIO" ;;
-    label: "CONSIGNATARIO"
+    label: "AGENTE DE CARGA"
   }
 
   dimension: consignatario_final {
@@ -103,6 +111,12 @@ view: cs_dash_imp {
   dimension: notificado {
     type: string
     sql: ${TABLE}."NOTIFICADO" ;;
+  }
+
+  measure: teus {
+    type: sum
+    sql: ${TABLE}."TEUS" ;;
+    label: "TEUS"
   }
 
    measure: volumes {
