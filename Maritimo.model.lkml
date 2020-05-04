@@ -22,7 +22,9 @@ explore: antaq_carga  {
   label: "Base Antaq"
 }
 
-explore: health_data {}
+explore: health_data {
+
+}
 
 explore: antaqxmaritimo {
   label: " Imp AntaqMaritimo"
