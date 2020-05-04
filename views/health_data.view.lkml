@@ -44,7 +44,10 @@ from (
      db_maritimo.c40 AS "C40",
      db_maritimo.total_fcl AS "QTDE FCL",
      db_maritimo.vlcubagem AS "VOLUMES",
-     db_maritimo.vlpesobruto AS "PESO BRUTO"
+     db_maritimo.vlpesobruto AS "PESO BRUTO",
+     db_maritimo.oprecolhimentofrete AS "RECOLHIMENTO FRETE",
+     db_maritimo.cdmoedafrete AS "CD MOEDA FRETE",
+     db_maritimo.nmmoedafrete AS "NOME MOEDA FRETE"
 FROM db_maritimo
 LEFT JOIN db_ce_history on db_ce_history.ce = db_maritimo.nrcemercante AND db_ce_history.deleted_at is NULL
 LEFT JOIN db_maritimo AS db_maritimo_consig ON db_maritimo_consig.nrcemaster = LPAD(db_maritimo.nrcemercante::TEXT, 15, '0')
