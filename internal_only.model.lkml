@@ -15,6 +15,7 @@ include: "/**/dau_wau_mau_dates.view.lkml"
 include: "/**/customer_derived_plan_info.view.lkml"
 include: "/**/customer_derived_trial_info.view.lkml"
 include: "/**/user_derived_info.view.lkml"
+include: "/**/bi_filters_customer_plan.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -131,6 +132,11 @@ explore: usage {
   #do care about first customer_plan, etc, for each user?
   join: customer_plan {
     sql_on: ${customer.id}=${customer_plan.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+  join: bi_filters_customer_plan{
+    sql_on:   ${customer_plan.id}=${bi_filters_customer_plan.customer_plan_id} ;;
     relationship: one_to_many
     type: left_outer
   }
