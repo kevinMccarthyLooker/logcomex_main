@@ -1,7 +1,9 @@
 view: health_data {
   derived_table: {
+    persist_for: "24 hours"
     indexes: ["dtoperacao"]
     sql: select
+       t.dtoperacao,
        d.col,
        count(*) filter (where value is null) as null_count,
        count(*) filter (where value is not null) as not_null_count,
@@ -11,7 +13,7 @@ from (
      db_maritimo.data_registro AS " DATA PROCESSADO",
      db_maritimo.tipo_carga AS "TIPO CARGA",
      db_maritimo.dtemissaoce AS "ETS",
-     db_maritimo.dtoperacao AS "ETA",
+     db_maritimo.dtoperacao,
      db_ce_history.dt_entregue AS "SAÍDA PORTO",
      db_maritimo.tipoconhecimento AS "EMBARQUE",
      db_maritimo.nmembarcacao AS "NAVIO",
@@ -45,7 +47,10 @@ from (
      db_maritimo.c40 AS "C40",
      db_maritimo.total_fcl AS "QTDE FCL",
      db_maritimo.vlcubagem AS "VOLUMES",
-     db_maritimo.vlpesobruto AS "PESO BRUTO"
+     db_maritimo.vlpesobruto AS "PESO BRUTO",
+     db_maritimo.oprecolhimentofrete AS "RECOLHIMENTO FRETE",
+     db_maritimo.cdmoedafrete AS "CD MOEDA FRETE",
+     db_maritimo.nmmoedafrete AS "NOME MOEDA FRETE"
 FROM db_maritimo
 LEFT JOIN db_ce_history on db_ce_history.ce = db_maritimo.nrcemercante AND db_ce_history.deleted_at is NULL
 LEFT JOIN db_maritimo AS db_maritimo_consig ON db_maritimo_consig.nrcemaster = LPAD(db_maritimo.nrcemercante::TEXT, 15, '0')
@@ -71,11 +76,10 @@ GROUP BY db_ce_history.dt_entregue, db_consignatarios.atv_principal_text, db_con
         db_cad_consig.nome_real, db_cad_shipper.nome_real, db_cad_notify.nome_real, db_cad_armador.nome_real, db_cad_agente.nome_real, db_cad_agente_inter.nome_real, db_cad_fcl.nome_real, db_maritimo.id
      ) as t
   cross join jsonb_each_text(to_jsonb(t)) as d(col, value)
-group by d.col
+group by d.col,t.dtoperacao
  ;;
-    sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW())/(168*60*60)) ;;
+    #sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW())/(168*60*60)) ;;
   }
-
 
   measure: count {
     type: count
@@ -88,20 +92,20 @@ group by d.col
     label: "Campo"
   }
 
-  dimension: null_count {
-    type: number
+  measure: null_count {
+    type: sum
     sql: ${TABLE}."null_count" ;;
     label: "Nulo"
   }
 
-  dimension: not_null_count {
-    type: number
+  measure: not_null_count {
+    type: sum
     sql: ${TABLE}."not_null_count" ;;
     label: "Preenchido"
   }
 
-  dimension: empty {
-    type: number
+  measure: empty {
+    type: sum
     sql: ${TABLE}."empty" ;;
     label: "Vazio"
   }

@@ -15,7 +15,9 @@ view: cs_dash_imp {
            db_maritimo.vlcubagem AS "VOLUMES",
            db_cad_pais_origem.trade as "TRADE LINE",
            db_consignatarios.atv_principal_text AS "ATIVIDADE",
-           db_maritimo_consig.teus AS "TEUS"
+           db_maritimo.teus AS "TEUS",
+           db_maritimo.vlpesobruto AS "PESO BRUTO",
+           db_maritimo.tipoconhecimento as "EMBARQUE"
       FROM db_maritimo
       LEFT JOIN db_maritimo AS db_maritimo_consig ON db_maritimo_consig.nrcemaster = LPAD(db_maritimo.nrcemercante::TEXT, 15, '0')
       LEFT JOIN vw_db_consignatarios AS db_consignatarios ON db_consignatarios.cnpj = db_maritimo_consig.cdconsignatario
@@ -26,10 +28,13 @@ view: cs_dash_imp {
       LEFT JOIN db_cad_porto as db_cad_porto_carga  ON db_maritimo.id_porto_carga = db_cad_porto_carga.id
       LEFT JOIN db_cad_porto as db_cad_porto_descarga ON db_maritimo.id_porto_descarga = db_cad_porto_descarga.id
       LEFT JOIN db_cad_porto as db_cad_porto_destino ON db_maritimo.id_porto_destino = db_cad_porto_destino.id
+      LEFT JOIN db_cad_pais as db_cad_pais_destino ON db_maritimo_consig.id_pais_destino = db_cad_pais_destino.id
       WHERE db_maritimo.dtoperacao >= '2019-01-01 00:00:00'-- and db_maritimo.dtoperacao < '2020-03-16 00:00:00'
       AND db_maritimo.categoriacarga = 'I'
       AND db_maritimo.deleted_at IS NULL
-      GROUP BY "ID","ETA","PORTO DESCARGA","PORTO DESTINO","PORTO EMBARQUE","PORTO ORIGEM", "CNPJ CONSIGNATARIO","CONSIGNATARIO","CONSIGNATARIO FINAL","NOTIFICADO", "VOLUMES", "TRADE LINE", "ATIVIDADE","TEUS"
+      GROUP BY "ID","ETA","PORTO DESCARGA","PORTO DESTINO","PORTO EMBARQUE","PORTO ORIGEM", "CNPJ CONSIGNATARIO",
+      "CONSIGNATARIO","CONSIGNATARIO FINAL","NOTIFICADO", "VOLUMES", "TRADE LINE", "ATIVIDADE","TEUS","PESO BRUTO", "EMBARQUE"
+      ORDER BY "TEUS" DESC
        ;;
   }
 
@@ -47,6 +52,7 @@ view: cs_dash_imp {
     timeframes: [
       date,
       month_num,
+      month_name,
       year
     ]
     sql: ${TABLE}."ETA" ;;
@@ -113,6 +119,12 @@ view: cs_dash_imp {
     sql: ${TABLE}."NOTIFICADO" ;;
   }
 
+  dimension: embarque {
+    type: string
+    sql: ${TABLE}."EMBARQUE" ;;
+    label: "EMBARQUE"
+  }
+
   measure: teus {
     type: sum
     sql: ${TABLE}."TEUS" ;;
@@ -123,6 +135,12 @@ view: cs_dash_imp {
     type: sum
     sql: ${TABLE}."VOLUMES" ;;
     label: "VOLUME"
+  }
+
+  measure: vlpesobruto {
+    type: sum
+    sql: ${TABLE}."PESO BRUTO" ;;
+    label: "PESO BRUTO"
   }
 
   set: detail {
