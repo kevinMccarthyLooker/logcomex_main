@@ -18,6 +18,7 @@ include: "/**/customer_derived_trial_info.view.lkml"
 include: "/**/user_derived_info.view.lkml"
 include: "/**/bi_filters_customer_plan.view.lkml"
 include: "/**/plan_info_join.view.lkml"
+include: "/**/cs_healthscore.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -65,6 +66,12 @@ explore: usage {
     sql_on: ${customer.customer_type_id}=${customer_type.id} ;;
     type: left_outer
     relationship: many_to_one
+  }
+
+  join: cs_healthscore{
+    sql_on: ${customer.id}=${cs_healthscore.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
   }
 
   join: customer_derived_plan_info {
