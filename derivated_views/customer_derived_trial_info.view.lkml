@@ -32,7 +32,6 @@ view: customer_derived_trial_info {
     GROUP BY 1
     )
 
-
     select customer_has_active_trial.*,customer_has_soon_to_be_expired_trial.count_soon_to_be_expired_trials
     from customer_has_active_trial
     customer_has_active_trial left join customer_has_soon_to_be_expired_trial on customer_has_active_trial.customer_id=customer_has_soon_to_be_expired_trial.customer_id

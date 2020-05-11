@@ -8,6 +8,7 @@ include: "/**/customer.view.lkml"
 include: "/**/customer_plan.view.lkml"
 include: "/**/customer_type.view.lkml"
 include: "/**/plan_complete.view.lkml"
+include: "/**/plan_info.view.lkml"
 include: "/**/service.view.lkml"
 include: "/**/plan.view.lkml"
 include: "/**/tickets_movidesk.view.lkml"
@@ -16,6 +17,7 @@ include: "/**/customer_derived_plan_info.view.lkml"
 include: "/**/customer_derived_trial_info.view.lkml"
 include: "/**/user_derived_info.view.lkml"
 include: "/**/bi_filters_customer_plan.view.lkml"
+include: "/**/plan_info_join.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -135,8 +137,13 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+  join: plan_info_join{
+    sql_on: ${customer_plan.id}=${plan_info_join.customer_plan_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
   join: bi_filters_customer_plan{
-    sql_on:   ${customer_plan.id}=${bi_filters_customer_plan.customer_plan_id} ;;
+    sql_on: ${customer_plan.id}=${bi_filters_customer_plan.customer_plan_id} ;;
     relationship: one_to_many
     type: left_outer
   }
@@ -151,7 +158,6 @@ explore: usage {
     relationship: many_to_one
     type: left_outer
   }
-
   #service view_label: "Plan Complete"
   #plan  view_label: "Plan Complete"
   join: plan {
