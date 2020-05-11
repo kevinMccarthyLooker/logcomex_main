@@ -97,6 +97,21 @@ view: customer {
     sql: ${TABLE}."executive_id" ;;
   }
 
+  dimension: executive_name {
+    type: string
+    sql:  CASE WHEN (customer.executive_id = 39) THEN 'Renan'
+              WHEN (customer.executive_id = 44) THEN 'Irene'
+              WHEN (customer.executive_id = 17) THEN 'Elaine'
+              WHEN (customer.executive_id = 16) THEN 'Nickelson'
+              WHEN (customer.executive_id = 37) THEN 'Jessica Moreira'
+              WHEN (customer.executive_id = 52) THEN 'Mirele'
+              WHEN (customer.executive_id = 59) THEN 'Valeria'
+              WHEN (customer.executive_id = 50) THEN 'Jessica Steinheusen'
+              when (customer.executive_id is null) then CAST ( customer.executive_id AS TEXT )
+          else CAST ( customer.executive_id AS TEXT ) end
+    ;;
+  }
+
   dimension: fake_customer {
     type: yesno
     sql: ${TABLE}."fake_customer" ;;
