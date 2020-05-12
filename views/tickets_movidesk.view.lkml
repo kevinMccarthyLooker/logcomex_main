@@ -73,6 +73,10 @@ view: tickets_movidesk {
   dimension: id_protocol {
     type: number
     sql: ${TABLE}."id_protocol" ;;
+    link: {
+      label: "Movidesk"
+      url: "https://logcomex.movidesk.com/Ticket/Edit/{{ value }}"
+    }
   }
 
   dimension: id_user {
@@ -174,6 +178,7 @@ measure: tempo_medio_fechamento_em_dias {
 # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
+      id_protocol,
       service_first,
       service_second,
       service_third,
