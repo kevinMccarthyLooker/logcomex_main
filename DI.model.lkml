@@ -24,6 +24,7 @@ include: "/**/di_control_pu_addition.view.lkml"
 # }
 
 explore: di_control {
+  label: "DI JOINS"
   join: di_control_pu {
     relationship: one_to_one
     sql_on: ${di_control.id} = ${di_control_pu.di_control_id} ;;
