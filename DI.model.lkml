@@ -2,6 +2,9 @@ connection: "aereo"
 
 include: "/**/di_pu.view.lkml"
 include: "/**/di_pu_addition.view.lkml"
+include: "/**/di_control_pu.view.lkml"
+include: "/**/di_control.view.lkml"
+include: "/**/di_control_pu_addition.view.lkml"
 
 # include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
@@ -20,11 +23,21 @@ include: "/**/di_pu_addition.view.lkml"
 #   }
 # }
 
-explore: di_pu {}
-
-explore: di_pu_addition {
+explore: di_control {
+  join: di_control_pu {
+    relationship: one_to_one
+    sql_on: ${di_control.id} = ${di_control_pu.di_control_id} ;;
+  }
   join: di_pu {
-    relationship: many_to_one
-    sql_on:  ${di_pu.di_number} = ${di_pu_addition.di_number} ;;
+    relationship: one_to_one
+    sql_on: ${di_control_pu.di_control_id} = ${di_pu.di_control_pu_id} ;;
+  }
+  join: di_control_pu_addition {
+    relationship: one_to_many
+    sql_on: ${di_control_pu.id} = ${di_control_pu_addition.di_control_pu_id} ;;
+  }
+  join: di_pu_addition {
+    relationship: one_to_one
+    sql_on: ${di_control_pu_addition.id} = ${di_pu_addition.di_control_pu_addition_id} ;;
   }
 }
