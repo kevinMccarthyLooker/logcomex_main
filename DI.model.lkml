@@ -5,6 +5,7 @@ include: "/**/di_pu_addition.view.lkml"
 include: "/**/di_control_pu.view.lkml"
 include: "/**/di_control.view.lkml"
 include: "/**/di_control_pu_addition.view.lkml"
+include: "/**/di_pendente_robos.view.lkml"
 
 # include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
@@ -23,11 +24,20 @@ include: "/**/di_control_pu_addition.view.lkml"
 #   }
 # }
 
-explore: di_control {
+explore: di_control{}
+explore: di_control_pu {}
+explore: di_pu {}
+explore: di_control_pu_addition {}
+explore: di_pu_addition {}
+explore: di_pendente_robos {}
+
+explore: di_joins {
+  from: di_control
+  view_label: "DI JOINS"
   label: "DI JOINS"
   join: di_control_pu {
     relationship: one_to_one
-    sql_on: ${di_control.id} = ${di_control_pu.di_control_id} ;;
+    sql_on: ${di_joins.id} = ${di_control_pu.di_control_id} ;;
   }
   join: di_pu {
     relationship: one_to_one
