@@ -19,6 +19,8 @@ include: "/**/user_derived_info.view.lkml"
 include: "/**/bi_filters_customer_plan.view.lkml"
 include: "/**/plan_info_join.view.lkml"
 include: "/**/cs_healthscore.view.lkml"
+include: "/**/bi_importacao_filtros.view.lkml"
+include: "/**/customer_info.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -73,6 +75,19 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+
+  join: customer_info{
+    sql_on: ${customer.id}=${customer_info.customer_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
+  join: bi_importacao_filtros{
+    sql_on: ${customer.id}=${bi_importacao_filtros.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
 
   join: customer_derived_plan_info {
     view_label: "Customer"
