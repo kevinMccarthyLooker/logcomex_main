@@ -4,7 +4,7 @@ view: client_documents_by_method {
           razao_social_e as razao_social,
           api_method,
           to_char(DATE_TRUNC('month', data_registro), 'YYYY.MM'::text) AS ano_mes,
-          COUNT(DISTINCT(CASE WHEN RIGHT(api_query_string, 16) = 'reprocessar=true' THEN regexp_replace(RIGHT(api_query_string, 42), '[^0-9]+', '', 'g') WHEN RIGHT(api_query_string, 26) LIKE '%numero_cpf%' THEN regexp_replace(SPLIT_PART(RIGHT(api_query_string, 43), 'numero_cpf', 1), '[^0-9]+', '', 'g') ELSE regexp_replace(RIGHT(api_query_string, 15), '[^0-9]+', '', 'g') END)) as documentos_unicos,
+          COUNT(DISTINCT RIGHT(api_query_string, 15)) as documentos_unicos,
           COUNT(1) as requests_totais
       FROM api_request
       LEFT JOIN empresas ON api_request.ide = empresas.ide
