@@ -9,7 +9,7 @@ view: client_documents_by_method {
       FROM api_request
       LEFT JOIN empresas ON api_request.ide = empresas.ide
       WHERE
-          api_request.ide IN (366, 375, 370) AND -- 375 - BTP :: 370 - Bandeirantes
+          -- api_request.ide IN (366, 375, 370) AND -- 375 - BTP :: 370 - Bandeirantes
           data_registro >= cast(date_trunc('month', current_date - interval '2 months') as date) AND
           data_registro <= NOW()
       GROUP BY
