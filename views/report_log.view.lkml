@@ -84,6 +84,17 @@ view: report_log {
     sql: ${TABLE}."user_id" ;;
   }
 
+
+# --------------------------------- Filtros BI Impotação ----------------------------------------------
+
+  dimension: bi_impo_filter {
+    type: string
+    sql: ${json_filter} ->> 'serviceId';;
+
+  }
+
+# --------------------------------- Measures ----------------------------------------------
+
   measure: count {
     type: count
     drill_fields: [customer.name, users.name, count]

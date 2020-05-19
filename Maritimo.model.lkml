@@ -7,6 +7,10 @@ include: "/views/aereo_dados_no_tempo.view.lkml"
 include: "/views/health_data.view.lkml"
 include: "/views/antaqxmaritimo.view.lkml"
 include: "/views/cs_dash_imp.view.lkml"
+include: "/views/view_infografico.view.lkml"
+include: "/views/view_infografico_exp.view.lkml"
+include: "/views/db_siscori_cod_ncm.view.lkml"
+include: "/views/db_siscori_incoterm.view.lkml"
 
 
 explore: view_AntaqMaritimo {
@@ -31,3 +35,27 @@ explore: antaqxmaritimo {
 }
 
 explore: cs_dash_imp {}
+
+explore: view_infografico {
+  join: db_siscori_cod_ncm {
+    relationship: one_to_one
+    sql_on: ${db_siscori_cod_ncm.id} = ${view_infografico.id_cdncm} ;;
+  }
+  join: db_siscori_incoterm {
+    relationship: one_to_one
+    sql_on: ${db_siscori_incoterm.id} = ${view_infografico.id_incoterm} ;;
+  }
+  label: "Infográfico Importação"
+}
+
+explore: view_infografico_exp {
+  join: db_siscori_cod_ncm {
+    relationship: one_to_one
+    sql_on: ${db_siscori_cod_ncm.id} = ${view_infografico_exp.id_cdncm} ;;
+  }
+  join: db_siscori_incoterm {
+    relationship: one_to_one
+    sql_on: ${db_siscori_incoterm.id} = ${view_infografico_exp.id_incoterm} ;;
+  }
+  label: "Infográfico Exportação"
+}
