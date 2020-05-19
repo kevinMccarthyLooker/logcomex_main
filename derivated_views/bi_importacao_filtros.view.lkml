@@ -33,11 +33,9 @@ view: bi_importacao_filtros {
         inner join users on users.id = report_log.user_id
         inner join customer_plan on customer_plan.id = report_log.customer_plan_id
         inner join customer on customer.id = customer_plan.customer_id
-        inner join service on service.id = (report_log.json_filter ->> 'serviceId')::INT
         where report_log.created_at between '2019-12-31' and '2020-12-31'
           and customer.fake_customer is false
-          and customer.id not in (736)
-          and (service.name = 'Importação' and report_log.json_filter ->> 'page' is null)
+          and (report_log.json_filter ->> 'serviceId' = '1' and report_log.json_filter ->> 'page' is null)
         order by report_log.created_at desc
            ;;
     #     persist_for: "24 hour"
