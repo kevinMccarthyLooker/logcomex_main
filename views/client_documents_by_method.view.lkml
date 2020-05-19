@@ -4,7 +4,7 @@ view: client_documents_by_method {
           razao_social_e as razao_social,
           api_method,
           to_char(DATE_TRUNC('month', data_registro), 'YYYY.MM'::text) AS ano_mes,
-          COUNT(DISTINCT RIGHT(api_query_string, 15)) as documentos_unicos,
+          COUNT(DISTINCT(CASE WHEN RIGHT(api_query_string, 16) = 'reprocessar=true' THEN regexp_replace(RIGHT(api_query_string, 42), '[^0-9]+', '', 'g') WHEN RIGHT(api_query_string, 26) LIKE '%numero_cpf%' THEN regexp_replace(SPLIT_PART(RIGHT(api_query_string, 43), 'numero_cpf', 1), '[^0-9]+', '', 'g') ELSE regexp_replace(RIGHT(api_query_string, 15), '[^0-9]+', '', 'g') END)) as documentos_unicos,
           COUNT(1) as requests_totais
       FROM api_request
       LEFT JOIN empresas ON api_request.ide = empresas.ide
@@ -13,6 +13,15 @@ view: client_documents_by_method {
           data_registro >= cast(date_trunc('month', current_date - interval '1 months') as date) AND
           data_registro <= NOW() AND
           api_method IN (
+          'get_di',
+          'get_pdf_di',
+          'get_pdf_ci',
+          'get_cadastro',
+          'get_siscarga',
+          'get_processo',
+          'get_ce',
+          'get_dta',
+          'get_taxa_conversao'
           'get_sigvig_status_fcl',
           'get_sigvig_user',
           'get_sigvig_requerimento',
