@@ -43,13 +43,13 @@ view: client_documents_by_method {
     sql: ${TABLE}."ano_mes" ;;
   }
 
-  dimension: documentos_unicos {
-    type: number
+  measure: documentos_unicos {
+    type: sum
     sql: ${TABLE}."documentos_unicos" ;;
   }
 
-  dimension: requests_totais {
-    type: number
+  measure: requests_totais {
+    type: sum
     sql: ${TABLE}."requests_totais" ;;
   }
 
