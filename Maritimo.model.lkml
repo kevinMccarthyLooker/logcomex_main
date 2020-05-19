@@ -11,6 +11,7 @@ include: "/views/view_infografico.view.lkml"
 include: "/views/view_infografico_exp.view.lkml"
 include: "/views/db_siscori_cod_ncm.view.lkml"
 include: "/views/db_siscori_incoterm.view.lkml"
+include: "/views/client_documents_by_method.view.lkml"
 
 
 explore: view_AntaqMaritimo {
