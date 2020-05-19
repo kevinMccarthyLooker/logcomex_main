@@ -19,7 +19,7 @@ view: client_documents_by_method {
       ORDER BY
           razao_social,
           api_method,
-          ano_mes;
+          ano_mes
        ;;
   }
 

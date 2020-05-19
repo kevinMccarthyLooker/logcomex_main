@@ -13,6 +13,10 @@ include: "/views/db_siscori_cod_ncm.view.lkml"
 include: "/views/db_siscori_incoterm.view.lkml"
 include: "/views/client_documents_by_method.view.lkml"
 
+explore: client_documents_by_method {
+  label: "Client Documents By Method"
+}
+
 
 explore: view_AntaqMaritimo {
   label: "Base Log"
