@@ -1,6 +1,9 @@
 view: client_documents_by_method {
   derived_table: {
+    persist_for: "24 hours"
+    indexes: ["api_request.id"]
     sql: SELECT
+          api_request.id,
           razao_social_e as razao_social,
           api_method,
           to_char(DATE_TRUNC('month', data_registro), 'YYYY.MM'::text) AS ano_mes,
@@ -91,6 +94,7 @@ view: client_documents_by_method {
           'historico_sefaz',
           'get_ce_navio_itj')
       GROUP BY
+          api_request.id,
           razao_social,
           api_method,
           ano_mes

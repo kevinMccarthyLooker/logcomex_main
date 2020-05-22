@@ -12,6 +12,7 @@ include: "/views/view_infografico_exp.view.lkml"
 include: "/views/db_siscori_cod_ncm.view.lkml"
 include: "/views/db_siscori_incoterm.view.lkml"
 include: "/views/client_documents_by_method.view.lkml"
+include: "/views/health_imp_house_direto.view.lkml"
 
 explore: client_documents_by_method {
   label: "Client Documents By Method"
@@ -40,6 +41,8 @@ explore: antaqxmaritimo {
 }
 
 explore: cs_dash_imp {}
+
+explore: health_imp_house_direto {}
 
 explore: view_infografico {
   join: db_siscori_cod_ncm {
