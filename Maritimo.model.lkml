@@ -20,7 +20,6 @@ explore: client_documents_by_method {
   label: "Client Documents By Method"
 }
 
-
 explore: view_AntaqMaritimo {
   label: "Base Log"
 }
@@ -29,14 +28,12 @@ explore: antaq_carga  {
   join: antaq_atracacao {
     relationship: one_to_one
     sql_on: ${antaq_carga.idatracacao} = ${antaq_atracacao.idatracacao} ;;
-
   }
   label: "Base Antaq"
 }
 
-explore: health_data {
-
-}
+explore: health_data {}
+explore: health_data_exp {}
 
 explore: antaqxmaritimo {
   label: " Imp AntaqMaritimo"
@@ -69,5 +66,3 @@ explore: view_infografico_exp {
   }
   label: "Infográfico Exportação"
 }
-
-explore: health_data_exp {}

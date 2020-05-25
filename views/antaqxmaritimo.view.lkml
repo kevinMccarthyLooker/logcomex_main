@@ -1,6 +1,6 @@
 view: antaqxmaritimo {
   derived_table: {
-    indexes: ["dtoperacao"]
+    indexes: ["destino"]
     sql: select destino,  mes,ano,sum(teu) as Teus_Antaq, (SELECT sum(teus) as Teus_Log
                                         from view_AntaqMaritimo
                                         where dtoperacao >='2019-01-01'
@@ -39,6 +39,7 @@ order by ano,mes
 
   dimension: ano {
     type: number
+    value_format: "0"
     sql: ${TABLE}."ano" ;;
   }
 
