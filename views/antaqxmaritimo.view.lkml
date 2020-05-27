@@ -1,6 +1,7 @@
 view: antaqxmaritimo {
   derived_table: {
     indexes: ["destino"]
+    persist_for: "24 hours"
     sql: select destino,  mes,ano,sum(teu) as Teus_Antaq, (SELECT sum(teus) as Teus_Log
                                         from view_AntaqMaritimo
                                         where dtoperacao >='2019-01-01'
@@ -19,7 +20,7 @@ and sentido = 'DESEMBARCADOS'
 group by  destino, mes,ano
 order by ano,mes
  ;;
-    sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW())/(720*60*60)) ;;
+    #sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW())/(720*60*60)) ;;
   }
 
   measure: count {
