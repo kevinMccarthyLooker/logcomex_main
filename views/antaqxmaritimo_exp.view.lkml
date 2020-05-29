@@ -41,6 +41,7 @@ order by ano,mes
 
   dimension: ano {
     type: number
+    value_format: "0"
     sql: ${TABLE}."ano" ;;
     label: "Ano"
   }
