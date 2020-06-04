@@ -18,5 +18,6 @@ view: customer_info {
   dimension: total_valor_pag {
     type: number
     sql: ${TABLE}."total_valor_pag" ;;
+    value_format_name: usd
   }
 }

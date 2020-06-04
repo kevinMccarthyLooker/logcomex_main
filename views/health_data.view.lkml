@@ -3,6 +3,8 @@ view: health_data {
     persist_for: "24 hours"
     indexes: ["dtoperacao"]
     sql: select
+       --CASE t.tipoconhecimento WHEN '10' THEN 'DIRETO' WHEN '11' THEN 'MASTER' WHEN '12' THEN 'HOUSE' WHEN '15' THEN 'SUB' ELSE '' END,
+       t.tipoconhecimento,
        t.dtoperacao,
        d.col,
        count(*) filter (where value is null) as null_count,
@@ -14,7 +16,8 @@ from (
      db_maritimo.tipo_carga AS "TIPO CARGA",
      db_maritimo.dtemissaoce AS "ETS",
      db_maritimo.dtoperacao,
-     db_ce_history.dt_entregue AS "SAÍDA PORTO",
+     db_maritimo.tipoconhecimento,
+     --db_ce_history.dt_entregue AS "SAÍDA PORTO",
      db_maritimo.tipoconhecimento AS "EMBARQUE",
      db_maritimo.nmembarcacao AS "NAVIO",
      db_maritimo.nrviagem AS "VIAGEM",
@@ -33,12 +36,12 @@ from (
      db_consignatarios.email AS "EMAIL",
      db_consignatarios.telefone AS "TELEFONE",
      db_cad_shipper.nome_real AS "NOME EXPORTADOR",
-     db_cad_notify.nome_real AS "NOTIFICADO",
+     --db_cad_notify.nome_real AS "NOTIFICADO",
      db_cad_armador.nome_real AS "ARMADOR",
      db_cad_agente.nome_real AS "AGENTE DE CARGA",
      db_cad_agente_inter.nome_real AS "AGENTE INTERNACIONAL",
      db_maritimo.oprecolhimentofrete AS "PAGAMENTO",
-     db_ce_dta.armazem_destino AS "ARMAZEM DESTINO",
+     --db_ce_dta.armazem_destino AS "ARMAZEM DESTINO",
      db_cad_fcl.nome_real AS "TIPO FCL",
      db_maritimo.itemcarga_cdncms AS "HS CODE",
      db_maritimo.itemcarga_noncms AS "MERCADORIA",
@@ -52,7 +55,7 @@ from (
      db_maritimo.cdmoedafrete AS "CD MOEDA FRETE",
      db_maritimo.nmmoedafrete AS "NOME MOEDA FRETE"
 FROM db_maritimo
-LEFT JOIN db_ce_history on db_ce_history.ce = db_maritimo.nrcemercante AND db_ce_history.deleted_at is NULL
+--LEFT JOIN db_ce_history on db_ce_history.ce = db_maritimo.nrcemercante AND db_ce_history.deleted_at is NULL
 LEFT JOIN db_maritimo AS db_maritimo_consig ON db_maritimo_consig.nrcemaster = LPAD(db_maritimo.nrcemercante::TEXT, 15, '0')
 LEFT JOIN vw_db_consignatarios AS db_consignatarios ON db_consignatarios.cnpj = db_maritimo.cdconsignatario
 LEFT JOIN db_ce_dta ON db_ce_dta.ce = db_maritimo.nrcemercante
@@ -61,7 +64,7 @@ LEFT JOIN db_cad_agente_inter ON db_maritimo.id_agente_inter = db_cad_agente_int
 LEFT JOIN db_cad_armador ON db_maritimo.id_armador = db_cad_armador.id
 LEFT JOIN db_cad_consig ON db_maritimo.id_consig = db_cad_consig.id
 LEFT JOIN db_cad_fcl ON db_maritimo.id_fcl = db_cad_fcl.id
-LEFT JOIN db_cad_notify ON db_maritimo.id_notify = db_cad_notify.id
+--LEFT JOIN db_cad_notify ON db_maritimo.id_notify = db_cad_notify.id
 LEFT JOIN db_cad_pais as db_cad_pais_origem ON db_maritimo.id_pais_origem = db_cad_pais_origem.id
 LEFT JOIN db_cad_porto as db_cad_porto_origem ON db_maritimo.id_porto_origem = db_cad_porto_origem.id
 LEFT JOIN db_cad_porto as db_cad_porto_carga  ON db_maritimo.id_porto_carga = db_cad_porto_carga.id
@@ -71,12 +74,13 @@ LEFT JOIN db_cad_shipper ON db_maritimo.id_shipper = db_cad_shipper.id
 LEFT JOIN db_cad_terminal as db_cad_terminal_descarga ON  db_maritimo.id_terminal_descarga = db_cad_terminal_descarga.id
 WHERE db_maritimo.dtoperacao >= '2020-01-01 00:00:00'
 AND db_maritimo.categoriacarga = 'I' AND db_maritimo.deleted_at IS NULL
-GROUP BY db_ce_history.dt_entregue, db_consignatarios.atv_principal_text, db_consignatarios.uf, db_consignatarios.municipio, db_consignatarios.email, db_consignatarios.telefone, db_ce_dta.armazem_destino,
-        db_cad_pais_origem.nome_real, db_cad_porto_origem.nome_real, db_cad_porto_carga.nome_real, db_cad_porto_descarga.nome_real, db_cad_terminal_descarga.nome_real, db_cad_porto_destino.nome_real,
-        db_cad_consig.nome_real, db_cad_shipper.nome_real, db_cad_notify.nome_real, db_cad_armador.nome_real, db_cad_agente.nome_real, db_cad_agente_inter.nome_real, db_cad_fcl.nome_real, db_maritimo.id
+GROUP BY db_consignatarios.atv_principal_text, db_consignatarios.uf, db_consignatarios.municipio, db_consignatarios.email, db_consignatarios.telefone, --db_ce_dta.armazem_destino,  db_ce_history.dt_entregue,
+        db_cad_pais_origem.nome_real,db_cad_agente.nome_real, db_cad_agente_inter.nome_real, db_cad_porto_origem.nome_real, db_cad_porto_carga.nome_real, db_cad_porto_descarga.nome_real, db_cad_terminal_descarga.nome_real, db_cad_porto_destino.nome_real,
+        db_cad_consig.nome_real, db_cad_shipper.nome_real,  db_cad_armador.nome_real, db_cad_fcl.nome_real, db_maritimo.id, db_maritimo.dtoperacao,
+     db_maritimo.tipoconhecimento--, db_cad_notify.nome_real
      ) as t
   cross join jsonb_each_text(to_jsonb(t)) as d(col, value)
-group by d.col,t.dtoperacao
+group by d.col,t.dtoperacao,t.tipoconhecimento
  ;;
     #sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW())/(168*60*60)) ;;
   }
@@ -108,6 +112,11 @@ group by d.col,t.dtoperacao
     type: sum
     sql: ${TABLE}."empty" ;;
     label: "Vazio"
+  }
+  dimension: tipoconhecimento {
+    type: string
+    sql: ${TABLE}."tipoconhecimento" ;;
+    label: "Embarque"
   }
 
   set: detail {

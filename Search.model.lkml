@@ -1,6 +1,6 @@
 connection: "filter-api"
 
-include: "/views/*.view.lkml"                # include all views in the views/ folder in this project
+include: "/**/filter_history.view.lkml"
 
 explore: filter_search {
   view_name: filter_history
