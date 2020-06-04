@@ -74,8 +74,8 @@ view: health_imp_house_direto {
         count(d.iddta) as Preenchidos, (select count(d.iddta) from db_ce_dta d
                                 inner join db_maritimo m on m.nrcemercante = d.ce
                                 where m.dtoperacao >=  '2020-01-01'
-                                and recinto_aduaneiro_destino is not null
-                                or unidade_local_destino is not null
+                                and recinto_aduaneiro_destino is  null
+                                and unidade_local_destino is  null
                                 AND m.categoriacarga = 'I'
                                 AND m.deleted_at IS NULL
                                 AND d.deleted_at is NULL
@@ -83,8 +83,7 @@ view: health_imp_house_direto {
         from db_ce_dta d
         inner join db_maritimo m on m.nrcemercante = d.ce
         where m.dtoperacao >=  '2020-01-01'
-        and recinto_aduaneiro_destino is null
-        and unidade_local_destino is null
+        and (recinto_aduaneiro_destino is not null or unidade_local_destino is not null)
         AND m.categoriacarga = 'I'
         AND m.deleted_at IS NULL
         AND d.deleted_at is NULL

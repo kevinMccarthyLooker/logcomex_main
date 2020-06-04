@@ -1,7 +1,7 @@
 view: client_documents_by_method {
   derived_table: {
     persist_for: "24 hours"
-    indexes: ["api_request.id"]
+    indexes: ["api_method"]
     sql: SELECT
           api_request.id,
           razao_social_e as razao_social,
