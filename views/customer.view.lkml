@@ -188,6 +188,7 @@ view: customer {
     fields: [
       id,
       name,
+      executive_name,
       report_log.count
     ]
   }
