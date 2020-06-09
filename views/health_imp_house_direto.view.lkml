@@ -8,7 +8,8 @@ view: health_imp_house_direto {
       from (
            select
 
-           db_ce_history.dt_entregue AS "SAÍDA PORTO"
+           db_ce_history.dt_entregue AS "SAÍDA PORTO",
+           m.id_recinto_aduaneiro as "LOCAL DE LIBERAÇÃO"
 
       FROM db_maritimo m
       LEFT JOIN db_ce_history on db_ce_history.ce = m.nrcemercante
@@ -65,29 +66,6 @@ view: health_imp_house_direto {
         OR recinto_aduaneiro_origem LIKE '%.PORT%'
         and tipoconhecimento in ('10','12')
         AND dtoperacao >= '2020-01-01'
-
-        UNION ALL
-
-      select (select column_name  from  information_schema.columns
-                where table_name =  'db_ce_dta'
-                and column_name = 'unidade_local_destino'),
-        count(d.iddta) as Preenchidos, (select count(d.iddta) from db_ce_dta d
-                                inner join db_maritimo m on m.nrcemercante = d.ce
-                                where m.dtoperacao >=  '2020-01-01'
-                                and recinto_aduaneiro_destino is  null
-                                and unidade_local_destino is  null
-                                AND m.categoriacarga = 'I'
-                                AND m.deleted_at IS NULL
-                                AND d.deleted_at is NULL
-                                AND tipoconhecimento in ('10','12')) AS Nulos
-        from db_ce_dta d
-        inner join db_maritimo m on m.nrcemercante = d.ce
-        where m.dtoperacao >=  '2020-01-01'
-        and (recinto_aduaneiro_destino is not null or unidade_local_destino is not null)
-        AND m.categoriacarga = 'I'
-        AND m.deleted_at IS NULL
-        AND d.deleted_at is NULL
-        AND tipoconhecimento in ('10','12')
        ;;
   }
 
