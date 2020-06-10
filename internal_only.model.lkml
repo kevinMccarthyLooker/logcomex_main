@@ -136,7 +136,8 @@ explore: usage {
     type: left_outer
   }
   join: bi_filtros{
-    sql_on: ${report_log.id}=${bi_filtros.report_log_id} ;;
+    view_label: "Report Log"
+    sql_on: ${report_log.id}=${bi_filtros.filters_report_log_id} ;;
     relationship: one_to_one
     type: left_outer
   }
