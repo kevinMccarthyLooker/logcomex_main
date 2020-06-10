@@ -1,10 +1,10 @@
 view: view_infografico_exp {
   derived_table: {
+    persist_for: "24 hours"
     indexes: ["id"]
     sql: SELECT id, Ano, Mes, anomes, id_cdncm, val_fob_us, id_incoterm, tot_val_peso, pais_destino
         from view_Infografico_exp
        ;;
-    sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW())/(720*60*60)) ;;
   }
 
   measure: count {
