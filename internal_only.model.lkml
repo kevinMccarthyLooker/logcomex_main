@@ -19,7 +19,7 @@ include: "/**/user_derived_info.view.lkml"
 include: "/**/bi_filters_customer_plan.view.lkml"
 include: "/**/plan_info_join.view.lkml"
 include: "/**/cs_healthscore.view.lkml"
-include: "/**/bi_importacao_filtros.view.lkml"
+include: "/**/bi_filtros.view.lkml"
 include: "/**/customer_info.view.lkml"
 include: "/**/filter_history.view.lkml"
 include: "/**/NPS.view.lkml"
@@ -85,12 +85,6 @@ explore: usage {
     type: left_outer
   }
 
-  join: bi_importacao_filtros{
-    sql_on: ${customer.id}=${bi_importacao_filtros.customer_id} ;;
-    relationship: one_to_many
-    type: left_outer
-  }
-
   join: customer_derived_plan_info {
     view_label: "Customer"
     sql_on: ${customer.id}=${customer_derived_plan_info.customer_id} ;;
@@ -141,6 +135,12 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+  join: bi_filtros{
+    sql_on: ${report_log.id}=${bi_filtros.report_log_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
   join: access_log {
     sql_on: ${customer.id}=${access_log.customer_id} ;;
     relationship: one_to_many
