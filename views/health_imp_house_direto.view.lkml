@@ -50,8 +50,8 @@ view: health_imp_house_direto {
 
       select (select column_name from  information_schema.columns
                 where table_name =  'db_ce_dta'
-                and column_name = 'armazem_destino') , count(m.id), (select count(m.id) from db_ce_dta d
-                                                        left join db_maritimo m on m.nrcemercante = d.ce
+                and column_name = 'armazem_destino') , count(iddta), (select count(iddta) from db_ce_dta d
+                                                        inner join db_maritimo m on m.nrcemercante = d.ce
                                                         where url_file is not null
                                                         and armazem_destino is not null
                                                         AND recinto_aduaneiro_origem ~' PORT'
@@ -59,7 +59,7 @@ view: health_imp_house_direto {
                                                         and tipoconhecimento in ('10','12')
                                                         AND dtoperacao >= '2020-01-01')
       from db_ce_dta d
-        left join db_maritimo m on m.nrcemercante = d.ce
+        inner join db_maritimo m on m.nrcemercante = d.ce
         where url_file is not null
         and armazem_destino is null
         AND recinto_aduaneiro_origem ~' PORT'
