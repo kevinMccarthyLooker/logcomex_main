@@ -2,7 +2,7 @@ view: client_documents_by_method {
   derived_table: {
     persist_for: "24 hours"
     indexes: ["razao_social"]
-    sql: SELECT * FROM mvw_api_request_month UNION mvw_api_request_3_months;;
+    sql: SELECT * FROM mvw_api_request_month;;
   }
 
   measure: count {
