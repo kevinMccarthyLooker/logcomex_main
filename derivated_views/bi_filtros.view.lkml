@@ -8,6 +8,7 @@ view: bi_filtros {
             FROM report_log
             WHERE  ((json_filter->>'serviceId' = '11' and report_log.json_filter -> 'year_month' is not null)
                or (json_filter->>'serviceId' = '3' and report_log.json_filter ->> 'page' is null)
+               or (json_filter->>'serviceId' = '2' and report_log.json_filter ->> 'page' is null)
                or (json_filter->>'serviceId' = '1' and report_log.json_filter ->> 'page' is null)
               )
             GROUP BY 1
