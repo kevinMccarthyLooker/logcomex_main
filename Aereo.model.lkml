@@ -5,7 +5,7 @@ include: "/views/aereo_consignatario.view.lkml"
 include: "/views/aereo_awb_details.view.lkml"
 
 
-explore: aereo_dados_no_tempo {}
+#explore: aereo_dados_no_tempo {}
 
 
 explore: aereo_awb_details {
