@@ -19,6 +19,7 @@ view: pct_match_search {
 
   dimension: anomes {
     type: number
+    value_format: "0"
     label: "Ano Mês"
     sql: ${TABLE}."anomes" ;;
   }
