@@ -34,6 +34,7 @@ view: pct_di_pu {
 
   dimension: ano_mes {
     type: number
+    value_format: "0"
     label: "Ano Mês"
     sql: ${TABLE}."ano_mes" ;;
   }

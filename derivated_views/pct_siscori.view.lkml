@@ -19,6 +19,7 @@ GROUP BY 1
 
   dimension: anomes {
     type: number
+    value_format: "0"
     label: "Ano Mês"
     sql: ${TABLE}."anomes" ;;
   }
