@@ -64,7 +64,6 @@ customer_has_active_plan left join customer_has_soon_to_be_expired_plan on custo
     sql: ${TABLE}.customer_id ;;
   }
 
-
   dimension: customer_plan_active_plan_count {
     type: number
     sql: ${TABLE}."customer_plan.active_plan_count" ;;

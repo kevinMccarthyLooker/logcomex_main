@@ -8,6 +8,7 @@ include: "/**/customer.view.lkml"
 include: "/**/customer_plan.view.lkml"
 include: "/**/customer_type.view.lkml"
 include: "/**/plan_complete.view.lkml"
+include: "/**/plan_info.view.lkml"
 include: "/**/service.view.lkml"
 include: "/**/plan.view.lkml"
 include: "/**/tickets_movidesk.view.lkml"
@@ -15,6 +16,14 @@ include: "/**/dau_wau_mau_dates.view.lkml"
 include: "/**/customer_derived_plan_info.view.lkml"
 include: "/**/customer_derived_trial_info.view.lkml"
 include: "/**/user_derived_info.view.lkml"
+include: "/**/bi_filters_customer_plan.view.lkml"
+include: "/**/plan_info_join.view.lkml"
+include: "/**/cs_healthscore.view.lkml"
+include: "/**/bi_filtros.view.lkml"
+include: "/**/customer_info.view.lkml"
+include: "/**/filter_history.view.lkml"
+include: "/**/NPS.view.lkml"
+
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -64,6 +73,18 @@ explore: usage {
     relationship: many_to_one
   }
 
+  join: cs_healthscore{
+    sql_on: ${customer.id}=${cs_healthscore.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: customer_info{
+    sql_on: ${customer.id}=${customer_info.customer_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
   join: customer_derived_plan_info {
     view_label: "Customer"
     sql_on: ${customer.id}=${customer_derived_plan_info.customer_id} ;;
@@ -96,6 +117,12 @@ explore: usage {
     type: left_outer
   }
 
+  join: nps {
+    sql_on: ${users.email}=${nps.email} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
   join: user_derived_info {
     view_label: "Users"
     sql_on: ${users.id}=${user_derived_info.user_id} ;;
@@ -108,6 +135,13 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+  join: bi_filtros{
+    view_label: "Report Log"
+    sql_on: ${report_log.id}=${bi_filtros.filters_report_log_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
   join: access_log {
     sql_on: ${customer.id}=${access_log.customer_id} ;;
     relationship: one_to_many
@@ -134,6 +168,16 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+  join: plan_info_join{
+    sql_on: ${customer_plan.id}=${plan_info_join.customer_plan_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+  join: bi_filters_customer_plan{
+    sql_on: ${customer_plan.id}=${bi_filters_customer_plan.customer_plan_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
   join: plan_complete {
     sql_on: ${customer_plan.plan_complete_id}=${plan_complete.id} ;;
     relationship: many_to_one
@@ -145,7 +189,6 @@ explore: usage {
     relationship: many_to_one
     type: left_outer
   }
-
   #service view_label: "Plan Complete"
   #plan  view_label: "Plan Complete"
   join: plan {
@@ -155,6 +198,5 @@ explore: usage {
     type: left_outer
   }
 }
-
 
 # explore: users {}

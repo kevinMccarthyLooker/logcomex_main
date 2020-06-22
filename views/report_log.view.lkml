@@ -44,9 +44,15 @@ view: report_log {
     sql: ${TABLE}."json_filter" ;;
   }
 
+  dimension: json_filter_text {
+    type: string
+    #sql: replace(replace(replace(replace(replace(cast(${TABLE}."json_filter" as text), '', ''), ',', ', '), '{', ''), '}', ''), ':', ': ') ;;
+    sql: cast(${TABLE}."json_filter" as text) ;;
+  }
+
   dimension: serviceId {
     type: number
-    sql: ${json_filter} ->> 'serviceId';;
+    sql: cast(${json_filter} ->> 'serviceId' as INTEGER);;
   }
 
   dimension: line_numbers {
@@ -84,9 +90,20 @@ view: report_log {
     sql: ${TABLE}."user_id" ;;
   }
 
+  dimension: tipo_chamada_bi {
+    type: string
+    case: {
+      when: {
+        label: "FiltroInicial"
+       # sql: (${json_filter} ->> 'per_page' is null) and (${json_filter} ->> 'grouper' is null );;
+        sql: (${json_filter} ->> 'per_page' is null);;
+        }
+      }
+  }
+
   measure: count {
     type: count
-    drill_fields: [customer.name, users.name, count]
+    drill_fields: [customer.name, users.name, json_filter_text]
   }
 
   measure: count_api_logs {
