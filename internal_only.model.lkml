@@ -22,6 +22,9 @@ include: "/**/cs_healthscore.view.lkml"
 include: "/**/bi_filtros.view.lkml"
 include: "/**/customer_info.view.lkml"
 include: "/**/filter_history.view.lkml"
+include: "/**/customer_api_relations.view.lkml"
+include: "/**/billing_contract_omie.view.lkml"
+include: "/**/service_order_omie.view.lkml"
 include: "/**/NPS.view.lkml"
 
 
@@ -71,6 +74,24 @@ explore: usage {
     sql_on: ${customer.customer_type_id}=${customer_type.id} ;;
     type: left_outer
     relationship: many_to_one
+  }
+
+  join: customer_api_relations{
+    sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: billing_contract_omie{
+    sql_on: ${customer_api_relations.id}=${billing_contract_omie.customer_api_relations_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: service_order_omie{
+    sql_on: ${billing_contract_omie.id}=${service_order_omie.billing_contract_id} ;;
+    relationship: one_to_many
+    type: left_outer
   }
 
   join: cs_healthscore{
