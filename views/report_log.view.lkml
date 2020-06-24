@@ -112,9 +112,21 @@ view: report_log {
     drill_fields: [customer.name, users.name, count]
   }
 
+  measure: count_api_logs_last_30_days {
+    type:  count
+    filters: [report_type_id: "3", created_date: "30 days"]
+    drill_fields: [customer.name, users.name, count]
+  }
+
   measure: count_screen_logs {
     type:  count
     filters: [report_type_id: "1"]
+    drill_fields: [customer.name, users.name, count]
+  }
+
+  measure: count_screen_logs_last_30_days {
+    type:  count
+    filters: [report_type_id: "1", created_date: "30 days"]
     drill_fields: [customer.name, users.name, count]
   }
 
@@ -124,7 +136,13 @@ view: report_log {
     drill_fields: [customer.name, users.name, count]
     }
 
-  measure: total_line_numbers {
+  measure: count_excel_logs_last_30_days {
+    type:  count
+    filters: [report_type_id: "2", created_date: "30 days"]
+    drill_fields: [customer.name, users.name, count]
+  }
+
+    measure: total_line_numbers {
     type: sum
     sql:  ${line_numbers};;
   }
