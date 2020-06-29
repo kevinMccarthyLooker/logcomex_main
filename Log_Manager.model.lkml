@@ -21,4 +21,38 @@ explore: log_manager {
     type: left_outer
     relationship: many_to_one
   }
+
+  join: plans {
+    sql_on: ${account.plan_id}=${plans.id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
+
+  join: organizations {
+    #view_label: "Customer"
+    sql_on: ${processos.org_id}=${organizations.id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
+
+  join: workflow {
+    #view_label: "Customer"
+    sql_on: ${processos.workflow_id}=${workflow.id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
+
+  join: pais_origem {
+    from: paises
+    sql_on: ${processos.pais_origem_id}=${pais_origem.id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
+
+  join: paise_destino {
+    from: paises
+    sql_on: ${processos.pais_origem_id}=${paise_destino.id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
 }
