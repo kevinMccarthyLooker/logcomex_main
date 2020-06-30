@@ -529,11 +529,6 @@ view: processos {
     sql: ${TABLE}."user_id" ;;
   }
 
-  dimension: valor_total {
-    type: number
-    sql: ${TABLE}."valor_total" ;;
-  }
-
   dimension: via_transporte {
     type: string
     sql: ${TABLE}."via_transporte" ;;
@@ -558,6 +553,11 @@ view: processos {
     type: number
     # hidden: yes
     sql: ${TABLE}."workflow_id" ;;
+  }
+
+  measure: valor_total {
+    type: sum
+    sql: ${TABLE}."valor_total" ;;
   }
 
   measure: count {
