@@ -3,9 +3,9 @@ view: pct_di_pu {
     sql: SELECT ano_mes,
                num_di_control,
                num_di_pu,
-               cast( cast (num_di_pu as NUMERIC)/ num_di_control AS NUMERIC(5,4)) as pct_di_pu,
+               case when num_di_control > 0 then cast( cast (num_di_pu as NUMERIC)/ num_di_control AS NUMERIC(5,4)) else 0.0 end as pct_di_pu,
                num_di_match,
-               cast( cast (num_di_match as NUMERIC)/ num_di_pu AS NUMERIC(5,4)) as pct_di_match
+               case when num_di_pu > 0 then cast( cast (num_di_match as NUMERIC)/ num_di_pu AS NUMERIC(5,4)) else 0.0 end as pct_di_match
         FROM
           (SELECT
              CAST(substr(di_control.data_hora_registro :: text, 1, 4) || substr(di_control.data_hora_registro :: text, 6, 2) AS
