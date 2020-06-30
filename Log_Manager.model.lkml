@@ -13,9 +13,9 @@ explore: log_manager {
 
   #sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
   #persist_with: my_datagroup
-  view_name: processos
+  view_name: account
 
-  join: account {
+  join: processos {
     #view_label: "Customer"
     sql_on: ${processos.account_id}=${account.id} ;;
     type: left_outer
@@ -31,6 +31,39 @@ explore: log_manager {
   join: organizations {
     #view_label: "Customer"
     sql_on: ${processos.org_id}=${organizations.id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
+
+  join: empresa_pessoa {
+    #view_label: "Customer"
+    from: empresa_pessoa
+    sql_on: ${empresa_pessoa.account_id}=${account.id} ;;
+    type: left_outer
+    relationship: many_to_one
+    sql_where: ${empresa_pessoa.deleted_raw} is null ;;
+  }
+
+  join: cliente {
+    #view_label: "Customer"
+    from: empresa_pessoa
+    sql_on: ${processos.cliente_id}=${cliente.id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
+
+  join: importador {
+    #view_label: "Customer"
+    from: empresa_pessoa
+    sql_on: ${processos.importador_id}=${importador.id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
+
+  join: exportador {
+    #view_label: "Customer"
+    from: empresa_pessoa
+    sql_on: ${processos.exportador_id}=${exportador.id} ;;
     type: left_outer
     relationship: many_to_one
   }
