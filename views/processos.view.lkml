@@ -539,6 +539,16 @@ view: processos {
     sql: ${TABLE}."via_transporte" ;;
   }
 
+  dimension: via_transporte_norm {
+    type: string
+    sql:  CASE WHEN (via_transporte in ('AÉrea', 'Aéreo')) THEN 'Aéreo'
+    WHEN (via_transporte in ('RODOVIÁRIA', 'Rodoviário')) THEN 'Rodoviário'
+    WHEN (via_transporte in ('Marítimo')) THEN 'Marítimo'
+    else 'Outro' end
+    ;;
+
+  }
+
   dimension: viagem {
     type: string
     sql: ${TABLE}."viagem" ;;
