@@ -5,7 +5,7 @@ view: pct_sem_adicao {
        count(*)
 FROM di_pu dp
 WHERE NOT EXISTS (SELECT da.di_number FROM di_pu_addition da WHERE da.di_number = dp.di_number)
-      AND dp.data_registro_despacho >= '2018/12/01'
+      AND dp.data_registro_despacho >= '2018/08/01'
 GROUP BY 1
 ORDER BY 1
  ;;
