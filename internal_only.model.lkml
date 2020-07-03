@@ -59,6 +59,17 @@ explore: dau_wau_mau {
 
 }
 
+
+explore: usage_logs {
+  view_name: access_log
+
+  join: customer {
+    sql_on: ${customer.id}=${access_log.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+}
+
 explore: usage {
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
 #   always_filter: {}
