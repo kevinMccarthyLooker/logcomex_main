@@ -26,6 +26,7 @@ include: "/**/customer_api_relations.view.lkml"
 include: "/**/billing_contract_omie.view.lkml"
 include: "/**/service_order_omie.view.lkml"
 include: "/**/NPS.view.lkml"
+include: "/**/clientes_ativos_por_mes.view.lkml"
 
 
 datagroup: my_datagroup {
@@ -56,6 +57,11 @@ explore: dau_wau_mau {
   }
   #did not join customer_plan because users can't be directly associated to one plan amongst their customer's plans
 
+}
+
+explore: cliente_ativos_por_mes{
+  persist_with: my_datagroup
+  view_name: clientes_ativos_por_mes
 }
 
 explore: usage {
