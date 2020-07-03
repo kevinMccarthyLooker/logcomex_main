@@ -65,6 +65,7 @@ explore: usage_logs {
 
   join: customer {
     sql_on: ${customer.id}=${access_log.customer_id} ;;
+    sql_where: ${customer.fake_customer} is false ;;
     relationship: one_to_many
     type: left_outer
   }
