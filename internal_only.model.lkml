@@ -59,11 +59,6 @@ explore: dau_wau_mau {
 
 }
 
-explore: cliente_ativos_por_mes{
-  persist_with: my_datagroup
-  view_name: clientes_ativos_por_mes
-}
-
 explore: usage {
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
 #   always_filter: {}
@@ -224,6 +219,15 @@ explore: usage {
     relationship: many_to_one
     type: left_outer
   }
+
+  join: clientes_ativos_por_mes {
+    sql_on: ${customer.id}=${clientes_ativos_por_mes.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+
+
 }
 
 # explore: users {}
