@@ -16,13 +16,13 @@ view: clientes_ativos_por_mes {
   dimension: customer_id {
     type: number
     sql: ${TABLE}."customer_id" ;;
+    drill_fields: [detail*]
   }
 
   measure: count_ativos_mes {
     type: count_distinct
     sql: ${TABLE}."customer_id_measure" ;;
   }
-
 
   dimension_group: anomes {
     type: time
@@ -37,4 +37,12 @@ view: clientes_ativos_por_mes {
     ]
     sql: ${TABLE}."anomes" ;;
   }
+  set: detail {
+    fields: [
+      customer.id,
+      customer.name,
+      customer.executive_name,
+    ]
+  }
+
 }
