@@ -23,7 +23,7 @@ view: report_log {
     sql: ${TABLE}."created_at" ;;
   }
 
-  dimension: customer_plan_id {
+    dimension: customer_plan_id {
     type: number
     # hidden: yes
     sql: ${TABLE}."customer_plan_id" ;;

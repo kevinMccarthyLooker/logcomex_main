@@ -69,6 +69,19 @@ explore: usage_logs {
     relationship: one_to_many
     type: left_outer
   }
+
+  join: user_profile_customer {
+    sql_on: ${user_profile_customer.customer_id}=${customer.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: users {
+    sql_on: ${user_profile_customer.user_id}=${users.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
 }
 
 explore: usage {
@@ -139,14 +152,14 @@ explore: usage {
     type: left_outer
   }
 
-  join: tickets_movidesk {
-    sql_on: ${tickets_movidesk.id_customer}=${customer.id} ;;
+  join: users {
+    sql_on: ${user_profile_customer.user_id}=${users.id} ;;
     relationship: many_to_one
     type: left_outer
   }
 
-  join: users {
-    sql_on: ${user_profile_customer.user_id}=${users.id} ;;
+  join: tickets_movidesk {
+    sql_on: ${tickets_movidesk.id_customer}=${customer.id} ;;
     relationship: many_to_one
     type: left_outer
   }
