@@ -27,7 +27,8 @@ include: "/**/billing_contract_omie.view.lkml"
 include: "/**/service_order_omie.view.lkml"
 include: "/**/NPS.view.lkml"
 include: "/**/clientes_ativos_por_mes.view.lkml"
-
+include: "/**/customer_block_status.view.lkml"
+include: "/**/customer_blocked_history.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -94,6 +95,20 @@ explore: usage {
 
   persist_with: my_datagroup
   view_name: customer
+
+  join: customer_blocked_history {
+    view_label: "Customer"
+    sql_on: ${customer.id}=${customer_blocked_history.customer_id} ;;
+    type: left_outer
+    relationship: one_to_one
+  }
+
+  join: customer_block_status {
+    view_label: "Customer"
+    sql_on: ${customer_block_status.id}=${customer_blocked_history.customer_block_status_id} ;;
+    type: left_outer
+    relationship: one_to_many
+  }
 
   join: customer_type {
     view_label: "Customer"
