@@ -13,6 +13,11 @@ view: customer {
     sql: ${TABLE}."address" ;;
   }
 
+  dimension: blocked {
+    type: yesno
+    sql: ${TABLE}."blocked" ;;
+  }
+
   dimension: api_key {
     type: string
     sql: ${TABLE}."api_key" ;;
