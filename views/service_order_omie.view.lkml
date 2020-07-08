@@ -129,4 +129,5 @@ view: service_order_omie {
   sql: ${omie_so_value_uni} ;;
   drill_fields: [id]
 }
+
 }

@@ -26,6 +26,7 @@ include: "/**/customer_api_relations.view.lkml"
 include: "/**/billing_contract_omie.view.lkml"
 include: "/**/service_order_omie.view.lkml"
 include: "/**/NPS.view.lkml"
+include: "/**/clientes_ativos_por_mes.view.lkml"
 
 
 datagroup: my_datagroup {
@@ -55,6 +56,31 @@ explore: dau_wau_mau {
     type: left_outer
   }
   #did not join customer_plan because users can't be directly associated to one plan amongst their customer's plans
+
+}
+
+
+explore: usage_logs {
+  view_name: access_log
+
+  join: customer {
+    sql_on: ${customer.id}=${access_log.customer_id} ;;
+    sql_where: ${customer.fake_customer} is false ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: user_profile_customer {
+    sql_on: ${user_profile_customer.customer_id}=${customer.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: users {
+    sql_on: ${user_profile_customer.user_id}=${users.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
 
 }
 
@@ -126,14 +152,14 @@ explore: usage {
     type: left_outer
   }
 
-  join: tickets_movidesk {
-    sql_on: ${tickets_movidesk.id_customer}=${customer.id} ;;
+  join: users {
+    sql_on: ${user_profile_customer.user_id}=${users.id} ;;
     relationship: many_to_one
     type: left_outer
   }
 
-  join: users {
-    sql_on: ${user_profile_customer.user_id}=${users.id} ;;
+  join: tickets_movidesk {
+    sql_on: ${tickets_movidesk.id_customer}=${customer.id} ;;
     relationship: many_to_one
     type: left_outer
   }
@@ -218,6 +244,15 @@ explore: usage {
     relationship: many_to_one
     type: left_outer
   }
+
+  join: clientes_ativos_por_mes {
+    sql_on: ${customer.id}=${clientes_ativos_por_mes.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+
+
 }
 
 # explore: users {}

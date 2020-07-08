@@ -17,7 +17,9 @@ view: cs_dash_imp {
            db_consignatarios.atv_principal_text AS "ATIVIDADE",
            db_maritimo.teus AS "TEUS",
            db_maritimo.vlpesobruto AS "PESO BRUTO",
-           db_maritimo.tipoconhecimento as "EMBARQUE"
+           db_maritimo.tipoconhecimento as "EMBARQUE",
+           db_maritimo.data_registro as "DATA_REGISTRO",
+           db_maritimo.available_at as "AVAILABLE_AT"
       FROM db_maritimo
       LEFT JOIN db_maritimo AS db_maritimo_consig ON db_maritimo_consig.nrcemaster = LPAD(db_maritimo.nrcemercante::TEXT, 15, '0')
       LEFT JOIN vw_db_consignatarios AS db_consignatarios ON db_consignatarios.cnpj = db_maritimo_consig.cdconsignatario
@@ -33,8 +35,8 @@ view: cs_dash_imp {
       AND db_maritimo.categoriacarga = 'I'
       AND db_maritimo.deleted_at IS NULL
       GROUP BY "ID","ETA","PORTO DESCARGA","PORTO DESTINO","PORTO EMBARQUE","PORTO ORIGEM", "CNPJ CONSIGNATARIO",
-      "CONSIGNATARIO","CONSIGNATARIO FINAL","NOTIFICADO", "VOLUMES", "TRADE LINE", "ATIVIDADE","TEUS","PESO BRUTO", "EMBARQUE"
-      ORDER BY "TEUS" DESC
+      "CONSIGNATARIO","CONSIGNATARIO FINAL","NOTIFICADO", "VOLUMES", "TRADE LINE", "ATIVIDADE","TEUS","PESO BRUTO", "EMBARQUE", "DATA_REGISTRO", "AVAILABLE_AT"
+      --ORDER BY "TEUS" DESC
        ;;
   }
 
@@ -57,6 +59,28 @@ view: cs_dash_imp {
     ]
     sql: ${TABLE}."ETA" ;;
     label: "PERÍODO"
+  }
+
+  dimension_group: data_registro {
+    type: time
+    timeframes: [
+      date,
+      month_num,
+      month_name,
+      year
+    ]
+    sql: ${TABLE}."DATA_REGISTRO" ;;
+  }
+
+  dimension_group: available_at {
+    type: time
+    timeframes: [
+      date,
+      month_num,
+      month_name,
+      year
+    ]
+    sql: ${TABLE}."AVAILABLE_AT" ;;
   }
 
   dimension: atv_principal_text {

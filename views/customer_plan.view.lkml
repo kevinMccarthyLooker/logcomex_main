@@ -180,6 +180,16 @@ view: customer_plan {
     ;;
   }
 
+  dimension: dias_contrato {
+    type: string
+    sql: ${expiration_raw}- (${start_raw}  -  INTERVAL '1 DAY')  :: DATE  ;;
+  }
+
+  dimension: dias_trial {
+    type: string
+    sql: ${trial_end_raw} - (${trial_start_raw}  -  INTERVAL '1 DAY')  :: DATE  ;;
+  }
+
   dimension: trial {
     type: yesno
     sql: current_date between ${trial_start_raw} and ${trial_end_raw}
