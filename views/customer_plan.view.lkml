@@ -181,12 +181,12 @@ view: customer_plan {
   }
 
   dimension: dias_contrato {
-    type: string
+    type: number
     sql: ${expiration_raw}- (${start_raw}  -  INTERVAL '1 DAY')  :: DATE  ;;
   }
 
   dimension: dias_trial {
-    type: string
+    type: number
     sql: ${trial_end_raw} - (${trial_start_raw}  -  INTERVAL '1 DAY')  :: DATE  ;;
   }
 
