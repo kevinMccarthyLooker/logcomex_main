@@ -13,6 +13,7 @@ include: "/views/health_imp_house_direto.view.lkml"
 include: "/views/health_data_exp.view.lkml"
 include: "/views/antaqxmaritimo_exp.view.lkml"
 include: "/views/antaqxmaritimo_cab.view.lkml"
+include: "/views/antaqxmaritimo_cab_emb.view.lkml"
 
 explore: client_documents_by_method {
   label: "Client Documents By Method"
@@ -30,8 +31,13 @@ explore: antaqxmaritimo {
 }
 
 explore: antaqxmaritimo_cab {
-  label: "Cab AntaqMaritimo"
+  label: "Cab AntaqMaritimo Desembarcados"
 }
+
+explore: antaqxmaritimo_cab_emb {
+  label: "Cab AntaqMaritimo Embarcados"
+}
+
 explore: view_infografico {
   join: db_siscori_cod_ncm {
     relationship: one_to_one
