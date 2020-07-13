@@ -100,6 +100,7 @@ explore: usage {
     view_label: "Customer"
     sql_on: ${customer.id}=${customer_blocked_history.customer_id} ;;
     type: left_outer
+    sql_where: ${customer_blocked_history.deleted_date} is null ;;
     relationship: one_to_one
   }
 
