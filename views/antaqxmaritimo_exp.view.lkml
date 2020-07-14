@@ -1,7 +1,7 @@
 view: antaqxmaritimo_exp {
   derived_table: {
     indexes: ["origem"]
-    persist_for: "24 hours"
+    persist_for: "3 hours"
     sql: select origem,  mes,ano,sum(teu) as Teus_Antaq, (SELECT sum(teus) as Teus_Log
                                         from view_AntaqMaritimo
                                         where dtoperacao >='2019-01-01'
