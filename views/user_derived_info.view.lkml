@@ -2,11 +2,11 @@ view: user_derived_info {
 
     derived_table: {
       sql: select users.id as user_id,
-               max(report_log.created_at)
+               max(access_log.created_at)
         from customer
         left join user_profile_customer on user_profile_customer.customer_id = customer.id
         left join users on users.customer_profile_default_id = user_profile_customer.id
-        left join report_log on users.id = report_log.user_id
+        left join access_log on users.id = access_log.user_id
         group by 1
          ;;
     }

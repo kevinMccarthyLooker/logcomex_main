@@ -19,11 +19,17 @@ include: "/**/user_derived_info.view.lkml"
 include: "/**/bi_filters_customer_plan.view.lkml"
 include: "/**/plan_info_join.view.lkml"
 include: "/**/cs_healthscore.view.lkml"
+include: "/**/cs_healthscore_accesslog.view.lkml"
 include: "/**/bi_filtros.view.lkml"
 include: "/**/customer_info.view.lkml"
 include: "/**/filter_history.view.lkml"
+include: "/**/customer_api_relations.view.lkml"
+include: "/**/billing_contract_omie.view.lkml"
+include: "/**/service_order_omie.view.lkml"
 include: "/**/NPS.view.lkml"
-
+include: "/**/clientes_ativos_por_mes.view.lkml"
+include: "/**/customer_block_status.view.lkml"
+include: "/**/customer_blocked_history.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -55,6 +61,31 @@ explore: dau_wau_mau {
 
 }
 
+
+explore: usage_logs {
+  view_name: access_log
+
+  join: customer {
+    sql_on: ${customer.id}=${access_log.customer_id} ;;
+    sql_where: ${customer.fake_customer} is false ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: user_profile_customer {
+    sql_on: ${user_profile_customer.customer_id}=${customer.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: users {
+    sql_on: ${user_profile_customer.user_id}=${users.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+}
+
 explore: usage {
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
 #   always_filter: {}
@@ -66,6 +97,21 @@ explore: usage {
   persist_with: my_datagroup
   view_name: customer
 
+  join: customer_blocked_history {
+    view_label: "Customer"
+    sql_on: ${customer.id}=${customer_blocked_history.customer_id} ;;
+    type: left_outer
+    sql_where: ${customer_blocked_history.deleted_date} is null ;;
+    relationship: one_to_one
+  }
+
+  join: customer_block_status {
+    view_label: "Customer"
+    sql_on: ${customer_block_status.id}=${customer_blocked_history.customer_block_status_id} ;;
+    type: left_outer
+    relationship: one_to_many
+  }
+
   join: customer_type {
     view_label: "Customer"
     sql_on: ${customer.customer_type_id}=${customer_type.id} ;;
@@ -73,8 +119,32 @@ explore: usage {
     relationship: many_to_one
   }
 
+  join: customer_api_relations{
+    sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: billing_contract_omie{
+    sql_on: ${customer_api_relations.id}=${billing_contract_omie.customer_api_relations_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: service_order_omie{
+    sql_on: ${billing_contract_omie.id}=${service_order_omie.billing_contract_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
   join: cs_healthscore{
     sql_on: ${customer.id}=${cs_healthscore.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: cs_healthscore_accesslog{
+    sql_on: ${customer.id}=${cs_healthscore_accesslog.customer_id} ;;
     relationship: one_to_many
     type: left_outer
   }
@@ -105,14 +175,14 @@ explore: usage {
     type: left_outer
   }
 
-  join: tickets_movidesk {
-    sql_on: ${tickets_movidesk.id_customer}=${customer.id} ;;
+  join: users {
+    sql_on: ${user_profile_customer.user_id}=${users.id} ;;
     relationship: many_to_one
     type: left_outer
   }
 
-  join: users {
-    sql_on: ${user_profile_customer.user_id}=${users.id} ;;
+  join: tickets_movidesk {
+    sql_on: ${tickets_movidesk.id_customer}=${customer.id} ;;
     relationship: many_to_one
     type: left_outer
   }
@@ -197,6 +267,15 @@ explore: usage {
     relationship: many_to_one
     type: left_outer
   }
+
+  join: clientes_ativos_por_mes {
+    sql_on: ${customer.id}=${clientes_ativos_por_mes.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+
+
 }
 
 # explore: users {}

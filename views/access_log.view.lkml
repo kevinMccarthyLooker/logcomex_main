@@ -34,6 +34,20 @@ view: access_log {
     sql: ${TABLE}."created_at" ;;
   }
 
+  dimension: dia_da_semana_created_at {
+    type: string
+    sql:  CASE WHEN (extract(DOW FROM ${TABLE}."created_at") = 0) THEN '(0) Domingo'
+           WHEN (extract(DOW FROM ${TABLE}."created_at") = 1) THEN '(1) Segunda'
+           WHEN (extract(DOW FROM ${TABLE}."created_at") = 2) THEN '(2) Terça'
+           WHEN (extract(DOW FROM ${TABLE}."created_at") = 3) THEN '(3) Quarta'
+           WHEN (extract(DOW FROM ${TABLE}."created_at") = 4) THEN '(4) Quinta'
+           WHEN (extract(DOW FROM ${TABLE}."created_at") = 5) THEN '(5) Sexta'
+           WHEN (extract(DOW FROM ${TABLE}."created_at") = 6) THEN '(6) Sábado'
+          else 'Outro' end
+    ;;
+  }
+
+
   dimension: customer_id {
     type: number
     sql: ${TABLE}."customer_id" ;;
@@ -76,6 +90,12 @@ view: access_log {
   dimension: user_id {
     type: number
     sql: ${TABLE}."user_id" ;;
+  }
+
+  measure: count_users_distinc {
+    type: count_distinct
+    sql: ${TABLE}."user_id" ;;
+    drill_fields: [user_id]
   }
 
   measure: count_access_log {

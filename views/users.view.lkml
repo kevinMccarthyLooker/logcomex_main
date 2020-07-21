@@ -112,7 +112,13 @@ view: users {
     drill_fields: [basic_drills*]
   }
 
+  measure: count_distinc {
+    type: count_distinct
+    sql: ${users.id} ;;
+    drill_fields: [basic_drills*]
+  }
 
-  set: basic_drills {fields:[id, name, customer.name, report_log.count]}
+
+  set: basic_drills {fields:[id, name, email]}
 
 }

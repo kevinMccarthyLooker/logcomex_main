@@ -7,7 +7,7 @@ include: "/views/company_info.view.lkml"
 include: "/views/company.view.lkml"
 include: "/views/recinto_aduaneiro.view.lkml"
 
-explore: aereo_dados_no_tempo {}
+#explore: aereo_dados_no_tempo {}
 
 
 explore: aereo_awb_details {

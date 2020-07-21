@@ -3,7 +3,7 @@ view: pct_match_search {
     sql: SELECT anomes,
                 qtde_total,
                 qtde_com_match,
-                cast( cast (qtde_com_match as NUMERIC)/ qtde_total AS NUMERIC(5,4)) as pct_match
+                case when qtde_total > 0 then cast( cast (qtde_com_match as NUMERIC)/ qtde_total AS NUMERIC(5,4)) else 0 end as pct_match
          FROM (SELECT anomes,
                SUM(CASE WHEN tp_match IS NOT NULL THEN 1 ELSE 0 END) AS qtde_com_match,
                COUNT(*) AS qtde_total
@@ -19,6 +19,7 @@ view: pct_match_search {
 
   dimension: anomes {
     type: number
+    value_format: "0"
     label: "Ano Mês"
     sql: ${TABLE}."anomes" ;;
   }
