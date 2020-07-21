@@ -12,6 +12,8 @@ include: "/views/client_documents_by_method.view.lkml"
 include: "/views/health_imp_house_direto.view.lkml"
 include: "/views/health_data_exp.view.lkml"
 include: "/views/antaqxmaritimo_exp.view.lkml"
+include: "/views/db_cad_armador.view.lkml"
+include: "/views/db_maritimo.view.lkml"
 
 explore: client_documents_by_method {
   label: "Client Documents By Method"
@@ -48,4 +50,10 @@ explore: view_infografico_exp {
     sql_on: ${db_siscori_incoterm.id} = ${view_infografico_exp.id_incoterm} ;;
   }
   label: "Infográfico Exportação"
+}
+explore: db_maritimo {
+  join: db_cad_armador {
+    relationship: many_to_one
+    sql_on: ${db_cad_armador.id} = ${db_maritimo.id_armador} ;;
+  }
 }

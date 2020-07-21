@@ -121,18 +121,18 @@ view: aereo_awb_details {
     sql: ${TABLE}."obs" ;;
   }
 
-  dimension: peso_total {
-    type: number
+  measure: peso_total {
+    type: sum
     sql: ${TABLE}."peso_total" ;;
   }
 
-  dimension: qtde_total_volume {
-    type: number
+  measure: qtde_total_volume {
+    type: sum
     sql: ${TABLE}."qtde_total_volume" ;;
   }
 
-  dimension: valor_frete {
-    type: number
+  measure: valor_frete {
+    type: sum
     sql: ${TABLE}."valor_frete" ;;
   }
 
