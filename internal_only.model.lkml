@@ -30,10 +30,7 @@ include: "/**/NPS.view.lkml"
 include: "/**/clientes_ativos_por_mes.view.lkml"
 include: "/**/customer_block_status.view.lkml"
 include: "/**/customer_blocked_history.view.lkml"
-include: "/**/tracking.view.lkml"
-include: "/**/tracking_aerial.view.lkml"
-include: "/**/tracking_aerial_internal_status.view.lkml"
-include: "/**/tracking_status.view.lkml"
+include: "/**/tracking_maritimo_aereo.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -278,7 +275,11 @@ explore: usage {
     type: left_outer
   }
 
-
+  join: tracking_maritimo_aereo {
+    sql_on: ${customer.id}=${tracking_maritimo_aereo.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
 
 }
 

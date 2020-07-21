@@ -223,20 +223,17 @@ inner join tracking_internal_status on tracking_aerial.internal_status = trackin
 
   measure: count {
     type: count
-    sql: ${tracking_id} ;;
     drill_fields: [detail*]
   }
 
   measure: count_maritimo {
     type: count
-    sql: ${tracking_id} ;;
     filters: [modal: "Maritimo"]
     drill_fields: [detail*]
   }
 
   measure: count_aereo {
     type: count
-    sql: ${tracking_id} ;;
     filters: [modal: "Aereo"]
     drill_fields: [detail*]
   }
