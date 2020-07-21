@@ -30,6 +30,10 @@ include: "/**/NPS.view.lkml"
 include: "/**/clientes_ativos_por_mes.view.lkml"
 include: "/**/customer_block_status.view.lkml"
 include: "/**/customer_blocked_history.view.lkml"
+include: "/**/tracking.view.lkml"
+include: "/**/tracking_aerial.view.lkml"
+include: "/**/tracking_aerial_internal_status.view.lkml"
+include: "/**/tracking_status.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
