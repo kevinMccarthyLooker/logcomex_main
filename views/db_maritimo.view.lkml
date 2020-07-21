@@ -27,13 +27,13 @@ view: db_maritimo {
     sql: ${TABLE}."bloqueio_conhecimento" ;;
   }
 
-  dimension: c20 {
-    type: number
+  measure: c20 {
+    type: sum
     sql: ${TABLE}."c20" ;;
   }
 
-  dimension: c40 {
-    type: number
+  measure: c40 {
+    type: sum
     sql: ${TABLE}."c40" ;;
   }
 
@@ -928,8 +928,8 @@ view: db_maritimo {
     sql: ${TABLE}."temcarga_cdncms" ;;
   }
 
-  dimension: teus {
-    type: number
+  measure: teus {
+    type: sum
     sql: ${TABLE}."teus" ;;
   }
 
@@ -958,8 +958,8 @@ view: db_maritimo {
     sql: ${TABLE}."tipoconhecimentooriginal" ;;
   }
 
-  dimension: total_fcl {
-    type: number
+  measure: total_fcl {
+    type: sum
     sql: ${TABLE}."total_fcl" ;;
   }
 
@@ -1008,18 +1008,18 @@ view: db_maritimo {
     sql: ${TABLE}."usoparcial" ;;
   }
 
-  dimension: vlcubagem {
-    type: number
+  measure: vlcubagem {
+    type: sum
     sql: ${TABLE}."vlcubagem" ;;
   }
 
-  dimension: vlfrete {
-    type: number
+  measure: vlfrete {
+    type: sum
     sql: ${TABLE}."vlfrete" ;;
   }
 
-  dimension: vlfretetotal {
-    type: number
+  measure: vlfretetotal {
+    type: sum
     sql: ${TABLE}."vlfretetotal" ;;
   }
 
@@ -1028,8 +1028,8 @@ view: db_maritimo {
     sql: ${TABLE}."vlfretetotalbld" ;;
   }
 
-  dimension: vlpesobruto {
-    type: number
+  measure: vlpesobruto {
+    type: sum
     sql: ${TABLE}."vlpesobruto" ;;
   }
 
