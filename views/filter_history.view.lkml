@@ -85,4 +85,11 @@ view: filter_history {
     type: count
     drill_fields: [id]
   }
+
+  measure: count_consulta {
+    type: count_distinct
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
+
 }
