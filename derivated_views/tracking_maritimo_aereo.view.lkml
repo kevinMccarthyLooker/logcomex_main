@@ -3,6 +3,7 @@ view: tracking_maritimo_aereo {
     sql:
 select 'Maritimo' as modal,
        tracking.id,
+       ('Maritimo' || to_char(tracking.id, '999999')) as chave,
        customer_id,
        tracking_status.description as status,
        bl_number as documento,
@@ -25,9 +26,11 @@ select 'Maritimo' as modal,
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
 inner join tracking_internal_status on tracking.internal_status_id = tracking_internal_status.id
+where deleted_at is null
 union
 select 'Aereo' as modal,
        tracking_aerial.id,
+       ('Aereo' || to_char(tracking_aerial.id, '999999')) as chave,
        customer_id,
        tracking_aerial_status.description as status,
        (coalesce((awb),'') || '-' || coalesce((hwb),'')) as documento,
@@ -50,12 +53,18 @@ select 'Aereo' as modal,
 from tracking_aerial
 inner join tracking_aerial_status on tracking_aerial.tracking_aerial_status_id = tracking_aerial_status.id
 inner join tracking_internal_status on tracking_aerial.internal_status = tracking_internal_status.id
+where deleted_at is null
 ;;
   }
 
   dimension: modal {
     type: string
     sql: ${TABLE}."modal" ;;
+  }
+
+  dimension: chave {
+    type: string
+    sql: ${TABLE}."chave" ;;
   }
 
   dimension: tracking_id {
@@ -222,18 +231,21 @@ inner join tracking_internal_status on tracking_aerial.internal_status = trackin
   }
 
   measure: count {
-    type: count
+    type: count_distinct
+    sql: ${chave} ;;
     drill_fields: [detail*]
   }
 
   measure: count_maritimo {
-    type: count
+    type: count_distinct
+    sql: ${chave} ;;
     filters: [modal: "Maritimo"]
     drill_fields: [detail*]
   }
 
   measure: count_aereo {
-    type: count
+    type: count_distinct
+    sql: ${chave} ;;
     filters: [modal: "Aereo"]
     drill_fields: [detail*]
   }
