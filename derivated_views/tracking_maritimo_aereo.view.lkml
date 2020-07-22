@@ -236,9 +236,24 @@ where deleted_at is null
     drill_fields: [detail*]
   }
 
+  measure: count_last_30_days {
+    type: count_distinct
+    sql: ${chave} ;;
+    filters: [created_date: "30 days"]
+    drill_fields: [detail*]
+  }
+
   measure: count_maritimo {
     type: count_distinct
     sql: ${chave} ;;
+    filters: [modal: "Maritimo"]
+    drill_fields: [detail*]
+  }
+
+  measure: count_maritimo_last_30_days {
+    type: count_distinct
+    sql: ${chave} ;;
+    filters: [created_date: "30 days"]
     filters: [modal: "Maritimo"]
     drill_fields: [detail*]
   }
@@ -250,7 +265,15 @@ where deleted_at is null
     drill_fields: [detail*]
   }
 
-  set: detail {
+  measure: count_aereo_last_30_days {
+    type: count_distinct
+    sql: ${chave} ;;
+    filters: [created_date: "30 days"]
+    filters: [modal: "Aereo"]
+    drill_fields: [detail*]
+  }
+
+    set: detail {
     fields: [customer.id, user_id]
   }
 
