@@ -208,6 +208,7 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+
   join: bi_filtros{
     view_label: "Report Log"
     sql_on: ${report_log.id}=${bi_filtros.filters_report_log_id} ;;
@@ -220,6 +221,7 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+
   join: access_log_user {
     from: access_log
     view_label: "Access Log Users"
@@ -227,6 +229,7 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+
   join: service_log {
     from: service
     view_label: "Report Log"
@@ -286,6 +289,14 @@ explore: usage {
   join: filter_history {
     view_label: "Search Filter History"
     sql_on: ${customer.id}=${filter_history.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: filter_history_user {
+    from: filter_history
+    view_label: "Search Filter History User"
+    sql_on: ${users.id}=${filter_history.user_id} ;;
     relationship: one_to_many
     type: left_outer
   }
