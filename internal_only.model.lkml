@@ -32,7 +32,7 @@ include: "/**/customer_block_status.view.lkml"
 include: "/**/customer_blocked_history.view.lkml"
 include: "/**/tracking_maritimo_aereo.view.lkml"
 include: "/**/filter_history.view.lkml"
-
+include: "/**/certificate.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -297,6 +297,12 @@ explore: usage {
     from: filter_history
     view_label: "Search Filter History User"
     sql_on: ${users.id}=${filter_history.user_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: certificate {
+    sql_on: ${customer.id}=${certificate.customer_id} ;;
     relationship: one_to_many
     type: left_outer
   }
