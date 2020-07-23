@@ -236,6 +236,13 @@ where deleted_at is null
     drill_fields: [detail*]
   }
 
+  measure: count_last_7_days {
+    type: count_distinct
+    sql: ${chave} ;;
+    filters: [created_date: "7 days"]
+    drill_fields: [detail*]
+  }
+
   measure: count_last_30_days {
     type: count_distinct
     sql: ${chave} ;;
@@ -271,6 +278,12 @@ where deleted_at is null
     filters: [created_date: "30 days"]
     filters: [modal: "Aereo"]
     drill_fields: [detail*]
+  }
+
+  measure: dt_ultimo_embarque {
+    type: date
+    sql: MAX(${created_date}) ;;
+    convert_tz: no
   }
 
     set: detail {
