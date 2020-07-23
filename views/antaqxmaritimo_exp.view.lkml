@@ -6,6 +6,7 @@ view: antaqxmaritimo_exp {
                                         from view_AntaqMaritimo
                                         where dtoperacao >='2019-01-01'
                                         and categoriacarga = 'E'
+                                        and cdportocarregamento like 'BR%'
                                         and cdportocarregamento = c.origem
                                         and LPAD(EXTRACT(MONTH FROM dtoperacao)::TEXT, 2, '0') = a.mes
                                         and extract(year from dtoperacao) = a.ano)
