@@ -147,7 +147,11 @@ where deleted_at is null
   dimension: token {
     type: string
     sql: ${TABLE}."token" ;;
-  }
+    link: {
+      label: "Tracking-Logcomex"
+      url: "https://sistema.logcomex.io/#/tracking/{{ value }}"
+    }
+    }
 
   dimension_group: executed {
     type: time
