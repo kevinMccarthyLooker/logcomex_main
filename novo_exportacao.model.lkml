@@ -1,4 +1,4 @@
-connection: "api"
+connection: "db"
 
 include: "/views/db_export_pre_acd.view.lkml"
 include: "/views/db_export_pre_acd_details.view.lkml"
