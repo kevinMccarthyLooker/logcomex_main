@@ -33,6 +33,8 @@ include: "/**/customer_blocked_history.view.lkml"
 include: "/**/tracking_maritimo_aereo.view.lkml"
 include: "/**/filter_history.view.lkml"
 include: "/**/certificate.view.lkml"
+include: "/**/robots.view.lkml"
+
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -285,6 +287,13 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+
+  join: robots {
+    sql_on: ${robots.id_shipowner}=${tracking_maritimo_aereo.armador_ciaaerea} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
 
   join: filter_history {
     view_label: "Search Filter History"
