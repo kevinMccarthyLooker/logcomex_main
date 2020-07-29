@@ -18,7 +18,8 @@ explore: db_export_pre_acd {
 
   join: db_export_pre_acd_details {
     relationship: one_to_one
-    sql_on: ${db_export_pre_acd_details.pu_export_urf_pre_data_id} = ${db_export_pre_acd.pu_export_urf_pre_data_id} ;;
+    sql_on: ${db_export_pre_acd_details.pu_export_urf_pre_data_id} = ${db_export_pre_acd.pu_export_urf_pre_data_id}
+        AND ${db_export_pre_acd_details.seq_deposito} = ${db_export_pre_acd.seq_deposito};;
   }
 
   join: db_export_pre_acd_fcl {
@@ -33,7 +34,9 @@ explore: db_export_pos_acd {
 
   join: db_export_pos_acd_details {
     relationship: one_to_one
-    sql_on: ${db_export_pos_acd_details.pu_export_urf_pos_data_id} = ${db_export_pos_acd.pu_export_urf_pos_data_id} ;;
+    sql_on: ${db_export_pos_acd_details.pu_export_urf_pos_data_id} = ${db_export_pos_acd.pu_export_urf_pos_data_id}
+        AND ${db_export_pos_acd_details.seq_deposito} = ${db_export_pos_acd.seq_deposito}
+        AND ${db_export_pos_acd_details.seq_carga} = ${db_export_pos_acd.seq_carga};;
   }
 
   join: db_export_pos_acd_carga {
