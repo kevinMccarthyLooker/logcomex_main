@@ -118,6 +118,7 @@ view: db_export_pre_acd {
   }
 
   dimension: pu_export_urf_pre_data_id {
+    label: "id_embarque"
     type: number
     sql: ${TABLE}."pu_export_urf_pre_data_id" ;;
   }
@@ -136,4 +137,10 @@ view: db_export_pre_acd {
     type: count
     drill_fields: [id]
   }
+
+  measure: count_embarques {
+    type: count_distinct
+    sql: ${pu_export_urf_pre_data_id} ;;
+  }
+
 }
