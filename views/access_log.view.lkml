@@ -98,7 +98,13 @@ view: access_log {
     drill_fields: [user_id]
   }
 
-  measure: count_access_log {
+  measure: count_customers_distinc {
+    type: count_distinct
+    sql: ${TABLE}."customer_id" ;;
+    drill_fields: [user_id]
+  }
+
+    measure: count_access_log {
     type: count
     drill_fields: [users.name]
   }
