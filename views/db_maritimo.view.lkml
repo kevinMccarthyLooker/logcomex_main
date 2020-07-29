@@ -953,6 +953,16 @@ view: db_maritimo {
     sql: ${TABLE}."tipoconhecimento" ;;
   }
 
+  dimension: tipoconhecimento_desc {
+    type: string
+    sql:  CASE WHEN (db_maritimo.tipoconhecimento = '10') THEN '10 -> Direto'
+               WHEN (db_maritimo.tipoconhecimento = '11') THEN '11 -> Master'
+               WHEN (db_maritimo.tipoconhecimento = '12') THEN '12 -> House'
+               WHEN (db_maritimo.tipoconhecimento = '15') THEN '15 -> Colocader'
+          else db_maritimo.tipoconhecimento end
+    ;;
+  }
+
   dimension: tipoconhecimentooriginal {
     type: string
     sql: ${TABLE}."tipoconhecimentooriginal" ;;
