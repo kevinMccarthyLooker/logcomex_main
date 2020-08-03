@@ -31,9 +31,10 @@ include: "/**/clientes_ativos_por_mes.view.lkml"
 include: "/**/customer_block_status.view.lkml"
 include: "/**/customer_blocked_history.view.lkml"
 include: "/**/tracking_maritimo_aereo.view.lkml"
-include: "/**/filter_history.view.lkml"
 include: "/**/certificate.view.lkml"
 include: "/**/robots.view.lkml"
+include: "/**/extra_data_container.view.lkml"
+include: "/**/extra_data_container_history.view.lkml"
 
 
 datagroup: my_datagroup {
@@ -65,7 +66,6 @@ explore: dau_wau_mau {
   #did not join customer_plan because users can't be directly associated to one plan amongst their customer's plans
 
 }
-
 
 explore: usage_logs {
   view_name: access_log
@@ -235,7 +235,7 @@ explore: usage {
   join: service_log {
     from: service
     view_label: "Report Log"
-    sql_on: cast(cast(${report_log.serviceId} as text) as integer)=${service_log.id};;
+    sql_on: cast(cast(${report_log.serviceId} as ext) as integer)=${service_log.id};;
     relationship: one_to_one
     type: left_outer
   }
@@ -318,4 +318,14 @@ explore: usage {
 
 }
 
-# explore: users {}
+explore: Logistica_Internacional {
+  persist_with: my_datagroup
+  view_name: extra_data_container
+
+  join: extra_data_container_history {
+    sql_on: ${extra_data_container.id}=${extra_data_container_history.extra_data_container_history_id} ;;
+    type: left_outer
+    relationship: one_to_many
+  }
+
+}
