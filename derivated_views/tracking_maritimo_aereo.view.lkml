@@ -2,7 +2,9 @@ view: tracking_maritimo_aereo {
   derived_table: {
     sql:
 select 'Maritimo' as modal,
-       tracking.id,
+       tracking.id as tracking_id,
+       tracking.id as tracking_maritimo_id,
+       0 as tracking_aereo_id,
        ('Maritimo' || to_char(tracking.id, '999999')) as chave,
        customer_id,
        tracking_status.description as status,
@@ -29,7 +31,9 @@ inner join tracking_internal_status on tracking.internal_status_id = tracking_in
 where deleted_at is null
 union
 select 'Aereo' as modal,
-       tracking_aerial.id,
+       tracking_aerial.id as tracking_id,
+       0 as tracking_maritimo_id,
+       tracking_aerial.id as tracking_aereo_id,
        ('Aereo' || to_char(tracking_aerial.id, '999999')) as chave,
        customer_id,
        tracking_aerial_status.description as status,
@@ -70,6 +74,16 @@ where deleted_at is null
   dimension: tracking_id {
     type: number
     sql: ${TABLE}."tracking_id" ;;
+  }
+
+  dimension: tracking_maritimo_id {
+    type: number
+    sql: ${TABLE}."tracking_maritimo_id" ;;
+  }
+
+  dimension: tracking_aereo_id {
+    type: number
+    sql: ${TABLE}."tracking_aereo_id" ;;
   }
 
   dimension: customer_id {

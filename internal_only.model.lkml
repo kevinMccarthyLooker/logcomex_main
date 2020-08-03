@@ -35,7 +35,7 @@ include: "/**/certificate.view.lkml"
 include: "/**/robots.view.lkml"
 include: "/**/extra_data_container.view.lkml"
 include: "/**/extra_data_container_history.view.lkml"
-
+include: "/**/follow_up.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -288,12 +288,20 @@ explore: usage {
     type: left_outer
   }
 
+  join: follow_up {
+    sql_on:
+      (${follow_up.tracking_id}=${tracking_maritimo_aereo.tracking_maritimo_id}) or
+      (${follow_up.tracking_aerial_id}=${tracking_maritimo_aereo.tracking_id})
+  ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
   join: robots {
     sql_on: ${robots.id_shipowner}=${tracking_maritimo_aereo.armador_ciaaerea} ;;
     relationship: one_to_many
     type: left_outer
   }
-
 
   join: filter_history {
     view_label: "Search Filter History"
