@@ -13,6 +13,12 @@ view: tickets_movidesk {
     sql: ${TABLE}."category" ;;
   }
 
+  dimension: ticket_category {
+    type: string
+    sql: Coalesce(tickets_movidesk.category,'Não Informado')
+    ;;
+  }
+
   dimension_group: ticket_closing_date {
     type: time
     timeframes: [
