@@ -95,14 +95,29 @@ view: tickets_movidesk {
     sql: ${TABLE}."service_first" ;;
   }
 
+  dimension: ticket_service_first {
+    type: string
+    sql: Coalesce(tickets_movidesk.service_first ,'Não Informado');;
+  }
+
   dimension: service_second {
     type: string
     sql: ${TABLE}."service_second" ;;
   }
 
+  dimension: ticket_service_second {
+    type: string
+    sql: Coalesce(tickets_movidesk.service_second ,'Não Informado');;
+  }
+
   dimension: service_third {
     type: string
     sql: ${TABLE}."service_third" ;;
+  }
+
+  dimension: ticket_service_third {
+    type: string
+    sql: Coalesce(tickets_movidesk.service_third ,'Não Informado');;
   }
 
   dimension: subject {
