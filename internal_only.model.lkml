@@ -36,6 +36,8 @@ include: "/**/robots.view.lkml"
 include: "/**/extra_data_container.view.lkml"
 include: "/**/extra_data_container_history.view.lkml"
 include: "/**/follow_up.view.lkml"
+include: "/**/FilaTrackingFollowUp.view.lkml"
+include: "/**/tracking_status.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -332,6 +334,17 @@ explore: Logistica_Internacional {
 
   join: extra_data_container_history {
     sql_on: ${extra_data_container.id}=${extra_data_container_history.extra_data_container_history_id} ;;
+    type: left_outer
+    relationship: one_to_many
+  }
+}
+
+explore: Robos_Tracking {
+    persist_with: my_datagroup
+    view_name: filatrackingfollowup
+
+  join: tracking_status {
+    sql_on: ${tracking_status.id}=${filatrackingfollowup.status_id} ;;
     type: left_outer
     relationship: one_to_many
   }
