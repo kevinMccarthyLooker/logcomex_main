@@ -152,6 +152,11 @@ view: tickets_movidesk {
     sql: ${TABLE}."urgency" ;;
   }
 
+  dimension: ticket_urgency {
+    type: string
+    sql: Coalesce(tickets_movidesk.urgency,'Não Informado');;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
