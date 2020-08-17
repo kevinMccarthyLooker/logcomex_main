@@ -21,6 +21,7 @@ view: planos_ativos_detalhes {
       else 'Fora do Padrao'
       end as padrao
       from (select
+      customer.id as customer_id,
       customer."name" as name,
       coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) AS quantidade_de_pesquisas,
       coalesce(pi_custom.search_lines_limit, pi_default.search_lines_limit) AS registros_por_pesquisa,
@@ -45,6 +46,11 @@ view: planos_ativos_detalhes {
       customer.fake_customer is false) as a1
       ;;
     }
+
+  dimension: customer_id {
+    type: number
+    sql: ${TABLE}.customer_id ;;
+  }
 
   dimension: name {
     type: string
