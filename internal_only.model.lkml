@@ -285,7 +285,7 @@ explore: usage {
     type: left_outer
   }
 
-  ##### testando colocar view no modelo
+  # view com detalhes dos planos dos clientes
 
   join: planos_ativos_detalhes {
     sql_on: ${customer.id} = ${planos_ativos_detalhes.customer_id} ;;
