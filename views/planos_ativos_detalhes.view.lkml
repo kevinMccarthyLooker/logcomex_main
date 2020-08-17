@@ -4,10 +4,21 @@ view: planos_ativos_detalhes {
     sql: select *,
 quantidade_de_pesquisas/200::float as indice_qtd_pesquisas,
 registros_por_pesquisa/5000::float as indice_registros_pesquisas,
-busca_perfil_empresas/1::float as indice_busca_perfil_empresas,
-qtd_excel/5::float as indice_export_excel,
-linhas_excel/1::float as indice_linhas_excel,
-meses_historico/6::float as indice_meses_historico,
+busca_perfil_empresas/5::float as indice_busca_perfil_empresas,
+(case
+when qtd_excel >0 then 1.5
+else 0
+end)::float
+as indice_export_excel,
+(case
+when linhas_excel >0 then 1.5
+else 0
+end)::float
+as indice_linhas_excel,
+(case
+when meses_historico <=24 then meses_historico/6
+else meses_historico/180
+end) as indice_meses_historico,
 usuarios/1::float as indice_usuarios,
 case
 when
@@ -48,7 +59,10 @@ registros_por_pesquisa/10000::float as indice_registros_pesquisas,
 busca_perfil_empresas/25::float as indice_busca_perfil_empresas,
 qtd_excel/5::float as indice_export_excel,
 linhas_excel/1000::float as indice_linhas_excel,
-meses_historico/12::float as indice_meses_historico,
+(case
+when meses_historico <=24 then meses_historico/12
+else meses_historico/365
+end) as indice_meses_historico,
 usuarios/2::float as indice_usuarios,
 case
 when
@@ -89,7 +103,10 @@ registros_por_pesquisa/20000::float as indice_registros_pesquisas,
 busca_perfil_empresas/100::float as indice_busca_perfil_empresas,
 qtd_excel/30::float as indice_export_excel,
 linhas_excel/10000::float as indice_linhas_excel,
-meses_historico/12::float as indice_meses_historico,
+(case
+when meses_historico <=24 then meses_historico/12
+else meses_historico/365
+end) as indice_meses_historico,
 usuarios/3::float as indice_usuarios,
 case
 when
@@ -130,7 +147,10 @@ registros_por_pesquisa/30000::float as indice_registros_pesquisas,
 busca_perfil_empresas/400::float as indice_busca_perfil_empresas,
 qtd_excel/100::float as indice_export_excel,
 linhas_excel/20000::float as indice_linhas_excel,
-meses_historico/12::float as indice_meses_historico,
+(case
+when meses_historico <=24 then meses_historico/12
+else meses_historico/365
+end) as indice_meses_historico,
 usuarios/5::float as indice_usuarios,
 case
 when
@@ -171,7 +191,10 @@ registros_por_pesquisa/100000::float as indice_registros_pesquisas,
 busca_perfil_empresas/1000::float as indice_busca_perfil_empresas,
 qtd_excel/200::float as indice_export_excel,
 linhas_excel/30000::float as indice_linhas_excel,
-meses_historico/24::float as indice_meses_historico,
+(case
+when meses_historico <=24 then meses_historico/24
+else meses_historico/730
+end) as indice_meses_historico,
 usuarios/5::float as indice_usuarios,
 case
 when
@@ -203,7 +226,7 @@ customer_plan.deleted_at is null AND
 pc.service_id = 19 and -- search
 (plan."name" like 'Expert' ) and
 customer.fake_customer is false) as a1
-      ;;
+;;
     }
 
   dimension: customer_id {
