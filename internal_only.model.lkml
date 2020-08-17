@@ -38,6 +38,7 @@ include: "/**/extra_data_container_history.view.lkml"
 include: "/**/follow_up.view.lkml"
 include: "/**/FilaTrackingFollowUp.view.lkml"
 include: "/**/tracking_status.view.lkml"
+include: "/**/planos_ativos_detalhes.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -281,6 +282,14 @@ explore: usage {
   join: clientes_ativos_por_mes {
     sql_on: ${customer.id}=${clientes_ativos_por_mes.customer_id} ;;
     relationship: one_to_many
+    type: left_outer
+  }
+
+  ##### testando colocar view no modelo
+
+  join: planos_ativos_detalhes {
+    sql_on: ${customer.id} = ${planos_ativos_detalhes.customer_id} ;;
+    relationship: one_to_one
     type: left_outer
   }
 
