@@ -261,14 +261,14 @@ customer.fake_customer is false) as a1
     sql: ${TABLE}.usuarios ;;
   }
 
-  dimension: indice_quantidade_de_pesquisas {
+  dimension: indice_qtd_pesquisas {
     type: number
-    sql: ${TABLE}.indice_quantidade_de_pesquisas ;;
+    sql: ${TABLE}.indice_qtd_pesquisas ;;
   }
 
-  dimension: indice_registros_por_pesquisa {
+  dimension: indice_registros_pesquisas {
     type: number
-    sql: ${TABLE}.indice_registros_por_pesquisa ;;
+    sql: ${TABLE}.indice_registros_pesquisas ;;
   }
 
   dimension: indice_busca_perfil_empresas {
@@ -276,9 +276,9 @@ customer.fake_customer is false) as a1
     sql: ${TABLE}.indice_busca_perfil_empresas ;;
   }
 
-  dimension: indice_qtd_excel {
+  dimension: indice_export_excel {
     type: number
-    sql: ${TABLE}.indice_qtd_excel ;;
+    sql: ${TABLE}.indice_export_excel ;;
   }
 
   dimension: indice_linhas_excel {
