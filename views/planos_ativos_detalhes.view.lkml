@@ -5,19 +5,19 @@ view: planos_ativos_detalhes {
       case
       when
       quantidade_de_pesquisas = 200 and registros_por_pesquisa = 5000 and busca_perfil_empresas = 5
-      and qtd_excel = 0 and linhas_excel = 0 and meses_historico = 6 and usuarios = 1 then 'Starter'
+      and qtd_excel = 0 and linhas_excel = 0 and meses_historico = 6 and usuarios = 1 then 'Padrão'
       when
       quantidade_de_pesquisas = 1000 and registros_por_pesquisa = 10000 and busca_perfil_empresas = 25
-      and qtd_excel = 5 and linhas_excel = 1000 and meses_historico = 12 and usuarios = 2 then 'Essencial'
+      and qtd_excel = 5 and linhas_excel = 1000 and meses_historico = 12 and usuarios = 2 then 'Padrão'
       when
       quantidade_de_pesquisas = 3000 and registros_por_pesquisa = 20000 and busca_perfil_empresas = 100
-      and qtd_excel = 30 and linhas_excel = 10000 and meses_historico = 12 and usuarios = 3 then 'Advanced'
+      and qtd_excel = 30 and linhas_excel = 10000 and meses_historico = 12 and usuarios = 3 then 'Padrão'
       when
       quantidade_de_pesquisas = 10000 and registros_por_pesquisa = 30000 and busca_perfil_empresas = 400
-      and qtd_excel = 100 and linhas_excel = 20000 and meses_historico = 12 and usuarios = 5 then 'Pro'
+      and qtd_excel = 100 and linhas_excel = 20000 and meses_historico = 12 and usuarios = 5 then 'Padrão'
       when
       quantidade_de_pesquisas = 50000 and registros_por_pesquisa = 100000 and busca_perfil_empresas = 1000
-      and qtd_excel = 200 and linhas_excel = 30000 and meses_historico = 24 and usuarios = 5 then 'Expert'
+      and qtd_excel = 200 and linhas_excel = 30000 and meses_historico = 24 and usuarios = 5 then 'Padrão'
       else 'Fora do Padrao'
       end as padrao
       from (select
