@@ -30,7 +30,7 @@ view: planos_ativos_detalhes {
       coalesce(pi_custom.excel_lines, pi_default.excel_lines) AS linhas_excel,
       coalesce(pi_custom.search_days_limit, pi_default.search_days_limit) AS meses_historico,
       coalesce(pi_custom.user_limit, pi_default.user_limit) AS usuarios,
-      plan."name" as plano_original
+      plan."name" as plano
       FROM customer
       INNER JOIN customer_plan ON customer.id = customer_plan.customer_id
       INNER JOIN plan_complete pc ON customer_plan.plan_complete_id = pc.id
@@ -57,14 +57,49 @@ view: planos_ativos_detalhes {
     sql: ${TABLE}.name ;;
   }
 
-  dimension: plano_original {
+  dimension: plano {
     type: string
-    sql: ${TABLE}.plano_original ;;
+    sql: ${TABLE}.plano ;;
   }
 
   dimension: padrao {
     type: string
     sql: ${TABLE}.padrao ;;
+  }
+
+  dimension: quantidade_de_pesquisas {
+    type: number
+    sql: ${TABLE}.quantidade_de_pesquisas ;;
+  }
+
+  dimension: registros_por_pesquisa {
+    type: number
+    sql: ${TABLE}.registros_por_pesquisa ;;
+  }
+
+  dimension: busca_perfil_empresas {
+    type: number
+    sql: ${TABLE}.busca_perfil_empresas ;;
+  }
+
+  dimension: qtd_excel {
+    type: number
+    sql: ${TABLE}.qtd_excel ;;
+  }
+
+  dimension: linhas_excel {
+    type: number
+    sql: ${TABLE}.linhas_excel ;;
+  }
+
+  dimension: meses_historico {
+    type: number
+    sql: ${TABLE}.meses_historico ;;
+  }
+
+  dimension: usuarios {
+    type: number
+    sql: ${TABLE}.usuarios ;;
   }
 
 }
