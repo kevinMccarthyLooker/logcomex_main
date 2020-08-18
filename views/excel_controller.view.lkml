@@ -22,6 +22,16 @@ view: excel_controller {
     sql: ${TABLE}."created_at" ;;
   }
 
+  dimension: ano {
+    type: string
+    sql: Extract(YEAR FROM ${TABLE}."created_at") ;;
+  }
+
+  dimension: mes {
+    type: string
+    sql: Extract(MONTH FROM ${TABLE}."created_at") ;;
+  }
+
   dimension: customer_id {
     type: number
     sql: ${TABLE}."customer_id" ;;
