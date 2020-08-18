@@ -22,6 +22,12 @@ view: excel_controller {
     sql: ${TABLE}."created_at" ;;
   }
 
+  dimension: id_excel {
+    type: string
+    sql: concat(Extract(YEAR FROM ${TABLE}."created_at"),Extract(MONTH FROM ${TABLE}."created_at"), ${TABLE}."customer_id") ;;
+
+  }
+
   dimension: ano {
     type: string
     sql: Extract(YEAR FROM ${TABLE}."created_at") ;;
