@@ -301,14 +301,14 @@ explore: usage {
     type: left_outer
   }
 
-  # view com detalhes do consumo excel
-  join: excel_controller {
-    sql_on: ${customer.id} = ${excel_controller.customer_id} ;;
+  # view com detalhes do consumo excel NAO ENCONTRA DEVIDO A CONEXAO (VERIFICAR!)
+  #join: excel_controller {
+  # sql_on: ${customer.id} = ${excel_controller.customer_id} ;;
     #: ${excel_controller.service_id} = 19
     #and ${excel_controller.excel_controller_status_id} = 3;;
-    relationship: one_to_many
-    type: left_outer
-  }
+  #  relationship: one_to_many
+   # type: left_outer
+  #}
 
   join: tracking_maritimo_aereo {
     sql_on: ${customer.id}=${tracking_maritimo_aereo.customer_id} ;;
