@@ -342,6 +342,11 @@ customer.fake_customer is false) as a1) as qq1
     sql: ${TABLE}.padrao_pesquisas ;;
   }
 
+  dimension: qtd_padrao_pesquisa_dim{
+    type: number
+    sql: ${TABLE}.padrao_pesquisas ;;
+  }
+
 
   measure: qtd_padrao_registros {
     type: sum
