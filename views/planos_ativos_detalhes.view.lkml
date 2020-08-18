@@ -341,4 +341,35 @@ customer.fake_customer is false) as a1) as qq1
     sql: ${TABLE}.padrao_pesquisas ;;
   }
 
+  measure: qtd_padrao_registros {
+    type: sum
+    sql: ${TABLE}.padrao_registros ;;
+  }
+
+  measure: qtd_padrao_perfil {
+    type: sum
+    sql: ${TABLE}.padrao_perfil ;;
+  }
+
+  measure: qtd_padrao_export_excel {
+    type: sum
+    sql: ${TABLE}.padrao_export_excel ;;
+  }
+
+  measure: qtd_padrao_linhas_excel {
+    type: sum
+    sql: ${TABLE}.padrao_linhas_excel ;;
+  }
+
+  measure: qtd_padrao_historico {
+    type: sum
+    sql: ${TABLE}.padrao_historico ;;
+  }
+
+  measure: qtd_padrao_usuarios {
+    type: sum
+    sql: ${TABLE}.padrao_usuarios ;;
+  }
+
+
 }
