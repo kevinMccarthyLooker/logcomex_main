@@ -2,6 +2,14 @@ view: planos_ativos_detalhes {
   # Or, you could make this view a derived table, like this:
   derived_table: {
     sql: select *,
+(case when indice_qtd_pesquisas <= 1 then 1 else 0 end ) as padrao_pesquisas,
+(case when indice_registros_pesquisas <= 1 then 1 else 0 end ) as padrao_registros,
+(case when indice_busca_perfil_empresas <= 1 then 1 else 0 end ) as padrao_perfil,
+(case when indice_busca_perfil_empresas <= 1 then 1 else 0 end ) as padrao_export_excel,
+(case when indice_linhas_excel <= 1 then 1 else 0 end ) as padrao_linhas_excel,
+(case when indice_meses_historico <= 1 then 1 else 0 end ) as padrao_historico,
+(case when indice_usuarios <= 1 then 1 else 0 end ) as padrao_usuarios
+from (select *,
 quantidade_de_pesquisas/200::float as indice_qtd_pesquisas,
 registros_por_pesquisa/5000::float as indice_registros_pesquisas,
 busca_perfil_empresas/5::float as indice_busca_perfil_empresas,
@@ -225,7 +233,7 @@ customer.deleted_at is null AND
 customer_plan.deleted_at is null AND
 pc.service_id = 19 and -- search
 (plan."name" like 'Expert' ) and
-customer.fake_customer is false) as a1
+customer.fake_customer is false) as a1) as qq1
 ;;
     }
 
@@ -326,6 +334,11 @@ customer.fake_customer is false) as a1
   measure: media_indice_pesquisas{
     type: average
     sql: ${TABLE}.indice_qtd_pesquisas ;;
+  }
+
+  measure: qtd_padrao_pesquisa {
+    type: sum
+    sql: ${TABLE}.padrao_pesquisas ;;
   }
 
 }
