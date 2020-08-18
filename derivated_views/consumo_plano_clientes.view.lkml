@@ -1,4 +1,4 @@
-view: planos_ativos_detalhes {
+view: consumo_plano_clientes {
   # Or, you could make this view a derived table, like this:
   derived_table: {
     sql: select qq1.year as ano, qq1.month as mes, qq1.customer_id as customer_id, qq1.qtd_pesquisas as qtd_pesquisas,
