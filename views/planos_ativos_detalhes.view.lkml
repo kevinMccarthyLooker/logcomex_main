@@ -240,6 +240,7 @@ customer.fake_customer is false) as a1) as qq1
   dimension: customer_id {
     type: number
     sql: ${TABLE}.customer_id ;;
+    primary_key: yes
   }
 
   dimension: name {
