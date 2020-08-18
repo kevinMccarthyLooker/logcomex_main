@@ -319,9 +319,8 @@ customer.fake_customer is false) as a1
     sql: ${TABLE}.indice_usuarios ;;
   }
 
-  measure: qtd_padrao_pesquisa {
-    type: number
-    sql: ${TABLE}.indice_qtd_pesquisas <= 1 ;;
+  measure: numero_de_planos {
+    type: count
   }
 
 }
