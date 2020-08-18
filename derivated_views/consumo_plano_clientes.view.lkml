@@ -1,7 +1,7 @@
 view: consumo_plano_clientes {
   # Or, you could make this view a derived table, like this:
   derived_table: {
-    sql: select qq1.year as ano, qq1.month as mes, qq1.customer_id as customer_id, qq1.qtd_pesquisas as qtd_pesquisas,
+    sql: select qq1.year as ano, qq1.month as mes, qq1.customer_id as customer_id, qq1.name as nome, qq1.qtd_pesquisas as qtd_pesquisas,
 qq2.quantity_possible_importer as qtd_importer, qq2.quantity_possible_exporter as qtd_export
 from(
 select fh."year", fh."month" , fh.customer_id, c2."name" , count(*) as qtd_pesquisas
@@ -42,6 +42,13 @@ group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.mont
     sql: ${TABLE}.mes ;;
 
   }
+
+  dimension: nome {
+    type: string
+    sql: ${TABLE}.nome ;;
+
+  }
+
 
   dimension: qtd_pesquisas {
     type: number
