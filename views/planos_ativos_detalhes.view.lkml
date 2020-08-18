@@ -341,6 +341,7 @@ customer.fake_customer is false) as a1) as qq1
     sql: ${TABLE}.padrao_pesquisas ;;
   }
 
+
   measure: qtd_padrao_registros {
     type: sum
     sql: ${TABLE}.padrao_registros ;;
