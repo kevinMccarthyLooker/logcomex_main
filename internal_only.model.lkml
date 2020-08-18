@@ -40,6 +40,7 @@ include: "/**/FilaTrackingFollowUp.view.lkml"
 include: "/**/tracking_status.view.lkml"
 include: "/**/planos_ativos_detalhes.view.lkml"
 include: "/**/consumo_plano_clientes.view.lkml"
+include: "/**/excel_controller.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -287,7 +288,6 @@ explore: usage {
   }
 
   # view com detalhes dos planos dos clientes
-
   join: planos_ativos_detalhes {
     sql_on: ${customer.id} = ${planos_ativos_detalhes.customer_id} ;;
     relationship: one_to_many
@@ -298,6 +298,17 @@ explore: usage {
   join: consumo_plano_clientes {
     sql_on: ${customer.id} = ${consumo_plano_clientes.customer_id} ;;
     relationship: one_to_many
+    type: left_outer
+  }
+
+  # view com detalhes do consumo excel
+  join: excel_controller {
+    sql_on: ${consumo_plano_clientes.customer_id} = ${excel_controller.customer_id}
+    and ${consumo_plano_clientes.ano} = ${excel_controller.created_year}
+    and ${consumo_plano_clientes.mes} = ${excel_controller.created_month} ;;
+    sql_where: ${excel_controller.service_id} = 19
+    and ${excel_controller.excel_controller_status_id} = 3;;
+    relationship: one_to_one
     type: left_outer
   }
 
