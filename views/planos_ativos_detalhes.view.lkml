@@ -328,7 +328,7 @@ customer.fake_customer is false) as a1) as qq1
   }
 
   measure: numero_de_planos {
-    type: count
+    type: count_distinct
   }
 
   measure: media_indice_pesquisas{
