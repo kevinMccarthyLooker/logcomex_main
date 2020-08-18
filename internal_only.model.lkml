@@ -289,7 +289,7 @@ explore: usage {
 
   join: planos_ativos_detalhes {
     sql_on: ${customer.id} = ${planos_ativos_detalhes.customer_id} ;;
-    relationship: one_to_one
+    relationship: one_to_many
     type: left_outer
   }
 
