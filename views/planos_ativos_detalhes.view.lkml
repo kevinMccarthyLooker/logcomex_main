@@ -323,4 +323,9 @@ customer.fake_customer is false) as a1
     type: count
   }
 
+  measure: media_indice_pesquisas{
+    type: average
+    sql: ${TABLE}.indice_qtd_pesquisas ;;
+  }
+
 }
