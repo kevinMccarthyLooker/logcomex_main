@@ -303,7 +303,8 @@ explore: usage {
 
   # view com detalhes do consumo excel
   join: excel_controller {
-    sql_on: ${consumo_plano_clientes.id} = ${excel_controller.id_excel} ;;
+    sql_on: ${consumo_plano_clientes.id} = ${excel_controller.id_excel}
+    and ${customer.id} = ${excel_controller.customer_id} ;;
     #: ${excel_controller.service_id} = 19
     #and ${excel_controller.excel_controller_status_id} = 3;;
     relationship: one_to_many
