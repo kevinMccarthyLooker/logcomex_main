@@ -1,7 +1,7 @@
 view: consumo_plano_clientes {
   # Or, you could make this view a derived table, like this:
   derived_table: {
-    sql: select qq1.year as ano, qq1.month as mes, qq1.customer_id as customer_id, qq1.name as nome, qq1.qtd_pesquisas as qtd_pesquisas,
+    sql: select concat(qq1.year,qq1.month,qq1.customer_id) as id, qq1.year as ano, qq1.month as mes, qq1.customer_id as customer_id, qq1.name as nome, qq1.qtd_pesquisas as qtd_pesquisas,
 qq2.quantity_possible_importer as qtd_importer, qq2.quantity_possible_exporter as qtd_export
 from(
 select fh."year", fh."month" , fh.customer_id, c2."name" , count(*) as qtd_pesquisas
@@ -25,6 +25,11 @@ and "filters" is not null
 and (filters @> '[{"name": "possibleImporter"}]' or filters @> '[{"name": "possibleExporter"}]')
 group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.month = qq2.month and qq1.customer_id = qq2.customer_id
 ;;
+  }
+
+  dimension: id {
+    type: string
+    sql: ${TABLE}.id ;;
   }
 
   dimension: customer_id {
