@@ -39,6 +39,7 @@ include: "/**/follow_up.view.lkml"
 include: "/**/FilaTrackingFollowUp.view.lkml"
 include: "/**/tracking_status.view.lkml"
 include: "/**/planos_ativos_detalhes.view.lkml"
+include: "/**/consumo_plano_clientes.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -289,6 +290,13 @@ explore: usage {
 
   join: planos_ativos_detalhes {
     sql_on: ${customer.id} = ${planos_ativos_detalhes.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  # view com o consumo dos planos
+  join: consumo_plano_clientes {
+    sql_on: ${customer.id} = ${consumo_plano_clientes.customer_id} ;;
     relationship: one_to_many
     type: left_outer
   }
