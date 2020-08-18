@@ -378,5 +378,9 @@ customer.fake_customer is false) as a1) as qq1
     sql: ${TABLE}.padrao_usuarios ;;
   }
 
+  measure: div_qtd_padrao_pesquisa {
+    type: number
+    sql: ${planos_ativos_detalhes.qtd_padrao_pesquisa} / ${planos_ativos_detalhes.numero_de_planos} ;;
+  }
 
 }
