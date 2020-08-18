@@ -304,8 +304,8 @@ explore: usage {
   # view com detalhes do consumo excel
   join: excel_controller {
     sql_on: ${consumo_plano_clientes.customer_id} = ${excel_controller.customer_id}
-    and ${consumo_plano_clientes.ano} = ${excel_controller.created_year}
-    and ${consumo_plano_clientes.mes} = ${excel_controller.created_month} ;;
+    and ${consumo_plano_clientes.ano} = ${excel_controller.ano}
+    and ${consumo_plano_clientes.mes} = ${excel_controller.mes} ;;
     sql_where: ${excel_controller.service_id} = 19
     and ${excel_controller.excel_controller_status_id} = 3;;
     relationship: one_to_one
