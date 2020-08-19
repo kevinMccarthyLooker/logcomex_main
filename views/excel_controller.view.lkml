@@ -30,7 +30,7 @@ view: excel_controller {
 
   dimension: ano {
     type: string
-    sql: Extract(YEAR FROM ${TABLE}."created_at") ;;
+    sql:date_part('year', ${TABLE}."created_at");;
   }
 
   dimension: mes {
