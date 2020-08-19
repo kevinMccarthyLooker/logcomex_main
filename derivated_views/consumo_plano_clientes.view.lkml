@@ -30,8 +30,6 @@ group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.mont
 ;;
   }
 
-  extends: [excel_controller]
-
   dimension: id {
     type: string
     sql: ${TABLE}.id ;;
