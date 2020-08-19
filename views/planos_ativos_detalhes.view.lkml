@@ -393,7 +393,7 @@ customer.fake_customer is false) as a1) as qq1
 
   measure: qtd_padrao_exato_perfil {
     type: sum
-    sql: ${TABLE}.padrao_exato_perfil ;;
+    sql: ${TABLE}.padrao_exato__perfil ;;
   }
 
   measure: qtd_padrao_exato_export_excel {
