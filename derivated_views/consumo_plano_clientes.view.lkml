@@ -1,3 +1,6 @@
+
+include: "/**/excel_controller.view.lkml"
+
 view: consumo_plano_clientes {
   # Or, you could make this view a derived table, like this:
   derived_table: {
@@ -26,6 +29,8 @@ and (filters @> '[{"name": "possibleImporter"}]' or filters @> '[{"name": "possi
 group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.month = qq2.month and qq1.customer_id = qq2.customer_id
 ;;
   }
+
+  extends: [excel_controller]
 
   dimension: id {
     type: string
@@ -72,6 +77,7 @@ group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.mont
     sql: ${TABLE}.qtd_export ;;
 
   }
+
 
 
 }
