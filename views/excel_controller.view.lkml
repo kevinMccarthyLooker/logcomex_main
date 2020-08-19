@@ -35,7 +35,7 @@ view: excel_controller {
 
   dimension: mes {
     type: string
-    sql: Extract(MONTH FROM ${TABLE}."created_at") ;;
+    sql: lpad(Extract(MONTH from ${TABLE}."created_at")::text, 2, '0') ;;
   }
 
   dimension: customer_id {
