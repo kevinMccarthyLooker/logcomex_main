@@ -8,7 +8,14 @@ view: planos_ativos_detalhes {
 (case when indice_busca_perfil_empresas <= 1 then 1 else 0 end ) as padrao_export_excel,
 (case when indice_linhas_excel <= 1 then 1 else 0 end ) as padrao_linhas_excel,
 (case when indice_meses_historico <= 1 then 1 else 0 end ) as padrao_historico,
-(case when indice_usuarios <= 1 then 1 else 0 end ) as padrao_usuarios
+(case when indice_usuarios <= 1 then 1 else 0 end ) as padrao_usuarios,
+(case when indice_qtd_pesquisas = 1 then 1 else 0 end ) as padrao_exato_pesquisas,
+(case when indice_registros_pesquisas = 1 then 1 else 0 end ) as padrao_exato_registros,
+(case when indice_busca_perfil_empresas = 1 then 1 else 0 end ) as padrao_exato__perfil,
+(case when indice_busca_perfil_empresas = 1 then 1 else 0 end ) as padrao_exato_export_excel,
+(case when indice_linhas_excel = 1 then 1 else 0 end ) as padrao_exato_linhas_excel,
+(case when indice_meses_historico = 1 then 1 else 0 end ) as padrao_exato_historico,
+(case when indice_usuarios = 1 then 1 else 0 end ) as padrao_exato_usuarios
 from (select *,
 quantidade_de_pesquisas/200::float as indice_qtd_pesquisas,
 registros_por_pesquisa/5000::float as indice_registros_pesquisas,
@@ -371,6 +378,42 @@ customer.fake_customer is false) as a1) as qq1
   measure: qtd_padrao_usuarios {
     type: sum
     sql: ${TABLE}.padrao_usuarios ;;
+  }
+
+  measure: qtd_padrao_exato_pesquisa {
+    type: sum
+    sql: ${TABLE}.padrao_exato_pesquisas ;;
+  }
+
+
+  measure: qtd_padrao_exato_registros {
+    type: sum
+    sql: ${TABLE}.padrao_exato_registros ;;
+  }
+
+  measure: qtd_padrao_exato_perfil {
+    type: sum
+    sql: ${TABLE}.padrao_exato_perfil ;;
+  }
+
+  measure: qtd_padrao_exato_export_excel {
+    type: sum
+    sql: ${TABLE}.padrao_exato_export_excel ;;
+  }
+
+  measure: qtd_padrao_exato_linhas_excel {
+    type: sum
+    sql: ${TABLE}.padrao_exato_linhas_excel ;;
+  }
+
+  measure: qtd_padrao_exato_historico {
+    type: sum
+    sql: ${TABLE}.padrao_exato_historico ;;
+  }
+
+  measure: qtd_padrao_exato_usuarios {
+    type: sum
+    sql: ${TABLE}.padrao_exato_usuarios ;;
   }
 
 }
