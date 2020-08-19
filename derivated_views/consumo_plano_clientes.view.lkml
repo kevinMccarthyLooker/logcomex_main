@@ -82,6 +82,12 @@ group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.mont
 
   }
 
+  measure: qtd_busca_perfil {
+    type: number
+    sql: ${TABLE}.qtd_importer + ${TABLE}.qtd_export ;;
+
+  }
+
 
 
 }
