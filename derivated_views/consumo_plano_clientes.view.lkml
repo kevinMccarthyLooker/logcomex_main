@@ -60,6 +60,16 @@ group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.mont
 
   }
 
+  dimension_group: anoMes {
+    type: time
+    timeframes: [
+      raw,
+      month,
+      year
+    ]
+    sql: TO_TIMESTAMP(${TABLE}.ano +' ' +${TABLE}.mes ,'YYYY MM') ;;
+  }
+
 
   measure: qtd_pesquisas {
     type: sum
