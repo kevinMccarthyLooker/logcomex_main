@@ -64,19 +64,19 @@ group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.mont
   }
 
 
-  dimension: qtd_pesquisas {
+  measure: qtd_pesquisas {
     type: number
     sql: ${TABLE}.qtd_pesquisas ;;
 
   }
 
-  dimension: qtd_importer {
+  measure: qtd_importer {
     type: number
     sql: ${TABLE}.qtd_importer ;;
 
   }
 
-  dimension: qtd_export {
+  measure: qtd_export {
     type: number
     sql: ${TABLE}.qtd_export ;;
 
