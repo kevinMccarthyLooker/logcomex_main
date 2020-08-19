@@ -30,7 +30,7 @@ view: excel_controller {
 
   dimension: ano {
     type: string
-    sql:date_part('year', ${TABLE}."created_at");;
+    sql: REPLACE(date_part('year', ${TABLE}."created_at")::text, '.0', '' );;
   }
 
   dimension: mes {
