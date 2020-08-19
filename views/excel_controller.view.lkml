@@ -24,7 +24,7 @@ view: excel_controller {
 
   dimension: id_excel {
     type: string
-    sql: concat(Extract(YEAR FROM ${TABLE}."created_at"),Extract(MONTH FROM ${TABLE}."created_at"), ${TABLE}."customer_id") ;;
+    sql: concat(Extract(YEAR FROM ${TABLE}."created_at"),lpad(Extract(MONTH from ${TABLE}."created_at")::text, 2, '0'), ${TABLE}."customer_id") ;;
 
   }
 
