@@ -383,4 +383,13 @@ customer.fake_customer is false) as a1) as qq1
     sql: ${planos_ativos_detalhes.numero_de_planos} ;;
   }
 
+  measure: percent_dim_pesquisa {
+    type: percent_of_total
+    sql: ${planos_ativos_detalhes.qtd_padrao_pesquisa_dim} ;;
+  }
+
+  measure: percent_mesure_pesquisa {
+    type: percent_of_total
+    sql: ${planos_ativos_detalhes.qtd_padrao_pesquisa} ;;
+  }
 }
