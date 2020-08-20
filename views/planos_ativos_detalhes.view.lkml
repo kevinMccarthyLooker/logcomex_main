@@ -430,7 +430,12 @@ customer.fake_customer is false) as a1) as qq1
 
   measure: avg_busca_perfil_empresas {
     type: average
-    sql: ${TABLE}.busca_perfil_empresas ;;
+    #retirando outliers da media
+    sql:CASE WHEN ${TABLE}.busca_perfil_empresas < 9999999
+        THEN ${TABLE}.busca_perfil_empresas
+        ELSE NULL
+        END ;;
+
   }
 
   measure: avg_qtd_excel {
