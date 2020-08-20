@@ -288,6 +288,7 @@ view: db_ce_mercante {
     sql:  CASE  WHEN (right(left(lpad(numero_ce :: text, 15, '0'),6),2) = '07') THEN 'Exportação'
                 WHEN (right(left(lpad(numero_ce :: text, 15, '0'),6),2) = '05') THEN 'Importação'
                 WHEN (right(left(lpad(numero_ce :: text, 15, '0'),6),2) = '03') THEN 'Cabotagem'
+                WHEN (right(left(lpad(numero_ce :: text, 15, '0'),6),2) = '09') THEN 'Passagem'
                 else right(left(lpad(${TABLE}."numero_ce" :: text, 15, '0'),6),2) end
     ;;
   }

@@ -73,4 +73,9 @@ explore: db_maritimo {
 }
 
 explore: db_ce_mercante {
+  join: db_maritimo {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${db_maritimo.nrcemercante} = ${db_ce_mercante.numero_ce} ;;
+  }
 }
