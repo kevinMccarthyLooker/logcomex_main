@@ -445,7 +445,10 @@ customer.fake_customer is false) as a1) as qq1
 
   measure: avg_linhas_excel {
     type: average
-    sql: ${TABLE}.linhas_excel ;;
+    sql:CASE WHEN ${TABLE}.linhas_excel < 200000
+        THEN ${TABLE}.linhas_excel
+        ELSE NULL
+        END ;;
   }
 
   measure: avg_meses_historico {
@@ -455,7 +458,10 @@ customer.fake_customer is false) as a1) as qq1
 
   measure: avg_usuarios {
     type: average
-    sql: ${TABLE}.usuarios ;;
+    sql:CASE WHEN ${TABLE}.usuarios < 9
+        THEN ${TABLE}.usuarios
+        ELSE NULL
+        END ;;
   }
 
   # media dos indices
