@@ -285,8 +285,10 @@ view: db_ce_mercante {
 
   dimension: tipo_trafego {
     type:  string
-    sql:  CASE WHEN (right(left(lpad(numero_ce :: text, 15, '0'),6),2) = '07') THEN 'Exportação'
-    else right(left(lpad(${TABLE}."numero_ce" :: text, 15, '0'),6),2) end
+    sql:  CASE  WHEN (right(left(lpad(numero_ce :: text, 15, '0'),6),2) = '07') THEN 'Exportação'
+                WHEN (right(left(lpad(numero_ce :: text, 15, '0'),6),2) = '05') THEN 'Importação'
+                WHEN (right(left(lpad(numero_ce :: text, 15, '0'),6),2) = '03') THEN 'Cabotagem'
+                else right(left(lpad(${TABLE}."numero_ce" :: text, 15, '0'),6),2) end
     ;;
   }
 
