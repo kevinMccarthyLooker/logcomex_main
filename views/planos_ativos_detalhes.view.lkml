@@ -462,6 +462,7 @@ customer.fake_customer is false) as a1) as qq1
 
   measure: avg_usuarios {
     type: average
+    # removendo outliers
     sql:CASE WHEN ${TABLE}.usuarios <9
         THEN ${TABLE}.usuarios
         ELSE NULL
