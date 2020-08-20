@@ -479,4 +479,34 @@ customer.fake_customer is false) as a1) as qq1
         END
     ;;
   }
+
+  measure: avg_indice_registros_pesquisas {
+    type: average
+    sql: ${TABLE}.indice_registros_pesquisas ;;
+  }
+
+  measure: avg_indice_busca_perfil_empresas {
+    type: average
+    sql: ${TABLE}.indice_busca_perfil_empresas ;;
+  }
+
+  measure: avg_indice_export_excel {
+    type: average
+    sql: ${TABLE}.indice_export_excel ;;
+  }
+
+  measure: avg_indice_linhas_excel {
+    type: average
+    sql: ${TABLE}.indice_linhas_excel ;;
+  }
+
+  measure: avg_indice_meses_historico {
+    type: average
+    sql: ${TABLE}.indice_meses_historico ;;
+  }
+
+  measure: avg_indice_usuarios {
+    type: average
+    sql: ${TABLE}.indice_usuarios ;;
+  }
 }
