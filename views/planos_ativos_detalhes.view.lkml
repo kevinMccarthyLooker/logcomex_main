@@ -453,7 +453,11 @@ customer.fake_customer is false) as a1) as qq1
 
   measure: avg_meses_historico {
     type: average
-    sql: ${TABLE}.meses_historico ;;
+    # trantando quando o plano é em dias
+    sql:CASE WHEN ${TABLE}.meses_historico > 24
+        THEN ${TABLE}.meses_historico/30
+        ELSE ${TABLE}.meses_historico
+        END ;;
   }
 
   measure: avg_usuarios {
