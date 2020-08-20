@@ -335,13 +335,9 @@ customer.fake_customer is false) as a1) as qq1
     sql: ${TABLE}.indice_usuarios ;;
   }
 
+# medidas utilizadas para calcular a qtd de beneficios com valor menor ou igual ao dos planos vendidos
   measure: numero_de_planos {
     type: count
-  }
-
-  measure: media_indice_pesquisas{
-    type: average
-    sql: ${TABLE}.indice_qtd_pesquisas ;;
   }
 
   measure: qtd_padrao_pesquisa {
@@ -380,6 +376,7 @@ customer.fake_customer is false) as a1) as qq1
     sql: ${TABLE}.padrao_usuarios ;;
   }
 
+# medidas utilizadas para calcular a qtd de beneficios exatamente no padrao dos planos vendidos
   measure: qtd_padrao_exato_pesquisa {
     type: sum
     sql: ${TABLE}.padrao_exato_pesquisas ;;
@@ -416,4 +413,45 @@ customer.fake_customer is false) as a1) as qq1
     sql: ${TABLE}.padrao_exato_usuarios ;;
   }
 
+ # media dos beneficios
+  measure: avg_quantidade_de_pesquisas {
+    type: average
+    sql: ${TABLE}.quantidade_de_pesquisas ;;
+  }
+
+  measure: avg_registros_por_pesquisa {
+    type: average
+    sql: ${TABLE}.registros_por_pesquisa ;;
+  }
+
+  measure: avg_busca_perfil_empresas {
+    type: average
+    sql: ${TABLE}.busca_perfil_empresas ;;
+  }
+
+  measure: avg_qtd_excel {
+    type: average
+    sql: ${TABLE}.qtd_excel ;;
+  }
+
+  measure: avg_linhas_excel {
+    type: average
+    sql: ${TABLE}.linhas_excel ;;
+  }
+
+  measure: avg_meses_historico {
+    type: average
+    sql: ${TABLE}.meses_historico ;;
+  }
+
+  measure: avg_usuarios {
+    type: average
+    sql: ${TABLE}.usuarios ;;
+  }
+
+  # media dos indices
+  measure: media_indice_pesquisas{
+    type: average
+    sql: ${TABLE}.indice_qtd_pesquisas ;;
+  }
 }
