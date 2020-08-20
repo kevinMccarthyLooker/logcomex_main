@@ -416,7 +416,11 @@ customer.fake_customer is false) as a1) as qq1
  # media dos beneficios
   measure: avg_quantidade_de_pesquisas {
     type: average
-    sql: ${TABLE}.quantidade_de_pesquisas ;;
+    #retirando outliers da media
+    sql:CASE WHEN ${TABLE}.quantidade_de_pesquisas < 9999999
+        THEN ${TABLE}.quantidade_de_pesquisas
+        ELSE NULL
+        END ;;
   }
 
   measure: avg_registros_por_pesquisa {
