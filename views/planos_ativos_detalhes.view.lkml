@@ -470,8 +470,13 @@ customer.fake_customer is false) as a1) as qq1
   }
 
   # media dos indices
-  measure: media_indice_pesquisas{
+  measure: avg_indice_pesquisas{
+    # removendo outliers
     type: average
-    sql: ${TABLE}.indice_qtd_pesquisas ;;
+    sql:CASE WHEN ${TABLE}.indice_qtd_pesquisas < 100 and ${TABLE}.indice_qtd_pesquisas >1
+        THEN ${TABLE}.indice_qtd_pesquisas
+        ELSE NULL
+        END
+    ;;
   }
 }
