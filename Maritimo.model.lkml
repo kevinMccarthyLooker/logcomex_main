@@ -14,6 +14,7 @@ include: "/views/health_data_exp.view.lkml"
 include: "/views/antaqxmaritimo_exp.view.lkml"
 include: "/views/db_cad_armador.view.lkml"
 include: "/views/db_maritimo.view.lkml"
+include: "/views/db_ce_mercante.view.lkml"
 include: "/views/antaqxmaritimo_cab.view.lkml"
 include: "/views/antaqxmaritimo_cab_emb.view.lkml"
 
@@ -51,6 +52,7 @@ explore: view_infografico {
   }
   label: "Infográfico Importação"
 }
+
 explore: view_infografico_exp {
   join: db_siscori_cod_ncm {
     relationship: one_to_one
@@ -62,9 +64,18 @@ explore: view_infografico_exp {
   }
   label: "Infográfico Exportação"
 }
+
 explore: db_maritimo {
   join: db_cad_armador {
     relationship: many_to_one
     sql_on: ${db_cad_armador.id} = ${db_maritimo.id_armador} ;;
+  }
+}
+
+explore: db_ce_mercante {
+  join: db_maritimo {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${db_maritimo.nrcemercante} = ${db_ce_mercante.numero_ce} ;;
   }
 }
