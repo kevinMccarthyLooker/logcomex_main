@@ -41,6 +41,7 @@ include: "/**/tracking_status.view.lkml"
 include: "/**/planos_ativos_detalhes.view.lkml"
 include: "/**/consumo_plano_clientes.view.lkml"
 include: "/**/excel_controller.view.lkml"
+include: "/**/log_integration_ibroker.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -352,6 +353,11 @@ explore: usage {
     type: left_outer
   }
 
+  join: log_integration_ibroker {
+    sql_on: ${customer.id}=${log_integration_ibroker.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
 }
 
 explore: Logistica_Internacional {
