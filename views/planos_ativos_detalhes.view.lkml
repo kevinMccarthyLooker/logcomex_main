@@ -346,12 +346,12 @@ customer.fake_customer is false) as a1) as qq1
   }
 
   dimension: data_inicio {
-    type: date_time
+    type: date
     sql: ${TABLE}.data_inicio ;;
   }
 
   dimension: data_fim {
-    type: date_time
+    type: date
     sql: ${TABLE}.data_fim ;;
   }
 
