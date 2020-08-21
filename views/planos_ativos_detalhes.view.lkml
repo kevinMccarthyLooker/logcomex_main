@@ -51,7 +51,9 @@ coalesce(pi_custom.excel_downloads, pi_default.excel_downloads) as qtd_excel,
 coalesce(pi_custom.excel_lines, pi_default.excel_lines) AS linhas_excel,
 coalesce(pi_custom.search_days_limit, pi_default.search_days_limit) AS meses_historico,
 coalesce(pi_custom.user_limit, pi_default.user_limit) AS usuarios,
-plan."name" as plano
+plan."name" as plano,
+customer_plan."start"  as data_inicio,
+customer_plan.expiration as data_fim
 FROM customer
 INNER JOIN customer_plan ON customer.id = customer_plan.customer_id
 INNER JOIN plan_complete pc ON customer_plan.plan_complete_id = pc.id
@@ -95,7 +97,9 @@ coalesce(pi_custom.excel_downloads, pi_default.excel_downloads) as qtd_excel,
 coalesce(pi_custom.excel_lines, pi_default.excel_lines) AS linhas_excel,
 coalesce(pi_custom.search_days_limit, pi_default.search_days_limit) AS meses_historico,
 coalesce(pi_custom.user_limit, pi_default.user_limit) AS usuarios,
-plan."name" as plano
+plan."name" as plano,
+customer_plan."start"  as data_inicio,
+customer_plan.expiration as data_fim
 FROM customer
 INNER JOIN customer_plan ON customer.id = customer_plan.customer_id
 INNER JOIN plan_complete pc ON customer_plan.plan_complete_id = pc.id
@@ -139,7 +143,9 @@ coalesce(pi_custom.excel_downloads, pi_default.excel_downloads) as qtd_excel,
 coalesce(pi_custom.excel_lines, pi_default.excel_lines) AS linhas_excel,
 coalesce(pi_custom.search_days_limit, pi_default.search_days_limit) AS meses_historico,
 coalesce(pi_custom.user_limit, pi_default.user_limit) AS usuarios,
-plan."name" as plano
+plan."name" as plano,
+customer_plan."start"  as data_inicio,
+customer_plan.expiration as data_fim
 FROM customer
 INNER JOIN customer_plan ON customer.id = customer_plan.customer_id
 INNER JOIN plan_complete pc ON customer_plan.plan_complete_id = pc.id
@@ -183,7 +189,9 @@ coalesce(pi_custom.excel_downloads, pi_default.excel_downloads) as qtd_excel,
 coalesce(pi_custom.excel_lines, pi_default.excel_lines) AS linhas_excel,
 coalesce(pi_custom.search_days_limit, pi_default.search_days_limit) AS meses_historico,
 coalesce(pi_custom.user_limit, pi_default.user_limit) AS usuarios,
-plan."name" as plano
+plan."name" as plano,
+customer_plan."start"  as data_inicio,
+customer_plan.expiration as data_fim
 FROM customer
 INNER JOIN customer_plan ON customer.id = customer_plan.customer_id
 INNER JOIN plan_complete pc ON customer_plan.plan_complete_id = pc.id
@@ -227,7 +235,9 @@ coalesce(pi_custom.excel_downloads, pi_default.excel_downloads) as qtd_excel,
 coalesce(pi_custom.excel_lines, pi_default.excel_lines) AS linhas_excel,
 coalesce(pi_custom.search_days_limit, pi_default.search_days_limit) AS meses_historico,
 coalesce(pi_custom.user_limit, pi_default.user_limit) AS usuarios,
-plan."name" as plano
+plan."name" as plano,
+customer_plan."start"  as data_inicio,
+customer_plan.expiration as data_fim
 FROM customer
 INNER JOIN customer_plan ON customer.id = customer_plan.customer_id
 INNER JOIN plan_complete pc ON customer_plan.plan_complete_id = pc.id
@@ -333,6 +343,16 @@ customer.fake_customer is false) as a1) as qq1
   dimension: indice_usuarios {
     type: number
     sql: ${TABLE}.indice_usuarios ;;
+  }
+
+  dimension: data_inicio {
+    type: date_time
+    sql: ${TABLE}.data_inicio ;;
+  }
+
+  dimension: data_fim {
+    type: date_time
+    sql: ${TABLE}.data_fim ;;
   }
 
 # medidas utilizadas para calcular a qtd de beneficios com valor menor ou igual ao dos planos vendidos
