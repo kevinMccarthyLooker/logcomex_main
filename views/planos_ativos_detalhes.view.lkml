@@ -416,7 +416,11 @@ customer.fake_customer is false) as a1) as qq1
  # media dos beneficios
   measure: avg_quantidade_de_pesquisas {
     type: average
-    sql: ${TABLE}.quantidade_de_pesquisas ;;
+    #retirando outliers da media
+    sql:CASE WHEN ${TABLE}.quantidade_de_pesquisas < 9999999
+        THEN ${TABLE}.quantidade_de_pesquisas
+        ELSE NULL
+        END ;;
   }
 
   measure: avg_registros_por_pesquisa {
@@ -426,7 +430,12 @@ customer.fake_customer is false) as a1) as qq1
 
   measure: avg_busca_perfil_empresas {
     type: average
-    sql: ${TABLE}.busca_perfil_empresas ;;
+    #retirando outliers da media
+    sql:CASE WHEN ${TABLE}.busca_perfil_empresas < 9999999
+        THEN ${TABLE}.busca_perfil_empresas
+        ELSE NULL
+        END ;;
+
   }
 
   measure: avg_qtd_excel {
@@ -436,22 +445,92 @@ customer.fake_customer is false) as a1) as qq1
 
   measure: avg_linhas_excel {
     type: average
-    sql: ${TABLE}.linhas_excel ;;
+    sql:CASE WHEN ${TABLE}.linhas_excel < 200000
+        THEN ${TABLE}.linhas_excel
+        ELSE NULL
+        END ;;
   }
 
   measure: avg_meses_historico {
     type: average
-    sql: ${TABLE}.meses_historico ;;
+    # trantando quando o plano é em dias
+    sql:CASE WHEN ${TABLE}.meses_historico > 24
+        THEN ${TABLE}.meses_historico/30
+        ELSE ${TABLE}.meses_historico
+        END ;;
   }
 
   measure: avg_usuarios {
     type: average
-    sql: ${TABLE}.usuarios ;;
+    # removendo outliers
+    sql:CASE WHEN ${TABLE}.usuarios <9
+        THEN ${TABLE}.usuarios
+        ELSE NULL
+        END ;;
   }
 
   # media dos indices
-  measure: media_indice_pesquisas{
+  measure: avg_indice_pesquisas{
+    # removendo outliers
     type: average
-    sql: ${TABLE}.indice_qtd_pesquisas ;;
+    sql:CASE WHEN ${TABLE}.indice_qtd_pesquisas < 100 and ${TABLE}.indice_qtd_pesquisas >1
+        THEN ${TABLE}.indice_qtd_pesquisas
+        ELSE NULL
+        END
+    ;;
+  }
+
+  measure: avg_indice_registros_pesquisas {
+    type: average
+    sql:CASE WHEN ${TABLE}.indice_registros_pesquisas  < 100 and  ${TABLE}.indice_registros_pesquisas  >1
+        THEN ${TABLE}.indice_registros_pesquisas
+        ELSE NULL
+        END
+    ;;
+  }
+
+  measure: avg_indice_busca_perfil_empresas {
+    type: average
+    sql:CASE WHEN ${TABLE}.indice_busca_perfil_empresas  < 100 and  ${TABLE}.indice_busca_perfil_empresas  >1
+        THEN ${TABLE}.indice_busca_perfil_empresas
+        ELSE NULL
+        END
+    ;;
+  }
+
+  measure: avg_indice_export_excel {
+    type: average
+    sql:CASE WHEN ${TABLE}.indice_export_excel < 100 and  ${TABLE}.indice_export_excel >1
+        THEN ${TABLE}.indice_export_excel
+        ELSE NULL
+        END
+    ;;
+  }
+
+  measure: avg_indice_linhas_excel {
+    type: average
+    sql:CASE WHEN ${TABLE}.indice_linhas_excel < 100 and ${TABLE}.indice_linhas_excel >1
+        THEN ${TABLE}.indice_linhas_excel
+        ELSE NULL
+        END
+    ;;
+  }
+
+  measure: avg_indice_meses_historico {
+    type: average
+    sql:CASE WHEN ${TABLE}.indice_meses_historico < 100 and ${TABLE}.indice_meses_historico >1
+        THEN ${TABLE}.indice_meses_historico
+        ELSE NULL
+        END
+    ;;
+  }
+
+  measure: avg_indice_usuarios {
+    type: average
+    sql:CASE WHEN ${TABLE}.indice_usuarios < 100 and ${TABLE}.indice_usuarios >1
+        THEN ${TABLE}.indice_usuarios
+        ELSE NULL
+        END
+    ;;
   }
 }
