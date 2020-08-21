@@ -482,31 +482,55 @@ customer.fake_customer is false) as a1) as qq1
 
   measure: avg_indice_registros_pesquisas {
     type: average
-    sql: ${TABLE}.indice_registros_pesquisas ;;
+    sql:CASE WHEN ${TABLE}.indice_registros_pesquisas  < 100 and  ${TABLE}.indice_registros_pesquisas  >1
+        THEN ${TABLE}.indice_registros_pesquisas
+        ELSE NULL
+        END
+    ;;
   }
 
   measure: avg_indice_busca_perfil_empresas {
     type: average
-    sql: ${TABLE}.indice_busca_perfil_empresas ;;
+    sql:CASE WHEN ${TABLE}.indice_busca_perfil_empresas  < 100 and  ${TABLE}.indice_busca_perfil_empresas  >1
+        THEN ${TABLE}.indice_busca_perfil_empresas
+        ELSE NULL
+        END
+    ;;
   }
 
   measure: avg_indice_export_excel {
     type: average
-    sql: ${TABLE}.indice_export_excel ;;
+    sql:CASE WHEN ${TABLE}.indice_export_excel < 100 and  ${TABLE}.indice_export_excel >1
+        THEN ${TABLE}.indice_export_excel
+        ELSE NULL
+        END
+    ;;
   }
 
   measure: avg_indice_linhas_excel {
     type: average
-    sql: ${TABLE}.indice_linhas_excel ;;
+    sql:CASE WHEN ${TABLE}.indice_linhas_excel < 100 and ${TABLE}.indice_linhas_excel >1
+        THEN ${TABLE}.indice_linhas_excel
+        ELSE NULL
+        END
+    ;;
   }
 
   measure: avg_indice_meses_historico {
     type: average
-    sql: ${TABLE}.indice_meses_historico ;;
+    sql:CASE WHEN ${TABLE}.indice_meses_historico < 100 and ${TABLE}.indice_meses_historico >1
+        THEN ${TABLE}.indice_meses_historico
+        ELSE NULL
+        END
+    ;;
   }
 
   measure: avg_indice_usuarios {
     type: average
-    sql: ${TABLE}.indice_usuarios ;;
+    sql:CASE WHEN ${TABLE}.indice_usuarios < 100 and ${TABLE}.indice_usuarios >1
+        THEN ${TABLE}.indice_usuarios
+        ELSE NULL
+        END
+    ;;
   }
 }
