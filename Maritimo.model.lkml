@@ -73,6 +73,7 @@ explore: db_maritimo {
 }
 
 explore: db_ce_mercante {
+  label: "Embarques"
   join: db_maritimo {
     type: left_outer
     relationship: one_to_one

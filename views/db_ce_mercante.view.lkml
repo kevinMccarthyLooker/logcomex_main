@@ -289,7 +289,14 @@ view: db_ce_mercante {
                 WHEN (right(left(lpad(numero_ce :: text, 15, '0'),6),2) = '05') THEN 'Importação'
                 WHEN (right(left(lpad(numero_ce :: text, 15, '0'),6),2) = '03') THEN 'Cabotagem'
                 WHEN (right(left(lpad(numero_ce :: text, 15, '0'),6),2) = '09') THEN 'Passagem'
-                else right(left(lpad(${TABLE}."numero_ce" :: text, 15, '0'),6),2) end
+                else 'Outros' end
+    ;;
+  }
+
+  dimension: processado {
+    type: yesno
+    sql:  CASE  WHEN (${dt_processamento_date} is not null) THEN true
+                else false end
     ;;
   }
 
