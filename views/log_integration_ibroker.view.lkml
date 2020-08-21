@@ -57,6 +57,14 @@ view: log_integration_ibroker {
     sql: ${TABLE}."type_tracking" ;;
   }
 
+  dimension: modal {
+    type: string
+    sql:  CASE WHEN (log_integration_ibroker.type_tracking = 0) THEN 'Marítimo'
+               WHEN (log_integration_ibroker.type_tracking = 1) THEN 'Aéreo'
+          else 'Outros' end
+    ;;
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [
