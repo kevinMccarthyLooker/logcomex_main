@@ -4,7 +4,7 @@ include: "/derivated_views/consumo_plano_clientes.view.lkml"
 explore: consumo_plano_clientes {
   join: excel_controller {
     relationship: many_to_one
-    sql_on: ${consumo_plano_clientes.customer_id} = ${excel_controller.customer_id ;;
+    sql_on: ${consumo_plano_clientes.customer_id} = ${excel_controller.customer_id} ;;
   }
 
 }
