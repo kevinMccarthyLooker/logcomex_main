@@ -1,4 +1,6 @@
-connection: "excel-api"
+#connection: "excel-api"
+
+include: "internal_only.model"
 
 include: "/**/excel_controller.view.lkml"
 include: "/**/excel_controller_status.view.lkml"
