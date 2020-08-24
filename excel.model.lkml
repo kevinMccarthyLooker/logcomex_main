@@ -2,7 +2,9 @@ connection: "excel-api"
 
 include: "/**/excel_controller.view.lkml"
 include: "/**/excel_controller_status.view.lkml"
-include: "/**/consumo_plano_clientes.view"
+include: "/**/consumo_plano_clientes.view.lkml"
+
+#include: "/**/api.base.lkml"
 
 
  explore: excel_controller {
