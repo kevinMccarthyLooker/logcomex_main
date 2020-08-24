@@ -1,4 +1,5 @@
-include: "excel.model.lkml"
+connection: "api"
+include: "/views/excel_controller.view.lkml"
 include: "/derivated_views/consumo_plano_clientes.view.lkml"
 
 explore: consumo_plano_clientes {
