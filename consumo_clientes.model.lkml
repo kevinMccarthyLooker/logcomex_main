@@ -1,6 +1,14 @@
-connection: "api"
-
+include: "excel.model.lkml"
 include: "/derivated_views/consumo_plano_clientes.view.lkml"
+
+explore: consumo_plano_clientes {
+  join: excel_controller {
+    relationship: many_to_one
+    sql_on: ${consumo_plano_clientes.customer_id} = ${excel_controller.customer_id ;;
+  }
+
+}
+
 #include: "intermediarioexcel.base.lkml"
 
 # include: "/**/view.lkml"                   # include all views in this project
