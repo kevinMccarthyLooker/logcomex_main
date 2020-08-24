@@ -1,5 +1,5 @@
 
-include: "/**/excel_controller.view.lkml"
+#include: "/**/excel_controller.view.lkml"
 
 view: consumo_plano_clientes {
   # Or, you could make this view a derived table, like this:
