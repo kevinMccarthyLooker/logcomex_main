@@ -1,3 +1,16 @@
+
+include: "/**/consumo_plano_clientes.view.lkml"
+
+view: consumo_clientes {
+  extends: [consumo_plano_clientes]
+
+  measure: count_lines {
+    type: count
+  }
+  # Additional things you want to add or change
+}
+
+
 view: excel_controller {
   sql_table_name: public.excel_controller ;;
   drill_fields: [id]
