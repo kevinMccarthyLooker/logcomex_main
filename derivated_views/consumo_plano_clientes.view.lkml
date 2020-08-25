@@ -1,9 +1,5 @@
-
-include: "/**/excel_controller.view.lkml"
-
 view: consumo_plano_clientes {
   # Or, you could make this view a derived table, like this:
-  extends: [excel_controller]
   derived_table: {
     sql: select TO_TIMESTAMP(concat(qq1.year,' ',qq1.month) ,'YYYY MM') as tempo,concat(qq1.year,qq1.month,qq1.customer_id) as id, concat(qq1.year,qq1.month,qq1.customer_id) as id_excel, qq1.year as ano, qq1.month as mes, qq1.customer_id as customer_id, qq1.name as nome, qq1.qtd_pesquisas as qtd_pesquisas,
 qq2.quantity_possible_importer as qtd_importer, qq2.quantity_possible_exporter as qtd_export

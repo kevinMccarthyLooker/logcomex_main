@@ -1,9 +1,5 @@
-
-#include: "/**/consumo_plano_clientes.view.lkml"
-
 view: excel_controller {
- # extends: [consumo_plano_clientes]
-  sql_table_name: excel-api.public.excel_controller ;;
+  sql_table_name: excel_controller ;;
   drill_fields: [id]
 
   dimension: id {
