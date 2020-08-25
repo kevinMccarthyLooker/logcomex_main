@@ -1,6 +1,7 @@
 connection: "api"
 include: "/views/excel_controller.view.lkml"
 include: "/derivated_views/consumo_plano_clientes.view.lkml"
+#include: "/intermediarioexcel.base.lkml"
 
 explore: consumo_plano_clientes {
   join: excel_controller {
