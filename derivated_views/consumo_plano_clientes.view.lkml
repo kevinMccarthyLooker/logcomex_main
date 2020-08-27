@@ -1,8 +1,33 @@
 view: consumo_plano_clientes {
   # Or, you could make this view a derived table, like this:
   derived_table: {
-    sql: select TO_TIMESTAMP(concat(qq1.year,' ',qq1.month) ,'YYYY MM') as tempo,concat(qq1.year,qq1.month,qq1.customer_id) as id, concat(qq1.year,qq1.month,qq1.customer_id) as id_excel, qq1.year as ano, qq1.month as mes, qq1.customer_id as customer_id, qq1.name as nome, qq1.qtd_pesquisas as qtd_pesquisas,
-qq2.quantity_possible_importer as qtd_importer, qq2.quantity_possible_exporter as qtd_export
+    sql: select TO_TIMESTAMP(concat(qq1.year,' ',qq1.month) ,'YYYY MM') as tempo,
+concat(qq1.year,qq1.month,qq1.customer_id) as id,
+qq1.year as ano,
+qq1.month as mes,
+qq1.customer_id as customer_id,
+qq1.name as nome,
+qq3.plano,
+qq3.data_inicio  as data_inicio,
+qq3.data_fim as data_fim,
+qq3.quantidade_de_pesquisas_plano,
+qq1.qtd_pesquisas as qtd_pesquisas,
+(case
+when qq3.quantidade_de_pesquisas_plano >0
+then
+(qq1.qtd_pesquisas::float/qq3.quantidade_de_pesquisas_plano::float)
+else
+-1
+end) as porcent_qtd_pesquisas,
+qq3.busca_perfil_empresas_plano,
+(qq2.quantity_possible_importer + qq2.quantity_possible_exporter) as qtd_busca_perfil,
+(case
+when qq3.busca_perfil_empresas_plano > 0
+then
+((coalesce(qq2.quantity_possible_importer,0) + coalesce(qq2.quantity_possible_exporter,0))::float/qq3.busca_perfil_empresas_plano)
+else -1
+end) as porcent_qtd_busca_perfil,
+qq3.qtd_excel_plano
 from(
 select fh."year", fh."month" , fh.customer_id, c2."name" , count(*) as qtd_pesquisas
 from filter_history fh
@@ -21,6 +46,27 @@ where "debited" = True and "service_id" = 19
 and "filters" is not null
 and (filters @> '[{"name": "possibleImporter"}]' or filters @> '[{"name": "possibleExporter"}]')
 group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.month = qq2.month and qq1.customer_id = qq2.customer_id
+left join(
+select
+customer.id as customer_id,
+coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) AS quantidade_de_pesquisas_plano,
+coalesce(pi_custom.filter_possible_guys_limit, pi_default.filter_possible_guys_limit) AS busca_perfil_empresas_plano,
+coalesce(pi_custom.excel_downloads, pi_default.excel_downloads) as qtd_excel_plano,
+plan."name" as plano,
+customer_plan."start"  as data_inicio,
+customer_plan.expiration as data_fim
+FROM customer
+INNER JOIN customer_plan ON customer.id = customer_plan.customer_id
+INNER JOIN plan_complete pc ON customer_plan.plan_complete_id = pc.id
+inner join plan on plan.id = pc.plan_id
+LEFT JOIN plan_info as pi_default ON pc.plan_info_id = pi_default.id
+LEFT JOIN plan_info as pi_custom ON customer_plan.plan_info_id = pi_custom.id
+where
+customer.deleted_at is null AND
+customer_plan.deleted_at is null AND
+pc.service_id = 19 and -- search
+customer.fake_customer is false
+) qq3 on qq1.customer_id = qq3.customer_id
 ;;
   }
 
@@ -30,14 +76,24 @@ group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.mont
     sql: ${TABLE}.id ;;
   }
 
-  dimension: id_excel {
-    type: string
-    sql: ${TABLE}.id_excel;;
-  }
-
   dimension: customer_id {
     type: number
     sql: ${TABLE}.customer_id ;;
+  }
+
+  dimension: quantidade_de_pesquisas_plano {
+    type: number
+    sql: ${TABLE}.quantidade_de_pesquisas_plano ;;
+  }
+
+  dimension: busca_perfil_empresas_plano {
+    type: number
+    sql: ${TABLE}.busca_perfil_empresas_plano ;;
+  }
+
+  dimension: qtd_excel_plano {
+    type: number
+    sql: ${TABLE}.qtd_excel_plano ;;
   }
 
   dimension: ano {
@@ -57,6 +113,12 @@ group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.mont
 
   }
 
+  dimension: plano {
+    type: string
+    sql: ${TABLE}.plano ;;
+
+  }
+
   dimension_group: tempo {
     type: time
     timeframes: [
@@ -67,6 +129,27 @@ group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.mont
     sql: ${TABLE}.tempo ;;
   }
 
+  dimension_group: data_inicio {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      month,
+      year
+    ]
+    sql: ${TABLE}.data_inicio ;;
+  }
+
+  dimension_group: data_fim {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      month,
+      year
+    ]
+    sql: ${TABLE}.data_fim ;;
+  }
 
   measure: qtd_pesquisas {
     type: sum
@@ -74,24 +157,21 @@ group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.mont
 
   }
 
-  measure: qtd_importer {
-    type: sum
-    sql: ${TABLE}.qtd_importer ;;
-
-  }
-
-  measure: qtd_export {
-    type: sum
-    sql: ${TABLE}.qtd_export ;;
-
-  }
-
-  measure: qtd_busca_perfil {
+  measure: qtd_busca_perfil  {
     type: number
-    sql: ${qtd_importer} + ${qtd_export} ;;
+    sql: ${TABLE}.qtd_busca_perfil ;;
 
   }
 
+  measure: porcent_qtd_pesquisas {
+    type: number
+    sql: ${TABLE}.porcent_qtd_pesquisas ;;
+  }
+
+  measure: porcent_qtd_busca_perfil {
+    type: number
+    sql: ${TABLE}.porcent_qtd_busca_perfil ;;
+  }
 
 
 }
