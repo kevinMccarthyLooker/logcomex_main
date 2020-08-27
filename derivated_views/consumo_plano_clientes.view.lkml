@@ -158,7 +158,7 @@ customer.fake_customer is false
   }
 
   measure: qtd_busca_perfil  {
-    type: number
+    type: sum
     sql: ${TABLE}.qtd_busca_perfil ;;
 
   }
