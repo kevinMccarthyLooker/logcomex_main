@@ -204,7 +204,13 @@ explore: usage {
     relationship: many_to_one
     type: left_outer
   }
- # join satisfaction_survey_movidesk{}
+
+  join: satisfaction_survey_movidesk{
+    sql_on: ${tickets_movidesk.id_ticket_movidesk} = ${satisfaction_survey_movidesk.tickets_movidesk_id} ;;
+    relationship: one_to_one
+    type: left_outer
+
+  }
 
   join: nps {
     sql_on: ${users.email}=${nps.email} ;;
