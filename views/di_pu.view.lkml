@@ -362,58 +362,58 @@ view: di_pu {
     sql: ${TABLE}."tipo_recolhimento" ;;
   }
 
-  dimension: total_dolares {
-    type: number
+  measure: total_dolares {
+    type: sum
     sql: ${TABLE}."total_dolares" ;;
   }
 
-  dimension: total_dolares_loc_desc {
-    type: number
+  measure: total_dolares_loc_desc {
+    type: sum
     sql: ${TABLE}."total_dolares_loc_desc" ;;
   }
 
-  dimension: total_dolares_loc_emb {
-    type: number
+  measure: total_dolares_loc_emb {
+    type: sum
     sql: ${TABLE}."total_dolares_loc_emb" ;;
   }
 
-  dimension: total_dolares_seguro {
-    type: number
+  measure: total_dolares_seguro {
+    type: sum
     sql: ${TABLE}."total_dolares_seguro" ;;
   }
 
-  dimension: total_moeda {
-    type: number
+  measure: total_moeda {
+    type: sum
     sql: ${TABLE}."total_moeda" ;;
   }
 
-  dimension: total_moeda_seguro {
-    type: number
+  measure: total_moeda_seguro {
+    type: sum
     sql: ${TABLE}."total_moeda_seguro" ;;
   }
 
-  dimension: total_reais {
-    type: number
+  measure: total_reais {
+    type: sum
     sql: ${TABLE}."total_reais" ;;
   }
 
-  dimension: total_reais_loc_desc {
-    type: number
+  measure: total_reais_loc_desc {
+    type: sum
     sql: ${TABLE}."total_reais_loc_desc" ;;
   }
 
-  dimension: total_reais_loc_emb {
+  measure: total_reais_loc_emb {
     type: number
     sql: ${TABLE}."total_reais_loc_emb" ;;
   }
 
-  dimension: total_reais_seguro {
-    type: number
+  measure: total_reais_seguro {
+    type: sum
     sql: ${TABLE}."total_reais_seguro" ;;
   }
 
-  dimension: transportador {
-    type: string
+  measure: transportador {
+    type: sum
     sql: ${TABLE}."transportador" ;;
   }
 
@@ -465,8 +465,8 @@ view: di_pu {
     sql: ${TABLE}."utilizacao" ;;
   }
 
-  dimension: valor {
-    type: string
+  measure: valor {
+    type: sum
     sql: ${TABLE}."valor" ;;
   }
 
