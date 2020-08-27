@@ -30,6 +30,17 @@ include: "/**/NPS.view.lkml"
 include: "/**/clientes_ativos_por_mes.view.lkml"
 include: "/**/customer_block_status.view.lkml"
 include: "/**/customer_blocked_history.view.lkml"
+include: "/**/tracking_maritimo_aereo.view.lkml"
+include: "/**/certificate.view.lkml"
+include: "/**/robots.view.lkml"
+include: "/**/extra_data_container.view.lkml"
+include: "/**/extra_data_container_history.view.lkml"
+include: "/**/follow_up.view.lkml"
+include: "/**/FilaTrackingFollowUp.view.lkml"
+include: "/**/tracking_status.view.lkml"
+include: "/**/planos_ativos_detalhes.view.lkml"
+include: "/**/consumo_plano_clientes.view.lkml"
+include: "/**/excel_controller.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -60,7 +71,6 @@ explore: dau_wau_mau {
   #did not join customer_plan because users can't be directly associated to one plan amongst their customer's plans
 
 }
-
 
 explore: usage_logs {
   view_name: access_log
@@ -205,6 +215,7 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+
   join: bi_filtros{
     view_label: "Report Log"
     sql_on: ${report_log.id}=${bi_filtros.filters_report_log_id} ;;
@@ -217,6 +228,7 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+
   join: access_log_user {
     from: access_log
     view_label: "Access Log Users"
@@ -224,6 +236,7 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+
   join: service_log {
     from: service
     view_label: "Report Log"
@@ -274,8 +287,92 @@ explore: usage {
     type: left_outer
   }
 
+  # view com detalhes dos planos dos clientes
+  join: planos_ativos_detalhes {
+    sql_on: ${customer.id} = ${planos_ativos_detalhes.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
 
+  # view com o consumo dos planos
+  join: consumo_plano_clientes {
+    sql_on: ${customer.id} = ${consumo_plano_clientes.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  # view com detalhes do consumo excel NAO ENCONTRA DEVIDO A CONEXAO (VERIFICAR!)
+  #join: excel_controller {
+  # sql_on: ${customer.id} = ${excel_controller.customer_id} ;;
+    #: ${excel_controller.service_id} = 19
+    #and ${excel_controller.excel_controller_status_id} = 3;;
+  #  relationship: one_to_many
+   # type: left_outer
+  #}
+
+  join: tracking_maritimo_aereo {
+    sql_on: ${customer.id}=${tracking_maritimo_aereo.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: follow_up {
+    sql_on:
+      (${follow_up.tracking_id}=${tracking_maritimo_aereo.tracking_maritimo_id}) or
+      (${follow_up.tracking_aerial_id}=${tracking_maritimo_aereo.tracking_id})
+  ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: robots {
+    sql_on: ${robots.id_shipowner}=${tracking_maritimo_aereo.armador_ciaaerea} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: filter_history {
+    view_label: "Search Filter History"
+    sql_on: ${customer.id}=${filter_history.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: filter_history_user {
+    from: filter_history
+    view_label: "Search Filter History User"
+    sql_on: ${users.id}=${filter_history.user_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: certificate {
+    sql_on: ${customer.id}=${certificate.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
 
 }
 
-# explore: users {}
+explore: Logistica_Internacional {
+  persist_with: my_datagroup
+  view_name: extra_data_container
+
+  join: extra_data_container_history {
+    sql_on: ${extra_data_container.id}=${extra_data_container_history.extra_data_container_history_id} ;;
+    type: left_outer
+    relationship: one_to_many
+  }
+}
+
+explore: Robos_Tracking {
+    persist_with: my_datagroup
+    view_name: filatrackingfollowup
+
+  join: tracking_status {
+    sql_on: ${tracking_status.id}=${filatrackingfollowup.status_id} ;;
+    type: left_outer
+    relationship: one_to_many
+  }
+
+}

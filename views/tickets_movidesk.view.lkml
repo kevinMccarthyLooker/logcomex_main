@@ -13,6 +13,12 @@ view: tickets_movidesk {
     sql: ${TABLE}."category" ;;
   }
 
+  dimension: ticket_category {
+    type: string
+    sql: Coalesce(tickets_movidesk.category,'Não Informado')
+    ;;
+  }
+
   dimension_group: ticket_closing_date {
     type: time
     timeframes: [
@@ -89,14 +95,29 @@ view: tickets_movidesk {
     sql: ${TABLE}."service_first" ;;
   }
 
+  dimension: ticket_service_first {
+    type: string
+    sql: Coalesce(tickets_movidesk.service_first ,'Não Informado');;
+  }
+
   dimension: service_second {
     type: string
     sql: ${TABLE}."service_second" ;;
   }
 
+  dimension: ticket_service_second {
+    type: string
+    sql: Coalesce(tickets_movidesk.service_second ,'Não Informado');;
+  }
+
   dimension: service_third {
     type: string
     sql: ${TABLE}."service_third" ;;
+  }
+
+  dimension: ticket_service_third {
+    type: string
+    sql: Coalesce(tickets_movidesk.service_third ,'Não Informado');;
   }
 
   dimension: subject {
@@ -144,6 +165,11 @@ view: tickets_movidesk {
   dimension: urgency {
     type: string
     sql: ${TABLE}."urgency" ;;
+  }
+
+  dimension: ticket_urgency {
+    type: string
+    sql: Coalesce(tickets_movidesk.urgency,'Não Informado');;
   }
 
   measure: count {

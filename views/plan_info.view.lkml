@@ -82,6 +82,16 @@ view: plan_info {
     sql: ${TABLE}."user_limit" ;;
   }
 
+  dimension: search_lines_limit{
+    type: number
+    sql: ${TABLE}."search_lines_limit" ;;
+  }
+
+  dimension: filter_possible_guys_limit {
+    type: number
+    sql: ${TABLE}."filter_possible_guys_limit" ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, customer_plan.count, plan_complete.count]
