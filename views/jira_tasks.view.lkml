@@ -1,0 +1,130 @@
+view: jira_tasks {
+  sql_table_name: public.jira_tasks ;;
+  drill_fields: [id]
+
+  dimension: id {
+    primary_key: yes
+    type: number
+    sql: ${TABLE}."id" ;;
+  }
+
+  dimension: assignee {
+    type: string
+    sql: ${TABLE}."assignee" ;;
+  }
+
+  dimension_group: created {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."created_at" ;;
+  }
+
+  dimension: issue_type {
+    type: string
+    sql: ${TABLE}."issue_type" ;;
+  }
+
+  dimension: log_key {
+    type: string
+    sql: ${TABLE}."log_key" ;;
+  }
+
+  dimension: priority {
+    type: string
+    sql: ${TABLE}."priority" ;;
+  }
+
+  dimension: reporter {
+    type: string
+    sql: ${TABLE}."reporter" ;;
+  }
+
+  dimension_group: resolution {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."resolution_date" ;;
+  }
+
+  dimension: status {
+    type: string
+    sql: ${TABLE}."status" ;;
+  }
+
+  dimension_group: task_created {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."task_created" ;;
+  }
+
+  dimension_group: task_updated {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."task_updated" ;;
+  }
+
+  dimension: tickets_movidesk_id {
+    type: number
+    sql: ${TABLE}."tickets_movidesk_id" ;;
+  }
+
+  dimension: time_original_estimate {
+    type: number
+    sql: ${TABLE}."time_original_estimate" ;;
+  }
+
+  dimension: time_spent {
+    type: number
+    sql: ${TABLE}."time_spent" ;;
+  }
+
+  dimension_group: updated {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."updated_at" ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [id]
+  }
+}
