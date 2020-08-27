@@ -1,11 +1,21 @@
 view: satisfaction_survey_movidesk {
-  sql_table_name: public.satisfaction_survey_movidesk ;;
-  drill_fields: [id]
 
-  dimension: id {
-    primary_key: yes
-    type: number
-    sql: ${TABLE}."id" ;;
+  derived_table: {
+
+    sql: select
+tickets_movidesk_id,
+max(response_date) as response_date,
+survey_model,
+score_response,
+positive_negative_response,
+smiley_faces_response,
+created_at,
+updated_at
+from satisfaction_survey_movidesk ssm
+group by tickets_movidesk_id, survey_model,
+score_response, positive_negative_response, smiley_faces_response,
+created_at, updated_at
+;;
   }
 
   dimension_group: created {
@@ -41,10 +51,6 @@ view: satisfaction_survey_movidesk {
     sql: ${TABLE}."response_date" ;;
   }
 
-  dimension: response_id {
-    type: number
-    sql: ${TABLE}."response_id" ;;
-  }
 
   dimension: score_response {
     type: number
@@ -82,6 +88,7 @@ view: satisfaction_survey_movidesk {
 
   measure: count {
     type: count
-    drill_fields: [id]
+    drill_fields: [tickets_movidesk_id]
   }
-}
+
+ }
