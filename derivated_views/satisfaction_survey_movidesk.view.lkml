@@ -3,7 +3,7 @@ view: satisfaction_survey_movidesk {
   derived_table: {
 
     sql: select
-max(id),
+max(id) as id,
 tickets_movidesk_id,
 max(response_date) as response_date,
 survey_model,
