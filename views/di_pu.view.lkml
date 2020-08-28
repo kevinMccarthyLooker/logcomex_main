@@ -482,7 +482,7 @@ view: di_pu {
 
   measure: percent_count {
     type: percent_of_total
-    drill_fields: [id]
+    sql: ${count}
   }
 
   measure: percent_total_dolares_loc_desc {
