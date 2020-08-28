@@ -51,7 +51,7 @@ created_at, updated_at
          WHEN ${TABLE}."positive_negative_response" = 2 THEN 'Insatisfeito'
          WHEN ${TABLE}."positive_negative_response" = 3 THEN 'Neutro'
          WHEN ${TABLE}."positive_negative_response" = 4 THEN 'Satisfeito'
-         WHEN ${TABLE}."positive_negative_response" = 2 THEN 'Muito Satisfeito'
+         WHEN ${TABLE}."positive_negative_response" = 5 THEN 'Muito Satisfeito'
          ELSE 'ERRO'
          END;;
   }
