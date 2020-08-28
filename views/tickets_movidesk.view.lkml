@@ -19,6 +19,7 @@ view: tickets_movidesk {
     ;;
   }
 
+
   dimension_group: ticket_closing_date {
     type: time
     timeframes: [
@@ -171,6 +172,61 @@ view: tickets_movidesk {
     type: string
     sql: Coalesce(tickets_movidesk.urgency,'Não Informado');;
   }
+
+  dimension: ticket_origin {
+    type: string
+    sql: Coalesce(${TABLE}."origin",'Não Informado');;
+  }
+
+  dimension: ticket_owner {
+    type: string
+    sql: Coalesce(${TABLE}."owner",'Não Informado');;
+  }
+
+  dimension: ticket_squad {
+    type: string
+    sql: Coalesce(${TABLE}."squad",'Não Informado');;
+  }
+
+  dimension_group: last_action {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."last_action_date" ;;
+  }
+
+  dimension_group: reopened_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."reopened_at" ;;
+  }
+
+  dimension: sla_response_time_min {
+    type: number
+    sql: ${TABLE}.sla_response_time_min;;
+  }
+
+
+  dimension: sla_solution_time_min {
+    type: number
+    sql: ${TABLE}.sla_solution_time_min;;
+  }
+
 
   measure: count {
     type: count
