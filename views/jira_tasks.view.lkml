@@ -37,7 +37,7 @@ view: jira_tasks {
     sql: ${TABLE}."log_key" ;;
 
     link: {
-      label: "Google"
+      label: "Jira"
       url: "https://logcomex.atlassian.net/browse/{{ value }}"
       icon_url: "https://is5-ssl.mzstatic.com/image/thumb/Purple124/v4/f4/88/3e/f4883e3a-c1af-53dd-d0ba-a3a80cf856eb/AppIcon-0-1x_U007emarketing-0-7-0-85-220.png/246x0w.png"
     }
