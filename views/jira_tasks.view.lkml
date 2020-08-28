@@ -35,6 +35,13 @@ view: jira_tasks {
   dimension: log_key {
     type: string
     sql: ${TABLE}."log_key" ;;
+
+    link: {
+      label: "Google"
+      url: "http://www.google.com/search?q={{ value }}"
+      icon_url: "http://google.com/favicon.ico"
+    }
+
   }
 
   dimension: priority {
