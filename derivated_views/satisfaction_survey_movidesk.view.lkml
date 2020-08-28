@@ -3,6 +3,7 @@ view: satisfaction_survey_movidesk {
   derived_table: {
 
     sql: select
+max(id),
 tickets_movidesk_id,
 max(response_date) as response_date,
 survey_model,
@@ -16,6 +17,12 @@ group by tickets_movidesk_id, survey_model,
 score_response, positive_negative_response, smiley_faces_response,
 created_at, updated_at
 ;;
+  }
+
+  dimension: survey_movidesk_id {
+    type: number
+    primary_key: yes
+    sql: ${TABLE}.id ;;
   }
 
   dimension_group: created {
