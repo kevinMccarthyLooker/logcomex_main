@@ -44,6 +44,18 @@ created_at, updated_at
     sql: ${TABLE}."positive_negative_response" ;;
   }
 
+  dimension: positive_negative_response_text {
+    type: string
+    sql: CASE
+         WHEN ${TABLE}."positive_negative_response" = 1 THEN 'Muito Insatisfeito'
+         WHEN ${TABLE}."positive_negative_response" = 2 THEN 'Insatisfeito'
+         WHEN ${TABLE}."positive_negative_response" = 3 THEN 'Neutro'
+         WHEN ${TABLE}."positive_negative_response" = 4 THEN 'Satisfeito'
+         WHEN ${TABLE}."positive_negative_response" = 2 THEN 'Muito Satisfeito'
+         ELSE 'ERRO'
+         END;;
+  }
+
   dimension_group: response {
     type: time
     timeframes: [
