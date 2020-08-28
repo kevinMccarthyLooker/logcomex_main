@@ -59,8 +59,8 @@ view: log_integration_ibroker {
 
   dimension: modal {
     type: string
-    sql:  CASE WHEN (log_integration_ibroker.type_tracking = 0) THEN 'Marítimo'
-               WHEN (log_integration_ibroker.type_tracking = 1) THEN 'Aéreo'
+    sql:  CASE WHEN (log_integration_ibroker.type_tracking = '0') THEN 'Marítimo'
+               WHEN (log_integration_ibroker.type_tracking = '1') THEN 'Aéreo'
           else 'Outros' end
     ;;
   }
