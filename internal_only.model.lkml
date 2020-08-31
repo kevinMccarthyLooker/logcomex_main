@@ -42,6 +42,8 @@ include: "/**/planos_ativos_detalhes.view.lkml"
 include: "/**/consumo_plano_clientes.view.lkml"
 include: "/**/excel_controller.view.lkml"
 include: "/**/log_integration_ibroker.view.lkml"
+include: "/**/jira_tasks.view.lkml"
+include: "/**/satisfaction_survey_movidesk.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -196,6 +198,19 @@ explore: usage {
     sql_on: ${tickets_movidesk.id_customer}=${customer.id} ;;
     relationship: many_to_one
     type: left_outer
+  }
+
+  join: jira_tasks {
+    sql_on: ${jira_tasks.tickets_movidesk_id} = ${tickets_movidesk.id_ticket_movidesk} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: satisfaction_survey_movidesk{
+    sql_on: ${tickets_movidesk.id_ticket_movidesk} = ${satisfaction_survey_movidesk.tickets_movidesk_id} ;;
+    relationship: one_to_one
+    type: left_outer
+
   }
 
   join: nps {

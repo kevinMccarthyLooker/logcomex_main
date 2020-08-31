@@ -1,5 +1,5 @@
 view: excel_controller {
-  sql_table_name: public.excel_controller ;;
+  sql_table_name: excel_controller ;;
   drill_fields: [id]
 
   dimension: id {
