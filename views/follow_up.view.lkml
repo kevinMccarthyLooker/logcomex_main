@@ -104,6 +104,12 @@ view: follow_up {
     sql: ${TABLE}."user_id" ;;
   }
 
+  dimension: atualizacao_automatica {
+    type: yesno
+    sql:  CASE WHEN (${TABLE}."user_id" is null) THEN true
+    else false end ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
