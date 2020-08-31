@@ -68,6 +68,18 @@ view: jira_tasks {
     sql: ${TABLE}."resolution_date" ;;
   }
 
+
+  dimension_group: tempo_aberto_jira {
+    type: duration
+    sql_start: ${task_created_raw};;
+    sql_end: case
+             when ${status} = 'Concluído' then ${resolution_date}
+             else now()
+             end
+    ;;
+    intervals: [day, hour, minute]
+  }
+
   dimension: status {
     type: string
     sql: ${TABLE}."status" ;;
