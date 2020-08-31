@@ -149,6 +149,19 @@ view: tickets_movidesk {
     intervals: [day, hour, minute]
   }
 
+  dimension_group: tempo_aberto_movidesk {
+    type: duration
+    sql_start: ${ticket_created_date_raw};;
+    sql_end: case
+             when tickets_movidesk.status = 'Fechado' then ${ticket_closing_date_raw}
+             when tickets_movidesk.status = 'Cancelado' then ${ticket_closing_date_raw}
+             when tickets_movidesk.status is null then ${ticket_closing_date_raw}
+             else now()
+             end
+    ;;
+    intervals: [day, hour, minute]
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [
