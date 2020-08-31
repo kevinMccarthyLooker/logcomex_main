@@ -111,6 +111,13 @@ where deleted_at is null
     sql: ${TABLE}."user_id" ;;
   }
 
+  dimension_group: last_execution {
+    type: duration
+    intervals: [day, hour]
+    sql_start: ${TABLE}."executed_at" ;;
+    sql_end: CURRENT_TIMESTAMP;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
