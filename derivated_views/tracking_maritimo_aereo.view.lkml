@@ -312,7 +312,7 @@ where deleted_at is null
   }
 
     set: detail {
-    fields: [customer.id, user_id]
+    fields: [customer_id, token]
   }
 
 }
