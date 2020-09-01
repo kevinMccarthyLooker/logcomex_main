@@ -24,14 +24,12 @@ select 'Maritimo' as modal,
        tracking.completed_at,
        tracking.tracking_robot_id,
        tracking.operation_date as operacao,
-       tracking.di_desembaracada_date
-       --max(follow_up.created_at) as last_follow_up
+       tracking.di_desembaracada_date,
+       (select max(follow_up.created_at) from follow_up where tracking.id = follow_up.tracking_id and user_id is null) as last_follow_up
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
 inner join tracking_internal_status on tracking.internal_status_id = tracking_internal_status.id
-inner join follow_up on tracking.id = follow_up.tracking_id
 where tracking.deleted_at is null
---group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
 union
 select 'Aereo' as modal,
        tracking_aerial.id as tracking_id,
@@ -56,14 +54,12 @@ select 'Aereo' as modal,
        '2000-01-01' as completed_at,
        999 as tracking_robot_id,
        '2000-01-01' as operacao,
-       '2000-01-01' as di_desembaracada_date
-       --max(follow_up.created_at) as last_follow_up
+       '2000-01-01' as di_desembaracada_date,
+       (select max(follow_up.created_at) from follow_up where tracking_aerial.id = follow_up.tracking_aerial_id and user_id is null) as last_follow_up
 from tracking_aerial
 inner join tracking_aerial_status on tracking_aerial.tracking_aerial_status_id = tracking_aerial_status.id
 inner join tracking_aerial_internal_status on tracking_aerial.internal_status = tracking_aerial_internal_status.id
-inner join follow_up on tracking_aerial.id = follow_up.tracking_aerial_id
 where tracking_aerial.deleted_at is null
---group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
 ;;
   }
 
@@ -117,12 +113,12 @@ where tracking_aerial.deleted_at is null
     sql: ${TABLE}."user_id" ;;
   }
 
-#  dimension_group: executed_vs_followup {
-#    type: duration
-#    intervals: [day, hour]
-#    sql_start: ${TABLE}."executed_at" ;;
-#    sql_end: ${TABLE}."last_follow_up";;
-#  }
+  dimension_group: executed_vs_followup {
+    type: duration
+    intervals: [day, hour]
+    sql_start: ${TABLE}."executed_at" ;;
+    sql_end: ${TABLE}."last_follow_up";;
+  }
 
   dimension_group: last_execution {
     type: duration
@@ -281,19 +277,19 @@ where tracking_aerial.deleted_at is null
     sql: ${TABLE}."di_desembaracada_date" ;;
   }
 
-#  dimension_group: last_follow_up_date {
-#    type: time
-#    timeframes: [
-#      raw,
-#      time,
-#      date,
-#      week,
-#      month,
-#      quarter,
-#      year
-#    ]
-#    sql: ${TABLE}."last_follow_up" ;;
-#  }
+  dimension_group: last_follow_up_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."last_follow_up" ;;
+  }
 
   measure: count {
     type: count_distinct
