@@ -6,29 +6,32 @@ select 'Maritimo' as modal,
        tracking.id as tracking_maritimo_id,
        0 as tracking_aereo_id,
        ('Maritimo' || to_char(tracking.id, '999999')) as chave,
-       customer_id,
+       tracking.customer_id,
        tracking_status.description as status,
-       bl_number as documento,
-       ce_number as CE,
-       user_id,
-       created_at,
-       updated_at,
-       deleted_at,
-       reference,
-       token,
-       executed_at,
-       consignee_id,
+       tracking.bl_number as documento,
+       tracking.ce_number as CE,
+       tracking.user_id,
+       tracking.created_at,
+       tracking.updated_at,
+       tracking.deleted_at,
+       tracking.reference,
+       tracking.token,
+       tracking.executed_at,
+       tracking.consignee_id,
        tracking_internal_status.description as internal_status,
-       is_master,
-       shipowner_id as armador_ciaaerea,
-       completed_at,
-       tracking_robot_id,
-       operation_date as operacao,
-       di_desembaracada_date
+       tracking.is_master,
+       tracking.shipowner_id as armador_ciaaerea,
+       tracking.completed_at,
+       tracking.tracking_robot_id,
+       tracking.operation_date as operacao,
+       tracking.di_desembaracada_date
+       --max(follow_up.created_at) as last_follow_up
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
 inner join tracking_internal_status on tracking.internal_status_id = tracking_internal_status.id
-where deleted_at is null
+inner join follow_up on tracking.id = follow_up.tracking_id
+where tracking.deleted_at is null
+--group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
 union
 select 'Aereo' as modal,
        tracking_aerial.id as tracking_id,
@@ -39,25 +42,28 @@ select 'Aereo' as modal,
        tracking_aerial_status.description as status,
        (coalesce((awb),'') || '-' || coalesce((hwb),'')) as documento,
        0 as CE,
-       user_id,
-       created_at,
-       updated_at,
-       deleted_at,
-       reference,
-       token,
-       executed_at,
-       consignee_id,
-       tracking_internal_status.description as internal_status,
+       tracking_aerial.user_id,
+       tracking_aerial.created_at,
+       tracking_aerial.updated_at,
+       tracking_aerial.deleted_at,
+       tracking_aerial.reference,
+       tracking_aerial.token,
+       tracking_aerial.executed_at,
+       tracking_aerial.consignee_id,
+       tracking_aerial_internal_status.description as internal_status,
        false as is_master,
-       airline_id as armador_ciaaerea,
+       tracking_aerial.airline_id as armador_ciaaerea,
        '2000-01-01' as completed_at,
        999 as tracking_robot_id,
        '2000-01-01' as operacao,
        '2000-01-01' as di_desembaracada_date
+       --max(follow_up.created_at) as last_follow_up
 from tracking_aerial
 inner join tracking_aerial_status on tracking_aerial.tracking_aerial_status_id = tracking_aerial_status.id
-inner join tracking_internal_status on tracking_aerial.internal_status = tracking_internal_status.id
-where deleted_at is null
+inner join tracking_aerial_internal_status on tracking_aerial.internal_status = tracking_aerial_internal_status.id
+inner join follow_up on tracking_aerial.id = follow_up.tracking_aerial_id
+where tracking_aerial.deleted_at is null
+--group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
 ;;
   }
 
@@ -111,11 +117,31 @@ where deleted_at is null
     sql: ${TABLE}."user_id" ;;
   }
 
+#  dimension_group: executed_vs_followup {
+#    type: duration
+#    intervals: [day, hour]
+#    sql_start: ${TABLE}."executed_at" ;;
+#    sql_end: ${TABLE}."last_follow_up";;
+#  }
+
   dimension_group: last_execution {
     type: duration
     intervals: [day, hour]
     sql_start: ${TABLE}."executed_at" ;;
     sql_end: CURRENT_TIMESTAMP;;
+  }
+
+  dimension: ultima_atualizacao {
+    type:  string
+    sql:  CASE WHEN (${days_last_execution} < 1) THEN 'A - 0 dias'
+    WHEN (${days_last_execution} = 1) THEN 'B - 1 dia'
+    WHEN (${days_last_execution} = 2) THEN 'C - 2 dias'
+    WHEN (${days_last_execution} > 2 AND ${days_last_execution} <= 5) THEN 'D - de 3 a 5 dias'
+    WHEN (${days_last_execution} >= 6 AND ${days_last_execution} <= 15) THEN 'E - de 6 a 15 dias'
+    WHEN (${days_last_execution} >= 16 AND ${days_last_execution} <= 45) THEN 'F - de 16 a 45 dias'
+    WHEN (${days_last_execution} >= 46 AND ${days_last_execution} <= 120) THEN 'G - de 46 a 120 dias'
+    else 'H - mais de 120 dias' end
+    ;;
   }
 
   dimension_group: created {
@@ -255,6 +281,20 @@ where deleted_at is null
     sql: ${TABLE}."di_desembaracada_date" ;;
   }
 
+#  dimension_group: last_follow_up_date {
+#    type: time
+#    timeframes: [
+#      raw,
+#      time,
+#      date,
+#      week,
+#      month,
+#      quarter,
+#      year
+#    ]
+#    sql: ${TABLE}."last_follow_up" ;;
+#  }
+
   measure: count {
     type: count_distinct
     sql: ${chave} ;;
@@ -312,7 +352,7 @@ where deleted_at is null
   }
 
     set: detail {
-    fields: [customer_id, token]
+    fields: [customer_id, customer.name, status, internal_status, created_raw, token]
   }
 
 }
