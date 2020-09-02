@@ -273,7 +273,7 @@ measure: tempo_medio_fechamento_em_dias {
   measure: tempo_mediana_fechamento_em_horas {
     type: median
     sql: ${hours_tempo_fechamento};;
-    value_format: "0.00 \" Hours\""
+    value_format: "0.0 \" Hours\""
   }
 
 # ----- Sets of fields for drilling ------
