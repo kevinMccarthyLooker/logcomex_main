@@ -116,8 +116,21 @@ where tracking_aerial.deleted_at is null
   dimension_group: executed_vs_followup {
     type: duration
     intervals: [day, hour]
-    sql_start: ${TABLE}."executed_at" ;;
-    sql_end: ${TABLE}."last_follow_up";;
+    sql_start: ${TABLE}."last_follow_up" ;;
+    sql_end: ${TABLE}."executed_at";;
+  }
+
+  dimension: diferenca_executado_followup {
+    type:  string
+    sql:  CASE WHEN (${days_executed_vs_followup} < 1) THEN 'A - 0 dias'
+          WHEN (${days_executed_vs_followup} = 1) THEN 'B - 1 dia'
+          WHEN (${days_executed_vs_followup} = 2) THEN 'C - 2 dias'
+          WHEN (${days_executed_vs_followup} > 2 AND ${days_executed_vs_followup} <= 5) THEN 'D - de 3 a 5 dias'
+          WHEN (${days_executed_vs_followup} >= 6 AND ${days_executed_vs_followup} <= 15) THEN 'E - de 6 a 15 dias'
+          WHEN (${days_executed_vs_followup} >= 16 AND ${days_executed_vs_followup} <= 45) THEN 'F - de 16 a 45 dias'
+          WHEN (${days_executed_vs_followup} >= 46 AND ${days_executed_vs_followup} <= 120) THEN 'G - de 46 a 120 dias'
+          else 'H - mais de 120 dias' end
+          ;;
   }
 
   dimension_group: last_execution {
