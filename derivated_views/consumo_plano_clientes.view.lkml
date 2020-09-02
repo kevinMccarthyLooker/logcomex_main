@@ -164,13 +164,13 @@ customer.fake_customer is false
   }
 
   measure: porcent_qtd_pesquisas {
-    type: average
+    type: number
     sql: ${TABLE}.porcent_qtd_pesquisas ;;
   }
 
   measure: porcent_qtd_busca_perfil {
-    type: average
-    sql: ${TABLE}.porcent_qtd_busca_perfil ;;
+    type: number
+    sql: case ${TABLE}.porcent_qtd_busca_perfil;;
   }
 
 
