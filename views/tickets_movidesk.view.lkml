@@ -270,6 +270,12 @@ measure: tempo_medio_fechamento_em_dias {
   value_format: "0.00 \" Days\""
 }
 
+  measure: tempo_mediana_fechamento_em_dias {
+    type: median
+    sql: ${days_tempo_fechamento} ;;
+    value_format: "0.00 \" Days\""
+  }
+
 # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
