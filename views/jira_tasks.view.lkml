@@ -146,4 +146,10 @@ view: jira_tasks {
     type: count
     drill_fields: [id]
   }
+
+  measure: jira_fechados_count {
+    type: count
+    #drill_fields: [detail*]
+    filters: [status: "Concluído"]
+  }
 }
