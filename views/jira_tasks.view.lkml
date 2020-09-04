@@ -1,4 +1,6 @@
+include: "/**/tickets_movidesk.view"
 view: jira_tasks {
+  extends: [tickets_movidesk]
   sql_table_name: public.jira_tasks ;;
   drill_fields: [id]
 
@@ -13,7 +15,7 @@ view: jira_tasks {
     sql: ${TABLE}."assignee" ;;
   }
 
-  dimension_group: created {
+  dimension_group: jira_created {
     type: time
     timeframes: [
       raw,
@@ -80,7 +82,7 @@ view: jira_tasks {
     intervals: [day, hour, minute]
   }
 
-  dimension: status {
+  dimension: jira_status {
     type: string
     sql: ${TABLE}."status" ;;
   }
@@ -128,7 +130,7 @@ view: jira_tasks {
     sql: ${TABLE}."time_spent" ;;
   }
 
-  dimension_group: updated {
+  dimension_group: jira_updated {
     type: time
     timeframes: [
       raw,
@@ -142,7 +144,7 @@ view: jira_tasks {
     sql: ${TABLE}."updated_at" ;;
   }
 
-  measure: count {
+  measure: jira_count {
     type: count
     drill_fields: [id]
   }
@@ -152,4 +154,109 @@ view: jira_tasks {
     #drill_fields: [detail*]
     filters: [status: "Concluído"]
   }
+  #-----------------campos movidesk---------------------
+
+  dimension: id_ticket_movidesk {hidden: yes primary_key:no}
+
+  dimension: category {hidden: yes}
+
+  dimension: ticket_category {hidden: yes}
+
+
+  dimension_group: ticket_closing_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."closing_date" ;;
+  }
+
+  dimension_group: created {hidden: yes}
+
+  dimension_group: ticket_created_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."created_date" ;;
+  }
+
+  dimension: id_customer {hidden: yes}
+
+  dimension: id_movidesk {hidden: yes}
+
+  dimension: id_movidesk_user {hidden: yes}
+
+  dimension: id_protocol {hidden: yes}
+
+  dimension: id_user {hidden: yes}
+
+  dimension: service_first {hidden: yes}
+
+  dimension: ticket_service_first {hidden: yes}
+
+  dimension: service_second {hidden: yes}
+
+  dimension: ticket_service_second {hidden: yes}
+
+  dimension: service_third {hidden: yes}
+
+  dimension: ticket_service_third {hidden: yes}
+
+  dimension: subject {hidden: yes}
+
+  dimension: status {hidden: yes}
+
+  dimension: ticket_status {hidden: yes}
+
+  dimension_group: tempo_fechamento {hidden: yes}
+
+  dimension_group: tempo_aberto_movidesk {hidden: yes}
+
+  dimension_group: updated {hidden: yes}
+
+  dimension: urgency {hidden: yes}
+
+  dimension: ticket_urgency {hidden: yes}
+
+  dimension: ticket_origin {hidden: yes}
+
+  dimension: ticket_owner {hidden: yes}
+
+  dimension: ticket_squad {hidden: yes}
+
+  dimension_group: last_action {hidden: yes}
+
+  dimension_group: reopened_at {hidden: yes}
+
+  dimension: sla_response_time_min {hidden: yes}
+
+  dimension: sla_solution_time_min {hidden: yes}
+
+
+  measure: count {hidden: yes}
+
+  measure: tickets_abertos_count {hidden: yes}
+
+  measure: tickets_fechados_count {hidden: yes}
+
+  measure: tickets_cancelados_count {hidden: yes}
+
+  measure: tempo_medio_fechamento_em_dias {hidden: yes}
+
+  measure: tempo_mediana_fechamento_em_horas {hidden: yes}
+
+
 }
