@@ -193,6 +193,18 @@ view: jira_tasks {
     sql: ${TABLE}."created_date" ;;
   }
 
+  dimension: diff_abertura_dim {
+    type: duration_hour
+    sql_start: ${ticket_created_date_time} ;;
+    sql_end: ${task_created_time} ;;
+  }
+
+  measure: diff_abertura {
+    type: average
+    sql: ${diff_abertura_dim} ;;
+
+  }
+
   dimension: id_customer {hidden: yes}
 
   dimension: id_movidesk {hidden: yes}
