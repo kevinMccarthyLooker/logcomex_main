@@ -16,7 +16,9 @@ jt.priority as priority,
 jt.created_at as created_at,
 jt.updated_at as updated_at,
 (jt.task_created - tm.created_date) as diff_abertura,
-(jt.resolution_date - tm.closing_date ) as diff_fechamento
+EXTRACT(EPOCH FROM (jt.task_created - tm.created_date ))/3600  as diff_abertura_hours,
+(tm.closing_date - jt.resolution_date ) as diff_fechamento,
+EXTRACT(EPOCH FROM (tm.closing_date - jt.resolution_date ))/3600  as diff_fechamento_hours
 from jira_tasks jt
 inner join tickets_movidesk tm on tm.id = jt.tickets_movidesk_id  ;;
   }
@@ -192,17 +194,29 @@ inner join tickets_movidesk tm on tm.id = jt.tickets_movidesk_id  ;;
 
   }
 
+  dimension: diff_abertura_hours {
+    type: number
+    sql: ${TABLE}.diff_abertura_hours ;;
+
+  }
+
+  dimension: diff_fechamento_hours {
+    type: number
+    sql: ${TABLE}.diff_fechamento_hours ;;
+
+  }
+
   measure: media_abertura_sistemas {
     type: average
-   # filters: [diff_abertura_time: ">=0"]
-    sql: ${diff_abertura_time};;
+    filters: [diff_abertura_hours: ">=0"]
+    sql: ${diff_abertura_hours};;
 
   }
 
   measure: media_fechamento_sistemas {
     type: average
-   # filters: [diff_fechamento_time: ">=0"]
-    sql: ${diff_fechamento_time};;
+    filters: [diff_fechamento_hours: ">=0"]
+    sql: ${diff_fechamento_hours};;
 
   }
 
