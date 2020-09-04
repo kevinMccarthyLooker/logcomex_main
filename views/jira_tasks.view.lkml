@@ -2,6 +2,7 @@ view: jira_tasks {
   derived_table: {
     sql: select jt.id as id,
 jt.tickets_movidesk_id as tickets_movidesk_id,
+jt.status as status,
 jt.log_key as log_key,
 jt.issue_type as issue_type,
 jt.assignee as assignee,
