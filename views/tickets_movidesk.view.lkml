@@ -1,7 +1,6 @@
-include: "/**/jira_tasks.view.lkml"
 
 view: tickets_movidesk {
-  extends: [jira_tasks]
+
   sql_table_name: public.tickets_movidesk ;;
   drill_fields: [id_ticket_movidesk]
 
@@ -280,12 +279,6 @@ measure: tempo_medio_fechamento_em_dias {
   }
 
 
-  dimension_group: tempo_abertura_sistemas {
-    type: duration
-    sql_start: ${ticket_created_date_time};;
-    sql_end: ${task_created_time};;
-    intervals: [day, hour, minute]
-  }
 
 # ----- Sets of fields for drilling ------
   set: detail {

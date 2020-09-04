@@ -3,7 +3,7 @@ view: jira_tasks {
   drill_fields: [id]
 
   dimension: id {
-    primary_key: no
+    primary_key: yes
     type: number
     sql: ${TABLE}."id" ;;
   }
