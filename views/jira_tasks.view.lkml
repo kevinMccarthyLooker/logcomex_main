@@ -1,7 +1,24 @@
-include: "/**/tickets_movidesk.view"
 view: jira_tasks {
-  extends: [tickets_movidesk]
-  sql_table_name: public.jira_tasks ;;
+  derived_table: {
+    sql: select jt.id as id,
+jt.tickets_movidesk_id as tickets_movidesk_id,
+jt.log_key as log_key,
+jt.issue_type as issue_type,
+jt.assignee as assignee,
+jt.reporter as reporter,
+jt.task_created as task_created,
+jt.task_updated as task_updated,
+jt.resolution_date as resolution_date,
+jt.time_original_estimate as time_original_estimate,
+jt.time_spent as time_spent,
+jt.priority as priority,
+jt.created_at as created_at,
+jt.updated_at as updated_at,
+(jt.task_created - tm.created_date) as diff_abertura,
+(jt.resolution_date - tm.closing_date ) as diff_fechamento
+from jira_tasks jt
+inner join tickets_movidesk tm on tm.id = jt.tickets_movidesk_id  ;;
+  }
   drill_fields: [id]
 
   dimension: id {
@@ -75,7 +92,7 @@ view: jira_tasks {
     type: duration
     sql_start: ${task_created_raw};;
     sql_end: case
-             when ${status} = 'Concluído' then ${resolution_date}
+             when ${jira_status} = 'Concluído' then ${resolution_date}
              else now()
              end
     ;;
@@ -144,6 +161,51 @@ view: jira_tasks {
     sql: ${TABLE}."updated_at" ;;
   }
 
+  dimension_group: diff_abertura {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.diff_abertura ;;
+
+  }
+
+  dimension_group: diff_fechamento {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.diff_fechamento ;;
+
+  }
+
+  measure: media_abertura_sistemas {
+    type: average
+   # filters: [diff_abertura_time: ">=0"]
+    sql: ${diff_abertura_time};;
+
+  }
+
+  measure: media_fechamento_sistemas {
+    type: average
+   # filters: [diff_fechamento_time: ">=0"]
+    sql: ${diff_fechamento_time};;
+
+  }
+
+
   measure: jira_count {
     type: count
     drill_fields: [id]
@@ -152,94 +214,6 @@ view: jira_tasks {
   measure: jira_fechados_count {
     type: count
     #drill_fields: [detail*]
-    filters: [status: "Concluído"]
+    filters: [jira_status: "Concluído"]
   }
-  #-----------------campos movidesk---------------------
-
-  dimension: id_ticket_movidesk {hidden: yes primary_key:no}
-
-  dimension: category {hidden: yes}
-
-  dimension: ticket_category {hidden: yes}
-
-  dimension_group: created {hidden: yes}
-
-  dimension: diff_abertura_dim {
-    type: duration_hour
-    sql_start: ${ticket_created_date_time} ;;
-    sql_end: ${task_created_time} ;;
-  }
-
-  measure: diff_abertura {
-    type: average
-    sql: ${diff_abertura_dim} ;;
-
-  }
-
-  dimension: id_customer {hidden: yes}
-
-  dimension: id_movidesk {hidden: yes}
-
-  dimension: id_movidesk_user {hidden: yes}
-
-  dimension: id_protocol {hidden: yes}
-
-  dimension: id_user {hidden: yes}
-
-  dimension: service_first {hidden: yes}
-
-  dimension: ticket_service_first {hidden: yes}
-
-  dimension: service_second {hidden: yes}
-
-  dimension: ticket_service_second {hidden: yes}
-
-  dimension: service_third {hidden: yes}
-
-  dimension: ticket_service_third {hidden: yes}
-
-  dimension: subject {hidden: yes}
-
-  dimension: status {hidden: yes}
-
-  dimension: ticket_status {hidden: yes}
-
-  dimension_group: tempo_fechamento {hidden: yes}
-
-  dimension_group: tempo_aberto_movidesk {hidden: yes}
-
-  dimension_group: updated {hidden: yes}
-
-  dimension: urgency {hidden: yes}
-
-  dimension: ticket_urgency {hidden: yes}
-
-  dimension: ticket_origin {hidden: yes}
-
-  dimension: ticket_owner {hidden: yes}
-
-  dimension: ticket_squad {hidden: yes}
-
-  dimension_group: last_action {hidden: yes}
-
-  dimension_group: reopened_at {hidden: yes}
-
-  dimension: sla_response_time_min {hidden: yes}
-
-  dimension: sla_solution_time_min {hidden: yes}
-
-
-  measure: count {hidden: yes}
-
-  measure: tickets_abertos_count {hidden: yes}
-
-  measure: tickets_fechados_count {hidden: yes}
-
-  measure: tickets_cancelados_count {hidden: yes}
-
-  measure: tempo_medio_fechamento_em_dias {hidden: yes}
-
-  measure: tempo_mediana_fechamento_em_horas {hidden: yes}
-
-
-}
+ }
