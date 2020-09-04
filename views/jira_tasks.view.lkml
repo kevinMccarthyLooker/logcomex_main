@@ -162,36 +162,7 @@ view: jira_tasks {
 
   dimension: ticket_category {hidden: yes}
 
-
-  dimension_group: ticket_closing_date {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}."closing_date" ;;
-  }
-
   dimension_group: created {hidden: yes}
-
-  dimension_group: ticket_created_date {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}."created_date" ;;
-  }
 
   dimension: diff_abertura_dim {
     type: duration_hour
