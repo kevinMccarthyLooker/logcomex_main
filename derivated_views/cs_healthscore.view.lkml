@@ -22,16 +22,16 @@ view: cs_healthscore {
   where tickets_movidesk.created_date >= current_date - interval '30' day
   and b.customer_id = customer.id)
 from (
-        select customer_id,
+       select customer_id,
         name,
                  count(*),
-                 count(case when (report_log_created_at >= current_date - interval '30 days') then 1 end) as qtde_ultimos_30_dias,
-                 count(case when (report_log_created_at < current_date - interval '30 days') then 1 end) as qtde_120_30_dias
+                 count(case when (log_created_at >= current_date - interval '30 days') then 1 end) as qtde_ultimos_30_dias,
+                 count(case when (log_created_at < current_date - interval '30 days') then 1 end) as qtde_120_30_dias
                  from
         (
                 select customer.id as customer_id,
                 customer."name" as name,
-                     date(report_log.created_at) as report_log_created_at
+                     date(report_log.created_at) as log_created_at
         from customer
                   inner join user_profile_customer on user_profile_customer.customer_id = customer.id
                   inner join users on users.customer_profile_default_id = user_profile_customer.id
@@ -46,51 +46,17 @@ from (
                   and plan_complete.deleted_at is null
                   and customer.fake_customer is false
                 group by 1, 2,3
-        ) a
-        group by 1,2
-        order by 2 asc
-) b
-where qtde_120_30_dias > 0
-union
-select customer_id,
-          -- name,
-          qtde_ultimos_30_dias,
-          qtde_120_30_dias,
-        case when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) >= 1.2 then 70
-           when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) between 1 and 1.2 then 30
-           when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.75 and 0.99 then 20
-           when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.50 and 0.74 then 10
-           when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.5 then 0
-       else 999 end
-       as healthScore_1,
-       (select case when count(*) = 0 then 30
-       when count(*) >= 1 and count(*) <= 3 then 25
-       when count(*) >= 4 and count(*) <= 6 then 1
-       when count(*) >= 7 and count(*) <= 10 then 0
-       when count(*) > 10 then -10
-       else 999 end as Healthscore_2
-  from tickets_movidesk
-  inner join customer on customer.id = tickets_movidesk.id_customer
-  where tickets_movidesk.created_date >= current_date - interval '30' day
-  and b.customer_id = customer.id)
-from (
-        select customer_id,
-        name,
-                 count(*),
-                 count(case when (fh_created_at >= current_date - interval '30 days') then 1 end) as qtde_ultimos_30_dias,
-                 count(case when (fh_created_at < current_date - interval '30 days') then 1 end) as qtde_120_30_dias
-                 from
-        (
+                union all -- para manter registros identicos, verificar necessidade
                 select customer.id as customer_id,
                 customer."name" as name,
-                     date(fh.created_at) as fh_created_at
+                     date(fh.created_at) as log_created_at
         from customer
                   inner join user_profile_customer on user_profile_customer.customer_id = customer.id
                   inner join users on users.customer_profile_default_id = user_profile_customer.id
                   inner join filter_history fh on users.id = fh.user_id
                   inner join customer_plan on customer_plan.customer_id = customer.id
                   inner join plan_complete on customer_plan.plan_complete_id = plan_complete.id
-                  inner join (select * from service where id <> 5) service on plan_complete.service_id = service.id
+                  inner join (select * from service where id = 19) service on plan_complete.service_id = service.id
                 where fh.created_at >= current_date - interval '120' day
                   and (current_date between customer_plan.start and customer_plan.expiration)
                   and customer.deleted_at is null
@@ -98,6 +64,7 @@ from (
                   and plan_complete.deleted_at is null
                   and customer.fake_customer is false
                 group by 1, 2,3
+                --order by 2
         ) a
         group by 1,2
         order by 2 asc
