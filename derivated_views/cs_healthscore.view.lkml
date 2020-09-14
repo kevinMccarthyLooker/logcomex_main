@@ -46,7 +46,7 @@ from (
                   and plan_complete.deleted_at is null
                   and customer.fake_customer is false
                 group by 1, 2,3
-                union all -- para manter registros identicos, verificar necessidade
+                union all -- para manter registros de mesma data e servicos diferentes
                 select customer.id as customer_id,
                 customer."name" as name,
                      date(fh.created_at) as log_created_at
