@@ -163,14 +163,30 @@ customer.fake_customer is false
 
   }
 
+  dimension: porcent_qtd_pesquisas_dim {
+    type: number
+    sql: ${TABLE}.porcent_qtd_pesquisas ;;
+
+  }
+
   measure: porcent_qtd_pesquisas {
     type: average
+    filters: [porcent_qtd_pesquisas_dim:">=0"]
     sql: ${TABLE}.porcent_qtd_pesquisas ;;
+
+  }
+
+  dimension: porcent_qtd_busca_perfil_dim {
+    type: number
+    sql: ${TABLE}.porcent_qtd_busca_perfil;;
+
   }
 
   measure: porcent_qtd_busca_perfil {
     type: average
-    sql: ${TABLE}.porcent_qtd_busca_perfil ;;
+    filters: [porcent_qtd_busca_perfil_dim: ">=0"]
+    sql: ${TABLE}.porcent_qtd_busca_perfil;;
+
   }
 
 

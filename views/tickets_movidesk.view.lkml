@@ -1,4 +1,6 @@
+
 view: tickets_movidesk {
+
   sql_table_name: public.tickets_movidesk ;;
   drill_fields: [id_ticket_movidesk]
 
@@ -136,6 +138,7 @@ view: tickets_movidesk {
     sql: case
           when tickets_movidesk.status = 'Fechado' then 'Fechado'
           when tickets_movidesk.status = 'Cancelado' then 'Cancelado'
+          when tickets_movidesk.status = 'Mesclado/Deletado' then 'Cancelado'
           when tickets_movidesk.status is null then 'Cancelado'
           else 'Aberto'
           end
@@ -155,6 +158,7 @@ view: tickets_movidesk {
     sql_end: case
              when tickets_movidesk.status = 'Fechado' then ${ticket_closing_date_raw}
              when tickets_movidesk.status = 'Cancelado' then ${ticket_closing_date_raw}
+             when tickets_movidesk.status = 'Mesclado/Deletado' then ${ticket_closing_date_raw}
              when tickets_movidesk.status is null then ${ticket_closing_date_raw}
              else now()
              end
@@ -269,6 +273,14 @@ measure: tempo_medio_fechamento_em_dias {
   sql: ${days_tempo_fechamento} ;;
   value_format: "0.00 \" Days\""
 }
+
+  measure: tempo_mediana_fechamento_em_horas {
+    type: median
+    sql: ${hours_tempo_fechamento};;
+    value_format: "0.0 \" Hours\""
+  }
+
+
 
 # ----- Sets of fields for drilling ------
   set: detail {

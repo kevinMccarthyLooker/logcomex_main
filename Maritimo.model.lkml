@@ -17,6 +17,7 @@ include: "/views/db_maritimo.view.lkml"
 include: "/views/db_ce_mercante.view.lkml"
 include: "/views/antaqxmaritimo_cab.view.lkml"
 include: "/views/antaqxmaritimo_cab_emb.view.lkml"
+include: "/views/db_export_cargo_reception_details.view.lkml"
 
 explore: client_documents_by_method {
   label: "Client Documents By Method"
@@ -70,7 +71,13 @@ explore: db_maritimo {
     relationship: many_to_one
     sql_on: ${db_cad_armador.id} = ${db_maritimo.id_armador} ;;
   }
+  join: db_export_cargo_reception_details {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_details.nrcemercante} = ${db_maritimo.nrcemercante} ;;
+
+  }
 }
+
 
 explore: db_ce_mercante {
   label: "Embarques"

@@ -1,5 +1,27 @@
 view: jira_tasks {
-  sql_table_name: public.jira_tasks ;;
+  derived_table: {
+    sql: select jt.id as id,
+jt.tickets_movidesk_id as tickets_movidesk_id,
+jt.status as status,
+jt.log_key as log_key,
+jt.issue_type as issue_type,
+jt.assignee as assignee,
+jt.reporter as reporter,
+jt.task_created as task_created,
+jt.task_updated as task_updated,
+jt.resolution_date as resolution_date,
+jt.time_original_estimate as time_original_estimate,
+jt.time_spent as time_spent,
+jt.priority as priority,
+jt.created_at as created_at,
+jt.updated_at as updated_at,
+(jt.task_created - tm.created_date) as diff_abertura,
+EXTRACT(EPOCH FROM (jt.task_created - tm.created_date ))/3600  as diff_abertura_hours,
+(tm.closing_date - jt.resolution_date ) as diff_fechamento,
+EXTRACT(EPOCH FROM (tm.closing_date - jt.resolution_date ))/3600  as diff_fechamento_hours
+from jira_tasks jt
+inner join tickets_movidesk tm on tm.id = jt.tickets_movidesk_id  ;;
+  }
   drill_fields: [id]
 
   dimension: id {
@@ -13,7 +35,7 @@ view: jira_tasks {
     sql: ${TABLE}."assignee" ;;
   }
 
-  dimension_group: created {
+  dimension_group: jira_created {
     type: time
     timeframes: [
       raw,
@@ -73,14 +95,14 @@ view: jira_tasks {
     type: duration
     sql_start: ${task_created_raw};;
     sql_end: case
-             when ${status} = 'Concluído' then ${resolution_date}
+             when ${jira_status} = 'Concluído' then ${resolution_date}
              else now()
              end
     ;;
     intervals: [day, hour, minute]
   }
 
-  dimension: status {
+  dimension: jira_status {
     type: string
     sql: ${TABLE}."status" ;;
   }
@@ -128,7 +150,7 @@ view: jira_tasks {
     sql: ${TABLE}."time_spent" ;;
   }
 
-  dimension_group: updated {
+  dimension_group: jira_updated {
     type: time
     timeframes: [
       raw,
@@ -142,8 +164,71 @@ view: jira_tasks {
     sql: ${TABLE}."updated_at" ;;
   }
 
-  measure: count {
+  dimension_group: diff_abertura {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.diff_abertura ;;
+
+  }
+
+  dimension_group: diff_fechamento {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.diff_fechamento ;;
+
+  }
+
+  dimension: diff_abertura_hours {
+    type: number
+    sql: ${TABLE}.diff_abertura_hours ;;
+
+  }
+
+  dimension: diff_fechamento_hours {
+    type: number
+    sql: ${TABLE}.diff_fechamento_hours ;;
+
+  }
+
+  measure: media_abertura_sistemas {
+    type: average
+    filters: [diff_abertura_hours: ">=0"]
+    sql: ${diff_abertura_hours};;
+
+  }
+
+  measure: media_fechamento_sistemas {
+    type: average
+    filters: [diff_fechamento_hours: ">=0"]
+    sql: ${diff_fechamento_hours};;
+
+  }
+
+
+  measure: jira_count {
     type: count
     drill_fields: [id]
   }
-}
+
+  measure: jira_fechados_count {
+    type: count
+    #drill_fields: [detail*]
+    filters: [jira_status: "Concluído"]
+  }
+ }
