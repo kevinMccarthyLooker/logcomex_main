@@ -25,6 +25,14 @@ select 'Maritimo' as modal,
        tracking.tracking_robot_id,
        tracking.operation_date as operacao,
        tracking.di_desembaracada_date,
+       tracking.bl_emit_date as documento_emit_date,
+       tracking.eta as eta,
+       tracking.ets as ets,
+       tracking.ce_emit_date as ce_emit_date,
+       tracking.manifest_date as manifest_date,
+       tracking.load_presence_date as load_presence_date,
+       tracking.release_loading_date as release_loading_date,
+       tracking.completed_at as completed_at,
        (select max(follow_up.created_at) from follow_up where tracking.id = follow_up.tracking_id and user_id is null) as last_follow_up
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
@@ -55,6 +63,14 @@ select 'Aereo' as modal,
        999 as tracking_robot_id,
        '2000-01-01' as operacao,
        '2000-01-01' as di_desembaracada_date,
+       tracking_aerial.hawb_emit_date as documento_emit_date,
+       tracking_aerial.eta as eta,
+       tracking_aerial.ets as ets,
+       '2000-01-01' as ce_emit_date,
+       '2000-01-01' as manifest_date,
+       '2000-01-01' as load_presence_date,
+       '2000-01-01' as release_loading_date,
+       '2000-01-01' as completed_at,
        (select max(follow_up.created_at) from follow_up where tracking_aerial.id = follow_up.tracking_aerial_id and user_id is null) as last_follow_up
 from tracking_aerial
 inner join tracking_aerial_status on tracking_aerial.tracking_aerial_status_id = tracking_aerial_status.id
@@ -302,6 +318,118 @@ where tracking_aerial.deleted_at is null
       year
     ]
     sql: ${TABLE}."last_follow_up" ;;
+  }
+
+  dimension_group: documento_emit_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."documento_emit_date" ;;
+  }
+
+  dimension_group: eta {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."eta" ;;
+  }
+
+  dimension_group: ets {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."ets" ;;
+  }
+
+  dimension_group: ce_emit_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."ce_emit_date" ;;
+  }
+
+  dimension_group: manifest_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."manifest_date" ;;
+  }
+
+  dimension_group: load_presence_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."load_presence_date" ;;
+  }
+
+  dimension_group: release_loading_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."release_loading_date" ;;
+  }
+
+  dimension_group: completed_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."completed_at" ;;
   }
 
   measure: count {
