@@ -46,7 +46,7 @@ from (
                   and plan_complete.deleted_at is null
                   and customer.fake_customer is false
                 group by 1, 2,3
-                union all -- para manter registros de mesma data e servicos diferentes
+                union all -- para manter registros de mesma data e servico do search
                 select customer.id as customer_id,
                 customer."name" as name,
                      date(fh.created_at) as log_created_at
@@ -64,13 +64,30 @@ from (
                   and plan_complete.deleted_at is null
                   and customer.fake_customer is false
                 group by 1, 2,3
-                --order by 2
+                union all -- para manter registros de mesma data e servico do tracking
+                select customer.id as customer_id,
+                    customer."name" as name,
+                 date(t2.created_at) as log_created_at
+    from customer
+              inner join user_profile_customer on user_profile_customer.customer_id = customer.id
+              inner join users on users.customer_profile_default_id = user_profile_customer.id
+              inner join tracking t2 on users.id = t2.user_id
+              inner join customer_plan on customer_plan.customer_id = customer.id
+              inner join plan_complete on customer_plan.plan_complete_id = plan_complete.id
+              inner join (select * from service where id = 5) service on plan_complete.service_id = service.id
+            where t2.created_at >= current_date - interval '120' day
+              and (current_date between customer_plan.start and customer_plan.expiration)
+              and customer.deleted_at is null
+              and customer_plan.deleted_at is null
+              and plan_complete.deleted_at is null
+              and customer.fake_customer is false
+            group by 1, 2,3
+
         ) a
         group by 1,2
         order by 2 asc
 ) b
-where qtde_120_30_dias > 0
-;;
+where qtde_120_30_dias > 0;;
     #     persist_for: "24 hour"
     #     sql_trigger_value: select count(*) from public.customer_plan ;;
       datagroup_trigger: my_datagroup
