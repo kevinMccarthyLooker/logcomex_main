@@ -138,7 +138,7 @@ view: tickets_movidesk {
     sql: case
           when tickets_movidesk.status = 'Fechado' then 'Fechado'
           when tickets_movidesk.status = 'Cancelado' then 'Cancelado'
-          when tickets_movidesk.status = 'Mesclado/Deletado' then 'Mesclado/Deletado'
+          when tickets_movidesk.status = 'Mesclado/Deletado' then 'Cancelado'
           when tickets_movidesk.status is null then 'Cancelado'
           else 'Aberto'
           end
@@ -266,12 +266,6 @@ view: tickets_movidesk {
     type: count
     drill_fields: [detail*]
     filters: [ticket_status: "Cancelado"]
-  }
-
-  measure: tickets_mesclados_deletados_count {
-    type: count
-    drill_fields: [detail*]
-    filters: [ticket_status: "Mesclado/Deletado"]
   }
 
 measure: tempo_medio_fechamento_em_dias {
