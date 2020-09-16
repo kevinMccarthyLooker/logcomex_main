@@ -11,12 +11,10 @@ derived_table: {
            when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.9 then 0
        else 999 end
        as usab_big_search,
-       (select case when count(*) = 0 then 30
-       when count(*) >= 1 and count(*) <= 3 then 25
-       when count(*) >= 4 and count(*) <= 6 then 1
-       when count(*) >= 7 and count(*) <= 10 then 0
-       when count(*) > 10 then -10
-       else 999 end as Healthscore_2
+       (select case when count(*) = 0 then 10
+       when count(*) >= 1 and count(*) <= 6 then 5
+       when count(*) > 6 then 0
+       else 999 end as qtd_tickets
       from tickets_movidesk
       inner join customer on customer.id = tickets_movidesk.id_customer
       where tickets_movidesk.created_date >= current_date - interval '30' day
@@ -94,20 +92,20 @@ where qtde_120_30_dias > 0 ;;
 
   dimension: healthScore_Tickets {
     type: number
-    sql: ${TABLE}.healthScore_2 ;;
+    sql: ${TABLE}.qtd_tickets ;;
   }
 
   dimension: healthScore_Total {
     type: number
-    sql: ${TABLE}.usab_big_search + ${TABLE}.healthScore_2 ;;
+    sql: ${TABLE}.usab_big_search + ${TABLE}.qtd_tickets ;;
   }
 
   dimension: healthScore_Status {
     type: string
     sql:  case
-           when (${TABLE}.usab_big_search + ${TABLE}.healthScore_2) < 40 then 'Vermelho'
-           when (${TABLE}.usab_big_search + ${TABLE}.healthScore_2) between 40 and 70 then 'Amarelo'
-           when (${TABLE}.usab_big_search + ${TABLE}.healthScore_2) > 70 then 'Verde'
+           when (${TABLE}.usab_big_search + ${TABLE}.qtd_tickets) < 40 then 'Vermelho'
+           when (${TABLE}.usab_big_search + ${TABLE}.qtd_tickets) between 40 and 70 then 'Amarelo'
+           when (${TABLE}.usab_big_search + ${TABLE}.qtd_tickets) > 70 then 'Verde'
           end
            ;;
   }
