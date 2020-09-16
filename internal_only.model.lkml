@@ -19,6 +19,7 @@ include: "/**/user_derived_info.view.lkml"
 include: "/**/bi_filters_customer_plan.view.lkml"
 include: "/**/plan_info_join.view.lkml"
 include: "/**/cs_healthscore.view.lkml"
+include: "/**/cs_novo_health_score.view.lkml"
 include: "/**/cs_healthscore_accesslog.view.lkml"
 include: "/**/bi_filtros.view.lkml"
 include: "/**/customer_info.view.lkml"
@@ -152,6 +153,12 @@ explore: usage {
 
   join: cs_healthscore{
     sql_on: ${customer.id}=${cs_healthscore.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: cs_novo_health_score{
+    sql_on: ${customer.id}=${cs_novo_health_score.customer_id} ;;
     relationship: one_to_many
     type: left_outer
   }
