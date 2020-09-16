@@ -6,13 +6,11 @@ derived_table: {
           -- name,
           qtde_ultimos_30_dias,
           qtde_120_30_dias,
-        case when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) >= 1.2 then 70
-           when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) between 1 and 1.2 then 30
-           when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.75 and 0.99 then 20
-           when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.50 and 0.74 then 10
-           when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.5 then 0
+        case when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
+           when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.9 and 1 then 10
+           when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.9 then 0
        else 999 end
-       as healthScore_1,
+       as usab_big_search,
        (select case when count(*) = 0 then 30
        when count(*) >= 1 and count(*) <= 3 then 25
        when count(*) >= 4 and count(*) <= 6 then 1
@@ -48,7 +46,7 @@ derived_table: {
                   and plan_complete.deleted_at is null
                   and customer.fake_customer is false
                 group by 1, 2,3
-                union all -- para manter registros de mesma data e servicos diferentes
+                union all -- para manter registros de mesma data e unir com o search
                 select customer.id as customer_id,
                 customer."name" as name,
                      date(fh.created_at) as log_created_at
@@ -66,24 +64,6 @@ derived_table: {
                   and plan_complete.deleted_at is null
                   and customer.fake_customer is false
                 group by 1, 2,3
-                union all -- adicionando tracking
-                select customer.id as customer_id,
-                    customer."name" as name,
-                 date(t3.created_at) as log_created_at
-        from customer
-             -- inner join user_profile_customer on user_profile_customer.customer_id = customer.id
-            --  inner join users on users.customer_profile_default_id = user_profile_customer.id
-                inner join tracking t3 on customer.id = t3.customer_id
-                inner join customer_plan on customer_plan.customer_id = customer.id
-                inner join plan_complete on customer_plan.plan_complete_id = plan_complete.id
-                inner join (select * from service where id = 5) service on plan_complete.service_id = service.id
-              where t3.created_at >= current_date - interval '120' day
-                and (current_date between customer_plan.start and customer_plan.expiration)
-                and customer.deleted_at is null
-                and customer_plan.deleted_at is null
-                and plan_complete.deleted_at is null
-                and customer.fake_customer is false
-              group by 1, 2,3
 
         ) a
         group by 1,2
@@ -107,9 +87,9 @@ where qtde_120_30_dias > 0 ;;
     sql: ${TABLE}.customer_id ;;
   }
 
-  dimension: healthScore_Acesso {
+  dimension: usab_big_search {
     type: number
-    sql: ${TABLE}.healthScore_1 ;;
+    sql: ${TABLE}.usab_big_search ;;
   }
 
   dimension: healthScore_Tickets {
@@ -119,15 +99,15 @@ where qtde_120_30_dias > 0 ;;
 
   dimension: healthScore_Total {
     type: number
-    sql: ${TABLE}.healthScore_1 + ${TABLE}.healthScore_2 ;;
+    sql: ${TABLE}.usab_big_search + ${TABLE}.healthScore_2 ;;
   }
 
   dimension: healthScore_Status {
     type: string
     sql:  case
-           when (${TABLE}.healthScore_1 + ${TABLE}.healthScore_2) < 40 then 'Vermelho'
-           when (${TABLE}.healthScore_1 + ${TABLE}.healthScore_2) between 40 and 70 then 'Amarelo'
-           when (${TABLE}.healthScore_1 + ${TABLE}.healthScore_2) > 70 then 'Verde'
+           when (${TABLE}.usab_big_search + ${TABLE}.healthScore_2) < 40 then 'Vermelho'
+           when (${TABLE}.usab_big_search + ${TABLE}.healthScore_2) between 40 and 70 then 'Amarelo'
+           when (${TABLE}.usab_big_search + ${TABLE}.healthScore_2) > 70 then 'Verde'
           end
            ;;
   }
