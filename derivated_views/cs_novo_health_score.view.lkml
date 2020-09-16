@@ -85,12 +85,12 @@ where qtde_120_30_dias > 0 ;;
     sql: ${TABLE}.customer_id ;;
   }
 
-  dimension: usab_big_search {
+  dimension: pontuacao_usab_big_search {
     type: number
     sql: ${TABLE}.usab_big_search ;;
   }
 
-  dimension: healthScore_Tickets {
+  dimension: pontuacao_tickets {
     type: number
     sql: ${TABLE}.qtd_tickets ;;
   }
