@@ -3,7 +3,7 @@ view: cs_novo_health_score {
 derived_table: {
     sql:
     select distinct
-    c.id,
+    c.id as customer_id,
     (case
     when (case when big_search.qtde_120_30_dias = 0 then 0 else round((big_search.qtde_ultimos_30_dias::numeric / (big_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
     when (case when big_search.qtde_120_30_dias = 0 then 0 else round((big_search.qtde_ultimos_30_dias::numeric / (big_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.9 and 1 then 10
