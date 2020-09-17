@@ -11,14 +11,32 @@ derived_table: {
            when (case when qtde_120_30_dias = 0 then 0 else round((qtde_ultimos_30_dias::numeric / (qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.9 then 0
        else 999 end
        as usab_big_search,
-       (select case when count(*) = 0 then 10
-       when count(*) >= 1 and count(*) <= 6 then 5
-       when count(*) > 6 then 0
-       else 999 end as qtd_tickets
+       (select
+         case when count(*) = 0 then 10
+         when count(*) >= 1 and count(*) <= 6 then 5
+         when count(*) > 6 then 0
+         else 999 end as qtd_tickets
       from tickets_movidesk
       inner join customer on customer.id = tickets_movidesk.id_customer
       where tickets_movidesk.created_date >= current_date - interval '30' day
-      and b.customer_id = customer.id)
+      and b.customer_id = customer.id),
+      (select   (case
+    when (positive_negative_response) >= 4 then 10
+    when (positive_negative_response) between 3 and 3.9 then 5
+    when (positive_negative_response) < 3 then 0
+    when (positive_negative_response) isnull then -1
+    end)
+    as ultima_satisfaction
+    from(
+    select tm.id_customer , positive_negative_response
+    from satisfaction_survey_movidesk ssm
+    inner join tickets_movidesk tm on tm.id = ssm.tickets_movidesk_id
+    where ssm.response_date = (select max(ssm2.response_date)
+    from satisfaction_survey_movidesk ssm2
+    inner join tickets_movidesk tm2 on tm2.id = ssm2.tickets_movidesk_id
+    where tm2.id_customer = tm.id_customer)
+    ) aa
+    where aa.id_customer = b.customer_id)
     from (
        select customer_id,
         name,
@@ -67,7 +85,8 @@ derived_table: {
         group by 1,2
         order by 2 asc
 ) b
-where qtde_120_30_dias > 0 ;;
+where qtde_120_30_dias > 0
+    ;;
 
   datagroup_trigger: my_datagroup
   indexes: ["customer_id"]
@@ -94,6 +113,12 @@ where qtde_120_30_dias > 0 ;;
     type: number
     sql: ${TABLE}.qtd_tickets ;;
   }
+
+  dimension: pontuacao_survey {
+    type: number
+    sql: ${TABLE}.ultima_satisfaction ;;
+  }
+
 
   dimension: healthScore_Total {
     type: number
