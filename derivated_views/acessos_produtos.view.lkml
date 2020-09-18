@@ -5,8 +5,7 @@ select
 customer.id as customer_id,
 date(access_log.created_at) as access_log_created_at,
 access_log.user_id as user_id,
-(case
-when service.id = 5  then 'Tracking'
+(case when service.id = 5  then 'Tracking'
 when service.id = 19 then 'Search'
 else 'Big Data'
 end) as service
