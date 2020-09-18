@@ -6,6 +6,7 @@ row_number() OVER () AS id,
 customer.id as customer_id,
 date(access_log.created_at) as access_log_created_at,
 access_log.user_id as user_id,
+users."name" as user_name,
 (case
 when service.id = 5  then 'Tracking'
 when service.id = 19 then 'Search'
@@ -24,7 +25,7 @@ where access_log.created_at >= current_date - interval '120' day
   and customer_plan.deleted_at is null
   and plan_complete.deleted_at is null
   and customer.fake_customer is false
-group by 2,3,4,5
+group by 2,3,4,5,6
     ;;
   }
 
@@ -55,6 +56,11 @@ group by 2,3,4,5
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
+  }
+
+  dimension: user_name {
+    type: string
+    sql: ${TABLE}.user_name ;;
   }
 
   dimension: produto {
