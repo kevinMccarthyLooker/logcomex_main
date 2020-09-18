@@ -122,7 +122,7 @@ from(
     inner join access_log on users.id = access_log.user_id
     inner join customer_plan on customer_plan.customer_id = customer.id
     inner join plan_complete on customer_plan.plan_complete_id = plan_complete.id
-    inner join (select * from service where id <> 5) service on plan_complete.service_id = service.id
+    inner join service on plan_complete.service_id = service.id
     where access_log.created_at >= current_date - interval '120' day
       and (current_date between customer_plan.start and customer_plan.expiration)
       and customer.deleted_at is null
