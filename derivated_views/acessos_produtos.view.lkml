@@ -53,6 +53,10 @@ where access_log.created_at >= current_date - interval '120' day
     sql: ${TABLE}.service ;;
   }
 
+  measure: count {
+    type: count
+  }
+
 
 
 }
