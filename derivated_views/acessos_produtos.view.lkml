@@ -2,6 +2,7 @@ view: acessos_produtos {
   derived_table: {
     sql:
 select
+row_number() OVER () AS id,
 customer.id as customer_id,
 date(access_log.created_at) as access_log_created_at,
 access_log.user_id as user_id,
@@ -23,7 +24,15 @@ where access_log.created_at >= current_date - interval '120' day
   and customer_plan.deleted_at is null
   and plan_complete.deleted_at is null
   and customer.fake_customer is false
+group by 2,3,4,5
     ;;
+  }
+
+  dimension: id {
+    type: number
+    primary_key: yes
+    hidden: yes
+    sql: ${TABLE}.id ;;
   }
 
   dimension: customer_id {
@@ -56,7 +65,6 @@ where access_log.created_at >= current_date - interval '120' day
   measure: count {
     type: count
   }
-
 
 
 }
