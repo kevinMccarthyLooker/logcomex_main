@@ -45,6 +45,7 @@ include: "/**/excel_controller.view.lkml"
 include: "/**/log_integration_ibroker.view.lkml"
 include: "/**/jira_tasks.view.lkml"
 include: "/**/satisfaction_survey_movidesk.view.lkml"
+include: "/**/acessos_produtos.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -191,6 +192,12 @@ explore: usage {
 
   join: user_profile_customer {
     sql_on: ${user_profile_customer.customer_id}=${customer.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: acessos_produtos {
+    sql_on: ${acessos_produtos.customer_id}=${customer.id} ;;
     relationship: many_to_one
     type: left_outer
   }
