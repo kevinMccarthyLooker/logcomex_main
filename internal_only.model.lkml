@@ -28,6 +28,7 @@ include: "/**/customer_api_relations.view.lkml"
 include: "/**/billing_contract_omie.view.lkml"
 include: "/**/service_order_omie.view.lkml"
 include: "/**/NPS.view.lkml"
+include: "/**/nps_08_2020.view.lkml"
 include: "/**/clientes_ativos_por_mes.view.lkml"
 include: "/**/customer_block_status.view.lkml"
 include: "/**/customer_blocked_history.view.lkml"
@@ -229,6 +230,12 @@ explore: usage {
 
   join: nps {
     sql_on: ${users.email}=${nps.email} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: nps_08_2020 {
+    sql_on: ${users.email}=${nps_08_2020.email} ;;
     relationship: one_to_many
     type: left_outer
   }

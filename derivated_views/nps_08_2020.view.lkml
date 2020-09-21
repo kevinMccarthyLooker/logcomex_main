@@ -1,4 +1,4 @@
-view: nps-08-2020 {
+view: nps_08_2020 {
   derived_table: {
     sql:
       SELECT
