@@ -122,7 +122,7 @@ view: nps_08_2020 {
         CAST('2020-08-17 19:41:38' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Ramiro Colsani' AS name, 'ramiro@bmlog.com.br' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, 1060 AS id_user
       UNION ALL
       SELECT
-        CAST('2020-08-17 19:43:22' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'André Alves' AS name, 'andre.alves@gefco.com.br' AS email, 10 AS nota, 10 AS observacao, 'Muito impactado' AS impacto, 4451 AS id_user
+        CAST('2020-08-17 19:43:22' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'André Alves' AS name, 'andre.alves@gefco.com.br' AS email, 10 AS nota, '10' AS observacao, 'Muito impactado' AS impacto, 4451 AS id_user
       UNION ALL
       SELECT
         CAST('2020-08-17 19:43:32' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao?tab=resumo&silent=true&groupBy=nmconsignatario&subGroup=&filter=end_date%3D2020-08-17%26filterImportacaoNmconsignatario%3Dpsmm%26grouper%3Dnmconsignatario%26start_date%3D2020-05-17&page=1&per_page=15' AS page, 'Marco Melo' AS name, 'mmelo@actioncargo.com.br' AS email, 10 AS nota, NULL AS observacao, NULL AS impacto, 5981 AS id_user
@@ -185,7 +185,7 @@ view: nps_08_2020 {
         CAST('2020-08-17 22:10:30' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao?tab=resumo&silent=true&groupBy=nmconsignatario&subGroup=&filter=end_date%3D2020-07-31%26filterImportacaoNmconsignatario%3DNova%2520Era%26grouper%3Dnmconsignatario%26start_date%3D2020-05-01' AS page, 'Lucas Freitas' AS name, 'lucas.freitas@dbschenker.com' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, 6105 AS id_user
       UNION ALL
       SELECT
-        CAST('2020-08-17 22:16:28' AS DATE) AS date, 'https://search.logcomex.io/dashboard/?period=2019-08&period=2020-07&possibleImporter=multiacos%20&source=home' AS page, 'tlarrosa@castellarmetals.com.br' AS name, 'tlarrosa@castellarmetals.com.br' AS email, 10 AS nota, 10 AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
+        CAST('2020-08-17 22:16:28' AS DATE) AS date, 'https://search.logcomex.io/dashboard/?period=2019-08&period=2020-07&possibleImporter=multiacos%20&source=home' AS page, 'tlarrosa@castellarmetals.com.br' AS name, 'tlarrosa@castellarmetals.com.br' AS email, 10 AS nota, '10' AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
       UNION ALL
       SELECT
         CAST('2020-08-17 22:37:28' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao?tab=resumo&silent=true&groupBy=nmconsignatario&subGroup=&filter=end_date%3D2020-08-17%26filterImportacaoNmconsignatario%3DOPUS%26grouper%3Dnmconsignatario%26start_date%3D2020-01-01' AS page, 'Roberta Penha' AS name, 'roberta.penha@dpworld.com' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, 5634 AS id_user
@@ -410,7 +410,7 @@ view: nps_08_2020 {
         CAST('2020-08-20 13:59:03' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Fabio' AS name, 'fabio.rossini@hafele.com.br' AS email, 10 AS nota, 'dfd' AS observacao, 'Nada impactado' AS impacto, 7182 AS id_user
       UNION ALL
       SELECT
-        CAST('2020-08-20 14:07:44' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Renan Cavalcanti' AS name, 'renan.cavalcanti@blulogistics.com.br' AS email, 7 AS nota, 'as vezes puxamos um campo e ele não aparece, as vezes o campo de 'pagamento' ou 'agente de carga' NAO aparece num estudo.. e também poderia melhorar na pesquisa, pois qualquer espaço ou . pode nao puxar a conta desejada' AS observacao, 'Muito impactado' AS impacto, 7015 AS id_user
+        CAST('2020-08-20 14:07:44' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Renan Cavalcanti' AS name, 'renan.cavalcanti@blulogistics.com.br' AS email, 7 AS nota, 'as vezes puxamos um campo e ele não aparece, as vezes o campo de pagamento ou agente de carga NAO aparece num estudo.. e também poderia melhorar na pesquisa, pois qualquer espaço ou . pode nao puxar a conta desejada' AS observacao, 'Muito impactado' AS impacto, 7015 AS id_user
       UNION ALL
       SELECT
         CAST('2020-08-20 14:31:18' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Caio' AS name, 'caio@kingshipline.com' AS email, 7 AS nota, NULL AS observacao, NULL AS impacto, 5739 AS id_user
@@ -452,7 +452,7 @@ view: nps_08_2020 {
         CAST('2020-08-20 17:00:24' AS DATE) AS date, 'https://sistema.logcomex.io/#/leads?tab=itens&silent=true&filter=dashboard%3Did%26end_date%3D2020-08-20%26filter_date%3Doperation_date%26grouper%3Dconsignatario_nome%26start_date%3D2020-06-15%26type%3Dleads&groupBy=consignatario_nome&subGroup=' AS page, 'Gustavo' AS name, 'gustavo@ciatextrade.com.br' AS email, 10 AS nota, NULL AS observacao, NULL AS impacto, 3037 AS id_user
       UNION ALL
       SELECT
-        CAST('2020-08-20 17:03:15' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/aereo?tab=resumo&silent=true&groupBy=consignatario&subGroup=&filter=end_date%3D2020-08-01%26filterAereoConsignatario%3Dsnapon%26grouper%3Dconsignatario%26start_date%3D2020-07-01' AS page, 'Fábio Rodrigo borborema' AS name, 'sales@delphiforwarding.com' AS email, 9 AS nota, 10 AS observacao, 'Muito impactado' AS impacto, 5625 AS id_user
+        CAST('2020-08-20 17:03:15' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/aereo?tab=resumo&silent=true&groupBy=consignatario&subGroup=&filter=end_date%3D2020-08-01%26filterAereoConsignatario%3Dsnapon%26grouper%3Dconsignatario%26start_date%3D2020-07-01' AS page, 'Fábio Rodrigo borborema' AS name, 'sales@delphiforwarding.com' AS email, 9 AS nota, '10' AS observacao, 'Muito impactado' AS impacto, 5625 AS id_user
       UNION ALL
       SELECT
         CAST('2020-08-20 17:03:17' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Rachel Streicher' AS name, 'rachelstreicher@polyterminais.com.br' AS email, 10 AS nota, NULL AS observacao, NULL AS impacto, 7036 AS id_user
@@ -485,7 +485,7 @@ view: nps_08_2020 {
         CAST('2020-08-20 17:58:31' AS DATE) AS date, 'https://sistema.logcomex.io/#/leads' AS page, 'Elenora Bohrer' AS name, 'comercial01@idcargo.com.br' AS email, 9 AS nota, 'Utilizo muito e as informações são confiáveis!' AS observacao, 'Pouco impactado' AS impacto, 2115 AS id_user
       UNION ALL
       SELECT
-        CAST('2020-08-20 17:59:47' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Shirlei Munhoz' AS name, 'comercial@gracolog.com.br' AS email, 8 AS nota, 7 AS observacao, NULL AS impacto, 4332 AS id_user
+        CAST('2020-08-20 17:59:47' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Shirlei Munhoz' AS name, 'comercial@gracolog.com.br' AS email, 8 AS nota, '7' AS observacao, NULL AS impacto, 4332 AS id_user
       UNION ALL
       SELECT
         CAST('2020-08-20 18:01:23' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao?tab=resumo&silent=true&groupBy=nmconsignatario&subGroup=&filter=end_date%3D2020-08-20%26filterImportacaoNmconsignatario%3Dpmc%26grouper%3Dnmconsignatario%26start_date%3D2020-06-01' AS page, 'victor cabrera' AS name, 'victor.cabrera@kuehne-nagel.com' AS email, 10 AS nota, NULL AS observacao, NULL AS impacto, 4843 AS id_user
@@ -578,7 +578,7 @@ view: nps_08_2020 {
         CAST('2020-08-20 20:35:25' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao?tab=resumo&silent=true&groupBy=nmconsignatario&subGroup=&filter=end_date%3D2020-08-20%26grouper%3Dnmconsignatario%26start_date%3D2020-04-20&page=1&per_page=15' AS page, 'Renato Fasolo' AS name, 'renato.fasolo@nextshipping.com.br' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, 7000 AS id_user
       UNION ALL
       SELECT
-        CAST('2020-08-20 20:40:12' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao?tab=resumo&silent=true&groupBy=nmconsignatario&subGroup=&filter=end_date%3D2020-08-20%26filterImportacaoNmportodestino%3D133%26filterImportacaoNmportoorigem%3D311%26filterImportacaoPagamento%3DC%26grouper%3Dnmconsignatario%26start_date%3D2020-01-01&page=1&per_page=15&grouper_value=CHAZAK%20VE%20EMATZ%20COMERCIAL%20IMPORTADORAS%20E' AS page, 'Rogerio Barbosa' AS name, 'rogerio.barbosa@csslog.com.br' AS email, 10 AS nota, 10 AS observacao, 'Pouco impactado' AS impacto, 85 AS id_user
+        CAST('2020-08-20 20:40:12' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao?tab=resumo&silent=true&groupBy=nmconsignatario&subGroup=&filter=end_date%3D2020-08-20%26filterImportacaoNmportodestino%3D133%26filterImportacaoNmportoorigem%3D311%26filterImportacaoPagamento%3DC%26grouper%3Dnmconsignatario%26start_date%3D2020-01-01&page=1&per_page=15&grouper_value=CHAZAK%20VE%20EMATZ%20COMERCIAL%20IMPORTADORAS%20E' AS page, 'Rogerio Barbosa' AS name, 'rogerio.barbosa@csslog.com.br' AS email, 10 AS nota, '10' AS observacao, 'Pouco impactado' AS impacto, 85 AS id_user
       UNION ALL
       SELECT
         CAST('2020-08-20 20:44:23' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao?tab=resumo&silent=true&groupBy=nmconsignatario&subGroup=&filter=end_date%3D2020-08-20%26filterImportacaoNmconsignatario%3Dajinomoto%26grouper%3Dnmconsignatario%26start_date%3D2020-01-01' AS page, 'Daniely de Almeida Soares' AS name, 'daniely.soares@cevalogistics.com' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, 5186 AS id_user
@@ -710,7 +710,7 @@ view: nps_08_2020 {
         CAST('2020-08-21 18:30:59' AS DATE) AS date, 'https://search.logcomex.io/dashboard/?period=2020-05&period=2020-07&possibleImporter=Ericsson&source=recent_search' AS page, 'rafael.mugnaini@comexport.com.br' AS name, 'rafael.mugnaini@comexport.com.br' AS email, 10 AS nota, 'satisfação' AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
       UNION ALL
       SELECT
-        CAST('2020-08-21 18:42:11' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Fajardo, Larissa' AS name, 'larissa.fajardo@dbschenker.com' AS email, 10 AS nota, 10 AS observacao, 'Muito impactado' AS impacto, 5405 AS id_user
+        CAST('2020-08-21 18:42:11' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Fajardo, Larissa' AS name, 'larissa.fajardo@dbschenker.com' AS email, 10 AS nota, '10' AS observacao, 'Muito impactado' AS impacto, 5405 AS id_user
       UNION ALL
       SELECT
         CAST('2020-08-21 18:45:22' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Marcelo Benatti' AS name, 'marcelo@transbrasa.com.br' AS email, 8 AS nota, 'Muito bom' AS observacao, NULL AS impacto, 1656 AS id_user
@@ -857,7 +857,7 @@ view: nps_08_2020 {
         CAST('2020-08-24 17:43:14' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao?tab=details&silent=true&groupBy=dtoperacao&subGroup=&filter=end_date%3D2020-08-24%26filterImportacaoNmportodestino%3D133%26filterImportacaoNmportoorigem%3D340%26filterImportacaoNmportoorigem%3D351%26grouper%3Ddtoperacao%26start_date%3D2020-05-01&page=1&per_page=15&grouper_value=202008' AS page, 'Mariana Morauer' AS name, 'mariana@kpmlogistica.com.br' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, 759 AS id_user
       UNION ALL
       SELECT
-        CAST('2020-08-24 17:46:22' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/aereo' AS page, 'VILSON SOUSA' AS name, 'vilson.sousa@bollore.com' AS email, 7 AS nota, 7 AS observacao, 'Pouco impactado' AS impacto, 4513 AS id_user
+        CAST('2020-08-24 17:46:22' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/aereo' AS page, 'VILSON SOUSA' AS name, 'vilson.sousa@bollore.com' AS email, 7 AS nota, '7' AS observacao, 'Pouco impactado' AS impacto, 4513 AS id_user
       UNION ALL
       SELECT
         CAST('2020-08-24 17:49:23' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'FERNANDO' AS name, 'fernandop@transbrasa.com.br' AS email, 6 AS nota, '.' AS observacao, 'Muito impactado' AS impacto, 189 AS id_user
@@ -1187,7 +1187,7 @@ view: nps_08_2020 {
         CAST('2020-08-27 19:36:07' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Leonardo Kaneko' AS name, 'lkaneko@interoceanica.com.br' AS email, 9 AS nota, 'ele puxa alguns filtros duplicados ou filtra incorretamente algumas pesquisas' AS observacao, 'Pouco impactado' AS impacto, 4779 AS id_user
       UNION ALL
       SELECT
-        CAST('2020-08-28 00:43:34' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Luiz Matteucci' AS name, 'luiz.matteucci@pglbr.com.br' AS email, 10 AS nota, 10 AS observacao, 'Nada impactado' AS impacto, 4202 AS id_user
+        CAST('2020-08-28 00:43:34' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Luiz Matteucci' AS name, 'luiz.matteucci@pglbr.com.br' AS email, 10 AS nota, '10' AS observacao, 'Nada impactado' AS impacto, 4202 AS id_user
       UNION ALL
       SELECT
         CAST('2020-08-28 01:01:58' AS DATE) AS date, 'https://sistema.logcomex.io/#/leads?tab=itens&silent=true&filter=dashboard%3Did%26end_date%3D2020-08-27%26filter_date%3Doperation_date%26grouper%3Dconsignatario_nome%26itemcarga_cdncms%3D9505%26start_date%3D2020-01-01%26type%3Dleads&groupBy=consignatario_nome&subGroup=&page=1&per_page=15' AS page, 'Helio Andrade' AS name, 'helio.andrade@florarte.com.br' AS email, 6 AS nota, 's' AS observacao, NULL AS impacto, 5224 AS id_user
