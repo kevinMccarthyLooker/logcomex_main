@@ -1,6 +1,7 @@
 view: nps_08_2020 {
   derived_table: {
     sql:
+      select (ROW_NUMBER () OVER ()) as id, * from(
       SELECT
         CAST('2020-08-17 18:10:58' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Franco, Nanci' AS name, 'nanci.franco@dbschenker.com' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, 5429 AS id_user
       UNION ALL
@@ -1368,8 +1369,14 @@ view: nps_08_2020 {
       UNION ALL
       SELECT
         CAST('2020-08-31 22:16:04' AS DATE) AS date, 'https://sistema.logcomex.io/#/leads' AS page, 'Luiz Gustavo Nery' AS name, 'luiz@rodonery.com.br' AS email, 7 AS nota, 'incosistências no sistema.' AS observacao, 'Muito impactado' AS impacto, 3867 AS id_user
-
+      ) as q1
       ;;
+  }
+
+  dimension: id {
+    type: number
+    primary_key: yes
+    sql: ${TABLE}.id ;;
   }
 
   dimension: date {
