@@ -32,7 +32,7 @@ when (survey_movi.positive_negative_response) between 3 and 3.9 then 5
 when (survey_movi.positive_negative_response) < 3 then 0
 when (survey_movi.positive_negative_response) isnull then null
 end)
-as ultima_satisfaction,
+as satisfaction,
 (case
 when (case when acessos_usuarios.qtde_120_30_dias = 0 then 0 else round((acessos_usuarios.qtde_ultimos_30_dias::numeric / (acessos_usuarios.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
 when (case when acessos_usuarios.qtde_120_30_dias = 0 then 0 else round((acessos_usuarios.qtde_ultimos_30_dias::numeric / (acessos_usuarios.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.9 and 1 then 10
@@ -142,13 +142,10 @@ where tm.created_date >= current_date - interval '30' day
 group by 1
        ) as tickets_movi on tickets_movi.id_customer = c.id
 left join(  -- adicionando dados das pesquisa de satisfacao movidesk
-select tm.id_customer , positive_negative_response
+select tm.id_customer , avg(ssm.positive_negative_response) as positive_negative_response
 from satisfaction_survey_movidesk ssm
-  inner join tickets_movidesk tm on tm.id = ssm.tickets_movidesk_id
-where ssm.response_date = (select max(ssm2.response_date)
-  from satisfaction_survey_movidesk ssm2
-  inner join tickets_movidesk tm2 on tm2.id = ssm2.tickets_movidesk_id
-  where tm2.id_customer = tm.id_customer)
+inner join tickets_movidesk tm on tm.id = ssm.tickets_movidesk_id
+group by tm.id_customer
        ) as survey_movi on survey_movi.id_customer = c.id
 where current_date between cp.start and cp.expiration
   and c.deleted_at is null
@@ -195,35 +192,8 @@ where current_date between cp.start and cp.expiration
 
   dimension: pontuacao_survey {
     type: number
-    sql: ${TABLE}.ultima_satisfaction ;;
+    sql: ${TABLE}.satisfaction ;;
   }
-
-
-  dimension: healthScore_Total {
-    type: number
-    sql: ${TABLE}.usab_big_search + ${TABLE}.pontos_qtd_tickets + ${TABLE}.usab_tracking ;;
-  }
-
-  dimension: healthScore_Status {
-    type: string
-    sql:  case
-           when (${TABLE}.usab_big_search + ${TABLE}.pontos_qtd_tickets) < 40 then 'Vermelho'
-           when (${TABLE}.usab_big_search + ${TABLE}.pontos_qtd_tickets) between 40 and 70 then 'Amarelo'
-           when (${TABLE}.usab_big_search + ${TABLE}.pontos_qtd_tickets) > 70 then 'Verde'
-          end
-           ;;
-  }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
