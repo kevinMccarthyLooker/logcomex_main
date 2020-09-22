@@ -1416,4 +1416,9 @@ view: nps_08_2020 {
   measure: count {
     type: count
   }
+
+  measure: media_nota {
+    type: average
+    sql: ${nota} ;;
+  }
 }
