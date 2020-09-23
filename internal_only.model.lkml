@@ -161,8 +161,8 @@ explore: usage {
 
   join: cs_novo_health_score{
     sql_on: ${customer.id}=${cs_novo_health_score.customer_id} ;;
-    relationship: one_to_many
-    type: left_outer
+    relationship: one_to_one
+    type: inner
   }
 
   join: cs_healthscore_accesslog{
