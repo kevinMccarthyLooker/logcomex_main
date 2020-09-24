@@ -31,8 +31,8 @@ group by cdconsignatario
 ) as q2;;
   }
 
-  dimension: cdconsignatario {
-    type: number
+  dimension: cnpj {
+    type: string
     sql: ${TABLE}.cdconsignatario ;;
 
   }
