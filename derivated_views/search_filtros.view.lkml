@@ -2,7 +2,9 @@ view: search_filtros {
 
   derived_table: {
     sql:
-    select TO_TIMESTAMP(concat(fh."year",' ',fh."month") ,'YYYY MM') as periodo,
+    select
+    concat(fh."year",fh."month",'|',fh.customer_id,'|',fh."source",'|',campos.name) as id,
+    TO_TIMESTAMP(concat(fh."year",' ',fh."month") ,'YYYY MM') as periodo,
     fh.customer_id as customer_id,
     fh."source" as fonte,
     campos.name as filtro,
@@ -14,9 +16,16 @@ view: search_filtros {
     and service_id = 19 -- search
     and id not in(311017,311018,311019,317637,317635,317636,321072,337053,337073,337088,468578,760035,760036,
     760037,760038,760034) -- jsons incompletos, problema
-    group by 1,2,3,4;;
+    group by 1,2,3,4,5;;
   }
 
+  dimension: id {
+    type: string
+    primary_key: yes
+    hidden: yes
+    sql: ${TABLE}.id ;;
+
+  }
   dimension_group: periodo {
     type: time
     timeframes: [
@@ -46,6 +55,11 @@ view: search_filtros {
 
   dimension: qtd {
     type: number
+    sql: ${TABLE}.qtd ;;
+  }
+
+  measure: total {
+    type: sum
     sql: ${TABLE}.qtd ;;
   }
 
