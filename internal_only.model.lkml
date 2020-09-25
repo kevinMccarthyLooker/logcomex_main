@@ -47,6 +47,7 @@ include: "/**/log_integration_ibroker.view.lkml"
 include: "/**/jira_tasks.view.lkml"
 include: "/**/satisfaction_survey_movidesk.view.lkml"
 include: "/**/acessos_produtos.view.lkml"
+include: "/**/search_filtros.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -212,6 +213,12 @@ explore: usage {
   join: tickets_movidesk {
     sql_on: ${tickets_movidesk.id_customer}=${customer.id} ;;
     relationship: many_to_one
+    type: left_outer
+  }
+
+  join: search_filtros{
+    sql_on: ${search_filtros.customer} = ${customer.id};;
+    relationship: one_to_many
     type: left_outer
   }
 
