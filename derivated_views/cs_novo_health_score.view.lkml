@@ -197,8 +197,8 @@ where current_date between cp.start and cp.expiration
 
   dimension: healthScore_Total {
     type: number
-    sql: coalesce(((coalesce(${TABLE}.usab_big_search,${TABLE}.usab_tracking) +
-          coalesce(${TABLE}.usab_tracking,${TABLE}.usab_big_search)),0)/2) +
+    sql: coalesce((coalesce(${TABLE}.usab_big_search,${TABLE}.usab_tracking) +
+          coalesce(${TABLE}.usab_tracking,${TABLE}.usab_big_search)),0)/2 +
           ${TABLE}.acessos_usuarios +
           ${TABLE}.pontos_qtd_tickets +
           ${TABLE}.satisfaction;;
