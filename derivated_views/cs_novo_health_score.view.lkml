@@ -195,5 +195,24 @@ where current_date between cp.start and cp.expiration
     sql: ${TABLE}.satisfaction ;;
   }
 
+  dimension: healthScore_Total {
+    type: number
+    sql: ((coalesce(${TABLE}.usab_big_search,${TABLE}.usab_tracking) +
+          coalesce(${TABLE}.usab_tracking,${TABLE}.usab_big_search))/2) +
+          ${TABLE}.acessos_usuarios +
+          ${TABLE}.pontos_qtd_tickets +
+          ${TABLE}.satisfaction;;
+  }
+
+  dimension: healthScore_Status {
+    type: string
+    sql:  case
+           when ${healthScore_Total} < 50 then 'Vermelho'
+           when ${healthScore_Total} between 50 and 70 then 'Amarelo'
+           when ${healthScore_Total} > 70 then 'Verde'
+          end
+           ;;
+  }
+
 
 }
