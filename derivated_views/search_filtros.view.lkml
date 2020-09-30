@@ -43,10 +43,26 @@ view: search_filtros {
     sql: ${TABLE}.customer_id ;;
   }
 
-  dimension: fonte {
+  dimension: source {
     type: string
     sql: ${TABLE}.fonte ;;
   }
+
+  dimension: fonte {
+    type: string
+    sql: case
+          when ${TABLE}.fonte = 'filter' then 'Filtro Lateral'
+          when ${TABLE}.fonte = 'UNKNOWN' then 'API'
+          when ${TABLE}.fonte = 'recent_search' then 'Busca Recente'
+          when ${TABLE}.fonte = 'quick_filter' then 'Quick Filter'
+          when ${TABLE}.fonte = 'load_url' then 'URL Compartilhada'
+          when ${TABLE}.fonte = 'home' then 'Página Inicial'
+          when ${TABLE}.fonte = 'home_saved_filter' then 'Filtro Salvo'
+          else 'Erro'
+          end
+          ;;
+  }
+
 
   dimension: filtro {
     type: string
