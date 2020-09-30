@@ -28,6 +28,7 @@ include: "/**/customer_api_relations.view.lkml"
 include: "/**/billing_contract_omie.view.lkml"
 include: "/**/service_order_omie.view.lkml"
 include: "/**/NPS.view.lkml"
+include: "/**/nps_08_2020.view.lkml"
 include: "/**/clientes_ativos_por_mes.view.lkml"
 include: "/**/customer_block_status.view.lkml"
 include: "/**/customer_blocked_history.view.lkml"
@@ -47,6 +48,7 @@ include: "/**/jira_tasks.view.lkml"
 include: "/**/satisfaction_survey_movidesk.view.lkml"
 include: "/**/acessos_produtos.view.lkml"
 include: "/**/tracking_plan_info.view.lkml"
+include: "/**/search_filtros.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -161,8 +163,8 @@ explore: usage {
 
   join: cs_novo_health_score{
     sql_on: ${customer.id}=${cs_novo_health_score.customer_id} ;;
-    relationship: one_to_many
-    type: left_outer
+    relationship: one_to_one
+    type: inner
   }
 
   join: cs_healthscore_accesslog{
@@ -215,6 +217,12 @@ explore: usage {
     type: left_outer
   }
 
+  join: search_filtros{
+    sql_on: ${search_filtros.customer} = ${customer.id};;
+    relationship: one_to_many
+    type: left_outer
+  }
+
   join: jira_tasks {
     sql_on: ${jira_tasks.tickets_movidesk_id} = ${tickets_movidesk.id_ticket_movidesk} ;;
     relationship: many_to_one
@@ -230,6 +238,12 @@ explore: usage {
 
   join: nps {
     sql_on: ${users.email}=${nps.email} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: nps_08_2020 {
+    sql_on: ${users.email}=${nps_08_2020.email} ;;
     relationship: one_to_many
     type: left_outer
   }
