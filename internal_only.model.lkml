@@ -47,6 +47,7 @@ include: "/**/log_integration_ibroker.view.lkml"
 include: "/**/jira_tasks.view.lkml"
 include: "/**/satisfaction_survey_movidesk.view.lkml"
 include: "/**/acessos_produtos.view.lkml"
+include: "/**/tracking_plan_info.view.lkml"
 include: "/**/search_filtros.view.lkml"
 
 datagroup: my_datagroup {
@@ -322,6 +323,12 @@ explore: usage {
     view_label: "Plan Complete"
     sql_on:${plan_complete.plan_id}=${plan.id} ;;
     relationship: many_to_one
+    type: left_outer
+  }
+
+  join: tracking_plan_info {
+    sql_on: ${tracking_plan_info.id}=${customer_plan.tracking_plan_info_id} ;;
+    relationship: one_to_many
     type: left_outer
   }
 

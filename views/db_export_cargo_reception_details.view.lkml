@@ -324,4 +324,11 @@ view: db_export_cargo_reception_details {
     type: count
     drill_fields: [id]
   }
+
+  measure: count_distinct_ce {
+    type: count_distinct
+    sql: ${TABLE}."nrcemercante" ;;
+    drill_fields: [id]
+  }
+
 }
