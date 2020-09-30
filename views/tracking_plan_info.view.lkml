@@ -43,8 +43,10 @@ view: tracking_plan_info {
 
   dimension: force_certificate {
     type: yesno
-    sql: ${TABLE}."force_certificate" ;;
-  }
+    sql:  CASE WHEN (${TABLE}."force_certificate" is false) THEN false
+    else true end
+    ;;
+    }
 
   dimension: monthly_bl {
     type: number
