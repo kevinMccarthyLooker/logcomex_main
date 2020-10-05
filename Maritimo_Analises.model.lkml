@@ -31,7 +31,7 @@ explore: db_export_cargo_reception_details {
   join: db_export_cargo_reception_nf {
     relationship: many_to_one
     sql_on: ${db_export_cargo_reception_nf.id_exp_cargo_details} = ${db_export_cargo_reception_details.id} ;;
-    type: inner
+    type: left_outer
 
   }
 
@@ -39,14 +39,14 @@ explore: db_export_cargo_reception_details {
     relationship: many_to_one
     sql_on: ${db_export_cargo_reception_nf_itens.id_exp_cargo_details} = ${db_export_cargo_reception_details.id}
             and ${db_export_cargo_reception_nf_itens.id_nf} = ${db_export_cargo_reception_nf.id_nf};;
-    type: inner
+    type: left_outer
   }
 
   join: db_export_cargo_reception_fcl  {
     relationship: many_to_one
     sql_on: ${db_export_cargo_reception_fcl.id_exp_cargo_details} = ${db_export_cargo_reception_details.id}
             and ${db_export_cargo_reception_fcl.id_nf} = ${db_export_cargo_reception_nf.id_nf} ;;
-    type: inner
+    type: left_outer
   }
 
 
