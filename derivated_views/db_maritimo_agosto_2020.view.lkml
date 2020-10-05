@@ -3,7 +3,7 @@ view: db_maritimo_agosto_2020 {
   derived_table: {
 
     sql: select *
-         from sistema.db_maritimo
+         from db_maritimo
          where categoriacarga = 'E' and dtoperacao >= '2020/08/01' and dtoperacao < '2020/09/01' ;;
 
   }
