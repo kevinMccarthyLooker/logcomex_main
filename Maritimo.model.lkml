@@ -29,10 +29,6 @@ explore:crescimento_consignatario  {
   label: "Crescimento do Consignatario"
 }
 
-explore:db_maritimo_agosto_2020  {
-  label: "DB MARITIMO AGOSTO 2020"
-}
-
 explore: health_data {}
 explore: health_data_exp {}
 explore: cs_dash_imp {}
