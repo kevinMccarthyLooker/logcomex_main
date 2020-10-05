@@ -13,7 +13,7 @@ explore:db_maritimo_agosto_2020  {
 }
 
 explore: db_maritimo {
-  label: "DB MARITIMO AGO 2020 INNER EXPORT CARGO DETAILS"
+  label: "DB MARITIMO INNER CARGO DETAILS"
   sql_always_where: ${categoriacarga} = 'E' and ${dtoperacao_raw} >= '2020/08/01' and ${dtoperacao_raw} < '2020/09/01';;   # limitando tipo e periodo
 
   join: db_export_cargo_reception_details {
@@ -25,7 +25,7 @@ explore: db_maritimo {
 
 
 explore: db_export_cargo_reception_details {
-  label: "Cargo Reception Details Inner NF INNER ITENS inner FCL"
+  label: "CARGO DETAILS INNER NF INNER FCL"
   sql_always_where: ${filter_date} >= '2020/08/01' and ${filter_date} < '2020/09/01' ;;
 
   join: db_export_cargo_reception_nf {
