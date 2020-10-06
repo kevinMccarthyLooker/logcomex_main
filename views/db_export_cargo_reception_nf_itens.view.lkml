@@ -9,7 +9,7 @@ view: db_export_cargo_reception_nf_itens {
   }
 
   dimension: cdncm_compl {
-    type: number
+    type: string
     sql: ${TABLE}."cdncm_compl" ;;
   }
 
@@ -62,13 +62,13 @@ view: db_export_cargo_reception_nf_itens {
     sql: ${TABLE}."num_item" ;;
   }
 
-  dimension: qtd_estatistica {
-    type: number
+  measure: qtd_estatistica {
+    type: sum
     sql: ${TABLE}."qtd_estatistica" ;;
   }
 
-  dimension: val_tot_bruto {
-    type: number
+  measure: val_tot_bruto {
+    type: sum
     sql: ${TABLE}."val_tot_bruto" ;;
   }
 

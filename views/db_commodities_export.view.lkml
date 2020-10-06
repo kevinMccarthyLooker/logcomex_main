@@ -103,23 +103,23 @@ view: db_commodities_export {
     sql: ${TABLE}."num_subitem" ;;
   }
 
-  dimension: qtd_comerc {
-    type: number
+  measure: qtd_comerc {
+    type: sum
     sql: ${TABLE}."qtd_comerc" ;;
   }
 
-  dimension: qtd_estat {
-    type: number
+  measure: qtd_estat {
+    type: sum
     sql: ${TABLE}."qtd_estat" ;;
   }
 
-  dimension: val_fob_us {
-    type: number
+  measure: val_fob_us {
+    type: sum
     sql: ${TABLE}."val_fob_us" ;;
   }
 
-  dimension: val_peso_liq {
-    type: number
+  measure: val_peso_liq {
+    type: sum
     sql: ${TABLE}."val_peso_liq" ;;
   }
 
