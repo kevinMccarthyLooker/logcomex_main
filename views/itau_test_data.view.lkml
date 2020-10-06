@@ -1,5 +1,5 @@
 view: itau_test_data {
-  sql_table_name: `looker-gsheets-test.looker_serch.itau_test_data`
+  sql_table_name: `looker-gsheets-test.looker_serch.itau_test_data2`
     ;;
 
   dimension: a {
@@ -8,7 +8,7 @@ view: itau_test_data {
   }
 
   dimension: anomes {
-    type: number
+    type: string
     sql: ${TABLE}.anomes ;;
   }
 
@@ -201,4 +201,35 @@ view: itau_test_data {
     type: count
     drill_fields: []
   }
+
+  measure: val_cif_un_us_median {
+    type: median
+    sql: ${TABLE}.val_cif_un_us ;;
+  }
+
+  measure: val_cif_un_us_q10 {
+    type: percentile
+    percentile:  10
+    sql: ${TABLE}.val_cif_un_us ;;
+  }
+
+  measure: val_cif_un_us_q90 {
+    type: percentile
+    percentile:  90
+    sql: ${TABLE}.val_cif_un_us ;;
+  }
+
+  measure: val_cif_un_us_q25 {
+    type: percentile
+    percentile: 25
+    sql: ${TABLE}.val_cif_un_us ;;
+  }
+
+  measure: val_cif_un_us_q75 {
+    type: percentile
+    percentile: 75
+    sql: ${TABLE}.val_cif_un_us ;;
+  }
+
+
 }
