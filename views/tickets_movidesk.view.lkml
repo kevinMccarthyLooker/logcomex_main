@@ -202,7 +202,12 @@ view: tickets_movidesk {
 
   dimension: ticket_squad {
     type: string
-    sql: Coalesce(${TABLE}."squad",'Não Informado');;
+    sql:
+    case
+    when ${TABLE}."squad" isnull  then 'Não Informado'
+    when ${TABLE}."squad" like '' then 'Não Informado'
+    else ${TABLE}."squad"
+    end;;
   }
 
   dimension_group: last_action {
