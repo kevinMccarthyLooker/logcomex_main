@@ -19,11 +19,11 @@ include: "/views/antaqxmaritimo_cab.view.lkml"
 include: "/views/antaqxmaritimo_cab_emb.view.lkml"
 include: "/views/db_export_cargo_reception_details.view.lkml"
 include: "/**/crescimento_consignatario.view.lkml"
+include: "/**/db_maritimo_agosto_2020.view.lkml"
 
 explore: client_documents_by_method {
   label: "Client Documents By Method"
 }
-
 
 explore:crescimento_consignatario  {
   label: "Crescimento do Consignatario"
