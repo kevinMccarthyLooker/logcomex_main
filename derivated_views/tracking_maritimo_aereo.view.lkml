@@ -254,6 +254,14 @@ where tracking_aerial.deleted_at is null
     sql: ${TABLE}."is_master" ;;
   }
 
+  dimension: embarque_tipo {
+    type: string
+    sql: CASE
+         WHEN ${is_master} = 'Yes' then 'MASTER'
+         ELSE 'HOUSE'
+         END;;
+  }
+
   dimension: armador_ciaaerea {
     type: number
     sql: ${TABLE}."armador_ciaaerea" ;;
