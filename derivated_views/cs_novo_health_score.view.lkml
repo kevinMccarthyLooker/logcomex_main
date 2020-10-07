@@ -19,18 +19,18 @@ else null
 end)
 as usab_tracking,
 (case
-when tickets_movi.qtd_tickets = 0 then 20
-when tickets_movi.qtd_tickets isnull then 20
-when tickets_movi.qtd_tickets >= 1 and tickets_movi.qtd_tickets <= 6 then 10
+when tickets_movi.qtd_tickets = 0 then 10
+when tickets_movi.qtd_tickets isnull then 10
+when tickets_movi.qtd_tickets >= 1 and tickets_movi.qtd_tickets <= 6 then 5
 when tickets_movi.qtd_tickets > 6 then 0
 else null
 end)
 as pontos_qtd_tickets,
 (case
-when (survey_movi.positive_negative_response) >= 4 then 20
-when (survey_movi.positive_negative_response) between 3 and 3.9 then 10
+when (survey_movi.positive_negative_response) >= 4 then 10
+when (survey_movi.positive_negative_response) between 3 and 3.9 then 5
 when (survey_movi.positive_negative_response) < 3 then 0
-when (survey_movi.positive_negative_response) isnull then 20 -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
+when (survey_movi.positive_negative_response) isnull then 10 -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
 end)
 as satisfaction,
 (case
@@ -39,7 +39,14 @@ when (case when acessos_usuarios.qtde_120_30_dias = 0 then 0 else round((acessos
 when (case when acessos_usuarios.qtde_120_30_dias = 0 then 0 else round((acessos_usuarios.qtde_ultimos_30_dias::numeric / (acessos_usuarios.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.9 then 0
 else null
 end)
-as acessos_usuarios
+as acessos_usuarios,
+(case
+when (case when crescimento_maritimo.qtde_365_dias = 0 then 0 else round((crescimento_maritimo.qtde_ultimos_30_dias::numeric / (crescimento_maritimo.qtde_365_dias::numeric / 12))::numeric,2) end) > 1 then 20
+when (case when crescimento_maritimo.qtde_365_dias = 0 then 0 else round((crescimento_maritimo.qtde_ultimos_30_dias::numeric / (crescimento_maritimo.qtde_365_dias::numeric / 12))::numeric,2) end) between 0.9 and 1 then 10
+when (case when crescimento_maritimo.qtde_365_dias = 0 then 0 else round((crescimento_maritimo.qtde_ultimos_30_dias::numeric / (crescimento_maritimo.qtde_365_dias::numeric / 12))::numeric,2) end) < 0.9 then 0
+else null
+end)
+as pontos_crescimento_maritimo
 from customer c
 inner join customer_plan cp on cp.customer_id = c.id
 inner join plan_complete pc on cp.plan_complete_id = pc.id
@@ -56,7 +63,7 @@ from(
       inner join report_log on users.id = report_log.user_id
       inner join customer_plan on customer_plan.customer_id = customer.id
       inner join plan_complete on customer_plan.plan_complete_id = plan_complete.id
-      inner join (select * from service where id <> 5) service on plan_complete.service_id = service.id
+      inner join (select * from service where id <> 5) service on plan_complete.service_id = service.id -- dados do big data , diferente de 5, pois 5 é tracking
     where report_log.created_at >= current_date - interval '120' day
     and (current_date between customer_plan.start and customer_plan.expiration)
     and customer.deleted_at is null
@@ -73,7 +80,7 @@ from(
     inner join filter_history fh on users.id = fh.user_id
     inner join customer_plan on customer_plan.customer_id = customer.id
     inner join plan_complete on customer_plan.plan_complete_id = plan_complete.id
-    inner join (select * from service where id = 19) service on plan_complete.service_id = service.id
+    inner join (select * from service where id = 19) service on plan_complete.service_id = service.id -- dados do search
   where fh.created_at >= current_date - interval '120' day
     and (current_date between customer_plan.start and customer_plan.expiration)
     and customer.deleted_at is null
@@ -137,7 +144,7 @@ left join(  -- adicionando dados dos tickets movidesk
 select tm.id_customer,
 count(*) as qtd_tickets
 from tickets_movidesk tm
-  left join customer on customer.id = tm.id_customer
+left join customer on customer.id = tm.id_customer
 where tm.created_date >= current_date - interval '30' day
 group by 1
        ) as tickets_movi on tickets_movi.id_customer = c.id
@@ -147,6 +154,24 @@ from satisfaction_survey_movidesk ssm
 inner join tickets_movidesk tm on tm.id = ssm.tickets_movidesk_id
 group by tm.id_customer
        ) as survey_movi on survey_movi.id_customer = c.id
+left join ( -- adicionando crescimento do cliente maritimo
+select
+cdconsignatario,
+count(*),
+count(case when (dtemissao >= current_date - interval '30 days') then 1 end) as qtde_ultimos_30_dias,
+count(case when (dtemissao < current_date - interval '30 days') then 1 end) as qtde_365_dias
+from
+(select id,
+cdconsignatario,
+dtemissao
+from sistema.db_maritimo dm
+where dm.tipoconhecimento in ('10','12','15') -- direto, house, sub
+and dm.cdconsignatario is not null -- retirando consignatarios nulos
+and cdconsignatario in (select cnpj from customer where fake_customer is false)
+and dtemissao >= current_date - interval '395' day -- ultimo mes e 365 dias antes
+) as q1
+group by cdconsignatario
+) as crescimento_maritimo on crescimento_maritimo.cdconsignatario = c.cnpj
 where current_date between cp.start and cp.expiration
   and c.deleted_at is null
   and cp.deleted_at is null
@@ -193,6 +218,11 @@ where current_date between cp.start and cp.expiration
   dimension: pontuacao_survey {
     type: number
     sql: ${TABLE}.satisfaction ;;
+  }
+
+  dimension: pontos_crescimento_maritimo {
+    type: number
+    sql: ${TABLE}.pontos_crescimento_maritimo ;;
   }
 
   dimension: healthScore_Total {
