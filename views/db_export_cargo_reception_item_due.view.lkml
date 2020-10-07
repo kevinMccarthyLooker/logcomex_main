@@ -1,5 +1,5 @@
-view: db_export_cargo_reception_nf_itens {
-  sql_table_name: public.db_export_cargo_reception_nf_itens ;;
+view: db_export_cargo_reception_item_due {
+  sql_table_name: public.db_export_cargo_reception_item_due ;;
   drill_fields: [id]
 
   dimension: id {
@@ -9,18 +9,13 @@ view: db_export_cargo_reception_nf_itens {
   }
 
   dimension: cdncm_compl {
-    type: string
+    type: number
     sql: ${TABLE}."cdncm_compl" ;;
   }
 
-  dimension: cfop {
-    type: number
-    sql: ${TABLE}."cfop" ;;
-  }
-
-  dimension: cod_produto {
+  dimension: conteiner {
     type: string
-    sql: ${TABLE}."cod_produto" ;;
+    sql: ${TABLE}."conteiner" ;;
   }
 
   dimension_group: created {
@@ -42,9 +37,9 @@ view: db_export_cargo_reception_nf_itens {
     sql: ${TABLE}."descr_ncm" ;;
   }
 
-  dimension: descricao {
-    type: string
-    sql: ${TABLE}."descricao" ;;
+  dimension: id_due {
+    type: number
+    sql: ${TABLE}."id_due" ;;
   }
 
   dimension: id_exp_cargo_details {
@@ -52,9 +47,19 @@ view: db_export_cargo_reception_nf_itens {
     sql: ${TABLE}."id_exp_cargo_details" ;;
   }
 
-  dimension: id_nf {
+  dimension: id_item {
     type: number
-    sql: ${TABLE}."id_nf" ;;
+    sql: ${TABLE}."id_item" ;;
+  }
+
+  dimension: identificacao {
+    type: number
+    sql: ${TABLE}."identificacao" ;;
+  }
+
+  dimension: num_due {
+    type: string
+    sql: ${TABLE}."num_due" ;;
   }
 
   dimension: num_item {
@@ -62,14 +67,14 @@ view: db_export_cargo_reception_nf_itens {
     sql: ${TABLE}."num_item" ;;
   }
 
-  measure: qtd_estatistica {
-    type: sum
-    sql: ${TABLE}."qtd_estatistica" ;;
+  dimension: qtd_export {
+    type: number
+    sql: ${TABLE}."qtd_export" ;;
   }
 
-  measure: val_tot_bruto {
-    type: sum
-    sql: ${TABLE}."val_tot_bruto" ;;
+  dimension: tara {
+    type: number
+    sql: ${TABLE}."tara" ;;
   }
 
   measure: count {

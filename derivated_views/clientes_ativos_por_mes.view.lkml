@@ -19,6 +19,15 @@ view: clientes_ativos_por_mes {
     drill_fields: [detail*]
   }
 
+  dimension: quarter {
+    type: string
+      sql:  CASE  WHEN (${TABLE}."anomes" = '2020-03-31') THEN 'Q1'
+                  WHEN (${TABLE}."anomes" = '2020-06-30') THEN 'Q2'
+                  WHEN (${TABLE}."anomes" = '2020-09-30') THEN 'Q3'
+                  ELSE 'N/A' end
+    ;;
+    }
+
   measure: count_ativos_mes {
     type: count_distinct
     sql: ${TABLE}."customer_id_measure" ;;
