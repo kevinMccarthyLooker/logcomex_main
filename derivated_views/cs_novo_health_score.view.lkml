@@ -19,18 +19,18 @@ else null
 end)
 as usab_tracking,
 (case
-when tickets_movi.qtd_tickets = 0 then 10
-when tickets_movi.qtd_tickets isnull then 10
-when tickets_movi.qtd_tickets >= 1 and tickets_movi.qtd_tickets <= 6 then 5
+when tickets_movi.qtd_tickets = 0 then 20
+when tickets_movi.qtd_tickets isnull then 20
+when tickets_movi.qtd_tickets >= 1 and tickets_movi.qtd_tickets <= 6 then 10
 when tickets_movi.qtd_tickets > 6 then 0
 else null
 end)
 as pontos_qtd_tickets,
 (case
-when (survey_movi.positive_negative_response) >= 4 then 10
-when (survey_movi.positive_negative_response) between 3 and 3.9 then 5
+when (survey_movi.positive_negative_response) >= 4 then 20
+when (survey_movi.positive_negative_response) between 3 and 3.9 then 10
 when (survey_movi.positive_negative_response) < 3 then 0
-when (survey_movi.positive_negative_response) isnull then 10 -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
+when (survey_movi.positive_negative_response) isnull then 20 -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
 end)
 as satisfaction,
 (case
