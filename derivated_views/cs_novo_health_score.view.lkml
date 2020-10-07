@@ -41,12 +41,12 @@ else null
 end)
 as acessos_usuarios,
 (case
-when (case when crescimento_maritimo.qtde_365_dias = 0 then 0 else round((crescimento_maritimo.qtde_ultimos_30_dias::numeric / (crescimento_maritimo.qtde_365_dias::numeric / 12))::numeric,2) end) > 1 then 20
-when (case when crescimento_maritimo.qtde_365_dias = 0 then 0 else round((crescimento_maritimo.qtde_ultimos_30_dias::numeric / (crescimento_maritimo.qtde_365_dias::numeric / 12))::numeric,2) end) between 0.9 and 1 then 10
-when (case when crescimento_maritimo.qtde_365_dias = 0 then 0 else round((crescimento_maritimo.qtde_ultimos_30_dias::numeric / (crescimento_maritimo.qtde_365_dias::numeric / 12))::numeric,2) end) < 0.9 then 0
+when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) > 1 then 20
+when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) between 0.9 and 1 then 10
+when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) < 0.9 then 0
 else null
 end)
-as pontos_crescimento_maritimo
+as pontos_crescimento_cliente
 from customer c
 inner join customer_plan cp on cp.customer_id = c.id
 inner join plan_complete pc on cp.plan_complete_id = pc.id
@@ -154,7 +154,7 @@ from satisfaction_survey_movidesk ssm
 inner join tickets_movidesk tm on tm.id = ssm.tickets_movidesk_id
 group by tm.id_customer
        ) as survey_movi on survey_movi.id_customer = c.id
-left join ( -- adicionando crescimento do cliente maritimo
+left join ( -- adicionando crescimento do cliente maritimo e aereo
 select
 cdconsignatario,
 count(*),
@@ -167,11 +167,19 @@ dtemissao
 from sistema.db_maritimo dm
 where dm.tipoconhecimento in ('10','12','15') -- direto, house, sub
 and dm.cdconsignatario is not null -- retirando consignatarios nulos
-and cdconsignatario in (select cnpj from customer where fake_customer is false)
+and cdconsignatario in (select cnpj from customer where fake_customer is false)--(select cnpj from api.customer where fake_customer is false)
 and dtemissao >= current_date - interval '395' day -- ultimo mes e 365 dias antes
+union all
+select aad.id as id,
+ac.cnpj as cdconsignatario,
+aad.data_hawb as dtemissao
+from aereo.aereo_awb_details aad
+inner join aereo.aereo_consignatario ac on ac.id = aad.consignatario_id
+where ac.cnpj in (select cnpj from customer where fake_customer is false)
+and aad.data_hawb >= current_date - interval '395' day
 ) as q1
 group by cdconsignatario
-) as crescimento_maritimo on crescimento_maritimo.cdconsignatario = c.cnpj
+) as crescimento_cliente on crescimento_cliente.cdconsignatario = c.cnpj
 where current_date between cp.start and cp.expiration
   and c.deleted_at is null
   and cp.deleted_at is null
@@ -220,9 +228,9 @@ where current_date between cp.start and cp.expiration
     sql: ${TABLE}.satisfaction ;;
   }
 
-  dimension: pontos_crescimento_maritimo {
+  dimension: pontos_crescimento_cliente {
     type: number
-    sql: ${TABLE}.pontos_crescimento_maritimo ;;
+    sql: ${TABLE}.pontos_crescimento_cliente ;;
   }
 
   dimension: healthScore_Total {
