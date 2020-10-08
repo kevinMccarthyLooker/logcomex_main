@@ -179,7 +179,7 @@ where ac.cnpj in (select cnpj from customer where fake_customer is false)
 and aad.data_hawb >= current_date - interval '395' day
 ) as q1
 group by cdconsignatario
-) as crescimento_cliente on crescimento_cliente.cdconsignatario = c.cnpj
+) as crescimento_cliente on left(crescimento_cliente.cdconsignatario,8)= left(c.cnpj,8) -- primeiros 8 digitos para considerar filiais
 where current_date between cp.start and cp.expiration
   and c.deleted_at is null
   and cp.deleted_at is null
