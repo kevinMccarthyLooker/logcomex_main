@@ -8,7 +8,7 @@ view: nova_base_nvocc {
               consignatario_final,
               consolidador,
               nmempresanavegacao,
-              monyh_year as mes_ano,
+              month_year as mes_ano,
               data_operacao,
               tipoconhecimento,
               cod_porto_descarga,
