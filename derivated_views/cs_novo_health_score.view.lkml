@@ -5,6 +5,7 @@ derived_table: {
     select distinct
 c.id as customer_id,
 (case
+when (big_search.qtde_120_30_dias = 0 and big_search.qtde_ultimos_30_dias > 0) then 10 -- cliente voltou a usar nos ultimo 30 dias
 when (case when big_search.qtde_120_30_dias = 0 then 0 else round((big_search.qtde_ultimos_30_dias::numeric / (big_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
 when (case when big_search.qtde_120_30_dias = 0 then 0 else round((big_search.qtde_ultimos_30_dias::numeric / (big_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.9 and 1 then 10
 when (case when big_search.qtde_120_30_dias = 0 then 0 else round((big_search.qtde_ultimos_30_dias::numeric / (big_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.9 then 0
@@ -12,6 +13,7 @@ else null
 end)
 as usab_big_search,
 (case
+when (tracking.qtde_120_30_dias = 0 and tracking.qtde_ultimos_30_dias > 0) then 10 -- cliente voltou a usar nos ultimo 30 dias
 when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_ultimos_30_dias::numeric / (tracking.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
 when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_ultimos_30_dias::numeric / (tracking.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.9 and 1 then 10
 when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_ultimos_30_dias::numeric / (tracking.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.9 then 0
@@ -34,6 +36,7 @@ when (survey_movi.positive_negative_response) isnull then 20 -- nunca respondeu 
 end)
 as satisfaction,
 (case
+--when (acessos_usuarios.qtde_120_30_dias = 0 and acessos_usuarios.qtde_ultimos_30_dias > 0) then 10 --cliente voltou a acessar nos ultimos 30 dias
 when (case when acessos_usuarios.qtde_120_30_dias = 0 then 0 else round((acessos_usuarios.qtde_ultimos_30_dias::numeric / (acessos_usuarios.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
 when (case when acessos_usuarios.qtde_120_30_dias = 0 then 0 else round((acessos_usuarios.qtde_ultimos_30_dias::numeric / (acessos_usuarios.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.9 and 1 then 10
 when (case when acessos_usuarios.qtde_120_30_dias = 0 then 0 else round((acessos_usuarios.qtde_ultimos_30_dias::numeric / (acessos_usuarios.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.9 then 0
@@ -179,7 +182,7 @@ where ac.cnpj in (select cnpj from customer where fake_customer is false)
 and aad.data_hawb >= current_date - interval '395' day
 ) as q1
 group by cdconsignatario
-) as crescimento_cliente on crescimento_cliente.cdconsignatario = c.cnpj
+) as crescimento_cliente on left(crescimento_cliente.cdconsignatario,8) = left(c.cnpj,8)
 where current_date between cp.start and cp.expiration
   and c.deleted_at is null
   and cp.deleted_at is null
