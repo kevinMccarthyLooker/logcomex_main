@@ -27,7 +27,6 @@ select 'Big Data' as  produto, -- acessos do big data
     and customer_plan.deleted_at is null
     and plan_complete.deleted_at is null
     and customer.fake_customer is false
-    and customer.id = 10
   group by 1,2,3,4,5,6,7
   union all -- acessos do search
   select 'Search' as produto,
@@ -52,7 +51,6 @@ select 'Big Data' as  produto, -- acessos do big data
     and customer_plan.deleted_at is null
     and plan_complete.deleted_at is null
     and customer.fake_customer is false
-    and customer.id = 10
   group by 1, 2,3,4,5,6,7
   union all
   select 'Tracking' as produto,
@@ -76,7 +74,6 @@ select 'Big Data' as  produto, -- acessos do big data
     and customer_plan.deleted_at is null
     and plan_complete.deleted_at is null
     and customer.fake_customer is false
-    and customer.id = 10
   group by 1,2,3,4,5,6,7) as qq1
  ;;
   }
