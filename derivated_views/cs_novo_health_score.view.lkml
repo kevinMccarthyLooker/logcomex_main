@@ -242,7 +242,7 @@ where current_date between cp.start and cp.expiration
           coalesce(${TABLE}.usab_tracking,${TABLE}.usab_big_search)),0)/2 +
           coalesce(${TABLE}.acessos_usuarios,0) +
           coalesce(${TABLE}.pontos_qtd_tickets,0) +
-          coalesce(${TABLE}.satisfaction,0)
+          coalesce(${TABLE}.satisfaction,0) +
           coalesce(${TABLE}.crescimento_cliente,0);;
   }
 
