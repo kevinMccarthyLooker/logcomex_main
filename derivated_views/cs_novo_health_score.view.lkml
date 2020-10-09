@@ -243,7 +243,7 @@ where current_date between cp.start and cp.expiration
           coalesce(${TABLE}.acessos_usuarios,0) +
           coalesce(${TABLE}.pontos_qtd_tickets,0) +
           coalesce(${TABLE}.satisfaction,0) +
-          coalesce(${TABLE}.crescimento_cliente,0);;
+          coalesce(${TABLE}.pontos_crescimento_cliente,0);;
   }
 
   dimension: healthScore_Status {
