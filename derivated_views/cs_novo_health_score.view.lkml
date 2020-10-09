@@ -21,18 +21,18 @@ else null
 end)
 as usab_tracking,
 (case
-when tickets_movi.qtd_tickets = 0 then 20
-when tickets_movi.qtd_tickets isnull then 20
+when tickets_movi.qtd_tickets = 0 then 15
+when tickets_movi.qtd_tickets isnull then 15
 when tickets_movi.qtd_tickets >= 1 and tickets_movi.qtd_tickets <= 6 then 10
 when tickets_movi.qtd_tickets > 6 then 0
 else null
 end)
 as pontos_qtd_tickets,
 (case
-when (survey_movi.positive_negative_response) >= 4 then 20
-when (survey_movi.positive_negative_response) between 3 and 3.9 then 10
+when (survey_movi.positive_negative_response) >= 4 then 15
+when (survey_movi.positive_negative_response) between 3 and 3.9 then 5
 when (survey_movi.positive_negative_response) < 3 then 0
-when (survey_movi.positive_negative_response) isnull then 20 -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
+when (survey_movi.positive_negative_response) isnull then 15  -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
 end)
 as satisfaction,
 (case
@@ -44,8 +44,8 @@ else null
 end)
 as acessos_usuarios,
 (case
-when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) > 1 then 20
-when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) between 0.9 and 1 then 10
+when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) > 1 then 10
+when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) between 0.9 and 1 then 5
 when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) < 0.9 then 0
 else null
 end)
