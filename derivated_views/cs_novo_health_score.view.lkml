@@ -36,7 +36,7 @@ when (survey_movi.positive_negative_response) isnull then 20 -- nunca respondeu 
 end)
 as satisfaction,
 (case
---when (acessos_usuarios.qtde_120_30_dias = 0 and acessos_usuarios.qtde_ultimos_30_dias > 0) then 10 --cliente voltou a acessar nos ultimos 30 dias
+when (acessos_usuarios.qtde_120_30_dias = 0 and acessos_usuarios.qtde_ultimos_30_dias > 0) then 10 --cliente voltou a acessar nos ultimos 30 dias
 when (case when acessos_usuarios.qtde_120_30_dias = 0 then 0 else round((acessos_usuarios.qtde_ultimos_30_dias::numeric / (acessos_usuarios.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
 when (case when acessos_usuarios.qtde_120_30_dias = 0 then 0 else round((acessos_usuarios.qtde_ultimos_30_dias::numeric / (acessos_usuarios.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.9 and 1 then 10
 when (case when acessos_usuarios.qtde_120_30_dias = 0 then 0 else round((acessos_usuarios.qtde_ultimos_30_dias::numeric / (acessos_usuarios.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.9 then 0
@@ -242,7 +242,8 @@ where current_date between cp.start and cp.expiration
           coalesce(${TABLE}.usab_tracking,${TABLE}.usab_big_search)),0)/2 +
           coalesce(${TABLE}.acessos_usuarios,0) +
           coalesce(${TABLE}.pontos_qtd_tickets,0) +
-          coalesce(${TABLE}.satisfaction,0);;
+          coalesce(${TABLE}.satisfaction,0)
+          coalesce(${TABLE}.crescimento_cliente,0);;
   }
 
   dimension: healthScore_Status {
