@@ -348,6 +348,21 @@ where tracking_aerial.deleted_at is null
     sql: ${TABLE}."last_follow_up" ;;
   }
 
+  dimension_group: last_workflow_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."last_workflow_date" ;;
+  }
+
+
   dimension: last_workflow {
     type: string
     sql: ${TABLE}."last_workflow" ;;
