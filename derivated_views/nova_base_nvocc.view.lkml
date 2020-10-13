@@ -32,7 +32,6 @@ view: nova_base_nvocc {
     ;;
   }
 
-
   dimension: consignatario {
     type: string
     sql: ${TABLE}.consignatario ;;
