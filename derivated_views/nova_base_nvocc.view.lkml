@@ -25,10 +25,12 @@ view: nova_base_nvocc {
       sql: ${TABLE}.embarque ;;
     }
 
-    dimension: nvocc {
-      type: string
-      sql: ${TABLE}.nvocc ;;
-    }
+  dimension: nvocc {
+    type: string
+    sql:  CASE WHEN (${TABLE}.nvocc is null) THEN ''
+          else ${TABLE}.nvocc end
+    ;;
+  }
 
   dimension: consignatario {
     type: string
