@@ -35,8 +35,7 @@ view: tracking_maritimo_aereo {
        tracking.completed_at as completed_at,
        qq2.created_at as last_follow_up,
        qq2.comment as last_workflow,
-       qq2.date_time as last_workflow_date,
-       tracking.operation_date as operation_date
+       qq2.date_time as last_workflow_date
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
 inner join tracking_internal_status on tracking.internal_status_id = tracking_internal_status.id
@@ -91,8 +90,7 @@ select 'Aereo' as modal,
        '2000-01-01' as completed_at,
        qq2.created_at as last_follow_up,
        qq2.comment as last_workflow,
-       qq2.date_time as last_workflow_date,
-       '2000-01-01' as operation_date
+       qq2.date_time as last_workflow_date
 from tracking_aerial
 inner join tracking_aerial_status on tracking_aerial.tracking_aerial_status_id = tracking_aerial_status.id
 inner join tracking_aerial_internal_status on tracking_aerial.internal_status = tracking_aerial_internal_status.id
@@ -494,13 +492,6 @@ where tracking_aerial.deleted_at is null
       year
     ]
     sql: ${TABLE}."completed_at" ;;
-  }
-
-  dimension_group: tempo_status {
-    type: duration
-    sql_start: ${TABLE}.operation_date;;
-    sql_end: now();;
-    intervals: [day, hour, minute]
   }
 
   measure: count {
