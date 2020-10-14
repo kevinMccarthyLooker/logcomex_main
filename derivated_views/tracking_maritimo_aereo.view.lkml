@@ -550,6 +550,12 @@ where tracking_aerial.deleted_at is null
     convert_tz: no
   }
 
+  measure: avg_last_exec {
+    type: average_distinct
+    sql_distinct_key: ${chave} ;;
+    sql: ${days_last_execution} ;;
+  }
+
     set: detail {
     fields: [customer_id, customer.name, status, internal_status, created_raw, token]
   }
