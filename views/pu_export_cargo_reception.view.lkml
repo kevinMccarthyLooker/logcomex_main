@@ -109,8 +109,24 @@ view: pu_export_cargo_reception {
     sql: ${TABLE}."urf_ra_code" ;;
   }
 
-  measure: count {
-    type: count
+  measure: count_filtros {
+    type: count_distinct
+    sql:  ${id} ;;
     drill_fields: [id, pu_export_cargo_reception_detail.count]
   }
+
+  measure: count_filtros_com_recinto {
+    type: count_distinct
+    sql:  ${id} ;;
+    filters: [urf_ra_code : "-NULL"]
+    drill_fields: [id, pu_export_cargo_reception_detail.count]
+  }
+
+  measure: count_filtros_sem_recinto {
+    type: count_distinct
+    sql:  ${id} ;;
+    filters: [urf_ra_code : "NULL"]
+    drill_fields: [id, pu_export_cargo_reception_detail.count]
+  }
+
 }

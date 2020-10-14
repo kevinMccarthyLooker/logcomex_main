@@ -105,8 +105,71 @@ view: pu_export_cargo_reception_detail {
     sql: ${TABLE}."year" ;;
   }
 
-  measure: count {
+  measure: detalhes_count {
     type: count
     drill_fields: [id, pu_export_cargo_reception.id]
   }
+
+  measure: processados_via_jsondata {
+    type: count
+    filters: [json_data : "-NULL"]
+    drill_fields: [id, pu_export_cargo_reception.id]
+  }
+
+  measure: percent_processado {
+    type: number
+    value_format_name: percent_2
+    sql: 1.0* ${processados_via_jsondata} / ${detalhes_count} ;;
+  }
+
+  measure: processados_via_processed_at {
+    type: count
+    filters: [processed_date: "-NULL"]
+    drill_fields: [id, pu_export_cargo_reception.id]
+  }
+
+  measure: nao_processados {
+    type: count
+    filters: [json_data : "NULL", has_error: "no"]
+    drill_fields: [id, pu_export_cargo_reception.id]
+  }
+
+  measure: percent_nao_processado {
+    type: number
+    value_format_name: percent_2
+    sql: 1.0* ${nao_processados} / ${detalhes_count} ;;
+  }
+
+  measure: com_erros {
+    type: count
+    filters: [has_error: "yes"]
+    drill_fields: [id, pu_export_cargo_reception.id]
+  }
+
+  measure: percent_erros {
+    type: number
+    value_format_name: percent_2
+    sql: 1.0* ${com_erros} / ${detalhes_count} ;;
+  }
+
+  measure: seq_nao_obtidos {
+    type: number
+    sql: ${max_sequencial} - ${min_sequencial} - ${detalhes_count} ;;
+  }
+
+  measure: min_sequencial {
+    type:  min
+    sql: ${sequential_number} ;;
+  }
+
+  measure: max_sequencial {
+    type:  max
+    sql: ${sequential_number} ;;
+  }
+
+  measure: dif_sequencial {
+    type: number
+    sql: ${max_sequencial} - ${min_sequencial} ;;
+  }
+
 }
