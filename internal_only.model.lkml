@@ -392,7 +392,7 @@ explore: usage {
   join: filter_history_user {
     from: filter_history
     view_label: "Search Filter History User"
-    sql_on: ${users.id}=${filter_history.user_id} ;;
+    sql_on: ${users.id}=${filter_history_user.user_id} ;;
     relationship: one_to_many
     type: left_outer
   }
