@@ -33,13 +33,27 @@ view: tracking_maritimo_aereo {
        tracking.load_presence_date as load_presence_date,
        tracking.release_loading_date as release_loading_date,
        tracking.completed_at as completed_at,
-       (select max(follow_up.created_at) from follow_up where tracking.id = follow_up.tracking_id and user_id is null) as last_follow_up,
-       'TESTE' as last_workflow
-       --(select "comment" from follow_up where follow_up.id = (select max(follow_up.id) from follow_up
-      -- where created_at = (select max(follow_up.created_at) from follow_up where tracking.id = follow_up.tracking_id and user_id is null))) as last_workflow -- em teste
+       qq2.created_at as last_follow_up,
+       qq2.comment as last_workflow,
+       qq2.date_time as last_workflow_date
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
 inner join tracking_internal_status on tracking.internal_status_id = tracking_internal_status.id
+left join(
+select
+fu.tracking_id,
+qq1.created_at,
+fu."comment",
+fu.date_time
+from follow_up fu
+inner join(
+select max(fu2.date_time) as date_time,
+max(fu2.created_at) as created_at,
+fu2.tracking_id as tracking_id
+from follow_up fu2
+where fu2.user_id is null --and tracking_id = 637393
+group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_id = fu.tracking_id
+where fu.tracking_id is not null) as qq2 on qq2.tracking_id = tracking.id
 where tracking.deleted_at is null
 union
 select 'Aereo' as modal,
@@ -74,13 +88,27 @@ select 'Aereo' as modal,
        '2000-01-01' as load_presence_date,
        '2000-01-01' as release_loading_date,
        '2000-01-01' as completed_at,
-       (select max(follow_up.created_at) from follow_up where tracking_aerial.id = follow_up.tracking_aerial_id and user_id is null) as last_follow_up,
-       'TESTE' as last_workflow
-       --(select "comment" from follow_up where follow_up.id = (select max(follow_up.id) from follow_up
-     --  where created_at = (select max(follow_up.created_at) from follow_up where tracking_aerial.id = follow_up.tracking_aerial_id and user_id is null))) as last_workflow -- em teste
+       qq2.created_at as last_follow_up,
+       qq2.comment as last_workflow,
+       qq2.date_time as last_workflow_date
 from tracking_aerial
 inner join tracking_aerial_status on tracking_aerial.tracking_aerial_status_id = tracking_aerial_status.id
 inner join tracking_aerial_internal_status on tracking_aerial.internal_status = tracking_aerial_internal_status.id
+left join (
+select
+fu.tracking_aerial_id,
+qq1.created_at,
+fu."comment",
+fu.date_time
+from follow_up fu
+inner join(
+select max(fu2.date_time) as date_time,
+max(fu2.created_at) as created_at,
+fu2.tracking_aerial_id as tracking_aerial_id
+from follow_up fu2
+where user_id is null
+group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_aerial_id = fu.tracking_aerial_id
+where fu.tracking_aerial_id is not null) as qq2 on qq2.tracking_aerial_id = tracking_aerial.id
 where tracking_aerial.deleted_at is null
     ;;
   }
@@ -333,6 +361,21 @@ where tracking_aerial.deleted_at is null
     ]
     sql: ${TABLE}."last_follow_up" ;;
   }
+
+  dimension_group: last_workflow_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."last_workflow_date" ;;
+  }
+
 
   dimension: last_workflow {
     type: string
