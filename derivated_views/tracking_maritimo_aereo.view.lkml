@@ -9,7 +9,7 @@ view: tracking_maritimo_aereo {
        tracking.customer_id,
        tracking_status.description as status,
        tracking.bl_number as documento,
-       tracking.ce_number as CE,
+       tracking.ce_number as ce_number,
        tracking.user_id,
        tracking.created_at,
        tracking.updated_at,
@@ -64,7 +64,7 @@ select 'Aereo' as modal,
        customer_id,
        tracking_aerial_status.description as status,
        (coalesce((awb),'') || '-' || coalesce((hwb),'')) as documento,
-       0 as CE,
+       0 as ce_number,
        tracking_aerial.user_id,
        tracking_aerial.created_at,
        tracking_aerial.updated_at,
@@ -153,9 +153,9 @@ where tracking_aerial.deleted_at is null
     sql: ${TABLE}."documento" ;;
   }
 
-  dimension: CE {
-    type: string
-    sql: ${TABLE}."CE" ;;
+  dimension: ce {
+    type: number
+    sql: ${TABLE}.ce_number ;;
   }
 
   dimension: user_id {
