@@ -9,7 +9,7 @@ view: tracking_maritimo_aereo {
        tracking.customer_id,
        tracking_status.description as status,
        tracking.bl_number as documento,
-       tracking.ce_number as CE,
+       tracking.ce_number as ce_number,
        tracking.user_id,
        tracking.created_at,
        tracking.updated_at,
@@ -51,7 +51,7 @@ select max(fu2.date_time) as date_time,
 max(fu2.created_at) as created_at,
 fu2.tracking_id as tracking_id
 from follow_up fu2
-where fu2.user_id is null --and tracking_id = 637393
+where (fu2.user_id is null or fu2.user_id = 7002) -- usuaio utilizado para inserir dados manualmente
 group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_id = fu.tracking_id
 where fu.tracking_id is not null) as qq2 on qq2.tracking_id = tracking.id
 where tracking.deleted_at is null
@@ -64,7 +64,7 @@ select 'Aereo' as modal,
        customer_id,
        tracking_aerial_status.description as status,
        (coalesce((awb),'') || '-' || coalesce((hwb),'')) as documento,
-       0 as CE,
+       0 as ce_number,
        tracking_aerial.user_id,
        tracking_aerial.created_at,
        tracking_aerial.updated_at,
@@ -106,7 +106,7 @@ select max(fu2.date_time) as date_time,
 max(fu2.created_at) as created_at,
 fu2.tracking_aerial_id as tracking_aerial_id
 from follow_up fu2
-where user_id is null
+where (fu2.user_id is null or fu2.user_id = 7002) -- usuaio utilizado para inserir dados manualmente
 group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_aerial_id = fu.tracking_aerial_id
 where fu.tracking_aerial_id is not null) as qq2 on qq2.tracking_aerial_id = tracking_aerial.id
 where tracking_aerial.deleted_at is null
@@ -153,9 +153,9 @@ where tracking_aerial.deleted_at is null
     sql: ${TABLE}."documento" ;;
   }
 
-  dimension: CE {
-    type: string
-    sql: ${TABLE}."CE" ;;
+  dimension: ce {
+    type: number
+    sql: ${TABLE}.ce_number ;;
   }
 
   dimension: user_id {
@@ -548,6 +548,12 @@ where tracking_aerial.deleted_at is null
     type: date
     sql: MAX(${created_date}) ;;
     convert_tz: no
+  }
+
+  measure: avg_last_exec {
+    type: average_distinct
+    sql_distinct_key: ${chave} ;;
+    sql: ${days_last_execution} ;;
   }
 
     set: detail {
