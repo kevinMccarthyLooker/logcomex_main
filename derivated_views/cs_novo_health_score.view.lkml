@@ -29,10 +29,10 @@ else null
 end)
 as pontos_qtd_tickets,
 (case
-when (survey_movi.positive_negative_response) >= 4 then 15
-when (survey_movi.positive_negative_response) between 3 and 3.9 then 5
-when (survey_movi.positive_negative_response) < 3 then 0
-when (survey_movi.positive_negative_response) isnull then 15  -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
+when (survey_movi.value_response) >= 4 then 15
+when (survey_movi.value_response) between 3 and 3.9 then 5
+when (survey_movi.value_response) < 3 then 0
+when (survey_movi.value_response) isnull then 15  -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
 end)
 as satisfaction,
 (case
@@ -152,7 +152,7 @@ where tm.created_date >= current_date - interval '30' day
 group by 1
        ) as tickets_movi on tickets_movi.id_customer = c.id
 left join(  -- adicionando dados das pesquisa de satisfacao movidesk
-select tm.id_customer , avg(ssm.positive_negative_response) as positive_negative_response
+select tm.id_customer , avg(ssm.value_response) as value_response
 from satisfaction_survey_movidesk ssm
 inner join tickets_movidesk tm on tm.id = ssm.tickets_movidesk_id
 group by tm.id_customer
