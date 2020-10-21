@@ -1,11 +1,12 @@
 connection: "db"
 
 include: "/**/customer.view.lkml"
+include: "/**/customer_info.view.lkml"
 include: "/**/nps_08_2020.view.lkml"
 include: "/**/user_profile_customer.view.lkml"
 include: "/**/users.view.lkml"
 include: "/**/cs_novo_health_score.view.lkml"
-include: "*.dashboard.lookml"  # incluindos os dash do tipo lkml para serem visualizado
+include: "/**/external_health_score.dashboard.lookml"  # incluindos os dash do tipo lkml para serem visualizado
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer ;;
@@ -14,6 +15,12 @@ datagroup: my_datagroup {
 explore: customer{
 
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
+
+  join: customer_info {
+    sql_on: ${customer_info.customer_id} = ${customer.id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
 
   join: cs_novo_health_score {
     sql_on: ${customer.id} = ${cs_novo_health_score.customer_id} ;;
