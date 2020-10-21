@@ -311,6 +311,13 @@ explore: usage {
     relationship: many_to_one
     type: left_outer
   }
+
+  join: plan_info {
+    sql_on: ${plan_complete.plan_info_id} = ${plan_info.id};;
+    relationship: many_to_one
+    type: left_outer
+  }
+
   join: service {
     view_label: "Plan Complete"
     sql_on: ${plan_complete.service_id}=${service.id} ;;
