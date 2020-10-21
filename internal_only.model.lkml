@@ -49,6 +49,7 @@ include: "/**/satisfaction_survey_movidesk.view.lkml"
 include: "/**/acessos_produtos.view.lkml"
 include: "/**/tracking_plan_info.view.lkml"
 include: "/**/search_filtros.view.lkml"
+include: "/**/plan_info_derivated.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -296,6 +297,13 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+
+  join: plan_info_derivated {  # view derivada do plano para conseguir pegar os valores correntes dos planos dos clientes
+    sql_on: ${customer_plan.id} = ${plan_info_derivated.customer_plan_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
   join: plan_info_join{
     sql_on: ${customer_plan.id}=${plan_info_join.customer_plan_id} ;;
     relationship: one_to_many
