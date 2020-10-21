@@ -1,4 +1,4 @@
-connection: "db"
+connection: "api"
 
 include: "/**/customer.view.lkml"
 include: "/**/customer_info.view.lkml"
