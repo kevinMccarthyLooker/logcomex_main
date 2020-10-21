@@ -97,9 +97,9 @@ view: plan_info {
     sql: ${TABLE}."update_period" ;;
   }
 
-  dimension: dead_line_month_new_data {
-    type: string
-    sql: ${TABLE}."dead_line_month_new_data" ;;
+  dimension: deadline_month_new_data {
+    type: number
+    sql: ${TABLE}."deadline_month_new_data" ;;
   }
 
   measure: count {
