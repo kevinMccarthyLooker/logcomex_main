@@ -92,6 +92,16 @@ view: plan_info {
     sql: ${TABLE}."filter_possible_guys_limit" ;;
   }
 
+  dimension: update_period {
+    type: string
+    sql: ${TABLE}."update_period" ;;
+  }
+
+  dimension: dead_line_month_new_data {
+    type: string
+    sql: ${TABLE}."dead_line_month_new_data" ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, customer_plan.count, plan_complete.count]
