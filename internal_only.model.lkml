@@ -320,11 +320,11 @@ explore: usage {
     type: left_outer
   }
 
-  join: plan_info {
-    sql_on: coalesce(${customer_plan.plan_info_id},${plan_complete.plan_info_id}) = ${plan_info.id};;
-    relationship: many_to_one
-    type: left_outer
-  }
+ # join: plan_info {
+  #  sql_on: coalesce(${customer_plan.plan_info_id},${plan_complete.plan_info_id}) = ${plan_info.id};;
+  #  relationship: many_to_one
+  #  type: left_outer
+  #}
 
   join: service {
     view_label: "Plan Complete"
