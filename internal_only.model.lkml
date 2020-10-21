@@ -313,7 +313,7 @@ explore: usage {
   }
 
   join: plan_info {
-    sql: ${plan_complete.plan_info_id} = ${plan_info.id};;
+    sql_on: ${plan_complete.plan_info_id} = ${plan_info.id};;
     relationship: many_to_one
     type: left_outer
   }
