@@ -500,6 +500,13 @@ where tracking_aerial.deleted_at is null
     drill_fields: [detail*]
   }
 
+  measure: count_nao_encontrado {
+    type: count_distinct
+    sql: ${chave} ;;
+    filters: [status: "Validando Embarque, Pendente mantra"]
+    drill_fields: [detail*]
+  }
+
   measure: count_last_7_days {
     type: count_distinct
     sql: ${chave} ;;
