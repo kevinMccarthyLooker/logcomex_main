@@ -31,8 +31,8 @@ else 0
 end)::float
 as indice_linhas_excel,
 (case
-when meses_historico <=24 then meses_historico/6
-else meses_historico/180
+when meses_historico <=24 then meses_historico::float/6
+else meses_historico::float/180
 end) as indice_meses_historico,
 usuarios/1::float as indice_usuarios,
 case
@@ -77,8 +77,8 @@ busca_perfil_empresas/25::float as indice_busca_perfil_empresas,
 qtd_excel/5::float as indice_export_excel,
 linhas_excel/1000::float as indice_linhas_excel,
 (case
-when meses_historico <=24 then meses_historico/12
-else meses_historico/365
+when meses_historico <=24 then meses_historico::float/12
+else meses_historico::float/365
 end) as indice_meses_historico,
 usuarios/2::float as indice_usuarios,
 case
@@ -169,8 +169,8 @@ busca_perfil_empresas/400::float as indice_busca_perfil_empresas,
 qtd_excel/100::float as indice_export_excel,
 linhas_excel/20000::float as indice_linhas_excel,
 (case
-when meses_historico <=24 then meses_historico/12
-else meses_historico/365
+when meses_historico <=24 then meses_historico::float/12
+else meses_historico::float/365
 end) as indice_meses_historico,
 usuarios/5::float as indice_usuarios,
 case
@@ -215,8 +215,8 @@ busca_perfil_empresas/1000::float as indice_busca_perfil_empresas,
 qtd_excel/200::float as indice_export_excel,
 linhas_excel/30000::float as indice_linhas_excel,
 (case
-when meses_historico <=24 then meses_historico/24
-else meses_historico/730
+when meses_historico <=24 then meses_historico::float/24
+else meses_historico::float/730
 end) as indice_meses_historico,
 usuarios/5::float as indice_usuarios,
 case
