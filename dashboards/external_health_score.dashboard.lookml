@@ -146,8 +146,8 @@
     height: 10
   - title: Verde >= 70
     name: Verde >= 70
-    model: internal_only
-    explore: usage
+    model: external_health_score
+    explore: customer
     type: single_value
     fields: [customer.id, customer.name, nps_08_2020.media_nota, cs_novo_health_score.healthScore_Total]
     sorts: [nps_08_2020.media_nota desc]
@@ -272,8 +272,8 @@
     height: 2
   - title: Vermelho <  50
     name: Vermelho <  50
-    model: internal_only
-    explore: usage
+    model: external_health_score
+    explore: customer
     type: single_value
     fields: [customer.id, customer.name, nps_08_2020.media_nota, cs_novo_health_score.healthScore_Total]
     sorts: [nps_08_2020.media_nota desc]
@@ -398,8 +398,8 @@
     height: 2
   - title: Amarelo >=50 & < 70
     name: Amarelo >=50 & < 70
-    model: internal_only
-    explore: usage
+    model: external_health_score
+    explore: customer
     type: single_value
     fields: [customer.id, customer.name, nps_08_2020.media_nota, cs_novo_health_score.healthScore_Total]
     sorts: [nps_08_2020.media_nota desc]
@@ -524,8 +524,8 @@
     height: 2
   - title: New Tile
     name: New Tile
-    model: internal_only
-    explore: usage
+    model: external_health_score
+    explore: customer
     type: single_value
     fields: [customer_info.hub_atualizado_em_date]
     fill_fields: [customer_info.hub_atualizado_em_date]
