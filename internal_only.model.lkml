@@ -50,6 +50,10 @@ include: "/**/acessos_produtos.view.lkml"
 include: "/**/tracking_plan_info.view.lkml"
 include: "/**/search_filtros.view.lkml"
 include: "/**/plan_info_derivated.view.lkml"
+include: "/**/bi_filters.view.lkml"
+include: "/**/bi_filters_customer_plan.view.lkml"
+include: "/**/bi_column.view.lkml"
+
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -314,6 +318,21 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+
+  join: bi_filters {
+    sql_on: ${bi_filters_customer_plan.bi_filters_id} = ${bi_filters.id} ;;
+    relationship: many_to_one
+    type: left_outer
+
+  }
+
+  join: bi_column {
+    sql_on: ${bi_filters.bi_column_id} = ${bi_column.id} ;;
+    relationship: one_to_one
+    type: left_outer
+
+  }
+
   join: plan_complete {
     sql_on: ${customer_plan.plan_complete_id}=${plan_complete.id} ;;
     relationship: many_to_one
