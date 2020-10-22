@@ -152,10 +152,19 @@ where tm.created_date >= current_date - interval '30' day
 group by 1
        ) as tickets_movi on tickets_movi.id_customer = c.id
 left join(  -- adicionando dados das pesquisa de satisfacao movidesk
-select tm.id_customer , avg(ssm.value_response) as value_response
+select qq1.id_customer,
+avg(qq1.value_response) as value_response
+from(
+select tm.id_customer,
+(case
+when question_id = 'l8zW' then (case when value_response = 1 then 5 else 1 end )
+when question_id = 'n7rK' then value_response
+else null
+end) as value_response
 from satisfaction_survey_movidesk ssm
-inner join tickets_movidesk tm on tm.id = ssm.tickets_movidesk_id
-group by tm.id_customer
+inner join tickets_movidesk tm on ssm.tickets_movidesk_id = tm.id
+where question_id in ('l8zW','n7rK')) as qq1
+group by qq1.id_customer
        ) as survey_movi on survey_movi.id_customer = c.id
 left join ( -- adicionando crescimento do cliente maritimo e aereo
 select
