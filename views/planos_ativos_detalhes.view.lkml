@@ -123,8 +123,8 @@ busca_perfil_empresas/100::float as indice_busca_perfil_empresas,
 qtd_excel/30::float as indice_export_excel,
 linhas_excel/10000::float as indice_linhas_excel,
 (case
-when meses_historico <=24 then meses_historico/12
-else meses_historico/365
+when meses_historico <=24 then meses_historico::float/12
+else meses_historico::float/365
 end) as indice_meses_historico,
 usuarios/3::float as indice_usuarios,
 case
