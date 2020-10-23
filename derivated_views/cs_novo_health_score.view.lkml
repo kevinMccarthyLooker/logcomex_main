@@ -32,7 +32,7 @@ as pontos_qtd_tickets,
 when (survey_movi.value_response) >= 4 then 15
 when (survey_movi.value_response) between 3 and 3.9 then 5
 when (survey_movi.value_response) < 3 then 0
-when (survey_movi.value_response) isnull then 15  -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
+when (survey_movi.value_response) isnull then 7  -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
 end)
 as satisfaction,
 (case
