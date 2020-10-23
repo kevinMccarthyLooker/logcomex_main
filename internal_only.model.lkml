@@ -45,7 +45,7 @@ include: "/**/consumo_plano_clientes.view.lkml"
 include: "/**/excel_controller.view.lkml"
 include: "/**/log_integration_ibroker.view.lkml"
 include: "/**/jira_tasks.view.lkml"
-include: "/**/satisfaction_survey_movidesk.view.lkml"
+#include: "/**/satisfaction_survey_movidesk.view.lkml"
 include: "/**/acessos_produtos.view.lkml"
 include: "/**/tracking_plan_info.view.lkml"
 include: "/**/search_filtros.view.lkml"
@@ -234,12 +234,12 @@ explore: usage {
     type: left_outer
   }
 
-  join: satisfaction_survey_movidesk{
-    sql_on: ${tickets_movidesk.id_ticket_movidesk} = ${satisfaction_survey_movidesk.tickets_movidesk_id} ;;
-    relationship: one_to_one
-    type: left_outer
+#  join: satisfaction_survey_movidesk{
+ #   sql_on: ${tickets_movidesk.id_ticket_movidesk} = ${satisfaction_survey_movidesk.tickets_movidesk_id} ;;
+  #  relationship: one_to_many
+   # type: left_outer
 
-  }
+  #}
 
   join: nps {
     sql_on: ${users.email}=${nps.email} ;;
