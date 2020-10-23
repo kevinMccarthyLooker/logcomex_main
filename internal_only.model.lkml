@@ -51,7 +51,7 @@ include: "/**/tracking_plan_info.view.lkml"
 include: "/**/search_filtros.view.lkml"
 include: "/**/plan_info_derivated.view.lkml"
 include: "/**/bi_filters.view.lkml"
-include: "/**/bi_column_customer_plan.view.lkml"
+include: "/**/bi_column_customer_plan_derivated.view.lkml"
 include: "/**/bi_column.view.lkml"
 
 
@@ -320,8 +320,8 @@ explore: usage {
     type: left_outer
   }
 
-  join: bi_column_customer_plan{
-    sql_on: ${customer_plan.id}=${bi_column_customer_plan.customer_plan_id} ;;
+  join: bi_column_customer_plan_derivated{
+    sql_on: ${customer_plan.id}=${bi_column_customer_plan_derivated.customer_plan_id} ;;
     relationship: one_to_many
     type: left_outer
   }
