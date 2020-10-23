@@ -326,14 +326,6 @@ explore: usage {
     type: left_outer
   }
 
-  join: bi_column_2 {
-    from: bi_column
-    sql_on: ${bi_column_customer_plan.bi_column_id} = ${bi_column_2.id} ;;
-    relationship: one_to_one
-    type: left_outer
-
-  }
-
   join: bi_filters {
     sql_on: ${bi_filters_customer_plan.bi_filters_id} = ${bi_filters.id} ;;
     relationship: many_to_one
