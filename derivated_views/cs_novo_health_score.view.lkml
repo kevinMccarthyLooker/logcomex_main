@@ -182,7 +182,7 @@ count(case when (dtemissao >= current_date - interval '30 days') then 1 end) as 
 count(case when (dtemissao < current_date - interval '30 days') then 1 end) as qtde_365_dias
 from
 (select id,
-cdconsignatario,
+left(cdconsignatario,8) as cdconsignatario,
 dtemissao
 from sistema.db_maritimo dm
 where dm.tipoconhecimento in ('10','12','15') -- direto, house, sub
@@ -191,7 +191,7 @@ and cdconsignatario in (select cnpj from customer where fake_customer is false)-
 and dtemissao >= current_date - interval '395' day -- ultimo mes e 365 dias antes
 union all
 select aad.id as id,
-ac.cnpj as cdconsignatario,
+left(ac.cnpj,8) as cdconsignatario,
 aad.data_hawb as dtemissao
 from aereo.aereo_awb_details aad
 inner join aereo.aereo_consignatario ac on ac.id = aad.consignatario_id
@@ -199,7 +199,7 @@ where ac.cnpj in (select cnpj from customer where fake_customer is false)
 and aad.data_hawb >= current_date - interval '395' day
 ) as q1
 group by cdconsignatario
-) as crescimento_cliente on left(crescimento_cliente.cdconsignatario,8) = left(c.cnpj,8)
+) as crescimento_cliente on crescimento_cliente.cdconsignatario = left(c.cnpj,8)
 where current_date between cp.start and cp.expiration
   and c.deleted_at is null
   and cp.deleted_at is null
