@@ -6,12 +6,13 @@ view: antaqxmaritimo {
                                         from view_AntaqMaritimo
                                         where dtoperacao >='2019-01-01'
                                         and categoriacarga = 'I'
+                                        and cdportodescarregamento like 'BR%'
                                         and cdportodescarregamento = c.destino
                                         and LPAD(EXTRACT(MONTH FROM dtoperacao)::TEXT, 2, '0') = a.mes
                                         and extract(year from dtoperacao) = a.ano)
 from antaq_carga c
 inner join antaq_atracacao a on a.idatracacao = c.idatracacao
-where c.tponave = 'LONGO CURSO'
+where c.tpoopercarga like 'LONGO CURSO IMPORTAÇÃO%'
 and c.natucarga = 'CARGA CONTEINERIZADA'
 and c.conteineest = 'CHEIO'
 and length(destino) = 5

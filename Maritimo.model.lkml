@@ -12,10 +12,21 @@ include: "/views/client_documents_by_method.view.lkml"
 include: "/views/health_imp_house_direto.view.lkml"
 include: "/views/health_data_exp.view.lkml"
 include: "/views/antaqxmaritimo_exp.view.lkml"
+include: "/views/db_cad_armador.view.lkml"
+include: "/views/db_maritimo.view.lkml"
+include: "/views/db_ce_mercante.view.lkml"
 include: "/views/antaqxmaritimo_cab.view.lkml"
+include: "/views/antaqxmaritimo_cab_emb.view.lkml"
+include: "/views/db_export_cargo_reception_details.view.lkml"
+include: "/**/crescimento_consignatario.view.lkml"
+include: "/**/db_maritimo_agosto_2020.view.lkml"
 
 explore: client_documents_by_method {
   label: "Client Documents By Method"
+}
+
+explore:crescimento_consignatario  {
+  label: "Crescimento do Consignatario"
 }
 
 explore: health_data {}
@@ -30,8 +41,13 @@ explore: antaqxmaritimo {
 }
 
 explore: antaqxmaritimo_cab {
-  label: "Cab AntaqMaritimo"
+  label: "Cab AntaqMaritimo Desembarcados"
 }
+
+explore: antaqxmaritimo_cab_emb {
+  label: "Cab AntaqMaritimo Embarcados"
+}
+
 explore: view_infografico {
   join: db_siscori_cod_ncm {
     relationship: one_to_one
@@ -43,6 +59,7 @@ explore: view_infografico {
   }
   label: "Infográfico Importação"
 }
+
 explore: view_infografico_exp {
   join: db_siscori_cod_ncm {
     relationship: one_to_one
@@ -53,4 +70,26 @@ explore: view_infografico_exp {
     sql_on: ${db_siscori_incoterm.id} = ${view_infografico_exp.id_incoterm} ;;
   }
   label: "Infográfico Exportação"
+}
+
+explore: db_maritimo {
+  join: db_cad_armador {
+    relationship: many_to_one
+    sql_on: ${db_cad_armador.id} = ${db_maritimo.id_armador} ;;
+  }
+  join: db_export_cargo_reception_details {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_details.nrcemercante} = ${db_maritimo.nrcemercante} ;;
+
+  }
+}
+
+
+explore: db_ce_mercante {
+  label: "Embarques"
+  join: db_maritimo {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${db_maritimo.nrcemercante} = ${db_ce_mercante.numero_ce} ;;
+  }
 }

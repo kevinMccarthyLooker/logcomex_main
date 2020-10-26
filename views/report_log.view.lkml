@@ -23,7 +23,7 @@ view: report_log {
     sql: ${TABLE}."created_at" ;;
   }
 
-  dimension: customer_plan_id {
+    dimension: customer_plan_id {
     type: number
     # hidden: yes
     sql: ${TABLE}."customer_plan_id" ;;
@@ -142,7 +142,13 @@ view: report_log {
     drill_fields: [customer.name, users.name, count]
   }
 
-    measure: total_line_numbers {
+  measure: count_excel_logs_last_6_months {
+    type:  count
+    filters: [report_type_id: "2", created_date: "6 months"]
+    drill_fields: [customer.name, users.name, count]
+  }
+
+  measure: total_line_numbers {
     type: sum
     sql:  ${line_numbers};;
   }

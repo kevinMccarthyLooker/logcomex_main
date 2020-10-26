@@ -85,4 +85,32 @@ view: filter_history {
     type: count
     drill_fields: [id]
   }
+
+  measure: count_consulta {
+    type: count_distinct
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
+
+measure: count_consulta_last_30_days {
+  type: count_distinct
+  filters: [created_date: "30 days"]
+  sql: ${source_hash} ;;
+  drill_fields: [id]
+}
+
+measure: count_consulta_this_month {
+  type: count_distinct
+  filters: [created_date: "this month"]
+  sql: ${source_hash} ;;
+  drill_fields: [id]
+}
+
+  measure: count_consulta_6_months {
+    type: count_distinct
+    filters: [created_date: "6 months"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
+
 }

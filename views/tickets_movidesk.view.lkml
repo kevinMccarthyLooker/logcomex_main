@@ -1,4 +1,6 @@
+
 view: tickets_movidesk {
+
   sql_table_name: public.tickets_movidesk ;;
   drill_fields: [id_ticket_movidesk]
 
@@ -12,6 +14,13 @@ view: tickets_movidesk {
     type: string
     sql: ${TABLE}."category" ;;
   }
+
+  dimension: ticket_category {
+    type: string
+    sql: Coalesce(tickets_movidesk.category,'Não Informado')
+    ;;
+  }
+
 
   dimension_group: ticket_closing_date {
     type: time
@@ -89,14 +98,29 @@ view: tickets_movidesk {
     sql: ${TABLE}."service_first" ;;
   }
 
+  dimension: ticket_service_first {
+    type: string
+    sql: Coalesce(tickets_movidesk.service_first ,'Não Informado');;
+  }
+
   dimension: service_second {
     type: string
     sql: ${TABLE}."service_second" ;;
   }
 
+  dimension: ticket_service_second {
+    type: string
+    sql: Coalesce(tickets_movidesk.service_second ,'Não Informado');;
+  }
+
   dimension: service_third {
     type: string
     sql: ${TABLE}."service_third" ;;
+  }
+
+  dimension: ticket_service_third {
+    type: string
+    sql: Coalesce(tickets_movidesk.service_third ,'Não Informado');;
   }
 
   dimension: subject {
@@ -114,6 +138,7 @@ view: tickets_movidesk {
     sql: case
           when tickets_movidesk.status = 'Fechado' then 'Fechado'
           when tickets_movidesk.status = 'Cancelado' then 'Cancelado'
+          when tickets_movidesk.status = 'Mesclado/Deletado' then 'Cancelado'
           when tickets_movidesk.status is null then 'Cancelado'
           else 'Aberto'
           end
@@ -124,6 +149,20 @@ view: tickets_movidesk {
     type: duration
     sql_start: ${ticket_created_date_raw};;
     sql_end: ${ticket_closing_date_raw} ;;
+    intervals: [day, hour, minute]
+  }
+
+  dimension_group: tempo_aberto_movidesk {
+    type: duration
+    sql_start: ${ticket_created_date_raw};;
+    sql_end: case
+             when tickets_movidesk.status = 'Fechado' then ${ticket_closing_date_raw}
+             when tickets_movidesk.status = 'Cancelado' then ${ticket_closing_date_raw}
+             when tickets_movidesk.status = 'Mesclado/Deletado' then ${ticket_closing_date_raw}
+             when tickets_movidesk.status is null then ${ticket_closing_date_raw}
+             else now()
+             end
+    ;;
     intervals: [day, hour, minute]
   }
 
@@ -145,6 +184,71 @@ view: tickets_movidesk {
     type: string
     sql: ${TABLE}."urgency" ;;
   }
+
+  dimension: ticket_urgency {
+    type: string
+    sql: Coalesce(tickets_movidesk.urgency,'Não Informado');;
+  }
+
+  dimension: ticket_origin {
+    type: string
+    sql: Coalesce(${TABLE}."origin",'Não Informado');;
+  }
+
+  dimension: ticket_owner {
+    type: string
+    sql: Coalesce(${TABLE}."owner",'Não Informado');;
+  }
+
+  dimension: ticket_squad {
+    type: string
+    sql:
+    case
+    when ${TABLE}."squad" isnull  then 'Não Informado'
+    when ${TABLE}."squad" like '' then 'Não Informado'
+    else ${TABLE}."squad"
+    end;;
+  }
+
+  dimension_group: last_action {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."last_action_date" ;;
+  }
+
+  dimension_group: reopened_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."reopened_at" ;;
+  }
+
+  dimension: sla_response_time_min {
+    type: number
+    sql: ${TABLE}.sla_response_time_min;;
+  }
+
+
+  dimension: sla_solution_time_min {
+    type: number
+    sql: ${TABLE}.sla_solution_time_min;;
+  }
+
 
   measure: count {
     type: count
@@ -174,6 +278,14 @@ measure: tempo_medio_fechamento_em_dias {
   sql: ${days_tempo_fechamento} ;;
   value_format: "0.00 \" Days\""
 }
+
+  measure: tempo_mediana_fechamento_em_horas {
+    type: median
+    sql: ${hours_tempo_fechamento};;
+    value_format: "0.0 \" Hours\""
+  }
+
+
 
 # ----- Sets of fields for drilling ------
   set: detail {

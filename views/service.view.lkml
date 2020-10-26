@@ -52,9 +52,11 @@ view: service {
 
   dimension: product {
     case: {
-      when: {label: "SearchX" sql: ${name} in ('Commodities','Leads') ;;}
+      when: {label: "SearchX" sql: ${name} in ('Commodities') ;;}
+      when: {label: "Leads" sql: ${name} in ('Leads') ;;}
       when: {label: "Search" sql: ${name} in ('Search') ;;}
       when: {label: "Tracking" sql: ${name} in ('Tracking') ;;}
+      when: {label: "Siscomex Restituição" sql: ${name} in ('Siscomex Restituição') ;;}
       else: "BI"
     }
   }

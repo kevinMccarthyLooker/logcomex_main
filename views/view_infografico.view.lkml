@@ -1,6 +1,6 @@
 view: view_infografico {
   derived_table: {
-    persist_for: "24 hours"
+    persist_for: "3 hours"
     indexes: ["id"]
     sql: select id, Ano, Mes, anomes, id_cdncm, val_vlme_us_subitem, id_incoterm, tot_val_peso ,val_frete_us_subitem,val_seg_us_subitem,
         pais_origem, pais_aquis
