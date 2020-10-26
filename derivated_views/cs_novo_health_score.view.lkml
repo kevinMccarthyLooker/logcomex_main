@@ -12,6 +12,8 @@ when (case when big_search.qtde_120_30_dias = 0 then 0 else round((big_search.qt
 else null
 end)
 as usab_big_search,
+big_search.qtde_ultimos_30_dias as big_search_qtde_ultimos_30_dias,
+big_search.qtde_120_30_dias as big_search_qtde_120_30_dias,
 (case
 when (tracking.qtde_120_30_dias = 0 and tracking.qtde_ultimos_30_dias > 0) then 10 -- cliente voltou a usar nos ultimo 30 dias
 when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_ultimos_30_dias::numeric / (tracking.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
@@ -20,6 +22,8 @@ when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_u
 else null
 end)
 as usab_tracking,
+tracking.qtde_ultimos_30_dias as tracking_qtde_ultimos_30_dias,
+tracking.qtde_120_30_dias as tracking_qtde_120_30_dias,
 (case
 when tickets_movi.qtd_tickets = 0 then 15
 when tickets_movi.qtd_tickets isnull then 15
@@ -43,13 +47,17 @@ when (case when acessos_usuarios.qtde_120_30_dias = 0 then 0 else round((acessos
 else null
 end)
 as acessos_usuarios,
+acessos_usuarios.qtde_ultimos_30_dias as acessos_usuarios_qtde_ultimos_30_dias,
+acessos_usuarios.qtde_120_30_dias as acessos_usuarios_qtde_120_30_dias,
 (case
 when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) > 1 then 10
 when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) between 0.9 and 1 then 5
 when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) < 0.9 then 0
 else null
 end)
-as pontos_crescimento_cliente
+as pontos_crescimento_cliente,
+crescimento_cliente.qtde_365_dias as crescimento_cliente_qtde_365_dias,
+crescimento_cliente.qtde_ultimos_30_dias as crescimento_cliente_qtde_30_dias
 from customer c
 inner join customer_plan cp on cp.customer_id = c.id
 inner join plan_complete pc on cp.plan_complete_id = pc.id
@@ -220,14 +228,44 @@ where current_date between cp.start and cp.expiration
     sql: ${TABLE}.usab_big_search ;;
   }
 
+  dimension: big_search_qtde_ultimos_30_dias {
+    type: number
+    sql: ${TABLE}.big_search_qtde_ultimos_30_dias ;;
+  }
+
+  dimension: big_search_qtde_120_30_dias {
+    type: number
+    sql: ${TABLE}.big_search_qtde_120_30_dias ;;
+  }
+
   dimension: pontuacao_usab_tracking {
     type: number
     sql: ${TABLE}.usab_tracking ;;
   }
 
+  dimension: tracking_qtde_ultimos_30_dias {
+    type: number
+    sql: ${TABLE}.tracking_qtde_ultimos_30_dias ;;
+  }
+
+  dimension: tracking_qtde_120_30_dias {
+    type: number
+    sql: ${TABLE}.tracking_qtde_120_30_dias ;;
+  }
+
   dimension: pontuacao_acessos_usuarios {
     type: number
     sql: ${TABLE}.acessos_usuarios ;;
+  }
+
+  dimension: acessos_usuarios_qtde_ultimos_30_dias {
+    type: number
+    sql: ${TABLE}.acessos_usuarios_qtde_ultimos_30_dias ;;
+  }
+
+  dimension: acessos_usuarios_qtde_120_30_dias {
+    type: number
+    sql: ${TABLE}.acessos_usuarios_qtde_120_30_dias ;;
   }
 
   dimension: pontuacao_tickets {
@@ -243,6 +281,16 @@ where current_date between cp.start and cp.expiration
   dimension: pontos_crescimento_cliente {
     type: number
     sql: ${TABLE}.pontos_crescimento_cliente ;;
+  }
+
+  dimension: crescimento_cliente_qtde_365_dias {
+    type: number
+    sql: ${TABLE}.crescimento_cliente_qtde_365_dias ;;
+  }
+
+  dimension: crescimento_cliente_qtde_30_dias {
+    type: number
+    sql: ${TABLE}.crescimento_cliente_qtde_30_dias ;;
   }
 
   dimension: healthScore_Total {
