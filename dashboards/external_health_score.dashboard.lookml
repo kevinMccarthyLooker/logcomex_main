@@ -1,5 +1,5 @@
 - dashboard: external_health_score
-  title: Health Score 2 - Em Construcao
+  title: Health Score 2 - Em Construção
   layout: newspaper
   elements:
   - title: Health Score
@@ -133,7 +133,12 @@
           options: {constraints: {min: {type: minimum}, mid: {type: number, value: 0},
               max: {type: maximum}}, mirror: true, reverse: false, stepped: false}},
         bold: false, italic: false, strikethrough: false, fields: [cs_novo_health_score.pontuacao_tickets,
-          cs_novo_health_score.pontuacao_survey]}]
+          cs_novo_health_score.pontuacao_survey]}, {type: equal to, value: 7, background_color: "#FFD95F",
+        font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
+          palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688, options: {constraints: {
+              min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
+            mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
+        strikethrough: false, fields: [cs_novo_health_score.pontuacao_survey]}]
     series_types: {}
     defaults_version: 1
     hidden_fields: [nps_08_2020.media_nota]
@@ -562,10 +567,62 @@
     limit_displayed_rows: false
     defaults_version: 1
     series_types: {}
+    row: 19
+    col: 0
+    width: 4
+    height: 4
+  - title: Detalhes - Cálculo dos Índices
+    name: Detalhes - Cálculo dos Índices
+    model: external_health_score
+    explore: customer
+    type: looker_grid
+    fields: [customer.id, customer.name, customer.executive_name, cs_novo_health_score.big_search_qtde_ultimos_30_dias,
+      cs_novo_health_score.big_search_qtde_120_30_dias, cs_novo_health_score.tracking_qtde_ultimos_30_dias,
+      cs_novo_health_score.tracking_qtde_120_30_dias, cs_novo_health_score.acessos_usuarios_qtde_ultimos_30_dias,
+      cs_novo_health_score.acessos_usuarios_qtde_120_30_dias, cs_novo_health_score.crescimento_cliente_qtde_30_dias,
+      cs_novo_health_score.crescimento_cliente_qtde_365_dias]
+    limit: 500
+    column_limit: 50
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    series_labels:
+      customer.id: ID Cliente
+      customer.name: Cliente
+      cs_novo_health_score.big_search_qtde_ultimos_30_dias: BD e Search - 30 dias
+      cs_novo_health_score.big_search_qtde_120_30_dias: BD e Search - 90 dias
+      cs_novo_health_score.tracking_qtde_ultimos_30_dias: Tracking - 30 dias
+      cs_novo_health_score.tracking_qtde_120_30_dias: Tracking - 90 dias
+      cs_novo_health_score.acessos_usuarios_qtde_ultimos_30_dias: Acessos - 30 dias
+      cs_novo_health_score.acessos_usuarios_qtde_120_30_dias: Acessos - 90 dias
+      cs_novo_health_score.crescimento_cliente_qtde_30_dias: Crescimento - 30 dias
+      cs_novo_health_score.crescimento_cliente_qtde_365_dias: Crescimento - 90 dias
+    series_column_widths:
+      cs_novo_health_score.big_search_qtde_ultimos_30_dias: 177
+      cs_novo_health_score.big_search_qtde_120_30_dias: 162
+    defaults_version: 1
+    listen:
+      Cliente: customer.name
+      Executivo(a): customer.executive_name
     row: 12
     col: 0
-    width: 8
-    height: 6
+    width: 24
+    height: 7
   filters:
   - name: Cliente
     title: Cliente
