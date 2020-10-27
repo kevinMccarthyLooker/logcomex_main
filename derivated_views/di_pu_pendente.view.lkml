@@ -9,6 +9,7 @@ view: di_pu_pendente {
              FROM di_control
         LEFT JOIN di_pu ON di_control.di_number = di_pu.di_number
         WHERE di_control.data_hora_registro >= '2018/01/01'
+        and ("via_transporte" <> 'N/A' or via_transporte is null)
         GROUP BY 1
         ORDER BY 1
          ;;
