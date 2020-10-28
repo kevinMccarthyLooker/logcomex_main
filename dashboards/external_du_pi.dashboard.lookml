@@ -27,7 +27,30 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
+    listen:
+      Importador CNPJ: di_pu.importador_cnpj
     row: 0
     col: 0
     width: 24
     height: 6
+  filters:
+  - name: Importador Nome
+    title: Importador Nome
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    model: test_embed_di
+    explore: di_pu
+    listens_to_filters: []
+    field: di_pu.importador_nome
+  - name: Importador CNPJ
+    title: Importador CNPJ
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    model: test_embed_di
+    explore: di_pu
+    listens_to_filters: []
+    field: di_pu.importador_cnpj
