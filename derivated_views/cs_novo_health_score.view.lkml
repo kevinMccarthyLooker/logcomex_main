@@ -5,15 +5,25 @@ derived_table: {
     select distinct
 c.id as customer_id,
 (case
-when (big_search.qtde_120_30_dias = 0 and big_search.qtde_ultimos_30_dias > 0) then 10 -- cliente voltou a usar nos ultimo 30 dias
-when (case when big_search.qtde_120_30_dias = 0 then 0 else round((big_search.qtde_ultimos_30_dias::numeric / (big_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
-when (case when big_search.qtde_120_30_dias = 0 then 0 else round((big_search.qtde_ultimos_30_dias::numeric / (big_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.8 and 1 then 10
-when (case when big_search.qtde_120_30_dias = 0 then 0 else round((big_search.qtde_ultimos_30_dias::numeric / (big_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.8 then 0
+when (big_data.qtde_120_30_dias = 0 and big_data.qtde_ultimos_30_dias > 0) then 10 -- cliente voltou a usar nos ultimo 30 dias
+when (case when big_data.qtde_120_30_dias = 0 then 0 else round((big_data.qtde_ultimos_30_dias::numeric / (big_data.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
+when (case when big_data.qtde_120_30_dias = 0 then 0 else round((big_data.qtde_ultimos_30_dias::numeric / (big_data.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.8 and 1 then 10
+when (case when big_data.qtde_120_30_dias = 0 then 0 else round((big_data.qtde_ultimos_30_dias::numeric / (big_data.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.8 then 0
 else null
 end)
-as usab_big_search,
-big_search.qtde_ultimos_30_dias as big_search_qtde_ultimos_30_dias,
-big_search.qtde_120_30_dias as big_search_qtde_120_30_dias,
+as usab_big_data,
+big_data.qtde_ultimos_30_dias as big_data_qtde_ultimos_30_dias,
+big_data.qtde_120_30_dias as big_data_qtde_120_30_dias,
+(case
+when (dados_search.qtde_120_30_dias = 0 and dados_search.qtde_ultimos_30_dias > 0) then 10 -- cliente voltou a usar nos ultimo 30 dias
+when (case when dados_search.qtde_120_30_dias = 0 then 0 else round((dados_search.qtde_ultimos_30_dias::numeric / (dados_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
+when (case when dados_search.qtde_120_30_dias = 0 then 0 else round((dados_search.qtde_ultimos_30_dias::numeric / (dados_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.8 and 1 then 10
+when (case when dados_search.qtde_120_30_dias = 0 then 0 else round((dados_search.qtde_ultimos_30_dias::numeric / (dados_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.8 then 0
+else null
+end)
+as usab_search,
+dados_search.qtde_ultimos_30_dias as search_qtde_ultimos_30_dias,
+dados_search.qtde_120_30_dias as search_qtde_120_30_dias,
 (case
 when (tracking.qtde_120_30_dias = 0 and tracking.qtde_ultimos_30_dias > 0) then 10 -- cliente voltou a usar nos ultimo 30 dias
 when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_ultimos_30_dias::numeric / (tracking.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
@@ -63,7 +73,7 @@ crescimento_cliente.qtde_ultimos_30_dias as crescimento_cliente_qtde_30_dias
 from customer c
 inner join customer_plan cp on cp.customer_id = c.id
 inner join plan_complete pc on cp.plan_complete_id = pc.id
-left join(  -- adicionando dados de uso search e big data
+left join(  -- adicionando dados de uso big data
 select customer_id,
 count(case when (log_created_at >= current_date - interval '30 days') then 1 end) as qtde_ultimos_30_dias,
 count(case when (log_created_at < current_date - interval '30 days') then 1 end) as qtde_120_30_dias
@@ -84,7 +94,14 @@ from(
     and plan_complete.deleted_at is null
     and customer.fake_customer is false
   group by 1, 2
-  union all -- para manter registros de mesma data e unir com o search
+    ) a
+group by 1
+     ) as big_data on big_data.customer_id = c.id
+left join(  -- adicionando dados de uso search
+select customer_id,
+count(case when (log_created_at >= current_date - interval '30 days') then 1 end) as qtde_ultimos_30_dias,
+count(case when (log_created_at < current_date - interval '30 days') then 1 end) as qtde_120_30_dias
+from(
   select customer.id as customer_id,
   date(fh.created_at) as log_created_at
   from customer
@@ -103,7 +120,7 @@ from(
   group by 1, 2
     ) a
 group by 1
-     ) as big_search on big_search.customer_id = c.id
+     ) as dados_search on dados_search.customer_id = c.id
 left join(  -- adicionando dados do tracking
 select customer_id,
 count(case when (log_created_at >= current_date - interval '30 days') then 1 end) as qtde_ultimos_30_dias,
@@ -225,19 +242,34 @@ where current_date between cp.start and cp.expiration
     sql: ${TABLE}.customer_id ;;
   }
 
-  dimension: pontuacao_usab_big_search {
+  dimension: pontuacao_usab_big_data {
     type: number
-    sql: ${TABLE}.usab_big_search ;;
+    sql: ${TABLE}.usab_big_data ;;
   }
 
-  dimension: big_search_qtde_ultimos_30_dias {
+  dimension: big_data_qtde_ultimos_30_dias {
     type: number
-    sql: ${TABLE}.big_search_qtde_ultimos_30_dias ;;
+    sql: ${TABLE}.big_data_qtde_ultimos_30_dias ;;
   }
 
-  dimension: big_search_qtde_120_30_dias {
+  dimension: big_data_qtde_120_30_dias {
     type: number
-    sql: ${TABLE}.big_search_qtde_120_30_dias ;;
+    sql: ${TABLE}.big_data_qtde_120_30_dias ;;
+  }
+
+  dimension: pontuacao_usab_search {
+    type: number
+    sql: ${TABLE}.usab_search ;;
+  }
+
+  dimension: search_qtde_ultimos_30_dias {
+    type: number
+    sql: ${TABLE}.search_qtde_ultimos_30_dias ;;
+  }
+
+  dimension: search_qtde_120_30_dias {
+    type: number
+    sql: ${TABLE}.search_qtde_120_30_dias ;;
   }
 
   dimension: pontuacao_usab_tracking {
