@@ -329,8 +329,12 @@ where current_date between cp.start and cp.expiration
 
   dimension: healthScore_Total {
     type: number
-    sql: coalesce((coalesce(${TABLE}.usab_big_search,${TABLE}.usab_tracking) +
-          coalesce(${TABLE}.usab_tracking,${TABLE}.usab_big_search)),0)/2 +
+    sql: coalesce(coalesce(${cs_novo_health_score.pontuacao_usab_big_data},${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_search})
+          + coalesce(${cs_novo_health_score.pontuacao_usab_big_data},${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_tracking})
+          + coalesce(${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_big_data},${cs_novo_health_score.pontuacao_usab_search})
+          + coalesce(${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_big_data})
+          + coalesce(${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_big_data},${cs_novo_health_score.pontuacao_usab_tracking})
+          + coalesce(${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_big_data}),0)/6 +
           coalesce(${TABLE}.acessos_usuarios,0) +
           coalesce(${TABLE}.pontos_qtd_tickets,0) +
           coalesce(${TABLE}.satisfaction,0) +
