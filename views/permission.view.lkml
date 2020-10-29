@@ -13,6 +13,14 @@ view: permission {
     sql: ${TABLE}."active" ;;
   }
 
+  dimension: excel_permission {
+    type: yesno
+    sql: case
+         when ${slug} like '%-excel' or ${slug} = 'administrador' then true
+         else false
+         end ;;
+  }
+
   dimension: basic_column {
     type: yesno
     sql: ${TABLE}."basic_column" ;;
