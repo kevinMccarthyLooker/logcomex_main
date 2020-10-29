@@ -56,8 +56,35 @@ view: permission {
   }
 
   dimension: service_id {
-    type: number
+    type: string
     sql: ${TABLE}."service_id" ;;
+  }
+
+  dimension: service_name {
+    type: number
+    sql: case
+         when ${service_id} = 1 then 'Importação'
+         when ${service_id} = 2  then   'Exportação'
+         when ${service_id} = 3  then   'Cabotagem'
+         when ${service_id} = 4  then   'LATAM Importação'
+         when ${service_id} = 5  then   'Tracking'
+         when ${service_id} = 6  then   'Aereo'
+         when ${service_id} = 7  then   'LATAM Exportação'
+         when ${service_id} = 8  then   'Leads'
+         when ${service_id} = 9  then   'Captação'
+         when ${service_id} = 11 then 'Commodities'
+         when ${service_id} = 12 then 'Argentina Importação'
+         when ${service_id} = 13 then 'Argentina Exportação'
+         when ${service_id} = 14 then 'Paraguai Importacão'
+         when ${service_id} = 15 then 'Paraguai Exportação'
+         when ${service_id} = 16 then 'Uruguai Importação'
+         when ${service_id} = 17 then 'Uruguai Exportação'
+         when ${service_id} = 18 then 'EUA Importação'
+         when ${service_id} = 19 then 'Search'
+         when ${service_id} = 20 then 'Siscomex Restituição'
+         when ${service_id} is null then 'Admin'
+         else 'Erro'
+         end  ;;
   }
 
   dimension: slug {
