@@ -56,12 +56,12 @@ view: permission {
   }
 
   dimension: service_id {
-    type: string
+    type: number
     sql: ${TABLE}."service_id" ;;
   }
 
   dimension: service_name {
-    type: number
+    type: string
     sql: case
          when ${service_id} = 1 then 'Importação'
          when ${service_id} = 2  then   'Exportação'
