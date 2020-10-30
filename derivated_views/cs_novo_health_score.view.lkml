@@ -35,15 +35,15 @@ as usab_tracking,
 tracking.qtde_ultimos_30_dias as tracking_qtde_ultimos_30_dias,
 tracking.qtde_120_30_dias as tracking_qtde_120_30_dias,
 (case
-when tickets_movi.qtd_tickets = 0 then 15
-when tickets_movi.qtd_tickets isnull then 15
-when tickets_movi.qtd_tickets >= 1 and tickets_movi.qtd_tickets <= 6 then 10
+when tickets_movi.qtd_tickets = 0 then 10
+when tickets_movi.qtd_tickets isnull then 10
+when tickets_movi.qtd_tickets >= 1 and tickets_movi.qtd_tickets <= 6 then 5
 when tickets_movi.qtd_tickets > 6 then 0
 else null
 end)
 as pontos_qtd_tickets,
 (case
-when (survey_movi.value_response) >= 4 then 15
+when (survey_movi.value_response) >= 4 then 10
 when (survey_movi.value_response) between 3 and 3.9 then 5
 when (survey_movi.value_response) < 3 then 0
 when (survey_movi.value_response) isnull then 7  -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
@@ -61,6 +61,13 @@ end)
 as acessos_usuarios,
 acessos_usuarios.qtde_ultimos_30_dias as acessos_usuarios_qtde_ultimos_30_dias,
 acessos_usuarios.qtde_120_30_dias as acessos_usuarios_qtde_120_30_dias,
+(case
+when titulos_omie.qtd_atrasados > 1 then 0
+when titulos_omie.qtd_atrasados = 1 then 5
+when titulos_omie.qtd_atrasados = 0 then 10
+else null
+end)
+as pontos_titulos_omie,
 (case
 when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) > 1 then 10
 when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) between 0.9 and 1 then 5
@@ -193,6 +200,18 @@ inner join tickets_movidesk tm on ssm.tickets_movidesk_id = tm.id
 where question_id in ('l8zW','n7rK')) as qq1
 group by qq1.id_customer
        ) as survey_movi on survey_movi.id_customer = c.id
+left join ( -- adicionando pagamentos do omie
+select c.id as customer_id,
+sum(case
+when fso.status = 'ATRASADO' then 1
+else 0
+end) as qtd_atrasados
+from customer c
+inner join customer_api_relations car on car.id_customer = c.id
+inner join billing_contract_omie bco on bco.customer_api_relations_id = car.id
+inner join service_order_omie soo on soo.billing_contract_id = bco.id
+inner join financial_securities_omie fso on fso.order_id = soo.order_service_id
+group by c.id) as titulos_omie on titulos_omie.customer_id = c.id
 left join ( -- adicionando crescimento do cliente maritimo e aereo
 select
 cdconsignatario,
@@ -307,6 +326,11 @@ where current_date between cp.start and cp.expiration
     sql: ${TABLE}.pontos_qtd_tickets ;;
   }
 
+  dimension: pontuacao_titulos_omie {
+    type: number
+    sql: ${TABLE}.pontos_titulos_omie ;;
+  }
+
   dimension: pontuacao_survey {
     type: number
     sql: ${TABLE}.satisfaction ;;
@@ -337,6 +361,7 @@ where current_date between cp.start and cp.expiration
           + coalesce(${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_big_data}),0)/6 +
           coalesce(${TABLE}.acessos_usuarios,0) +
           coalesce(${TABLE}.pontos_qtd_tickets,0) +
+          coalesce(${TABLE}.pontos_titulos_omie,0) +
           coalesce(${TABLE}.satisfaction,0) +
           coalesce(${TABLE}.pontos_crescimento_cliente,0);;
   }
