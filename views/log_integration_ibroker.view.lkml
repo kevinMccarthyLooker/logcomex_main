@@ -94,11 +94,11 @@ view: log_integration_ibroker {
     drill_fields: [id]
   }
 
-    measure: count_error {
-      type: count_distinct
-      filters: [has_error: "yes"]
-      drill_fields: [id]
-    }
+  measure: count_error {
+    type: count
+    filters: [has_error: "yes"]
+    drill_fields: [id]
+  }
 
   measure: count_integracoes {
     type: count_distinct

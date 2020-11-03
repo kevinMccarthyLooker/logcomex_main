@@ -43,15 +43,28 @@ explore: db_export_cargo_reception_details {
 
   join: db_export_cargo_reception_nf_itens {
     relationship: many_to_one
-    sql_on: ${db_export_cargo_reception_nf_itens.id_exp_cargo_details} = ${db_export_cargo_reception_details.id}
-            and ${db_export_cargo_reception_nf_itens.id_nf} = ${db_export_cargo_reception_nf.id_nf};;
+    sql_on: ${db_export_cargo_reception_nf_itens.id_nf} = ${db_export_cargo_reception_nf.id_nf};;
     type: left_outer
   }
 
   join: db_export_cargo_reception_fcl  {
     relationship: many_to_one
     sql_on: ${db_export_cargo_reception_fcl.id_exp_cargo_details} = ${db_export_cargo_reception_details.id}
-            and ${db_export_cargo_reception_fcl.id_nf} = ${db_export_cargo_reception_nf.id_nf} ;;
+      or ${db_export_cargo_reception_fcl.id_nf} = ${db_export_cargo_reception_nf.id_nf} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_fcl_via_nota  {
+    from: db_export_cargo_reception_fcl
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_fcl.id_nf} = ${db_export_cargo_reception_nf.id_nf} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_fcl_via_det  {
+    from: db_export_cargo_reception_fcl
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_fcl.id_exp_cargo_details} = ${db_export_cargo_reception_details.id} ;;
     type: left_outer
   }
 
