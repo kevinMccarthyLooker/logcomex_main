@@ -963,6 +963,23 @@ view: db_maritimo {
     ;;
   }
 
+  dimension: tipo_trafego {
+    type:  string
+    sql:  CASE  WHEN ${tptrafego} = '07' THEN 'Exportação'
+                WHEN ${tptrafego} = '05' THEN 'Importação'
+                WHEN ${tptrafego} = '03' THEN 'Cabotagem'
+                WHEN ${tptrafego} = '09' THEN 'Passagem'
+                else 'Outros' end
+    ;;
+  }
+
+  dimension: frete_processado {
+    type: yesno
+    sql:  CASE  WHEN (${oprecolhimentofrete} is not null) THEN true
+                else false end
+    ;;
+  }
+
   dimension: tipoconhecimentooriginal {
     type: string
     sql: ${TABLE}."tipoconhecimentooriginal" ;;
