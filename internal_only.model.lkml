@@ -53,6 +53,9 @@ include: "/**/plan_info_derivated.view.lkml"
 include: "/**/bi_filters.view.lkml"
 include: "/**/bi_column_customer_plan_derivated.view.lkml"
 include: "/**/bi_column.view.lkml"
+include: "/**/permission.view.lkml"
+include: "/**/permission_group.view.lkml"
+include: "/**/group.view.lkml"
 
 
 datagroup: my_datagroup {
@@ -202,6 +205,24 @@ explore: usage {
     sql_on: ${user_profile_customer.customer_id}=${customer.id} ;;
     relationship: many_to_one
     type: left_outer
+  }
+
+  join: group {
+    sql_on: ${user_profile_customer.group_id} = ${group.id} ;;
+    relationship: many_to_one
+    type: inner
+  }
+
+  join: permission_group {
+    sql_on: ${group.id} = ${permission_group.group_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: permission {
+    sql_on: ${permission_group.permission_id} = ${permission.id} ;;
+    relationship: many_to_one
+    type: inner
   }
 
   join: acessos_produtos {
