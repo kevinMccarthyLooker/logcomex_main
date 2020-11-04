@@ -47,6 +47,13 @@ explore: db_export_cargo_reception_details {
     type: left_outer
   }
 
+  join: db_siscori_cod_ncm {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_nf_itens.cdncm_compl} = ${db_siscori_cod_ncm.cdncm_compl};;
+    type: left_outer
+  }
+
+
   join: db_export_cargo_reception_fcl  {
     relationship: many_to_one
     sql_on: ${db_export_cargo_reception_fcl.id_exp_cargo_details} = ${db_export_cargo_reception_details.id}
