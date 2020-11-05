@@ -358,6 +358,7 @@ customer.fake_customer is false) as a1) as qq1
 # medidas utilizadas para calcular a qtd de beneficios com valor menor ou igual ao dos planos vendidos
   measure: numero_de_planos {
     type: count
+    drill_fields: [detail*]
   }
 
   measure: qtd_padrao_pesquisa {
@@ -553,4 +554,15 @@ customer.fake_customer is false) as a1) as qq1
         END
     ;;
   }
+
+  set: detail {  #drills para o planos
+    fields: [
+      customer_id,
+      name,
+      plano,
+      padrao
+    ]
+  }
+
+
 }
