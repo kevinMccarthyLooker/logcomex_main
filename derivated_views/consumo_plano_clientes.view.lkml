@@ -15,7 +15,7 @@ qq3.data_fim_trial as data_fim_trial,
 qq3.quantidade_de_pesquisas_plano,
 qq1.qtd_pesquisas as qtd_pesquisas,
 (case
-when qq3.quantidade_de_pesquisas_plano = 9999999 or (qq3.busca_perfil_empresas_plano is null or qq3.busca_perfil_empresas_plano = 9999999) then true
+when qq3.quantidade_de_pesquisas_plano = 9999999 or (qq3.busca_perfil_empresas_plano = 0 or qq3.busca_perfil_empresas_plano = 9999999) then true
 else false
 end) as ilimitado,
 (case
@@ -60,7 +60,7 @@ left join(
 select
 customer.id as customer_id,
 coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) AS quantidade_de_pesquisas_plano,
-coalesce(pi_custom.filter_possible_guys_limit, pi_default.filter_possible_guys_limit) AS busca_perfil_empresas_plano,
+coalesce(pi_custom.filter_possible_guys_limit, pi_default.filter_possible_guys_limit,9999999) AS busca_perfil_empresas_plano,
 coalesce(pi_custom.excel_downloads, pi_default.excel_downloads) as qtd_excel_plano,
 plan."name" as plano,
 customer_plan."start"  as data_inicio,
