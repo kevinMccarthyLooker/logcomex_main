@@ -121,7 +121,7 @@ explore: consignee_radar {
     sql_on: ${consignee.id}=${certificate_consignee_radar.consignee_id} ;;
     sql_where: ${certificate_consignee_radar.deleted_raw} is null ;;
     relationship: one_to_many
-    type: left_outer
+    type: inner
   }
 
   join: certificate {
@@ -130,7 +130,7 @@ explore: consignee_radar {
     sql_where: ${certificate.valid_until_date} > now()
         and ${certificate.deleted_raw} is null;;
     relationship: many_to_one
-    type: left_outer
+    type: inner
   }
 
   join: customer {
