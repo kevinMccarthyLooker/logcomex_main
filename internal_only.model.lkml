@@ -56,7 +56,9 @@ include: "/**/bi_column.view.lkml"
 include: "/**/permission.view.lkml"
 include: "/**/permission_group.view.lkml"
 include: "/**/group.view.lkml"
-
+include: "/**/consignee.view.lkml"
+include: "/**/certificate_consignee_radar.view.lkml"
+include: "/**/certificate.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -111,6 +113,33 @@ explore: usage_logs {
   }
 
 }
+
+explore: consignee_radar {
+  view_name: consignee
+
+  join: certificate_consignee_radar {
+    sql_on: ${consignee.id}=${certificate_consignee_radar.consignee_id} ;;
+    sql_where: ${certificate_consignee_radar.deleted_raw} is null ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: certificate {
+    sql_on: ${consignee.cert_id}=${certificate.id}
+        and ${certificate.customer_id}=${consignee.customer_id};;
+    sql_where: ${certificate.valid_until_date} > now()
+        and ${certificate.deleted_raw} is null;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: customer {
+    sql_on: ${consignee.customer_id}=${customer.id};;
+    relationship: many_to_one
+    type: left_outer
+    }
+}
+
 
 explore: usage {
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
