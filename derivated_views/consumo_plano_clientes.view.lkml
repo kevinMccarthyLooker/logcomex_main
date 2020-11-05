@@ -168,6 +168,28 @@ customer.fake_customer is false
     sql: ${TABLE}.data_fim ;;
   }
 
+  dimension_group: data_inicio_trial {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      month,
+      year
+    ]
+    sql: ${TABLE}.data_inicio_trial ;;
+  }
+
+  dimension_group: data_fim_trial {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      month,
+      year
+    ]
+    sql: ${TABLE}.data_fim_trial ;;
+  }
+
   measure: qtd_pesquisas {
     type: sum
     sql: ${TABLE}.qtd_pesquisas ;;
