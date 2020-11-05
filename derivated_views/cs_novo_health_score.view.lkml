@@ -7,8 +7,10 @@ c.id as customer_id,
 (case
 when (big_data.qtde_120_30_dias = 0 and big_data.qtde_ultimos_30_dias > 0) then 10 -- cliente voltou a usar nos ultimo 30 dias
 when (case when big_data.qtde_120_30_dias = 0 then 0 else round((big_data.qtde_ultimos_30_dias::numeric / (big_data.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
-when (case when big_data.qtde_120_30_dias = 0 then 0 else round((big_data.qtde_ultimos_30_dias::numeric / (big_data.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.8 and 1 then 10
-when (case when big_data.qtde_120_30_dias = 0 then 0 else round((big_data.qtde_ultimos_30_dias::numeric / (big_data.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.8 then 0
+when (case when big_data.qtde_120_30_dias = 0 then 0 else round((big_data.qtde_ultimos_30_dias::numeric / (big_data.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.9 and 1 then 15
+when (case when big_data.qtde_120_30_dias = 0 then 0 else round((big_data.qtde_ultimos_30_dias::numeric / (big_data.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.8 and 0.89 then 10
+when (case when big_data.qtde_120_30_dias = 0 then 0 else round((big_data.qtde_ultimos_30_dias::numeric / (big_data.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.7 and 0.79 then 5
+when (case when big_data.qtde_120_30_dias = 0 then 0 else round((big_data.qtde_ultimos_30_dias::numeric / (big_data.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.7 then 0
 else null
 end)
 as usab_big_data,
@@ -17,8 +19,10 @@ big_data.qtde_120_30_dias as big_data_qtde_120_30_dias,
 (case
 when (dados_search.qtde_120_30_dias = 0 and dados_search.qtde_ultimos_30_dias > 0) then 10 -- cliente voltou a usar nos ultimo 30 dias
 when (case when dados_search.qtde_120_30_dias = 0 then 0 else round((dados_search.qtde_ultimos_30_dias::numeric / (dados_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
-when (case when dados_search.qtde_120_30_dias = 0 then 0 else round((dados_search.qtde_ultimos_30_dias::numeric / (dados_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.8 and 1 then 10
-when (case when dados_search.qtde_120_30_dias = 0 then 0 else round((dados_search.qtde_ultimos_30_dias::numeric / (dados_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.8 then 0
+when (case when dados_search.qtde_120_30_dias = 0 then 0 else round((dados_search.qtde_ultimos_30_dias::numeric / (dados_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.9 and 1 then 15
+when (case when dados_search.qtde_120_30_dias = 0 then 0 else round((dados_search.qtde_ultimos_30_dias::numeric / (dados_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.8 and 0.89 then 10
+when (case when dados_search.qtde_120_30_dias = 0 then 0 else round((dados_search.qtde_ultimos_30_dias::numeric / (dados_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.7 and 0.79 then 5
+when (case when dados_search.qtde_120_30_dias = 0 then 0 else round((dados_search.qtde_ultimos_30_dias::numeric / (dados_search.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.7 then 0
 else null
 end)
 as usab_search,
@@ -27,8 +31,10 @@ dados_search.qtde_120_30_dias as search_qtde_120_30_dias,
 (case
 when (tracking.qtde_120_30_dias = 0 and tracking.qtde_ultimos_30_dias > 0) then 10 -- cliente voltou a usar nos ultimo 30 dias
 when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_ultimos_30_dias::numeric / (tracking.qtde_120_30_dias::numeric / 3))::numeric,2) end) > 1 then 20
-when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_ultimos_30_dias::numeric / (tracking.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.8 and 1 then 10
-when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_ultimos_30_dias::numeric / (tracking.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.8 then 0
+when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_ultimos_30_dias::numeric / (tracking.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.9 and 1 then 15
+when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_ultimos_30_dias::numeric / (tracking.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.8 and 0.89 then 10
+when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_ultimos_30_dias::numeric / (tracking.qtde_120_30_dias::numeric / 3))::numeric,2) end) between 0.7 and 0.79 then 5
+when (case when tracking.qtde_120_30_dias = 0 then 0 else round((tracking.qtde_ultimos_30_dias::numeric / (tracking.qtde_120_30_dias::numeric / 3))::numeric,2) end) < 0.7 then 0
 else null
 end)
 as usab_tracking,
@@ -216,25 +222,29 @@ left join ( -- adicionando crescimento do cliente maritimo e aereo
 select
 cdconsignatario,
 count(*),
-count(case when (dtemissao >= current_date - interval '30 days') then 1 end) as qtde_ultimos_30_dias,
-count(case when (dtemissao < current_date - interval '30 days') then 1 end) as qtde_365_dias
+count(case when (dtoperacao >= current_date - interval '30 days') then 1 end) as qtde_ultimos_30_dias,
+count(case when (dtoperacao < current_date - interval '30 days') then 1 end) as qtde_365_dias
 from
 (select id,
 left(cdconsignatario,8) as cdconsignatario,
-dtemissao
+dtoperacao
 from sistema.db_maritimo dm
-where dm.tipoconhecimento in ('10','12','15') -- direto, house, sub
+where dm.tipoconhecimento in ('10','11','12','15') -- direto,master, house, co-loader
 and dm.cdconsignatario is not null -- retirando consignatarios nulos
 and cdconsignatario in (select cnpj from customer where fake_customer is false)--(select cnpj from api.customer where fake_customer is false)
-and dtemissao >= current_date - interval '395' day -- ultimo mes e 365 dias antes
-union all
+and dtoperacao >= current_date - interval '395' day -- ultimo mes e 365 dias antes
+and dtoperacao <= current_date
+and tptrafego = '05' -- importacao
+union all  -- adicionando dados aereo
 select aad.id as id,
 left(ac.cnpj,8) as cdconsignatario,
-aad.data_hawb as dtemissao
+aal.periodo as dtoperacao
 from aereo.aereo_awb_details aad
 inner join aereo.aereo_consignatario ac on ac.id = aad.consignatario_id
+inner join aereo.aereo_awb_list aal on aal.id = aad.id_awb_list
 where ac.cnpj in (select cnpj from customer where fake_customer is false)
-and aad.data_hawb >= current_date - interval '395' day
+and aal.periodo >= current_date - interval '395' day
+and aal.periodo <= current_date
 ) as q1
 group by cdconsignatario
 ) as crescimento_cliente on crescimento_cliente.cdconsignatario = left(c.cnpj,8)
