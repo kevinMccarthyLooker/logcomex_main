@@ -32,10 +32,12 @@ from(
 select fh."year", fh."month" , fh.customer_id, c2."name" , count(*) as qtd_pesquisas
 from filter_history fh
 inner join customer c2 on c2.id = fh.customer_id
+inner join customer_plan cp on cp.customer_id = c2.id
 where fh.debited = true -- flag que contabiliza
 and fh.service_id = 19 -- produto search
 and c2.deleted_at is null -- verifica se foi deletado
 and c2.fake_customer is false -- verifica se é cliente teste
+and cp.deleted_at is null -- verifica se o plano foi deletado
 group by fh."year", fh."month" ,fh.customer_id, c2."name"
 order by fh."year", fh."month" desc) as qq1
 left join (
