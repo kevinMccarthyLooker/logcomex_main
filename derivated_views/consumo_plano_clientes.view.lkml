@@ -199,7 +199,7 @@ data_fim_trial) as qq
   }
 
   measure: avg_extrapoled {
-    type: average
+    type: median
     filters: [avg_extrapoled_dim: ">0"]
     sql: ${TABLE}.avg_extrapoled;;
 
