@@ -26,16 +26,22 @@ else
 -1
 end) as porcent_qtd_pesquisas,
 qq3.busca_perfil_empresas_plano,
-(qq2.quantity_possible_importer + qq2.quantity_possible_exporter) as qtd_busca_perfil,
+(qq1.quantity_possible_importer + qq1.quantity_possible_exporter) as qtd_busca_perfil,
 (case
 when qq3.busca_perfil_empresas_plano > 0
 then
-((coalesce(qq2.quantity_possible_importer,0) + coalesce(qq2.quantity_possible_exporter,0))::float/qq3.busca_perfil_empresas_plano)
+((coalesce(qq1.quantity_possible_importer,0) + coalesce(qq1.quantity_possible_exporter,0))::float/qq3.busca_perfil_empresas_plano)
 else -1
 end) as porcent_qtd_busca_perfil,
 qq3.qtd_excel_plano
 from(
-select fh."year", fh."month" , fh.customer_id, c2."name" , count(*) as qtd_pesquisas
+select fh."year",
+fh."month",
+fh.customer_id,
+c2."name",
+count(*) as qtd_pesquisas,
+sum(case when fh.filters @> '[{"name": "possibleImporter"}]' then 1 else 0 end) as quantity_possible_importer,
+sum(case when fh.filters @> '[{"name": "possibleExporter"}]' then 1 else 0 end) as quantity_possible_exporter
 from filter_history fh
 inner join customer c2 on c2.id = fh.customer_id
 inner join customer_plan cp on cp.customer_id = c2.id
@@ -46,16 +52,7 @@ and pc2.service_id = 19 -- plano com search
 and c2.deleted_at is null -- verifica se foi deletado
 and c2.fake_customer is false -- verifica se é cliente teste
 and cp.deleted_at is null -- verifica se o plano foi deletado
-group by fh."year", fh."month" ,fh.customer_id, c2."name"
-order by fh."year", fh."month" desc) as qq1
-left join (
-select "year", "month" , "customer_id", sum(case when filters @> '[{"name": "possibleImporter"}]' then 1 else 0 end) as quantity_possible_importer,
-sum(case when filters @> '[{"name": "possibleExporter"}]' then 1 else 0 end) as quantity_possible_exporter
-from "filter_history"
-where "debited" = True and "service_id" = 19
-and "filters" is not null
-and (filters @> '[{"name": "possibleImporter"}]' or filters @> '[{"name": "possibleExporter"}]')
-group by "year" ,"month" ,"customer_id") qq2 on qq1.year = qq2.year and qq1.month = qq2.month and qq1.customer_id = qq2.customer_id
+group by fh."year", fh."month" ,fh.customer_id, c2."name") as qq1
 left join(
 select
 customer.id as customer_id,
