@@ -180,6 +180,12 @@ data_fim_trial) as qq
 
   }
 
+  dimension: extrapoled_searchs {
+    type: yesno
+    sql: case when ${porcent_qtd_pesquisas_dim} > 1 then true
+         else false end;;
+  }
+
   measure: qtd_pesquisas {
     type: sum
     sql: ${TABLE}.qtd_pesquisas ;;
@@ -233,19 +239,6 @@ data_fim_trial) as qq
   }
 
 
-  measure: count_extrapoled_searchs {
-    type: average
-    filters: [porcent_qtd_pesquisas_dim: ">1"]
-    sql: ${TABLE}.id_table;;
-
-  }
-
-  measure: count_below_searchs {
-    type: average
-    filters: [porcent_qtd_pesquisas_dim: "<1"]
-    sql: ${TABLE}.id_table;;
-
-  }
 
   measure: count {
     type: count
