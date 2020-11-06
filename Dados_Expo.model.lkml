@@ -91,6 +91,7 @@ explore: db_export_cargo_reception_details {
 
 explore: db_commodities_export {
   label: "siscori exportacao"
+  sql_always_where: ${anomes} > 201912 ;;
 
   join: db_siscori_cod_ncm {
     relationship: many_to_one
