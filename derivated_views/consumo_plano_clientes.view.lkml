@@ -225,5 +225,9 @@ customer.fake_customer is false
 
   }
 
+  measure: count {
+    type: count
+  }
+
 
 }
