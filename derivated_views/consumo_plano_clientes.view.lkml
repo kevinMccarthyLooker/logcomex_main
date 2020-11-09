@@ -224,6 +224,26 @@ data_fim_trial, extrapolados.data_extrapolou, extrapolados.dias_extrapolou) as q
          else false end;;
   }
 
+
+  dimension: porcent_qtd_pesquisas_dim {
+    type: number
+    sql: ${TABLE}.porcent_qtd_pesquisas ;;
+
+  }
+
+  measure: porcent_qtd_pesquisas {
+    type: average
+    filters: [porcent_qtd_pesquisas_dim:">=0"]
+    sql: ${TABLE}.porcent_qtd_pesquisas ;;
+
+  }
+
+  dimension: porcent_qtd_busca_perfil_dim {
+    type: number
+    sql: ${TABLE}.porcent_qtd_busca_perfil;;
+
+  }
+
   measure: qtd_pesquisas {
     type: sum
     sql: ${TABLE}.qtd_pesquisas ;;
@@ -249,26 +269,6 @@ data_fim_trial, extrapolados.data_extrapolou, extrapolados.dias_extrapolou) as q
 
   }
 
-
-  dimension: porcent_qtd_pesquisas_dim {
-    type: number
-    sql: ${TABLE}.porcent_qtd_pesquisas ;;
-
-  }
-
-  measure: porcent_qtd_pesquisas {
-    type: average
-    filters: [porcent_qtd_pesquisas_dim:">=0"]
-    sql: ${TABLE}.porcent_qtd_pesquisas ;;
-
-  }
-
-  dimension: porcent_qtd_busca_perfil_dim {
-    type: number
-    sql: ${TABLE}.porcent_qtd_busca_perfil;;
-
-  }
-
   measure: porcent_qtd_busca_perfil {
     type: average
     filters: [porcent_qtd_busca_perfil_dim: ">=0"]
@@ -277,8 +277,8 @@ data_fim_trial, extrapolados.data_extrapolou, extrapolados.dias_extrapolou) as q
   }
 
 
-  measure: avg_dias_extrapolou {
-    type: average
+  measure: median_dias_extrapolou {
+    type: median
     sql: ${dias_extrapolou} ;;
   }
 
