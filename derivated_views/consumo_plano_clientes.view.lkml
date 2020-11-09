@@ -238,10 +238,21 @@ data_fim_trial) as qq
 
   }
 
-
-
   measure: count {
     type: count
+    drill_fields: [detail*]
+  }
+
+  set: detail {  #drills para o planos
+    fields: [
+      customer_id,
+      mes,
+      plano,
+      quantidade_de_pesquisas_plano,
+      busca_perfil_empresas_plano,
+      qtd_pesquisas,
+      qtd_extrapoled
+    ]
   }
 
 
