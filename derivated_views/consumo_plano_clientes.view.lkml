@@ -246,10 +246,10 @@ data_fim_trial) as qq
   set: detail {  #drills para o planos
     fields: [
       customer_id,
+      nome,
       mes,
       plano,
       quantidade_de_pesquisas_plano,
-      busca_perfil_empresas_plano,
       qtd_pesquisas
     ]
   }
