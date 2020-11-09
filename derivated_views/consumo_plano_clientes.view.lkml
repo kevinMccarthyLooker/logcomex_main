@@ -33,11 +33,28 @@ cp."start"  as data_inicio,
 cp.expiration as data_fim,
 cp.trial_start as data_inicio_trial,
 cp.trial_end as data_fim_trial,
+extrapolados.data_extrapolou,
+extrapolados.dias_extrapolou,
 count(*) as qtd_pesquisas,
 sum(case when fh.filters @> '[{"name": "possibleImporter"}]' then 1 else 0 end) as quantity_possible_importer,
 sum(case when fh.filters @> '[{"name": "possibleExporter"}]' then 1 else 0 end) as quantity_possible_exporter,
 sum(case when fh.total_lines > coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) then 1 else 0 end) as qtd_extrapoled,
-coalesce(AVG(case when fh.total_lines > coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) then fh.total_lines - coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit)  else null end),0) as avg_extrapoled
+coalesce(avg(case when fh.total_lines > coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) then fh.total_lines - coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit)  else null end),0) as avg_extrapoled
+from filter_history fh
+inner join customer c2 on c2.id = fh.customer_id
+inner join customer_plan cp on cp.customer_id = c2.id
+inner join plan_complete pc2 on pc2.id = cp.plan_complete_id
+inner join plan on plan.id = pc2.plan_id
+LEFT JOIN plan_info as pi_default ON pc2.plan_info_id = pi_default.id
+LEFT JOIN plan_info as pi_custom ON cp.plan_info_id = pi_custom.id
+left join(
+select qq2.customer_id,LPAD(qq2.mes::text,2,'0') as mes, qq2.ano::text as ano, min(qq2.data_consulta) as data_extrapolou, min(dias) as dias_extrapolou
+from(
+select fh.customer_id,extract(month from fh.created_at ) as mes, extract(year from fh.created_at ) as ano, date(fh.created_at) as data_consulta,
+coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) AS quantidade_de_pesquisas_plano,
+sum(count(fh.source_hash)) OVER (PARTITION by fh.customer_id, extract(month from fh.created_at ),extract(year from fh.created_at ) ORDER BY date(fh.created_at)),
+sum(count(fh.source_hash)) OVER (PARTITION by fh.customer_id, extract(month from fh.created_at ),extract(year from fh.created_at ) ORDER BY date(fh.created_at))/coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) as percentual,
+count(date(fh.created_at)) OVER (PARTITION by fh.customer_id, extract(month from fh.created_at ),extract(year from fh.created_at ) ORDER BY date(fh.created_at)) as dias
 from filter_history fh
 inner join customer c2 on c2.id = fh.customer_id
 inner join customer_plan cp on cp.customer_id = c2.id
@@ -51,10 +68,21 @@ and pc2.service_id = 19 -- plano com search
 and c2.deleted_at is null -- verifica se foi deletado
 and c2.fake_customer is false -- verifica se é cliente teste
 and cp.deleted_at is null -- verifica se o plano foi deletado
-group by id_table, tempo,ano, mes ,fh.customer_id, nome,
+--and fh.customer_id = 2102
+group by fh.customer_id,mes, ano, date(fh.created_at),quantidade_de_pesquisas_plano
+order by 2) as qq2
+where qq2.percentual > 1
+group by qq2.customer_id,qq2.mes, qq2.ano) as extrapolados on extrapolados.customer_id = fh.customer_id and extrapolados.mes = fh."month" and extrapolados.ano = fh."year"
+where fh.debited = true -- flag que contabiliza
+and fh.service_id = 19 -- produto search
+and pc2.service_id = 19 -- plano com search
+and c2.deleted_at is null -- verifica se foi deletado
+and c2.fake_customer is false -- verifica se é cliente teste
+and cp.deleted_at is null -- verifica se o plano foi deletado
+group by id_table, tempo, fh."year" , fh."month" ,fh.customer_id, nome,
 quantidade_de_pesquisas_plano,busca_perfil_empresas_plano,qtd_excel_plano,
 excel_lines_plano,search_lines_plano,plano,data_inicio,data_fim,data_inicio_trial,
-data_fim_trial) as qq
+data_fim_trial, extrapolados.data_extrapolou, extrapolados.dias_extrapolou) as qq
 ;;
   }
 
@@ -110,6 +138,16 @@ data_fim_trial) as qq
     type: string
     sql: ${TABLE}.plano ;;
 
+  }
+
+  dimension: data_extrapolou {
+    type: date
+    sql: ${TABLE}.data_extrapolou ;;
+  }
+
+  dimension: dias_extrapolou {
+    type:number
+    sql: ${TABLE}.dias_extrapolou ;;
   }
 
   dimension_group: tempo {
@@ -236,6 +274,12 @@ data_fim_trial) as qq
     filters: [porcent_qtd_busca_perfil_dim: ">=0"]
     sql: ${TABLE}.porcent_qtd_busca_perfil;;
 
+  }
+
+
+  measure: avg_dias_extrapolou {
+    type: average
+    sql: ${dias_extrapolou} ;;
   }
 
   measure: count {
