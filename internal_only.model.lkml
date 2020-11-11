@@ -154,9 +154,9 @@ explore: usage {
 
   join: customer_blocked_history {
     view_label: "Customer"
-    sql_on: ${customer.id}=${customer_blocked_history.customer_id} ;;
+    sql_on: ${customer.id}=${customer_blocked_history.customer_id} and ${customer_blocked_history.deleted_date} is null ;;
     type: left_outer
-    sql_where: ${customer_blocked_history.deleted_date} is null ;;
+    #sql_where: ${customer_blocked_history.deleted_date} is null ;;
     relationship: one_to_one
   }
 
