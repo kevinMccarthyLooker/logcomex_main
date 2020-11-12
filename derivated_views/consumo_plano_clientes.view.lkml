@@ -48,7 +48,7 @@ and pc2.service_id = 19 -- plano com search
 and c2.deleted_at is null -- verifica se foi deletado
 and c2.fake_customer is false -- verifica se é cliente teste
 and cp.deleted_at is null -- verifica se o plano foi deletado
-and c2.id = 2102  --  portal 316 banrisul
+--and c2.id = 2102  --  portal 316 banrisul
 and upc.logcomex_fake is false -- nao contabiliza pesquisas de usuarios logcomex
 group by id_table,ano,mes, periodo, fh.customer_id, nome,quantidade_de_pesquisas_plano, busca_perfil_empresas_plano, qtd_excel_plano,
 excel_lines_plano, search_lines_plano, plano, data_inicio, data_fim, data_inicio_trial, data_fim_trial
@@ -246,6 +246,11 @@ order by periodo) qq1
 
   }
 
+  measure: qtd_pesquisas_med {
+    type: sum
+    sql: ${TABLE}.qtd_pesquisas ;;
+  }
+
 
   # dimension: data_extrapolou {
   #   type: date
@@ -283,11 +288,6 @@ order by periodo) qq1
 
   # }
 
-  # measure: qtd_pesquisas {
-  #   type: sum
-  #   sql: ${TABLE}.qtd_pesquisas ;;
-
-  # }
 
   # measure: qtd_busca_perfil  {
   #   type: sum
