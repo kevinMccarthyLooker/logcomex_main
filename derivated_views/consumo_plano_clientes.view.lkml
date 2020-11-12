@@ -267,6 +267,12 @@ order by periodo) qq1
     sql: ${TABLE}.percentual_acumulado_perfil ;;
   }
 
+  # dimension: extrapoled_searchs {
+  # type: yesno
+  # sql: exists( then true
+  #     else false end;;
+
+# }
 
   # measure: porcentual_avg_qtd_pesquisas_mea {
   # type: average
@@ -289,11 +295,6 @@ order by periodo) qq1
   #   sql: ${TABLE}.dias_extrapolou ;;
   # }
 
-  # dimension: extrapoled_searchs {
-  #   type: yesno
-  #   sql: case when ${porcent_qtd_pesquisas_dim} > 1 then true
-  #       else false end;;
-  # }
 
 
   # dimension: porcent_qtd_pesquisas_dim {
