@@ -267,6 +267,11 @@ order by periodo) qq1
     sql: ${TABLE}.percentual_acumulado_perfil ;;
   }
 
+  measure: qtd_extrapoled_mea {
+    type: number
+    sql: ${qtd_extrapoled_dim} ;;
+  }
+
   # dimension: extrapoled_searchs {
   # type: yesno
   # sql: case when ${qtd_extrapoled_dim} > 0 then true else false end;;
