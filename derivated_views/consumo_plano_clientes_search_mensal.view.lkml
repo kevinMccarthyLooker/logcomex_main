@@ -1,4 +1,4 @@
-view: consumo_plano_clientes {
+view: consumo_plano_clientes_search_mensal {
   # Or, you could make this view a derived table, like this:
   derived_table: {
     sql:select *,
