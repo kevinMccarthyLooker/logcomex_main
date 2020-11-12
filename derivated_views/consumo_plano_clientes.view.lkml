@@ -256,6 +256,18 @@ order by periodo) qq1
     sql: ${TABLE}.qtd_perfil ;;
   }
 
+  measure: porcentual_avg_qtd_pesquisas_mea {
+  type: average
+  sql: ${percentual_diario_pesquisas} ;;
+
+  }
+
+  measure: porcentual_avg_qtd_perfil {
+    type: average
+    sql: ${percentual_diario_perfil} ;;
+
+  }
+
   # dimension: data_extrapolou {
   #   type: date
   #   sql: ${TABLE}.data_extrapolou ;;
@@ -279,12 +291,7 @@ order by periodo) qq1
 
   # }
 
-  # measure: porcent_qtd_pesquisas {
-  #   type: average
-  #   filters: [porcent_qtd_pesquisas_dim:">=0"]
-  #   sql: ${TABLE}.porcent_qtd_pesquisas ;;
 
-  # }
 
   # dimension: porcent_qtd_busca_perfil_dim {
   #   type: number
