@@ -246,11 +246,15 @@ order by periodo) qq1
 
   }
 
-  measure: qtd_pesquisas_med {
+  measure: qtd_pesquisas_mea {
     type: sum
     sql: ${TABLE}.qtd_pesquisas ;;
   }
 
+  measure: qtd_perfil_mea {
+    type: sum
+    sql: ${TABLE}.qtd_perfil ;;
+  }
 
   # dimension: data_extrapolou {
   #   type: date
