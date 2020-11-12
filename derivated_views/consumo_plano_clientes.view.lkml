@@ -259,12 +259,12 @@ order by periodo) qq1
 
   dimension: max_porcentagem_acumulada_pesquisas {
     type: number
-    sql: max(${porcentagem_acumulada_pesquisas}) ;;
+    sql: max(${TABLE}.porcentagem_acumulada_pesquisas) ;;
   }
 
   dimension: max_percentual_acumulado_perfil {
     type: number
-    sql: max(${percentual_acumulado_perfil}) ;;
+    sql: max(${TABLE}.percentual_acumulado_perfil) ;;
   }
 
 
