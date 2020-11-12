@@ -257,14 +257,14 @@ order by periodo) qq1
   }
 
 
-  dimension: max_porcentagem_acumulada_pesquisas {
-    type: number
-    sql: max(${TABLE}.porcentagem_acumulada_pesquisas) ;;
+  measure: max_porcentagem_acumulada_pesquisas {
+    type: max
+    sql: ${TABLE}.porcentagem_acumulada_pesquisas ;;
   }
 
-  dimension: max_percentual_acumulado_perfil {
-    type: number
-    sql: max(${TABLE}.percentual_acumulado_perfil) ;;
+  measure: max_percentual_acumulado_perfil {
+    type: max
+    sql: ${TABLE}.percentual_acumulado_perfil ;;
   }
 
 
