@@ -56,6 +56,7 @@ view: service {
       when: {label: "Leads" sql: ${name} in ('Leads') ;;}
       when: {label: "Search" sql: ${name} in ('Search') ;;}
       when: {label: "Tracking" sql: ${name} in ('Tracking') ;;}
+      when: {label: "Siscomex Restituição" sql: ${name} in ('Siscomex Restituição') ;;}
       else: "BI"
     }
   }

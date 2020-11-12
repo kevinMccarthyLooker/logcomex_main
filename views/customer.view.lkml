@@ -118,6 +118,15 @@ view: customer {
               WHEN (customer.executive_id = 36) THEN 'Gabriela'
               WHEN (customer.executive_id = 72) THEN 'Sthephanny'
               WHEN (customer.executive_id = 71) THEN 'Rafael'
+              WHEN (customer.executive_id = 75) THEN 'Maxi'
+              WHEN (customer.executive_id = 76) THEN 'Leandro'
+              WHEN (customer.executive_id = 11) THEN 'Laryssa Andrade'
+              WHEN (customer.executive_id = 12) THEN 'Daniela Vasconcelos'
+              WHEN (customer.executive_id = 41) THEN 'Caroline Bilibio'
+              WHEN (customer.executive_id = 43) THEN 'Gilson Almeida'
+              WHEN (customer.executive_id = 77) THEN 'Bruna Soares'
+              WHEN (customer.executive_id = 57) THEN 'Kathia Festa'
+              WHEN (customer.executive_id = 81) THEN 'Edgar Oliveira'
               when (customer.executive_id is null) then CAST ( customer.executive_id AS TEXT )
           else CAST ( customer.executive_id AS TEXT ) end
     ;;

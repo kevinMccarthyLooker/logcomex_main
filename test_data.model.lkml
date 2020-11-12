@@ -1,17 +1,6 @@
-connection: "api"
-include: "/views/excel_controller.view.lkml"
-include: "/derivated_views/consumo_plano_clientes.view.lkml"
+connection: "bigquery_test_itau"
 
-explore: consumo_plano_clientes {
-  join: excel_controller {
-    relationship: many_to_one
-    sql_on: ${consumo_plano_clientes.customer_id} = ${excel_controller.customer_id} ;;
-  }
-
-}
-
-#include: "intermediarioexcel.base.lkml"
-
+include: "/views/itau_test_data.view.lkml"                # include all views in the views/ folder in this project
 # include: "/**/view.lkml"                   # include all views in this project
 # include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
@@ -29,3 +18,5 @@ explore: consumo_plano_clientes {
 #     sql_on: ${users.id} = ${orders.user_id} ;;
 #   }
 # }
+
+explore: itau_test_data {}
