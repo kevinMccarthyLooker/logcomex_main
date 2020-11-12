@@ -349,6 +349,11 @@ order by periodo) qq1
     drill_fields: [detail*]
   }
 
+  measure: count_distinct_customers {
+    type: count_distinct
+    sql: ${customer_id} ;;
+  }
+
   set: detail {  #drills para o planos
     fields: [
       ano,
