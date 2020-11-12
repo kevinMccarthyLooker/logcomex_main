@@ -247,15 +247,15 @@ order by periodo) qq1
   }
 
 
-  dimension: data_extrapolou {
-    type: date
-    sql: ${TABLE}.data_extrapolou ;;
-  }
+  # dimension: data_extrapolou {
+  #   type: date
+  #   sql: ${TABLE}.data_extrapolou ;;
+  # }
 
-  dimension: dias_extrapolou {
-    type:number
-    sql: ${TABLE}.dias_extrapolou ;;
-  }
+  # dimension: dias_extrapolou {
+  #   type:number
+  #   sql: ${TABLE}.dias_extrapolou ;;
+  # }
 
   # dimension: extrapoled_searchs {
   #   type: yesno
