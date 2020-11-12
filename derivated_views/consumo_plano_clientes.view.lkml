@@ -354,6 +354,7 @@ order by periodo) qq1
 
   measure: count_distinct_customers {
     type: count_distinct
+    filters: [qtd_extrapoled_dim: ">0"]
     sql: ${customer_id} ;;
   }
 
