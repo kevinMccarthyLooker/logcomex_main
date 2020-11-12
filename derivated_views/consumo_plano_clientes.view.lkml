@@ -362,6 +362,12 @@ order by periodo) qq1
     sql: ${customer_id} ;;
   }
 
+  measure: count_distinct_customers_ultrapassou {
+    type: count_distinct
+    filters: [porcentagem_acumulada_pesquisas: ">1"]
+    sql: ${customer_id} ;;
+  }
+
   set: detail {  #drills para o planos
     fields: [
       ano,
