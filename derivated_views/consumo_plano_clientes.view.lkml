@@ -246,6 +246,11 @@ order by periodo) qq1
 
   }
 
+  dimension: ultrapassou_limite {
+    type: yesno
+    sql: case when ${porcentagem_acumulada_pesquisas} > 1 then true else false end ;;
+  }
+
   measure: qtd_pesquisas_mea {
     type: sum
     sql: ${TABLE}.qtd_pesquisas ;;
