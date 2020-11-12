@@ -41,7 +41,8 @@ include: "/**/follow_up.view.lkml"
 include: "/**/FilaTrackingFollowUp.view.lkml"
 include: "/**/tracking_status.view.lkml"
 include: "/**/planos_ativos_detalhes.view.lkml"
-include: "/**/consumo_plano_clientes.view.lkml"
+#include: "/**/consumo_plano_clientes_search_mensal.view.lkml"
+include: "/**/consumo_plano_clientes_search_diario.view.lkml"
 include: "/**/excel_controller.view.lkml"
 include: "/**/log_integration_ibroker.view.lkml"
 include: "/**/jira_tasks.view.lkml"
@@ -437,8 +438,14 @@ explore: usage {
   }
 
   # view com o consumo dos planos
-  join: consumo_plano_clientes {
-    sql_on: ${customer.id} = ${consumo_plano_clientes.customer_id} ;;
+  # join: consumo_plano_clientes {
+  #   sql_on: ${customer.id} = ${consumo_plano_clientes_search_mensal.customer_id} ;;
+  #   relationship: one_to_many
+  #   type: left_outer
+  # }
+
+  join: consumo_plano_clientes_search_diario {
+    sql_on: ${customer.id} = ${consumo_plano_clientes_search_diario.customer_id} ;;
     relationship: one_to_many
     type: left_outer
   }
