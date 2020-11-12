@@ -41,6 +41,7 @@ sum(case when fh.filters @> '[{"name": "possibleExporter"}]' then 1 else 0 end) 
 sum(case when fh.total_lines > coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) then 1 else 0 end) as qtd_extrapoled,
 coalesce(avg(case when fh.total_lines > coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) then fh.total_lines - coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit)  else null end),0) as avg_extrapoled
 from filter_history fh
+inner join user_profile_customer upc on upc.user_id = fh.user_id and fh.customer_id = upc.customer_id
 inner join customer c2 on c2.id = fh.customer_id
 inner join customer_plan cp on cp.customer_id = c2.id
 inner join plan_complete pc2 on pc2.id = cp.plan_complete_id
@@ -56,6 +57,7 @@ sum(count(fh.source_hash)) OVER (PARTITION by fh.customer_id, extract(month from
 sum(count(fh.source_hash)) OVER (PARTITION by fh.customer_id, extract(month from fh.created_at ),extract(year from fh.created_at ) ORDER BY date(fh.created_at))/coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) as percentual,
 count(date(fh.created_at)) OVER (PARTITION by fh.customer_id, extract(month from fh.created_at ),extract(year from fh.created_at ) ORDER BY date(fh.created_at)) as dias
 from filter_history fh
+inner join user_profile_customer upc on upc.user_id = fh.user_id and fh.customer_id = upc.customer_id
 inner join customer c2 on c2.id = fh.customer_id
 inner join customer_plan cp on cp.customer_id = c2.id
 inner join plan_complete pc2 on pc2.id = cp.plan_complete_id
@@ -68,6 +70,7 @@ and pc2.service_id = 19 -- plano com search
 and c2.deleted_at is null -- verifica se foi deletado
 and c2.fake_customer is false -- verifica se é cliente teste
 and cp.deleted_at is null -- verifica se o plano foi deletado
+and upc.logcomex_fake is false -- nao contabiliza pesquisas de usuarios logcomex
 --and fh.customer_id = 2102
 group by fh.customer_id,mes, ano, date(fh.created_at),quantidade_de_pesquisas_plano
 order by 2) as qq2
@@ -79,6 +82,7 @@ and pc2.service_id = 19 -- plano com search
 and c2.deleted_at is null -- verifica se foi deletado
 and c2.fake_customer is false -- verifica se é cliente teste
 and cp.deleted_at is null -- verifica se o plano foi deletado
+and upc.logcomex_fake is false -- nao contabiliza pesquisas de usuarios logcomex
 group by id_table, tempo, fh."year" , fh."month" ,fh.customer_id, nome,
 quantidade_de_pesquisas_plano,busca_perfil_empresas_plano,qtd_excel_plano,
 excel_lines_plano,search_lines_plano,plano,data_inicio,data_fim,data_inicio_trial,
