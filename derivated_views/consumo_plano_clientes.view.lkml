@@ -267,12 +267,11 @@ order by periodo) qq1
     sql: ${TABLE}.percentual_acumulado_perfil ;;
   }
 
-  # dimension: extrapoled_searchs {
-  # type: yesno
-  # sql: exists( then true
-  #     else false end;;
-
-# }
+  dimension: extrapoled_searchs {
+  type: yesno
+  sql: case ${qtd_extrapoled_dim} > 0 then true
+      else false end;;
+  }
 
   # measure: porcentual_avg_qtd_pesquisas_mea {
   # type: average
