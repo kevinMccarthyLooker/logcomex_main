@@ -268,7 +268,7 @@ order by periodo) qq1
   }
 
   measure: qtd_extrapoled_mea {
-    type: number
+    type: sum
     sql: ${qtd_extrapoled_dim} ;;
   }
 
