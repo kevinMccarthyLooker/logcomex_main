@@ -258,13 +258,13 @@ order by periodo) qq1
 
   measure: porcentual_avg_qtd_pesquisas_mea {
   type: average
-  sql: ${percentual_diario_pesquisas} ;;
+  sql: max(${TABLE}.porcentagem_acumulada_pesquisas);; # O MAXIMO REPRESENTA O ACUMULADO DO MES
 
   }
 
   measure: porcentual_avg_qtd_perfil {
     type: average
-    sql: ${percentual_diario_perfil} ;;
+    sql: max(${TABLE}.percentual_acumualdo_perfil);; # o maximo representa o acumulado do mes
 
   }
 
