@@ -246,11 +246,6 @@ order by periodo) qq1
 
   }
 
-  dimension: ultrapassou_limite {
-    type: yesno
-    sql: case when ${porcentagem_acumulada_pesquisas} <= 1 then false else true end ;;
-  }
-
   measure: qtd_pesquisas_mea {
     type: sum
     sql: ${TABLE}.qtd_pesquisas ;;
@@ -275,6 +270,11 @@ order by periodo) qq1
   measure: qtd_extrapoled_mea {
     type: sum
     sql: ${qtd_extrapoled_dim} ;;
+  }
+
+  measure: median_dias {
+    type: median
+    sql: ${contador_dias} ;;
   }
 
   # dimension: extrapoled_searchs {
