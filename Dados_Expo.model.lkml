@@ -23,7 +23,8 @@ explore:db_maritimo_agosto_2020  {
 
 explore: db_maritimo {
   label: "db maritimo + cargo reception details"
-  sql_always_where: ${categoriacarga} = 'E' and ${dtoperacao_raw} >= '2020/08/01' and ${dtoperacao_raw} < '2020/09/01';;   # limitando tipo e periodo
+  sql_always_where: ${categoriacarga} = 'E' and ${dtoperacao_raw} >= '2020/01/01';;
+  #and ${dtoperacao_raw} < '2020/11/01';;   # limitando tipo e periodo
 
   join: db_export_cargo_reception_details {
     relationship: many_to_one
