@@ -278,6 +278,11 @@ view: consumo_plano_clientes_search_diario {
     sql: ${contador_dias} ;;
   }
 
+  measure: porcentagem_acumulada_pesquisas_mea{
+    type: sum
+    sql: ${percentual_diario_pesquisas} ;;
+  }
+
   # dimension: extrapoled_searchs {
   # type: yesno
   # sql: case when ${qtd_extrapoled_dim} > 0 then true else false end;;
