@@ -29,7 +29,7 @@ explore: db_maritimo {
   join: db_export_cargo_reception_details {
     relationship: many_to_one
     sql_on: ${db_export_cargo_reception_details.nrcemercante} = ${db_maritimo.nrcemercante};;
-    type: inner
+    type: left_outer
   }
 
   join: db_export_cargo_reception_nf {
