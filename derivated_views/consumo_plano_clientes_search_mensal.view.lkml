@@ -240,10 +240,10 @@ view: consumo_plano_clientes_search_mensal {
 
   }
 
-  measure: avg_porcent_qtd_pesquisas {
+  measure: avg_percentual_pesquisas {
     type: average
     filters: [percentual_pesquisas_dim:">=0"]
-    sql: ${TABLE}.porcent_qtd_pesquisas ;;
+    sql: ${TABLE}.percentual_pesquisas ;;
 
   }
 
@@ -278,10 +278,10 @@ view: consumo_plano_clientes_search_mensal {
 
   }
 
-  measure: porcent_qtd_busca_perfil {
+  measure: avg_percentual_percentual_perfil {
     type: average
     filters: [percentual_perfil_dim: ">=0"]
-    sql: ${TABLE}.porcent_qtd_busca_perfil;;
+    sql: ${TABLE}.percentual_perfil;;
 
   }
 
