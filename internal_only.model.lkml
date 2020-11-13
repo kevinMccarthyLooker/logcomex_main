@@ -438,11 +438,11 @@ explore: usage {
   }
 
  # view com o consumo dos planos
-  # join: consumo_plano_clientes_search_mensal_ {
-  #   sql_on: ${customer.id} = ${consumo_plano_clientes_search_mensal_.customer_id} ;;
-  #   relationship: one_to_many
-  #   type: left_outer
-  # }
+  join: consumo_plano_clientes_search_mensal {
+    sql_on: ${customer.id} = ${consumo_plano_clientes_search_mensal.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
 
   join: consumo_plano_clientes_search_diario {
     sql_on: ${customer.id} = ${consumo_plano_clientes_search_diario.customer_id} ;;
