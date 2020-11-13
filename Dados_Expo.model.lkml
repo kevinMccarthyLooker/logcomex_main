@@ -30,6 +30,59 @@ explore: db_maritimo {
     sql_on: ${db_export_cargo_reception_details.nrcemercante} = ${db_maritimo.nrcemercante};;
     type: inner
   }
+
+  join: db_export_cargo_reception_nf {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_nf.id_exp_cargo_details} = ${db_export_cargo_reception_details.id} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_nf_itens {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_nf_itens.id_nf} = ${db_export_cargo_reception_nf.id_nf};;
+    type: left_outer
+  }
+
+  join: db_siscori_cod_ncm {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_nf_itens.cdncm_compl} = ${db_siscori_cod_ncm.cdncm_compl};;
+    type: left_outer
+  }
+
+
+  join: db_export_cargo_reception_fcl  {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_fcl.id_exp_cargo_details} = ${db_export_cargo_reception_details.id}
+      or ${db_export_cargo_reception_fcl.id_nf} = ${db_export_cargo_reception_nf.id_nf} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_fcl_via_nota  {
+    from: db_export_cargo_reception_fcl
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_fcl.id_nf} = ${db_export_cargo_reception_nf.id_nf} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_fcl_via_det  {
+    from: db_export_cargo_reception_fcl
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_fcl.id_exp_cargo_details} = ${db_export_cargo_reception_details.id} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_carga  {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_carga.id_exp_cargo_details} = ${db_export_cargo_reception_details.id} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_item_due  {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_item_due.id_exp_cargo_details} = ${db_export_cargo_reception_details.id} ;;
+    type: left_outer
+  }
+
 }
 
 explore: db_export_cargo_reception_details {
