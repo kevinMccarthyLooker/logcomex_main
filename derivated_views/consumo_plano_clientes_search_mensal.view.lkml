@@ -241,7 +241,7 @@ view: consumo_plano_clientes_search_mensal {
   }
 
   measure: avg_percentual_pesquisas {
-    type: average
+    type: median
     filters: [percentual_pesquisas_dim:">=0"]
     sql: ${TABLE}.percentual_pesquisas ;;
 
@@ -279,7 +279,7 @@ view: consumo_plano_clientes_search_mensal {
   }
 
   measure: avg_percentual_percentual_perfil {
-    type: average
+    type: median
     filters: [percentual_perfil_dim: ">=0"]
     sql: ${TABLE}.percentual_perfil;;
 
