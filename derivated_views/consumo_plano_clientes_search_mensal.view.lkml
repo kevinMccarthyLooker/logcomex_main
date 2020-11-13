@@ -2,25 +2,17 @@ view: consumo_plano_clientes_search_mensal {
   # Or, you could make this view a derived table, like this:
   derived_table: {
     sql:select *,
-      (case
-      when qq.quantidade_de_pesquisas_plano = 9999999
-      or (qq.busca_perfil_empresas_plano = 0 or qq.busca_perfil_empresas_plano = 9999999) then true
-      else false
-      end) as ilimitado,
-      qq.qtd_pesquisas::float/qq.quantidade_de_pesquisas_plano::float as porcent_qtd_pesquisas,
-      (qq.quantity_possible_importer + qq.quantity_possible_exporter) as qtd_busca_perfil,
-      (case
-      when qq.busca_perfil_empresas_plano > 0
-      then
-      ((coalesce(qq.quantity_possible_importer,0) + coalesce(qq.quantity_possible_exporter,0))::float/qq.busca_perfil_empresas_plano)
-      else -1
-      end) as porcent_qtd_busca_perfil
+    (case when qq.quantidade_de_pesquisas_plano = 0 or quantidade_de_pesquisas_plano = 9999999 then true else false end) as pesquisas_ilimitadas,
+      (case when qq.busca_perfil_empresas_plano = 0 or qq.busca_perfil_empresas_plano = 9999999 then true else false end) as perfil_ilimitados,
+      qq.qtd_pesquisas::float/qq.quantidade_de_pesquisas_plano::float as percentual_pesquisas,
+      (qq.quantity_possible_importer + qq.quantity_possible_exporter) as qtd_perfil,
+      (qq.quantity_possible_importer + qq.quantity_possible_exporter)::float/(case when qq.busca_perfil_empresas_plano = 0 then 9999999 else qq.busca_perfil_empresas_plano end)::float as percentual_perfil
       from(
       select
-      concat(fh.year,fh.month,fh.customer_id) as id_table,
-      TO_TIMESTAMP(concat(fh.year,' ',fh.month) ,'YYYY MM') as tempo,
-      fh."year" as ano,
-      fh."month"as mes,
+      concat(extract("year" from fh.created_at),extract("month" from fh.created_at),fh.customer_id) as id_table,
+      TO_TIMESTAMP(concat(extract("year" from fh.created_at),' ',extract("month" from fh.created_at)) ,'YYYY MM') as periodo,
+      extract("year" from fh.created_at) as ano,
+      extract("month" from fh.created_at) as mes,
       fh.customer_id,
       c2."name" as nome,
       coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) AS quantidade_de_pesquisas_plano,
@@ -49,7 +41,7 @@ view: consumo_plano_clientes_search_mensal {
       LEFT JOIN plan_info as pi_default ON pc2.plan_info_id = pi_default.id
       LEFT JOIN plan_info as pi_custom ON cp.plan_info_id = pi_custom.id
       left join(
-      select qq2.customer_id,LPAD(qq2.mes::text,2,'0') as mes, qq2.ano::text as ano, min(qq2.data_consulta) as data_extrapolou, min(dias) as dias_extrapolou
+      select qq2.customer_id, qq2.mes , qq2.ano as ano, min(qq2.data_consulta) as data_extrapolou, min(dias) as dias_extrapolou
       from(
       select fh.customer_id,extract(month from fh.created_at ) as mes, extract(year from fh.created_at ) as ano, date(fh.created_at) as data_consulta,
       coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) AS quantidade_de_pesquisas_plano,
@@ -75,7 +67,7 @@ view: consumo_plano_clientes_search_mensal {
       group by fh.customer_id,mes, ano, date(fh.created_at),quantidade_de_pesquisas_plano
       order by 2) as qq2
       where qq2.percentual > 1
-      group by qq2.customer_id,qq2.mes, qq2.ano) as extrapolados on extrapolados.customer_id = fh.customer_id and extrapolados.mes = fh."month" and extrapolados.ano = fh."year"
+      group by qq2.customer_id,qq2.mes, qq2.ano) as extrapolados on extrapolados.customer_id = fh.customer_id and extrapolados.mes = extract(month from fh.created_at) and extrapolados.ano = extract(year from fh.created_at)
       where fh.debited = true -- flag que contabiliza
       and fh.service_id = 19 -- produto search
       and pc2.service_id = 19 -- plano com search
@@ -83,10 +75,12 @@ view: consumo_plano_clientes_search_mensal {
       and c2.fake_customer is false -- verifica se é cliente teste
       and cp.deleted_at is null -- verifica se o plano foi deletado
       and upc.logcomex_fake is false -- nao contabiliza pesquisas de usuarios logcomex
-      group by id_table, tempo, fh."year" , fh."month" ,fh.customer_id, nome,
+      --and c2.id = 2102
+      group by id_table, periodo, extract("year" from fh.created_at) , extract("month" from fh.created_at) ,fh.customer_id, nome,
       quantidade_de_pesquisas_plano,busca_perfil_empresas_plano,qtd_excel_plano,
       excel_lines_plano,search_lines_plano,plano,data_inicio,data_fim,data_inicio_trial,
-      data_fim_trial, extrapolados.data_extrapolou, extrapolados.dias_extrapolou) as qq
+      data_fim_trial, extrapolados.data_extrapolou, extrapolados.dias_extrapolou
+      order by periodo) as qq
       ;;
   }
 
@@ -101,9 +95,14 @@ view: consumo_plano_clientes_search_mensal {
     sql: ${TABLE}.customer_id ;;
   }
 
-  dimension: ilimitado {
+  dimension: pesquisas_ilimitadas {
     type: yesno
-    sql: ${TABLE}.ilimitado ;;
+    sql: ${TABLE}.pesquisas_ilimitadas ;;
+  }
+
+  dimension: perfil_ilimitados {
+    type: yesno
+    sql: ${TABLE}.perfil_ilimitados ;;
   }
 
   dimension: quantidade_de_pesquisas_plano {
@@ -121,13 +120,19 @@ view: consumo_plano_clientes_search_mensal {
     sql: ${TABLE}.qtd_excel_plano ;;
   }
 
+  dimension: search_lines_plano {
+    type: number
+    sql: ${TABLE}.search_lines_plano ;;
+  }
+
+
   dimension: ano {
-    type: string
+    type: number
     sql: ${TABLE}.ano ;;
   }
 
   dimension: mes {
-    type: string
+    type: number
     sql: ${TABLE}.mes ;;
 
   }
@@ -154,14 +159,14 @@ view: consumo_plano_clientes_search_mensal {
     sql: ${TABLE}.dias_extrapolou ;;
   }
 
-  dimension_group: tempo {
+  dimension_group: periodo {
     type: time
     timeframes: [
       raw,
       month,
       year
     ]
-    sql: ${TABLE}.tempo ;;
+    sql: ${TABLE}.periodo ;;
   }
 
   dimension_group: data_inicio {
@@ -224,27 +229,27 @@ view: consumo_plano_clientes_search_mensal {
 
   dimension: extrapoled_searchs {
     type: yesno
-    sql: case when ${porcent_qtd_pesquisas_dim} > 1 then true
+    sql: case when ${percentual_pesquisas_dim} > 1 then true
       else false end;;
   }
 
 
-  dimension: porcent_qtd_pesquisas_dim {
+  dimension: percentual_pesquisas_dim {
     type: number
-    sql: ${TABLE}.porcent_qtd_pesquisas ;;
+    sql: ${TABLE}.percentual_pesquisas ;;
 
   }
 
-  measure: porcent_qtd_pesquisas {
+  measure: avg_porcent_qtd_pesquisas {
     type: average
-    filters: [porcent_qtd_pesquisas_dim:">=0"]
+    filters: [percentual_pesquisas_dim:">=0"]
     sql: ${TABLE}.porcent_qtd_pesquisas ;;
 
   }
 
-  dimension: porcent_qtd_busca_perfil_dim {
+  dimension: percentual_perfil_dim {
     type: number
-    sql: ${TABLE}.porcent_qtd_busca_perfil;;
+    sql: ${TABLE}.percentual_perfil;;
 
   }
 
@@ -254,9 +259,9 @@ view: consumo_plano_clientes_search_mensal {
 
   }
 
-  measure: qtd_busca_perfil  {
+  measure: qtd_perfil_sum  {
     type: sum
-    sql: ${TABLE}.qtd_busca_perfil ;;
+    sql: ${TABLE}.qtd_perfil ;;
 
   }
 
@@ -275,7 +280,7 @@ view: consumo_plano_clientes_search_mensal {
 
   measure: porcent_qtd_busca_perfil {
     type: average
-    filters: [porcent_qtd_busca_perfil_dim: ">=0"]
+    filters: [percentual_perfil_dim: ">=0"]
     sql: ${TABLE}.porcent_qtd_busca_perfil;;
 
   }
