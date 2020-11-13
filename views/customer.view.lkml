@@ -125,6 +125,8 @@ view: customer {
               WHEN (customer.executive_id = 41) THEN 'Caroline Bilibio'
               WHEN (customer.executive_id = 43) THEN 'Gilson Almeida'
               WHEN (customer.executive_id = 77) THEN 'Bruna Soares'
+              WHEN (customer.executive_id = 57) THEN 'Kathia Festa'
+              WHEN (customer.executive_id = 81) THEN 'Edgar Oliveira'
               when (customer.executive_id is null) then CAST ( customer.executive_id AS TEXT )
           else CAST ( customer.executive_id AS TEXT ) end
     ;;

@@ -57,6 +57,11 @@ view: filter_history {
     sql: ${TABLE}."total_lines" ;;
   }
 
+  dimension: debited {
+    type: yesno
+    sql: ${TABLE}."debited" ;;
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [

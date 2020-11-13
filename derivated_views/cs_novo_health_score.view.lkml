@@ -49,8 +49,8 @@ else null
 end)
 as pontos_qtd_tickets,
 (case
-when (survey_movi.value_response) >= 4 then 10
-when (survey_movi.value_response) between 3 and 3.9 then 5
+when (survey_movi.value_response) >= 4 then 15
+when (survey_movi.value_response) between 3 and 3.9 then 7
 when (survey_movi.value_response) < 3 then 0
 when (survey_movi.value_response) isnull then 7  -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
 end)
@@ -69,8 +69,8 @@ acessos_usuarios.qtde_ultimos_30_dias as acessos_usuarios_qtde_ultimos_30_dias,
 acessos_usuarios.qtde_120_30_dias as acessos_usuarios_qtde_120_30_dias,
 (case
 when titulos_omie.qtd_atrasados > 1 then 0
-when titulos_omie.qtd_atrasados = 1 then 5
-when titulos_omie.qtd_atrasados = 0 then 10
+when titulos_omie.qtd_atrasados = 1 then 7
+when titulos_omie.qtd_atrasados = 0 then 15
 else null
 end)
 as pontos_titulos_omie,
@@ -99,13 +99,14 @@ from(
       inner join report_log on users.id = report_log.user_id
       inner join customer_plan on customer_plan.customer_id = customer.id
       inner join plan_complete on customer_plan.plan_complete_id = plan_complete.id
-      inner join (select * from service where id <> 5) service on plan_complete.service_id = service.id -- dados do big data , diferente de 5, pois 5 é tracking
+      inner join service on plan_complete.service_id = service.id -- dados do big data , diferente de 5, pois 5 é tracking
     where report_log.created_at >= current_date - interval '120' day
     and (current_date between customer_plan.start and customer_plan.expiration)
     and customer.deleted_at is null
     and customer_plan.deleted_at is null
     and plan_complete.deleted_at is null
     and customer.fake_customer is false
+    and service.id not in (5,19,20) -- todos os servicoes menos, search, tracking e restituicao
   group by 1, 2
     ) a
 group by 1
