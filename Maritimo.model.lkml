@@ -20,6 +20,8 @@ include: "/views/antaqxmaritimo_cab_emb.view.lkml"
 include: "/views/db_export_cargo_reception_details.view.lkml"
 include: "/**/crescimento_consignatario.view.lkml"
 include: "/**/db_maritimo_agosto_2020.view.lkml"
+include: "/**/db_cad_pais.view.lkml"
+
 
 explore: client_documents_by_method {
   label: "Client Documents By Method"
@@ -77,6 +79,21 @@ explore: db_maritimo {
     relationship: many_to_one
     sql_on: ${db_cad_armador.id} = ${db_maritimo.id_armador} ;;
   }
+
+  join: db_cad_pais_origem {
+    from: db_cad_pais
+    relationship: many_to_one
+    sql_on: ${db_cad_pais_origem.id} = ${db_maritimo.id_pais_origem} ;;
+    type: left_outer
+  }
+
+  join: db_cad_pais_destino {
+    from: db_cad_pais
+    relationship: many_to_one
+    sql_on: ${db_cad_pais_destino.id} = ${db_maritimo.id_pais_destino} ;;
+    type: left_outer
+  }
+
   join: db_export_cargo_reception_details {
     relationship: many_to_one
     sql_on: ${db_export_cargo_reception_details.nrcemercante} = ${db_maritimo.nrcemercante} ;;
