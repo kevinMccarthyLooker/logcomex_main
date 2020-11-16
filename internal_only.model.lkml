@@ -27,6 +27,7 @@ include: "/**/filter_history.view.lkml"
 include: "/**/customer_api_relations.view.lkml"
 include: "/**/billing_contract_omie.view.lkml"
 include: "/**/service_order_omie.view.lkml"
+include: "/**/financial_securities_omie.view.lkml"
 include: "/**/NPS.view.lkml"
 include: "/**/nps_08_2020.view.lkml"
 include: "/**/clientes_ativos_por_mes.view.lkml"
@@ -191,6 +192,13 @@ explore: usage {
     sql_on: ${billing_contract_omie.id}=${service_order_omie.billing_contract_id} ;;
     relationship: one_to_many
     type: left_outer
+  }
+
+  join: financial_securities_omie {
+    sql_on: ${service_order_omie.id} = ${financial_securities_omie.service_order_id} ;;
+    relationship: one_to_many
+    type: left_outer
+
   }
 
   join: cs_healthscore{

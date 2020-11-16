@@ -148,6 +148,37 @@ where tracking_aerial.deleted_at is null
     sql: ${TABLE}."status" ;;
   }
 
+  dimension: status_ordenado_maritimo {
+    type: string
+    sql: case when ${status} = 'Aguardando BL' then '0 - Aguardando BL'
+              when ${status} = 'Validando Embarque' then '1 - Validando Embarque'
+              when ${status} = 'Em Transito Internacional' then '2 - Em Transito Internacional'
+              when ${status} = 'Manifestado' then '3 - Manifestado'
+              when ${status} = 'Carga Carregada/Descarregada' then '4 - Carga Carregada/Descarregada'
+              when ${status} = 'Registro Presenca de carga' then '5 - Registro Presenca de carga'
+              when ${status} = 'Registro DTA' then '6 - Registro DTA'
+              when ${status} = 'Registro DI' then '7 - Registro DI'
+              when ${status} = 'DI Desembaraçada' then '8 - DI Desembaraçada'
+              when ${status} = 'Liberado p/ Carregamento' then '9 - Liberado p/ Carregamento'
+              else ${status} end;;
+  }
+
+  dimension: status_ordenado_aereo {
+    type: string
+    sql: case when ${status} = 'Pendente mantra' then '0 - Pendente mantra'
+              when ${status} = 'Trânsito Internacional' then '1 - Trânsito Internacional'
+              when ${status} = 'Chegada destino' then '2 - Chegada destino'
+              when ${status} = 'Registro DTA' then '3 - Registro DTA'
+              when ${status} = 'Visado' then '4 - Visado'
+              when ${status} = 'DTA desembaraçada' then '5 - DTA desembaraçada'
+              when ${status} = 'Registro DI' then '6 - Registro DI'
+              when ${status} = 'DI parametrizada' then '7 - DI parametrizada'
+              when ${status} = 'DI desembaraçada' then '8 - DI desembaraçada'
+              when ${status} = 'Recebida' then '9 - Recebida'
+              else ${status} end;;
+  }
+
+
   dimension: documento {
     type: string
     sql: ${TABLE}."documento" ;;
