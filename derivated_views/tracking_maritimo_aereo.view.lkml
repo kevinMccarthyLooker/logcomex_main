@@ -151,7 +151,14 @@ where tracking_aerial.deleted_at is null
   dimension: status_ordenado {
     type: string
     sql: case when ${status} = 'Validando Embarque' then '1 - Validando Embarque'
-         else ${status} end;;
+              when ${status} = 'Em Transito Internacional' then '2 - Em Transito Internacional'
+              when ${status} = 'Manifestado' then '3 - Manifestado'
+              when ${status} = 'Registro Presenca de carga' then '4 - Registro Presenca de carga'
+              when ${status} = 'Registro DTA' then '5 - Registro DTA'
+              when ${status} = 'Registro DI' then '6 - Registro DI'
+              when ${status} = 'DI Desembaraçada' then '7 - DI Desembaraçada'
+              when ${status} = 'Liberado p/ Carregamento' then '8 - Liberado p/ Carregamento'
+              else ${status} end;;
   }
 
 
