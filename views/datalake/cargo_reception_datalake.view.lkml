@@ -14,6 +14,11 @@ view: cargo_reception_datalake {
     sql: ${TABLE}.id ;;
   }
 
+  dimension: id_cargo_details {
+    type: number
+    sql: ${TABLE}.id_cargo_details ;;
+  }
+
   dimension: filter_date {
     type: date
     sql: ${TABLE}.filter_date ;;
