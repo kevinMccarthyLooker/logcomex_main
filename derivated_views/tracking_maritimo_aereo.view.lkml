@@ -148,6 +148,13 @@ where tracking_aerial.deleted_at is null
     sql: ${TABLE}."status" ;;
   }
 
+  dimension: status_ordenado {
+    type: string
+    sql: case when ${status} = 'Validando Embarque' then '1 - Validando Embarque'
+         else ${status} end;;
+  }
+
+
   dimension: documento {
     type: string
     sql: ${TABLE}."documento" ;;
