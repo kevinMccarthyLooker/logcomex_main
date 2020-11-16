@@ -21,6 +21,8 @@ include: "/views/db_export_cargo_reception_details.view.lkml"
 include: "/**/crescimento_consignatario.view.lkml"
 include: "/**/db_maritimo_agosto_2020.view.lkml"
 include: "/**/db_cad_pais.view.lkml"
+include: "/**/db_cad_porto.view.lkml"
+include: "/**/db_cad_fcl.view.lkml"
 
 
 explore: client_documents_by_method {
@@ -91,6 +93,26 @@ explore: db_maritimo {
     from: db_cad_pais
     relationship: many_to_one
     sql_on: ${db_cad_pais_destino.id} = ${db_maritimo.id_pais_destino} ;;
+    type: left_outer
+  }
+
+  join: db_cad_porto_origem {
+    from: db_cad_porto
+    relationship: many_to_one
+    sql_on: ${db_cad_porto_origem.id} = ${db_maritimo.id_porto_origem} ;;
+    type: left_outer
+  }
+
+  join: db_cad_porto_destino {
+    from: db_cad_porto
+    relationship: many_to_one
+    sql_on: ${db_cad_porto_destino.id} = ${db_maritimo.id_porto_destino} ;;
+    type: left_outer
+  }
+
+  join: db_cad_fcl {
+    relationship: many_to_one
+    sql_on: ${db_cad_fcl.id} = ${db_maritimo.id_fcl} ;;
     type: left_outer
   }
 

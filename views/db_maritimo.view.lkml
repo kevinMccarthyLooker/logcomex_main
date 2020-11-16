@@ -987,7 +987,7 @@ view: db_maritimo {
 
   dimension: rota {
     type: string
-    sql: ${TABLE}."nmportoorigem"  || ' >> ' ||  ${TABLE}."nmportodestino";;
+    sql: ${TABLE}."cdportoorigem"  || ' >> ' ||  ${TABLE}."cdportodestino";;
   }
 
   dimension: tipoconhecimentooriginal {
