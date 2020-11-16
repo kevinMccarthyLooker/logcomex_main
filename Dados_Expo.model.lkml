@@ -19,6 +19,7 @@ include: "/**/db_siscori_unid_fiscal.view.lkml"
 include: "/**/external_search_expo_nfs.dashboard.lookml"  #dashboard externo nfs para search expo
 include: "/**/external_search_expo_siscori.dashboard.lookml"  #dashboard externo siscori para search expo
 
+
 explore:db_maritimo_agosto_2020  {
   label: "db_maritimo agosto 2020"
 }
