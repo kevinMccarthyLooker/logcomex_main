@@ -165,7 +165,7 @@ where tracking_aerial.deleted_at is null
 
   dimension: status_ordenado_aereo {
     type: string
-    sql: case when ${status} = 'Pendente Mantra' then '0 - Pendente Mantra'
+    sql: case when ${status} = 'Pendente mantra' then '0 - Pendente mantra'
               when ${status} = 'Trânsito Internacional' then '1 - Trânsito Internacional'
               when ${status} = 'Chegada destino' then '2 - Chegada destino'
               when ${status} = 'Registro DTA' then '3 - Registro DTA'
