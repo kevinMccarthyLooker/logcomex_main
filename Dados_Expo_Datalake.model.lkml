@@ -1,12 +1,12 @@
 connection: "dremio_datalake"
 
-include: "/**/expo_maritimo_cooked.view.lkml"
-include: "/**/cargo_reception_datalake.view.lkml"
+include: "/**/big_data_expo_datalake.view.lkml"
+include: "/**/big_data_expo_test_datalake.view.lkml"
 
-explore:expo_maritimo_cooked  {
-  label: "origens - dados maritimo"
+explore:big_data_expo_datalake  {
+  label: "exp + maritimo via datalake"
 }
 
-explore: cargo_reception_datalake  {
-  label: "origens - dados cargo reception"
+explore:big_data_expo_test_datalake  {
+  label: "teste: exp + maritimo via datalake"
 }
