@@ -1052,11 +1052,13 @@ view: db_maritimo {
 
   measure: vlfrete {
     type: sum
+    value_format: "$#.00;($#.00)"
     sql: ${TABLE}."vlfrete" ;;
   }
 
   measure: vlfretetotal {
     type: sum
+    value_format: "$#.00;($#.00)"
     sql: ${TABLE}."vlfretetotal" ;;
   }
 
