@@ -1067,6 +1067,7 @@ view: db_maritimo {
 
   measure: vl_frete_por_TEU {
     type: average
+    value_format: "$#.00;($#.00)"
     filters: [teus_dimension: ">0"]
     sql: ${TABLE}."vlfretetotal" /  ${TABLE}."teus" ;;
   }
