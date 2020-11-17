@@ -928,6 +928,11 @@ view: db_maritimo {
     sql: ${TABLE}."temcarga_cdncms" ;;
   }
 
+  dimension: teus_dimension {
+    type: number
+    sql: ${TABLE}."teus" ;;
+  }
+
   measure: teus {
     type: sum
     sql: ${TABLE}."teus" ;;
@@ -978,6 +983,11 @@ view: db_maritimo {
     sql:  CASE  WHEN (${oprecolhimentofrete} is not null) THEN true
                 else false end
     ;;
+  }
+
+  dimension: rota {
+    type: string
+    sql: ${TABLE}."cdportoorigem"  || ' >> ' ||  ${TABLE}."cdportodestino";;
   }
 
   dimension: tipoconhecimentooriginal {
@@ -1050,18 +1060,26 @@ view: db_maritimo {
     sql: ${TABLE}."vlfretetotal" ;;
   }
 
-  dimension: vlfretetotalbld {
-    type: string
-    sql: ${TABLE}."vlfretetotalbld" ;;
-  }
-
   measure: vlpesobruto {
     type: sum
     sql: ${TABLE}."vlpesobruto" ;;
+  }
+
+  measure: vl_frete_por_TEU {
+    type: average
+    filters: [teus_dimension: ">0"]
+    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."teus" ;;
   }
 
   measure: count {
     type: count
     drill_fields: [id]
   }
+
+  measure: count_distinct_ce {
+    type: count_distinct
+    sql: ${TABLE}."nrcemercante" ;;
+    drill_fields: [id]
+  }
+
 }
