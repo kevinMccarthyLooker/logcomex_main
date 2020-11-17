@@ -1052,11 +1052,13 @@ view: db_maritimo {
 
   measure: vlfrete {
     type: sum
+    value_format: "$#.00;($#.00)"
     sql: ${TABLE}."vlfrete" ;;
   }
 
   measure: vlfretetotal {
     type: sum
+    value_format: "$#.00;($#.00)"
     sql: ${TABLE}."vlfretetotal" ;;
   }
 
@@ -1067,6 +1069,7 @@ view: db_maritimo {
 
   measure: vl_frete_por_TEU {
     type: average
+    value_format: "$#.00;($#.00)"
     filters: [teus_dimension: ">0"]
     sql: ${TABLE}."vlfretetotal" /  ${TABLE}."teus" ;;
   }
