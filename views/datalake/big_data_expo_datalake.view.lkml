@@ -1,6 +1,6 @@
 view: big_data_expo_datalake {
   derived_table: {
-    sql: SELECT * FROM big_data_expo.big_data_expo_gold limit 10
+    sql: SELECT * FROM big_data_expo.big_data_expo_gold
       ;;
   }
 
