@@ -1377,6 +1377,7 @@ view: big_data_expo_datalake {
 
   set: detail {
     fields: [
+      id_mar,
       id,
       ide,
       idu,
