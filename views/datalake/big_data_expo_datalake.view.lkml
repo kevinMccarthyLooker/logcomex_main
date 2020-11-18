@@ -27,6 +27,11 @@ view: big_data_expo_datalake {
     drill_fields: [detail*]
   }
 
+  dimension: id_mar {
+    type: number
+    sql: ${TABLE}.id_mar ;;
+  }
+
   dimension: id {
     type: number
     sql: ${TABLE}.id ;;
@@ -1399,6 +1404,7 @@ view: big_data_expo_datalake {
 
   set: detail {
     fields: [
+      id_mar,
       id,
       ide,
       idu,

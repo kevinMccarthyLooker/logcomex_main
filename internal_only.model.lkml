@@ -61,10 +61,16 @@ include: "/**/group.view.lkml"
 include: "/**/consignee.view.lkml"
 include: "/**/certificate_consignee_radar.view.lkml"
 include: "/**/certificate.view.lkml"
+include: "/**/follow_up_status.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
 }
+
+explore: follow_up_status {
+  label: "Tempo no Status - Tracking "
+}
+
 
 explore: dau_wau_mau {
   view_name: report_log
@@ -536,5 +542,7 @@ explore: Robos_Tracking {
     type: left_outer
     relationship: one_to_many
   }
+
+
 
 }

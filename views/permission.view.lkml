@@ -82,6 +82,7 @@ view: permission {
          when ${service_id} = 18 then 'EUA Importação'
          when ${service_id} = 19 then 'Search'
          when ${service_id} = 20 then 'Siscomex Restituição'
+         when ${service_id} = 21 then 'Novo Exportação'
          when ${service_id} is null then 'Admin'
          else 'Erro'
          end  ;;
