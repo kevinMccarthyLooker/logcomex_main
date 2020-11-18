@@ -9,6 +9,24 @@ view: big_data_expo_datalake {
     drill_fields: [detail*]
   }
 
+  measure: count_id0 {
+    type: count_distinct
+    sql: ${TABLE}.id0 ;;
+    drill_fields: [detail*]
+  }
+
+  measure: count_id00 {
+    type: count_distinct
+    sql: ${TABLE}.id00 ;;
+    drill_fields: [detail*]
+  }
+
+  measure: count_id1 {
+    type: count_distinct
+    sql: ${TABLE}.id1 ;;
+    drill_fields: [detail*]
+  }
+
   dimension: id {
     type: number
     sql: ${TABLE}.id ;;
@@ -39,8 +57,17 @@ view: big_data_expo_datalake {
     sql: ${TABLE}.dtemissao ;;
   }
 
-  dimension: dtoperacao {
-    type: date
+  dimension_group: dt_operacao {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.dtoperacao ;;
   }
 
@@ -1378,7 +1405,7 @@ view: big_data_expo_datalake {
       data_registro_time,
       nrmanifesto,
       dtemissao,
-      dtoperacao,
+      dt_operacao_raw,
       dtemissaoce,
       dtemissaocemaster,
       nrviagem,
