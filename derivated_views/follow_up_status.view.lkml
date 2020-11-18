@@ -13,6 +13,7 @@ where fu1.deleted_at is null ;;
 
 
   dimension: tracking_id  {
+    primary_key: yes
     type: number
     sql: ${TABLE}.tracking_id ;;
   }
@@ -34,6 +35,27 @@ where fu1.deleted_at is null ;;
 
   dimension: diff_desembaracada_liberado  {
     type: number
+    sql: ${TABLE}.diff_desembaracada_liberado ;;
+  }
+
+
+  measure: manifestado_presenca_avg  {
+    type: average
+    sql: ${TABLE}.diff_manifestado_presenca ;;
+  }
+
+  measure: presenca_di_avg  {
+    type: average
+    sql: ${TABLE}.diff_presenca_di_avg ;;
+  }
+
+  measure: di_deembaracada_avg {
+    type: average
+    sql: ${TABLE}.diff_di_deembaracada ;;
+  }
+
+  measure: desembaracada_liberado_avg  {
+    type: average
     sql: ${TABLE}.diff_desembaracada_liberado ;;
   }
 
