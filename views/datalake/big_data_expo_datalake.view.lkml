@@ -9,6 +9,11 @@ view: big_data_expo_datalake {
     drill_fields: [detail*]
   }
 
+  dimension: id_mar {
+    type: number
+    sql: ${TABLE}.id_mar ;;
+  }
+
   dimension: id {
     type: number
     sql: ${TABLE}.id ;;
