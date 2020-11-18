@@ -46,7 +46,7 @@ where fu1.deleted_at is null ;;
 
   measure: presenca_di_avg  {
     type: average
-    sql: ${TABLE}.diff_presenca_di_avg ;;
+    sql: ${TABLE}.diff_presenca_di ;;
   }
 
   measure: di_deembaracada_avg {
