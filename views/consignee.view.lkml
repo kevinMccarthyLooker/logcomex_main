@@ -165,4 +165,9 @@ view: consignee {
     type: count
     drill_fields: [id, name, certificate_consignee_radar.count]
   }
+
+  measure: count_distinct_cnpj {
+    type: count_distinct
+    sql: ${cnpj} ;;
+  }
 }
