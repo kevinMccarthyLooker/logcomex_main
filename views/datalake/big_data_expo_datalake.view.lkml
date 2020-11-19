@@ -14,10 +14,9 @@ view: big_data_expo_datalake {
     sql: ${TABLE}.chk_origem ;;
   }
 
-
-  dimension: id_mar {
+  dimension: dt_id {
     type: number
-    sql: ${TABLE}.id_mar ;;
+    sql: ${TABLE}.dt_id ;;
   }
 
   dimension: dt_pu_export_cargo_reception_id {
