@@ -14,6 +14,12 @@ view: big_data_expo_datalake {
     sql: ${TABLE}.chk_origem ;;
   }
 
+
+  dimension: id_mar {
+    type: number
+    sql: ${TABLE}.id_mar ;;
+  }
+
   dimension: dt_pu_export_cargo_reception_id {
     type: number
     sql: ${TABLE}.dt_pu_export_cargo_reception_id ;;
@@ -28,6 +34,7 @@ view: big_data_expo_datalake {
     type: date
     sql: ${TABLE}.dt_filter_date ;;
   }
+
 
   dimension: dt_tipo {
     type: number
@@ -254,8 +261,17 @@ view: big_data_expo_datalake {
     sql: ${TABLE}.dt_conteiner_dat_confere ;;
   }
 
-  dimension: dt_dt_emissao {
-    type: date
+  dimension_group: dt_dt_emissao {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.dt_dt_emissao ;;
   }
 
@@ -1410,7 +1426,6 @@ view: big_data_expo_datalake {
       dt_unid_transp_dat_confere,
       dt_elem_segur_dat_confere,
       dt_conteiner_dat_confere,
-      dt_dt_emissao,
       dt_created_at_time,
       dt_updated_at_time,
       nf_id,
