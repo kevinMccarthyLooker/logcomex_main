@@ -5,9 +5,6 @@ view: active_importers_match_radar {
     select row_number() over() as id,
     qq1.cnpj_importador,
     qq2.cnpj_radar,
-    case when qq1.cnpj_importador = qq2.cnpj_radar then true else false end as match
-    select qq1.cnpj_importador,
-    qq2.cnpj_radar,
     case when qq1.cnpj_importador = qq2.cnpj_radar then true else false end as encontrado
     from(
     select distinct replace(replace(replace(importador_cnpj,'-',''),'/',''),'.','') as cnpj_importador
