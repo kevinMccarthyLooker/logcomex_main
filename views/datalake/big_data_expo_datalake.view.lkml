@@ -1,1655 +1,1669 @@
 view: big_data_expo_datalake {
   derived_table: {
-    sql: SELECT * FROM big_data_expo.big_data_expo_gold
+    sql: select * from big_data_expo.big_data_expo_gold
       ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
+  # measure: count {
+  #   type: count
+  #   drill_fields: [detail*]
+  # }
+
+  dimension: chk_origem {
+    type: string
+    sql: ${TABLE}.chk_origem ;;
   }
+
 
   dimension: id_mar {
     type: number
     sql: ${TABLE}.id_mar ;;
   }
 
-  dimension: id {
+  dimension: dt_pu_export_cargo_reception_id {
     type: number
-    sql: ${TABLE}.id ;;
+    sql: ${TABLE}.dt_pu_export_cargo_reception_id ;;
   }
 
-  dimension: ide {
+  dimension: dt_sequential_number {
     type: number
-    sql: ${TABLE}.ide ;;
+    sql: ${TABLE}.dt_sequential_number ;;
   }
 
-  dimension: idu {
-    type: number
-    sql: ${TABLE}.idu ;;
-  }
-
-  dimension_group: data_registro {
+  dimension_group: dt_filter_date {
     type: time
-    sql: ${TABLE}.data_registro ;;
-  }
-
-  dimension: nrmanifesto {
-    type: string
-    sql: ${TABLE}.nrmanifesto ;;
-  }
-
-  dimension: dtemissao {
-    type: date
-    sql: ${TABLE}.dtemissao ;;
-  }
-
-  dimension: dtoperacao {
-    type: date
-    sql: ${TABLE}.dtoperacao ;;
-  }
-
-  dimension: dtemissaoce {
-    type: date
-    sql: ${TABLE}.dtemissaoce ;;
-  }
-
-  dimension: dtemissaocemaster {
-    type: date
-    sql: ${TABLE}.dtemissaocemaster ;;
-  }
-
-  dimension: nrviagem {
-    type: string
-    sql: ${TABLE}.nrviagem ;;
-  }
-
-  dimension: cdportocarregamento {
-    type: string
-    sql: ${TABLE}.cdportocarregamento ;;
-  }
-
-  dimension: nmportocarregamento {
-    type: string
-    sql: ${TABLE}.nmportocarregamento ;;
-  }
-
-  dimension: cdportodescarregamento {
-    type: string
-    sql: ${TABLE}.cdportodescarregamento ;;
-  }
-
-  dimension: nmportodescarregamento {
-    type: string
-    sql: ${TABLE}.nmportodescarregamento ;;
-  }
-
-  dimension: tptrafego {
-    type: string
-    sql: ${TABLE}.tptrafego ;;
-  }
-
-  dimension: cdembarcacao {
-    type: string
-    sql: ${TABLE}.cdembarcacao ;;
-  }
-
-  dimension: nmembarcacao {
-    type: string
-    sql: ${TABLE}.nmembarcacao ;;
-  }
-
-  dimension: cdempresanavegacao {
-    type: string
-    sql: ${TABLE}.cdempresanavegacao ;;
-  }
-
-  dimension: nmempresanavegacao {
-    type: string
-    sql: ${TABLE}.nmempresanavegacao ;;
-  }
-
-  dimension: cdagencianavegacao {
-    type: string
-    sql: ${TABLE}.cdagencianavegacao ;;
-  }
-
-  dimension: nmagencianavegacao {
-    type: string
-    sql: ${TABLE}.nmagencianavegacao ;;
-  }
-
-  dimension: qtconhecimentosinformados {
-    type: number
-    sql: ${TABLE}.qtconhecimentosinformados ;;
-  }
-
-  dimension: qtconhecimentosexistentes {
-    type: number
-    sql: ${TABLE}.qtconhecimentosexistentes ;;
-  }
-
-  dimension: qtconhecimentosassociado {
-    type: number
-    sql: ${TABLE}.qtconhecimentosassociado ;;
-  }
-
-  dimension: ckshipsconvenience {
-    type: string
-    sql: ${TABLE}.ckshipsconvenience ;;
-  }
-
-  dimension: bloqueio_conhecimento {
-    type: string
-    sql: ${TABLE}.bloqueio_conhecimento ;;
-  }
-
-  dimension: ret_pendente_analise {
-    type: string
-    sql: ${TABLE}.ret_pendente_analise ;;
-  }
-
-  dimension: revisao_ou_pendencia_afrmm {
-    type: string
-    sql: ${TABLE}.revisao_ou_pendencia_afrmm ;;
-  }
-
-  dimension: pendencia_transito_maritimo {
-    type: string
-    sql: ${TABLE}.pendencia_transito_maritimo ;;
-  }
-
-  dimension: situacao_endosso {
-    type: string
-    sql: ${TABLE}.situacao_endosso ;;
-  }
-
-  dimension: nrcemercante {
-    type: number
-    sql: ${TABLE}.nrcemercante ;;
-  }
-
-  dimension: nrblconhecimento {
-    type: string
-    sql: ${TABLE}.nrblconhecimento ;;
-  }
-
-  dimension: vlcubagem {
-    type: number
-    sql: ${TABLE}.vlcubagem ;;
-  }
-
-  dimension: vlpesobruto {
-    type: number
-    sql: ${TABLE}.vlpesobruto ;;
-  }
-
-  dimension: cdportoorigem {
-    type: string
-    sql: ${TABLE}.cdportoorigem ;;
-  }
-
-  dimension: nmportoorigem {
-    type: string
-    sql: ${TABLE}.nmportoorigem ;;
-  }
-
-  dimension: cdportodestino {
-    type: string
-    sql: ${TABLE}.cdportodestino ;;
-  }
-
-  dimension: nmportodestino {
-    type: string
-    sql: ${TABLE}.nmportodestino ;;
-  }
-
-  dimension: cdportooriginal {
-    type: string
-    sql: ${TABLE}.cdportooriginal ;;
-  }
-
-  dimension: nmportooriginal {
-    type: string
-    sql: ${TABLE}.nmportooriginal ;;
-  }
-
-  dimension: tipoconhecimento {
-    type: string
-    sql: ${TABLE}.tipoconhecimento ;;
-  }
-
-  dimension: categoriacarga {
-    type: string
-    sql: ${TABLE}.categoriacarga ;;
-  }
-
-  dimension: cdconsignatario {
-    type: string
-    sql: ${TABLE}.cdconsignatario ;;
-  }
-
-  dimension: txshipper {
-    type: string
-    sql: ${TABLE}.txshipper ;;
-  }
-
-  dimension: txmercadoria {
-    type: string
-    sql: ${TABLE}.txmercadoria ;;
-  }
-
-  dimension: txobservacoes {
-    type: string
-    sql: ${TABLE}.txobservacoes ;;
-  }
-
-  dimension: txnotifypart {
-    type: string
-    sql: ${TABLE}.txnotifypart ;;
-  }
-
-  dimension: cdnotifypart {
-    type: string
-    sql: ${TABLE}.cdnotifypart ;;
-  }
-
-  dimension: nmconsignatario {
-    type: string
-    sql: ${TABLE}.nmconsignatario ;;
-  }
-
-  dimension: nrpassaporteconsignatario {
-    type: string
-    sql: ${TABLE}.nrpassaporteconsignatario ;;
-  }
-
-  dimension: txconsignatario {
-    type: string
-    sql: ${TABLE}.txconsignatario ;;
-  }
-
-  dimension: cdpracaentexterior {
-    type: string
-    sql: ${TABLE}.cdpracaentexterior ;;
-  }
-
-  dimension: nmpracaentexterior {
-    type: string
-    sql: ${TABLE}.nmpracaentexterior ;;
-  }
-
-  dimension: indblordem {
-    type: string
-    sql: ${TABLE}.indblordem ;;
-  }
-
-  dimension: cdmoedafrete {
-    type: string
-    sql: ${TABLE}.cdmoedafrete ;;
-  }
-
-  dimension: nmmoedafrete {
-    type: string
-    sql: ${TABLE}.nmmoedafrete ;;
-  }
-
-  dimension: oprecolhimentofrete {
-    type: string
-    sql: ${TABLE}.oprecolhimentofrete ;;
-  }
-
-  dimension: indmodalidadefrete {
-    type: string
-    sql: ${TABLE}.indmodalidadefrete ;;
-  }
-
-  dimension: dtceorigem {
-    type: string
-    sql: ${TABLE}.dtceorigem ;;
-  }
-
-  dimension: nrceorigem {
-    type: string
-    sql: ${TABLE}.nrceorigem ;;
-  }
-
-  dimension: nmnavioorigem {
-    type: string
-    sql: ${TABLE}.nmnavioorigem ;;
-  }
-
-  dimension: transbordosexterior {
-    type: string
-    sql: ${TABLE}.transbordosexterior ;;
-  }
-
-  dimension: ckblservico {
-    type: string
-    sql: ${TABLE}.ckblservico ;;
-  }
-
-  dimension: nrceoriginal {
-    type: string
-    sql: ${TABLE}.nrceoriginal ;;
-  }
-
-  dimension: cdterminalportuario {
-    type: string
-    sql: ${TABLE}.cdterminalportuario ;;
-  }
-
-  dimension: nmterminalportuario {
-    type: string
-    sql: ${TABLE}.nmterminalportuario ;;
-  }
-
-  dimension: indufdestino {
-    type: string
-    sql: ${TABLE}.indufdestino ;;
-  }
-
-  dimension: nmufdestino {
-    type: string
-    sql: ${TABLE}.nmufdestino ;;
-  }
-
-  dimension: cdpaisprocedencia {
-    type: string
-    sql: ${TABLE}.cdpaisprocedencia ;;
-  }
-
-  dimension: nmpaisprocedencia {
-    type: string
-    sql: ${TABLE}.nmpaisprocedencia ;;
-  }
-
-  dimension: responsavel_cpf_conhec {
-    type: string
-    sql: ${TABLE}.responsavel_cpf_conhec ;;
-  }
-
-  dimension: responsavel_nome_conhec {
-    type: string
-    sql: ${TABLE}.responsavel_nome_conhec ;;
-  }
-
-  dimension: responsavel_tipo_conhec {
-    type: string
-    sql: ${TABLE}.responsavel_tipo_conhec ;;
-  }
-
-  dimension: responsavel_ip_conhec {
-    type: string
-    sql: ${TABLE}.responsavel_ip_conhec ;;
-  }
-
-  dimension: responsavel_data_conhec {
-    type: string
-    sql: ${TABLE}.responsavel_data_conhec ;;
-  }
-
-  dimension: itens {
-    type: string
-    sql: ${TABLE}.itens ;;
-  }
-
-  dimension: nrcemaster {
-    type: string
-    sql: ${TABLE}.nrcemaster ;;
-  }
-
-  dimension: qthouseinformadomaster {
-    type: string
-    sql: ${TABLE}.qthouseinformadomaster ;;
-  }
-
-  dimension: qthousedeclaradomaster {
-    type: string
-    sql: ${TABLE}.qthousedeclaradomaster ;;
-  }
-
-  dimension: cdempnavegdesconmaster {
-    type: string
-    sql: ${TABLE}.cdempnavegdesconmaster ;;
-  }
-
-  dimension: nmempnavegdesconmaster {
-    type: string
-    sql: ${TABLE}.nmempnavegdesconmaster ;;
-  }
-
-  dimension: cdagtnavegmaster {
-    type: string
-    sql: ${TABLE}.cdagtnavegmaster ;;
-  }
-
-  dimension: nmagtnavegmaster {
-    type: string
-    sql: ${TABLE}.nmagtnavegmaster ;;
-  }
-
-  dimension: itemcarga_nritem {
-    type: string
-    sql: ${TABLE}.itemcarga_nritem ;;
-  }
-
-  dimension: nrdde {
-    type: string
-    sql: ${TABLE}.nrdde ;;
-  }
-
-  dimension: indedse {
-    type: string
-    sql: ${TABLE}.indedse ;;
-  }
-
-  dimension: cdpaisdestfinal {
-    type: string
-    sql: ${TABLE}.cdpaisdestfinal ;;
-  }
-
-  dimension: nmpaisdestfinal {
-    type: string
-    sql: ${TABLE}.nmpaisdestfinal ;;
-  }
-
-  dimension: cdshipper {
-    type: string
-    sql: ${TABLE}.cdshipper ;;
-  }
-
-  dimension: qtveiculostransportadores {
-    type: string
-    sql: ${TABLE}.qtveiculostransportadores ;;
-  }
-
-  dimension: nova {
-    type: string
-    sql: ${TABLE}.nova ;;
-  }
-
-  dimension: opconsignatario {
-    type: string
-    sql: ${TABLE}.opconsignatario ;;
-  }
-
-  dimension: vlfretetotal {
-    type: number
-    sql: ${TABLE}.vlfretetotal ;;
-  }
-
-  dimension: vlfrete {
-    type: number
-    sql: ${TABLE}.vlfrete ;;
-  }
-
-  dimension: componentesfrete {
-    type: string
-    sql: ${TABLE}.componentesfrete ;;
-  }
-
-  dimension: cdterminalportuariocarregamento {
-    type: string
-    sql: ${TABLE}.cdterminalportuariocarregamento ;;
-  }
-
-  dimension: nmterminalportuariocarregamento {
-    type: string
-    sql: ${TABLE}.nmterminalportuariocarregamento ;;
-  }
-
-  dimension: vlfretetotalbld {
-    type: string
-    sql: ${TABLE}.vlfretetotalbld ;;
-  }
-
-  dimension_group: dt_itens {
-    type: time
-    sql: ${TABLE}.dt_itens ;;
-  }
-
-  dimension: cdmoedafretetotalbld {
-    type: string
-    sql: ${TABLE}.cdmoedafretetotalbld ;;
-  }
-
-  dimension: ncm {
-    type: string
-    sql: ${TABLE}.ncm ;;
-  }
-
-  dimension: ncm_desc {
-    type: string
-    sql: ${TABLE}.ncm_desc ;;
-  }
-
-  dimension: lista_fcl {
-    type: string
-    sql: ${TABLE}.lista_fcl ;;
-  }
-
-  dimension: tipo_fcl {
-    type: string
-    sql: ${TABLE}.tipo_fcl ;;
-  }
-
-  dimension: tipo_carga {
-    type: string
-    sql: ${TABLE}.tipo_carga ;;
-  }
-
-  dimension: c20 {
-    type: number
-    sql: ${TABLE}.c20 ;;
-  }
-
-  dimension: c40 {
-    type: number
-    sql: ${TABLE}.c40 ;;
-  }
-
-  dimension: teus {
-    type: number
-    sql: ${TABLE}.teus ;;
-  }
-
-  dimension: feus {
-    type: number
-    sql: ${TABLE}.feus ;;
-  }
-
-  dimension: total_fcl {
-    type: number
-    sql: ${TABLE}.total_fcl ;;
-  }
-
-  dimension: cnpj_num {
-    type: number
-    sql: ${TABLE}.cnpj_num ;;
-  }
-
-  dimension: tpitem {
-    type: string
-    sql: ${TABLE}.tpitem ;;
-  }
-
-  dimension: itemcarga_vlpesobruto {
-    type: number
-    sql: ${TABLE}.itemcarga_vlpesobruto ;;
-  }
-
-  dimension: itemcarga_vlcubagem {
-    type: number
-    sql: ${TABLE}.itemcarga_vlcubagem ;;
-  }
-
-  dimension: itemcarga_txmarca {
-    type: string
-    sql: ${TABLE}.itemcarga_txmarca ;;
-  }
-
-  dimension: itemcarga_txcontramarca {
-    type: string
-    sql: ${TABLE}.itemcarga_txcontramarca ;;
-  }
-
-  dimension: itemcarga_vlquantidade {
-    type: string
-    sql: ${TABLE}.itemcarga_vlquantidade ;;
-  }
-
-  dimension: itemcarga_cdindicadormercadoriaperigosa {
-    type: string
-    sql: ${TABLE}.itemcarga_cdindicadormercadoriaperigosa ;;
-  }
-
-  dimension: itemcarga_cdclassemercadoriaperigosa {
-    type: string
-    sql: ${TABLE}.itemcarga_cdclassemercadoriaperigosa ;;
-  }
-
-  dimension: itemcarga_cdtipoembalagem {
-    type: string
-    sql: ${TABLE}.itemcarga_cdtipoembalagem ;;
-  }
-
-  dimension: itemcarga_descricao_embalagem {
-    type: string
-    sql: ${TABLE}.itemcarga_descricao_embalagem ;;
-  }
-
-  dimension: itemcarga_cdncms {
-    type: string
-    sql: ${TABLE}.itemcarga_cdncms ;;
-  }
-
-  dimension: temcarga_cdncms {
-    type: string
-    sql: ${TABLE}.temcarga_cdncms ;;
-  }
-
-  dimension: responsavel_cpf {
-    type: string
-    sql: ${TABLE}.responsavel_cpf ;;
-  }
-
-  dimension: responsavel_tipo {
-    type: string
-    sql: ${TABLE}.responsavel_tipo ;;
-  }
-
-  dimension: responsavel_ip {
-    type: string
-    sql: ${TABLE}.responsavel_ip ;;
-  }
-
-  dimension: responsavel_data {
-    type: string
-    sql: ${TABLE}.responsavel_data ;;
-  }
-
-  dimension: responsavel_hora {
-    type: string
-    sql: ${TABLE}.responsavel_hora ;;
-  }
-
-  dimension: itemcarga_noncms {
-    type: string
-    sql: ${TABLE}.itemcarga_noncms ;;
-  }
-
-  dimension: itemcarga_tipocontainer {
-    type: string
-    sql: ${TABLE}.itemcarga_tipocontainer ;;
-  }
-
-  dimension: usoparcial {
-    type: string
-    sql: ${TABLE}.usoparcial ;;
-  }
-
-  dimension: itemcarga_cdtipogranel {
-    type: string
-    sql: ${TABLE}.itemcarga_cdtipogranel ;;
-  }
-
-  dimension: itemcarga_descricao_tipogranel {
-    type: string
-    sql: ${TABLE}.itemcarga_descricao_tipogranel ;;
-  }
-
-  dimension: itemcarga_descricao {
-    type: string
-    sql: ${TABLE}.itemcarga_descricao ;;
-  }
-
-  dimension: nmmoedafretetotalbld {
-    type: string
-    sql: ${TABLE}.nmmoedafretetotalbld ;;
-  }
-
-  dimension_group: dt_consulta_master {
-    type: time
-    sql: ${TABLE}.dt_consulta_master ;;
-  }
-
-  dimension: incodacao {
-    type: string
-    sql: ${TABLE}.incodacao ;;
-  }
-
-  dimension: codigoncmitemcomplementar {
-    type: string
-    sql: ${TABLE}.codigoncmitemcomplementar ;;
-  }
-
-  dimension: descncmitemcomplementar {
-    type: string
-    sql: ${TABLE}.descncmitemcomplementar ;;
-  }
-
-  dimension: link {
-    type: string
-    sql: ${TABLE}.link ;;
-  }
-
-  dimension: itemcarga_condncms {
-    type: string
-    sql: ${TABLE}.itemcarga_condncms ;;
-  }
-
-  dimension: nomeconsiglce {
-    type: string
-    sql: ${TABLE}.nomeconsiglce ;;
-  }
-
-  dimension: enderecoconsiglce {
-    type: string
-    sql: ${TABLE}.enderecoconsiglce ;;
-  }
-
-  dimension: nrruc {
-    type: string
-    sql: ${TABLE}.nrruc ;;
-  }
-
-  dimension: enviar {
-    type: string
-    sql: ${TABLE}.enviar ;;
-  }
-
-  dimension: limpar {
-    type: string
-    sql: ${TABLE}.limpar ;;
-  }
-
-  dimension: id_porto_origem {
-    type: number
-    sql: ${TABLE}.id_porto_origem ;;
-  }
-
-  dimension: id_porto_carga {
-    type: number
-    sql: ${TABLE}.id_porto_carga ;;
-  }
-
-  dimension: id_porto_descarga {
-    type: number
-    sql: ${TABLE}.id_porto_descarga ;;
-  }
-
-  dimension: id_porto_destino {
-    type: number
-    sql: ${TABLE}.id_porto_destino ;;
-  }
-
-  dimension: id_armador {
-    type: number
-    sql: ${TABLE}.id_armador ;;
-  }
-
-  dimension: id_agencia {
-    type: number
-    sql: ${TABLE}.id_agencia ;;
-  }
-
-  dimension: id_shipper {
-    type: number
-    sql: ${TABLE}.id_shipper ;;
-  }
-
-  dimension: id_consig {
-    type: number
-    sql: ${TABLE}.id_consig ;;
-  }
-
-  dimension: id_shipconv {
-    type: number
-    sql: ${TABLE}.id_shipconv ;;
-  }
-
-  dimension: id_notify {
-    type: number
-    sql: ${TABLE}.id_notify ;;
-  }
-
-  dimension: id_agente {
-    type: number
-    sql: ${TABLE}.id_agente ;;
-  }
-
-  dimension: id_agente_inter {
-    type: number
-    sql: ${TABLE}.id_agente_inter ;;
-  }
-
-  dimension: id_terminal_descarga {
-    type: number
-    sql: ${TABLE}.id_terminal_descarga ;;
-  }
-
-  dimension: id_terminal_carga {
-    type: number
-    sql: ${TABLE}.id_terminal_carga ;;
-  }
-
-  dimension: id_moeda_frete {
-    type: number
-    sql: ${TABLE}.id_moeda_frete ;;
-  }
-
-  dimension: id_pais_origem {
-    type: number
-    sql: ${TABLE}.id_pais_origem ;;
-  }
-
-  dimension: id_fcl {
-    type: number
-    sql: ${TABLE}.id_fcl ;;
-  }
-
-  dimension: id_pais_destino {
-    type: number
-    sql: ${TABLE}.id_pais_destino ;;
-  }
-
-  dimension_group: dt_cabotagem {
-    type: time
-    sql: ${TABLE}.dt_cabotagem ;;
-  }
-
-  dimension: id_nvocc {
-    type: number
-    sql: ${TABLE}.id_nvocc ;;
-  }
-
-  dimension_group: dt_update_agente {
-    type: time
-    sql: ${TABLE}.dt_update_agente ;;
-  }
-
-  dimension: tipoconhecimentooriginal {
-    type: string
-    sql: ${TABLE}.tipoconhecimentooriginal ;;
-  }
-
-  dimension_group: deleted_at {
-    type: time
-    sql: ${TABLE}.deleted_at ;;
-  }
-
-  dimension: teus_parcial {
-    type: number
-    sql: ${TABLE}.teus_parcial ;;
-  }
-
-  dimension_group: checked_at {
-    type: time
-    sql: ${TABLE}.checked_at ;;
-  }
-
-  dimension_group: available_at {
-    type: time
-    sql: ${TABLE}.available_at ;;
-  }
-
-  dimension_group: processed_at {
-    type: time
-    sql: ${TABLE}.processed_at ;;
-  }
-
-  dimension_group: checked_error_at {
-    type: time
-    sql: ${TABLE}.checked_error_at ;;
-  }
-
-  dimension: obs_migr {
-    type: string
-    sql: ${TABLE}.obs_migr ;;
-  }
-
-  dimension: id_recinto_aduaneiro {
-    type: number
-    sql: ${TABLE}.id_recinto_aduaneiro ;;
-  }
-
-  dimension: cdncm_compl {
-    type: string
-    sql: ${TABLE}.cdncm_compl ;;
-  }
-
-  dimension: lista_hscode {
-    type: string
-    sql: ${TABLE}.lista_hscode ;;
-  }
-
-  dimension: id_original {
-    type: number
-    sql: ${TABLE}.id_original ;;
-  }
-
-  dimension: desc_hscode {
-    type: string
-    sql: ${TABLE}.desc_hscode ;;
-  }
-
-  dimension: desc_ncm {
-    type: string
-    sql: ${TABLE}.desc_ncm ;;
-  }
-
-  dimension: id0 {
-    type: number
-    sql: ${TABLE}.id0 ;;
-  }
-
-  dimension: pu_export_cargo_reception_id {
-    type: number
-    sql: ${TABLE}.pu_export_cargo_reception_id ;;
-  }
-
-  dimension: sequential_number {
-    type: number
-    sql: ${TABLE}.sequential_number ;;
-  }
-
-  dimension: filter_date {
-    type: date
-    sql: ${TABLE}.filter_date ;;
-  }
-
-  dimension: tipo {
-    type: number
-    sql: ${TABLE}.tipo ;;
-  }
-
-  dimension: tipooperacaocarga {
-    type: string
-    sql: ${TABLE}.tipooperacaocarga ;;
-  }
-
-  dimension: tipodocumentooperacao {
-    type: string
-    sql: ${TABLE}.tipodocumentooperacao ;;
-  }
-
-  dimension: cod_urf {
-    type: number
-    sql: ${TABLE}.cod_urf ;;
-  }
-
-  dimension: desc_urf {
-    type: string
-    sql: ${TABLE}.desc_urf ;;
-  }
-
-  dimension: cod_ra {
-    type: number
-    sql: ${TABLE}.cod_ra ;;
-  }
-
-  dimension: desc_ra {
-    type: string
-    sql: ${TABLE}.desc_ra ;;
-  }
-
-  dimension: responsavel_cnpj {
-    type: string
-    sql: ${TABLE}.responsavel_cnpj ;;
-  }
-
-  dimension: responsavel_nome {
-    type: string
-    sql: ${TABLE}.responsavel_nome ;;
-  }
-
-  dimension: latitude {
-    type: number
-    sql: ${TABLE}.latitude ;;
-  }
-
-  dimension: longitude {
-    type: number
-    sql: ${TABLE}.longitude ;;
-  }
-
-  dimension: entregador_cnpj {
-    type: string
-    sql: ${TABLE}.entregador_cnpj ;;
-  }
-
-  dimension: entregador_nome {
-    type: string
-    sql: ${TABLE}.entregador_nome ;;
-  }
-
-  dimension: recebedor_cnpj {
-    type: string
-    sql: ${TABLE}.recebedor_cnpj ;;
-  }
-
-  dimension: recebedor_nome {
-    type: string
-    sql: ${TABLE}.recebedor_nome ;;
-  }
-
-  dimension: nacionalidaderecebedor {
-    type: string
-    sql: ${TABLE}.nacionalidaderecebedor ;;
-  }
-
-  dimension: condutor_codigo {
-    type: string
-    sql: ${TABLE}.condutor_codigo ;;
-  }
-
-  dimension: condutor_nome {
-    type: string
-    sql: ${TABLE}.condutor_nome ;;
-  }
-
-  dimension: condutorbrasileiro {
-    type: string
-    sql: ${TABLE}.condutorbrasileiro ;;
-  }
-
-  dimension: viatransporte {
-    type: string
-    sql: ${TABLE}.viatransporte ;;
-  }
-
-  dimension: veiculo_placa {
-    type: string
-    sql: ${TABLE}.veiculo_placa ;;
-  }
-
-  dimension: veiculo_lacres {
-    type: string
-    sql: ${TABLE}.veiculo_lacres ;;
-  }
-
-  dimension: ind_escaneamento {
-    type: string
-    sql: ${TABLE}.ind_escaneamento ;;
-  }
-
-  dimension: ind_transito_simpl {
-    type: string
-    sql: ${TABLE}.ind_transito_simpl ;;
-  }
-
-  dimension: peso_aferido {
-    type: number
-    sql: ${TABLE}.peso_aferido ;;
-  }
-
-  dimension: motivo_nao_pesagem {
-    type: string
-    sql: ${TABLE}.motivo_nao_pesagem ;;
-  }
-
-  dimension: observacoes {
-    type: string
-    sql: ${TABLE}.observacoes ;;
-  }
-
-  dimension: descr_avaria {
-    type: string
-    sql: ${TABLE}.descr_avaria ;;
-  }
-
-  dimension: local_armazenamento {
-    type: string
-    sql: ${TABLE}.local_armazenamento ;;
-  }
-
-  dimension: local_referencia {
-    type: string
-    sql: ${TABLE}.local_referencia ;;
-  }
-
-  dimension: descr_divergencia {
-    type: string
-    sql: ${TABLE}.descr_divergencia ;;
-  }
-
-  dimension: recepcao_mau_funcionamento {
-    type: string
-    sql: ${TABLE}.recepcao_mau_funcionamento ;;
-  }
-
-  dimension: has_conteiner_nota {
-    type: string
-    sql: ${TABLE}.has_conteiner_nota ;;
-  }
-
-  dimension_group: dataregistro {
-    type: time
-    sql: ${TABLE}.dataregistro ;;
-  }
-
-  dimension: transportador_cnpj {
-    type: string
-    sql: ${TABLE}.transportador_cnpj ;;
-  }
-
-  dimension: transportador_nome {
-    type: string
-    sql: ${TABLE}.transportador_nome ;;
-  }
-
-  dimension: transp_condutor_cpf {
-    type: string
-    sql: ${TABLE}.transp_condutor_cpf ;;
-  }
-
-  dimension: transp_condutor_nome {
-    type: string
-    sql: ${TABLE}.transp_condutor_nome ;;
-  }
-
-  dimension: num_doc_manifest {
-    type: string
-    sql: ${TABLE}.num_doc_manifest ;;
-  }
-
-  dimension: tp_doc_manifest {
-    type: number
-    sql: ${TABLE}.tp_doc_manifest ;;
-  }
-
-  dimension: desc_tp_doc_manifest {
-    type: string
-    sql: ${TABLE}.desc_tp_doc_manifest ;;
-  }
-
-  dimension: veic_dat_condutor_confere {
-    type: string
-    sql: ${TABLE}.veic_dat_condutor_confere ;;
-  }
-
-  dimension: unid_transp_dat_confere {
-    type: string
-    sql: ${TABLE}.unid_transp_dat_confere ;;
-  }
-
-  dimension: elem_segur_dat_confere {
-    type: string
-    sql: ${TABLE}.elem_segur_dat_confere ;;
-  }
-
-  dimension: conteiner_dat_confere {
-    type: string
-    sql: ${TABLE}.conteiner_dat_confere ;;
-  }
-
-  dimension: dt_emissao {
-    type: date
-    sql: ${TABLE}.dt_emissao ;;
-  }
-
-  dimension_group: created_at {
-    type: time
-    sql: ${TABLE}.created_at ;;
-  }
-
-  dimension: conhecimento {
-    type: string
-    sql: ${TABLE}.conhecimento ;;
-  }
-
-  dimension: nrcemercante0 {
-    type: number
-    sql: ${TABLE}.nrcemercante0 ;;
-  }
-
-  dimension_group: updated_at {
-    type: time
-    sql: ${TABLE}.updated_at ;;
-  }
-
-  dimension: id00 {
-    type: number
-    sql: ${TABLE}.id00 ;;
-  }
-
-  dimension: id_exp_cargo_details {
-    type: number
-    sql: ${TABLE}.id_exp_cargo_details ;;
-  }
-
-  dimension: id_nf {
-    type: number
-    sql: ${TABLE}.id_nf ;;
-  }
-
-  dimension: num_nf {
-    type: string
-    sql: ${TABLE}.num_nf ;;
-  }
-
-  dimension: num_serie {
-    type: string
-    sql: ${TABLE}.num_serie ;;
-  }
-
-  dimension: modelo {
-    type: string
-    sql: ${TABLE}.modelo ;;
-  }
-
-  dimension: anomes_nf {
-    type: number
-    sql: ${TABLE}.anomes_nf ;;
-  }
-
-  dimension: sigla_uf_emitente {
-    type: string
-    sql: ${TABLE}.sigla_uf_emitente ;;
-  }
-
-  dimension_group: data_emissao {
-    type: time
-    sql: ${TABLE}.data_emissao ;;
-  }
-
-  dimension: cpf_cnpj_destinatario {
-    type: string
-    sql: ${TABLE}.cpf_cnpj_destinatario ;;
-  }
-
-  dimension: nome_destinatario {
-    type: string
-    sql: ${TABLE}.nome_destinatario ;;
-  }
-
-  dimension_group: data_cancelamento {
-    type: time
-    sql: ${TABLE}.data_cancelamento ;;
-  }
-
-  dimension_group: created_at0 {
-    type: time
-    sql: ${TABLE}.created_at0 ;;
-  }
-
-  dimension: cpf_cnpj_emissor {
-    type: string
-    sql: ${TABLE}.cpf_cnpj_emissor ;;
-  }
-
-  dimension: nome_emissor {
-    type: string
-    sql: ${TABLE}.nome_emissor ;;
-  }
-
-  dimension: id1 {
-    type: number
-    sql: ${TABLE}.id1 ;;
-  }
-
-  dimension: id_exp_cargo_details0 {
-    type: number
-    sql: ${TABLE}.id_exp_cargo_details0 ;;
-  }
-
-  dimension: id_nf0 {
-    type: number
-    sql: ${TABLE}.id_nf0 ;;
-  }
-
-  dimension: num_item {
-    type: number
-    sql: ${TABLE}.num_item ;;
-  }
-
-  dimension: cod_produto {
-    type: string
-    sql: ${TABLE}.cod_produto ;;
-  }
-
-  dimension: cdncm_compl0 {
-    type: number
-    sql: ${TABLE}.cdncm_compl0 ;;
-  }
-
-  dimension: descr_ncm {
-    type: string
-    sql: ${TABLE}.descr_ncm ;;
-  }
-
-  dimension: descricao {
-    type: string
-    sql: ${TABLE}.descricao ;;
-  }
-
-  dimension: cfop {
-    type: number
-    sql: ${TABLE}.cfop ;;
-  }
-
-  dimension: val_tot_bruto {
-    type: number
-    sql: ${TABLE}.val_tot_bruto ;;
-  }
-
-  dimension: qtd_estatistica {
-    type: number
-    sql: ${TABLE}.qtd_estatistica ;;
-  }
-
-  dimension_group: created_at1 {
-    type: time
-    sql: ${TABLE}.created_at1 ;;
-  }
-
-  dimension: id2 {
-    type: number
-    sql: ${TABLE}.id2 ;;
-  }
-
-  dimension: id_exp_cargo_details1 {
-    type: number
-    sql: ${TABLE}.id_exp_cargo_details1 ;;
-  }
-
-  dimension: id_nf1 {
-    type: number
-    sql: ${TABLE}.id_nf1 ;;
-  }
-
-  dimension: conteiner {
-    type: string
-    sql: ${TABLE}.conteiner ;;
-  }
-
-  dimension: tara {
-    type: number
-    sql: ${TABLE}.tara ;;
-  }
-
-  dimension: dispensa_lacres {
-    type: string
-    sql: ${TABLE}.dispensa_lacres ;;
-  }
-
-  dimension: lacres {
-    type: string
-    sql: ${TABLE}.lacres ;;
-  }
-
-  dimension: peso_aferido0 {
-    type: number
-    sql: ${TABLE}.peso_aferido0 ;;
-  }
-
-  dimension_group: created_at2 {
-    type: time
-    sql: ${TABLE}.created_at2 ;;
-  }
-
-  dimension: location {
-    type: location
-    sql_latitude: ${TABLE}.latitude ;;
-    sql_longitude: ${TABLE}.longitude ;;
-  }
-
-  set: detail {
-    fields: [
-      id_mar,
-      id,
-      ide,
-      idu,
-      data_registro_time,
-      nrmanifesto,
-      dtemissao,
-      dtoperacao,
-      dtemissaoce,
-      dtemissaocemaster,
-      nrviagem,
-      cdportocarregamento,
-      nmportocarregamento,
-      cdportodescarregamento,
-      nmportodescarregamento,
-      tptrafego,
-      cdembarcacao,
-      nmembarcacao,
-      cdempresanavegacao,
-      nmempresanavegacao,
-      cdagencianavegacao,
-      nmagencianavegacao,
-      qtconhecimentosinformados,
-      qtconhecimentosexistentes,
-      qtconhecimentosassociado,
-      ckshipsconvenience,
-      bloqueio_conhecimento,
-      ret_pendente_analise,
-      revisao_ou_pendencia_afrmm,
-      pendencia_transito_maritimo,
-      situacao_endosso,
-      nrcemercante,
-      nrblconhecimento,
-      vlcubagem,
-      vlpesobruto,
-      cdportoorigem,
-      nmportoorigem,
-      cdportodestino,
-      nmportodestino,
-      cdportooriginal,
-      nmportooriginal,
-      tipoconhecimento,
-      categoriacarga,
-      cdconsignatario,
-      txshipper,
-      txmercadoria,
-      txobservacoes,
-      txnotifypart,
-      cdnotifypart,
-      nmconsignatario,
-      nrpassaporteconsignatario,
-      txconsignatario,
-      cdpracaentexterior,
-      nmpracaentexterior,
-      indblordem,
-      cdmoedafrete,
-      nmmoedafrete,
-      oprecolhimentofrete,
-      indmodalidadefrete,
-      dtceorigem,
-      nrceorigem,
-      nmnavioorigem,
-      transbordosexterior,
-      ckblservico,
-      nrceoriginal,
-      cdterminalportuario,
-      nmterminalportuario,
-      indufdestino,
-      nmufdestino,
-      cdpaisprocedencia,
-      nmpaisprocedencia,
-      responsavel_cpf_conhec,
-      responsavel_nome_conhec,
-      responsavel_tipo_conhec,
-      responsavel_ip_conhec,
-      responsavel_data_conhec,
-      itens,
-      nrcemaster,
-      qthouseinformadomaster,
-      qthousedeclaradomaster,
-      cdempnavegdesconmaster,
-      nmempnavegdesconmaster,
-      cdagtnavegmaster,
-      nmagtnavegmaster,
-      itemcarga_nritem,
-      nrdde,
-      indedse,
-      cdpaisdestfinal,
-      nmpaisdestfinal,
-      cdshipper,
-      qtveiculostransportadores,
-      nova,
-      opconsignatario,
-      vlfretetotal,
-      vlfrete,
-      componentesfrete,
-      cdterminalportuariocarregamento,
-      nmterminalportuariocarregamento,
-      vlfretetotalbld,
-      dt_itens_time,
-      cdmoedafretetotalbld,
-      ncm,
-      ncm_desc,
-      lista_fcl,
-      tipo_fcl,
-      tipo_carga,
-      c20,
-      c40,
-      teus,
-      feus,
-      total_fcl,
-      cnpj_num,
-      tpitem,
-      itemcarga_vlpesobruto,
-      itemcarga_vlcubagem,
-      itemcarga_txmarca,
-      itemcarga_txcontramarca,
-      itemcarga_vlquantidade,
-      itemcarga_cdindicadormercadoriaperigosa,
-      itemcarga_cdclassemercadoriaperigosa,
-      itemcarga_cdtipoembalagem,
-      itemcarga_descricao_embalagem,
-      itemcarga_cdncms,
-      temcarga_cdncms,
-      responsavel_cpf,
-      responsavel_tipo,
-      responsavel_ip,
-      responsavel_data,
-      responsavel_hora,
-      itemcarga_noncms,
-      itemcarga_tipocontainer,
-      usoparcial,
-      itemcarga_cdtipogranel,
-      itemcarga_descricao_tipogranel,
-      itemcarga_descricao,
-      nmmoedafretetotalbld,
-      dt_consulta_master_time,
-      incodacao,
-      codigoncmitemcomplementar,
-      descncmitemcomplementar,
-      link,
-      itemcarga_condncms,
-      nomeconsiglce,
-      enderecoconsiglce,
-      nrruc,
-      enviar,
-      limpar,
-      id_porto_origem,
-      id_porto_carga,
-      id_porto_descarga,
-      id_porto_destino,
-      id_armador,
-      id_agencia,
-      id_shipper,
-      id_consig,
-      id_shipconv,
-      id_notify,
-      id_agente,
-      id_agente_inter,
-      id_terminal_descarga,
-      id_terminal_carga,
-      id_moeda_frete,
-      id_pais_origem,
-      id_fcl,
-      id_pais_destino,
-      dt_cabotagem_time,
-      id_nvocc,
-      dt_update_agente_time,
-      tipoconhecimentooriginal,
-      deleted_at_time,
-      teus_parcial,
-      checked_at_time,
-      available_at_time,
-      processed_at_time,
-      checked_error_at_time,
-      obs_migr,
-      id_recinto_aduaneiro,
-      cdncm_compl,
-      lista_hscode,
-      id_original,
-      desc_hscode,
-      desc_ncm,
-      id0,
-      pu_export_cargo_reception_id,
-      sequential_number,
-      filter_date,
-      tipo,
-      tipooperacaocarga,
-      tipodocumentooperacao,
-      cod_urf,
-      desc_urf,
-      cod_ra,
-      desc_ra,
-      responsavel_cnpj,
-      responsavel_nome,
-      latitude,
-      longitude,
-      entregador_cnpj,
-      entregador_nome,
-      recebedor_cnpj,
-      recebedor_nome,
-      nacionalidaderecebedor,
-      condutor_codigo,
-      condutor_nome,
-      condutorbrasileiro,
-      viatransporte,
-      veiculo_placa,
-      veiculo_lacres,
-      ind_escaneamento,
-      ind_transito_simpl,
-      peso_aferido,
-      motivo_nao_pesagem,
-      observacoes,
-      descr_avaria,
-      local_armazenamento,
-      local_referencia,
-      descr_divergencia,
-      recepcao_mau_funcionamento,
-      has_conteiner_nota,
-      dataregistro_time,
-      transportador_cnpj,
-      transportador_nome,
-      transp_condutor_cpf,
-      transp_condutor_nome,
-      num_doc_manifest,
-      tp_doc_manifest,
-      desc_tp_doc_manifest,
-      veic_dat_condutor_confere,
-      unid_transp_dat_confere,
-      elem_segur_dat_confere,
-      conteiner_dat_confere,
-      dt_emissao,
-      created_at_time,
-      conhecimento,
-      nrcemercante0,
-      updated_at_time,
-      id00,
-      id_exp_cargo_details,
-      id_nf,
-      num_nf,
-      num_serie,
-      modelo,
-      anomes_nf,
-      sigla_uf_emitente,
-      data_emissao_time,
-      cpf_cnpj_destinatario,
-      nome_destinatario,
-      data_cancelamento_time,
-      created_at0_time,
-      cpf_cnpj_emissor,
-      nome_emissor,
-      id1,
-      id_exp_cargo_details0,
-      id_nf0,
-      num_item,
-      cod_produto,
-      cdncm_compl0,
-      descr_ncm,
-      descricao,
-      cfop,
-      val_tot_bruto,
-      qtd_estatistica,
-      created_at1_time,
-      id2,
-      id_exp_cargo_details1,
-      id_nf1,
-      conteiner,
-      tara,
-      dispensa_lacres,
-      lacres,
-      peso_aferido0,
-      created_at2_time,
-      location
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
     ]
+    sql: ${TABLE}.dt_filter_date ;;
   }
+
+
+  dimension: dt_tipo {
+    type: number
+    sql: ${TABLE}.dt_tipo ;;
+  }
+
+  dimension: dt_tipooperacaocarga {
+    type: string
+    sql: ${TABLE}.dt_tipooperacaocarga ;;
+  }
+
+  dimension: dt_tipodocumentooperacao {
+    type: string
+    sql: ${TABLE}.dt_tipodocumentooperacao ;;
+  }
+
+  dimension: dt_cod_urf {
+    type: number
+    sql: ${TABLE}.dt_cod_urf ;;
+  }
+
+  dimension: dt_desc_urf {
+    type: string
+    sql: ${TABLE}.dt_desc_urf ;;
+  }
+
+  dimension: dt_cod_ra {
+    type: number
+    sql: ${TABLE}.dt_cod_ra ;;
+  }
+
+  dimension: dt_desc_ra {
+    type: string
+    sql: ${TABLE}.dt_desc_ra ;;
+  }
+
+  dimension: dt_responsavel_cnpj {
+    type: string
+    sql: ${TABLE}.dt_responsavel_cnpj ;;
+  }
+
+  dimension: dt_responsavel_nome {
+    type: string
+    sql: ${TABLE}.dt_responsavel_nome ;;
+  }
+
+  dimension: dt_latitude {
+    type: number
+    sql: ${TABLE}.dt_latitude ;;
+  }
+
+  dimension: dt_longitude {
+    type: number
+    sql: ${TABLE}.dt_longitude ;;
+  }
+
+  dimension: dt_entregador_cnpj {
+    type: string
+    sql: ${TABLE}.dt_entregador_cnpj ;;
+  }
+
+  dimension: dt_entregador_nome {
+    type: string
+    sql: ${TABLE}.dt_entregador_nome ;;
+  }
+
+  dimension: dt_recebedor_cnpj {
+    type: string
+    sql: ${TABLE}.dt_recebedor_cnpj ;;
+  }
+
+  dimension: dt_recebedor_nome {
+    type: string
+    sql: ${TABLE}.dt_recebedor_nome ;;
+  }
+
+  dimension: dt_nacionalidaderecebedor {
+    type: string
+    sql: ${TABLE}.dt_nacionalidaderecebedor ;;
+  }
+
+  dimension: dt_condutor_codigo {
+    type: string
+    sql: ${TABLE}.dt_condutor_codigo ;;
+  }
+
+  dimension: dt_condutor_nome {
+    type: string
+    sql: ${TABLE}.dt_condutor_nome ;;
+  }
+
+  dimension: dt_condutorbrasileiro {
+    type: string
+    sql: ${TABLE}.dt_condutorbrasileiro ;;
+  }
+
+  dimension: dt_viatransporte {
+    type: string
+    sql: ${TABLE}.dt_viatransporte ;;
+  }
+
+  dimension: dt_veiculo_placa {
+    type: string
+    sql: ${TABLE}.dt_veiculo_placa ;;
+  }
+
+  dimension: dt_veiculo_lacres {
+    type: string
+    sql: ${TABLE}.dt_veiculo_lacres ;;
+  }
+
+  dimension: dt_ind_escaneamento {
+    type: string
+    sql: ${TABLE}.dt_ind_escaneamento ;;
+  }
+
+  dimension: dt_ind_transito_simpl {
+    type: string
+    sql: ${TABLE}.dt_ind_transito_simpl ;;
+  }
+
+  dimension: dt_peso_aferido {
+    type: number
+    sql: ${TABLE}.dt_peso_aferido ;;
+  }
+
+  dimension: dt_motivo_nao_pesagem {
+    type: string
+    sql: ${TABLE}.dt_motivo_nao_pesagem ;;
+  }
+
+  dimension: dt_observacoes {
+    type: string
+    sql: ${TABLE}.dt_observacoes ;;
+  }
+
+  dimension: dt_descr_avaria {
+    type: string
+    sql: ${TABLE}.dt_descr_avaria ;;
+  }
+
+  dimension: dt_local_armazenamento {
+    type: string
+    sql: ${TABLE}.dt_local_armazenamento ;;
+  }
+
+  dimension: dt_local_referencia {
+    type: string
+    sql: ${TABLE}.dt_local_referencia ;;
+  }
+
+  dimension: dt_descr_divergencia {
+    type: string
+    sql: ${TABLE}.dt_descr_divergencia ;;
+  }
+
+  dimension: dt_recepcao_mau_funcionamento {
+    type: string
+    sql: ${TABLE}.dt_recepcao_mau_funcionamento ;;
+  }
+
+  dimension: dt_has_conteiner_nota {
+    type: string
+    sql: ${TABLE}.dt_has_conteiner_nota ;;
+  }
+
+  dimension_group: dt_dataregistro {
+    type: time
+    sql: ${TABLE}.dt_dataregistro ;;
+  }
+
+  dimension: dt_transportador_cnpj {
+    type: string
+    sql: ${TABLE}.dt_transportador_cnpj ;;
+  }
+
+  dimension: dt_transportador_nome {
+    type: string
+    sql: ${TABLE}.dt_transportador_nome ;;
+  }
+
+  dimension: dt_transp_condutor_cpf {
+    type: string
+    sql: ${TABLE}.dt_transp_condutor_cpf ;;
+  }
+
+  dimension: dt_transp_condutor_nome {
+    type: string
+    sql: ${TABLE}.dt_transp_condutor_nome ;;
+  }
+
+  dimension: dt_num_doc_manifest {
+    type: string
+    sql: ${TABLE}.dt_num_doc_manifest ;;
+  }
+
+  dimension: dt_tp_doc_manifest {
+    type: number
+    sql: ${TABLE}.dt_tp_doc_manifest ;;
+  }
+
+  dimension: dt_desc_tp_doc_manifest {
+    type: string
+    sql: ${TABLE}.dt_desc_tp_doc_manifest ;;
+  }
+
+  dimension: dt_veic_dat_condutor_confere {
+    type: string
+    sql: ${TABLE}.dt_veic_dat_condutor_confere ;;
+  }
+
+  dimension: dt_unid_transp_dat_confere {
+    type: string
+    sql: ${TABLE}.dt_unid_transp_dat_confere ;;
+  }
+
+  dimension: dt_elem_segur_dat_confere {
+    type: string
+    sql: ${TABLE}.dt_elem_segur_dat_confere ;;
+  }
+
+  dimension: dt_conteiner_dat_confere {
+    type: string
+    sql: ${TABLE}.dt_conteiner_dat_confere ;;
+  }
+
+  dimension_group: dt_dt_emissao {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.dt_dt_emissao ;;
+  }
+
+  dimension_group: dt_created_at {
+    type: time
+    sql: ${TABLE}.dt_created_at ;;
+  }
+
+  dimension_group: dt_updated_at {
+    type: time
+    sql: ${TABLE}.dt_updated_at ;;
+  }
+
+  dimension: nf_id {
+    type: number
+    sql: ${TABLE}.nf_id ;;
+  }
+
+  dimension: nf_id_exp_cargo_details {
+    type: number
+    sql: ${TABLE}.nf_id_exp_cargo_details ;;
+  }
+
+  dimension: nf_id_nf {
+    type: number
+    sql: ${TABLE}.nf_id_nf ;;
+  }
+
+  dimension: nf_num_nf {
+    type: string
+    sql: ${TABLE}.nf_num_nf ;;
+  }
+
+  dimension: nf_num_serie {
+    type: string
+    sql: ${TABLE}.nf_num_serie ;;
+  }
+
+  dimension: nf_modelo {
+    type: string
+    sql: ${TABLE}.nf_modelo ;;
+  }
+
+  dimension: nf_anomes_nf {
+    type: number
+    sql: ${TABLE}.nf_anomes_nf ;;
+  }
+
+  dimension: nf_sigla_uf_emitente {
+    type: string
+    sql: ${TABLE}.nf_sigla_uf_emitente ;;
+  }
+
+  dimension_group: nf_data_emissao {
+    type: time
+    sql: ${TABLE}.nf_data_emissao ;;
+  }
+
+  dimension: nf_cpf_cnpj_destinatario {
+    type: string
+    sql: ${TABLE}.nf_cpf_cnpj_destinatario ;;
+  }
+
+  dimension: nf_nome_destinatario {
+    type: string
+    sql: ${TABLE}.nf_nome_destinatario ;;
+  }
+
+  dimension_group: nf_data_cancelamento {
+    type: time
+    sql: ${TABLE}.nf_data_cancelamento ;;
+  }
+
+  dimension_group: nf_created_at {
+    type: time
+    sql: ${TABLE}.nf_created_at ;;
+  }
+
+  dimension: nf_cpf_cnpj_emissor {
+    type: string
+    sql: ${TABLE}.nf_cpf_cnpj_emissor ;;
+  }
+
+  dimension: nf_nome_emissor {
+    type: string
+    sql: ${TABLE}.nf_nome_emissor ;;
+  }
+
+  dimension: it_id {
+    type: number
+    sql: ${TABLE}.it_id ;;
+  }
+
+  dimension: it_id_exp_cargo_details {
+    type: number
+    sql: ${TABLE}.it_id_exp_cargo_details ;;
+  }
+
+  dimension: it_id_nf {
+    type: number
+    sql: ${TABLE}.it_id_nf ;;
+  }
+
+  dimension: it_num_item {
+    type: number
+    sql: ${TABLE}.it_num_item ;;
+  }
+
+  dimension: it_cod_produto {
+    type: string
+    sql: ${TABLE}.it_cod_produto ;;
+  }
+
+  dimension: it_cdncm_compl {
+    type: number
+    sql: ${TABLE}.it_cdncm_compl ;;
+  }
+
+  dimension: it_descr_ncm {
+    type: string
+    sql: ${TABLE}.it_descr_ncm ;;
+  }
+
+  dimension: it_descricao {
+    type: string
+    sql: ${TABLE}.it_descricao ;;
+  }
+
+  dimension: it_cfop {
+    type: number
+    sql: ${TABLE}.it_cfop ;;
+  }
+
+  dimension: it_val_tot_bruto {
+    type: number
+    sql: ${TABLE}.it_val_tot_bruto ;;
+  }
+
+  dimension: it_qtd_estatistica {
+    type: number
+    sql: ${TABLE}.it_qtd_estatistica ;;
+  }
+
+  dimension_group: it_created_at {
+    type: time
+    sql: ${TABLE}.it_created_at ;;
+  }
+
+  dimension: fcl_id {
+    type: number
+    sql: ${TABLE}.fcl_id ;;
+  }
+
+  dimension: fcl_id_exp_cargo_details {
+    type: number
+    sql: ${TABLE}.fcl_id_exp_cargo_details ;;
+  }
+
+  dimension: fcl_id_nf {
+    type: number
+    sql: ${TABLE}.fcl_id_nf ;;
+  }
+
+  dimension: fcl_conteiner {
+    type: string
+    sql: ${TABLE}.fcl_conteiner ;;
+  }
+
+  dimension: fcl_tara {
+    type: number
+    sql: ${TABLE}.fcl_tara ;;
+  }
+
+  dimension: fcl_dispensa_lacres {
+    type: string
+    sql: ${TABLE}.fcl_dispensa_lacres ;;
+  }
+
+  dimension: fcl_lacres {
+    type: string
+    sql: ${TABLE}.fcl_lacres ;;
+  }
+
+  dimension: fcl_peso_aferido {
+    type: number
+    sql: ${TABLE}.fcl_peso_aferido ;;
+  }
+
+  dimension_group: fcl_created_at {
+    type: time
+    sql: ${TABLE}.fcl_created_at ;;
+  }
+
+  dimension: mar_conteiner {
+    type: string
+    sql: ${TABLE}.mar_conteiner ;;
+  }
+
+  dimension: mar_id {
+    type: number
+    sql: ${TABLE}.mar_id ;;
+  }
+
+  dimension: mar_ide {
+    type: number
+    sql: ${TABLE}.mar_ide ;;
+  }
+
+  dimension: mar_idu {
+    type: number
+    sql: ${TABLE}.mar_idu ;;
+  }
+
+  dimension_group: mar_data_registro {
+    type: time
+    sql: ${TABLE}.mar_data_registro ;;
+  }
+
+  dimension: mar_nrmanifesto {
+    type: string
+    sql: ${TABLE}.mar_nrmanifesto ;;
+  }
+
+  dimension: mar_dtemissao {
+    type: date
+    sql: ${TABLE}.mar_dtemissao ;;
+  }
+
+  dimension_group: mar_dtoperacao {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.mar_dtoperacao ;;
+  }
+
+  dimension: mar_dtemissaoce {
+    type: date
+    sql: ${TABLE}.mar_dtemissaoce ;;
+  }
+
+  dimension: mar_dtemissaocemaster {
+    type: date
+    sql: ${TABLE}.mar_dtemissaocemaster ;;
+  }
+
+  dimension: mar_nrviagem {
+    type: string
+    sql: ${TABLE}.mar_nrviagem ;;
+  }
+
+  dimension: mar_cdportocarregamento {
+    type: string
+    sql: ${TABLE}.mar_cdportocarregamento ;;
+  }
+
+  dimension: mar_nmportocarregamento {
+    type: string
+    sql: ${TABLE}.mar_nmportocarregamento ;;
+  }
+
+  dimension: mar_cdportodescarregamento {
+    type: string
+    sql: ${TABLE}.mar_cdportodescarregamento ;;
+  }
+
+  dimension: mar_nmportodescarregamento {
+    type: string
+    sql: ${TABLE}.mar_nmportodescarregamento ;;
+  }
+
+  dimension: mar_tptrafego {
+    type: string
+    sql: ${TABLE}.mar_tptrafego ;;
+  }
+
+  dimension: mar_cdembarcacao {
+    type: string
+    sql: ${TABLE}.mar_cdembarcacao ;;
+  }
+
+  dimension: mar_nmembarcacao {
+    type: string
+    sql: ${TABLE}.mar_nmembarcacao ;;
+  }
+
+  dimension: mar_cdempresanavegacao {
+    type: string
+    sql: ${TABLE}.mar_cdempresanavegacao ;;
+  }
+
+  dimension: mar_nmempresanavegacao {
+    type: string
+    sql: ${TABLE}.mar_nmempresanavegacao ;;
+  }
+
+  dimension: mar_cdagencianavegacao {
+    type: string
+    sql: ${TABLE}.mar_cdagencianavegacao ;;
+  }
+
+  dimension: mar_nmagencianavegacao {
+    type: string
+    sql: ${TABLE}.mar_nmagencianavegacao ;;
+  }
+
+  dimension: mar_qtconhecimentosinformados {
+    type: number
+    sql: ${TABLE}.mar_qtconhecimentosinformados ;;
+  }
+
+  dimension: mar_qtconhecimentosexistentes {
+    type: number
+    sql: ${TABLE}.mar_qtconhecimentosexistentes ;;
+  }
+
+  dimension: mar_qtconhecimentosassociado {
+    type: number
+    sql: ${TABLE}.mar_qtconhecimentosassociado ;;
+  }
+
+  dimension: mar_ckshipsconvenience {
+    type: string
+    sql: ${TABLE}.mar_ckshipsconvenience ;;
+  }
+
+  dimension: mar_bloqueio_conhecimento {
+    type: string
+    sql: ${TABLE}.mar_bloqueio_conhecimento ;;
+  }
+
+  dimension: mar_ret_pendente_analise {
+    type: string
+    sql: ${TABLE}.mar_ret_pendente_analise ;;
+  }
+
+  dimension: mar_revisao_ou_pendencia_afrmm {
+    type: string
+    sql: ${TABLE}.mar_revisao_ou_pendencia_afrmm ;;
+  }
+
+  dimension: mar_pendencia_transito_maritimo {
+    type: string
+    sql: ${TABLE}.mar_pendencia_transito_maritimo ;;
+  }
+
+  dimension: mar_situacao_endosso {
+    type: string
+    sql: ${TABLE}.mar_situacao_endosso ;;
+  }
+
+  dimension: mar_nrcemercante {
+    type: number
+    sql: ${TABLE}.mar_nrcemercante ;;
+  }
+
+  dimension: mar_nrblconhecimento {
+    type: string
+    sql: ${TABLE}.mar_nrblconhecimento ;;
+  }
+
+  dimension: mar_vlcubagem {
+    type: number
+    sql: ${TABLE}.mar_vlcubagem ;;
+  }
+
+  dimension: mar_vlpesobruto {
+    type: number
+    sql: ${TABLE}.mar_vlpesobruto ;;
+  }
+
+  dimension: mar_cdportoorigem {
+    type: string
+    sql: ${TABLE}.mar_cdportoorigem ;;
+  }
+
+  dimension: mar_nmportoorigem {
+    type: string
+    sql: ${TABLE}.mar_nmportoorigem ;;
+  }
+
+  dimension: mar_cdportodestino {
+    type: string
+    sql: ${TABLE}.mar_cdportodestino ;;
+  }
+
+  dimension: mar_nmportodestino {
+    type: string
+    sql: ${TABLE}.mar_nmportodestino ;;
+  }
+
+  dimension: mar_cdportooriginal {
+    type: string
+    sql: ${TABLE}.mar_cdportooriginal ;;
+  }
+
+  dimension: mar_nmportooriginal {
+    type: string
+    sql: ${TABLE}.mar_nmportooriginal ;;
+  }
+
+  dimension: mar_tipoconhecimento {
+    type: string
+    sql: ${TABLE}.mar_tipoconhecimento ;;
+  }
+
+  dimension: mar_categoriacarga {
+    type: string
+    sql: ${TABLE}.mar_categoriacarga ;;
+  }
+
+  dimension: mar_cdconsignatario {
+    type: string
+    sql: ${TABLE}.mar_cdconsignatario ;;
+  }
+
+  dimension: mar_txshipper {
+    type: string
+    sql: ${TABLE}.mar_txshipper ;;
+  }
+
+  dimension: mar_txmercadoria {
+    type: string
+    sql: ${TABLE}.mar_txmercadoria ;;
+  }
+
+  dimension: mar_txobservacoes {
+    type: string
+    sql: ${TABLE}.mar_txobservacoes ;;
+  }
+
+  dimension: mar_txnotifypart {
+    type: string
+    sql: ${TABLE}.mar_txnotifypart ;;
+  }
+
+  dimension: mar_cdnotifypart {
+    type: string
+    sql: ${TABLE}.mar_cdnotifypart ;;
+  }
+
+  dimension: mar_nmconsignatario {
+    type: string
+    sql: ${TABLE}.mar_nmconsignatario ;;
+  }
+
+  dimension: mar_nrpassaporteconsignatario {
+    type: string
+    sql: ${TABLE}.mar_nrpassaporteconsignatario ;;
+  }
+
+  dimension: mar_txconsignatario {
+    type: string
+    sql: ${TABLE}.mar_txconsignatario ;;
+  }
+
+  dimension: mar_cdpracaentexterior {
+    type: string
+    sql: ${TABLE}.mar_cdpracaentexterior ;;
+  }
+
+  dimension: mar_nmpracaentexterior {
+    type: string
+    sql: ${TABLE}.mar_nmpracaentexterior ;;
+  }
+
+  dimension: mar_indblordem {
+    type: string
+    sql: ${TABLE}.mar_indblordem ;;
+  }
+
+  dimension: mar_cdmoedafrete {
+    type: string
+    sql: ${TABLE}.mar_cdmoedafrete ;;
+  }
+
+  dimension: mar_nmmoedafrete {
+    type: string
+    sql: ${TABLE}.mar_nmmoedafrete ;;
+  }
+
+  dimension: mar_oprecolhimentofrete {
+    type: string
+    sql: ${TABLE}.mar_oprecolhimentofrete ;;
+  }
+
+  dimension: mar_indmodalidadefrete {
+    type: string
+    sql: ${TABLE}.mar_indmodalidadefrete ;;
+  }
+
+  dimension: mar_dtceorigem {
+    type: string
+    sql: ${TABLE}.mar_dtceorigem ;;
+  }
+
+  dimension: mar_nrceorigem {
+    type: string
+    sql: ${TABLE}.mar_nrceorigem ;;
+  }
+
+  dimension: mar_nmnavioorigem {
+    type: string
+    sql: ${TABLE}.mar_nmnavioorigem ;;
+  }
+
+  dimension: mar_transbordosexterior {
+    type: string
+    sql: ${TABLE}.mar_transbordosexterior ;;
+  }
+
+  dimension: mar_ckblservico {
+    type: string
+    sql: ${TABLE}.mar_ckblservico ;;
+  }
+
+  dimension: mar_nrceoriginal {
+    type: string
+    sql: ${TABLE}.mar_nrceoriginal ;;
+  }
+
+  dimension: mar_cdterminalportuario {
+    type: string
+    sql: ${TABLE}.mar_cdterminalportuario ;;
+  }
+
+  dimension: mar_nmterminalportuario {
+    type: string
+    sql: ${TABLE}.mar_nmterminalportuario ;;
+  }
+
+  dimension: mar_indufdestino {
+    type: string
+    sql: ${TABLE}.mar_indufdestino ;;
+  }
+
+  dimension: mar_nmufdestino {
+    type: string
+    sql: ${TABLE}.mar_nmufdestino ;;
+  }
+
+  dimension: mar_cdpaisprocedencia {
+    type: string
+    sql: ${TABLE}.mar_cdpaisprocedencia ;;
+  }
+
+  dimension: mar_nmpaisprocedencia {
+    type: string
+    sql: ${TABLE}.mar_nmpaisprocedencia ;;
+  }
+
+  dimension: mar_responsavel_cpf_conhec {
+    type: string
+    sql: ${TABLE}.mar_responsavel_cpf_conhec ;;
+  }
+
+  dimension: mar_responsavel_nome_conhec {
+    type: string
+    sql: ${TABLE}.mar_responsavel_nome_conhec ;;
+  }
+
+  dimension: mar_responsavel_tipo_conhec {
+    type: string
+    sql: ${TABLE}.mar_responsavel_tipo_conhec ;;
+  }
+
+  dimension: mar_responsavel_ip_conhec {
+    type: string
+    sql: ${TABLE}.mar_responsavel_ip_conhec ;;
+  }
+
+  dimension: mar_responsavel_data_conhec {
+    type: string
+    sql: ${TABLE}.mar_responsavel_data_conhec ;;
+  }
+
+  dimension: mar_itens {
+    type: string
+    sql: ${TABLE}.mar_itens ;;
+  }
+
+  dimension: mar_nrcemaster {
+    type: string
+    sql: ${TABLE}.mar_nrcemaster ;;
+  }
+
+  dimension: mar_qthouseinformadomaster {
+    type: string
+    sql: ${TABLE}.mar_qthouseinformadomaster ;;
+  }
+
+  dimension: mar_qthousedeclaradomaster {
+    type: string
+    sql: ${TABLE}.mar_qthousedeclaradomaster ;;
+  }
+
+  dimension: mar_cdempnavegdesconmaster {
+    type: string
+    sql: ${TABLE}.mar_cdempnavegdesconmaster ;;
+  }
+
+  dimension: mar_nmempnavegdesconmaster {
+    type: string
+    sql: ${TABLE}.mar_nmempnavegdesconmaster ;;
+  }
+
+  dimension: mar_cdagtnavegmaster {
+    type: string
+    sql: ${TABLE}.mar_cdagtnavegmaster ;;
+  }
+
+  dimension: mar_nmagtnavegmaster {
+    type: string
+    sql: ${TABLE}.mar_nmagtnavegmaster ;;
+  }
+
+  dimension: mar_itemcarga_nritem {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_nritem ;;
+  }
+
+  dimension: mar_nrdde {
+    type: string
+    sql: ${TABLE}.mar_nrdde ;;
+  }
+
+  dimension: mar_indedse {
+    type: string
+    sql: ${TABLE}.mar_indedse ;;
+  }
+
+  dimension: mar_cdpaisdestfinal {
+    type: string
+    sql: ${TABLE}.mar_cdpaisdestfinal ;;
+  }
+
+  dimension: mar_nmpaisdestfinal {
+    type: string
+    sql: ${TABLE}.mar_nmpaisdestfinal ;;
+  }
+
+  dimension: mar_cdshipper {
+    type: string
+    sql: ${TABLE}.mar_cdshipper ;;
+  }
+
+  dimension: mar_qtveiculostransportadores {
+    type: string
+    sql: ${TABLE}.mar_qtveiculostransportadores ;;
+  }
+
+  dimension: mar_nova {
+    type: string
+    sql: ${TABLE}.mar_nova ;;
+  }
+
+  dimension: mar_opconsignatario {
+    type: string
+    sql: ${TABLE}.mar_opconsignatario ;;
+  }
+
+  dimension: mar_vlfretetotal {
+    type: number
+    sql: ${TABLE}.mar_vlfretetotal ;;
+  }
+
+  dimension: mar_vlfrete {
+    type: number
+    sql: ${TABLE}.mar_vlfrete ;;
+  }
+
+  dimension: mar_componentesfrete {
+    type: string
+    sql: ${TABLE}.mar_componentesfrete ;;
+  }
+
+  dimension: mar_cdterminalportuariocarregamento {
+    type: string
+    sql: ${TABLE}.mar_cdterminalportuariocarregamento ;;
+  }
+
+  dimension: mar_nmterminalportuariocarregamento {
+    type: string
+    sql: ${TABLE}.mar_nmterminalportuariocarregamento ;;
+  }
+
+  dimension: mar_vlfretetotalbld {
+    type: string
+    sql: ${TABLE}.mar_vlfretetotalbld ;;
+  }
+
+  dimension_group: mar_dt_itens {
+    type: time
+    sql: ${TABLE}.mar_dt_itens ;;
+  }
+
+  dimension: mar_cdmoedafretetotalbld {
+    type: string
+    sql: ${TABLE}.mar_cdmoedafretetotalbld ;;
+  }
+
+  dimension: mar_ncm {
+    type: string
+    sql: ${TABLE}.mar_ncm ;;
+  }
+
+  dimension: mar_ncm_desc {
+    type: string
+    sql: ${TABLE}.mar_ncm_desc ;;
+  }
+
+  dimension: mar_lista_fcl {
+    type: string
+    sql: ${TABLE}.mar_lista_fcl ;;
+  }
+
+  dimension: mar_tipo_fcl {
+    type: string
+    sql: ${TABLE}.mar_tipo_fcl ;;
+  }
+
+  dimension: mar_tipo_carga {
+    type: string
+    sql: ${TABLE}.mar_tipo_carga ;;
+  }
+
+  dimension: mar_c20 {
+    type: number
+    sql: ${TABLE}.mar_c20 ;;
+  }
+
+  dimension: mar_c40 {
+    type: number
+    sql: ${TABLE}.mar_c40 ;;
+  }
+
+  dimension: mar_teus {
+    type: number
+    sql: ${TABLE}.mar_teus ;;
+  }
+
+  dimension: mar_feus {
+    type: number
+    sql: ${TABLE}.mar_feus ;;
+  }
+
+  dimension: mar_total_fcl {
+    type: number
+    sql: ${TABLE}.mar_total_fcl ;;
+  }
+
+  dimension: mar_cnpj_num {
+    type: number
+    sql: ${TABLE}.mar_cnpj_num ;;
+  }
+
+  dimension: mar_tpitem {
+    type: string
+    sql: ${TABLE}.mar_tpitem ;;
+  }
+
+  dimension: mar_itemcarga_vlpesobruto {
+    type: number
+    sql: ${TABLE}.mar_itemcarga_vlpesobruto ;;
+  }
+
+  dimension: mar_itemcarga_vlcubagem {
+    type: number
+    sql: ${TABLE}.mar_itemcarga_vlcubagem ;;
+  }
+
+  dimension: mar_itemcarga_txmarca {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_txmarca ;;
+  }
+
+  dimension: mar_itemcarga_txcontramarca {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_txcontramarca ;;
+  }
+
+  dimension: mar_itemcarga_vlquantidade {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_vlquantidade ;;
+  }
+
+  dimension: mar_itemcarga_cdindicadormercadoriaperigosa {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_cdindicadormercadoriaperigosa ;;
+  }
+
+  dimension: mar_itemcarga_cdclassemercadoriaperigosa {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_cdclassemercadoriaperigosa ;;
+  }
+
+  dimension: mar_itemcarga_cdtipoembalagem {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_cdtipoembalagem ;;
+  }
+
+  dimension: mar_itemcarga_descricao_embalagem {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_descricao_embalagem ;;
+  }
+
+  dimension: mar_itemcarga_cdncms {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_cdncms ;;
+  }
+
+  dimension: mar_temcarga_cdncms {
+    type: string
+    sql: ${TABLE}.mar_temcarga_cdncms ;;
+  }
+
+  dimension: mar_responsavel_cpf {
+    type: string
+    sql: ${TABLE}.mar_responsavel_cpf ;;
+  }
+
+  dimension: mar_responsavel_tipo {
+    type: string
+    sql: ${TABLE}.mar_responsavel_tipo ;;
+  }
+
+  dimension: mar_responsavel_ip {
+    type: string
+    sql: ${TABLE}.mar_responsavel_ip ;;
+  }
+
+  dimension: mar_responsavel_data {
+    type: string
+    sql: ${TABLE}.mar_responsavel_data ;;
+  }
+
+  dimension: mar_responsavel_hora {
+    type: string
+    sql: ${TABLE}.mar_responsavel_hora ;;
+  }
+
+  dimension: mar_itemcarga_noncms {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_noncms ;;
+  }
+
+  dimension: mar_itemcarga_tipocontainer {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_tipocontainer ;;
+  }
+
+  dimension: mar_usoparcial {
+    type: string
+    sql: ${TABLE}.mar_usoparcial ;;
+  }
+
+  dimension: mar_itemcarga_cdtipogranel {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_cdtipogranel ;;
+  }
+
+  dimension: mar_itemcarga_descricao_tipogranel {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_descricao_tipogranel ;;
+  }
+
+  dimension: mar_itemcarga_descricao {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_descricao ;;
+  }
+
+  dimension: mar_nmmoedafretetotalbld {
+    type: string
+    sql: ${TABLE}.mar_nmmoedafretetotalbld ;;
+  }
+
+  dimension_group: mar_dt_consulta_master {
+    type: time
+    sql: ${TABLE}.mar_dt_consulta_master ;;
+  }
+
+  dimension: mar_incodacao {
+    type: string
+    sql: ${TABLE}.mar_incodacao ;;
+  }
+
+  dimension: mar_codigoncmitemcomplementar {
+    type: string
+    sql: ${TABLE}.mar_codigoncmitemcomplementar ;;
+  }
+
+  dimension: mar_descncmitemcomplementar {
+    type: string
+    sql: ${TABLE}.mar_descncmitemcomplementar ;;
+  }
+
+  dimension: mar_link {
+    type: string
+    sql: ${TABLE}.mar_link ;;
+  }
+
+  dimension: mar_itemcarga_condncms {
+    type: string
+    sql: ${TABLE}.mar_itemcarga_condncms ;;
+  }
+
+  dimension: mar_nomeconsiglce {
+    type: string
+    sql: ${TABLE}.mar_nomeconsiglce ;;
+  }
+
+  dimension: mar_enderecoconsiglce {
+    type: string
+    sql: ${TABLE}.mar_enderecoconsiglce ;;
+  }
+
+  dimension: mar_nrruc {
+    type: string
+    sql: ${TABLE}.mar_nrruc ;;
+  }
+
+  dimension: mar_enviar {
+    type: string
+    sql: ${TABLE}.mar_enviar ;;
+  }
+
+  dimension: mar_limpar {
+    type: string
+    sql: ${TABLE}.mar_limpar ;;
+  }
+
+  dimension: mar_id_porto_origem {
+    type: number
+    sql: ${TABLE}.mar_id_porto_origem ;;
+  }
+
+  dimension: mar_id_porto_carga {
+    type: number
+    sql: ${TABLE}.mar_id_porto_carga ;;
+  }
+
+  dimension: mar_id_porto_descarga {
+    type: number
+    sql: ${TABLE}.mar_id_porto_descarga ;;
+  }
+
+  dimension: mar_id_porto_destino {
+    type: number
+    sql: ${TABLE}.mar_id_porto_destino ;;
+  }
+
+  dimension: mar_id_armador {
+    type: number
+    sql: ${TABLE}.mar_id_armador ;;
+  }
+
+  dimension: mar_id_agencia {
+    type: number
+    sql: ${TABLE}.mar_id_agencia ;;
+  }
+
+  dimension: mar_id_shipper {
+    type: number
+    sql: ${TABLE}.mar_id_shipper ;;
+  }
+
+  dimension: mar_id_consig {
+    type: number
+    sql: ${TABLE}.mar_id_consig ;;
+  }
+
+  dimension: mar_id_shipconv {
+    type: number
+    sql: ${TABLE}.mar_id_shipconv ;;
+  }
+
+  dimension: mar_id_notify {
+    type: number
+    sql: ${TABLE}.mar_id_notify ;;
+  }
+
+  dimension: mar_id_agente {
+    type: number
+    sql: ${TABLE}.mar_id_agente ;;
+  }
+
+  dimension: mar_id_agente_inter {
+    type: number
+    sql: ${TABLE}.mar_id_agente_inter ;;
+  }
+
+  dimension: mar_id_terminal_descarga {
+    type: number
+    sql: ${TABLE}.mar_id_terminal_descarga ;;
+  }
+
+  dimension: mar_id_terminal_carga {
+    type: number
+    sql: ${TABLE}.mar_id_terminal_carga ;;
+  }
+
+  dimension: mar_id_moeda_frete {
+    type: number
+    sql: ${TABLE}.mar_id_moeda_frete ;;
+  }
+
+  dimension: mar_id_pais_origem {
+    type: number
+    sql: ${TABLE}.mar_id_pais_origem ;;
+  }
+
+  dimension: mar_id_fcl {
+    type: number
+    sql: ${TABLE}.mar_id_fcl ;;
+  }
+
+  dimension: mar_id_pais_destino {
+    type: number
+    sql: ${TABLE}.mar_id_pais_destino ;;
+  }
+
+  dimension_group: mar_dt_cabotagem {
+    type: time
+    sql: ${TABLE}.mar_dt_cabotagem ;;
+  }
+
+  dimension: mar_id_nvocc {
+    type: number
+    sql: ${TABLE}.mar_id_nvocc ;;
+  }
+
+  dimension_group: mar_dt_update_agente {
+    type: time
+    sql: ${TABLE}.mar_dt_update_agente ;;
+  }
+
+  dimension: mar_tipoconhecimentooriginal {
+    type: string
+    sql: ${TABLE}.mar_tipoconhecimentooriginal ;;
+  }
+
+  dimension_group: mar_deleted_at {
+    type: time
+    sql: ${TABLE}.mar_deleted_at ;;
+  }
+
+  dimension: mar_teus_parcial {
+    type: number
+    sql: ${TABLE}.mar_teus_parcial ;;
+  }
+
+  dimension_group: mar_checked_at {
+    type: time
+    sql: ${TABLE}.mar_checked_at ;;
+  }
+
+  dimension_group: mar_available_at {
+    type: time
+    sql: ${TABLE}.mar_available_at ;;
+  }
+
+  dimension_group: mar_processed_at {
+    type: time
+    sql: ${TABLE}.mar_processed_at ;;
+  }
+
+  dimension_group: mar_checked_error_at {
+    type: time
+    sql: ${TABLE}.mar_checked_error_at ;;
+  }
+
+  dimension: mar_obs_migr {
+    type: string
+    sql: ${TABLE}.mar_obs_migr ;;
+  }
+
+  dimension: mar_id_recinto_aduaneiro {
+    type: number
+    sql: ${TABLE}.mar_id_recinto_aduaneiro ;;
+  }
+
+  dimension: mar_cdncm_compl {
+    type: string
+    sql: ${TABLE}.mar_cdncm_compl ;;
+  }
+
+  dimension: mar_lista_hscode {
+    type: string
+    sql: ${TABLE}.mar_lista_hscode ;;
+  }
+
+  dimension: mar_id_original {
+    type: number
+    sql: ${TABLE}.mar_id_original ;;
+  }
+
+  dimension: mar_desc_hscode {
+    type: string
+    sql: ${TABLE}.mar_desc_hscode ;;
+  }
+
+  dimension: mar_desc_ncm {
+    type: string
+    sql: ${TABLE}.mar_desc_ncm ;;
+  }
+
+  # set: detail {
+  #   fields: [
+  #     chk_origem,
+  #     dt_pu_export_cargo_reception_id,
+  #     dt_sequential_number,
+  #     dt_filter_date,
+  #     dt_tipo,
+  #     dt_tipooperacaocarga,
+  #     dt_tipodocumentooperacao,
+  #     dt_cod_urf,
+  #     dt_desc_urf,
+  #     dt_cod_ra,
+  #     dt_desc_ra,
+  #     dt_responsavel_cnpj,
+  #     dt_responsavel_nome,
+  #     dt_latitude,
+  #     dt_longitude,
+  #     dt_entregador_cnpj,
+  #     dt_entregador_nome,
+  #     dt_recebedor_cnpj,
+  #     dt_recebedor_nome,
+  #     dt_nacionalidaderecebedor,
+  #     dt_condutor_codigo,
+  #     dt_condutor_nome,
+  #     dt_condutorbrasileiro,
+  #     dt_viatransporte,
+  #     dt_veiculo_placa,
+  #     dt_veiculo_lacres,
+  #     dt_ind_escaneamento,
+  #     dt_ind_transito_simpl,
+  #     dt_peso_aferido,
+  #     dt_motivo_nao_pesagem,
+  #     dt_observacoes,
+  #     dt_descr_avaria,
+  #     dt_local_armazenamento,
+  #     dt_local_referencia,
+  #     dt_descr_divergencia,
+  #     dt_recepcao_mau_funcionamento,
+  #     dt_has_conteiner_nota,
+  #     dt_dataregistro_time,
+  #     dt_transportador_cnpj,
+  #     dt_transportador_nome,
+  #     dt_transp_condutor_cpf,
+  #     dt_transp_condutor_nome,
+  #     dt_num_doc_manifest,
+  #     dt_tp_doc_manifest,
+  #     dt_desc_tp_doc_manifest,
+  #     dt_veic_dat_condutor_confere,
+  #     dt_unid_transp_dat_confere,
+  #     dt_elem_segur_dat_confere,
+  #     dt_conteiner_dat_confere,
+  #     dt_created_at_time,
+  #     dt_updated_at_time,
+  #     nf_id,
+  #     nf_id_exp_cargo_details,
+  #     nf_id_nf,
+  #     nf_num_nf,
+  #     nf_num_serie,
+  #     nf_modelo,
+  #     nf_anomes_nf,
+  #     nf_sigla_uf_emitente,
+  #     nf_data_emissao_time,
+  #     nf_cpf_cnpj_destinatario,
+  #     nf_nome_destinatario,
+  #     nf_data_cancelamento_time,
+  #     nf_created_at_time,
+  #     nf_cpf_cnpj_emissor,
+  #     nf_nome_emissor,
+  #     it_id,
+  #     it_id_exp_cargo_details,
+  #     it_id_nf,
+  #     it_num_item,
+  #     it_cod_produto,
+  #     it_cdncm_compl,
+  #     it_descr_ncm,
+  #     it_descricao,
+  #     it_cfop,
+  #     it_val_tot_bruto,
+  #     it_qtd_estatistica,
+  #     it_created_at_time,
+  #     fcl_id,
+  #     fcl_id_exp_cargo_details,
+  #     fcl_id_nf,
+  #     fcl_conteiner,
+  #     fcl_tara,
+  #     fcl_dispensa_lacres,
+  #     fcl_lacres,
+  #     fcl_peso_aferido,
+  #     fcl_created_at_time,
+  #     mar_conteiner,
+  #     mar_id,
+  #     mar_ide,
+  #     mar_idu,
+  #     mar_data_registro_time,
+  #     mar_nrmanifesto,
+  #     mar_dtemissao,
+  #     mar_dtoperacao,
+  #     mar_dtemissaoce,
+  #     mar_dtemissaocemaster,
+  #     mar_nrviagem,
+  #     mar_cdportocarregamento,
+  #     mar_nmportocarregamento,
+  #     mar_cdportodescarregamento,
+  #     mar_nmportodescarregamento,
+  #     mar_tptrafego,
+  #     mar_cdembarcacao,
+  #     mar_nmembarcacao,
+  #     mar_cdempresanavegacao,
+  #     mar_nmempresanavegacao,
+  #     mar_cdagencianavegacao,
+  #     mar_nmagencianavegacao,
+  #     mar_qtconhecimentosinformados,
+  #     mar_qtconhecimentosexistentes,
+  #     mar_qtconhecimentosassociado,
+  #     mar_ckshipsconvenience,
+  #     mar_bloqueio_conhecimento,
+  #     mar_ret_pendente_analise,
+  #     mar_revisao_ou_pendencia_afrmm,
+  #     mar_pendencia_transito_maritimo,
+  #     mar_situacao_endosso,
+  #     mar_nrcemercante,
+  #     mar_nrblconhecimento,
+  #     mar_vlcubagem,
+  #     mar_vlpesobruto,
+  #     mar_cdportoorigem,
+  #     mar_nmportoorigem,
+  #     mar_cdportodestino,
+  #     mar_nmportodestino,
+  #     mar_cdportooriginal,
+  #     mar_nmportooriginal,
+  #     mar_tipoconhecimento,
+  #     mar_categoriacarga,
+  #     mar_cdconsignatario,
+  #     mar_txshipper,
+  #     mar_txmercadoria,
+  #     mar_txobservacoes,
+  #     mar_txnotifypart,
+  #     mar_cdnotifypart,
+  #     mar_nmconsignatario,
+  #     mar_nrpassaporteconsignatario,
+  #     mar_txconsignatario,
+  #     mar_cdpracaentexterior,
+  #     mar_nmpracaentexterior,
+  #     mar_indblordem,
+  #     mar_cdmoedafrete,
+  #     mar_nmmoedafrete,
+  #     mar_oprecolhimentofrete,
+  #     mar_indmodalidadefrete,
+  #     mar_dtceorigem,
+  #     mar_nrceorigem,
+  #     mar_nmnavioorigem,
+  #     mar_transbordosexterior,
+  #     mar_ckblservico,
+  #     mar_nrceoriginal,
+  #     mar_cdterminalportuario,
+  #     mar_nmterminalportuario,
+  #     mar_indufdestino,
+  #     mar_nmufdestino,
+  #     mar_cdpaisprocedencia,
+  #     mar_nmpaisprocedencia,
+  #     mar_responsavel_cpf_conhec,
+  #     mar_responsavel_nome_conhec,
+  #     mar_responsavel_tipo_conhec,
+  #     mar_responsavel_ip_conhec,
+  #     mar_responsavel_data_conhec,
+  #     mar_itens,
+  #     mar_nrcemaster,
+  #     mar_qthouseinformadomaster,
+  #     mar_qthousedeclaradomaster,
+  #     mar_cdempnavegdesconmaster,
+  #     mar_nmempnavegdesconmaster,
+  #     mar_cdagtnavegmaster,
+  #     mar_nmagtnavegmaster,
+  #     mar_itemcarga_nritem,
+  #     mar_nrdde,
+  #     mar_indedse,
+  #     mar_cdpaisdestfinal,
+  #     mar_nmpaisdestfinal,
+  #     mar_cdshipper,
+  #     mar_qtveiculostransportadores,
+  #     mar_nova,
+  #     mar_opconsignatario,
+  #     mar_vlfretetotal,
+  #     mar_vlfrete,
+  #     mar_componentesfrete,
+  #     mar_cdterminalportuariocarregamento,
+  #     mar_nmterminalportuariocarregamento,
+  #     mar_vlfretetotalbld,
+  #     mar_dt_itens_time,
+  #     mar_cdmoedafretetotalbld,
+  #     mar_ncm,
+  #     mar_ncm_desc,
+  #     mar_lista_fcl,
+  #     mar_tipo_fcl,
+  #     mar_tipo_carga,
+  #     mar_c20,
+  #     mar_c40,
+  #     mar_teus,
+  #     mar_feus,
+  #     mar_total_fcl,
+  #     mar_cnpj_num,
+  #     mar_tpitem,
+  #     mar_itemcarga_vlpesobruto,
+  #     mar_itemcarga_vlcubagem,
+  #     mar_itemcarga_txmarca,
+  #     mar_itemcarga_txcontramarca,
+  #     mar_itemcarga_vlquantidade,
+  #     mar_itemcarga_cdindicadormercadoriaperigosa,
+  #     mar_itemcarga_cdclassemercadoriaperigosa,
+  #     mar_itemcarga_cdtipoembalagem,
+  #     mar_itemcarga_descricao_embalagem,
+  #     mar_itemcarga_cdncms,
+  #     mar_temcarga_cdncms,
+  #     mar_responsavel_cpf,
+  #     mar_responsavel_tipo,
+  #     mar_responsavel_ip,
+  #     mar_responsavel_data,
+  #     mar_responsavel_hora,
+  #     mar_itemcarga_noncms,
+  #     mar_itemcarga_tipocontainer,
+  #     mar_usoparcial,
+  #     mar_itemcarga_cdtipogranel,
+  #     mar_itemcarga_descricao_tipogranel,
+  #     mar_itemcarga_descricao,
+  #     mar_nmmoedafretetotalbld,
+  #     mar_dt_consulta_master_time,
+  #     mar_incodacao,
+  #     mar_codigoncmitemcomplementar,
+  #     mar_descncmitemcomplementar,
+  #     mar_link,
+  #     mar_itemcarga_condncms,
+  #     mar_nomeconsiglce,
+  #     mar_enderecoconsiglce,
+  #     mar_nrruc,
+  #     mar_enviar,
+  #     mar_limpar,
+  #     mar_id_porto_origem,
+  #     mar_id_porto_carga,
+  #     mar_id_porto_descarga,
+  #     mar_id_porto_destino,
+  #     mar_id_armador,
+  #     mar_id_agencia,
+  #     mar_id_shipper,
+  #     mar_id_consig,
+  #     mar_id_shipconv,
+  #     mar_id_notify,
+  #     mar_id_agente,
+  #     mar_id_agente_inter,
+  #     mar_id_terminal_descarga,
+  #     mar_id_terminal_carga,
+  #     mar_id_moeda_frete,
+  #     mar_id_pais_origem,
+  #     mar_id_fcl,
+  #     mar_id_pais_destino,
+  #     mar_dt_cabotagem_time,
+  #     mar_id_nvocc,
+  #     mar_dt_update_agente_time,
+  #     mar_tipoconhecimentooriginal,
+  #     mar_deleted_at_time,
+  #     mar_teus_parcial,
+  #     mar_checked_at_time,
+  #     mar_available_at_time,
+  #     mar_processed_at_time,
+  #     mar_checked_error_at_time,
+  #     mar_obs_migr,
+  #     mar_id_recinto_aduaneiro,
+  #     mar_cdncm_compl,
+  #     mar_lista_hscode,
+  #     mar_id_original,
+  #     mar_desc_hscode,
+  #     mar_desc_ncm
+  #   ]
+  # }
 }
