@@ -4,7 +4,7 @@
   elements:
   - title: Untitled
     name: Untitled
-    model: test_embed_di
+    model: aereo_consignee
     explore: di_pu
     type: looker_grid
     fields: [di_pu.id, di_pu.data_chegada_carga_date, di_pu.data_desembaraco_date,
@@ -40,7 +40,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: test_embed_di
+    model: aereo_consignee
     explore: di_pu
     listens_to_filters: []
     field: di_pu.importador_nome
@@ -50,7 +50,7 @@
     default_value: ''
     allow_multiple_values: true
     required: false
-    model: test_embed_di
+    model: aereo_consignee
     explore: di_pu
     listens_to_filters: []
     field: di_pu.importador_cnpj
