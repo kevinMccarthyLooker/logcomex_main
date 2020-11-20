@@ -19,8 +19,7 @@ date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.track
 date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 8 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 5 limit 1)::timestamp)::int AS diff_05, -- registroDI_diDesembaracada
 date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 7 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 8 limit 1)::timestamp)::int AS diff_06  -- diDesembaraca_recebida
 FROM follow_up fu1
-where fu1.deleted_at is null --and tracking_aerial_id = 18135 ;;
-
+where fu1.deleted_at is null;; #--and tracking_aerial_id = 18135 ;;
   }
 
 
