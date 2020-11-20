@@ -2,11 +2,9 @@ view: active_importers_match_radar {
 
   derived_table: {
     sql:
-    select qq3.match, count(*) -- extamente cnpj 25586, considerando filiais  -- 0,0776
-    from(
     select qq1.cnpj_importador,
     qq2.cnpj_radar,
-    case when qq1.cnpj_importador = qq2.cnpj_radar then true else false end as encontrado
+    case when qq1.cnpj_importador = qq2.cnpj_radar then true else false end as match
     from(
     select distinct replace(replace(replace(importador_cnpj,'-',''),'/',''),'.','') as cnpj_importador
     from aereo.di_pu dp
@@ -27,9 +25,7 @@ view: active_importers_match_radar {
         and c2.valid_until > now()
         and c2.deleted_at is null
         and char_length(c.cnpj) > 11 -- retirando cpfs
-        ) qq2 on qq2.cnpj_radar = qq1.cnpj_importador
-    ) qq3
-    group by 1;;
+        ) qq2 on qq2.cnpj_radar = qq1.cnpj_importador;;
   }
 
   dimension: id {
