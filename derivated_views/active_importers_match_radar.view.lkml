@@ -2,7 +2,7 @@ view: active_importers_match_radar {
 
   derived_table: {
     sql:
-    select qq3.encontrado, count(*) -- extamente cnpj 25586, considerando filiais  -- 0,0776
+    select qq3.match, count(*) -- extamente cnpj 25586, considerando filiais  -- 0,0776
     from(
     select qq1.cnpj_importador,
     qq2.cnpj_radar,
