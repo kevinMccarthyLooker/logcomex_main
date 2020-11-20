@@ -1,7 +1,7 @@
 connection: "db" # utlizada a conexao db, pois ela consegue ver os schemas api e aereo
 
-include: "/**/di_pu.view.lkml"                # include all views in the views/ folder in this project
-include: "/**/external_du_pi.dashboard.lookml"
+include: "/**/di_pu_sistema.view.lkml"                # include all views in the views/ folder in this project
+#include: "/**/external_du_pi.dashboard.lookml"
 include: "/**/active_importers_match_radar.view.lkml"
 
 explore: active_importers_match_radar {
@@ -9,10 +9,10 @@ explore: active_importers_match_radar {
 }
 
 
-explore: di_pu {
+explore: di_pu_sistema {
 
   access_filter: {
-    field: di_pu.importador_nome
+    field: di_pu_sistema.importador_nome
     user_attribute: importador_nome
   }
 
