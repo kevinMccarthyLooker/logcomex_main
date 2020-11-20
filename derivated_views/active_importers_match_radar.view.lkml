@@ -9,7 +9,7 @@ view: active_importers_match_radar {
     case when qq1.cnpj_importador = qq2.cnpj_radar then true else false end as encontrado
     from(
     select distinct replace(replace(replace(importador_cnpj,'-',''),'/',''),'.','') as cnpj_importador
-    from di_pu dp
+    from aereo.di_pu dp
     where data_hora_registro  >= current_date - interval '180' day
     and importador_cnpj is not null
     and importador_cnpj not like ''
