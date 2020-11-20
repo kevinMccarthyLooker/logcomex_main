@@ -18,6 +18,11 @@ view: consignee {
     sql: ${TABLE}."cnpj" ;;
   }
 
+  dimension: cpf {
+    type: yesno
+    sql: case when char_length(${TABLE}."cnpj") >11 then false else true end ;;
+  }
+
   dimension: comments {
     type: string
     sql: ${TABLE}."comments" ;;
@@ -168,6 +173,7 @@ view: consignee {
 
   measure: count_distinct_cnpj {
     type: count_distinct
+    filters: [cpf: "no"]
     sql: ${cnpj} ;;
   }
 }
