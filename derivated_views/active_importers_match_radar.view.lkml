@@ -9,7 +9,7 @@ view: active_importers_match_radar {
     from(
     select distinct replace(replace(replace(importador_cnpj,'-',''),'/',''),'.','') as cnpj_importador
     from aereo.di_pu dp
-    where data_hora_registro  >= current_date - interval '90' day
+    where data_hora_registro  >= current_date - interval '180' day
     and importador_cnpj is not null
     and importador_cnpj not like '') qq1
     left join(
