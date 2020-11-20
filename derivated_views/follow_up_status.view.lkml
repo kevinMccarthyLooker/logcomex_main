@@ -60,7 +60,7 @@ where fu1.deleted_at is null;; #--and tracking_aerial_id = 18135 ;;
   }
 
   dimension: modal {
-    type: number
+    type: string
     sql: ${TABLE}.modal ;;
   }
 
