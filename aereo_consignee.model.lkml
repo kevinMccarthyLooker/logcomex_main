@@ -11,9 +11,9 @@ explore: active_importers_match_radar {
 
 explore: di_pu_sistema {
 
-  access_filter: {
-    field: di_pu_sistema.importador_nome
-    user_attribute: importador_nome
-  }
+  # access_filter: {
+  #   field: di_pu_sistema.importador_nome
+  #   user_attribute: importador_nome
+  # }
 
 }
