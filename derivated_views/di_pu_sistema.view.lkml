@@ -217,6 +217,11 @@ view: di_pu_sistema {
     sql: ${TABLE}."importador_cnpj" ;;
   }
 
+  dimension: importador_cpf {
+    type: yesno
+    sql: case when char_length(replace(replace(replace(${TABLE}."importador_cnpj",'-',''),'/',''),'.','')) > 11 then false else true end ;;
+  }
+
   dimension: importador_endereco {
     type: string
     sql: ${TABLE}."importador_endereco" ;;
@@ -482,6 +487,7 @@ view: di_pu_sistema {
 
   measure: count_distinct_cnpj {
     type: count_distinct
+    filters: [cpf: "no"]
     sql: ${importador_cnpj} ;;
   }
 
