@@ -18,12 +18,12 @@ view: active_importers_match_radar {
     from api.consignee c
     inner join api.certificate_consignee_radar ccr on
         c.id = ccr.consignee_id
-        and ccr.deleted_at is null
+        --and ccr.deleted_at is null
     inner join api.certificate c2 on
         c.cert_id = c2.id
         and c2.customer_id = c.customer_id
         and c2.valid_until > now()
-        and c2.deleted_at is null
+        --and c2.deleted_at is null
         and char_length(c.cnpj) > 11 -- retirando cpfs
         ) qq2 on qq2.cnpj_radar = qq1.cnpj_importador;;
   }
