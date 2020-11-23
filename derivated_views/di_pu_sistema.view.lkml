@@ -487,7 +487,7 @@ view: di_pu_sistema {
 
   measure: count_distinct_cnpj {
     type: count_distinct
-    filters: [cpf: "no"]
+    filters: [importador_cpf: "no"]
     sql: ${importador_cnpj} ;;
   }
 
