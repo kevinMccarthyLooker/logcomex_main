@@ -1,6 +1,6 @@
 view: di_pu_sistema {
   sql_table_name: aereo.di_pu ;;
-  drill_fields: [id]
+  drill_fields: [id, importador_cnpj, importador_nome]
 
   dimension: id {
     primary_key: yes

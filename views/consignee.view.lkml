@@ -1,6 +1,6 @@
 view: consignee {
   sql_table_name: public.consignee ;;
-  drill_fields: [id]
+  drill_fields: [id, cnpj, name]
 
   dimension: id {
     primary_key: yes
@@ -168,7 +168,7 @@ view: consignee {
 
   measure: count {
     type: count
-    drill_fields: [id, name, certificate_consignee_radar.count]
+    drill_fields: [id, cnpj, name, certificate_consignee_radar.count]
   }
 
   measure: count_distinct_cnpj {
