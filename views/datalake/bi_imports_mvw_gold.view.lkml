@@ -372,8 +372,8 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.terminal_descarga ;;
   }
 
-  dimension: teus {
-    type: number
+  measure: teus {
+    type: sum
     sql: ${TABLE}.teus ;;
   }
 
@@ -452,8 +452,14 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.volumes ;;
   }
 
+  dimension: rota {
+    type: string
+    sql: ${TABLE}."nmportoorigem"  || ' >> ' ||  ${TABLE}."nmportodestino";;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
   }
+
 }
