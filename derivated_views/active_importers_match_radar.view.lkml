@@ -46,19 +46,25 @@ view: active_importers_match_radar {
     sql: ${TABLE}.cnpj_importador ;;
   }
 
-  dimension: cnpj_radar {
-    type: string
-    sql: ${TABLE}.cnpj_radar ;;
-  }
-
   dimension: qtd_importacoes {
     type: number
     sql: ${TABLE}.qtd_importacoes ;;
   }
 
+  dimension: cnpj_radar {
+    type: string
+    sql: ${TABLE}.cnpj_radar ;;
+  }
+
+  dimension: nome_importador {
+    type: string
+    sql: ${TABLE}.nome_importador ;;
+  }
+
   dimension: match {
     type: yesno
     sql: ${TABLE}.match ;;
+    html:   <font color="green">{{ yes }}</font>;;
   }
 
   measure: count {
