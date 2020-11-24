@@ -62,6 +62,7 @@ include: "/**/consignee.view.lkml"
 include: "/**/certificate_consignee_radar.view.lkml"
 include: "/**/certificate.view.lkml"
 include: "/**/follow_up_status.view.lkml"
+include: "/**/big_data_filtros.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -71,6 +72,9 @@ explore: follow_up_status {
   label: "Tempo no Status - Tracking "
 }
 
+explore: big_data_filtros {
+  label: "Big Data Filtros"
+}
 
 explore: dau_wau_mau {
   view_name: report_log
