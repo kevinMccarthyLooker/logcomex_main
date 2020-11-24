@@ -3,7 +3,7 @@ view: follow_up_status {
   derived_table: {
     sql:
 SELECT distinct 'maritimo' as modal, fu1.tracking_id,
-null::timestamp as diff_00,
+'2020-10-01 00:00:00'::timestamp as diff_00,
 date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 3 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 2 limit 1)::timestamp) AS diff_01, --manifestado_presenca,
 date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 5 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 3 limit 1)::timestamp) AS diff_02, --presenca_di,
 date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 9 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 5 limit 1)::timestamp) AS diff_03, --_deembaracada,
@@ -33,8 +33,8 @@ where fu1.deleted_at is null and fu1.tracking_aerial_id not in (5085,5721,6555,7
     sql: ${TABLE}.tracking_id ;;
   }
 
-  dimension: diff_00 {
-    type: duration_hour
+  dimension_group: diff_00 {
+    type: time
     sql: ${TABLE}.diff_00 ;;
   }
 
