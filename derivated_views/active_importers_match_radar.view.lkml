@@ -64,7 +64,11 @@ view: active_importers_match_radar {
   dimension: match {
     type: yesno
     sql: ${TABLE}.match ;;
-    html:   <font color="green">{{ yes }}</font>;;
+    html: {% if value == 'Yes' %}
+            <font color="green">{{ match }}</font>
+          {% else %}
+            <font color="red">{{ match }}</font>
+          {% endif %};;
   }
 
   measure: count {
