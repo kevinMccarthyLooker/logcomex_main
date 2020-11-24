@@ -452,6 +452,8 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.volumes ;;
   }
 
+########################## ----> Itens adicionados Manualmente <---- ##########################
+
   dimension: rota {
     type: string
     sql: ${TABLE}."nmportoorigem"  || ' >> ' ||  ${TABLE}."nmportodestino";;
