@@ -3,7 +3,7 @@ view: follow_up_status {
   derived_table: {
     sql:
 SELECT distinct 'maritimo' as modal, fu1.tracking_id,
-'2020-10-01 00:00:00'::timestamp as diff_00,
+null::float as diff_00,
 date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 3 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 2 limit 1)::timestamp) AS diff_01, --manifestado_presenca,
 date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 5 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 3 limit 1)::timestamp) AS diff_02, --presenca_di,
 date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 9 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 5 limit 1)::timestamp) AS diff_03, --_deembaracada,
@@ -14,8 +14,8 @@ FROM follow_up fu1
 where fu1.deleted_at is null --and fu1.tracking_id = 648698
 union
 SELECT distinct 'aereo' as modal, fu1.tracking_aerial_id,
-case when (age((SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 1 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp,(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 0 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp)) < age('2020-11-24 00:00:00','2020-11-24 00:00:00') then null
-     else (age((SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 1 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp,(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 0 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp)) end AS diff_00, -- mantra_transito
+case when (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 1 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 0 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp)) then null
+     else (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 1 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 0 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp)) end AS diff_00, -- mantra_transito
 date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 2 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 1 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp) AS diff_01, -- transitoInt_chegada
 date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 3 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 2 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp) AS diff_02, -- chegada_registro_dta
 date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 4 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 3 and extract("YEAR" from follow_up.date_time) > 2000 limit 1)::timestamp) AS diff_03, -- registro_dta_visado
@@ -33,8 +33,8 @@ where fu1.deleted_at is null and fu1.tracking_aerial_id not in (5085,5721,6555,7
     sql: ${TABLE}.tracking_id ;;
   }
 
-  dimension_group: diff_00 {
-    type: time
+  dimension: diff_00 {
+    type: number
     sql: ${TABLE}.diff_00 ;;
   }
 
