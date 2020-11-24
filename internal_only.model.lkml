@@ -21,7 +21,7 @@ include: "/**/plan_info_join.view.lkml"
 include: "/**/cs_healthscore.view.lkml"
 include: "/**/cs_novo_health_score.view.lkml"
 include: "/**/cs_healthscore_accesslog.view.lkml"
-include: "/**/bi_filtros.view.lkml"
+include: "/**/bi_filtros_agrupado.view.lkml"
 include: "/**/customer_info.view.lkml"
 include: "/**/filter_history.view.lkml"
 include: "/**/customer_api_relations.view.lkml"
@@ -329,9 +329,9 @@ explore: usage {
     type: left_outer
   }
 
-  join: bi_filtros{
+  join: bi_filtros_agrupado{
     view_label: "Report Log"
-    sql_on: ${report_log.id}=${bi_filtros.filters_report_log_id} ;;
+    sql_on: ${report_log.id}=${bi_filtros_agrupado.filters_report_log_id} ;;
     relationship: one_to_one
     type: left_outer
   }

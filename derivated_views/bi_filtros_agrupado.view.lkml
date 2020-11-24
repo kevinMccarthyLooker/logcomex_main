@@ -1,4 +1,4 @@
-view: bi_filtros {
+view: bi_filtros_agrupado {
   derived_table: {
     sql:
       SELECT filters.id as filters_report_log_id,
