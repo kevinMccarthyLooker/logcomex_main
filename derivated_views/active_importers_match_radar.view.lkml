@@ -7,7 +7,7 @@ view: active_importers_match_radar {
     qq1.cnpj_importador,
     qq2.cnpj_radar,
     qq1.qtd_importacoes,
-    ac.normalizado as nome_importador,
+    coalesce(ac.normalizado,cg."name",'Desconhecido')as nome_importador,
     case when qq1.cnpj_importador = qq2.cnpj_radar then true else false end as match
     from(
     select replace(replace(replace(importador_cnpj,'-',''),'/',''),'.','') as cnpj_importador, count(*) as qtd_importacoes
@@ -23,15 +23,16 @@ view: active_importers_match_radar {
     from api.consignee c
     inner join api.certificate_consignee_radar ccr on
         c.id = ccr.consignee_id
-        --and ccr.deleted_at is null
+     --   and ccr.deleted_at is null
     inner join api.certificate c2 on
         c.cert_id = c2.id
         and c2.customer_id = c.customer_id
         and c2.valid_until > now()
-        --and c2.deleted_at is null
+     --   and c2.deleted_at is null
         and char_length(c.cnpj) > 11 -- retirando cpfs
         ) qq2 on qq2.cnpj_radar = qq1.cnpj_importador
-    left join aereo.aereo_consignatario ac on ac.id = (select ac2.id from aereo.aereo_consignatario ac2 where ac2.cnpj = qq1.cnpj_importador limit 1);;
+    left join aereo.aereo_consignatario ac on ac.id = (select ac2.id from aereo.aereo_consignatario ac2 where ac2.cnpj = qq1.cnpj_importador limit 1)
+  left join api.consignee cg on cg.id = (select cg2.id from api.consignee cg2 where cg2.cnpj = qq1.cnpj_importador limit 1);;
   }
 
   dimension: id {
@@ -43,7 +44,12 @@ view: active_importers_match_radar {
 
   dimension: cnpj_importador {
     type: string
-    sql: ${TABLE}.cnpj_importador ;;
+    sql: ${TABLE}.cnpj_importador;;
+    link: {
+    label: "Receita Federal"
+    url: " https://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp?cnpj={{ value }}"
+    icon_url: "https://receita.economia.gov.br/arquivos-e-imagens/icones/procurar.png/@@images/image.png"
+    }
   }
 
   dimension: qtd_importacoes {
