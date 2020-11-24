@@ -74,7 +74,7 @@ where fu1.deleted_at is null and fu1.tracking_aerial_id not in (5085,5721,6555,7
   }
 
   measure: diff_00_avg  {
-    type: average
+    type: median
     sql: ${TABLE}.diff_00 ;;
   }
 
