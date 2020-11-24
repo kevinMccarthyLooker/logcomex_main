@@ -490,21 +490,21 @@ view: bi_imports_mvw_gold {
     type: average
     value_format: "$#.00;($#.00)"
     filters: [teus_dimension: ">0"]
-    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."teus" ;;
+    sql: ${TABLE}."vlfrete" /  ${TABLE}."teus" ;;
   }
 
   measure: vl_frete_por_c20 {
     type: average
     value_format: "$#.00;($#.00)"
     filters: [c20_dimension: ">0"]
-    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."c20" ;;
+    sql: ${TABLE}."vlfrete" /  ${TABLE}."c20" ;;
   }
 
   measure: vl_frete_por_c40 {
     type: average
     value_format: "$#.00;($#.00)"
     filters: [c40_dimension: ">0"]
-    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."c40" ;;
+    sql: ${TABLE}."vlfrete" /  ${TABLE}."c40" ;;
   }
 
   dimension: rota {

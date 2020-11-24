@@ -947,12 +947,12 @@ view: big_data_expo_datalake {
     sql: ${TABLE}.mar_opconsignatario ;;
   }
 
-  dimension: mar_vlfretetotal {
+  dimension: mar_vlfretetotal_dimension {
     type: number
     sql: ${TABLE}.mar_vlfretetotal ;;
   }
 
-  dimension: mar_vlfrete {
+  dimension: mar_vlfrete_dimension {
     type: number
     sql: ${TABLE}.mar_vlfrete ;;
   }
@@ -1011,22 +1011,6 @@ view: big_data_expo_datalake {
     type: string
     sql: ${TABLE}.mar_tipo_carga ;;
   }
-
-  dimension: mar_c20 {
-    type: number
-    sql: ${TABLE}.mar_c20 ;;
-  }
-
-  dimension: mar_c40 {
-    type: number
-    sql: ${TABLE}.mar_c40 ;;
-  }
-
-  dimension: mar_teus {
-    type: number
-    sql: ${TABLE}.mar_teus ;;
-  }
-
   dimension: mar_feus {
     type: number
     sql: ${TABLE}.mar_feus ;;
@@ -1391,6 +1375,72 @@ view: big_data_expo_datalake {
     type: string
     sql: ${TABLE}.mar_desc_ncm ;;
   }
+
+  ####################### --------------> Measures e Dimensions Criadas / Alteradas <-------------------- #########################
+
+  dimension: mar_teus_dimension {
+    type: number
+    sql: ${TABLE}.mar_teus ;;
+  }
+
+  dimension: mar_c20_dimension {
+    type: number
+    sql: ${TABLE}.mar_c20 ;;
+  }
+
+  dimension: mar_c40_dimension {
+    type: number
+    sql: ${TABLE}.mar_c40 ;;
+  }
+
+  measure: mar_teus {
+    type: sum
+    sql: ${TABLE}.mar_teus ;;
+  }
+
+  measure: mar_c20 {
+    type: sum
+    sql: ${TABLE}.mar_c20 ;;
+  }
+
+  measure: mar_c40 {
+    type: sum
+    sql: ${TABLE}.mar_c40 ;;
+  }
+
+  measure: mar_vlfrete {
+    type: sum
+    value_format: "$#.00;($#.00)"
+    sql: ${TABLE}."mar_vlfrete" ;;
+  }
+
+  measure: mar_vlfretetotal {
+    type: sum
+    value_format: "$#.00;($#.00)"
+    sql: ${TABLE}."mar_vlfretetotal" ;;
+  }
+
+  measure: mar_vl_frete_por_TEU {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [mar_teus_dimension: ">0"]
+    sql: ${TABLE}."mar_vlfrete" /  ${TABLE}."mar_teus" ;;
+  }
+
+  measure: mar_vl_frete_por_c20 {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [mar_c20_dimension: ">0"]
+    sql: ${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c20" ;;
+  }
+
+  measure: mar_vl_frete_por_c40 {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [mar_c40_dimension: ">0"]
+    sql: ${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c40" ;;
+  }
+
 
   # set: detail {
   #   fields: [
