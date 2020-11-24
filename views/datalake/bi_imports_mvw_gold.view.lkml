@@ -33,16 +33,6 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.atv_principal_code ;;
   }
 
-  dimension: c20 {
-    type: number
-    sql: ${TABLE}.c20 ;;
-  }
-
-  dimension: c40 {
-    type: number
-    sql: ${TABLE}.c40 ;;
-  }
-
   dimension: carga_perigosa {
     type: string
     sql: ${TABLE}.carga_perigosa ;;
@@ -459,9 +449,29 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.teus ;;
   }
 
+  dimension: c20_dimension {
+    type: number
+    sql: ${TABLE}.c20 ;;
+  }
+
+  dimension: c40_dimension {
+    type: number
+    sql: ${TABLE}.c40 ;;
+  }
+
   measure: teus {
     type: sum
     sql: ${TABLE}.teus ;;
+  }
+
+  measure: c20 {
+    type: sum
+    sql: ${TABLE}.c20 ;;
+  }
+
+  measure: c40 {
+    type: sum
+    sql: ${TABLE}.c40 ;;
   }
 
   measure: vlfrete {
@@ -483,9 +493,25 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}."vlfretetotal" /  ${TABLE}."teus" ;;
   }
 
+  measure: vl_frete_por_c20 {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [c20_dimension: ">0"]
+    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."c20" ;;
+  }
+
+  measure: vl_frete_por_c40 {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [c40_dimension: ">0"]
+    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."c40" ;;
+  }
+
   dimension: rota {
     type: string
     sql: ${TABLE}."nmportoorigem"  || ' >> ' ||  ${TABLE}."nmportodestino";;
   }
+
+
 
 }
