@@ -5,7 +5,7 @@ view: big_data_filtros {
     select
     row_number() over () as id,*
     from(
-    SELECT date_trunc('month',created_at) as period, json_filter->>'serviceId' as service, report_type_id,user_id, json_object_keys(json_filter) as filter, count(1) -- json_filter->>'serviceId'
+    SELECT date_trunc('month',created_at) as period, json_filter->>'serviceId' as service, report_type_id,user_id, json_object_keys(json_filter) as filter, count(1) as qtd
     FROM report_log
     WHERE json_filter->>'serviceId' in ('2') --('1','2','3','6','8','9','10','11','12','13','14','15','16','17','18')
     --and report_log.id in (6145047,6145046,6145045,6144138,6144134,6144131)
