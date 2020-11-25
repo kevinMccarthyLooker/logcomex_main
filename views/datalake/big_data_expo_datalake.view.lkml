@@ -4,10 +4,12 @@ view: big_data_expo_datalake {
       ;;
   }
 
-  # measure: count {
-  #   type: count
-  #   drill_fields: [detail*]
-  # }
+# Prefixos :: Tabelas
+#  dt = details
+#  nf = nota
+#  it = itens nota
+#  fcl = conteiner
+#  mar = maritimo
 
   dimension: chk_origem {
     type: string
@@ -1441,6 +1443,22 @@ view: big_data_expo_datalake {
     sql: ${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c40" ;;
   }
 
+  measure: count_mar_id {
+    type: count_distinct
+    sql: ${TABLE}.mar_id ;;
+  }
+
+#  measure: count_mar_id_com_dt {
+#    type: count_distinct
+#    filters: [dt_id: "-NULL"]
+#    sql: ${TABLE}.mar_id ;;
+#  }
+
+  measure: count_mar_id_sem_dt {
+    type: count_distinct
+    filters: [dt_id: "NULL"]
+    sql: ${TABLE}.mar_id ;;
+  }
 
   # set: detail {
   #   fields: [
