@@ -22,7 +22,7 @@ view: big_data_filtros {
 
   dimension: filter {
     type: string
-    sql: ${TABLE}.filters ;;
+    sql: ${TABLE}.filter ;;
   }
 
   dimension: service {
