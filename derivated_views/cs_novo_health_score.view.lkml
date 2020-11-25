@@ -74,15 +74,17 @@ when titulos_omie.qtd_atrasados = 0 then 15
 else null
 end)
 as pontos_titulos_omie,
-(case
-when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) > 1 then 10
-when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) between 0.9 and 1 then 5
-when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) < 0.9 then 0
-else null
-end)
-as pontos_crescimento_cliente,
-crescimento_cliente.qtde_365_dias as crescimento_cliente_qtde_365_dias,
-crescimento_cliente.qtde_ultimos_30_dias as crescimento_cliente_qtde_30_dias
+# (case
+# when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) > 1 then 10
+# when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) between 0.9 and 1 then 5
+# when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) < 0.9 then 0
+# else null
+# end)
+null as pontos_crescimento_cliente,
+null as crescimento_cliente_qtde_365_dias,
+null as crescimento_cliente_qtde_30_dias
+# crescimento_cliente.qtde_365_dias as crescimento_cliente_qtde_365_dias,
+# crescimento_cliente.qtde_ultimos_30_dias as crescimento_cliente_qtde_30_dias
 from customer c
 inner join customer_plan cp on cp.customer_id = c.id
 inner join plan_complete pc on cp.plan_complete_id = pc.id
@@ -219,36 +221,36 @@ inner join billing_contract_omie bco on bco.customer_api_relations_id = car.id
 inner join service_order_omie soo on soo.billing_contract_id = bco.id
 inner join financial_securities_omie fso on fso.order_id = soo.order_service_id
 group by c.id) as titulos_omie on titulos_omie.customer_id = c.id
-left join ( -- adicionando crescimento do cliente maritimo e aereo
-select
-cdconsignatario,
-count(*),
-count(case when (dtoperacao >= current_date - interval '30 days') then 1 end) as qtde_ultimos_30_dias,
-count(case when (dtoperacao < current_date - interval '30 days') then 1 end) as qtde_365_dias
-from
-(select id,
-left(cdconsignatario,8) as cdconsignatario,
-dtoperacao
-from sistema.db_maritimo dm
-where dm.tipoconhecimento in ('10','11','12','15') -- direto,master, house, co-loader
-and dm.cdconsignatario is not null -- retirando consignatarios nulos
-and cdconsignatario in (select cnpj from customer where fake_customer is false)--(select cnpj from api.customer where fake_customer is false)
-and dtoperacao >= current_date - interval '395' day -- ultimo mes e 365 dias antes
-and dtoperacao <= current_date
-and tptrafego = '05' -- importacao
-union all  -- adicionando dados aereo
-select aad.id as id,
-left(ac.cnpj,8) as cdconsignatario,
-aal.periodo as dtoperacao
-from aereo.aereo_awb_details aad
-inner join aereo.aereo_consignatario ac on ac.id = aad.consignatario_id
-inner join aereo.aereo_awb_list aal on aal.id = aad.id_awb_list
-where ac.cnpj in (select cnpj from customer where fake_customer is false)
-and aal.periodo >= current_date - interval '395' day
-and aal.periodo <= current_date
-) as q1
-group by cdconsignatario
-) as crescimento_cliente on crescimento_cliente.cdconsignatario = left(c.cnpj,8)
+# left join ( -- adicionando crescimento do cliente maritimo e aereo
+# select
+# cdconsignatario,
+# count(*),
+# count(case when (dtoperacao >= current_date - interval '30 days') then 1 end) as qtde_ultimos_30_dias,
+# count(case when (dtoperacao < current_date - interval '30 days') then 1 end) as qtde_365_dias
+# from
+# (select id,
+# left(cdconsignatario,8) as cdconsignatario,
+# dtoperacao
+# from sistema.db_maritimo dm
+# where dm.tipoconhecimento in ('10','11','12','15') -- direto,master, house, co-loader
+# and dm.cdconsignatario is not null -- retirando consignatarios nulos
+# and cdconsignatario in (select cnpj from customer where fake_customer is false)--(select cnpj from api.customer where fake_customer is false)
+# and dtoperacao >= current_date - interval '395' day -- ultimo mes e 365 dias antes
+# and dtoperacao <= current_date
+# and tptrafego = '05' -- importacao
+# union all  -- adicionando dados aereo
+# select aad.id as id,
+# left(ac.cnpj,8) as cdconsignatario,
+# aal.periodo as dtoperacao
+# from aereo.aereo_awb_details aad
+# inner join aereo.aereo_consignatario ac on ac.id = aad.consignatario_id
+# inner join aereo.aereo_awb_list aal on aal.id = aad.id_awb_list
+# where ac.cnpj in (select cnpj from customer where fake_customer is false)
+# and aal.periodo >= current_date - interval '395' day
+# and aal.periodo <= current_date
+# ) as q1
+# group by cdconsignatario
+# ) as crescimento_cliente on crescimento_cliente.cdconsignatario = left(c.cnpj,8)
 where current_date between cp.start and cp.expiration
   and c.deleted_at is null
   and cp.deleted_at is null
