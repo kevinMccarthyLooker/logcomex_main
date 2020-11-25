@@ -27,7 +27,7 @@ view: big_data_filtros {
 
   dimension: service {
     type: string
-    sql: case when ${TABLE}.service = 2 then 'Exportação' else 'ERRO' end ;;
+    sql: case when ${TABLE}.service = '2' then 'Exportação' else 'ERRO' end ;;
   }
 
   dimension: qtd {
