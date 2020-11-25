@@ -2,7 +2,7 @@ view: cs_novo_health_score {
 
 derived_table: {
     sql:
-    select distinct
+     select distinct
 c.id as customer_id,
 (case
 when (big_data.qtde_120_30_dias = 0 and big_data.qtde_ultimos_30_dias > 0) then 10 -- cliente voltou a usar nos ultimo 30 dias
@@ -74,17 +74,17 @@ when titulos_omie.qtd_atrasados = 0 then 15
 else null
 end)
 as pontos_titulos_omie,
-# (case
+/*# (case
 # when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) > 1 then 10
 # when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) between 0.9 and 1 then 5
 # when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) < 0.9 then 0
 # else null
-# end)
+# end) */
 null as pontos_crescimento_cliente,
 null as crescimento_cliente_qtde_365_dias,
 null as crescimento_cliente_qtde_30_dias
-# crescimento_cliente.qtde_365_dias as crescimento_cliente_qtde_365_dias,
-# crescimento_cliente.qtde_ultimos_30_dias as crescimento_cliente_qtde_30_dias
+/*# crescimento_cliente.qtde_365_dias as crescimento_cliente_qtde_365_dias,
+# crescimento_cliente.qtde_ultimos_30_dias as crescimento_cliente_qtde_30_dias */
 from customer c
 inner join customer_plan cp on cp.customer_id = c.id
 inner join plan_complete pc on cp.plan_complete_id = pc.id
@@ -221,7 +221,7 @@ inner join billing_contract_omie bco on bco.customer_api_relations_id = car.id
 inner join service_order_omie soo on soo.billing_contract_id = bco.id
 inner join financial_securities_omie fso on fso.order_id = soo.order_service_id
 group by c.id) as titulos_omie on titulos_omie.customer_id = c.id
-# left join ( -- adicionando crescimento do cliente maritimo e aereo
+/*# left join ( -- adicionando crescimento do cliente maritimo e aereo
 # select
 # cdconsignatario,
 # count(*),
@@ -250,7 +250,7 @@ group by c.id) as titulos_omie on titulos_omie.customer_id = c.id
 # and aal.periodo <= current_date
 # ) as q1
 # group by cdconsignatario
-# ) as crescimento_cliente on crescimento_cliente.cdconsignatario = left(c.cnpj,8)
+# ) as crescimento_cliente on crescimento_cliente.cdconsignatario = left(c.cnpj,8) */
 where current_date between cp.start and cp.expiration
   and c.deleted_at is null
   and cp.deleted_at is null
