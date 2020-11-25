@@ -80,9 +80,9 @@ as pontos_titulos_omie,
 # when (case when crescimento_cliente.qtde_365_dias = 0 then 0 else round((crescimento_cliente.qtde_ultimos_30_dias::numeric / (crescimento_cliente.qtde_365_dias::numeric / 12))::numeric,2) end) < 0.9 then 0
 # else null
 # end) */
-null as pontos_crescimento_cliente,
-null as crescimento_cliente_qtde_365_dias,
-null as crescimento_cliente_qtde_30_dias
+null::int as pontos_crescimento_cliente,
+null::int as crescimento_cliente_qtde_365_dias,
+null::int as crescimento_cliente_qtde_30_dias
 /*# crescimento_cliente.qtde_365_dias as crescimento_cliente_qtde_365_dias,
 # crescimento_cliente.qtde_ultimos_30_dias as crescimento_cliente_qtde_30_dias */
 from customer c
