@@ -8,7 +8,7 @@ view: big_data_filtros {
     FROM report_log
     WHERE json_filter->>'serviceId' in ('2') --('1','2','3','6','8','9','10','11','12','13','14','15','16','17','18')
     --and report_log.id in (6145047,6145046,6145045,6144138,6144134,6144131)
-    GROUP BY periodo, json_object_keys(json_filter),json_filter->>'serviceId') qq1
+    GROUP BY period, json_object_keys(json_filter),json_filter->>'serviceId') qq1
     where qq1.filter NOT IN ('', 'chartPath', 'dashboard', 'detalhes', 'export_excel', 'filter_date', 'filterName', 'grouper', 'grouper_value', 'id', 'isChart', 'isPivot', 'page', 'paginated', 'path', 'per_page', 'serviceId', 'serviceSlug', 'sort', 'sortBy', 'tabType', 'title', 'type', 'undefined', 'x-api-key', 'XDEBUG_SESSION_START');;
 
   }
