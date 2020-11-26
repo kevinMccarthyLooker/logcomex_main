@@ -61,7 +61,7 @@ view: big_data_filtros {
 
   measure: total {
     type: sum
-    sql: ${qtd} ;;
+    sql: coalesce(${qtd},0) ;;
 
   }
 
