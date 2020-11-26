@@ -34,13 +34,6 @@ view: big_data_filtros {
 
   dimension: service {
     type: string
-    sql: case when ${TABLE}.service = '1' then 'Importação'
-              when ${TABLE}.service = '2' then 'Exportação'
-         else 'ERRO' end ;;
-  }
-
-  dimension: report_type_id {
-    type: string
     sql: case
              when ${TABLE}.service = '1' then 'Importação'
              when ${TABLE}.service = '2' then 'Exportação'
@@ -57,6 +50,16 @@ view: big_data_filtros {
              when ${TABLE}.service = '16' then 'Uruguai Importação'
              when ${TABLE}.service = '17' then 'Uruguai Exportação'
              when ${TABLE}.service = '18' then 'EUA Importação'
+             else 'ERRO'
+         end ;;
+  }
+
+  dimension: report_type {
+    type: string
+    sql: case
+             when ${TABLE}.report_type_id = 1 then 'Screen'
+             when ${TABLE}.report_type_id = 2 then 'Excel'
+             when ${TABLE}.report_type_id = 3 then 'Api'
              else 'ERRO'
          end ;;
   }
