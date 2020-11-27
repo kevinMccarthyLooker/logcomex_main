@@ -1460,6 +1460,12 @@ view: big_data_expo_datalake {
     sql: ${TABLE}.mar_id ;;
   }
 
+  measure: percent_match_maritimo {
+    type: number
+    value_format_name: percent_2
+    sql: 1.0* ${count_mar_id_com_dt} / ${count_mar_id} ;;
+  }
+
   # set: detail {
   #   fields: [
   #     chk_origem,
