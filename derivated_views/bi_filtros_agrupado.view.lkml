@@ -23,6 +23,7 @@ view: bi_filtros_agrupado {
 
   dimension: filters_report_log_id {
     hidden: yes
+    primary_key: yes
     type: number
     sql: ${TABLE}.filters_report_log_id ;;
   }
