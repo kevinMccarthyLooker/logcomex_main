@@ -36,4 +36,8 @@ view: bi_filtros_agrupado {
     type: string
     sql: ${TABLE}.filters_campos_agrupado ;;
   }
+
+  measure: count_agrupado {
+    type: count
+  }
 }
