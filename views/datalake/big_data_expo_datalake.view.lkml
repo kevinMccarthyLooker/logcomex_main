@@ -1448,11 +1448,11 @@ view: big_data_expo_datalake {
     sql: ${TABLE}.mar_id ;;
   }
 
-#  measure: count_mar_id_com_dt {
-#    type: count_distinct
-#    filters: [dt_id: "-NULL"]
-#    sql: ${TABLE}.mar_id ;;
-#  }
+  measure: count_mar_id_com_dt {
+    type: count_distinct
+    filters: [dt_id: ">0"]
+    sql: ${TABLE}.mar_id ;;
+  }
 
   measure: count_mar_id_sem_dt {
     type: count_distinct
