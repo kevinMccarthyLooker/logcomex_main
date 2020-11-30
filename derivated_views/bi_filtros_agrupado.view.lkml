@@ -11,7 +11,7 @@ view: bi_filtros_agrupado {
                or (json_filter->>'serviceId' = '2' and report_log.json_filter ->> 'page' is null)
                or (json_filter->>'serviceId' = '1' and report_log.json_filter ->> 'page' is null))
             and report_log.id in (6145047,6145046,6145045,6144138,6144134,6144131,6145213,6145212,6145211) */
-            GROUP BY 1,
+            GROUP BY 1
             order by 1,2 -- ordenando para agrupar sempre na mesma sequencia
             ) as filters
       WHERE filter NOT IN ('', 'chartPath', 'dashboard', 'detalhes', 'export_excel', 'filter_date', 'filterName', 'grouper', 'grouper_value', 'id', 'isChart', 'isPivot', 'page', 'paginated', 'path', 'per_page', 'serviceId', 'serviceSlug', 'sort', 'sortBy', 'tabType', 'title', 'type', 'undefined', 'x-api-key', 'XDEBUG_SESSION_START')
