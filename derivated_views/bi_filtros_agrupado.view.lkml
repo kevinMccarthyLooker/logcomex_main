@@ -39,6 +39,12 @@ view: bi_filtros_agrupado {
     sql: ${TABLE}.filters_campos_agrupado ;;
   }
 
+  dimension_group: period {
+    type: time
+    timeframes: [month,year]
+    sql: ${TABLE}.period ;;
+  }
+
   measure: count_agrupado {
     type: count
   }

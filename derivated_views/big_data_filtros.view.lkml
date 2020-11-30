@@ -26,7 +26,6 @@ view: big_data_filtros {
     type: time
     timeframes: [month,year]
     sql: ${TABLE}.period ;;
-
   }
 
   dimension: filter {
