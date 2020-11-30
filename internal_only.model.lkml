@@ -63,6 +63,7 @@ include: "/**/certificate_consignee_radar.view.lkml"
 include: "/**/certificate.view.lkml"
 include: "/**/follow_up_status.view.lkml"
 include: "/**/big_data_filtros.view.lkml"
+include: "/**/search_filtros_agrupados.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -74,6 +75,10 @@ explore: follow_up_status {
 
 explore: big_data_filtros {
   label: "Big Data Filtros"
+}
+
+explore: search_filtros_agrupados {
+  label: "Search e Novo Expo Filtros AGG"
 }
 
 explore: dau_wau_mau {
