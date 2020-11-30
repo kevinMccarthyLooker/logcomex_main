@@ -1,9 +1,9 @@
 view: bi_filtros_agrupado {
   derived_table: {
     sql:
-    SELECT filters.id as filters_report_log_id,filters.period, filters.service, string_agg(filter, ', ') as filters_campos_agrupado
+    SELECT filters.id as filters_report_log_id, string_agg(filter, ', ') as filters_campos_agrupado
       FROM (
-            SELECT id, date_trunc('month',created_at) as period, json_filter->>'serviceId' as service, json_object_keys(json_filter) as filter
+            SELECT id, json_object_keys(json_filter) as filter
             FROM report_log
             WHERE json_filter->>'serviceId' in ('1','2','3','6','8','9','10','11','12','13','14','15','16','17','18')
               /* and ((json_filter->>'serviceId' = '11' and report_log.json_filter -> 'year_month' is not null)
@@ -11,11 +11,11 @@ view: bi_filtros_agrupado {
                or (json_filter->>'serviceId' = '2' and report_log.json_filter ->> 'page' is null)
                or (json_filter->>'serviceId' = '1' and report_log.json_filter ->> 'page' is null))
             and report_log.id in (6145047,6145046,6145045,6144138,6144134,6144131,6145213,6145212,6145211) */
-            GROUP BY 1,2,3
-            order by 1,2,3,4 -- ordenando para agrupar sempre na mesma sequencia
+            GROUP BY 1,
+            order by 1,2 -- ordenando para agrupar sempre na mesma sequencia
             ) as filters
       WHERE filter NOT IN ('', 'chartPath', 'dashboard', 'detalhes', 'export_excel', 'filter_date', 'filterName', 'grouper', 'grouper_value', 'id', 'isChart', 'isPivot', 'page', 'paginated', 'path', 'per_page', 'serviceId', 'serviceSlug', 'sort', 'sortBy', 'tabType', 'title', 'type', 'undefined', 'x-api-key', 'XDEBUG_SESSION_START')
-      GROUP BY 1,2,3 ;;
+      GROUP BY 1 ;;
 
     indexes: ["filters_report_log_id"]
     sql_trigger_value: current_date;;
@@ -29,21 +29,22 @@ view: bi_filtros_agrupado {
     sql: ${TABLE}.filters_report_log_id ;;
   }
 
-  dimension: service {
-    type: number
-    sql: ${TABLE}.service ;;
-  }
-
   dimension: filters_campos_agrupado {
     type: string
     sql: ${TABLE}.filters_campos_agrupado ;;
   }
 
-  dimension_group: period {
-    type: time
-    timeframes: [month,year]
-    sql: ${TABLE}.period ;;
-  }
+  # dimension: service {
+  #   type: number
+  #   sql: ${TABLE}.service ;;
+  # }
+
+
+  # dimension_group: period {
+  #   type: time
+  #   timeframes: [month,year]
+  #   sql: ${TABLE}.period ;;
+  # }
 
   measure: count_agrupado {
     type: count
