@@ -13,15 +13,13 @@ view: search_filtros_agrupados {
               and fh.id not in(311017,311018,311019,317637,317635,317636,321072,337053,337073,337088,468578,760035,760036,760037,760038,760034) -- jsons incompletos, problema
           group by 1,2,3,4
           order by 1,2,3,4 -- ordernando para agrupar corretamente
-          ) filters_search
+          ) as filters_search
     GROUP BY 1,2,3;;
-
-    indexes: ["filters_search.id"]
+    indexes: ["id"]
     sql_trigger_value: current_date;;
+  }
 
-    }
-
-  dimension: _id {
+  dimension: id {
     hidden: yes
     primary_key: yes
     type: number
