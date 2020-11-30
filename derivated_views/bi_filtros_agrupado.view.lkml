@@ -1,9 +1,9 @@
 view: bi_filtros_agrupado {
   derived_table: {
     sql:
-    SELECT filters.id as filters_report_log_id, filters.service, string_agg(filter, ', ') as filters_campos_agrupado
+    SELECT filters.id as filters_report_log_id,filters.period, filters.service, string_agg(filter, ', ') as filters_campos_agrupado
       FROM (
-            SELECT id,json_filter->>'serviceId' as service, json_object_keys(json_filter) as filter
+            SELECT id, date_trunc('month',created_at) as period, json_filter->>'serviceId' as service, json_object_keys(json_filter) as filter
             FROM report_log
             WHERE json_filter->>'serviceId' in ('1','2','3','6','8','9','10','11','12','13','14','15','16','17','18')
               /* and ((json_filter->>'serviceId' = '11' and report_log.json_filter -> 'year_month' is not null)
