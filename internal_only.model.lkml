@@ -295,7 +295,13 @@ explore: usage {
   }
 
   join: search_filtros{
-    sql_on: ${search_filtros.customer} = ${customer.id};;
+    sql_on: ${customer.id} = ${search_filtros.customer} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: search_filtros_agrupados{
+    sql_on: ${customer.id} = ${search_filtros_agrupados.customer_id};;
     relationship: one_to_many
     type: left_outer
   }
