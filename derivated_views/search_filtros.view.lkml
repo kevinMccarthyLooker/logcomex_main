@@ -98,11 +98,11 @@ view: search_filtros {
     sql: ${TABLE}.qtd ;;
   }
 
-  set: detail {  #drills para o planos
+  set: detail {  #drills
     fields: [
       filtro,
       valor,
-      qtd
+      total
     ]
   }
 
