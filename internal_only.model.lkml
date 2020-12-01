@@ -30,6 +30,7 @@ include: "/**/service_order_omie.view.lkml"
 include: "/**/financial_securities_omie.view.lkml"
 include: "/**/NPS.view.lkml"
 include: "/**/nps_08_2020.view.lkml"
+include: "/**/nps_11_2020.view.lkml"
 include: "/**/clientes_ativos_por_mes.view.lkml"
 include: "/**/customer_block_status.view.lkml"
 include: "/**/customer_blocked_history.view.lkml"
@@ -63,6 +64,7 @@ include: "/**/certificate_consignee_radar.view.lkml"
 include: "/**/certificate.view.lkml"
 include: "/**/follow_up_status.view.lkml"
 include: "/**/big_data_filtros.view.lkml"
+include: "/**/search_filtros_agrupados.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -74,6 +76,10 @@ explore: follow_up_status {
 
 explore: big_data_filtros {
   label: "Big Data Filtros"
+}
+
+explore: search_filtros_agrupados {
+  label: "Search e Novo Expo Filtros AGG"
 }
 
 explore: dau_wau_mau {
@@ -290,7 +296,13 @@ explore: usage {
   }
 
   join: search_filtros{
-    sql_on: ${search_filtros.customer} = ${customer.id};;
+    sql_on: ${customer.id} = ${search_filtros.customer} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: search_filtros_agrupados{
+    sql_on: ${customer.id} = ${search_filtros_agrupados.customer_id};;
     relationship: one_to_many
     type: left_outer
   }
@@ -316,6 +328,12 @@ explore: usage {
 
   join: nps_08_2020 {
     sql_on: ${users.email}=${nps_08_2020.email} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: nps_11_2020 {
+    sql_on: ${users.email}=${nps_11_2020.email} ;;
     relationship: one_to_many
     type: left_outer
   }
