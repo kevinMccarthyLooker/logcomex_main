@@ -90,11 +90,20 @@ view: search_filtros {
   measure: total {
     type: sum
     sql: ${TABLE}.qtd ;;
+    drill_fields: [detail*]
   }
 
   measure: max {
     type: max
     sql: ${TABLE}.qtd ;;
+  }
+
+  set: detail {  #drills para o planos
+    fields: [
+      filtro,
+      valor,
+      qtd
+    ]
   }
 
 
