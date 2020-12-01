@@ -9,15 +9,16 @@ view: search_filtros {
     fh.service_id as service,
     fh."source" as fonte,
     campos.name as filtro,
+    campos.value as valor,
     count(id) as qtd
-    from filter_history fh ,jsonb_to_recordset(fh.filters) as campos(name text)
+    from filter_history fh ,jsonb_to_recordset(fh.filters) as campos(name text, value text)
     where fh.filters is not null -- retira filtros nulos
     and fh.filters::text not like 'null' -- retira filtros nulos
     and debited is true -- para não contabilizar mesma buscas duplicadas
     and service_id in(19,21) -- search e novo exportacao
     and id not in(311017,311018,311019,317637,317635,317636,321072,337053,337073,337088,468578,760035,760036,
     760037,760038,760034) -- jsons incompletos, problema
-    group by 1,2,3,4,5,6;;
+    group by 1,2,3,4,5,6,7;;
   }
 
   dimension: id {
@@ -74,6 +75,11 @@ view: search_filtros {
   dimension: filtro {
     type: string
     sql: ${TABLE}.filtro ;;
+  }
+
+  dimension: valor {
+    type: string
+    sql: ${TABLE}.valor ;;
   }
 
   dimension: qtd {
