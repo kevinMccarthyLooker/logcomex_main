@@ -92,5 +92,10 @@ view: search_filtros {
     sql: ${TABLE}.qtd ;;
   }
 
+  measure: max {
+    type: max
+    sql: ${TABLE}.qtd ;;
+  }
+
 
 }
