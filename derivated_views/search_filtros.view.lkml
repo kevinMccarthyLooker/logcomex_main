@@ -127,6 +127,15 @@ view: search_filtros {
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 378 and 407 then '≅ 13 Meses'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 408 and 437 then '≅ 14 Meses'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 438 and 467 then '≅ 15 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 468 and 497 then '≅ 16 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 498 and 527 then '≅ 17 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 528 and 557 then '≅ 1 Ano e Meio'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 558 and 587 then '≅ 19 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 588 and 617 then '≅ 20 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 618 and 647 then '≅ 21 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 648 and 677 then '≅ 22 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 678 and 707 then '≅ 23 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 708 and 737 then '≅ 2 Anos'
     else ${TABLE}.valor
     end;;
   }
