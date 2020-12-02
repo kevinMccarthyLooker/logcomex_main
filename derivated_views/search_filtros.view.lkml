@@ -101,6 +101,7 @@ view: search_filtros {
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["2", "0", "2", "0", "", "0", "1"]' then 'Fora do Padrão'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["NaNaN", "NaNaN"]' then 'Fora do Padrão'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["2", "0", "2", "0", "", "0", "5"]' then 'Fora do Padrão'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["2", "0", "2", "0", "", "0", "4"]' then 'Fora do Padrão'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["2", "0", "2", "0", "", "0", "2"]' then 'Fora do Padrão'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["2", "0", "2", "0", "", "0", "2"]' then 'Fora do Padrão'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["last_3_months"]' then 'Fora do Padrão'
