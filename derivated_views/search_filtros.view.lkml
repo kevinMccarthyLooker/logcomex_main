@@ -125,6 +125,7 @@ view: search_filtros {
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 338 and 377 then '≅ 1 Ano'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 378 and 407 then '≅ 13 Meses'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 408 and 437 then '≅ 14 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 438 and 467 then '≅ 15 Meses'
     else ${TABLE}.valor
     end;;
   }
