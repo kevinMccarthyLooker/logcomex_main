@@ -105,11 +105,12 @@ view: search_filtros {
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["2", "0", "2", "0", "", "0", "2"]' then 'Fora do Padrão'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["last_3_months"]' then 'Fora do Padrão'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 119 and 210 then '4 Meses'
-    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 58 and 61 then '2 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 58 and 69 then '2 Meses'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 28 and 32 then '1 Mês'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 89 and 91 then '1 Mês'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 0 and 2 then '1 Dia'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 5 and 7 then '1 Semana'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 12 and 17 then '2 Semanas'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 9 and 11 then '10 Dias'
     else ${TABLE}.valor
     end;;
