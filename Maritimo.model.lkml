@@ -23,7 +23,12 @@ include: "/**/db_maritimo_agosto_2020.view.lkml"
 include: "/**/db_cad_pais.view.lkml"
 include: "/**/db_cad_porto.view.lkml"
 include: "/**/db_cad_fcl.view.lkml"
+include: "/**/puc_embarques.view.lkml"
 
+
+explore: puc_embarques {
+  label: "Puc Embarques"
+}
 
 explore: client_documents_by_method {
   label: "Client Documents By Method"
