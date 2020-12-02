@@ -2,6 +2,11 @@ connection: "aereo"
 
 include: "/**/di_pu.view.lkml"
 include: "/**/di_pu_addition.view.lkml"
+include: "/**/di_pu_addition_acrescimo.view.lkml"
+include: "/**/di_pu_addition_imposto.view.lkml"
+include: "/**/di_pu_addition_itens.view.lkml"
+include: "/**/di_pu_docs.view.lkml"
+include: "/**/di_pu_pagamentos.view.lkml"
 include: "/**/di_control_pu.view.lkml"
 include: "/**/di_control.view.lkml"
 include: "/**/di_control_pu_addition.view.lkml"
@@ -35,7 +40,6 @@ explore: di_pu_addition {}
 explore: di_pendente_robos {}
 explore: di_pu_pendente {}
 explore: search_acuracidade{}
-
 explore: di_joins {
   from: di_control
   view_label: "DI JOINS"
