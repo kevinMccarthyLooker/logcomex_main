@@ -96,7 +96,10 @@ view: search_filtros {
 
   dimension: valor {
     type: string
-    sql: ${TABLE}.valor ;;
+    sql: case
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["l", "a", "s", "t", "_", "3", "_", "m", "o", "n", "t", "h", "s"]' then 'Fora do Padrão'
+    else ${TABLE}.valor
+    end;;
   }
 
   dimension: qtd {
