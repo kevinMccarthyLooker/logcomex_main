@@ -9,15 +9,32 @@ view: search_filtros {
     fh.service_id as service,
     fh."source" as fonte,
     campos.name as filtro,
-    campos.value as valor,
+    (case
+      when  campos.name ='period' and service_id = 21 and fh."source" <> 'UNKNOWN' then (case when CHAR_LENGTH(campos.value) = 12 then '1' else (SUBSTR(campos.value, 15, 8)::date - SUBSTR(campos.value, 3, 8)::date)::text end)
+      when  campos.name ='period' and service_id = 19 and fh."source" <>  'UNKNOWN' and CHAR_LENGTH(campos.value) = 10 then (last_day(to_date(SUBSTR(campos.value, 3, 6),'YYYYMM')) - to_date(SUBSTR(campos.value, 3, 6),'YYYYMM'))::text
+      when  campos.name ='period' and service_id = 19 and fh."source" <> 'UNKNOWN' and CHAR_LENGTH(campos.value) = 20  then (last_day(to_date(SUBSTR(campos.value, 13, 6),'YYYYMM')) - to_date(SUBSTR(campos.value, 3, 6),'YYYYMM'))::text
+      when  campos.name ='period' and service_id = 19 and fh."source" = 'UNKNOWN' and CHAR_LENGTH(campos.value) = 20   then
+        (case when to_date(SUBSTR(campos.value, 13, 6),'YYYYMM') > to_date(SUBSTR(campos.value, 3, 6),'YYYYMM')
+               then (last_day(to_date(SUBSTR(campos.value, 13, 6),'YYYYMM')) - to_date(SUBSTR(campos.value, 3, 6),'YYYYMM'))::text
+               else (last_day(to_date(SUBSTR(campos.value, 3, 6),'YYYYMM')) - to_date(SUBSTR(campos.value, 13, 6),'YYYYMM'))::text
+           end)
+      when  campos.name ='period' and service_id = 19 and fh."source" = 'UNKNOWN' and CHAR_LENGTH(campos.value) = 16   then
+          (case when to_date(SUBSTR(campos.value, 10, 6),'YYYYMM') > to_date(SUBSTR(campos.value, 2, 6),'YYYYMM')
+               then (last_day(to_date(SUBSTR(campos.value, 10, 6),'YYYYMM')) - to_date(SUBSTR(campos.value, 2, 6),'YYYYMM'))::text
+               else (last_day(to_date(SUBSTR(campos.value, 2, 6),'YYYYMM')) - to_date(SUBSTR(campos.value, 10, 6),'YYYYMM'))::text
+           end)
+      when  campos.name ='period' and service_id = 19 and fh."source" = 'UNKNOWN' and CHAR_LENGTH(campos.value) = 8 then (last_day(to_date(SUBSTR(campos.value, 2, 6),'YYYYMM')) - to_date(SUBSTR(campos.value, 2, 6),'YYYYMM'))::text
+      when  campos.name ='period' and service_id = 19 and fh."source" = 'UNKNOWN' and CHAR_LENGTH(campos.value) = 10   then (last_day(to_date(SUBSTR(campos.value, 3, 6),'YYYYMM')) - to_date(SUBSTR(campos.value, 3, 6),'YYYYMM'))::text
+  else  campos.value
+    end) as valor,
     count(id) as qtd
     from filter_history fh ,jsonb_to_recordset(fh.filters) as campos(name text, value text)
     where fh.filters is not null -- retira filtros nulos
     and fh.filters::text not like 'null' -- retira filtros nulos
     and debited is true -- para não contabilizar mesma buscas duplicadas
     and service_id in(19,21) -- search e novo exportacao
-    and id not in(311017,311018,311019,317637,317635,317636,321072,337053,337073,337088,468578,760035,760036,
-    760037,760038,760034) -- jsons incompletos, problema
+    and id not in(311017,311018,311019,317637,317635,317636,321072,337053,337073,337088,468578,760035,760036,760037,760038,760034,208817) -- jsons com problema
+    --and campos.name = 'period'
     group by 1,2,3,4,5,6,7;;
   }
 
