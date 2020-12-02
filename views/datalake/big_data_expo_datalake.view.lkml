@@ -470,12 +470,12 @@ view: big_data_expo_datalake {
   }
 
   measure: mar_c20 {
-    type: number
+    type: sum
     sql: ${TABLE}.mar_c20 ;;
   }
 
   measure: mar_c40 {
-    type: number
+    type: sum
     sql: ${TABLE}.mar_c40 ;;
   }
 
@@ -1409,12 +1409,12 @@ view: big_data_expo_datalake {
   }
 
   measure: mar_teus {
-    type: number
+    type: sum
     sql: ${TABLE}.mar_teus ;;
   }
 
   measure: mar_teus_parcial {
-    type: number
+    type: sum
     sql: ${TABLE}.mar_teus_parcial ;;
   }
 
@@ -1549,12 +1549,12 @@ view: big_data_expo_datalake {
   }
 
   measure: mvw_c20 {
-    type: number
+    type: sum
     sql: ${TABLE}.mvw_c20 ;;
   }
 
   measure: mvw_c40 {
-    type: number
+    type: sum
     sql: ${TABLE}.mvw_c40 ;;
   }
 
@@ -1779,7 +1779,7 @@ view: big_data_expo_datalake {
   }
 
   measure: mvw_teus {
-    type: number
+    type: sum
     sql: ${TABLE}.mvw_teus ;;
   }
 
