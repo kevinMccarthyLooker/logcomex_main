@@ -1,9 +1,10 @@
 view: nps_11_2020 {
 
   derived_table: {
-    sql:select (ROW_NUMBER () OVER ()) as id, *
-        from(
-            SELECT
+    sql:
+select (ROW_NUMBER () OVER ()) as id, *
+from(
+SELECT
   CAST('2020-11-16 12:05:45' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'marly@atias.com.br' AS name, 'marly@atias.com.br' AS email, 10 AS nota, 'rapidez' AS observacao, 'Muito impactado' AS impacto, null::int AS id_user
 UNION ALL
 SELECT
@@ -172,8 +173,7 @@ SELECT
   CAST('2020-11-16 14:45:11' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/aereo' AS page, 'Jorge Maribondo' AS name, 'jmaribondo@agility.com' AS email, 10 AS nota, 'praticidade' AS observacao, 'Muito impactado' AS impacto, 125 AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-16 14:45:19' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'patrick@grossl.com.br' AS name, 'patrick@grossl.com.br' AS email, 7 AS nota, 'n/a
-' AS observacao, 'Pouco impactado' AS impacto, NULL AS id_user
+  CAST('2020-11-16 14:45:19' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'patrick@grossl.com.br' AS name, 'patrick@grossl.com.br' AS email, 7 AS nota, 'n/a' AS observacao, 'Pouco impactado' AS impacto, NULL AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-16 14:45:32' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Rafael Falchi' AS name, 'rafael.falchi@skymarine.com.br' AS email, 8 AS nota, 'Excelente ferramenta para obter leads, contudo para trabalhar os dados com mais precisão e eficácia seria muito interessante ter a possibilidade de customizar tabelas com base em critérios pre definidos e poder selecionar mais de um critério de filtro para exportar ao excel.' AS observacao, 'Muito impactado' AS impacto, 6340 AS id_user
@@ -339,9 +339,7 @@ SELECT
 ' AS observacao, 'Muito impactado' AS impacto, 5700 AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-16 18:08:14' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'eduardo.silva@anastacio.com' AS name, 'eduardo.silva@anastacio.com' AS email, 7 AS nota, 'O serviço é bom.
-
-O ponto negativo é a demora no lançamento das atualizações.' AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
+  CAST('2020-11-16 18:08:14' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'eduardo.silva@anastacio.com' AS name, 'eduardo.silva@anastacio.com' AS email, 7 AS nota, 'O serviço é bom. Oponto negativo é a demora no lançamento das atualizações.' AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-16 18:08:29' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Leandro Cirillo' AS name, 'leandro.cirillo@kuehne-nagel.com' AS email, 9 AS nota, 'Só não levaram 10 porque agora no resultado das pesquisas, aparece no campo pagamento "não informado" ao invés de collect ou prepaid.' AS observacao, 'Muito impactado' AS impacto, 2354 AS id_user
@@ -379,8 +377,7 @@ SELECT
   CAST('2020-11-16 18:33:52' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'compras@rudnik.com.br' AS name, 'compras@rudnik.com.br' AS email, 7 AS nota, 'Boa ferramenta' AS observacao, 'Pouco impactado' AS impacto, NULL AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-16 18:41:24' AS DATE) AS date, 'https://sistema.logcomex.io/#/leads' AS page, 'Gilberto' AS name, 'gilberto.olm@owinlog.com.br' AS email, 10 AS nota, 'programa bem didático!!
-' AS observacao, 'Muito impactado' AS impacto, 7085 AS id_user
+  CAST('2020-11-16 18:41:24' AS DATE) AS date, 'https://sistema.logcomex.io/#/leads' AS page, 'Gilberto' AS name, 'gilberto.olm@owinlog.com.br' AS email, 10 AS nota, 'programa bem didático!!' AS observacao, 'Muito impactado' AS impacto, 7085 AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-16 18:48:53' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Tiago Piovesani' AS name, 'tiago.piovesani@dbschenker.com' AS email, 10 AS nota, 'Me ajuda muito!' AS observacao, 'Muito impactado' AS impacto, 6109 AS id_user
@@ -410,8 +407,7 @@ SELECT
   CAST('2020-11-16 19:03:45' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Leocádio Cesar Ribeiro Cunha' AS name, 'leocadio.cunha@band-deicmar.com.br' AS email, 10 AS nota, 'Todas as informações necessárias para as minhas prospecções, estão disponíveis aqui.' AS observacao, 'Muito impactado' AS impacto, 6793 AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-16 19:04:02' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Leandro Oliveira' AS name, 'leandrooliveira@ecuworldwide.com' AS email, 6 AS nota, 'A modalidade de frete precisa voltar a ser apurada.
-Ao volta a ser 10.' AS observacao, 'Muito impactado' AS impacto, 2532 AS id_user
+  CAST('2020-11-16 19:04:02' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Leandro Oliveira' AS name, 'leandrooliveira@ecuworldwide.com' AS email, 6 AS nota, 'A modalidade de frete precisa voltar a ser apurada.Ao volta a ser 10.' AS observacao, 'Muito impactado' AS impacto, 2532 AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-16 19:06:09' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'renata.menezes@pbusiness.com.ar' AS name, 'renata.menezes@pbusiness.com.ar' AS email, 10 AS nota, null AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
@@ -576,8 +572,7 @@ SELECT
   CAST('2020-11-17 20:42:55' AS DATE) AS date, 'https://sistema.logcomex.io/#/tracking/relatorio' AS page, 'Ambev / Arosuco' AS name, 'ambev@pinho.com.br' AS email, 10 AS nota, NULL AS observacao, NULL AS impacto, 3627 AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-17 20:45:14' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Nilson Datoguia' AS name, 'nilson@eudmarco.com.br' AS email, 8 AS nota, 'vocês são feras
-' AS observacao, 'Pouco impactado' AS impacto, 562 AS id_user
+  CAST('2020-11-17 20:45:14' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Nilson Datoguia' AS name, 'nilson@eudmarco.com.br' AS email, 8 AS nota, 'vocês são feras' AS observacao, 'Pouco impactado' AS impacto, 562 AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-17 20:49:56' AS DATE) AS date, 'https://search.logcomex.io/dashboard/details/?period=2020-07&period=2020-09&ncm=31043010&productDescriptionContains%3Aor=potassio&source=home' AS page, 'suprimentos.mp@araguaia.com.br' AS name, 'suprimentos.mp@araguaia.com.br' AS email, 10 AS nota, NULL AS observacao, NULL AS impacto, NULL AS id_user
@@ -598,8 +593,7 @@ SELECT
   CAST('2020-11-18 01:04:04' AS DATE) AS date, 'https://search.logcomex.io/dashboard/details/?period=2019-10&period=2020-09&productDescriptionContains%3Aor=sildenafila&source=home' AS page, 'carla.queiros@globequimica.com.br' AS name, 'carla.queiros@globequimica.com.br' AS email, 8 AS nota, 's' AS observacao, 'Pouco impactado' AS impacto, NULL AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-18 03:19:11' AS DATE) AS date, 'https://search.logcomex.io/dashboard/?period=2020-09&ncm=39204300&source=home' AS page, 'renato@tdtrading.com.br' AS name, 'renato@tdtrading.com.br' AS email, 10 AS nota, 'Funciona muito bem
-' AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
+  CAST('2020-11-18 03:19:11' AS DATE) AS date, 'https://search.logcomex.io/dashboard/?period=2020-09&ncm=39204300&source=home' AS page, 'renato@tdtrading.com.br' AS name, 'renato@tdtrading.com.br' AS email, 10 AS nota, 'Funciona muito bem' AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-18 12:16:20' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Andreia Nascimento' AS name, 'andreia.nascimento@suntrans.com.br' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, 7690 AS id_user
@@ -638,8 +632,7 @@ SELECT
   CAST('2020-11-18 15:05:43' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'rafaell.souza@cticargo.com.br' AS name, 'rafaell.souza@cticargo.com.br' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, NULL AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-18 15:08:07' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'adellini.segal@coldmix.com.br' AS name, 'adellini.segal@coldmix.com.br' AS email, 9 AS nota, 'Ainda estamos no início da avaliação da plataforma, mas já parece muito boa
-' AS observacao, 'Pouco impactado' AS impacto, NULL AS id_user
+  CAST('2020-11-18 15:08:07' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'adellini.segal@coldmix.com.br' AS name, 'adellini.segal@coldmix.com.br' AS email, 9 AS nota, 'Ainda estamos no início da avaliação da plataforma, mas já parece muito boa' AS observacao, 'Pouco impactado' AS impacto, NULL AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-18 15:28:21' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Paulo André Games' AS name, 'paulo.games@deicmar.com' AS email, 10 AS nota, 'informações dinâmicas' AS observacao, 'Muito impactado' AS impacto, 513 AS id_user
@@ -711,8 +704,7 @@ SELECT
   CAST('2020-11-19 14:26:45' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao?tab=resumo&silent=true&groupBy=nmconsignatario&subGroup=&filter=end_date%3D2020-11-19%26filterImportacaoNmconsignatario%3DBEARING%26grouper%3Dnmconsignatario%26start_date%3D2020-10-19' AS page, 'Ricardo Salomão' AS name, 'ricardo.salomao@windlog.com.br' AS email, 9 AS nota, NULL AS observacao, NULL AS impacto, 7569 AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-19 14:28:22' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Lucas' AS name, 'lucas@cfreight.com.br' AS email, 10 AS nota, 'Informações excelentes
-' AS observacao, 'Pouco impactado' AS impacto, 4199 AS id_user
+  CAST('2020-11-19 14:28:22' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Lucas' AS name, 'lucas@cfreight.com.br' AS email, 10 AS nota, 'Informações excelentes' AS observacao, 'Pouco impactado' AS impacto, 4199 AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-19 14:48:06' AS DATE) AS date, 'https://search.logcomex.io/dashboard/?period=2020-01&period=2020-09&ncm=39072031&source=home' AS page, 'adriana.fischer@additiva.com.br' AS name, 'adriana.fischer@additiva.com.br' AS email, 9 AS nota, NULL AS observacao, NULL AS impacto, NULL AS id_user
@@ -776,9 +768,7 @@ SELECT
   CAST('2020-11-20 12:32:03' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'bruno.perona@anastacio.com' AS name, 'bruno.perona@anastacio.com' AS email, 9 AS nota, NULL AS observacao, NULL AS impacto, NULL AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-20 12:46:41' AS DATE) AS date, 'https://search.logcomex.io/dashboard/details/?period=2020-10&ncm=47032100&source=home' AS page, 'ariel@kruna.com.br' AS name, 'ariel@kruna.com.br' AS email, 6 AS nota, 'Só sai dia 20 as informações
-
-Interface poderia ser melhor ou mais adaptável para cada cliente' AS observacao, 'Pouco impactado' AS impacto, NULL AS id_user
+  CAST('2020-11-20 12:46:41' AS DATE) AS date, 'https://search.logcomex.io/dashboard/details/?period=2020-10&ncm=47032100&source=home' AS page, 'ariel@kruna.com.br' AS name, 'ariel@kruna.com.br' AS email, 6 AS nota, 'Só sai dia 20 as informações Interface poderia ser melhor ou mais adaptável para cada cliente' AS observacao, 'Pouco impactado' AS impacto, NULL AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-20 13:25:19' AS DATE) AS date, 'https://search.logcomex.io/dashboard/?period=2019-11&period=2020-10&ncm=39252000&source=home' AS page, 'compras01@bellvalley.com.br' AS name, 'compras01@bellvalley.com.br' AS email, 10 AS nota, 'Ótimo para consultas' AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
@@ -1174,8 +1164,7 @@ SELECT
   CAST('2020-11-26 18:23:44' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'BR-SALES-POA' AS name, 'br-sales-poa@jas.com' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, 7898 AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-26 18:25:22' AS DATE) AS date, 'https://sistema.logcomex.io/#/searchx/importacao' AS page, 'Luis' AS name, 'luis@asiasource.com.br' AS email, 10 AS nota, 'Um site rápido que proporciona resultados em pouco tempo
-' AS observacao, 'Muito impactado' AS impacto, 3843 AS id_user
+  CAST('2020-11-26 18:25:22' AS DATE) AS date, 'https://sistema.logcomex.io/#/searchx/importacao' AS page, 'Luis' AS name, 'luis@asiasource.com.br' AS email, 10 AS nota, 'Um site rápido que proporciona resultados em pouco tempo' AS observacao, 'Muito impactado' AS impacto, 3843 AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-26 18:44:37' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'macedo87@hotmail.com' AS name, 'macedo87@hotmail.com' AS email, 9 AS nota, 'muito bom ' AS observacao, 'Pouco impactado' AS impacto, NULL AS id_user
@@ -1205,8 +1194,7 @@ SELECT
   CAST('2020-11-26 21:01:39' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Rafael' AS name, 'rafael@bflogistics.com.br' AS email, 10 AS nota, 'sistema funciona bem' AS observacao, 'Muito impactado' AS impacto, 6296 AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-26 21:30:27' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Carlos Bastos' AS name, 'carlos.bastos@dachser.com' AS email, 8 AS nota, 'bom trabalho
-' AS observacao, 'Muito impactado' AS impacto, 5823 AS id_user
+  CAST('2020-11-26 21:30:27' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Carlos Bastos' AS name, 'carlos.bastos@dachser.com' AS email, 8 AS nota, 'bom trabalho' AS observacao, 'Muito impactado' AS impacto, 5823 AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-27 00:22:27' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Sami Hermas' AS name, 'sami@newtrafic.com.br' AS email, 10 AS nota, NULL AS observacao, NULL AS impacto, 375 AS id_user
@@ -1255,25 +1243,67 @@ SELECT
 UNION ALL
 SELECT
   CAST('2020-11-27 14:49:30' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/aereo' AS page, 'Cláudia Ferreira Neto' AS name, 'claudia.neto@dbschenker.com' AS email, 8 AS nota, '8' AS observacao, 'Pouco impactado' AS impacto, 7969 AS id_user
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            ) as qq1;;
+UNION ALL
+SELECT
+  CAST('2020-11-16 12:14:30' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=C%C3%A9lio%20Matos&last_name=Matos&email=cmatos%40transbrasa.com.br&aid=8&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-81QFmGT6kMPEuRDy0gSoDGAYsiw7MSrm0V9joBJmHfw9UkqkE7CDArdLgI23SyGcjmxid1BBEJjPSZ--FY4JFwLSXX5w&utm_content=99967737&utm_source=hs_email' AS page, 'Célio Matos' AS name, 'cmatos@transbrasa.com.br' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 12:14:32' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Vanessa%20Zajankauskas&last_name=Zajankauskas&email=vanessazajanka%40polyterminais.com.br&aid=9&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-9BvNgzjWbyZsR-I56Pn8k1f3BzSk8cOSh9YrynUnmUD_QpOCCSlWNaqxcSIHgkD-GiUCfU1GNng9NccberrbPY5RwGTjguMJiiAJSyM2k1LvY74SU&utm_content=99967737&utm_source=hs_email' AS page, 'Vanessa Zajankauskas' AS name, 'vanessazajanka@polyterminais.com.br' AS email, 9 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 12:14:47' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Ana%20Cristina%20da%20Silva%20Vieira%20Araujo&last_name=Araujo&email=ana.araujo%40grupocbo.com.br&aid=8&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-_w7PAcbKiR1bUG1G9WNjARtWGRJlKf3DbjXG-2A21T89YpIKi5AtF0s5uznTTQ9V56wIQ8g401UD7_XrvRW-3JmkU2WprZTIRNhdOBevjD3fZVQ3s&utm_content=99967737&utm_source=hs_email' AS page, 'Ana Cristina da Silva Vieira Araujo' AS name, 'ana.araujo@grupocbo.com.br' AS email, 8 AS nota, 'Alguns problemas na atualização dos embarques e relatórios gerados.' AS observacao, 'Muito impactado' AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 12:14:54' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Adelson%20Jos%C3%A9%20de%20Carvalho&last_name=%7B%7Bcontact.lastname%7D%7D&email=adelsonc%40nelsonheusi.com&aid=0&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-_cTqLInKHzewpuC6uj8-QbOJIc20wHWetMz0lPUtECb8w3KecCuc2TG3girDZhtWXhkJqIkatWmdu54V_AqbmFU9Uwkg&utm_content=99967737&utm_source=hs_email' AS page, 'Adelson José de Carvalho' AS name, 'adelsonc@nelsonheusi.com' AS email, 0 AS nota, 'Atendimento ao cliente nível baixíssimo, muita demora na resolução de problemas. ' AS observacao, 'Nada impactado' AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 12:16:24' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=CARLOS.OLIVEIRA&last_name=Henrique%20de%20Oliveira&email=carlos.oliveira%40bandeiranteslog.com.br&aid=4&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-_xvyNynqEnpQsnRr5mLDaDunkREsrMCq79VT-8cEpIF4VtqZJRQUx1O4xhM6y-59F6td9R3nUkY23QsZspTOJiBOXIRncraBWxUmiKxJqnJv68djE&utm_content=99967737&utm_source=hs_email' AS page, 'CARLOS.OLIVEIRA' AS name, 'carlos.oliveira@bandeiranteslog.com.br' AS email, 4 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 12:17:23' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Milton%20de%20Jesus%20Souza&last_name=Souza&email=milton.souza%40veritas-agency.com.br&aid=8&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-8X3RZqe_p0nPIEZ9RUVoVH8KH4Z7XdLGPWwQqe6_y2YMZHUD4A0GXYj_Anw-7MfRwyYw0Ro6Kd_OauFHYKoDyaNw9g2HZmrAYHsjMefGqBLmELzRg&utm_content=99967737&utm_source=hs_email' AS page, 'Milton de Jesus Souza' AS name, 'milton.souza@veritas-agency.com.br' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 12:19:06' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Fran%20Borba&last_name=Borba&email=francoiseborba%40polyterminais.com.br&aid=7&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-_XuN0RjxuamlaBc3VuiXtfNSC2NbnIF5KJi7egJdpmEnZMoliovfcAt0xs6KQOXMjeB0-tNOyQ1BLetaGCXJXGhaRhEiReb2koK2ZX4EhPTlIRjTc&utm_content=99967737&utm_source=hs_email' AS page, 'Fran Borba' AS name, 'francoiseborba@polyterminais.com.br' AS email, 7 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 12:19:45' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=F%C3%A1bio&last_name=%7B%7Bcontact.lastname%7D%7D&email=export3%40plennacomex.com.br&aid=10&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-_AcTUkpIu1CBWc7c4ZGFN0FvSToHdbqtFFi-ibOh3V5RIM0-wufA-_KBc8g32ricJV4hjyZSHx5j9qgosHd52jTVM24xRr3kZ5vMRTlkiQcdcbb6A&utm_content=99967737&utm_source=hs_email' AS page, 'Fábio' AS name, 'export3@plennacomex.com.br' AS email, 10 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 12:20:04' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Leoc%C3%A1dio%20Cesar%20Ribeiro%20Cunha&last_name=Cesar%20Ribeiro%20Cunha&email=leocadio.cunha%40band-deicmar.com.br&aid=10&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz--iN-V7Dr36HyPg_MT9ubnCbzVBQ-ryLihE9yphQ30lCki4akX0fPT68j6NrW2Kx2HfJBfk0u5fD8jZBgStaVPGWjlQAgnpoDyhZjiXFyFTHo7hZ0w&utm_content=99967737&utm_source=hs_email' AS page, 'Leocádio Cesar Ribeiro Cunha' AS name, 'leocadio.cunha@band-deicmar.com.br' AS email, 10 AS nota, 'Todas as informações necessárias para a minha atividade, estão disponíveis.' AS observacao, 'Muito impactado' AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 12:39:25' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=GUBLIO%20HEBER%20HELIO%20SILVA&last_name=Silva&email=gublio.silva%40nunofracht.com.br&aid=9&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-9dKUpKj_zTBNa8mKHH5-CkrvcSsyCQ-1Utsrl0IL8fVlze3AxESkXN9ROcy8cCjd_b2bibBPh32R6zKyUF6xX4wtEmktDW6vcUXvNAkS--lgjlahg&utm_content=99967737&utm_source=hs_email' AS page, 'GUBLIO HEBER HELIO SILVA' AS name, 'gublio.silva@nunofracht.com.br' AS email, 9 AS nota, 'Boa ferramenta e bom atendimento' AS observacao, 'Pouco impactado' AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 12:42:14' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Ramon%20Canova&last_name=Canova&email=ramon.canova%40tcp.com.br&aid=9&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz--7bgTrzOg3xKOxyzI1Yy9tS8tuHMMJ3aBCciceHhZJ2GtjHZcvyYdkg74aTVOhTmVU3meXjp6pbNH9FJDtkfqMSDfpPw&utm_content=99967737&utm_source=hs_email' AS page, 'Ramon Canova' AS name, 'ramon.canova@tcp.com.br' AS email, 9 AS nota, 'O que preciso utilizar da plataforma me atende, tanto quanto atendimento.' AS observacao, 'Muito impactado' AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 13:27:41' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=%C3%81lvaro%20Goto&last_name=Bastos%20Goto&email=alvaro.goto%40brado.com.br&aid=3&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-8Qg24mlGbhnpsRI50l2hzRUj5jA9ktorY4tVTvRB0NDdcX9xGinvDgSJgml0XVqA56abkQLRbok-DOosTiCVN69UCgrw&utm_content=99967737&utm_source=hs_email' AS page, 'Álvaro Goto' AS name, 'alvaro.goto@brado.com.br' AS email, 3 AS nota, 'dados imprecisos, reprocessamento de dados do passado, demora no retorno do atendimento.' AS observacao, 'Muito impactado' AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 13:32:23' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Caroline%20Regalin&last_name=Regalin&email=caroline.regalin%40gett.com.br&aid=5&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-9ZmQkibbOkgCzabOWWVuKn7jhnGN4_CjnS5uDDhriRVv7xPWN8SMkWn2fHArx5GLLv-rxkre9t4OTiFrkeguxrDTVdAEMiCIxPhjfXkKuR17OTUfU&utm_content=99967737&utm_source=hs_email' AS page, 'Caroline Regalin' AS name, 'caroline.regalin@gett.com.br' AS email, 5 AS nota, 'Não estou utilizando logcomex no momento' AS observacao, 'Pouco impactado' AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 14:56:43' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Natalia%20Garrido%20Mariano&last_name=Garrido&email=natalia.garrido%40florestareal.com&aid=9&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz--O4XgmHSezVxKBptxuK8TOE7JV8PRKOOec1ws2w3Yr3aF7H8wR9e3Qh7CQNzaUwg5iHe5xNXi8JUth29Fj5GkSSm0HZjP7kDagmKN5zO993FEwjOY&utm_content=99967737&utm_source=hs_email' AS page, 'Natalia Garrido Mariano' AS name, 'natalia.garrido@florestareal.com' AS email, 9 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 16:22:12' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Luiz%20Policarpo&last_name=Policarpo&email=luiz.policarpo%40cticargo.com.br&aid=9&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-_HjpswJEU2fMaOH4RzghYKUL5YXZQkxunr8vajQoAJvhMIb8nAmYcPgUdHlyyWMgwfvY_jvlRRsZXdQIMj7KiOzlWItQp4keHky72hHYES48tGlcs&utm_content=99967737&utm_source=hs_email' AS page, 'Luiz Policarpo' AS name, 'luiz.policarpo@cticargo.com.br' AS email, 9 AS nota, 'Satisfação com os produtos ofertados pela Logcomex e atendimento e suporte da equipe.' AS observacao, 'Muito impactado' AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 16:37:33' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Fernanda&last_name=%7B%7Bcontact.lastname%7D%7D&email=fernanda.meucci%40florestareal.com&aid=9&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-96MgVR8Qh50mSiFGi313SYO-91OCtlFLsudTr5J52EECyON7s-EUJvEyXNyjFcUMDmpWKGQzH2gi0F5xxST0k4qgBhLI8iM-K5YTS649e1mA-KHSg&utm_content=99967737&utm_source=hs_email' AS page, 'Fernanda' AS name, 'fernanda.meucci@florestareal.com' AS email, 9 AS nota, 'Estou satisfeito porém as vezes demora para receber um retorno mais ágil da equipe.' AS observacao, 'Muito impactado' AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 16:38:11' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Ricardo%20Estevam&last_name=Estevam&email=ricardo.estevam%40gett.com.br&aid=10&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-_e8gZtI8TC2PzgNeI1UDzAeZ7EteedGL0LLx267bcGBA9Mevotkv-HHKTzMFoN9ofp8nU1d5FeNKUfo8jjsUDYqN8ILsGgjjsQbtoTZNfDV3-0yG8&utm_content=99967737&utm_source=hs_email' AS page, 'Ricardo Estevam' AS name, 'ricardo.estevam@gett.com.br' AS email, 10 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-16 17:28:32' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Edleuza%20Nogueira&last_name=%7B%7Bcontact.lastname%7D%7D&email=operacional%40maltacomex.com&aid=10&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-8qWaQmsFFbxvpwJlDHiASp-oFwsK1oerd5Y_AJTEnx3rhMExHb3yxqj1KDXVad1QKj5BggrMv-RJfAfcC9qiLKboQYFh2hXyTVpcqLvuSMoiY51ck&utm_content=99967737&utm_source=hs_email' AS page, 'Edleuza Nogueira' AS name, 'operacional@maltacomex.com' AS email, 10 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-17 13:22:26' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Angelina&last_name=%7B%7Bcontact.lastname%7D%7D&email=a.marques%40btp.com.br&aid=9&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-_Vp6b0enbEaPiRi3f4rE69THwXQvgpl1fwXbb3CbDkpi8ktASnFfVuyHYtJpgM0QJn8ZuEG7DbEegky9TczmJuACOCHw&utm_content=99967737&utm_source=hs_email' AS page, 'Angelina' AS name, 'a.marques@btp.com.br' AS email, 9 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
+UNION ALL
+SELECT
+  CAST('2020-11-20 16:22:56' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Cesar%20Reffer&last_name=Reffer&email=cesar.reffer%40latam.com&aid=7&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-8ywo8XqTxrtRQMy1k9w-JK2Be_zSCPYQuxbpEDwvDO45086OV9b9nlSKLyyh7kNaOuQVeb43gzo-UbnYdIyQ8CUPN65g&utm_content=99967737&utm_source=hs_email' AS page, 'Cesar Reffer' AS name, 'cesar.reffer@latam.com' AS email, 7 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
+) as qq1;;
 
   }
 
