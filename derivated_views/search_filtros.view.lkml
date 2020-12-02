@@ -114,7 +114,17 @@ view: search_filtros {
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 48 and 57 then '≅ 50 Dias'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 58 and 69 then '≅ 2 Meses'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 70 and 97  then '≅ 3 Meses'
-    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 119 and 210 then '≅ 4 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 98 and 127 then '≅ 4 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 128 and 157 then '≅ 5 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 158 and 187 then '≅ 6 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 188 and 217 then '≅ 7 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 218 and 247 then '≅ 8 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 248 and 277 then '≅ 9 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 278 and 307 then '≅ 10 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 308 and 337 then '≅ 11 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 338 and 377 then '≅ 1 Ano'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 378 and 407 then '≅ 13 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 408 and 437 then '≅ 14 Meses'
     else ${TABLE}.valor
     end;;
   }
