@@ -136,6 +136,19 @@ view: search_filtros {
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 648 and 677 then '≅ 22 Meses'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 678 and 707 then '≅ 23 Meses'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 708 and 737 then '≅ 2 Anos'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 738 and 767 then '≅ 25 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 768 and 797 then '≅ 26 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 798 and 827 then '≅ 27 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 828 and 857 then '≅ 28 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 858 and 887 then '≅ 29 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 888 and 917 then '≅ 2 Anos e Meio'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 918 and 947 then '≅ 31 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 948 and 977 then '≅ 32 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 978 and 1007 then '≅ 33 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 1008 and 1037 then '≅ 34 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 1038 and 1067 then '≅ 35 Meses'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 1068 and 1097 then '≅ 3 Anos'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 1098 and 3000 then '> 3 Anos'
     else ${TABLE}.valor
     end;;
   }
