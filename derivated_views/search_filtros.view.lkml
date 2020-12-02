@@ -107,10 +107,13 @@ view: search_filtros {
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 119 and 210 then '4 Meses'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 58 and 69 then '2 Meses'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 70 and 97  then '3 Meses'
-    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 28 and 32 then '1 Mês'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 25 and 37 then '1 Mês'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 0 and 2 then '1 Dia'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 5 and 7 then '1 Semana'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 12 and 17 then '2 Semanas'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 18 and 24 then '20 Dias'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 38 and 47 then '40 Dias'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 48 and 57 then '50 Dias'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 9 and 11 then '10 Dias'
     else ${TABLE}.valor
     end;;
