@@ -1371,6 +1371,11 @@ view: bi_exports_mvw_gold {
     sql: ${TABLE}.mar_c20 ;;
   }
 
+  measure: count_mar_id {
+    type: count_distinct
+    sql: ${TABLE}.mar_id ;;
+  }
+
   measure: mar_c40 {
     type: sum
     sql: ${TABLE}.mar_c40 ;;
