@@ -14,8 +14,7 @@ SELECT
   CAST('2020-11-16 12:06:18' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'marcelo.pace@citi.com' AS name, 'marcelo.pace@citi.com' AS email, 9 AS nota, 'Fácil interação no sistema e ampla variedade de informações.' AS observacao, 'Pouco impactado' AS impacto, NULL AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-16 12:06:41' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'seiji.nomura@donaldson.com' AS name, 'seiji.nomura@donaldson.com' AS email, 6 AS nota, 'eu nem cheguei a utilizar a plataforma e vcs já pedem feedback, sem a alternativa para ignorar a pesquisa
-' AS observacao, NULL AS impacto, NULL AS id_user
+  CAST('2020-11-16 12:06:41' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'seiji.nomura@donaldson.com' AS name, 'seiji.nomura@donaldson.com' AS email, 6 AS nota, 'eu nem cheguei a utilizar a plataforma e vcs já pedem feedback, sem a alternativa para ignorar a pesquisa' AS observacao, NULL AS impacto, NULL AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-16 12:07:41' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'pauloraphael@aqm.com.br' AS name, 'pauloraphael@aqm.com.br' AS email, 8 AS nota, 'ok' AS observacao, 'Pouco impactado' AS impacto, NULL AS id_user
@@ -132,8 +131,7 @@ SELECT
   CAST('2020-11-16 13:55:17' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'PATRICIA LEAL RODRIGUES' AS name, 'patricia.rodrigues@delphiforwarding.com' AS email, 10 AS nota, NULL AS observacao, NULL AS impacto, 5638 AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-16 13:56:29' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'alex.gomes@aditex.com.br' AS name, 'alex.gomes@aditex.com.br' AS email, 9 AS nota, 'Performance
-' AS observacao, 'Nada impactado' AS impacto, NULL AS id_user
+  CAST('2020-11-16 13:56:29' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'alex.gomes@aditex.com.br' AS name, 'alex.gomes@aditex.com.br' AS email, 9 AS nota, 'Performance' AS observacao, 'Nada impactado' AS impacto, NULL AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-16 13:56:50' AS DATE) AS date, 'https://sistema.logcomex.io/#/leads?tab=itens&silent=true&filter=dashboard%3Did%26end_date%3D2020-11-16%26filter_date%3Doperation_date%26grouper%3Dconsignatario_nome%26nmconsignatario%3Dtigre%26start_date%3D2020-10-21%26type%3Dleads&groupBy=consignatario_nome&subGroup=&page=1&per_page=15' AS page, 'Cristiano Ribas' AS name, 'cristiano.ribas@rodonery.com.br' AS email, 8 AS nota, 'estou satisfeito' AS observacao, 'Muito impactado' AS impacto, 4141 AS id_user
@@ -145,8 +143,7 @@ SELECT
   CAST('2020-11-16 14:01:05' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'leonardo@trichem.com.br' AS name, 'leonardo@trichem.com.br' AS email, 10 AS nota, 'informação precisa' AS observacao, 'Pouco impactado' AS impacto, NULL AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-16 14:07:07' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Eliel Breve' AS name, 'eliel.silva@localfrio.com.br' AS email, 8 AS nota, 'Sempre podemos melhorar
-' AS observacao, 'Muito impactado' AS impacto, 2659 AS id_user
+  CAST('2020-11-16 14:07:07' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Eliel Breve' AS name, 'eliel.silva@localfrio.com.br' AS email, 8 AS nota, 'Sempre podemos melhorar' AS observacao, 'Muito impactado' AS impacto, 2659 AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-16 14:15:06' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'marcos@importglobal.com.br' AS name, 'marcos@importglobal.com.br' AS email, 8 AS nota, 'tem me atendido satisfatoriamente' AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
@@ -335,8 +332,7 @@ SELECT
   CAST('2020-11-16 18:07:00' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Steve Kleindienst' AS name, 'steve@intertransbrasil.com.br' AS email, 7 AS nota, 'Alguns dados sao incompletos' AS observacao, 'Pouco impactado' AS impacto, 5287 AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-16 18:07:35' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Daniela RIo' AS name, 'daniela.rio@cevalogistics.com' AS email, 9 AS nota, 'satisfatorio
-' AS observacao, 'Muito impactado' AS impacto, 5700 AS id_user
+  CAST('2020-11-16 18:07:35' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Daniela RIo' AS name, 'daniela.rio@cevalogistics.com' AS email, 9 AS nota, 'satisfatorio' AS observacao, 'Muito impactado' AS impacto, 5700 AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-16 18:08:14' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'eduardo.silva@anastacio.com' AS name, 'eduardo.silva@anastacio.com' AS email, 7 AS nota, 'O serviço é bom. Oponto negativo é a demora no lançamento das atualizações.' AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
@@ -345,8 +341,7 @@ SELECT
   CAST('2020-11-16 18:08:29' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Leandro Cirillo' AS name, 'leandro.cirillo@kuehne-nagel.com' AS email, 9 AS nota, 'Só não levaram 10 porque agora no resultado das pesquisas, aparece no campo pagamento "não informado" ao invés de collect ou prepaid.' AS observacao, 'Muito impactado' AS impacto, 2354 AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-16 18:08:45' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'leonardo@ascensus.com.br' AS name, 'leonardo@ascensus.com.br' AS email, 10 AS nota, '.
-' AS observacao, 'Nada impactado' AS impacto, NULL AS id_user
+  CAST('2020-11-16 18:08:45' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'leonardo@ascensus.com.br' AS name, 'leonardo@ascensus.com.br' AS email, 10 AS nota, '.' AS observacao, 'Nada impactado' AS impacto, NULL AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-16 18:15:28' AS DATE) AS date, 'https://search.logcomex.io/dashboard/?period=2020-07&period=2020-09&ncm=7306400&ncm=73066100&source=recent_search' AS page, 'tlarrosa@castellarmetals.com.br' AS name, 'tlarrosa@castellarmetals.com.br' AS email, 10 AS nota, 'Otimo ! ' AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
@@ -367,8 +362,7 @@ SELECT
   CAST('2020-11-16 18:28:45' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Adilson Silva' AS name, 'adilson.silva@connectlatam.com' AS email, 6 AS nota, '6' AS observacao, 'Pouco impactado' AS impacto, 7796 AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-16 18:30:36' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Andre Stein' AS name, 'andre.stein@windlog.com.br' AS email, 5 AS nota, '.
-' AS observacao, 'Pouco impactado' AS impacto, 6219 AS id_user
+  CAST('2020-11-16 18:30:36' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Andre Stein' AS name, 'andre.stein@windlog.com.br' AS email, 5 AS nota, '.' AS observacao, 'Pouco impactado' AS impacto, 6219 AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-16 18:31:31' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'rafael.mugnaini@comexport.com.br' AS name, 'rafael.mugnaini@comexport.com.br' AS email, 10 AS nota, 'Muito boa!' AS observacao, 'Muito impactado' AS impacto, NULL AS id_user
@@ -734,8 +728,7 @@ SELECT
   CAST('2020-11-19 18:46:10' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/importacao' AS page, 'Bruna Freitas' AS name, 'bruna.freitas@pglbr.com.br' AS email, 8 AS nota, NULL AS observacao, NULL AS impacto, 1405 AS id_user
 UNION ALL
 SELECT
-  CAST('2020-11-19 18:54:27' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/aereo?tab=details&silent=true&groupBy=consignatario&subGroup=&filter=end_date%3D2020-10-31%26filterAereoConsignatario%3DSIDEL%26grouper%3Dconsignatario%26start_date%3D2020-10-01&page=1&per_page=15&grouper_value=SIDEL' AS page, 'Danilo Damprelli' AS name, 'danilo.damprelli@geodis.com' AS email, 10 AS nota, 'Otimo controle
-' AS observacao, 'Nada impactado' AS impacto, 3688 AS id_user
+  CAST('2020-11-19 18:54:27' AS DATE) AS date, 'https://sistema.logcomex.io/#/inteligencia/aereo?tab=details&silent=true&groupBy=consignatario&subGroup=&filter=end_date%3D2020-10-31%26filterAereoConsignatario%3DSIDEL%26grouper%3Dconsignatario%26start_date%3D2020-10-01&page=1&per_page=15&grouper_value=SIDEL' AS page, 'Danilo Damprelli' AS name, 'danilo.damprelli@geodis.com' AS email, 10 AS nota, 'Otimo controle' AS observacao, 'Nada impactado' AS impacto, 3688 AS id_user
 UNION ALL
 SELECT
   CAST('2020-11-19 18:55:52' AS DATE) AS date, 'https://search.logcomex.io/dashboard/?period=2020-01&period=2020-09&ncm=40112090&source=home' AS page, 'jonatas.vieira@mondaxcomercio.com.br' AS name, 'jonatas.vieira@mondaxcomercio.com.br' AS email, 7 AS nota, NULL AS observacao, NULL AS impacto, NULL AS id_user
