@@ -89,6 +89,11 @@ view: puc_embarques {
     sql: ${TABLE}."printed_at" ;;
   }
 
+  dimension: exportacao_frete_hoje {
+    type: yesno
+    sql: case when ${TABLE}."printed_at" >= current_date then true else false end ;;
+  }
+
   dimension_group: processed {
     type: time
     timeframes: [
