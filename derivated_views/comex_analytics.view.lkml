@@ -6,7 +6,7 @@ view: comex_analytics {
     c.id as customer_id,
     c."name" as customer_name,
     cg.cnpj as consignee_cnpj,
-    cg."name" as consignee_cnpj,
+    cg."name" as consignee_name,
     ct.id as cert_id,
     ct.owner_name as cert_owner,
     ct.valid_until as cert_valid,
@@ -47,6 +47,11 @@ view: comex_analytics {
   dimension: consignee_cnpj {
     type: string
     sql: ${TABLE}."consignee_cnpj" ;;
+  }
+
+  dimension: consignee_name {
+    type: string
+    sql: ${TABLE}."consignee_name" ;;
   }
 
   dimension: cert_id {
