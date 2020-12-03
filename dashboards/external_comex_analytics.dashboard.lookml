@@ -1,4 +1,4 @@
-- dashboard: comex_analytics
+- dashboard: external_comex_analytics
   title: Comex Analytics - Test
   layout: newspaper
   preferred_viewer: dashboards-next
