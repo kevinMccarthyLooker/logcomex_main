@@ -20,6 +20,7 @@ view: comex_analytics {
     inner join api.certificate ct on ct.id = cg.cert_id and ct.customer_id = cg.customer_id
     inner join aereo.di_pu di on replace(replace(replace(di.importador_cnpj,'-',''),'/',''),'.','') = cg.cnpj
     where ct.valid_until > current_date -- certificados válidos
+    and di.data_hora_registro  >= current_date - interval '30' day -- diminuindo o periodo para teste
     --and c.id = 1536
     --and ct.deleted_at is null descomentar caso não incluir os deletados
     --and c.id = 512
