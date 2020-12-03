@@ -19,8 +19,8 @@ view: comex_analytics {
     --inner join api.certificate_consignee_radar ccr on ccr.consignee_id = cg.id and ccr.deleted_at is null descomentar caso nao incluir os deletados
     inner join api.certificate ct on ct.id = cg.cert_id and ct.customer_id = cg.customer_id
     inner join aereo.di_pu di on replace(replace(replace(di.importador_cnpj,'-',''),'/',''),'.','') = cg.cnpj
-    where c.id = 1536
-    and ct.valid_until > current_date -- certificados válidos
+    where ct.valid_until > current_date -- certificados válidos
+    --and c.id = 1536
     --and ct.deleted_at is null descomentar caso não incluir os deletados
     --and c.id = 512
     ;;
