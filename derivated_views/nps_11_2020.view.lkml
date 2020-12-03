@@ -2,7 +2,7 @@ view: nps_11_2020 {
 
   derived_table: {
     sql:
-select (ROW_NUMBER () OVER ()) as id, *
+    select (ROW_NUMBER () OVER ()) as id, *
 from(
 SELECT
   CAST('2020-11-16 12:05:45' AS DATE) AS date, 'https://search.logcomex.io/' AS page, 'marly@atias.com.br' AS name, 'marly@atias.com.br' AS email, 10 AS nota, 'rapidez' AS observacao, 'Muito impactado' AS impacto, null::int AS id_user
@@ -1262,9 +1262,6 @@ SELECT
   CAST('2020-11-16 12:19:45' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=F%C3%A1bio&last_name=%7B%7Bcontact.lastname%7D%7D&email=export3%40plennacomex.com.br&aid=10&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-_AcTUkpIu1CBWc7c4ZGFN0FvSToHdbqtFFi-ibOh3V5RIM0-wufA-_KBc8g32ricJV4hjyZSHx5j9qgosHd52jTVM24xRr3kZ5vMRTlkiQcdcbb6A&utm_content=99967737&utm_source=hs_email' AS page, 'Fábio' AS name, 'export3@plennacomex.com.br' AS email, 10 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
 UNION ALL
 SELECT
-  CAST('2020-11-16 12:20:04' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Leoc%C3%A1dio%20Cesar%20Ribeiro%20Cunha&last_name=Cesar%20Ribeiro%20Cunha&email=leocadio.cunha%40band-deicmar.com.br&aid=10&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz--iN-V7Dr36HyPg_MT9ubnCbzVBQ-ryLihE9yphQ30lCki4akX0fPT68j6NrW2Kx2HfJBfk0u5fD8jZBgStaVPGWjlQAgnpoDyhZjiXFyFTHo7hZ0w&utm_content=99967737&utm_source=hs_email' AS page, 'Leocádio Cesar Ribeiro Cunha' AS name, 'leocadio.cunha@band-deicmar.com.br' AS email, 10 AS nota, 'Todas as informações necessárias para a minha atividade, estão disponíveis.' AS observacao, 'Muito impactado' AS impacto, null as id_user
-UNION ALL
-SELECT
   CAST('2020-11-16 12:39:25' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=GUBLIO%20HEBER%20HELIO%20SILVA&last_name=Silva&email=gublio.silva%40nunofracht.com.br&aid=9&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-9dKUpKj_zTBNa8mKHH5-CkrvcSsyCQ-1Utsrl0IL8fVlze3AxESkXN9ROcy8cCjd_b2bibBPh32R6zKyUF6xX4wtEmktDW6vcUXvNAkS--lgjlahg&utm_content=99967737&utm_source=hs_email' AS page, 'GUBLIO HEBER HELIO SILVA' AS name, 'gublio.silva@nunofracht.com.br' AS email, 9 AS nota, 'Boa ferramenta e bom atendimento' AS observacao, 'Pouco impactado' AS impacto, null as id_user
 UNION ALL
 SELECT
@@ -1293,9 +1290,6 @@ SELECT
 UNION ALL
 SELECT
   CAST('2020-11-17 13:22:26' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Angelina&last_name=%7B%7Bcontact.lastname%7D%7D&email=a.marques%40btp.com.br&aid=9&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-_Vp6b0enbEaPiRi3f4rE69THwXQvgpl1fwXbb3CbDkpi8ktASnFfVuyHYtJpgM0QJn8ZuEG7DbEegky9TczmJuACOCHw&utm_content=99967737&utm_source=hs_email' AS page, 'Angelina' AS name, 'a.marques@btp.com.br' AS email, 9 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
-UNION ALL
-SELECT
-  CAST('2020-11-20 16:22:56' AS DATE) AS date, 'https://survey.survicate.com/3635b128a2e9258b/?p=hubspot&first_name=Cesar%20Reffer&last_name=Reffer&email=cesar.reffer%40latam.com&aid=7&utm_medium=email&_hsmi=99967737&_hsenc=p2ANqtz-8ywo8XqTxrtRQMy1k9w-JK2Be_zSCPYQuxbpEDwvDO45086OV9b9nlSKLyyh7kNaOuQVeb43gzo-UbnYdIyQ8CUPN65g&utm_content=99967737&utm_source=hs_email' AS page, 'Cesar Reffer' AS name, 'cesar.reffer@latam.com' AS email, 7 AS nota, NULL AS observacao, NULL AS impacto, null as id_user
 ) as qq1;;
 
   }
