@@ -23,7 +23,8 @@ view: comex_analytics {
     and ct.valid_until > current_date -- certificados válidos
     --and ct.deleted_at is null descomentar caso não incluir os deletados
     --and c.id = 512
-    indexes: ["customer_id"]
+    ;;
+    indexes: ["cnpj_importador"]
     sql_trigger_value: select current_date;;
   }
 
