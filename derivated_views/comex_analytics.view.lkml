@@ -10,7 +10,7 @@ view: comex_analytics {
     ct.id as cert_id,
     ct.owner_name as cert_owner,
     ct.valid_until as cert_valid,
-    di.importador_cnpj,
+    replace(replace(replace(di.importador_cnpj,'-',''),'/',''),'.','') as cnpj_importador,
     di.data_hora_registro,
     di.armazem,
     di.tipo_recolhimento
@@ -63,9 +63,9 @@ view: comex_analytics {
     sql: ${TABLE}."cert_valid" ;;
   }
 
-  dimension: importador_cnpj {
+  dimension: cnpj_importador {
     type: string
-    sql: ${TABLE}."importador_cnpj" ;;
+    sql: ${TABLE}."cnpj_importador" ;;
   }
 
   dimension: data_hora_registro {
