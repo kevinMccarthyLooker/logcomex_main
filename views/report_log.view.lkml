@@ -106,8 +106,9 @@ view: report_log {
     drill_fields: [customer.name, users.name, json_filter_text]
   }
 
-  measure: count_distinct {
+  measure: count_distinct_user {
     type: count_distinct
+    sql: ${user_id} ;;
   }
 
   measure: count_api_logs {
