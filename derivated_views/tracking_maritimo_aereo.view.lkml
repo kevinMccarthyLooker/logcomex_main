@@ -525,6 +525,11 @@ where tracking_aerial.deleted_at is null
     sql: ${TABLE}."completed_at" ;;
   }
 
+  measure: count_distinct_users {
+    type: count_distinct
+    sql: ${user_id} ;;
+  }
+
   measure: count {
     type: count_distinct
     sql: ${chave} ;;
