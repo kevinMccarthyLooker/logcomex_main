@@ -71,7 +71,7 @@ datagroup: my_datagroup {
 }
 
 explore: follow_up_status {
-  label: "Tempo no Status - Tracking - TESTE "
+  label: "Tempo no Status - Tracking"
 }
 
 explore: big_data_filtros {
