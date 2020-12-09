@@ -74,9 +74,6 @@ explore: follow_up_status {
   label: "Tempo no Status - Tracking"
 }
 
-explore: big_data_filtros {
-  label: "Big Data Filtros"
-}
 
 explore: search_filtros_agrupados {
   label: "Search e Novo Expo Filtros AGG"
