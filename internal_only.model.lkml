@@ -358,6 +358,12 @@ explore: usage {
     type: left_outer
   }
 
+  join: big_data_filtros {
+    sql_on: ${customer_plan.id} = ${big_data_filtros.customer_plan_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
   join: access_log {
     sql_on: ${customer.id}=${access_log.customer_id} ;;
     relationship: one_to_many
