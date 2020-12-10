@@ -71,12 +71,9 @@ datagroup: my_datagroup {
 }
 
 explore: follow_up_status {
-  label: "Tempo no Status - Tracking "
+  label: "Tempo no Status - Tracking"
 }
 
-explore: big_data_filtros {
-  label: "Big Data Filtros"
-}
 
 explore: search_filtros_agrupados {
   label: "Search e Novo Expo Filtros AGG"
@@ -355,6 +352,12 @@ explore: usage {
     view_label: "Report Log"
     sql_on: ${report_log.id}=${bi_filtros_agrupado.filters_report_log_id} ;;
     relationship: one_to_one
+    type: left_outer
+  }
+
+  join: big_data_filtros {
+    sql_on: ${customer_plan.id} = ${big_data_filtros.customer_plan_id} ;;
+    relationship: one_to_many
     type: left_outer
   }
 

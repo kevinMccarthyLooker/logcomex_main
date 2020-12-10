@@ -33,6 +33,8 @@ view: tracking_maritimo_aereo {
        tracking.load_presence_date as load_presence_date,
        tracking.release_loading_date as release_loading_date,
        tracking.completed_at as completed_at,
+       tracking.robot_updated_at as robot_updated_at,
+       tracking.is_api as is_api,
        qq2.created_at as last_follow_up,
        qq2.comment as last_workflow,
        qq2.date_time as last_workflow_date
@@ -88,6 +90,8 @@ select 'Aereo' as modal,
        '2000-01-01' as load_presence_date,
        '2000-01-01' as release_loading_date,
        '2000-01-01' as completed_at,
+       tracking_aerial.robot_updated_at as robot_updated_at,
+       tracking_aerial.is_api as is_api,
        qq2.created_at as last_follow_up,
        qq2.comment as last_workflow,
        qq2.date_time as last_workflow_date
@@ -523,6 +527,30 @@ where tracking_aerial.deleted_at is null
       year
     ]
     sql: ${TABLE}."completed_at" ;;
+  }
+
+  dimension_group: robot_updated_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."robot_updated_at" ;;
+  }
+
+  dimension: is_api {
+    type: yesno
+    sql: ${TABLE}."is_api" ;;
+  }
+
+  measure: count_distinct_users {
+    type: count_distinct
+    sql: ${user_id} ;;
   }
 
   measure: count {
