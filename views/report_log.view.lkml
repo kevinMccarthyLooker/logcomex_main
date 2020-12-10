@@ -23,7 +23,19 @@ view: report_log {
     sql: ${TABLE}."created_at" ;;
   }
 
-    dimension: customer_plan_id {
+  dimension: dia_da_semana {
+    type: string
+    sql: CASE WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Domingo'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Segunda-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Terça-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Quarta-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Quinta-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Sexta-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Sábado'  end
+    ;;
+  }
+
+  dimension: customer_plan_id {
     type: number
     # hidden: yes
     sql: ${TABLE}."customer_plan_id" ;;
