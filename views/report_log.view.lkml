@@ -23,15 +23,22 @@ view: report_log {
     sql: ${TABLE}."created_at" ;;
   }
 
+  dimension: dia_da_semana_num {
+    type: string
+    sql: date_part('isodow', ${TABLE}."created_at" )
+    ;;
+  }
+
   dimension: dia_da_semana {
     type: string
-    sql: CASE WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Domingo'
-              WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Segunda-feira'
-              WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Terça-feira'
-              WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Quarta-feira'
-              WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Quinta-feira'
-              WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Sexta-feira'
-              WHEN date_part('isodow', ${TABLE}."created_at" ) THEN 'Sábado'  end
+    sql: CASE WHEN date_part('isodow', ${TABLE}."created_at" ) = 7 THEN 'Domingo'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 1 THEN 'Segunda-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 2 THEN 'Terça-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 3 THEN 'Quarta-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 4 THEN 'Quinta-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 5 THEN 'Sexta-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 6 THEN 'Sábado'
+              end
     ;;
   }
 
