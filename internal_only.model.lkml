@@ -356,7 +356,7 @@ explore: usage {
   }
 
   join: big_data_filtros {
-    sql_on: ${customer_plan.id} = ${big_data_filtros.customer_plan_id} ;;
+    sql_on: ${users.id} = ${big_data_filtros.user_id} ;;
     relationship: one_to_many
     type: left_outer
   }
