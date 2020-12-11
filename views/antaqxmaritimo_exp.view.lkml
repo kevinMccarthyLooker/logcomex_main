@@ -12,7 +12,7 @@ view: antaqxmaritimo_exp {
                                         and extract(year from dtoperacao) = a.ano)
 from antaq_carga c
 inner join antaq_atracacao a on a.idatracacao = c.idatracacao
-where c.tpoopercarga like 'LONGO CURSO EXPORTAÇÃO%'
+where c.tpoopercarga like 'LONGO CURSO EXPORT%'
 and c.natucarga = 'CARGA CONTEINERIZADA'
 and c.conteineest = 'CHEIO'
 and length(origem) = 5
