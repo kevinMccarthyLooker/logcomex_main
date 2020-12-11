@@ -31,13 +31,13 @@ view: report_log {
 
   dimension: dia_da_semana {
     type: string
-    sql: CASE WHEN date_part('isodow', ${TABLE}."created_at" ) = 7 THEN 'Domingo'
-              WHEN date_part('isodow', ${TABLE}."created_at" ) = 1 THEN 'Segunda-feira'
-              WHEN date_part('isodow', ${TABLE}."created_at" ) = 2 THEN 'Terça-feira'
-              WHEN date_part('isodow', ${TABLE}."created_at" ) = 3 THEN 'Quarta-feira'
-              WHEN date_part('isodow', ${TABLE}."created_at" ) = 4 THEN 'Quinta-feira'
-              WHEN date_part('isodow', ${TABLE}."created_at" ) = 5 THEN 'Sexta-feira'
-              WHEN date_part('isodow', ${TABLE}."created_at" ) = 6 THEN 'Sábado'
+    sql: CASE WHEN date_part('isodow', ${TABLE}."created_at" ) = 7 THEN '(0) Domingo'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 1 THEN '(1) Segunda-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 2 THEN '(2) Terça-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 3 THEN '(3) Quarta-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 4 THEN '(4) Quinta-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 5 THEN '(5) Sexta-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 6 THEN '(6) Sábado'
               end
     ;;
   }
