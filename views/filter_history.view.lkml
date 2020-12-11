@@ -57,6 +57,11 @@ view: filter_history {
     sql: ${TABLE}."total_lines" ;;
   }
 
+  dimension: debited {
+    type: yesno
+    sql: ${TABLE}."debited" ;;
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [
@@ -105,5 +110,12 @@ measure: count_consulta_this_month {
   sql: ${source_hash} ;;
   drill_fields: [id]
 }
+
+  measure: count_consulta_6_months {
+    type: count_distinct
+    filters: [created_date: "6 months"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
 
 }

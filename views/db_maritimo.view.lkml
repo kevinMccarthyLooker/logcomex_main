@@ -928,6 +928,11 @@ view: db_maritimo {
     sql: ${TABLE}."temcarga_cdncms" ;;
   }
 
+  dimension: teus_dimension {
+    type: number
+    sql: ${TABLE}."teus" ;;
+  }
+
   measure: teus {
     type: sum
     sql: ${TABLE}."teus" ;;
@@ -951,6 +956,38 @@ view: db_maritimo {
   dimension: tipoconhecimento {
     type: string
     sql: ${TABLE}."tipoconhecimento" ;;
+  }
+
+  dimension: tipoconhecimento_desc {
+    type: string
+    sql:  CASE WHEN (db_maritimo.tipoconhecimento = '10') THEN '10 -> Direto'
+               WHEN (db_maritimo.tipoconhecimento = '11') THEN '11 -> Master'
+               WHEN (db_maritimo.tipoconhecimento = '12') THEN '12 -> House'
+               WHEN (db_maritimo.tipoconhecimento = '15') THEN '15 -> Colocader'
+          else db_maritimo.tipoconhecimento end
+    ;;
+  }
+
+  dimension: tipo_trafego {
+    type:  string
+    sql:  CASE  WHEN ${tptrafego} = '07' THEN 'Exportação'
+                WHEN ${tptrafego} = '05' THEN 'Importação'
+                WHEN ${tptrafego} = '03' THEN 'Cabotagem'
+                WHEN ${tptrafego} = '09' THEN 'Passagem'
+                else 'Outros' end
+    ;;
+  }
+
+  dimension: frete_processado {
+    type: yesno
+    sql:  CASE  WHEN (${oprecolhimentofrete} is not null) THEN true
+                else false end
+    ;;
+  }
+
+  dimension: rota {
+    type: string
+    sql: ${TABLE}."cdportoorigem"  || ' >> ' ||  ${TABLE}."cdportodestino";;
   }
 
   dimension: tipoconhecimentooriginal {
@@ -1015,17 +1052,14 @@ view: db_maritimo {
 
   measure: vlfrete {
     type: sum
+    value_format: "$#.00;($#.00)"
     sql: ${TABLE}."vlfrete" ;;
   }
 
   measure: vlfretetotal {
     type: sum
+    value_format: "$#.00;($#.00)"
     sql: ${TABLE}."vlfretetotal" ;;
-  }
-
-  dimension: vlfretetotalbld {
-    type: string
-    sql: ${TABLE}."vlfretetotalbld" ;;
   }
 
   measure: vlpesobruto {
@@ -1033,8 +1067,22 @@ view: db_maritimo {
     sql: ${TABLE}."vlpesobruto" ;;
   }
 
+  measure: vl_frete_por_TEU {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [teus_dimension: ">0"]
+    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."teus" ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
   }
+
+  measure: count_distinct_ce {
+    type: count_distinct
+    sql: ${TABLE}."nrcemercante" ;;
+    drill_fields: [id]
+  }
+
 }

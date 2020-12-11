@@ -23,7 +23,26 @@ view: report_log {
     sql: ${TABLE}."created_at" ;;
   }
 
-    dimension: customer_plan_id {
+  dimension: dia_da_semana_num {
+    type: string
+    sql: date_part('isodow', ${TABLE}."created_at" )
+    ;;
+  }
+
+  dimension: dia_da_semana {
+    type: string
+    sql: CASE WHEN date_part('isodow', ${TABLE}."created_at" ) = 7 THEN '(0) Domingo'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 1 THEN '(1) Segunda-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 2 THEN '(2) Terça-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 3 THEN '(3) Quarta-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 4 THEN '(4) Quinta-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 5 THEN '(5) Sexta-feira'
+              WHEN date_part('isodow', ${TABLE}."created_at" ) = 6 THEN '(6) Sábado'
+              end
+    ;;
+  }
+
+  dimension: customer_plan_id {
     type: number
     # hidden: yes
     sql: ${TABLE}."customer_plan_id" ;;
@@ -106,6 +125,11 @@ view: report_log {
     drill_fields: [customer.name, users.name, json_filter_text]
   }
 
+  measure: count_distinct_user {
+    type: count_distinct
+    sql: ${user_id} ;;
+  }
+
   measure: count_api_logs {
     type:  count
     filters: [report_type_id: "3"]
@@ -142,7 +166,13 @@ view: report_log {
     drill_fields: [customer.name, users.name, count]
   }
 
-    measure: total_line_numbers {
+  measure: count_excel_logs_last_6_months {
+    type:  count
+    filters: [report_type_id: "2", created_date: "6 months"]
+    drill_fields: [customer.name, users.name, count]
+  }
+
+  measure: total_line_numbers {
     type: sum
     sql:  ${line_numbers};;
   }
