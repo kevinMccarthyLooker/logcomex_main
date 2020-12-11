@@ -131,6 +131,19 @@ view: consumo_plano_clientes_search_diario {
     sql: ${TABLE}.periodo ;;
   }
 
+  dimension: dia_da_semana {
+    type: string
+    sql: CASE WHEN date_part('isodow', ${TABLE}."periodo" ) = 7 THEN '(0) Domingo'
+              WHEN date_part('isodow', ${TABLE}."periodo" ) = 1 THEN '(1) Segunda-feira'
+              WHEN date_part('isodow', ${TABLE}."periodo" ) = 2 THEN '(2) Terça-feira'
+              WHEN date_part('isodow', ${TABLE}."periodo" ) = 3 THEN '(3) Quarta-feira'
+              WHEN date_part('isodow', ${TABLE}."periodo" ) = 4 THEN '(4) Quinta-feira'
+              WHEN date_part('isodow', ${TABLE}."periodo" ) = 5 THEN '(5) Sexta-feira'
+              WHEN date_part('isodow', ${TABLE}."periodo" ) = 6 THEN '(6) Sábado'
+              end
+    ;;
+  }
+
   dimension: customer_id {
     type: number
     sql: ${TABLE}.customer_id ;;
