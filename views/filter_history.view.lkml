@@ -119,8 +119,9 @@ measure: count_consulta_this_month {
   }
 
   measure: min_created{
-    type: min
-    sql: ${created_raw} ;;
+    type: date
+    sql: min(${created_raw}) ;;
+    convert_tz: no
   }
 
 }
