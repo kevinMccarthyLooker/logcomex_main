@@ -118,4 +118,9 @@ measure: count_consulta_this_month {
     drill_fields: [id]
   }
 
+  measure: min_created{
+    type: min
+    sql: ${created_raw} ;;
+  }
+
 }
