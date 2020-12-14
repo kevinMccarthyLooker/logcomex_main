@@ -65,6 +65,7 @@ include: "/**/certificate.view.lkml"
 include: "/**/follow_up_status.view.lkml"
 include: "/**/big_data_filtros.view.lkml"
 include: "/**/search_filtros_agrupados.view.lkml"
+include: "/**/hubspot_customer_journey.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -190,6 +191,12 @@ explore: usage {
   join: customer_api_relations{
     sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
     relationship: one_to_many
+    type: left_outer
+  }
+
+  join: hubspot_customer_journey {
+    sql_on: ${customer_api_relations.id} = ${hubspot_customer_journey.customer_api_relations_id} ;;
+    relationship: one_to_one
     type: left_outer
   }
 
