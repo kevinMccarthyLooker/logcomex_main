@@ -462,7 +462,7 @@ explore: usage {
   }
 
   join: clientes_ativos_por_mes {
-    sql_on: ${customer.id}=${clientes_ativos_por_mes.customer_id} ;;
+    sql_on: ${customer_plan.id}=${clientes_ativos_por_mes.customer_plan_id} ;;
     relationship: one_to_many
     type: left_outer
   }
