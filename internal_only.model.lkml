@@ -435,6 +435,14 @@ explore: usage {
 
   }
 
+  join: report_log_plan {
+    from: report_log
+    view_label: "Report Log Customer Plan "
+    sql_on: ${customer_plan.id}=${report_log.customer_plan_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
   join: plan_complete {
     sql_on: ${customer_plan.plan_complete_id}=${plan_complete.id} ;;
     relationship: many_to_one
