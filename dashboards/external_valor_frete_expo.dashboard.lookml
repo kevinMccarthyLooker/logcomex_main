@@ -10,10 +10,12 @@
     explore: bi_exports_mvw_gold
     type: looker_grid
     fields: [bi_exports_mvw_gold.mvw_pais_de_destino, bi_exports_mvw_gold.mar_vl_frete_por_TEU,
-      bi_exports_mvw_gold.mar_vl_frete_por_c20, bi_exports_mvw_gold.mar_vl_frete_por_c40]
+      bi_exports_mvw_gold.mar_vl_frete_por_c20, bi_exports_mvw_gold.mar_vl_frete_por_c40,
+      bi_exports_mvw_gold.mar_teus]
     filters:
       bi_exports_mvw_gold.mvw_moeda_frete: DOLAR DOS EUA
       bi_exports_mvw_gold.mvw_tipo_fcl: DRY,REEFER
+    sorts: [bi_exports_mvw_gold.mar_teus desc]
     limit: 500
     query_timezone: America/Sao_Paulo
     show_view_names: false
@@ -65,7 +67,12 @@
     truncate_column_names: true
     defaults_version: 1
     series_types: {}
-    hidden_fields: []
+    hidden_fields: [bi_exports_mvw_gold.mar_teus]
+    listen:
+      Porto de Origem: bi_exports_mvw_gold.mar_nmportoorigem
+      Porto de Destino: bi_exports_mvw_gold.mar_nmportodestino
+      País de Destino: bi_exports_mvw_gold.mar_nmpaisdestfinal
+      Período de Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
     row: 0
     col: 12
     width: 12
@@ -142,6 +149,11 @@
     defaults_version: 1
     series_types: {}
     hidden_fields: [bi_exports_mvw_gold.mar_teus]
+    listen:
+      Porto de Origem: bi_exports_mvw_gold.mar_nmportoorigem
+      Porto de Destino: bi_exports_mvw_gold.mar_nmportodestino
+      País de Destino: bi_exports_mvw_gold.mar_nmpaisdestfinal
+      Período de Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
     row: 0
     col: 0
     width: 12
@@ -217,6 +229,11 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
+    listen:
+      Porto de Origem: bi_exports_mvw_gold.mar_nmportoorigem
+      Porto de Destino: bi_exports_mvw_gold.mar_nmportodestino
+      País de Destino: bi_exports_mvw_gold.mar_nmpaisdestfinal
+      Período de Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
     row: 5
     col: 0
     width: 24
