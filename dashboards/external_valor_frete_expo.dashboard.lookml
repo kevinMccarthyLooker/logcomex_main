@@ -1,4 +1,4 @@
-- dashboard: mdia_valor_frete_por_rota__exportao
+- dashboard: media_valor_frete_por_rota__exportao
   title: Média valor frete por rota - Exportação
   layout: newspaper
   preferred_viewer: dashboards-next
