@@ -97,19 +97,26 @@ view: filter_history {
     drill_fields: [id]
   }
 
-measure: count_consulta_last_30_days {
-  type: count_distinct
-  filters: [created_date: "30 days"]
-  sql: ${source_hash} ;;
-  drill_fields: [id]
-}
+  measure: count_consulta_expo {
+    type: count_distinct
+    filters: [service_id: "21"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
 
-measure: count_consulta_this_month {
-  type: count_distinct
-  filters: [created_date: "this month"]
-  sql: ${source_hash} ;;
-  drill_fields: [id]
-}
+  measure: count_consulta_last_30_days {
+    type: count_distinct
+    filters: [created_date: "30 days"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
+
+  measure: count_consulta_this_month {
+    type: count_distinct
+    filters: [created_date: "this month"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
 
   measure: count_consulta_6_months {
     type: count_distinct
