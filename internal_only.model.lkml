@@ -438,7 +438,7 @@ explore: usage {
   join: report_log_plan {
     from: report_log
     view_label: "Report Log Customer Plan "
-    sql_on: ${customer_plan.id}=${report_log.customer_plan_id} ;;
+    sql_on: ${customer_plan.id}=${report_log_plan.customer_plan_id} ;;
     relationship: one_to_many
     type: left_outer
   }
