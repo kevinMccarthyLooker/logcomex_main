@@ -33,6 +33,42 @@ view: big_data_filtros {
     sql: ${TABLE}.filter ;;
   }
 
+  dimension: campo_produto {
+    type: string
+    sql:  case
+          when ${filter} 'end_date' then 'Data final'
+          when ${filter} 'start_date' then 'Data inicial'
+          when ${filter} 'txshipper'  then 'Nome exportador'
+          when ${filter} 'sub_grouper' then 'Sub agrupador'
+          when ${filter} 'nmportoorigem' then 'Porto origem'
+          when ${filter} 'nmportodestino' then 'Porto destino'
+          when ${filter} 'itemcarga_cdncms' then 'HSCODE'
+          when ${filter} 'tipo_carga' then 'Tipo carga'
+          when ${filter} 'nmpaisdestfinal' then 'País destino'
+          when ${filter} 'cdshipper' then 'CNPJ shipper'
+          when ${filter} 'oprecolhimentofrete' then 'Tipo pagamento'
+          when ${filter} 'cdconsignatario' then 'CNPJ consignatário'
+          when ${filter} 'nmconsignatario' then 'Nome consignatário'
+          when ${filter} 'itemcarga_noncms' then 'Descrição mercadoria'
+          when ${filter} 'trade_lane_destino' then 'Trade lane'
+          when ${filter} 'sub_grouper_value' then 'Detalhes sub agrupador'
+          when ${filter} 'nmempresanavegacao' then 'Agente de carga'
+          when ${filter} 'tipoconhecimento' then 'Tipo embarque'
+          when ${filter} 'nmterminalportuariocarregamento' then 'Terminal embarque'
+          when ${filter} 'nmembarcacao' then  'Navio'
+          when ${filter} 'txmercadoria' then  'Descrição mercadoria - txmercadoria'
+          when ${filter} 'load_type' then 'Tipo carga - load_type'
+          when ${filter} 'itemcarga_descricao' then 'Descrição carga'
+          when ${filter} 'nmempnavegdesconmaster' then 'Agente internacional'
+          when ${filter} 'tipoconhecimentoexpo' then  'Tipo embarque - tipoconhecimentoexpo'
+          when ${filter} 'nmpaisprocedencia' then 'País procedência'
+          when ${filter} 'consignatario_cidade' then 'Cidade consignatário'
+          when ${filter} 'consignatario_uf' then 'UF consignatário'
+          when ${filter} 'notificado' then 'Notificado'
+          else 'Verificar!!!'
+          end  ;;
+  }
+
   dimension: service {
     type: string
     sql: case
