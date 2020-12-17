@@ -67,7 +67,7 @@ view: big_data_filtros {
     sql:  case
           when ${filter} = 'sub_grouper' and ${service} = 'Exportação' then 'Sub agrupador'
           when ${filter} = 'sub_grouper_value' and ${service} = 'Exportação' then 'Detalhes sub agrupador'
-          else 'Outro'
+          else ${filter}
           end  ;;
   }
 
