@@ -1,5 +1,5 @@
 view: searchx_gold {
-  sql_table_name: searchx.searchx_gold ;;
+  sql_table_name: searchx.searchx_gold_v2;;
 
   dimension: addition_number {
     type: string
@@ -74,6 +74,11 @@ view: searchx_gold {
   dimension: cidade_import {
     type: string
     sql: ${TABLE}.cidade_import ;;
+  }
+
+  dimension: client_id {
+    type: string
+    sql: ${TABLE}.client_id ;;
   }
 
   dimension: cnpj_adquirente {
