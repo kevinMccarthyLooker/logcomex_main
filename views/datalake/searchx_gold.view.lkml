@@ -76,11 +76,6 @@ view: searchx_gold {
     sql: ${TABLE}.cidade_import ;;
   }
 
-  dimension: client_id {
-    type: string
-    sql: ${TABLE}.client_id ;;
-  }
-
   dimension: cnpj_adquirente {
     type: string
     sql: ${TABLE}.cnpj_adquirente ;;
@@ -109,6 +104,11 @@ view: searchx_gold {
   dimension: crt {
     type: string
     sql: ${TABLE}.crt ;;
+  }
+
+  dimension: customer_id {
+    type: string
+    sql: ${TABLE}.customer_id ;;
   }
 
   dimension: data_chegada_carga {
