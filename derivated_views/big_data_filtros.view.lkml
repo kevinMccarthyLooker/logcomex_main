@@ -92,7 +92,7 @@ view: big_data_filtros {
           when ${filter} = 'load_type' and ${service} = 'Exportação' then 'Tipo carga - load_type'
           when ${filter} = 'itemcarga_descricao' and ${service} = 'Exportação' then 'Descrição carga'
           when ${filter} = 'nmempnavegdesconmaster' and ${service} = 'Exportação' then 'Agente internacional'
-          when ${filter} = 'armazem_destino' and and ${service} = 'Exportação' then 'Armazém de destino'
+          when ${filter} = 'armazem_destino' and ${service} = 'Exportação' then 'Armazém de destino'
           when ${filter} = 'tipoconhecimentoexpo' and ${service} = 'Exportação' then  'Tipo embarque - tipoconhecimentoexpo'
           when ${filter} = 'nmpaisprocedencia' and ${service} = 'Exportação' then 'País procedência'
           when ${filter} = 'consignatario_cidade' and ${service} = 'Exportação' then 'Cidade consignatário'
