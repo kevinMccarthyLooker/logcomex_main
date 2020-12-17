@@ -58,7 +58,7 @@ view: big_data_filtros {
 
   dimension: service_id {
     type: number
-    sql: ${TABLE}.service ;;
+    sql: ${TABLE}.service::int ;;
 
   }
 
