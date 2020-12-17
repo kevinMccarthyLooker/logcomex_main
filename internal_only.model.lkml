@@ -66,6 +66,7 @@ include: "/**/follow_up_status.view.lkml"
 include: "/**/big_data_filtros.view.lkml"
 include: "/**/search_filtros_agrupados.view.lkml"
 include: "/**/hubspot_customer_journey.view.lkml"
+include: "/**/filters_names.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -365,6 +366,12 @@ explore: usage {
   join: big_data_filtros {
     sql_on: ${users.id} = ${big_data_filtros.user_id} ;;
     relationship: one_to_many
+    type: left_outer
+  }
+
+  join: filters_names {
+    sql_on: ${big_data_filtros.filter} = ${filters_names.bi_field} and ${big_data_filtros.service_id} = ${filters_names.service_id} ;;
+    relationship: many_to_one
     type: left_outer
   }
 
