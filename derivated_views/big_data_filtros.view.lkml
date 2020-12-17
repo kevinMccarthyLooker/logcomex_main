@@ -33,42 +33,6 @@ view: big_data_filtros {
     sql: ${TABLE}.filter ;;
   }
 
-  dimension: campo_produto {
-    type: string
-    sql:  case
-          when ${filter} = 'end_date' then 'Data final'
-          when ${filter} = 'start_date' then 'Data inicial'
-          when ${filter} = 'txshipper'  then 'Nome exportador'
-          when ${filter} = 'sub_grouper' then 'Sub agrupador'
-          when ${filter} = 'nmportoorigem' then 'Porto origem'
-          when ${filter} = 'nmportodestino' then 'Porto destino'
-          when ${filter} = 'itemcarga_cdncms' then 'HSCODE'
-          when ${filter} = 'tipo_carga' then 'Tipo carga'
-          when ${filter} = 'nmpaisdestfinal' then 'País destino'
-          when ${filter} = 'cdshipper' then 'CNPJ shipper'
-          when ${filter} = 'oprecolhimentofrete' then 'Tipo pagamento'
-          when ${filter} = 'cdconsignatario' then 'CNPJ consignatário'
-          when ${filter} = 'nmconsignatario' then 'Nome consignatário'
-          when ${filter} = 'itemcarga_noncms' then 'Descrição mercadoria'
-          when ${filter} = 'trade_lane_destino' then 'Trade lane'
-          when ${filter} = 'sub_grouper_value' then 'Detalhes sub agrupador'
-          when ${filter} = 'nmempresanavegacao' then 'Agente de carga'
-          when ${filter} = 'tipoconhecimento' then 'Tipo embarque'
-          when ${filter} = 'nmterminalportuariocarregamento' then 'Terminal embarque'
-          when ${filter} = 'nmembarcacao' then  'Navio'
-          when ${filter} = 'txmercadoria' then  'Descrição mercadoria - txmercadoria'
-          when ${filter} = 'load_type' then 'Tipo carga - load_type'
-          when ${filter} = 'itemcarga_descricao' then 'Descrição carga'
-          when ${filter} = 'nmempnavegdesconmaster' then 'Agente internacional'
-          when ${filter} = 'tipoconhecimentoexpo' then  'Tipo embarque - tipoconhecimentoexpo'
-          when ${filter} = 'nmpaisprocedencia' then 'País procedência'
-          when ${filter} = 'consignatario_cidade' then 'Cidade consignatário'
-          when ${filter} = 'consignatario_uf' then 'UF consignatário'
-          when ${filter} = 'notificado' then 'Notificado'
-          else 'Verificar!!!'
-          end  ;;
-  }
-
   dimension: service {
     type: string
     sql: case
@@ -89,6 +53,57 @@ view: big_data_filtros {
              when ${TABLE}.service = '18' then 'EUA Importação'
              else 'ERRO'
          end ;;
+  }
+
+  dimension: campo_produto {
+    type: string
+    sql:  case
+          when ${filter} = 'end_date' and ${service} = 'Importação' then 'Data final'
+          when ${filter} = 'start_date' and ${service} = 'Importação' then 'Data inicial'
+          when ${filter} = 'txshipper' and ${service} = 'Importação'  then 'Nome exportador'
+          when ${filter} = 'sub_grouper' and ${service} = 'Importação' then 'Sub agrupador'
+          when ${filter} = 'nmportoorigem' and ${service} = 'Importação' then 'Porto origem'
+          when ${filter} = 'nmportodestino' and ${service} = 'Importação' then 'Porto destino'
+          when ${filter} = 'itemcarga_cdncms' and ${service} = 'Importação' then 'HSCODE'
+          when ${filter} = 'tipo_carga' and ${service} = 'Importação' then 'Tipo carga'
+          when ${filter} = 'nmpaisdestfinal' and ${service} = 'Importação' then 'País destino'
+          when ${filter} = 'cdshipper' and ${service} = 'Importação' then 'CNPJ shipper'
+          when ${filter} = 'oprecolhimentofrete' and ${service} = 'Importação' then 'Tipo pagamento'
+          when ${filter} = 'cdconsignatario' and ${service} = 'Importação' then 'CNPJ consignatário'
+          when ${filter} = 'nmconsignatario' and ${service} = 'Importação' then 'Nome consignatário'
+          when ${filter} = 'itemcarga_noncms' and ${service} = 'Importação' then 'Descrição mercadoria'
+          when ${filter} = 'trade_lane_destino' and ${service} = 'Importação' then 'Trade lane'
+          when ${filter} = 'sub_grouper_value' and ${service} = 'Importação' then 'Detalhes sub agrupador'
+          when ${filter} = 'nmempresanavegacao' and ${service} = 'Importação' then 'Agente de carga'
+          when ${filter} = 'tipoconhecimento' and ${service} = 'Importação' then 'Tipo embarque'
+          when ${filter} = 'nmterminalportuariocarregamento' and ${service} = 'Importação' then 'Terminal embarque'
+          when ${filter} = 'nmembarcacao' and ${service} = 'Importação' then  'Navio'
+          when ${filter} = 'txmercadoria' and ${service} = 'Importação' then  'Descrição mercadoria - txmercadoria'
+          when ${filter} = 'load_type' and ${service} = 'Importação' then 'Tipo carga - load_type'
+          when ${filter} = 'itemcarga_descricao' and ${service} = 'Importação' then 'Descrição carga'
+          when ${filter} = 'nmempnavegdesconmaster' and ${service} = 'Importação' then 'Agente internacional'
+          when ${filter} = 'tipoconhecimentoexpo' and ${service} = 'Importação' then  'Tipo embarque - tipoconhecimentoexpo'
+          when ${filter} = 'nmpaisprocedencia' and ${service} = 'Importação' then 'País procedência'
+          when ${filter} = 'consignatario_cidade' and ${service} = 'Importação' then 'Cidade consignatário'
+          when ${filter} = 'consignatario_uf' and ${service} = 'Importação' then 'UF consignatário'
+          when ${filter} = 'notificado' and ${service} = 'Importação' then 'Notificado'
+          when ${filter} = 'cod_moeda_frete' and ${service} = 'Aereo' then 'Moeda'
+          when ${filter} = 'aeroporto_origem' and ${service} = 'Aereo' then 'Aeroporto de Origem'
+          when ${filter} = 'aeroporto_destino' and ${service} = 'Aereo' then 'Aeroporto de Destino'
+          when ${filter} = 'pais_de_origem' and ${service} = 'Aereo' then 'País de Origem'
+          when ${filter} = 'airline_name' and ${service} = 'Aereo' then 'Linha Aérea'
+          when ${filter} = 'aereoCidade' and ${service} = 'Aereo' then 'Consignatário Cidade'
+          when ${filter} = 'aereoUf' and ${service} = 'Aereo' then 'Consignatário Estado'
+          when ${filter} = 'aeroporto_chegada' and ${service} = 'Aereo' then 'Aeroporto Chegada'
+          when ${filter} = 'modalidade' and ${service} = 'Aereo' then 'Tipo de pagamento'
+          when ${filter} = 'trade_lane' and ${service} = 'Aereo' then 'Trade lane'
+          when ${filter} = 'pais_de_destino' and ${service} = 'Aereo' then 'País de Destino'
+          when ${filter} = 'aeroporto_origem_house' and ${service} = 'Aereo' then 'Aeroporto de origem house'
+          when ${filter} = 'aeroporto_destino_house' and ${service} = 'Aereo' then 'Aeroporto de destino house'
+          when ${filter} = 'aeroporto_embarque' and ${service} = 'Aereo' then 'Aeroporto de embarque'
+          when ${filter} = 'embarque' and ${service} = 'Aereo' then 'Tipo de Embarque'
+          else 'Verificar!!!'
+          end  ;;
   }
 
   dimension: report_type {
