@@ -104,6 +104,16 @@ view: search_filtros {
   dimension: campo_produto {
     type: string
     sql: case when ${filtro} = 'portoOrigem' then 'Porto Origem'
+         case when ${filtro} = 'hscode' then 'HS Code'
+         case when ${filtro} = 'portoDestino' then 'Porto Destino'
+         case when ${filtro} = 'paisDeDestino' then 'País de Destino'
+         case when ${filtro} = 'tipoCarga' then 'Tipo Carga'
+         case when ${filtro} = 'filterImportadorCnpj' then 'Importador CNPJ'
+         case when ${filtro} = 'cnpjExportador' then 'CNPJ Exportador'
+         case when ${filtro} = 'tipoEmbarque' then 'Tipo Embarque'
+         case when ${filtro} = 'tipoConteiner' then 'Tipo Contêiner'
+         case when ${filtro} = 'terminalEmbarque' then 'Terminal Embarque'
+         case when ${filtro} = 'estadoExportador' then 'Estado Exportador'
          else ${filtro}
          end;;
   }
