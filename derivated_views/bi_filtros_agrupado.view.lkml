@@ -16,9 +16,8 @@ view: bi_filtros_agrupado {
             ) as filters
       WHERE filter NOT IN ('', 'chartPath', 'dashboard', 'detalhes', 'export_excel', 'filter_date', 'filterName', 'grouper', 'grouper_value', 'id', 'isChart', 'isPivot', 'page', 'paginated', 'path', 'per_page', 'serviceId', 'serviceSlug', 'sort', 'sortBy', 'tabType', 'title', 'type', 'undefined', 'x-api-key', 'XDEBUG_SESSION_START')
       GROUP BY 1 ;;
-
-   # indexes: ["filters_report_log_id"]
-   # sql_trigger_value: select current_date;;
+    indexes: ["filters_report_log_id"]
+    sql_trigger_value: select current_date;;
 
     }
 
