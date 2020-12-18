@@ -15,8 +15,8 @@ view: search_filtros_agrupados {
           order by 1,2,3,4,5 -- ordernando para agrupar corretamente
           ) as filters_search
     GROUP BY 1,2,3,4;;
-    indexes: ["id"]
-    sql_trigger_value: current_date;;
+   # indexes: ["id"]
+    #sql_trigger_value: current_date;;
   }
 
   dimension: id {
