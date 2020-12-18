@@ -18,7 +18,7 @@ view: bi_filtros_agrupado {
       GROUP BY 1 ;;
 
    # indexes: ["filters_report_log_id"]
-   # sql_trigger_value: current_date;;
+   # sql_trigger_value: select current_date;;
 
     }
 
