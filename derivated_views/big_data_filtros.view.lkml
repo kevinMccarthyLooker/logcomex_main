@@ -65,8 +65,8 @@ view: big_data_filtros {
   dimension: campo_produto {
     type: string
     sql:  case
-          when ${filter} = 'sub_grouper' and ${service} = 'Exportação' then 'Sub agrupador'
-          when ${filter} = 'sub_grouper_value' and ${service} = 'Exportação' then 'Detalhes sub agrupador'
+          when ${filter} = 'sub_grouper' then 'Sub agrupador'
+          when ${filter} = 'sub_grouper_value' then 'Detalhes sub agrupador'
           else ${filter}
           end  ;;
   }
