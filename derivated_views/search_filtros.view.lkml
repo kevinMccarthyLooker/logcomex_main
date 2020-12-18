@@ -74,6 +74,12 @@ view: search_filtros {
               else 'Erro' end;;
   }
 
+  dimension: service_id {
+    type: number
+    sql: ${TABLE}.service;;
+
+  }
+
   dimension: fonte {
     type: string
     sql: case

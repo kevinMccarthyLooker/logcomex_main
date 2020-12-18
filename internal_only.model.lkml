@@ -306,6 +306,14 @@ explore: usage {
     type: left_outer
   }
 
+  join: filters_names_search  {
+    from: filters_names
+    view_label: "Filters Names Search"
+    sql_on: ${filters_names_search.name} = ${search_filtros.filtro} and ${search_filtros.service_id} = ${filters_names_search.service_id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
   join: search_filtros_agrupados{
     sql_on: ${customer.id} = ${search_filtros_agrupados.customer_id};;
     relationship: one_to_many
