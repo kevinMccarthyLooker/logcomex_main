@@ -100,6 +100,14 @@ view: search_filtros {
     sql: ${TABLE}.filtro ;;
   }
 
+
+  dimension: campo_produto {
+    type: string
+    sql: case when ${filtro} = 'portoOrigem' then 'Porto Origem'
+         else ${filtro}
+         end;;
+  }
+
   dimension: valor {
     type: string
     sql: case
