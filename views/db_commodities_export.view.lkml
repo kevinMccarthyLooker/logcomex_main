@@ -127,4 +127,34 @@ view: db_commodities_export {
     type: count
     drill_fields: [id]
   }
+  dimension: Anomes_Mes{
+    type: string
+    sql: case
+             when ${TABLE}.Anomes = 202,001 then 'Janeiro/2020'
+             when ${TABLE}.Anomes = 202,002 then 'Fevereiro/2020'
+             when ${TABLE}.Anomes = 202,003 then 'Março/2020'
+             when ${TABLE}.Anomes = 202,004 then 'Abril/2020'
+             when ${TABLE}.Anomes = 202,005 then 'Maio/2020'
+             when ${TABLE}.Anomes = 202,006 then 'Junho/2020'
+             when ${TABLE}.Anomes = 202,007 then 'Julho/2020'
+             when ${TABLE}.Anomes = 202,008 then 'Agosto/2020'
+             when ${TABLE}.Anomes = 202,009 then 'Setembro/2020'
+             when ${TABLE}.Anomes = 202,010 then 'Outubro/2020'
+             when ${TABLE}.Anomes = 202,011 then 'Novembro/2020'
+             when ${TABLE}.Anomes = 202,012 then 'Dezembro/2020'
+             when ${TABLE}.Anomes = 202,101 then 'Janeiro/2021'
+             when ${TABLE}.Anomes = 202,102 then 'Fevereiro/2021'
+             when ${TABLE}.Anomes = 202,103 then 'Março/2021'
+             when ${TABLE}.Anomes = 202,104 then 'Abril/2021'
+             when ${TABLE}.Anomes = 202,105 then 'Mario/2021'
+             when ${TABLE}.Anomes = 202,106 then 'Junho/2021'
+             when ${TABLE}.Anomes = 202,107 then 'Julho/2021'
+             when ${TABLE}.Anomes = 202,108 then 'Agosto/2021'
+             when ${TABLE}.Anomes = 202,109 then 'Setembro/2021'
+             when ${TABLE}.Anomes = 202,110 then 'Outubro/2021'
+             when ${TABLE}.Anomes = 202,111 then 'Novembro/2021'
+             when ${TABLE}.Anomes = 202,112 then 'Dezembro/2021'
+             else 'ERRO'
+         end ;;
+  }
 }
