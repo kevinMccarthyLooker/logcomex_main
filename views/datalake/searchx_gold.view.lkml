@@ -1,5 +1,5 @@
 view: searchx_gold {
-  sql_table_name: searchx.searchx_gold ;;
+  sql_table_name: searchx.searchx_gold_v2;;
 
   dimension: addition_number {
     type: string
@@ -104,6 +104,11 @@ view: searchx_gold {
   dimension: crt {
     type: string
     sql: ${TABLE}.crt ;;
+  }
+
+  dimension: customer_id {
+    type: string
+    sql: ${TABLE}.customer_id ;;
   }
 
   dimension: data_chegada_carga {

@@ -3,7 +3,7 @@ view: view_infografico {
     persist_for: "3 hours"
     indexes: ["id"]
     sql: select id, Ano, Mes, anomes, id_cdncm, val_vlme_us_subitem, id_incoterm, tot_val_peso ,val_frete_us_subitem,val_seg_us_subitem,
-        pais_origem, pais_aquis
+        pais_origem, pais_aquis,val_fob_un_us,qtd_comerc
         from view_Infografico
        ;;
   }
@@ -65,6 +65,18 @@ view: view_infografico {
     sql: ${TABLE}."val_frete_us_subitem" ;;
     label: "Total Frete"
   }
+  dimension: val_fob_un_us {
+    type: number
+    value_format: "$#,##0.00"
+    sql: ${TABLE}."val_fob_un_us" ;;
+    label: "Valor Fob"
+  }
+  dimension: qtd_comerc {
+    type: number
+    value_format: "0"
+    sql: ${TABLE}."qtd_comerc" ;;
+    label: "Quant Comercializada"
+  }
 
   measure: val_seg_us_subitem {
     type: sum
@@ -98,7 +110,9 @@ view: view_infografico {
       val_frete_us_subitem,
       val_seg_us_subitem,
       pais_origem,
-      pais_aquis
+      pais_aquis,
+      val_fob_un_us,
+      qtd_comerc
     ]
   }
 }

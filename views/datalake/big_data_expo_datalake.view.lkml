@@ -1907,6 +1907,11 @@ view: big_data_expo_datalake {
     sql: ${TABLE}.nf_nome_emissor ;;
   }
 
+  dimension: nf_nome_emissor_nulo{
+    type: yesno
+    sql: case when ${nf_nome_emissor} is null then true else false end ;;
+  }
+
   dimension: nf_num_nf {
     type: string
     sql: ${TABLE}.nf_num_nf ;;

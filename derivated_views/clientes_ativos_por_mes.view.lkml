@@ -4,7 +4,8 @@ view: clientes_ativos_por_mes {
       SELECT
       mes as anomes,
       customer."id" AS customer_id,
-      customer."id" AS customer_id_measure
+      customer."id" AS customer_id_measure,
+      customer_plan.id as customer_plan_id
       FROM public.customer  AS customer
       LEFT JOIN public.customer_plan  AS customer_plan ON (customer."id")=(customer_plan."customer_id")
       LEFT JOIN (select last_day(date '2019-06-01' + (interval '1' month * generate_series(0,20))) as mes) as meses on 1 = 1
@@ -19,6 +20,11 @@ view: clientes_ativos_por_mes {
     type: number
     sql: ${TABLE}."customer_id" ;;
     drill_fields: [detail*]
+  }
+
+  dimension: customer_plan_id {
+    type: number
+    sql: ${TABLE}."customer_plan_id" ;;
   }
 
   dimension: quarter {

@@ -5,11 +5,11 @@ view: big_data_filtros {
     select
     row_number() over () as id,*
     from(
-    SELECT date_trunc('month',created_at) as period, json_filter->>'serviceId' as service, report_type_id,user_id, json_object_keys(json_filter) as filter, count(1) as qtd
+    SELECT date_trunc('month',created_at) as period, json_filter->>'serviceId' as service, report_type_id, customer_plan_id, user_id, json_object_keys(json_filter) as filter, count(1) as qtd
     FROM report_log
     WHERE json_filter->>'serviceId' in ('1','2','3','6','8','9','10','11','12','13','14','15','16','17','18')
     --and report_log.id in (6145047,6145046,6145045,6144138,6144134,6144131)
-    GROUP BY period,json_filter->>'serviceId', report_type_id,user_id,json_object_keys(json_filter)) qq1
+    GROUP BY period,json_filter->>'serviceId', report_type_id,customer_plan_id,user_id,json_object_keys(json_filter)) qq1
     where qq1.filter NOT IN ('', 'chartPath', 'dashboard', 'detalhes', 'export_excel', 'filter_date', 'filterName', 'grouper', 'grouper_value', 'id', 'isChart', 'isPivot', 'page', 'paginated', 'path', 'per_page', 'serviceId', 'serviceSlug', 'sort', 'sortBy', 'tabType', 'title', 'type', 'undefined', 'x-api-key', 'XDEBUG_SESSION_START');;
     indexes: ["period"]
     sql_trigger_value: SELECT CURRENT_DATE;;
@@ -55,6 +55,22 @@ view: big_data_filtros {
          end ;;
   }
 
+
+  dimension: service_id {
+    type: number
+    sql: ${TABLE}.service::int ;;
+
+  }
+
+  dimension: campo_produto {
+    type: string
+    sql:  case
+          when ${filter} = 'sub_grouper' then 'Sub agrupador'
+          when ${filter} = 'sub_grouper_value' then 'Detalhes sub agrupador'
+          else ${filter}
+          end  ;;
+  }
+
   dimension: report_type {
     type: string
     sql: case
@@ -63,6 +79,11 @@ view: big_data_filtros {
              when ${TABLE}.report_type_id = 3 then 'Api'
              else 'ERRO'
          end ;;
+  }
+
+  dimension: customer_plan_id {
+    type: number
+    sql: ${TABLE}.customer_plan_id;;
   }
 
   dimension: user_id {
