@@ -130,18 +130,18 @@ view: db_commodities_export {
   dimension: Anomes_Mes{
     type: string
     sql: case
-             when ${TABLE}.Anomes = 202,001 then 'Janeiro/2020'
-             when ${TABLE}.Anomes = 202,002 then 'Fevereiro/2020'
-             when ${TABLE}.Anomes = 202,003 then 'Março/2020'
-             when ${TABLE}.Anomes = 202,004 then 'Abril/2020'
-             when ${TABLE}.Anomes = 202,005 then 'Maio/2020'
-             when ${TABLE}.Anomes = 202,006 then 'Junho/2020'
-             when ${TABLE}.Anomes = 202,007 then 'Julho/2020'
-             when ${TABLE}.Anomes = 202,008 then 'Agosto/2020'
-             when ${TABLE}.Anomes = 202,009 then 'Setembro/2020'
-             when ${TABLE}.Anomes = 202,010 then 'Outubro/2020'
-             when ${TABLE}.Anomes = 202,011 then 'Novembro/2020'
-             when ${TABLE}.Anomes = 202,012 then 'Dezembro/2020'
+             when ${TABLE}.Anomes_Mes = 202,001 then 'Janeiro/2020',
+             when ${TABLE}.Anomes_Mes = 202,002 then 'Fevereiro/2020',
+             when ${TABLE}.Anomes_Mes = 202,003 then 'Março/2020'
+             when ${TABLE}.Anomes_Mes = 202,004 then 'Abril/2020'
+             when ${TABLE}.Anomes_Mes = 202,005 then 'Maio/2020'
+             when ${TABLE}.Anomes_Mes = 202,006 then 'Junho/2020'
+             when ${TABLE}.Anomes_Mes = 202,007 then 'Julho/2020'
+             when ${TABLE}.Anomes_Mes = 202,008 then 'Agosto/2020'
+             when ${TABLE}.Anomes_Mes = 202,009 then 'Setembro/2020'
+             when ${TABLE}.Anomes_Mes = 202,010 then 'Outubro/2020'
+             when ${TABLE}.Anomes_Mes = 202,011 then 'Novembro/2020'
+             when ${TABLE}.Anomes_Mes = 202,012 then 'Dezembro/2020'
              else 'ERRO'
          end ;;
   }
