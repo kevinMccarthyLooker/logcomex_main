@@ -86,6 +86,16 @@ view: filter_history {
     sql: ${TABLE}."year" ;;
   }
 
+  dimension: possibleImporter {
+    type: yesno
+    sql: filters @> '[{"name": "possibleImporter"}]' ;;
+  }
+
+  dimension: possibleExporter {
+    type: yesno
+    sql: filters @> '[{"name": "possibleExporter"}]' ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
@@ -110,6 +120,20 @@ measure: count_consulta_this_month {
   sql: ${source_hash} ;;
   drill_fields: [id]
 }
+
+  measure: count_consulta_perfil_impo {
+    type: count_distinct
+    filters: [possibleImporter: "yes"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
+
+  measure: count_consulta_perfil_expo {
+    type: count_distinct
+    filters: [possibleExporter: "yes"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
 
   measure: count_consulta_6_months {
     type: count_distinct

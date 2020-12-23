@@ -29,3 +29,8 @@ explore: aereo_awb_details {
     sql_on: ${aereo_awb_details.id_recinto_aduaneiro} = ${recinto_aduaneiro.id} ;;
   }
 }
+
+explore: aereo_details {
+  from: aereo_awb_details
+  label: "Aereo"
+}
