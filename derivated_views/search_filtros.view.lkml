@@ -74,6 +74,12 @@ view: search_filtros {
               else 'Erro' end;;
   }
 
+  dimension: service_id {
+    type: number
+    sql: ${TABLE}.service;;
+
+  }
+
   dimension: fonte {
     type: string
     sql: case
@@ -92,6 +98,25 @@ view: search_filtros {
   dimension: filtro {
     type: string
     sql: ${TABLE}.filtro ;;
+  }
+
+
+  dimension: campo_produto {
+    type: string
+    sql: case when ${filtro} = 'portoOrigem' then 'Porto Origem'
+              when ${filtro} = 'hscode' then 'HS Code'
+              when ${filtro} = 'portoDestino' then 'Porto Destino'
+              when ${filtro} = 'paisDeDestino' then 'País de Destino'
+              when ${filtro} = 'tipoCarga' then 'Tipo Carga'
+              when ${filtro} = 'filterImportadorCnpj' then 'Importador CNPJ'
+              when ${filtro} = 'cnpjExportador' then 'Exportador CNPJ'
+              when ${filtro} = 'exporter' then 'Exportador'
+              when ${filtro} = 'tipoEmbarque' then 'Tipo Embarque'
+              when ${filtro} = 'tipoConteiner' then 'Tipo Contêiner'
+              when ${filtro} = 'terminalEmbarque' then 'Terminal Embarque'
+              when ${filtro} = 'estadoExportador' then 'Estado Exportador'
+              else ${filtro}
+         end;;
   }
 
   dimension: valor {

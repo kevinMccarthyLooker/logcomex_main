@@ -66,6 +66,7 @@ include: "/**/follow_up_status.view.lkml"
 include: "/**/big_data_filtros.view.lkml"
 include: "/**/search_filtros_agrupados.view.lkml"
 include: "/**/hubspot_customer_journey.view.lkml"
+include: "/**/filters_names.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -305,6 +306,14 @@ explore: usage {
     type: left_outer
   }
 
+  join: filters_names_search  {
+    from: filters_names
+    view_label: "Filters Names Search"
+    sql_on: ${filters_names_search.name} = ${search_filtros.filtro} and ${search_filtros.service_id} = ${filters_names_search.service_id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
   join: search_filtros_agrupados{
     sql_on: ${customer.id} = ${search_filtros_agrupados.customer_id};;
     relationship: one_to_many
@@ -365,6 +374,12 @@ explore: usage {
   join: big_data_filtros {
     sql_on: ${users.id} = ${big_data_filtros.user_id} ;;
     relationship: one_to_many
+    type: left_outer
+  }
+
+  join: filters_names {
+    sql_on: ${big_data_filtros.filter} = ${filters_names.bi_field} and ${big_data_filtros.service_id} = ${filters_names.service_id} ;;
+    relationship: many_to_one
     type: left_outer
   }
 
@@ -433,6 +448,14 @@ explore: usage {
     relationship: one_to_one
     type: left_outer
 
+  }
+
+  join: report_log_plan {
+    from: report_log
+    view_label: "Report Log Customer Plan "
+    sql_on: ${customer_plan.id}=${report_log_plan.customer_plan_id} ;;
+    relationship: one_to_many
+    type: left_outer
   }
 
   join: plan_complete {

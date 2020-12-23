@@ -1407,6 +1407,7 @@ view: bi_exports_mvw_gold {
     sql: ${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c20" ;;
   }
 
+
   measure: mar_vl_frete_por_c40 {
     type: average
     value_format: "$#.00;($#.00)"

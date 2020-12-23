@@ -176,4 +176,11 @@ view: report_log {
     type: sum
     sql:  ${line_numbers};;
   }
+
+  measure: min_created {
+    type: date
+    sql: min(${created_raw}) ;;
+    convert_tz: no
+  }
+
 }

@@ -185,6 +185,14 @@ view: customer_plan {
     sql: ${expiration_raw}- (${start_raw}  -  INTERVAL '1 DAY')  :: DATE  ;;
   }
 
+  dimension: plano_sem_datas {  # verifica se é um plano sem datas, ou seja, um plano nao finalizado ou criado para contornar o bug de exibicao dos servicos
+    type: yesno
+    sql: case when (${start_raw} is null and ${trial_start_raw} is null) or (${expiration_raw} is null and ${trial_end_raw} is null) then true
+              else false
+         end;;
+
+  }
+
   dimension: dias_trial {
     type: number
     sql: ${trial_end_raw} - (${trial_start_raw}  -  INTERVAL '1 DAY')  :: DATE  ;;

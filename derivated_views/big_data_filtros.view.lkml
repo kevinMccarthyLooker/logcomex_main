@@ -55,6 +55,22 @@ view: big_data_filtros {
          end ;;
   }
 
+
+  dimension: service_id {
+    type: number
+    sql: ${TABLE}.service::int ;;
+
+  }
+
+  dimension: campo_produto {
+    type: string
+    sql:  case
+          when ${filter} = 'sub_grouper' then 'Sub agrupador'
+          when ${filter} = 'sub_grouper_value' then 'Detalhes sub agrupador'
+          else ${filter}
+          end  ;;
+  }
+
   dimension: report_type {
     type: string
     sql: case
