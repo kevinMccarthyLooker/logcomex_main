@@ -13,7 +13,7 @@ view: trials_ativos_mes {
     WHERE (meses.mes between (customer_plan.trial_start) and last_day(customer_plan.trial_end)
     --WHERE (meses.mes between (customer_plan.trial_start) and (customer_plan.trial_end)
         and (customer_plan."deleted_at") is null) AND ((customer."fake_customer")=false
-        and customer_id = 1991
+        --and customer_id = 1991
         --and (customer."deleted_at") is null
         ) ;;
   }
