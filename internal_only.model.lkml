@@ -77,11 +77,6 @@ explore: follow_up_status {
   label: "Tempo no Status - Tracking"
 }
 
-explore: trials_ativos_mes {
-  label: ""
-}
-
-
 explore: search_filtros_agrupados {
   label: "Search e Novo Expo Filtros AGG"
 }
@@ -498,6 +493,12 @@ explore: usage {
 
   join: clientes_ativos_por_mes {
     sql_on: ${customer_plan.id}=${clientes_ativos_por_mes.customer_plan_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: trials_ativos_mes {
+    sql_on: ${customer_plan.id}=${trials_ativos_mes.customer_plan_id} ;;
     relationship: one_to_many
     type: left_outer
   }
