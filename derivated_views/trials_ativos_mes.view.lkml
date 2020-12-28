@@ -1,4 +1,4 @@
-view: trials_ativos_por_mes {
+view: trials_ativos_mes {
 
   derived_table: {
     sql:
