@@ -67,6 +67,7 @@ include: "/**/big_data_filtros.view.lkml"
 include: "/**/search_filtros_agrupados.view.lkml"
 include: "/**/hubspot_customer_journey.view.lkml"
 include: "/**/filters_names.view.lkml"
+include: "/**/trials_ativos_mes.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -496,6 +497,12 @@ explore: usage {
     relationship: one_to_many
     type: left_outer
   }
+
+ # join: trials_ativos_mes{
+#    sql_on: ${customer_plan.id}=${trials_ativos_mes.customer_plan_id} ;;
+#    relationship: one_to_many
+#    type: left_outer
+#  }
 
   # view com detalhes dos planos dos clientes
   join: planos_ativos_detalhes {
