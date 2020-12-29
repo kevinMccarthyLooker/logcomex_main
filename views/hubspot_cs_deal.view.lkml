@@ -1,5 +1,5 @@
-view: hubspot_customer_journey {
-  sql_table_name: public.hubspot_customer_journey ;;
+view: hubspot_cs_deal {
+  sql_table_name: public.hubspot_cs_deal ;;
   drill_fields: [id]
 
   dimension: id {
@@ -23,9 +23,37 @@ view: hubspot_customer_journey {
     sql: ${TABLE}."churn_signal_dates" ;;
   }
 
+  dimension_group: created {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."created_at" ;;
+  }
+
   dimension: customer_api_relations_id {
     type: number
     sql: ${TABLE}."customer_api_relations_id" ;;
+  }
+
+  dimension_group: deleted {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."deleted_at" ;;
   }
 
   dimension: duration_of_implementation {
@@ -36,6 +64,11 @@ view: hubspot_customer_journey {
   dimension: expansion {
     type: yesno
     sql: ${TABLE}."expansion" ;;
+  }
+
+  dimension: first_days_access {
+    type: yesno
+    sql: ${TABLE}."first_days_access" ;;
   }
 
   dimension: hubspot_customer_id {
@@ -58,6 +91,26 @@ view: hubspot_customer_journey {
     sql: ${TABLE}."markdowns" ;;
   }
 
+  dimension_group: payment {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}."payment_date" ;;
+  }
+
+  dimension: pipeline {
+    type: string
+    sql: ${TABLE}."pipeline" ;;
+  }
+
   dimension: released_without_payment {
     type: yesno
     sql: ${TABLE}."released_without_payment" ;;
@@ -68,9 +121,29 @@ view: hubspot_customer_journey {
     sql: ${TABLE}."signaled_churn" ;;
   }
 
+  dimension: squad_cs {
+    type: string
+    sql: ${TABLE}."squad_cs" ;;
+  }
+
   dimension: stage {
     type: string
     sql: ${TABLE}."stage" ;;
+  }
+
+  dimension_group: start_of_implementation {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}."start_of_implementation" ;;
   }
 
   dimension: status_onboarding {
@@ -136,6 +209,20 @@ view: hubspot_customer_journey {
   dimension: training_duration_two {
     type: string
     sql: ${TABLE}."training_duration_two" ;;
+  }
+
+  dimension_group: updated {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."updated_at" ;;
   }
 
   measure: count {

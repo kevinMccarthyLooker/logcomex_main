@@ -65,7 +65,7 @@ include: "/**/certificate.view.lkml"
 include: "/**/follow_up_status.view.lkml"
 include: "/**/big_data_filtros.view.lkml"
 include: "/**/search_filtros_agrupados.view.lkml"
-include: "/**/hubspot_customer_journey.view.lkml"
+include: "/**/hubspot_cs_deal.view.lkml"
 include: "/**/filters_names.view.lkml"
 include: "/**/trials_ativos_mes.view.lkml"
 
@@ -195,8 +195,8 @@ explore: usage {
     type: left_outer
   }
 
-  join: hubspot_customer_journey {
-    sql_on: ${customer_api_relations.id} = ${hubspot_customer_journey.customer_api_relations_id} ;;
+  join: hubspot_cs_deal {
+    sql_on: ${customer_api_relations.id} = ${hubspot_cs_deal.customer_api_relations_id} ;;
     relationship: one_to_one
     type: left_outer
   }
