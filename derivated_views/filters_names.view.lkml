@@ -6,6 +6,7 @@ view: filters_names {
           bi_condition_filter."name",
           (case
           when bi_condition_filter.bi_field = 'consignatario' then 'Consignatário Aereo'
+          when bi_condition_filter.bi_field = 'nmconsignatario' then 'Consignatário Marítimo'
           else bi_condition_filter.label_pt
           end) as label_pt,
           bi_column_service.service_id
