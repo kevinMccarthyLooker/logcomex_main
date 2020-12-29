@@ -664,4 +664,9 @@ view: searchx_gold_v2 {
     type: count
     drill_fields: [id, name, custom_name]
   }
+
+  measure: cif_sum {
+    type: sum
+    sql: ${val_cif_un_us}::int ;;
+  }
 }
