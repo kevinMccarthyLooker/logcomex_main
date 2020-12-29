@@ -576,7 +576,7 @@ view: searchx_gold_v2 {
   }
 
   dimension: val_cif_un_us {
-    type: string
+    type: number
     sql: ${TABLE}.val_cif_un_us ;;
   }
 
@@ -667,6 +667,6 @@ view: searchx_gold_v2 {
 
   measure: cif_sum {
     type: sum
-    sql: ${val_cif_un_us}::int ;;
+    sql: ${val_cif_un_us};;
   }
 }
