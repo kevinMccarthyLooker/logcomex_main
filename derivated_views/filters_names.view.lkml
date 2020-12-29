@@ -4,7 +4,10 @@ view: filters_names {
     sql: select bi_condition_filter.id,
           bi_condition_filter.bi_field,
           bi_condition_filter."name",
-          bi_condition_filter.label_pt,
+          (case
+          when bi_condition_filter.bi_field = 'consignatario' then 'Consignatário Aereo'
+          else bi_condition_filter.label_pt
+          end) as label_pt,
           bi_column_service.service_id
           from bi_condition_filter
           join bi_column_service on bi_condition_filter.id = bi_column_service.bi_condition_filter_id
