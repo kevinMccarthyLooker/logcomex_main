@@ -228,20 +228,11 @@ view: hubspot_cs_deal {
     sql: ${TABLE}."training_duration_two" ;;
   }
 
-  dimension: training_duration_two_minutes {
-    type: number
-    sql: left(lpad(replace(${training_duration_two},':',''),4,'0'),2)::int * 60 + right(lpad(replace(${training_duration_two},':',''),4,'0'),2)::int;;
-  }
-
   dimension: training_duration_three {
     type: string
     sql: ${TABLE}."training_duration_three" ;;
   }
 
-  dimension: training_duration_three_minutes {
-    type: number
-    sql: left(lpad(replace(${training_duration_three},':',''),4,'0'),2)::int * 60 + right(lpad(replace(${training_duration_three},':',''),4,'0'),2)::int;;
-  }
 
   dimension_group: updated {
     type: time
