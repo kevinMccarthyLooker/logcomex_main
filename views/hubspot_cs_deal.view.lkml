@@ -131,6 +131,23 @@ view: hubspot_cs_deal {
     sql: ${TABLE}."stage" ;;
   }
 
+  dimension: stage_sorted {
+    type: string
+    sql: case
+          when ${stage} = 'Novos' then '1 - Novos'
+          when ${stage} = 'Treinamento' then '2 - Treinamento'
+          when ${stage} = 'FUP 7' then '3 - FUP 7'
+          when ${stage} = 'FUP 14' then '4 - FUP 14'
+          when ${stage} = 'FUP 21' then '5 - FUP 21'
+          when ${stage} = 'FUP 30' then '6 - FUP 30'
+          when ${stage} = 'FUP 45' then '7 - FUP 45'
+          when ${stage} = 'FUP 60' then '8 - FUP 60'
+          when ${stage} = 'Churn' then '9 - Churn'
+          when ${stage} = 'Concluido' then '10 - Concluido'
+          else 'Erro'
+        end ;;
+  }
+
   dimension_group: start_of_implementation {
     type: time
     timeframes: [
