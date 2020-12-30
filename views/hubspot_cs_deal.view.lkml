@@ -233,7 +233,6 @@ view: hubspot_cs_deal {
     sql: ${TABLE}."training_duration_three" ;;
   }
 
-
   dimension_group: updated {
     type: time
     timeframes: [
@@ -251,5 +250,10 @@ view: hubspot_cs_deal {
   measure: count {
     type: count
     drill_fields: [id]
+  }
+
+  measure: training_one_minutes_sum {
+    type: sum
+    sql: ${training_duration_one_minutes};;
   }
 }
