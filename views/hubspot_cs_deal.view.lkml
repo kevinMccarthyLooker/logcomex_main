@@ -144,7 +144,7 @@ view: hubspot_cs_deal {
           when ${stage} = 'FUP 60' then '8 - FUP 60'
           when ${stage} = 'Churn' then '9 - Churn'
           when ${stage} = 'Concluido' then '10 - Concluido'
-          else 'Erro'
+          else ${stage}
         end ;;
   }
 
