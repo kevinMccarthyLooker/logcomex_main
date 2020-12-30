@@ -223,9 +223,6 @@ view: hubspot_cs_deal {
     sql: left(lpad(replace(${training_duration_one},':',''),4,'0'),2)::int * 60 + right(lpad(replace(${training_duration_one},':',''),4,'0'),2)::int;;
   }
 
-
-
-
   dimension: training_duration_three {
     type: string
     sql: ${TABLE}."training_duration_three" ;;
