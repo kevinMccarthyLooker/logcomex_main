@@ -5,6 +5,7 @@ view: trials_ativos_mes {
     SELECT
     mes as anomes,
     customer."id" AS customer_id,
+    customer."name" as nome,
     customer."id" AS customer_id_measure,
     customer_plan.id as customer_plan_id
     FROM public.customer  AS customer
@@ -28,9 +29,9 @@ view: trials_ativos_mes {
     sql: ${TABLE}."customer_plan_id" ;;
   }
 
-  measure: count_ativos_mes {
-    type: count_distinct
-    sql: ${TABLE}."customer_id_measure" ;;
+  dimension: nome {
+    type: string
+    sql: ${TABLE}."nome" ;;
   }
 
   dimension_group: anomes {
@@ -45,6 +46,16 @@ view: trials_ativos_mes {
       year
     ]
     sql: ${TABLE}."anomes" ;;
+  }
+
+  measure: count_ativos_mes {
+    type: count_distinct
+    sql: ${TABLE}."customer_id_measure" ;;
+    drill_fields: [detail*]
+  }
+
+  set: detail {
+    fields: [customer_id, nome]
   }
 
 }
