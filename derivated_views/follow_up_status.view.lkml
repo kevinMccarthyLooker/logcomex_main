@@ -37,6 +37,8 @@ case when (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE foll
      else (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 7 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 8 limit 1)::timestamp)) end AS diff_06  -- diDesembaraca_recebida
 FROM follow_up fu1
 inner join tracking_aerial ta on ta.id = fu1.tracking_aerial_id ;;
+indexes: ["chave"]
+sql_trigger_value: select current_date;;
 }
 
 
