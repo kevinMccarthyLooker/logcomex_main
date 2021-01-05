@@ -553,6 +553,13 @@ where tracking_aerial.deleted_at is null
     sql: ${user_id} ;;
   }
 
+  measure: count_api {
+    type: count_distinct
+    sql: ${chave} ;;
+    filters: [is_api: "yes"]
+    drill_fields: [detail*]
+  }
+
   measure: count {
     type: count_distinct
     sql: ${chave} ;;
