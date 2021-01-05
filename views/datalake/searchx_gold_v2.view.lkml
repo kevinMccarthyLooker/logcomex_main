@@ -167,6 +167,13 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.customer_id ;;
   }
 
+  dimension: cliente {
+    type: yesno
+    sql: case when ${TABLE}.customer_id is null then false
+         else true
+         end;;
+  }
+
   dimension: customer_type_id {
     type: number
     sql: ${TABLE}.customer_type_id ;;
@@ -582,7 +589,7 @@ view: searchx_gold_v2 {
 
   dimension: val_cif_un_us_num {
     type: number
-    sql: cast(${TABLE}.val_cif_un_us as integer) ;;
+    sql: cast(${TABLE}.val_cif_un_us as float) ;;
   }
 
   dimension: val_fob_un_us {
