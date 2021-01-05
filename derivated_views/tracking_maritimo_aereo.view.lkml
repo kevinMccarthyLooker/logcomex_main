@@ -198,6 +198,14 @@ where tracking_aerial.deleted_at is null
     sql: ${TABLE}."user_id" ;;
   }
 
+  dimension: user_id_null {
+    type: yesno
+    hidden: yes
+    sql: case when ${TABLE}."user_id" is null then true
+         else false
+         end;;
+  }
+
   dimension_group: executed_vs_followup {
     type: duration
     intervals: [day, hour]
@@ -222,6 +230,13 @@ where tracking_aerial.deleted_at is null
     type: duration
     intervals: [day, hour]
     sql_start: ${TABLE}."executed_at" ;;
+    sql_end: CURRENT_TIMESTAMP;;
+  }
+
+  dimension_group: last_update {
+    type: duration
+    intervals: [day, hour]
+    sql_start: ${robot_updated_at_raw} ;;
     sql_end: CURRENT_TIMESTAMP;;
   }
 
@@ -557,6 +572,22 @@ where tracking_aerial.deleted_at is null
     type: count_distinct
     sql: ${chave} ;;
     filters: [is_api: "yes"]
+    drill_fields: [detail*]
+  }
+
+  measure: count_seguir_emb {
+    type: count_distinct
+    sql: ${chave} ;;
+    filters: [is_api: "no"]
+    filters: [user_id_null: "yes"]
+    drill_fields: [detail*]
+  }
+
+  measure: count_ {
+    type: count_distinct
+    sql: ${chave} ;;
+    filters: [is_api: "no"]
+    filters: [user_id_null: "no"]
     drill_fields: [detail*]
   }
 
