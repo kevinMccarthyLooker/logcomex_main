@@ -1361,6 +1361,17 @@ view: bi_exports_mvw_gold {
     sql: ${TABLE}.mar_c40 ;;
   }
 
+    dimension: mar_rota {
+    type: string
+    sql: ${TABLE}."mar_nmportoorigem"  || ' >> ' ||  ${TABLE}."mar_nmportodestino";;
+  }
+
+  dimension: MedianaFrete20 {
+    type: number
+    value_format: "$#.00;($#.00)"
+    sql: ${TABLE}."mar_vlfrete" ;;
+  }
+
   measure: mar_teus {
     type: sum
     sql: ${TABLE}.mar_teus ;;
@@ -1407,7 +1418,6 @@ view: bi_exports_mvw_gold {
     sql: ${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c20" ;;
   }
 
-
   measure: mar_vl_frete_por_c40 {
     type: average
     value_format: "$#.00;($#.00)"
@@ -1415,10 +1425,6 @@ view: bi_exports_mvw_gold {
     sql: ${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c40" ;;
   }
 
-  dimension: mar_rota {
-    type: string
-    sql: ${TABLE}."mar_nmportoorigem"  || ' >> ' ||  ${TABLE}."mar_nmportodestino";;
-  }
 
 
 }
