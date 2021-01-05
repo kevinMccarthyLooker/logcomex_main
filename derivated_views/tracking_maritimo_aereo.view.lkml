@@ -583,7 +583,7 @@ where tracking_aerial.deleted_at is null
     drill_fields: [detail*]
   }
 
-  measure: count_ {
+  measure: count_screen {
     type: count_distinct
     sql: ${chave} ;;
     filters: [is_api: "no"]
