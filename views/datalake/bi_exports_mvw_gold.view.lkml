@@ -1368,7 +1368,7 @@ view: bi_exports_mvw_gold {
 
   dimension: MedianaFrete20 {
     type: string
-    sql: ${TABLE}."mar_vlfrete" ;;
+    sql: ${TABLE}."mar_vlfretetotal" ;;
   }
 
   measure: mar_teus {
