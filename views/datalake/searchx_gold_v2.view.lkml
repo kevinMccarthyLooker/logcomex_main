@@ -174,6 +174,16 @@ view: searchx_gold_v2 {
          end;;
   }
 
+  dimension: cliente_match {
+    type: yesno
+    sql: ${cliente} ;;
+    html: {% if value == 'Yes' %}
+            <font color="green">{{ cliente }}</font>
+          {% else %}
+            <font color="red">{{ cliente }}</font>
+          {% endif %};;
+  }
+
   dimension: customer_type_id {
     type: number
     sql: ${TABLE}.customer_type_id ;;
