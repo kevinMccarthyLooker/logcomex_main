@@ -209,6 +209,7 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.data_hora_registro ;;
   }
 
+
   dimension: data_pagamento {
     type: string
     sql: ${TABLE}.data_pagamento ;;
@@ -684,6 +685,12 @@ view: searchx_gold_v2 {
 
   measure: count {
     type: count
+    drill_fields: [id, name, custom_name]
+  }
+
+  measure: count_distinc {
+    type: count_distinct
+    sql: ${importador_nome} ;;
     drill_fields: [id, name, custom_name]
   }
 
