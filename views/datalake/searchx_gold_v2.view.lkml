@@ -209,18 +209,6 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.data_hora_registro ;;
   }
 
-  dimension_group: data_hora_registro_convert {
-    type: time
-    timeframes: [
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: to_date(left(${data_hora_registro},10),‘YYYY/MM/DD') ;;
-    convert_tz: no
-  }
 
   dimension: data_pagamento {
     type: string
