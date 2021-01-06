@@ -212,15 +212,13 @@ view: searchx_gold_v2 {
   dimension_group: data_hora_registro_convert {
     type: time
     timeframes: [
-      raw,
-      time,
       date,
       week,
       month,
       quarter,
       year
     ]
-    sql: to_timestamp(${data_hora_registro},‘YYYY/MM/DD HH24:MI:SS') ;;
+    sql: to_date(left(${data_hora_registro},10),‘YYYY/MM/DD') ;;
     convert_tz: no
   }
 
