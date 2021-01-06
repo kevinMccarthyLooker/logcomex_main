@@ -216,6 +216,7 @@ view: searchx_gold_v2 {
       year
     ]
     sql: ${TABLE}.data_hora_registro ;;
+    convert_tz: no
   }
 
   dimension: data_pagamento {
