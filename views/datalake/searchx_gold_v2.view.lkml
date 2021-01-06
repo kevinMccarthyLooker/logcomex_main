@@ -688,6 +688,11 @@ view: searchx_gold_v2 {
     drill_fields: [id, name, custom_name]
   }
 
+  measure: count_distinc {
+    type: count_distinct
+    drill_fields: [id, name, custom_name]
+  }
+
   measure: cif_sum {
     type: sum
     sql: ${val_cif_un_us_num};;
