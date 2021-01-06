@@ -220,7 +220,7 @@ view: searchx_gold_v2 {
       quarter,
       year
     ]
-    sql: ${data_hora_registro} ;;
+    sql: to_timestamp(${data_hora_registro},‘YYYY/MM/DD HH24:MI:SS') ;;
     convert_tz: no
   }
 
