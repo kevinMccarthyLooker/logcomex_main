@@ -127,21 +127,21 @@ view: db_commodities_export {
     type: count
     drill_fields: [id]
   }
-  measure: anomes_Mes {
+  dimension: anomes_Mes {
     type: string
     sql: case
-             when ${TABLE}.anomes = 202,001 then 'Janeiro/2020'
-             when ${TABLE}.anomes = 202,002 then 'Fevereiro/2020'
-             when ${TABLE}.anomes = 202,003 then 'Março/2020'
-             when ${TABLE}.anomes = 202,004 then 'Abril/2020'
-             when ${TABLE}.anomes = 202,005 then 'Maio/2020'
-             when ${TABLE}.anomes = 202,006 then 'Junho/2020'
-             when ${TABLE}.anomes = 202,007 then 'Julho/2020'
-             when ${TABLE}.anomes = 202,008 then 'Agosto/2020'
-             when ${TABLE}.anomes = 202,009 then 'Setembro/2020'
-             when ${TABLE}.anomes = 202,010 then 'Outubro/2020'
-             when ${TABLE}.anomes = 202,011 then 'Novembro/2020'
-             when ${TABLE}.anomes = 202,012 then 'Dezembro/2020'
+             when ${TABLE}.anomes = 202001 then 'Janeiro/2020'
+             when ${TABLE}.anomes = 202002 then 'Fevereiro/2020'
+             when ${TABLE}.anomes = 202003 then 'Março/2020'
+             when ${TABLE}.anomes = 202004 then 'Abril/2020'
+             when ${TABLE}.anomes = 202005 then 'Maio/2020'
+             when ${TABLE}.anomes = 202006 then 'Junho/2020'
+             when ${TABLE}.anomes = 202007 then 'Julho/2020'
+             when ${TABLE}.anomes = 202008 then 'Agosto/2020'
+             when ${TABLE}.anomes = 202009 then 'Setembro/2020'
+             when ${TABLE}.anomes = 202010 then 'Outubro/2020'
+             when ${TABLE}.anomes = 202011 then 'Novembro/2020'
+             when ${TABLE}.anomes = 202012 then 'Dezembro/2020'
              else 'ERRO'
          end ;;
   }
