@@ -690,6 +690,7 @@ view: searchx_gold_v2 {
 
   measure: count_distinc {
     type: count_distinct
+    sql: ${importador_nome} ;;
     drill_fields: [id, name, custom_name]
   }
 
