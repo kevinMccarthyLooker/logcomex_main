@@ -127,7 +127,7 @@ view: db_commodities_export {
     type: count
     drill_fields: [id]
   }
-  dimension: anomes_Mes {
+  measure: anomes_Mes {
     type: string
     sql: case
              when ${TABLE}.anomes = 202,001 then 'Janeiro/2020'
