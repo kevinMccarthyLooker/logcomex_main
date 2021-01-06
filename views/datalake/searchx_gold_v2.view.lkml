@@ -204,8 +204,17 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.data_embarque ;;
   }
 
-  dimension: data_hora_registro {
-    type: string
+  dimension_group: data_hora_registro {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.data_hora_registro ;;
   }
 
