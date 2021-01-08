@@ -67,13 +67,6 @@
     defaults_version: 1
     series_types: {}
     hidden_fields: [bi_exports_mvw_gold.mar_teus]
-    listen:
-      Data Embarque Month: bi_exports_mvw_gold.data_embarque_month
-      Tipo Fcl: bi_exports_mvw_gold.tipo_fcl
-      Porto de Origem: bi_exports_mvw_gold.mar_nmportoorigem
-      Porto de Destino: bi_exports_mvw_gold.mar_nmportodestino
-      País de Destino: bi_exports_mvw_gold.mar_nmpaisdestfinal
-      Período de Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
     row: 0
     col: 8
     width: 8
@@ -149,13 +142,6 @@
     defaults_version: 1
     series_types: {}
     hidden_fields: [bi_exports_mvw_gold.mar_teus]
-    listen:
-      Data Embarque Month: bi_exports_mvw_gold.data_embarque_month
-      Tipo Fcl: bi_exports_mvw_gold.tipo_fcl
-      Porto de Origem: bi_exports_mvw_gold.mar_nmportoorigem
-      Porto de Destino: bi_exports_mvw_gold.mar_nmportodestino
-      País de Destino: bi_exports_mvw_gold.mar_nmpaisdestfinal
-      Período de Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
     row: 0
     col: 0
     width: 8
@@ -230,14 +216,6 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    listen:
-      Data Embarque Month: bi_exports_mvw_gold.data_embarque_month
-      Tipo Fcl: bi_exports_mvw_gold.tipo_fcl
-      Mvw Data Embarque Month: bi_exports_mvw_gold.mvw_data_embarque_month
-      Porto de Origem: bi_exports_mvw_gold.mar_nmportoorigem
-      Porto de Destino: bi_exports_mvw_gold.mar_nmportodestino
-      País de Destino: bi_exports_mvw_gold.mar_nmpaisdestfinal
-      Período de Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
     row: 5
     col: 0
     width: 24
@@ -305,78 +283,7 @@
     defaults_version: 1
     series_types: {}
     hidden_fields: [bi_exports_mvw_gold.mar_teus]
-    listen:
-      Data Embarque Month: bi_exports_mvw_gold.data_embarque_month
-      Tipo Fcl: bi_exports_mvw_gold.tipo_fcl
-      Porto de Origem: bi_exports_mvw_gold.mar_nmportoorigem
-      Porto de Destino: bi_exports_mvw_gold.mar_nmportodestino
-      País de Destino: bi_exports_mvw_gold.mar_nmpaisdestfinal
-      Período de Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
     row: 0
     col: 16
     width: 8
     height: 5
-  filters:
-  - name: Período de Embarque
-    title: Período de Embarque
-    type: field_filter
-    default_value: 6 month
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: advanced
-      display: popover
-      options: []
-    model: Dados_Expo_Datalake
-    explore: bi_exports_mvw_gold
-    listens_to_filters: []
-    field: bi_exports_mvw_gold.mvw_data_embarque_month
-  - name: Porto de Origem
-    title: Porto de Origem
-    type: field_filter
-    default_value: ''
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: tag_list
-      display: popover
-    model: Dados_Expo_Datalake
-    explore: bi_exports_mvw_gold
-    listens_to_filters: []
-    field: bi_exports_mvw_gold.mar_nmportoorigem
-  - name: Porto de Destino
-    title: Porto de Destino
-    type: field_filter
-    default_value: ''
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: tag_list
-      display: popover
-    model: Dados_Expo_Datalake
-    explore: bi_exports_mvw_gold
-    listens_to_filters: []
-    field: bi_exports_mvw_gold.mar_nmportodestino
-  - name: País de Destino
-    title: País de Destino
-    type: field_filter
-    default_value: ''
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: tag_list
-      display: popover
-    model: Dados_Expo_Datalake
-    explore: bi_exports_mvw_gold
-    listens_to_filters: []
-    field: bi_exports_mvw_gold.mar_nmpaisdestfinal
-  - name: Tipo Container
-    title: Tipo Container
-    type: string_filter
-    default_value: ''
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: advanced
-      display: popover
-      options: []
