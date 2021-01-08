@@ -89,6 +89,16 @@ view: report_log {
     sql: ${TABLE}."report_type_id" ;;
   }
 
+  dimension: report_type {
+    type: string
+    sql: case
+             when ${TABLE}.report_type_id = 1 then 'Screen'
+             when ${TABLE}.report_type_id = 2 then 'Excel'
+             when ${TABLE}.report_type_id = 3 then 'Api'
+             else 'ERRO'
+         end ;;
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [
