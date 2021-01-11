@@ -678,6 +678,11 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.val_vmle_us_subitem ;;
   }
 
+  dimension: val_vmle_us_subitem_num {
+    type: number
+    sql: cast(${TABLE}.val_vmle_us_subitem as float) ;;
+  }
+
   dimension: via_transp {
     type: string
     sql: ${TABLE}.via_transp ;;
@@ -702,6 +707,6 @@ view: searchx_gold_v2 {
 
   measure: cif_sum {
     type: sum
-    sql: ${val_cif_un_us_num};;
+    sql: ${val_vmle_us_subitem_num};;
   }
 }
