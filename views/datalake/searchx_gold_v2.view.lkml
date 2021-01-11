@@ -693,6 +693,12 @@ view: searchx_gold_v2 {
     drill_fields: [id, name, custom_name]
   }
 
+  measure: count_customer_id {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    drill_fields: [customer_id, name, custom_name]
+  }
+
   measure: count_distinc {
     type: count_distinct
     sql: ${importador_nome} ;;
