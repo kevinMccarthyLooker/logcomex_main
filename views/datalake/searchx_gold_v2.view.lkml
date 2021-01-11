@@ -678,6 +678,11 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.val_vmle_us_subitem ;;
   }
 
+  dimension: val_vmle_us_subitem_num {
+    type: number
+    sql: cast(${TABLE}.val_vmle_us_subitem as float) ;;
+  }
+
   dimension: via_transp {
     type: string
     sql: ${TABLE}.via_transp ;;
@@ -688,14 +693,26 @@ view: searchx_gold_v2 {
     drill_fields: [id, name, custom_name]
   }
 
+  measure: count_customer_id {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    drill_fields: [customer_id, name, custom_name]
+  }
+
   measure: count_distinc {
     type: count_distinct
     sql: ${importador_nome} ;;
+    drill_fields: [importador_nome]
+  }
+
+  measure: count_distinc_cnpj {
+    type: count_distinct
+    sql: ${importador_cnpj} ;;
     drill_fields: [id, name, custom_name]
   }
 
   measure: cif_sum {
     type: sum
-    sql: ${val_cif_un_us_num};;
+    sql: ${val_vmle_us_subitem_num};;
   }
 }
