@@ -189,6 +189,13 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.customer_type_id ;;
   }
 
+  dimension: customer_type {
+    type: string
+    sql: case when ${TABLE}.customer_type_id = 6 then 'Importador'
+         else 'Outro'
+         end;;
+  }
+
   dimension: data_chegada_carga {
     type: string
     sql: ${TABLE}.data_chegada_carga ;;
