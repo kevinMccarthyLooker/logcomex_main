@@ -1943,7 +1943,14 @@ view: big_data_expo_datalake {
     type: number
     sql: ${TABLE}.mar_c40 ;;
   }
-
+  dimension: mar_tipoconhecimento_nome {
+    type: string
+    sql: case
+             when ${TABLE}.mar_tipoconhecimento = 10 then 'Direto'
+             when ${TABLE}.mar_tipoconhecimento = 11 then 'Master'
+             else 'ERRO'
+         end ;;
+  }
   measure: mar_vl_frete_por_TEU {
     type: average
     value_format: "$#.00;($#.00)"
@@ -1987,5 +1994,4 @@ view: big_data_expo_datalake {
     value_format_name: percent_2
     sql: 1.0* ${count_mar_id_com_dt} / ${count_mar_id} ;;
   }
-
 }
