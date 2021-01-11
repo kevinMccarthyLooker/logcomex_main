@@ -344,6 +344,13 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.importador_nome ;;
   }
 
+  dimension: importador_nome_tratado {
+    type: string
+    sql: case when ${TABLE}.importador_nome = '' then 'Não Encontrado'
+         else ${TABLE}.importador_nome
+         end ;;
+  }
+
   dimension: incoterm {
     type: string
     sql: ${TABLE}.incoterm ;;
