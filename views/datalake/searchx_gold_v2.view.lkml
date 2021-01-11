@@ -351,6 +351,13 @@ view: searchx_gold_v2 {
          end ;;
   }
 
+  dimension: importador_encontrado {
+    type: yesno
+    sql: case when ${TABLE}.importador_nome = '' then false
+         else true
+         end ;;
+  }
+
   dimension: incoterm {
     type: string
     sql: ${TABLE}.incoterm ;;
