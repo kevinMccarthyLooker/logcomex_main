@@ -691,6 +691,12 @@ view: searchx_gold_v2 {
   measure: count_distinc {
     type: count_distinct
     sql: ${importador_nome} ;;
+    drill_fields: [importador_nome]
+  }
+
+  measure: count_distinc_cnpj {
+    type: count_distinct
+    sql: ${importador_cnpj} ;;
     drill_fields: [id, name, custom_name]
   }
 
