@@ -25,7 +25,12 @@ include: "/**/db_cad_porto.view.lkml"
 include: "/**/db_cad_fcl.view.lkml"
 include: "/**/puc_embarques.view.lkml"
 include: "/**/api_request.view.lkml"
+include: "/**/api_requests_empresas.view.lkml"
 
+
+explore: api_requests_empresas {
+  label: "API Request Empresas"
+}
 
 explore: api_request {
   label: "API Request"
