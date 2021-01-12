@@ -704,6 +704,11 @@ view: searchx_gold_v2 {
     sql: cast(${TABLE}.val_vmle_us_subitem as float) ;;
   }
 
+  dimension: branches_activity {
+    type: string
+    sql: ${TABLE}.branches_activity ;;
+  }
+
   dimension: via_transp {
     type: string
     sql: ${TABLE}.via_transp ;;
