@@ -12,7 +12,7 @@ explore:searchx_gold_v2  {
 
   join: searchx_importadores_agrupado {
     sql_on: ${searchx_gold_v2.importador_nome}.id}=${searchx_importadores_agrupado.importador_nome} ;;
-    relationship: one_to_many
+    relationship: one_to_one
     type: left_outer
   }
 
