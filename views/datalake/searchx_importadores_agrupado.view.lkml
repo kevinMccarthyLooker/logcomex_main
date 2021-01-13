@@ -35,27 +35,27 @@ view: searchx_importadores_agrupado {
     sql: ${TABLE}.importador_nome ;;
   }
 
-  dimension: cod_cnae_import {
+  dimension: top_cod_cnae_import {
     type: string
     sql: ${TABLE}.cod_cnae_import ;;
   }
 
-  dimension: cdncm_compl {
+  dimension: top_cdncm_compl {
     type: string
     sql: ${TABLE}.cdncm_compl ;;
   }
 
-  dimension: nome_ncm_pt {
+  dimension: top_nome_ncm_pt {
     type: string
     sql: ${TABLE}.nome_ncm_pt ;;
   }
 
-  dimension: desc_cnae_import {
+  dimension: top_desc_cnae_import {
     type: string
     sql: ${TABLE}.desc_cnae_import ;;
   }
 
-  dimension: valor {
+  dimension: top_valor {
     type: number
     sql: ${TABLE}.valor ;;
   }
