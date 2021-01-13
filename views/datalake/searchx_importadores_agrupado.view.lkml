@@ -27,7 +27,7 @@ view: searchx_importadores_agrupado {
         sum(cast(val_vmle_us_subitem as float)) as valor
         from searchx.searchx_gold_v2
         GROUP BY 1,2,3,4,5,6) as qq2 where qq2.importador_nome = qq1.importador_nome
-        ) and importador_nome = 'YARA BRASIL FERTILIZANTES SA';;
+        ) ;;
   }
 
   dimension: importador_nome_agp {
