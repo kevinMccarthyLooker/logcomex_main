@@ -353,14 +353,14 @@ view: searchx_gold_v2 {
 
   dimension: importador_nome_tratado {
     type: string
-    sql: case when ${TABLE}.importador_nome = '' then 'NÃO ENCONTRADO'
+    sql: case when (${TABLE}.importador_nome = '' or null) then 'NÃO ENCONTRADO'
          else ${TABLE}.importador_nome
          end ;;
   }
 
   dimension: importador_encontrado {
     type: yesno
-    sql: case when ${TABLE}.importador_nome = '' then false
+    sql: case when (${TABLE}.importador_nome = '' or null) then false
          else true
          end ;;
   }
