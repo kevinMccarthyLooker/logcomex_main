@@ -11,10 +11,11 @@ view: big_data_filtros {
     --and report_log.id in (6145047,6145046,6145045,6144138,6144134,6144131)
     GROUP BY period,json_filter->>'serviceId', report_type_id,customer_plan_id,user_id,json_object_keys(json_filter)) qq1
     where qq1.filter NOT IN ('', 'chartPath', 'dashboard', 'detalhes', 'export_excel', 'filter_date', 'filterName', 'grouper', 'grouper_value', 'id', 'isChart', 'isPivot', 'page', 'paginated', 'path', 'per_page', 'serviceId', 'serviceSlug', 'sort', 'sortBy', 'tabType', 'title', 'type', 'undefined', 'x-api-key', 'XDEBUG_SESSION_START');;
-    indexes: ["period"]
-    sql_trigger_value: SELECT CURRENT_DATE;;
 
   }
+
+  #indexes: ["period"]
+  #sql_trigger_value: SELECT CURRENT_DATE;;
 
   dimension: id{
     type:  number

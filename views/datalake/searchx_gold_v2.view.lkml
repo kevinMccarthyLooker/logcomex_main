@@ -189,6 +189,13 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.customer_type_id ;;
   }
 
+  dimension: customer_type {
+    type: string
+    sql: case when ${TABLE}.customer_type_id = 6 then 'Importador'
+         else 'Outro'
+         end;;
+  }
+
   dimension: data_chegada_carga {
     type: string
     sql: ${TABLE}.data_chegada_carga ;;
@@ -342,6 +349,20 @@ view: searchx_gold_v2 {
   dimension: importador_nome {
     type: string
     sql: ${TABLE}.importador_nome ;;
+  }
+
+  dimension: importador_nome_tratado {
+    type: string
+    sql: case when ${TABLE}.importador_nome = '' then 'NÃO ENCONTRADO'
+         else ${TABLE}.importador_nome
+         end ;;
+  }
+
+  dimension: importador_encontrado {
+    type: yesno
+    sql: case when ${TABLE}.importador_nome = '' then false
+         else true
+         end ;;
   }
 
   dimension: incoterm {
@@ -681,6 +702,11 @@ view: searchx_gold_v2 {
   dimension: val_vmle_us_subitem_num {
     type: number
     sql: cast(${TABLE}.val_vmle_us_subitem as float) ;;
+  }
+
+  dimension: branches_activity {
+    type: string
+    sql: ${TABLE}.branches_activity ;;
   }
 
   dimension: via_transp {
