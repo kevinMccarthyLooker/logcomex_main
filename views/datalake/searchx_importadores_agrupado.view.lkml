@@ -1,7 +1,9 @@
 view: searchx_importadores_agrupado {
 
   derived_table: {
-    sql:select
+    sql:select importador_nome,cod_cnae_import,desc_cnae_import,cdncm_compl,nome_ncm_pt,valor
+        from(
+        select
         concat(importador_nome,cod_cnae_import,cod_cnae_import,cdncm_compl,nome_ncm_pt,desc_cnae_import) as id,
         importador_nome,
         cod_cnae_import,
@@ -10,13 +12,23 @@ view: searchx_importadores_agrupado {
         desc_cnae_import,
         sum(cast(val_vmle_us_subitem as float)) as valor
         from searchx.searchx_gold_v2
-        GROUP BY 1,2,3,4,5,6 ;;
-  }
-
-  dimension: id {
-    type: string
-    primary_key: yes
-    sql: ${TABLE}.id ;;
+        GROUP BY 1,2,3,4,5,6) as qq1
+        where valor =
+        (
+        select max(valor)
+        from(
+        select
+        concat(importador_nome,cod_cnae_import,cod_cnae_import,cdncm_compl,nome_ncm_pt,desc_cnae_import) as id,
+        importador_nome,
+        cod_cnae_import,
+        cdncm_compl,
+        nome_ncm_pt,
+        desc_cnae_import,
+        sum(cast(val_vmle_us_subitem as float)) as valor
+        from searchx.searchx_gold_v2
+        GROUP BY 1,2,3,4,5,6) as qq2 where qq2.importador_nome = qq1.importador_nome
+        ) and importador_nome = 'YARA BRASIL FERTILIZANTES SA'
+          };;
   }
 
   dimension: importador_nome {
