@@ -30,7 +30,7 @@ view: searchx_importadores_agrupado {
         ) and importador_nome = 'YARA BRASIL FERTILIZANTES SA';;
   }
 
-  dimension: importador_nome {
+  dimension: importador_nome_agp {
     type: string
     sql: ${TABLE}.importador_nome ;;
   }
