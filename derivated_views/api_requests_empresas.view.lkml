@@ -26,6 +26,9 @@ view: api_requests_empresas {
         from api_request_mvw_2020 arm
         inner join empresas e on e.ide = arm.ide
         where arm.data_registro >='2020-06-01' ;;
+
+    indexes: ["id"]
+    sql_trigger_value: SELECT CURRENT_DATE;;
   }
 
   dimension: id {
