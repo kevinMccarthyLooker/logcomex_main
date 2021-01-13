@@ -3,6 +3,7 @@ view: api_requests_empresas {
   derived_table: {
     sql:select
         arm.id,
+        e.nome_e,
         e.razao_social_e as razao_social,
         e.e_mails_e as email,
         e.responsavel_e as responsavel,
@@ -40,6 +41,11 @@ view: api_requests_empresas {
   dimension: razao_social {
     type: string
     sql: ${TABLE}.razao_social ;;
+  }
+
+  dimension: nome_e {
+    type: string
+    sql: ${TABLE}.nome_e ;;
   }
 
   dimension: email {
