@@ -25,6 +25,8 @@ view: comex_analytics {
     --and ct.deleted_at is null descomentar caso não incluir os deletados
     --and c.id = 512
     ;;
+    indexes: ["cnpj_importador"]
+    sql_trigger_value: select current_date;;
   }
 
   dimension: id {
