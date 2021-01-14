@@ -141,7 +141,7 @@ view: searchx_importadores_agrupado {
   }
 
 
-  dimension: top_ncm_cap {
+  dimension: top_ncm_cap_desc {
     type: string
     sql:
     case
