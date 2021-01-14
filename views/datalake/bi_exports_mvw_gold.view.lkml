@@ -1424,9 +1424,9 @@ view: bi_exports_mvw_gold {
     sql: ${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c40" ;;
   }
 
-  measure: mar_vlfrete_median {
+  measure: mar_vlfrete_median20 {
     type: number
-    sql: median(${mar_vlfrete_num}) ;;
+    sql: median(${mar_vlfrete_num})/(${mar_vlfrete_num}/${mar_vl_frete_por_c20}) ;;
   }
 
 }
