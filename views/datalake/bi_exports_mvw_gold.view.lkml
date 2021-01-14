@@ -1425,7 +1425,7 @@ view: bi_exports_mvw_gold {
   }
 
   measure: mar_vlfrete_median20 {
-    type: number
+    type: average
     sql: AVG(${TABLE}."mar_vlfrete")/(${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c40") ;;
   }
 
