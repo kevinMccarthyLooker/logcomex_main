@@ -1424,9 +1424,15 @@ view: bi_exports_mvw_gold {
     sql: ${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c40" ;;
   }
 
-  measure: mar_vlfrete_median20 {
+  measure: mar_vl_frete_Median_TEU {
     type: average
-    sql: AVG(${TABLE}."mar_vlfrete")/(${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c40") ;;
+    value_format: "$#.00;($#.00)"
+    filters: [mar_c40_dimension: ">0"]
+    sql: mean(pivot_row(${TABLE}."mar_vlfrete"))/(${TABLE}."mar_vlfrete" /  ${TABLE}."mar_teus")
   }
 
+ measure: mar_vlfrete_median20 {
+    type: average
+    sql: AVG(${TABLE}."mar_vlfrete")/(${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c40") ;;
+ }
 }
