@@ -211,7 +211,7 @@ view: searchx_importadores_agrupado {
     when left(${TABLE}.cdncm_compl,2) = '64' then 'CALÇADOS, POLAINAS E ARTEFATOS SEMELHANTES; SUAS PARTES.'
     when left(${TABLE}.cdncm_compl,2) = '65' then 'CHAPÉUS E ARTEFATOS DE USO SEMELHANTE, E SUAS PARTES.'
     when left(${TABLE}.cdncm_compl,2) = '66' then 'GUARDA-CHUVAS, SOMBRINHAS, GUARDA-SÓIS, BENGALAS, BENGALAS-ASSENTOS, CHICOTES, PINGALINS, E SUAS PARTES.'
-    when left(${TABLE}.cdncm_compl,2) = '67' then 'PENAS E PENUGEM PREPARADAS E SUAS OBRAS; FLORES ARTIFICIAIS; OBRAS DE CABELO.''
+    when left(${TABLE}.cdncm_compl,2) = '67' then 'PENAS E PENUGEM PREPARADAS E SUAS OBRAS; FLORES ARTIFICIAIS; OBRAS DE CABELO.'
     when left(${TABLE}.cdncm_compl,2) = '68' then 'OBRAS DE PEDRA, GESSO, CIMENTO, AMIANTO, MICA OU DE MATÉRIAS SEMELHANTES.'
     when left(${TABLE}.cdncm_compl,2) = '69' then 'PRODUTOS CERÂMICOS.'
     when left(${TABLE}.cdncm_compl,2) = '70' then 'VIDRO E SUAS OBRAS.'
