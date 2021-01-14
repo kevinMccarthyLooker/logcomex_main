@@ -353,14 +353,14 @@ view: searchx_gold_v2 {
 
   dimension: importador_nome_tratado {
     type: string
-    sql: case when ${TABLE}.importador_nome = '' then 'NÃO ENCONTRADO'
+    sql: case when (${TABLE}.importador_nome = '' or ${TABLE}.importador_nome is null) then 'NÃO ENCONTRADO'
          else ${TABLE}.importador_nome
          end ;;
   }
 
   dimension: importador_encontrado {
     type: yesno
-    sql: case when ${TABLE}.importador_nome = '' then false
+    sql: case when (${TABLE}.importador_nome = '' or ${TABLE}.importador_nome is null) then false
          else true
          end ;;
   }
@@ -719,13 +719,13 @@ view: searchx_gold_v2 {
     drill_fields: [id, name, custom_name]
   }
 
-  measure: count_customer_id {
+  measure: count_distinct_customer_id {
     type: count_distinct
     sql: ${customer_id} ;;
     drill_fields: [customer_id, name, custom_name]
   }
 
-  measure: count_distinc {
+  measure: count_distinc_imp_name {
     type: count_distinct
     sql: ${importador_nome} ;;
     drill_fields: [importador_nome]
