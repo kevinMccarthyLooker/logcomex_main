@@ -952,9 +952,4 @@ view: comex_analytics_datalake {
 
   ########################## ----> Itens adicionados / alterados <---- ##########################
 
-  dimension: moedaNegociadaNome {
-    type: string
-    sql: ${TABLE}.moedaNegociadaNome ;;
-  }
-
 }
