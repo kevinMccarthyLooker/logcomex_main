@@ -123,6 +123,16 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.cod_cnae_import ;;
   }
 
+  dimension: cnae_segmento{
+    type: string
+    sql:
+    case
+    when left(${TABLE}.cod_cnae_import,2) = '06' then 'INDÚSTRIAS EXTRATIVAS'
+    else 'outro'
+    end;;
+  }
+
+
   dimension: cod_cnpj_import {
     type: string
     sql: ${TABLE}.cod_cnpj_import ;;
