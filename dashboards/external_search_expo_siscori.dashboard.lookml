@@ -79,8 +79,8 @@
     total_color: "#C2DD67"
     x_axis_scale: auto
     listen:
-      URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
+      NCM: db_siscori_cod_ncm.cdncm_compl
     row: 0
     col: 0
     width: 7
@@ -120,8 +120,8 @@
     series_column_widths:
       db_commodities_export.anomes: 161
     listen:
-      URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
+      NCM: db_siscori_cod_ncm.cdncm_compl
     row: 3
     col: 0
     width: 7
@@ -182,7 +182,8 @@
       first_last: first
       num_rows: 0
     hide_legend: false
-    series_types: {}
+    series_types:
+      db_commodities_export.val_peso_liq: line
     series_colors:
       db_commodities_export.val_peso_liq: "#64bdff"
     series_labels:
@@ -214,8 +215,8 @@
       db_commodities_export.anomes: 161
     hidden_fields: [db_commodities_export.anomes]
     listen:
-      URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
+      NCM: db_siscori_cod_ncm.cdncm_compl
     row: 0
     col: 7
     width: 17
@@ -304,8 +305,8 @@
     show_comparison_label: true
     defaults_version: 1
     listen:
-      URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
+      NCM: db_siscori_cod_ncm.cdncm_compl
     row: 6
     col: 12
     width: 12
@@ -393,8 +394,8 @@
       db_siscori_unid_fiscal.nome_unid_fiscal: 362
       db_siscori_unid_fiscal.uf: 187
     listen:
-      URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
+      NCM: db_siscori_cod_ncm.cdncm_compl
     row: 6
     col: 0
     width: 12
@@ -485,8 +486,8 @@
     show_comparison_label: true
     defaults_version: 1
     listen:
-      URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
+      NCM: db_siscori_cod_ncm.cdncm_compl
     row: 13
     col: 0
     width: 12
@@ -610,8 +611,8 @@
     labelColor: "#FFF"
     bar_range_max: 100000000000
     listen:
-      URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
+      NCM: db_siscori_cod_ncm.cdncm_compl
     row: 13
     col: 12
     width: 12
@@ -630,16 +631,20 @@
     explore: db_commodities_export
     listens_to_filters: []
     field: db_commodities_export.anomes_Mes
-  - name: URF Desembaraço
-    title: URF Desembaraço
+  - name: NCM
+    title: NCM
     type: field_filter
     default_value: ''
     allow_multiple_values: true
     required: false
     ui_config:
-      type: tag_list
-      display: popover
+      type: advanced
+      display: inline
+      options:
+      - '1'
+      - '2'
+      - '3'
     model: Dados_Expo
     explore: db_commodities_export
     listens_to_filters: []
-    field: db_siscori_unid_fiscal.nome_unid_fiscal
+    field: db_siscori_cod_ncm.cdncm_compl
