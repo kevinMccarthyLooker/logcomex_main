@@ -1,5 +1,10 @@
 view: db_commodities_export {
-  sql_table_name: public.db_commodities_export ;;
+  derived_table: {
+    sql: select * from public.db_commodities_export ;;
+    indexes: ["id"]
+    sql_trigger_value: select current_date ;;
+  }
+
   drill_fields: [id]
 
   dimension: id {
