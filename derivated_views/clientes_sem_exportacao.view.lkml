@@ -2,7 +2,7 @@ view: clientes_sem_exportacao {
 
  derived_table: {
     sql:
-    select distinct c.id, c."name", u."name", u.email
+    select distinct c.id, c."name" as customer_name, u."name" as user_name, u.email as user_email
     from customer c
     inner join customer_plan cp on cp.customer_id = c.id
     inner join plan_complete pc on pc.id = cp.plan_complete_id
@@ -34,18 +34,18 @@ view: clientes_sem_exportacao {
   }
 
   dimension: customer_name {
-    type: number
-    sql: ${TABLE}.id ;;
+    type: string
+    sql: ${TABLE}.customer_name ;;
   }
 
   dimension: user_name {
-    type: number
-    sql: ${TABLE}.id ;;
+    type: string
+    sql: ${TABLE}.user_name ;;
   }
 
   dimension: user_email {
-    type: number
-    sql: ${TABLE}.id ;;
+    type: string
+    sql: ${TABLE}.user_email ;;
   }
 
   measure: count {
