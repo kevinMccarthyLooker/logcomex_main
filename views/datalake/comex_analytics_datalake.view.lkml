@@ -949,4 +949,7 @@ view: comex_analytics_datalake {
       user_id0
     ]
   }
+
+  ########################## ----> Itens adicionados / alterados <---- ##########################
+
 }
