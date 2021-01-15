@@ -145,6 +145,7 @@ explore: db_export_cargo_reception_details {
 }
 
 explore: db_commodities_export {
+  persist_for: "24 hours"
   label: "siscori exportacao"
   sql_always_where: ${anomes} > 201912 ;;
 
