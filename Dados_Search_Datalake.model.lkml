@@ -3,7 +3,19 @@ connection: "dremio_datalake"
 include: "/**/searchx_gold.view.lkml"
 include: "/**/searchx_gold_v2.view.lkml"
 include: "/**/searchx_importadores_agrupado.view.lkml"
+include: "/**/searchx_gold_v2_index.view.lkml"
 
+
+datagroup: searchx_datagroup {
+
+  sql_trigger: SELECT max(id) FROM searchx_gold_v2_index ;;
+  max_cache_age: "24 hours"
+  label: "ETL ID added"
+  description: "Triggered when new ID is added to ETL log"
+}
+
+explore:searchx_gold_v2_index  {
+}
 
 explore:searchx_gold  {
 }
