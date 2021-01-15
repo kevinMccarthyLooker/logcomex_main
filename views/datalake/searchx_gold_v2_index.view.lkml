@@ -1,10 +1,12 @@
-view: searchx_gold_v2 {
+view: searchx_gold_v2_index {
 
   derived_table: {
     sql:
     select *
     from searchx.searchx_gold_v2
     where cast(data_hora_registro as date) >= current_date - interval '12' month;;
+    indexes: ["id"]
+    sql_trigger_value: select current_date ;;
   }
 
   drill_fields: [id]
@@ -748,4 +750,5 @@ view: searchx_gold_v2 {
     type: sum
     sql: ${val_vmle_us_subitem_num};;
   }
+
 }
