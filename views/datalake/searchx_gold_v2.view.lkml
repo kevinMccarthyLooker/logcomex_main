@@ -1,5 +1,12 @@
 view: searchx_gold_v2 {
-  sql_table_name: searchx.searchx_gold_v2 ;;
+
+  derived_table: {
+    sql:
+    select *
+    from searchx.searchx_gold_v2
+    where cast(data_hora_registro as date) >= current_date - interval '12' month;;
+  }
+
   drill_fields: [id]
 
   dimension: id {
