@@ -19,6 +19,11 @@ include: "/**/db_siscori_unid_fiscal.view.lkml"
 include: "/**/external_search_expo_nfs.dashboard.lookml"  #dashboard externo nfs para search expo
 include: "/**/external_search_expo_siscori.dashboard.lookml"  #dashboard externo siscori para search expo
 
+datagroup: db_commodities_export_datagroup {
+  sql_trigger: SELECT max(id) FROM public.db_commodities_export ;;
+  max_cache_age: "24 hours"
+}
+
 explore:db_maritimo_agosto_2020  {
   label: "db_maritimo agosto 2020"
 }
@@ -145,7 +150,7 @@ explore: db_export_cargo_reception_details {
 }
 
 explore: db_commodities_export {
-  persist_for: "24 hours"
+  persist_with: db_commodities_export_datagroup
   label: "siscori exportacao"
   sql_always_where: ${anomes} > 201912 ;;
 
