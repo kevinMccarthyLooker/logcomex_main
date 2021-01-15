@@ -80,7 +80,6 @@
     x_axis_scale: auto
     listen:
       URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
-      URF Embarque: db_siscori_unid_fiscal_2.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
     row: 0
     col: 0
@@ -122,7 +121,6 @@
       db_commodities_export.anomes: 161
     listen:
       URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
-      URF Embarque: db_siscori_unid_fiscal_2.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
     row: 3
     col: 0
@@ -215,6 +213,9 @@
     series_column_widths:
       db_commodities_export.anomes: 161
     hidden_fields: [db_commodities_export.anomes]
+    listen:
+      URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
+      Mês: db_commodities_export.anomes_Mes
     row: 0
     col: 7
     width: 17
@@ -247,6 +248,7 @@
     show_totals: true
     show_row_totals: true
     series_labels:
+      db_siscori_cod_ncm.cdncm_compl: NCM
       db_siscori_cod_ncm.ncm_desc: Mercadoria
       db_commodities_export.val_fob_us: FOB USD
     series_column_widths:
@@ -303,100 +305,9 @@
     defaults_version: 1
     listen:
       URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
-      URF Embarque: db_siscori_unid_fiscal_2.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
     row: 6
     col: 12
-    width: 12
-    height: 7
-  - title: Valor Total - URF Desembaraço
-    name: Valor Total - URF Desembaraço
-    model: Dados_Expo
-    explore: db_commodities_export
-    type: looker_grid
-    fields: [db_commodities_export.val_fob_us, db_siscori_unid_fiscal.nome_unid_fiscal]
-    sorts: [db_commodities_export.val_fob_us desc]
-    limit: 500
-    query_timezone: America/Sao_Paulo
-    show_view_names: false
-    show_row_numbers: true
-    transpose: false
-    truncate_text: true
-    hide_totals: false
-    hide_row_totals: false
-    size_to_fit: true
-    table_theme: gray
-    limit_displayed_rows: false
-    enable_conditional_formatting: false
-    header_text_alignment: left
-    header_font_size: '12'
-    rows_font_size: '12'
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    show_sql_query_menu_options: false
-    show_totals: true
-    show_row_totals: true
-    series_labels:
-      db_siscori_unid_fiscal.nome_unid_fiscal: Unidade Fiscal
-      db_commodities_export.val_fob_us: FOB USD
-    series_column_widths:
-      db_commodities_export.anomes: 161
-      db_commodities_export.id_cdncm: 244
-      db_siscori_unid_fiscal.desc_unid_fiscal: 412
-      db_siscori_unid_fiscal.nome_unid_fiscal: 362
-    series_cell_visualizations:
-      db_commodities_export.val_fob_us:
-        is_active: true
-        palette:
-          palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825
-          collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    y_axes: [{label: '', orientation: left, series: [{axisId: db_commodities_export.val_peso_liq,
-            id: db_commodities_export.val_peso_liq, name: Val Peso Liq}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}, {label: !!null '', orientation: right, series: [{axisId: db_commodities_export.val_fob_us,
-            id: db_commodities_export.val_fob_us, name: Val Fob Us}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}]
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    legend_position: center
-    series_types: {}
-    point_style: none
-    show_value_labels: true
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    custom_color_enabled: true
-    show_single_value_title: true
-    value_format: ''
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    defaults_version: 1
-    listen:
-      URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
-      URF Embarque: db_siscori_unid_fiscal_2.nome_unid_fiscal
-      Mês: db_commodities_export.anomes_Mes
-    row: 21
-    col: 0
     width: 12
     height: 7
   - title: Valor Total por Estado
@@ -482,100 +393,10 @@
       db_siscori_unid_fiscal.nome_unid_fiscal: 362
       db_siscori_unid_fiscal.uf: 187
     listen:
+      URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
     row: 6
     col: 0
-    width: 12
-    height: 7
-  - title: Valor Total - URF Embarque
-    name: Valor Total - URF Embarque
-    model: Dados_Expo
-    explore: db_commodities_export
-    type: looker_grid
-    fields: [db_commodities_export.val_fob_us, db_siscori_unid_fiscal_2.nome_unid_fiscal]
-    filters: {}
-    sorts: [db_commodities_export.val_fob_us desc]
-    limit: 500
-    query_timezone: America/Sao_Paulo
-    show_view_names: false
-    show_row_numbers: true
-    transpose: false
-    truncate_text: true
-    hide_totals: false
-    hide_row_totals: false
-    size_to_fit: true
-    table_theme: gray
-    limit_displayed_rows: false
-    enable_conditional_formatting: false
-    header_text_alignment: left
-    header_font_size: '12'
-    rows_font_size: '12'
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    show_sql_query_menu_options: false
-    show_totals: true
-    show_row_totals: true
-    series_labels:
-      db_siscori_unid_fiscal.nome_unid_fiscal: Unidade Fiscal
-      db_commodities_export.val_fob_us: FOB USD
-    series_column_widths:
-      db_commodities_export.anomes: 161
-      db_commodities_export.id_cdncm: 244
-      db_siscori_unid_fiscal.desc_unid_fiscal: 412
-      db_siscori_unid_fiscal.nome_unid_fiscal: 362
-    series_cell_visualizations:
-      db_commodities_export.val_fob_us:
-        is_active: true
-        palette:
-          palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825
-          collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    y_axes: [{label: '', orientation: left, series: [{axisId: db_commodities_export.val_peso_liq,
-            id: db_commodities_export.val_peso_liq, name: Val Peso Liq}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}, {label: !!null '', orientation: right, series: [{axisId: db_commodities_export.val_fob_us,
-            id: db_commodities_export.val_fob_us, name: Val Fob Us}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}]
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    legend_position: center
-    series_types: {}
-    point_style: none
-    show_value_labels: true
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    custom_color_enabled: true
-    show_single_value_title: true
-    value_format: ''
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    defaults_version: 1
-    listen:
-      URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
-      URF Embarque: db_siscori_unid_fiscal_2.nome_unid_fiscal
-      Mês: db_commodities_export.anomes_Mes
-    row: 21
-    col: 12
     width: 12
     height: 7
   - title: Valor Total - País Destino
@@ -665,7 +486,6 @@
     defaults_version: 1
     listen:
       URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
-      URF Embarque: db_siscori_unid_fiscal_2.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
     row: 13
     col: 0
@@ -790,6 +610,7 @@
     labelColor: "#FFF"
     bar_range_max: 100000000000
     listen:
+      URF Desembaraço: db_siscori_unid_fiscal.nome_unid_fiscal
       Mês: db_commodities_export.anomes_Mes
     row: 13
     col: 12
@@ -822,16 +643,3 @@
     explore: db_commodities_export
     listens_to_filters: []
     field: db_siscori_unid_fiscal.nome_unid_fiscal
-  - name: URF Embarque
-    title: URF Embarque
-    type: field_filter
-    default_value: ''
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: tag_list
-      display: popover
-    model: Dados_Expo
-    explore: db_commodities_export
-    listens_to_filters: []
-    field: db_siscori_unid_fiscal_2.nome_unid_fiscal
