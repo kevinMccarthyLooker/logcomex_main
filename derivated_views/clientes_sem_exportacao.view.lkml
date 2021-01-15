@@ -48,5 +48,9 @@ view: clientes_sem_exportacao {
     sql: ${TABLE}.id ;;
   }
 
+  measure: count {
+    type: count
+  }
+
 
 }

@@ -68,9 +68,14 @@ include: "/**/search_filtros_agrupados.view.lkml"
 include: "/**/hubspot_cs_deal.view.lkml"
 include: "/**/filters_names.view.lkml"
 include: "/**/trials_ativos_mes.view.lkml"
+include: "/**/clientes_sem_exportacao.view.lkml"
 
 datagroup: my_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
+}
+
+explore: clientes_sem_exportacao{
+
 }
 
 explore: follow_up_status {
