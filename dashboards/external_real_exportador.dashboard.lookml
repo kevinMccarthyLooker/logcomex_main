@@ -182,7 +182,7 @@
   - name: Data Embarque
     title: Data Embarque
     type: field_filter
-    default_value: 3 month
+    default_value: 6 month
     allow_multiple_values: true
     required: false
     ui_config:
