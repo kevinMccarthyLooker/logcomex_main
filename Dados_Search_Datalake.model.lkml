@@ -22,6 +22,7 @@ explore:searchx_gold  {
 }
 
 explore:searchx_gold_v2  {
+  persist_for: "24 hours"
 
   join: searchx_importadores_agrupado {
     sql_on: ${searchx_gold_v2.importador_nome}=${searchx_importadores_agrupado.importador_nome_agp} ;;
