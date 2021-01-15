@@ -8,7 +8,7 @@ include: "/**/searchx_gold_v2_index.view.lkml"
 
 datagroup: searchx_datagroup {
 
-  sql_trigger: SELECT max(id) FROM searchx_gold_v2_index ;;
+  sql_trigger: SELECT max(id) FROM searchx.searchx_gold_v2_index ;;
   max_cache_age: "24 hours"
   label: "ETL ID added"
   description: "Triggered when new ID is added to ETL log"
