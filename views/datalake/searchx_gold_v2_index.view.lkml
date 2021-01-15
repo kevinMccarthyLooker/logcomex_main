@@ -5,8 +5,6 @@ view: searchx_gold_v2_index {
     select *
     from searchx.searchx_gold_v2
     where cast(data_hora_registro as date) >= current_date - interval '12' month;;
-    indexes: ["id"]
-    sql_trigger_value: select current_date ;;
   }
 
   drill_fields: [id]
