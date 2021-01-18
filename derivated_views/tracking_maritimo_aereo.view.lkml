@@ -116,7 +116,7 @@ where fu.tracking_aerial_id is not null and (fu.user_id is null or fu.user_id = 
 where tracking_aerial.deleted_at is null
     ;;
 indexes: ["chave"]
-sql_trigger_value: select current_date ;;
+sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60));;
   }
 
   dimension: modal {
