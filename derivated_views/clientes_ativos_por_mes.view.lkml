@@ -3,6 +3,7 @@ view: clientes_ativos_por_mes {
     sql:
       SELECT
       mes as anomes,
+      customer."name" as customer_name,
       customer."id" AS customer_id,
       customer."id" AS customer_id_measure,
       customer_plan.id as customer_plan_id
@@ -19,7 +20,11 @@ view: clientes_ativos_por_mes {
   dimension: customer_id {
     type: number
     sql: ${TABLE}."customer_id" ;;
-    drill_fields: [detail*]
+  }
+
+  dimension: customer_name{
+    type: string
+    sql: ${TABLE}."customer_name" ;;
   }
 
   dimension: customer_plan_id {
@@ -29,16 +34,13 @@ view: clientes_ativos_por_mes {
 
   dimension: quarter {
     type: string
-      sql:  CASE  WHEN (${TABLE}."anomes" = '2020-03-31') THEN 'Q1'
-                  WHEN (${TABLE}."anomes" = '2020-06-30') THEN 'Q2'
-                  WHEN (${TABLE}."anomes" = '2020-09-30') THEN 'Q3'
-                  ELSE 'N/A' end
-    ;;
-    }
-
-  measure: count_ativos_mes {
-    type: count_distinct
-    sql: ${TABLE}."customer_id_measure" ;;
+      sql:
+      CASE
+      WHEN (${TABLE}."anomes" = '2020-03-31') THEN 'Q1'
+      WHEN (${TABLE}."anomes" = '2020-06-30') THEN 'Q2'
+      WHEN (${TABLE}."anomes" = '2020-09-30') THEN 'Q3'
+      ELSE 'N/A'
+      END ;;
   }
 
   dimension_group: anomes {
@@ -54,11 +56,17 @@ view: clientes_ativos_por_mes {
     ]
     sql: ${TABLE}."anomes" ;;
   }
+
+  measure: count_ativos_mes {
+    type: count_distinct
+    sql: ${TABLE}."customer_id_measure" ;;
+    drill_fields: [detail*]
+  }
+
   set: detail {
     fields: [
-      customer.id,
-      customer.name,
-      customer.executive_name,
+      customer_id,
+      customer_name
     ]
   }
 
