@@ -210,7 +210,7 @@ view: customer {
   measure: count_distinc {
     type: count_distinct
     sql: ${customer.id} ;;
-    drill_fields: [detail*]
+    drill_fields: [detail_light*]
   }
 
   # ----- Sets of fields for drilling ------
@@ -220,6 +220,13 @@ view: customer {
       name,
       executive_name,
       report_log.count
+    ]
+  }
+
+  set: detail_light{
+    fields: [
+      id,
+      name
     ]
   }
 }
