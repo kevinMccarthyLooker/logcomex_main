@@ -272,3 +272,16 @@
     explore: big_data_expo_datalake
     listens_to_filters: []
     field: big_data_expo_datalake.mvw_pais_de_destino
+  - name: Tipo de conhecimento
+    title: Tipo de conhecimento
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: button_group
+      display: inline
+    model: Dados_Expo_Datalake
+    explore: big_data_expo_datalake
+    listens_to_filters: []
+    field: big_data_expo_datalake.mar_tipoconhecimento_nome
