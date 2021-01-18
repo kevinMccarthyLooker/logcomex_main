@@ -21,7 +21,7 @@ view: tracking_maritimo_aereo {
        tracking_internal_status.description as internal_status,
        tracking.is_master,
        tracking.shipowner_id as armador_ciaaerea,
-       tracking.completed_at,
+       --tracking.completed_at,
        tracking.tracking_robot_id,
        tracking.operation_date as operacao,
        tracking.di_desembaracada_date,
@@ -78,7 +78,7 @@ select 'Aereo' as modal,
        tracking_aerial_internal_status.description as internal_status,
        false as is_master,
        tracking_aerial.airline_id as armador_ciaaerea,
-       '2000-01-01' as completed_at,
+       --'2000-01-01' as completed_at,
        999 as tracking_robot_id,
        '2000-01-01' as operacao,
        '2000-01-01' as di_desembaracada_date,
@@ -115,6 +115,8 @@ group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_aerial_id = 
 where fu.tracking_aerial_id is not null and (fu.user_id is null or fu.user_id = 7002)) as qq2 on qq2.tracking_aerial_id = tracking_aerial.id
 where tracking_aerial.deleted_at is null
     ;;
+indexes: ["chave"]
+sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60));;
   }
 
   dimension: modal {
