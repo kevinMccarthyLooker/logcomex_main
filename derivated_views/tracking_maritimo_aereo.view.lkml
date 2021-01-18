@@ -115,6 +115,8 @@ group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_aerial_id = 
 where fu.tracking_aerial_id is not null and (fu.user_id is null or fu.user_id = 7002)) as qq2 on qq2.tracking_aerial_id = tracking_aerial.id
 where tracking_aerial.deleted_at is null
     ;;
+indexes: ["chave"]
+sql_trigger_value: select current_date ;;
   }
 
   dimension: modal {
