@@ -69,7 +69,7 @@ sql_trigger_value: select current_date;;
   }
 
   dimension: force_certificate  {
-    type: string
+    type: yesno
     sql: ${TABLE}.force_certificate ;;
   }
 
