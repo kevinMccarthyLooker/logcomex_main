@@ -81,6 +81,7 @@
       Exportador (Big Data): big_data_expo_datalake.mvw_nome_exportador
       HSCODE: big_data_expo_datalake.mvw_hs_code
       Real Exportador: big_data_expo_datalake.nf_nome_emissor
+      Tipo Embarque: big_data_expo_datalake.mar_tipoconhecimento_nome
     row: 0
     col: 16
     width: 8
@@ -174,6 +175,7 @@
       País Destino: big_data_expo_datalake.mvw_pais_de_destino
       Exportador (Big Data): big_data_expo_datalake.mvw_nome_exportador
       Real Exportador: big_data_expo_datalake.nf_nome_emissor
+      Tipo Embarque: big_data_expo_datalake.mar_tipoconhecimento_nome
     row: 0
     col: 0
     width: 16
@@ -272,8 +274,8 @@
     explore: big_data_expo_datalake
     listens_to_filters: []
     field: big_data_expo_datalake.mvw_pais_de_destino
-  - name: Tipo de conhecimento
-    title: Tipo de conhecimento
+  - name: Tipo Embarque
+    title: Tipo Embarque
     type: field_filter
     default_value: ''
     allow_multiple_values: true
