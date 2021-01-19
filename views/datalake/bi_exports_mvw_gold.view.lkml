@@ -1424,13 +1424,4 @@ view: bi_exports_mvw_gold {
     sql: ${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c40" ;;
   }
 
-
-  measure: mar_vl_frete_por_c20_dry {
-    type: average
-    value_format: "$#.00;($#.00)"
-    filters: [mar_c20_dimension: ">0"]
-    filters: [mvw_tipo_fcl: "=DRY"]
-    sql: ${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c20" ;;
-  }
-
 }
