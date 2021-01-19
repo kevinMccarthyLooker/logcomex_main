@@ -2,7 +2,13 @@ view: follow_up_status {
 
   derived_table: {
     sql:
-/*SELECT distinct 'maritimo' as modal, fu1.tracking_id, date(t2.created_at) as created_at, concat('maritimo|',fu1.tracking_id) as chave,
+SELECT distinct 'maritimo' as modal,
+c.id as customer_id,
+c."name" as customer_name,
+tpi.force_certificate as force_certificate,
+fu1.tracking_id,
+date(t2.created_at) as created_at,
+concat('maritimo|',fu1.tracking_id) as chave,
 case when (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 2 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 11 limit 1)::timestamp)) < 0 then null
      else (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 2 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 11 limit 1)::timestamp)) end aS diff_00, -- BL_manifestado
 case when (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 2 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 0 limit 1)::timestamp)) < 0 then null
@@ -18,8 +24,14 @@ case when (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE foll
 null::float as diff_06
 FROM follow_up fu1
 inner join tracking t2 on t2.id = fu1.tracking_id
+inner join customer c on c.id = t2.customer_id
+inner join customer_plan cp on cp.customer_id = c.id
+inner join tracking_plan_info tpi on tpi.id = cp.tracking_plan_info_id
 where fu1.deleted_at is null
-union */
+and c.deleted_at is null
+and c.fake_customer is false
+and cp.deleted_at is null
+union
 SELECT distinct 'aereo' as modal,
 c.id as customer_id,
 c."name" as customer_name,
