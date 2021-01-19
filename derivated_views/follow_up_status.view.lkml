@@ -2,7 +2,7 @@ view: follow_up_status {
 
   derived_table: {
     sql:
-SELECT distinct 'maritimo' as modal, fu1.tracking_id, date(t2.created_at) as created_at, concat('maritimo|',fu1.tracking_id) as chave,
+/*SELECT distinct 'maritimo' as modal, fu1.tracking_id, date(t2.created_at) as created_at, concat('maritimo|',fu1.tracking_id) as chave,
 case when (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 2 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 11 limit 1)::timestamp)) < 0 then null
      else (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 2 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 11 limit 1)::timestamp)) end aS diff_00, -- BL_manifestado
 case when (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 2 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 0 limit 1)::timestamp)) < 0 then null
@@ -19,8 +19,14 @@ null::float as diff_06
 FROM follow_up fu1
 inner join tracking t2 on t2.id = fu1.tracking_id
 where fu1.deleted_at is null
-union
-SELECT distinct 'aereo' as modal, fu1.tracking_aerial_id as tracking_id, date(ta.created_at) as created_at, concat('aereo|',fu1.tracking_aerial_id) as chave,
+union */
+SELECT distinct 'aereo' as modal,
+c.id as customer_id,
+c."name" as customer_name,
+tpi.force_certificate as force_certificate,
+fu1.tracking_aerial_id as tracking_id,
+date(ta.created_at) as created_at,
+concat('aereo|',fu1.tracking_aerial_id) as chave,
 case when (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 1 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 0 limit 1)::timestamp)) < 0 then null
      else (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 1 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 0 limit 1)::timestamp)) end AS diff_00, -- mantra_transito
 case when (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 2 and extract('YEAR' from follow_up.date_time) > 1900 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 1 and extract('YEAR' from follow_up.date_time) > 1900 limit 1)::timestamp)) < 0 then null
@@ -36,7 +42,11 @@ case when (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE foll
 case when (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 7 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 8 limit 1)::timestamp)) < 0 then null
      else (date_part('day',(SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 7 limit 1)::timestamp - (SELECT follow_up.date_time FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 8 limit 1)::timestamp)) end AS diff_06  -- diDesembaraca_recebida
 FROM follow_up fu1
-inner join tracking_aerial ta on ta.id = fu1.tracking_aerial_id ;;
+inner join tracking_aerial ta on ta.id = fu1.tracking_aerial_id
+inner join customer c on c.id = ta.customer_id
+inner join customer_plan cp on cp.customer_id = c.id
+inner join tracking_plan_info tpi on tpi.id = cp.tracking_plan_info_id
+where c.fake_customer is false and c.deleted_at is null and cp.deleted_at is null;;
 indexes: ["chave"]
 sql_trigger_value: select current_date;;
 }
@@ -46,6 +56,21 @@ sql_trigger_value: select current_date;;
     primary_key: yes
     type: string
     sql: ${TABLE}.chave ;;
+  }
+
+  dimension: customer_id  {
+    type: number
+    sql: ${TABLE}.customer_id ;;
+  }
+
+  dimension: customer_name  {
+    type: string
+    sql: ${TABLE}.customer_name ;;
+  }
+
+  dimension: force_certificate  {
+    type: string
+    sql: ${TABLE}.force_certificate ;;
   }
 
   dimension: tracking_id {
