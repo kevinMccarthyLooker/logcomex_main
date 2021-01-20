@@ -2,19 +2,32 @@
   title: Frete - Export
   layout: newspaper
   preferred_viewer: dashboards-next
+  crossfilter_enabled: true
   elements:
-  - title: Média por Rota
-    name: Média por Rota
+  - title: Rota
+    name: Rota
     model: Dados_Expo_Datalake
     explore: bi_exports_mvw_gold
     type: looker_grid
     fields: [bi_exports_mvw_gold.mvw_porto_origem, bi_exports_mvw_gold.mvw_porto_destino,
-      bi_exports_mvw_gold.mar_vl_frete_por_c20, bi_exports_mvw_gold.mar_vl_frete_por_c40,
-      bi_exports_mvw_gold.mar_vl_frete_por_TEU, bi_exports_mvw_gold.mar_teus]
+      bi_exports_mvw_gold.mar_teus, bi_exports_mvw_gold.media_vl_frete_por_c20, bi_exports_mvw_gold.media_vl_frete_por_c40,
+      bi_exports_mvw_gold.mar_c20, bi_exports_mvw_gold.mar_c40, bi_exports_mvw_gold.mar_vlfrete]
     filters:
       bi_exports_mvw_gold.mvw_moeda_frete: DOLAR DOS EUA
+      bi_exports_mvw_gold.mvw_tipo_fcl: DRY,REEFER
     sorts: [bi_exports_mvw_gold.mar_teus desc]
     limit: 500
+    dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: 'mean(pivot_row(${bi_exports_mvw_gold.mar_vlfrete}))',
+        value_format: !!null '', value_format_name: !!null '', is_disabled: true,
+        _kind_hint: supermeasure, _type_hint: number}, {table_calculation: calculation_2,
+        label: Calculation 2, expression: 'median(${bi_exports_mvw_gold.mar_vlfrete})/median(${bi_exports_mvw_gold.mar_teus})',
+        value_format: !!null '', value_format_name: !!null '', is_disabled: true,
+        _kind_hint: measure, _type_hint: number}, {table_calculation: mediana_20,
+        label: Mediana 20', expression: "(((${bi_exports_mvw_gold.mar_vlfrete}/${bi_exports_mvw_gold.mar_teus})*${bi_exports_mvw_gold.mar_c20})/${bi_exports_mvw_gold.mar_c20})",
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}, {table_calculation: mediana_40, label: Mediana 40', expression: "(((${bi_exports_mvw_gold.mar_vlfrete}/${bi_exports_mvw_gold.mar_teus})*(2*${bi_exports_mvw_gold.mar_c40}))/${bi_exports_mvw_gold.mar_c40})",
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}]
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -33,7 +46,9 @@
     show_sql_query_menu_options: false
     column_order: ["$$$_row_numbers_$$$", bi_exports_mvw_gold.mvw_porto_origem, bi_exports_mvw_gold.mvw_porto_destino,
       bi_exports_mvw_gold.mar_vl_frete_por_c20, bi_exports_mvw_gold.mar_vl_frete_por_c40,
-      bi_exports_mvw_gold.mar_teus]
+      bi_exports_mvw_gold.media_vl_frete_por_c20, bi_exports_mvw_gold.media_vl_frete_por_c40,
+      bi_exports_mvw_gold.mar_teus, bi_exports_mvw_gold.mar_c20, bi_exports_mvw_gold.mar_c40,
+      bi_exports_mvw_gold.mar_vlfrete]
     show_totals: true
     show_row_totals: true
     series_labels:
@@ -43,6 +58,8 @@
       bi_exports_mvw_gold.mar_teus: TEU
       bi_exports_mvw_gold.mar_vl_frete_por_c40: 40'
       bi_exports_mvw_gold.mar_vl_frete_por_TEU: TEU
+      bi_exports_mvw_gold.media_vl_frete_por_c20: Médio 20'
+      bi_exports_mvw_gold.media_vl_frete_por_c40: Média 40'
     series_column_widths: {}
     series_cell_visualizations:
       bi_exports_mvw_gold.mar_vl_frete_por_c20:
@@ -60,6 +77,14 @@
         align: left
       bi_exports_mvw_gold.mar_vl_frete_por_c40:
         align: left
+      bi_exports_mvw_gold.media_vl_frete_por_c40:
+        align: left
+      bi_exports_mvw_gold.media_vl_frete_por_c20:
+        align: left
+      mediana_20:
+        align: left
+      mediana_40:
+        align: left
     series_value_format:
       bi_exports_mvw_gold.mar_vl_frete_por_c40:
         name: usd
@@ -73,7 +98,24 @@
         name: usd
         format_string: "$#,##0.00"
         label: U.S. Dollars (2)
-    hidden_fields: [bi_exports_mvw_gold.mar_teus]
+      mediana_20:
+        name: usd
+        format_string: "$#,##0.00"
+        label: U.S. Dollars (2)
+      mediana_40:
+        name: usd
+        format_string: "$#,##0.00"
+        label: U.S. Dollars (2)
+      bi_exports_mvw_gold.media_vl_frete_por_c20:
+        name: usd
+        format_string: "$#,##0.00"
+        label: U.S. Dollars (2)
+      bi_exports_mvw_gold.media_vl_frete_por_c40:
+        name: usd
+        format_string: "$#,##0.00"
+        label: U.S. Dollars (2)
+    hidden_fields: [bi_exports_mvw_gold.mar_teus, bi_exports_mvw_gold.mar_c20, bi_exports_mvw_gold.mar_c40,
+      bi_exports_mvw_gold.mar_vlfrete]
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_y_axis_labels: true
@@ -108,17 +150,18 @@
       Data Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
     row: 0
     col: 0
-    width: 12
-    height: 5
-  - title: Média por País
-    name: Média por País
+    width: 14
+    height: 6
+  - title: País de Destino
+    name: País de Destino
     model: Dados_Expo_Datalake
     explore: bi_exports_mvw_gold
     type: looker_grid
     fields: [bi_exports_mvw_gold.mar_vl_frete_por_c20, bi_exports_mvw_gold.mar_vl_frete_por_c40,
-      bi_exports_mvw_gold.mar_vl_frete_por_TEU, bi_exports_mvw_gold.mar_teus, bi_exports_mvw_gold.mvw_pais_de_destino]
+      bi_exports_mvw_gold.mar_teus, bi_exports_mvw_gold.mvw_pais_de_destino]
     filters:
       bi_exports_mvw_gold.mvw_moeda_frete: DOLAR DOS EUA
+      bi_exports_mvw_gold.mvw_tipo_fcl: DRY,REEFER
     sorts: [bi_exports_mvw_gold.mar_teus desc]
     limit: 500
     show_view_names: false
@@ -145,9 +188,9 @@
     series_labels:
       bi_exports_mvw_gold.mvw_porto_origem: Porto Origem
       bi_exports_mvw_gold.mvw_porto_destino: Porto Destino
-      bi_exports_mvw_gold.mar_vl_frete_por_c20: 20'
+      bi_exports_mvw_gold.mar_vl_frete_por_c20: Média 20'
       bi_exports_mvw_gold.mar_teus: TEU
-      bi_exports_mvw_gold.mar_vl_frete_por_c40: 40'
+      bi_exports_mvw_gold.mar_vl_frete_por_c40: Média 40'
       bi_exports_mvw_gold.mar_vl_frete_por_TEU: TEU
       bi_exports_mvw_gold.mvw_pais_de_destino: País de Destino
     series_column_widths: {}
@@ -214,19 +257,20 @@
       País De Destino: bi_exports_mvw_gold.mvw_pais_de_destino
       Data Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
     row: 0
-    col: 12
-    width: 12
-    height: 5
+    col: 14
+    width: 10
+    height: 6
   - title: Valor Frete Médio
     name: Valor Frete Médio
     model: Dados_Expo_Datalake
     explore: bi_exports_mvw_gold
     type: looker_line
-    fields: [bi_exports_mvw_gold.mar_vl_frete_por_c20, bi_exports_mvw_gold.mar_vl_frete_por_c40,
-      bi_exports_mvw_gold.mar_vl_frete_por_TEU, bi_exports_mvw_gold.mar_teus, bi_exports_mvw_gold.mvw_data_embarque_month]
+    fields: [bi_exports_mvw_gold.mar_teus, bi_exports_mvw_gold.mvw_data_embarque_month,
+      bi_exports_mvw_gold.media_vl_frete_por_c20, bi_exports_mvw_gold.media_vl_frete_por_c40]
     fill_fields: [bi_exports_mvw_gold.mvw_data_embarque_month]
     filters:
       bi_exports_mvw_gold.mvw_moeda_frete: DOLAR DOS EUA
+      bi_exports_mvw_gold.mvw_tipo_fcl: DRY,REEFER
     sorts: [bi_exports_mvw_gold.mvw_data_embarque_month desc]
     limit: 500
     x_axis_gridlines: false
@@ -255,7 +299,7 @@
     interpolation: linear
     color_application:
       collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
-      palette_id: 471a8295-662d-46fc-bd2d-2d0acd370c1e
+      palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825
       options:
         steps: 5
         reverse: true
@@ -271,6 +315,8 @@
     x_axis_label: Data de Embarque
     series_types:
       bi_exports_mvw_gold.mar_teus: column
+    series_colors:
+      bi_exports_mvw_gold.media_vl_frete_por_c40: "#91beff"
     series_labels:
       bi_exports_mvw_gold.mvw_porto_origem: Porto Origem
       bi_exports_mvw_gold.mvw_porto_destino: Porto Destino
@@ -340,15 +386,15 @@
       Porto Destino: bi_exports_mvw_gold.mvw_porto_destino
       Data Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
       País De Destino: bi_exports_mvw_gold.mvw_pais_de_destino
-    row: 5
+    row: 6
     col: 0
     width: 24
-    height: 7
+    height: 8
   filters:
   - name: Data Embarque
     title: Data Embarque
     type: field_filter
-    default_value: 6 month
+    default_value: 3 month
     allow_multiple_values: true
     required: false
     ui_config:
