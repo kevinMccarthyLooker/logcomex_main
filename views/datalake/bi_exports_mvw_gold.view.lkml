@@ -1423,16 +1423,18 @@ view: bi_exports_mvw_gold {
     filters: [mar_c40_dimension: ">0"]
     sql: ${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c40" ;;
   }
-  measure: media_vl_frete_por_c40 {
-    type: average
-    value_format: "$#.00;($#.00)"
-    filters: [mar_c40_dimension: ">0"]
-    sql: (((${TABLE}."mar_vlfrete" /  ${TABLE}."mar_teus") * 2) * ${TABLE}."mar_c40") / ${TABLE}."mar_c40";;
-  }
+
   measure: media_vl_frete_por_c20 {
     type: average
     value_format: "$#.00;($#.00)"
     filters: [mar_c20_dimension: ">0"]
     sql: ((${TABLE}."mar_vlfrete" /  ${TABLE}."mar_teus") * ${TABLE}."mar_c20") / ${TABLE}."mar_c20";;
+  }
+
+  measure: media_vl_frete_por_c40 {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [mar_c40_dimension: ">0"]
+    sql: (((${TABLE}."mar_vlfrete" /  ${TABLE}."mar_teus") * 2) * ${TABLE}."mar_c40") / ${TABLE}."mar_c40";;
   }
 }
