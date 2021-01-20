@@ -512,6 +512,19 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}."nmportoorigem"  || ' >> ' ||  ${TABLE}."nmportodestino";;
   }
 
+ measure: media_vl_frete_por_c20 {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [c20_dimension: ">0"]
+    sql: ((${TABLE}."vlfrete" /  ${TABLE}."teus") * ${TABLE}."c20") / ${TABLE}."c20";;
+  }
+
+  measure: media_vl_frete_por_c40 {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [c40_dimension: ">0"]
+    sql: (((${TABLE}."vlfrete" /  ${TABLE}."teus") * 2) * ${TABLE}."c40") / ${TABLE}."c40";;
+  }
 
 
 }
