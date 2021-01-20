@@ -445,21 +445,21 @@ view: bi_imports_mvw_gold {
 ########################## ----> Itens adicionados / alterados <---- ##########################
 
   dimension: mais_de_um_tipo {
-    type: yesno
-    sql:  CASE WHEN (${TABLE}.c20 <> 0 and ${TABLE}.c40 <> 0) THEN true
-          else false
+    type: string
+    sql:  CASE WHEN (${TABLE}.c20 <> 0 and ${TABLE}.c40 <> 0) THEN "A"
+          else "B" end
     ;;
   }
 
   measure: mais_de_um_tipo_sim {
     type: sum
-    filters: [mais_de_um_tipo: "yes"]
+    filters: [mais_de_um_tipo: "=A"]
     sql: mais_de_um_tipo ;;
   }
 
   measure: mais_de_um_tipo_nao {
     type: sum
-    filters: [mais_de_um_tipo: "no"]
+    filters: [mais_de_um_tipo: "=B"]
     sql: mais_de_um_tipo ;;
   }
 
