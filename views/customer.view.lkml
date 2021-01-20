@@ -104,22 +104,22 @@ view: customer {
 
   dimension: executive_name {
     type: string
-    sql:  CASE WHEN (customer.executive_id = 39) THEN 'Renan'
-              WHEN (customer.executive_id = 44) THEN 'Irene'
-              WHEN (customer.executive_id = 17) THEN 'Elaine'
+    sql:  CASE WHEN (customer.executive_id = 39) THEN 'Renan Goncalves'
+              WHEN (customer.executive_id = 44) THEN 'Irene Lima'
+              WHEN (customer.executive_id = 17) THEN 'Elaine Ribeiro'
               WHEN (customer.executive_id = 16) THEN 'Nickelson'
               WHEN (customer.executive_id = 37) THEN 'Jessica Moreira'
-              WHEN (customer.executive_id = 52) THEN 'Mirele'
-              WHEN (customer.executive_id = 59) THEN 'Valeria'
+              WHEN (customer.executive_id = 52) THEN 'Mirele Benato'
+              WHEN (customer.executive_id = 59) THEN 'Valeria Antunes'
               WHEN (customer.executive_id = 50) THEN 'Jessica Steinheusen'
-              WHEN (customer.executive_id = 10) THEN 'Andreza'
+              WHEN (customer.executive_id = 10) THEN 'Andreza Sandim'
               WHEN (customer.executive_id = 4) THEN 'Helmuth'
               WHEN (customer.executive_id = 55) THEN 'Danilo'
               WHEN (customer.executive_id = 36) THEN 'Gabriela'
-              WHEN (customer.executive_id = 72) THEN 'Sthephanny'
-              WHEN (customer.executive_id = 71) THEN 'Rafael'
-              WHEN (customer.executive_id = 75) THEN 'Maxi'
-              WHEN (customer.executive_id = 76) THEN 'Leandro'
+              WHEN (customer.executive_id = 72) THEN 'Sthephanny Andrade'
+              WHEN (customer.executive_id = 71) THEN 'Rafael Gehrke'
+              WHEN (customer.executive_id = 75) THEN 'Maxi Mendes'
+              WHEN (customer.executive_id = 76) THEN 'Leandro Oliveira'
               WHEN (customer.executive_id = 11) THEN 'Laryssa Andrade'
               WHEN (customer.executive_id = 12) THEN 'Daniela Vasconcelos'
               WHEN (customer.executive_id = 41) THEN 'Caroline Bilibio'
@@ -210,7 +210,7 @@ view: customer {
   measure: count_distinc {
     type: count_distinct
     sql: ${customer.id} ;;
-    drill_fields: [detail*]
+    drill_fields: [detail_light*]
   }
 
   # ----- Sets of fields for drilling ------
@@ -220,6 +220,13 @@ view: customer {
       name,
       executive_name,
       report_log.count
+    ]
+  }
+
+  set: detail_light{
+    fields: [
+      id,
+      name
     ]
   }
 }

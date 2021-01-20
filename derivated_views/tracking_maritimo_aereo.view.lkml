@@ -14,6 +14,7 @@ view: tracking_maritimo_aereo {
        tracking.created_at,
        tracking.updated_at,
        tracking.deleted_at,
+       tracking.archived_at,
        tracking.reference,
        tracking.token,
        tracking.executed_at,
@@ -21,7 +22,7 @@ view: tracking_maritimo_aereo {
        tracking_internal_status.description as internal_status,
        tracking.is_master,
        tracking.shipowner_id as armador_ciaaerea,
-       tracking.completed_at,
+       --tracking.completed_at,
        tracking.tracking_robot_id,
        tracking.operation_date as operacao,
        tracking.di_desembaracada_date,
@@ -71,6 +72,7 @@ select 'Aereo' as modal,
        tracking_aerial.created_at,
        tracking_aerial.updated_at,
        tracking_aerial.deleted_at,
+       tracking_aerial.archived_at,
        tracking_aerial.reference,
        tracking_aerial.token,
        tracking_aerial.executed_at,
@@ -78,7 +80,7 @@ select 'Aereo' as modal,
        tracking_aerial_internal_status.description as internal_status,
        false as is_master,
        tracking_aerial.airline_id as armador_ciaaerea,
-       '2000-01-01' as completed_at,
+       --'2000-01-01' as completed_at,
        999 as tracking_robot_id,
        '2000-01-01' as operacao,
        '2000-01-01' as di_desembaracada_date,
@@ -89,7 +91,7 @@ select 'Aereo' as modal,
        '2000-01-01' as manifest_date,
        '2000-01-01' as load_presence_date,
        '2000-01-01' as release_loading_date,
-       '2000-01-01' as completed_at,
+       null::timestamp as completed_at,
        tracking_aerial.robot_updated_at as robot_updated_at,
        tracking_aerial.is_api as is_api,
        qq2.created_at as last_follow_up,
@@ -115,6 +117,8 @@ group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_aerial_id = 
 where fu.tracking_aerial_id is not null and (fu.user_id is null or fu.user_id = 7002)) as qq2 on qq2.tracking_aerial_id = tracking_aerial.id
 where tracking_aerial.deleted_at is null
     ;;
+indexes: ["chave"]
+sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60));;
   }
 
   dimension: modal {
@@ -293,6 +297,20 @@ where tracking_aerial.deleted_at is null
       year
     ]
     sql: ${TABLE}."deleted_at" ;;
+  }
+
+  dimension_group: archived {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."archived_at" ;;
   }
 
   dimension: reference {
