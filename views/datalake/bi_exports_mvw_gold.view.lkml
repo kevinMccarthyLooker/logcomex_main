@@ -1427,7 +1427,7 @@ view: bi_exports_mvw_gold {
     type: average
     value_format: "$#.00;($#.00)"
     filters: [mar_c40_dimension: ">0"]
-    sql: ((${TABLE}."mar_vlfrete" /  ${TABLE}."mar_teus") * 2) * ${TABLE}."mar_vlfrete"  ;;
+    sql: ((${TABLE}."mar_vlfrete" /  ${TABLE}."mar_teus") * 2) * ${TABLE}."mar_c40"  ;;
   }
 
 }
