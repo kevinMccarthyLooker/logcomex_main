@@ -120,59 +120,59 @@ sql_trigger_value: select current_date;;
     sql: ${TABLE}."created_at" ;;
   }
 
-  dimension: diff_00 {
+  dimension: diff_00_hour {
     type: number
     sql: ${TABLE}.diff_00 ;;
   }
 
-  dimension: diff_01  {
+  dimension: diff_01_hour  {
     type: number
     sql: ${TABLE}.diff_01 ;;
   }
 
-  dimension: diff_02  {
+  dimension: diff_02_hour  {
     type: number
     sql: ${TABLE}.diff_02 ;;
   }
 
-  dimension: diff_03  {
+  dimension: diff_03_hour  {
     type: number
     sql: ${TABLE}.diff_03 ;;
   }
 
-  dimension: diff_04  {
+  dimension: diff_04_hour  {
     type: number
     sql: ${TABLE}.diff_04 ;;
   }
 
-  dimension: diff_05  {
+  dimension: diff_05_hour  {
     type: number
     sql: ${TABLE}.diff_05 ;;
   }
 
-  dimension: diff_06 {
+  dimension: diff_06_hour {
     type: number
     sql: ${TABLE}.diff_06 ;;
   }
 
-  dimension: diff_07 {
+  dimension: diff_07_hour {
     type: number
-    sql: ${TABLE}.diff_06 ;;
+    sql: ${TABLE}.diff_07 ;;
   }
 
-  dimension: diff_08 {
+  dimension: diff_08_hour {
     type: number
-    sql: ${TABLE}.diff_06 ;;
+    sql: ${TABLE}.diff_08 ;;
   }
 
-  dimension: diff_09 {
+  dimension: diff_09_hour {
     type: number
-    sql: ${TABLE}.diff_06 ;;
+    sql: ${TABLE}.diff_09 ;;
   }
 
-  dimension: diff_10 {
+  dimension: diff_10_hour {
     type: number
-    sql: ${TABLE}.diff_06 ;;
+    sql: ${TABLE}.diff_10 ;;
   }
 
   dimension: modal {
@@ -180,59 +180,169 @@ sql_trigger_value: select current_date;;
     sql: ${TABLE}.modal ;;
   }
 
-  measure: diff_00_avg  {
+  dimension: diff_00_day {
+    type: number
+    sql: ${TABLE}.diff_00/24 ;;
+  }
+
+  dimension: diff_01_day  {
+    type: number
+    sql: ${TABLE}.diff_01/24 ;;
+  }
+
+  dimension: diff_02_day  {
+    type: number
+    sql: ${TABLE}.diff_02/24 ;;
+  }
+
+  dimension: diff_03_day  {
+    type: number
+    sql: ${TABLE}.diff_03/24 ;;
+  }
+
+  dimension: diff_04_day  {
+    type: number
+    sql: ${TABLE}.diff_04/24 ;;
+  }
+
+  dimension: diff_05_day  {
+    type: number
+    sql: ${TABLE}.diff_05/24 ;;
+  }
+
+  dimension: diff_06_day {
+    type: number
+    sql: ${TABLE}.diff_06/24 ;;
+  }
+
+  dimension: diff_07_day {
+    type: number
+    sql: ${TABLE}.diff_07/24 ;;
+  }
+
+  dimension: diff_08_day {
+    type: number
+    sql: ${TABLE}.diff_08/24 ;;
+  }
+
+  dimension: diff_09_day {
+    type: number
+    sql: ${TABLE}.diff_09/24 ;;
+  }
+
+  dimension: diff_10_day {
+    type: number
+    sql: ${TABLE}.diff_10/24 ;;
+  }
+
+  measure: diff_00_avg_hour  {
     type: average
     sql: ${TABLE}.diff_00 ;;
   }
 
-  measure: diff_01_avg  {
+  measure: diff_01_avg_hour  {
     type: average
     sql: ${TABLE}.diff_01 ;;
   }
 
-  measure: diff_02_avg  {
+  measure: diff_02_avg_hour  {
     type: average
     sql: ${TABLE}.diff_02 ;;
   }
 
-  measure: diff_03_avg  {
+  measure: diff_03_avg_hour  {
     type: average
     sql: ${TABLE}.diff_03 ;;
   }
 
-  measure: diff_04_avg  {
+  measure: diff_04_avg_hour  {
     type: average
     sql: ${TABLE}.diff_04 ;;
   }
 
-  measure: diff_05_avg  {
+  measure: diff_05_avg_hour  {
     type: average
     sql: ${TABLE}.diff_05 ;;
   }
 
-  measure: diff_06_avg  {
+  measure: diff_06_avg_hour  {
     type: average
     sql: ${TABLE}.diff_06 ;;
   }
 
-  measure: diff_07_avg  {
+  measure: diff_07_avg_hour  {
     type: average
-    sql: ${TABLE}.diff_06 ;;
+    sql: ${TABLE}.diff_07 ;;
   }
 
-  measure: diff_08_avg  {
+  measure: diff_08_avg_hour  {
     type: average
-    sql: ${TABLE}.diff_06 ;;
+    sql: ${TABLE}.diff_08 ;;
   }
 
-  measure: diff_09_avg  {
+  measure: diff_09_avg_hour  {
     type: average
-    sql: ${TABLE}.diff_06 ;;
+    sql: ${TABLE}.diff_09 ;;
   }
 
-  measure: diff_10_avg  {
+  measure: diff_10_avg_hour  {
     type: average
     sql: ${TABLE}.diff_10 ;;
+  }
+
+  measure: diff_00_avg_day  {
+    type: average
+    sql: ${diff_00_day} ;;
+  }
+
+  measure: diff_01_avg_day  {
+    type: average
+    sql: ${diff_01_day} ;;
+  }
+
+  measure: diff_02_avg_day  {
+    type: average
+    sql: ${diff_02_day} ;;
+  }
+
+  measure: diff_03_avg_day  {
+    type: average
+    sql: ${diff_03_day} ;;
+  }
+
+  measure: diff_04_avg_day  {
+    type: average
+    sql: ${diff_04_day} ;;
+  }
+
+  measure: diff_05_avg_day  {
+    type: average
+    sql: ${diff_05_day} ;;
+  }
+
+  measure: diff_06_avg_day  {
+    type: average
+    sql: ${diff_06_day} ;;
+  }
+
+  measure: diff_07_avg_day  {
+    type: average
+    sql: ${diff_07_day} ;;
+  }
+
+  measure: diff_08_avg_day {
+    type: average
+    sql: ${diff_08_day} ;;
+  }
+
+  measure: diff_09_avg_day  {
+    type: average
+    sql: ${diff_09_day} ;;
+  }
+
+  measure: diff_10_avg_day  {
+    type: average
+    sql: ${diff_10_day} ;;
   }
 
 
