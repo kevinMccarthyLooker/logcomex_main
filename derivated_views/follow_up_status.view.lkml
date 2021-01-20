@@ -138,6 +138,21 @@ sql_trigger_value: select current_date;;
     sql: ${TABLE}.diff_06 ;;
   }
 
+  dimension: diff_07 {
+    type: number
+    sql: ${TABLE}.diff_06 ;;
+  }
+
+  dimension: diff_08 {
+    type: number
+    sql: ${TABLE}.diff_06 ;;
+  }
+
+  dimension: diff_09 {
+    type: number
+    sql: ${TABLE}.diff_06 ;;
+  }
+
   dimension: modal {
     type: string
     sql: ${TABLE}.modal ;;
@@ -148,12 +163,10 @@ sql_trigger_value: select current_date;;
     sql: ${TABLE}.diff_00 ;;
   }
 
-
   measure: diff_01_avg  {
     type: average
     sql: ${TABLE}.diff_01 ;;
   }
-
 
   measure: diff_02_avg  {
     type: average
@@ -176,6 +189,21 @@ sql_trigger_value: select current_date;;
   }
 
   measure: diff_06_avg  {
+    type: average
+    sql: ${TABLE}.diff_06 ;;
+  }
+
+  measure: diff_07_avg  {
+    type: average
+    sql: ${TABLE}.diff_06 ;;
+  }
+
+  measure: diff_08_avg  {
+    type: average
+    sql: ${TABLE}.diff_06 ;;
+  }
+
+  measure: diff_09_avg  {
     type: average
     sql: ${TABLE}.diff_06 ;;
   }
