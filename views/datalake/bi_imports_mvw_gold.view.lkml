@@ -452,15 +452,13 @@ view: bi_imports_mvw_gold {
   }
 
   measure: mais_de_um_tipo_sim {
-    type: sum
+    type: count
     filters: [mais_de_um_tipo: "=A"]
-    sql: mais_de_um_tipo ;;
   }
 
   measure: mais_de_um_tipo_nao {
-    type: sum
+    type: count
     filters: [mais_de_um_tipo: "=B"]
-    sql: mais_de_um_tipo ;;
   }
 
   dimension: teus_dimension {
