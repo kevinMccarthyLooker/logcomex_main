@@ -14,7 +14,12 @@ view: test_time {
       month,
       year
     ]
-    sql: ${TABLE}.tempo ;;
+    sql: ${TABLE}."tempo" ;;
+  }
+
+  dimension: tempo_string {
+    type: string
+    sql: ${TABLE}."tempo" ;;
   }
 
   }
