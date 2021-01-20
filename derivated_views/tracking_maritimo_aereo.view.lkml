@@ -14,6 +14,7 @@ view: tracking_maritimo_aereo {
        tracking.created_at,
        tracking.updated_at,
        tracking.deleted_at,
+       tracking.archived_at,
        tracking.reference,
        tracking.token,
        tracking.executed_at,
@@ -71,6 +72,7 @@ select 'Aereo' as modal,
        tracking_aerial.created_at,
        tracking_aerial.updated_at,
        tracking_aerial.deleted_at,
+       tracking_aerial.archived_at,
        tracking_aerial.reference,
        tracking_aerial.token,
        tracking_aerial.executed_at,
@@ -89,7 +91,7 @@ select 'Aereo' as modal,
        '2000-01-01' as manifest_date,
        '2000-01-01' as load_presence_date,
        '2000-01-01' as release_loading_date,
-       '2000-01-01' as completed_at,
+       null::timestamp as completed_at,
        tracking_aerial.robot_updated_at as robot_updated_at,
        tracking_aerial.is_api as is_api,
        qq2.created_at as last_follow_up,
@@ -295,6 +297,20 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60));;
       year
     ]
     sql: ${TABLE}."deleted_at" ;;
+  }
+
+  dimension_group: archived {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."archived_at" ;;
   }
 
   dimension: reference {
