@@ -80,7 +80,7 @@ view: db_siscori_cod_ncm {
 
   measure: ncm_hscode {
     type: number
-    value_format: "0000"
+    value_format: "####"
     sql: ${TABLE}."cdncm_compl" ;;
   }
 
