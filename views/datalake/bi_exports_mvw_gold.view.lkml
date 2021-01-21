@@ -1371,6 +1371,18 @@ view: bi_exports_mvw_gold {
     sql: ${TABLE}."mar_vlfrete" ;;
   }
 
+  dimension: media_vl_frete_por_c20_di {
+    type: number
+    value_format: "$#.00;($#.00)"
+    sql: ((${TABLE}."mar_vlfrete" /  ${TABLE}."mar_teus") * ${TABLE}."mar_c20") / ${TABLE}."mar_c20";;
+  }
+
+  dimension: media_vl_frete_por_c40_di {
+    type: number
+    value_format: "$#.00;($#.00)"
+    sql: (((${TABLE}."mar_vlfrete" /  ${TABLE}."mar_teus") * 2) * ${TABLE}."mar_c40") / ${TABLE}."mar_c40";;
+  }
+
   measure: mar_teus {
     type: sum
     sql: ${TABLE}.mar_teus ;;
@@ -1454,7 +1466,7 @@ view: bi_exports_mvw_gold {
 
   measure: order_sd {
     type: number
-    sql: stddev(${TABLE}."media_vl_frete_por_c20");;
+    sql: stddev(${TABLE}."media_vl_frete_por_c20_di");;
   }
 
 }
