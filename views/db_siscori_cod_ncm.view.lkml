@@ -16,7 +16,7 @@ view: db_siscori_cod_ncm {
 
   dimension: cdncm_compl {
     type: number
-    value_format: "0"
+    value_format: "0#######"
     sql: ${TABLE}."cdncm_compl" ;;
   }
 
