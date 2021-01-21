@@ -79,8 +79,8 @@ view: db_siscori_cod_ncm {
   }
 
   measure: ncm_hscode {
-    type: string
+    type: number
     value_format: "0"
-    sql: left ${TABLE}."cdncm_compl",4;;
+    sql: left ${TABLE}."cdncm_compl";;
   }
 }
