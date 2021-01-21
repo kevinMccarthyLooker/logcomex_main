@@ -205,7 +205,3 @@ explore: db_commodities_export {
     type: left_outer
   }
 }
-named_value_format: hscode_format {
-  value_format: "0###"
-  strict_value_format: yes
-}

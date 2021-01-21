@@ -80,8 +80,8 @@ view: db_siscori_cod_ncm {
 
   measure: ncm_hscode {
     type: number
-    value_format: "hscode_format"
-    sql: ${TABLE}."cdncm_compl" ;;
+    value_format: "0"
+    sql: left(${TABLE}."cdncm_compl",4);;
   }
 
 }
