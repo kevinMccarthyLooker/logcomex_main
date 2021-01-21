@@ -1,12 +1,17 @@
 view: tracking_maritimo_aereo {
   derived_table: {
     sql:
-   select 'Maritimo' as modal,
+select 'Maritimo' as modal,
        tracking.id as tracking_id,
        tracking.id as tracking_maritimo_id,
        0 as tracking_aereo_id,
        ('Maritimo' || to_char(tracking.id, '999999')) as chave,
        tracking.customer_id,
+       (case
+       when customer_id in (select c.id from customer c inner join customer_plan cp on cp.customer_id = c.id inner join tracking_plan_info tpi on tpi.id = cp.tracking_plan_info_id
+              where c.deleted_at is null  and c.fake_customer is false and cp.deleted_at is null and tpi.force_certificate is false) then 'No'
+     else 'Yes'
+     end) as force_certificate,
        tracking_status.description as status,
        tracking.bl_number as documento,
        tracking.ce_number as ce_number,
@@ -65,6 +70,11 @@ select 'Aereo' as modal,
        tracking_aerial.id as tracking_aereo_id,
        ('Aereo' || to_char(tracking_aerial.id, '999999')) as chave,
        customer_id,
+       (case
+       when customer_id in (select c.id from customer c inner join customer_plan cp on cp.customer_id = c.id inner join tracking_plan_info tpi on tpi.id = cp.tracking_plan_info_id
+              where c.deleted_at is null  and c.fake_customer is false and cp.deleted_at is null and tpi.force_certificate is false) then 'No'
+     else 'Yes'
+     end) as force_certificate,
        tracking_aerial_status.description as status,
        (coalesce((awb),'') || '-' || coalesce((hwb),'')) as documento,
        0 as ce_number,
@@ -112,7 +122,7 @@ select max(fu2.date_time) as date_time,
 max(fu2.created_at) as created_at,
 fu2.tracking_aerial_id as tracking_aerial_id
 from follow_up fu2
-where (fu2.user_id is null or fu2.user_id = 7002) -- usuaio utilizado para inserir dados manualmente
+where (fu2.user_id is null or fu2.user_id = 7002) -- usuario utilizado para inserir dados manualmente
 group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_aerial_id = fu.tracking_aerial_id
 where fu.tracking_aerial_id is not null and (fu.user_id is null or fu.user_id = 7002)) as qq2 on qq2.tracking_aerial_id = tracking_aerial.id
 where tracking_aerial.deleted_at is null
@@ -149,6 +159,11 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60));;
   dimension: customer_id {
     type: number
     sql: ${TABLE}."customer_id" ;;
+  }
+
+  dimension: force_certificate {
+    type: string
+    sql: ${TABLE}."force_certificate" ;;
   }
 
   dimension: status {
