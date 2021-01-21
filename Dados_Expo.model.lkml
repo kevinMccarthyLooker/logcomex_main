@@ -204,5 +204,8 @@ explore: db_commodities_export {
     sql_on: ${db_siscori_unid_fiscal.id} = ${db_commodities_export.id_unid_embq} ;;
     type: left_outer
   }
-
+}
+named_value_format: hscode_format {
+  value_format: "0###"
+  strict_value_format: yes
 }
