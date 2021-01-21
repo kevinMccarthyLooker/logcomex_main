@@ -98,8 +98,8 @@ sql_trigger_value: select current_date;;
   }
 
   dimension: force_certificate  {
-    type: yesno
-    sql: ${TABLE}.force_certificate ;;
+    type: string
+    sql: case when ${TABLE}.force_certificate is false then 'No' else 'Yes' end' ;;
   }
 
   dimension: tracking_id {
