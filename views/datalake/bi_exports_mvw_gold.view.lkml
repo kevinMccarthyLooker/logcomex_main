@@ -1451,4 +1451,10 @@ view: bi_exports_mvw_gold {
     filters: [mar_c40_dimension: ">0"]
     sql: STDDEV((((${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c40") * 2) * ${TABLE}."mar_c40") / ${TABLE}."mar_c40");;
   }
+
+  measure: order_sd {
+    type: number
+    sql: stddev(${TABLE}."mar_vlfrete");;
+  }
+
 }
