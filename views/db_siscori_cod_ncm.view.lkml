@@ -81,7 +81,6 @@ view: db_siscori_cod_ncm {
   measure: ncm_hscode {
     type: number
     value_format: "0"
-    sql: left(${TABLE}."cdncm_compl",4);;
+    sql: left(LPAD(${TABLE}."cdncm_compl",8,"0"),4);;
   }
-
 }
