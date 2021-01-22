@@ -1451,8 +1451,10 @@ view: bi_exports_mvw_gold {
   }
 
   measure: order_sd {
-    type: number
-    sql: stddev(${TABLE}."mar_vlfrete" /  (${TABLE}."mar_c40">0));;
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [mar_c20_dimension: ">0"]
+    sql: stddev(${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c20");;
   }
 
 }
