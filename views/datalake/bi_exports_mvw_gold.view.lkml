@@ -1454,7 +1454,7 @@ view: bi_exports_mvw_gold {
 
   measure: order_sd {
     type: number
-    sql: stddev(((${mar_vlfrete}/${mar_teus}) * ${mar_c20}) / ${mar_c20});;
+    sql: stddev(((${TABLE}."mar_vlfrete"/${TABLE}."mar_teus")*${TABLE}."mar_c20")/${TABLE}."mar_c20");;
   }
 
 }
