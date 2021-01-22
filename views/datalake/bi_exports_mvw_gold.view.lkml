@@ -1440,7 +1440,7 @@ view: bi_exports_mvw_gold {
 
   measure: desvio_padrao_c20 {
     type: number
-    sql: stddev ${mar_vlfrete}
+    sql: stddev ${TABLE}."mar_vlfrete"
   }
 
   measure: desvio_padrao_c40 {
