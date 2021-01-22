@@ -1440,7 +1440,7 @@ view: bi_exports_mvw_gold {
 
   measure: desvio_padrao_c20 {
     type: number
-    sql: (STDDEV(CASE WHEN (${TABLE}."mar_c20_dimension"  > 0) THEN ((${TABLE}."mar_vlfrete" /  ${TABLE}."mar_teus") * ${TABLE}."mar_c20") / ${TABLE}."mar_c20" ELSE NULL END) IS NULL);;
+    sql: (AVG(CASE WHEN (${TABLE}."mar_c20_dimension" > 0) THEN ((${TABLE}."mar_vlfrete" /  ${TABLE}."mar_teus") * ${TABLE}."mar_c20") / ${TABLE}."mar_c20" ELSE NULL END) IS "0");;
   }
 
   measure: desvio_padrao_c40 {
