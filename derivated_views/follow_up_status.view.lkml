@@ -125,6 +125,10 @@ sql_trigger_value: select current_date;;
   dimension: cod_token {
     type: string
     sql: ${TABLE}.cod_token ;;
+    link: {
+      label: "Tracking-Logcomex"
+      url: "https://sistema.logcomex.io/#/tracking/{{ value }}"
+    }
   }
 
   dimension: diff_00_hour {
