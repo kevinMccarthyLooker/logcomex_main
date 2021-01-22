@@ -1373,7 +1373,7 @@ view: bi_exports_mvw_gold {
 
   dimension: media_c20 {
     type: number
-    sql: ${TABLE}."media_vl_frete_por_c20";;
+    sql: ${TABLE}.mar_vlfrete_num;;
   }
 
   measure: mar_teus {
