@@ -1452,6 +1452,7 @@ view: bi_exports_mvw_gold {
 
   measure: desvio_padrao_teu {
     type: number
+    value_format: "$#.00;($#.00)"
     sql: stddev(${TABLE}."mar_vlfrete");;
   }
 
