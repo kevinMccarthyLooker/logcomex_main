@@ -411,6 +411,26 @@ sql_trigger_value: select current_date;;
     sql: ${diff_10_day} ;;
   }
 
+  measure: diff_00_min_day  {
+    type: min
+    sql: ${diff_00_day} ;;
+  }
+
+  measure: diff_01_min_day  {
+    type: min
+    sql: ${diff_01_day} ;;
+  }
+
+  measure: diff_02_min_day  {
+    type: min
+    sql: ${diff_02_day} ;;
+  }
+
+  measure: diff_03_min_day  {
+    type: min
+    sql: ${diff_03_day} ;;
+  }
+
   measure: diff_04_min_day  {
     type: min
     sql: ${diff_04_day} ;;
@@ -424,6 +444,26 @@ sql_trigger_value: select current_date;;
   measure: diff_06_min_day  {
     type: min
     sql: ${diff_06_day} ;;
+  }
+
+  measure: diff_07_min_day  {
+    type: min
+    sql: ${diff_07_day} ;;
+  }
+
+  measure: diff_08_min_day {
+    type: min
+    sql: ${diff_08_day} ;;
+  }
+
+  measure: diff_09_min_day  {
+    type: min
+    sql: ${diff_09_day} ;;
+  }
+
+  measure: diff_10_min_day  {
+    type: min
+    sql: ${diff_10_day} ;;
   }
 
 }
