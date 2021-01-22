@@ -1440,14 +1440,16 @@ view: bi_exports_mvw_gold {
 
   measure: desvio_padrao_c20 {
     type: number
-    sql: stddev (${TABLE}."mar_vlfrete");;
+    sql: case when ${TABLE}."mar_c20" = 0 then null
+             else stddev(${TABLE}."mar_vlfrete" / ${TABLE}."mar_teus")
+             end;;
   }
 
   measure: desvio_padrao_c40 {
     type: average
     value_format: "$#.00;($#.00)"
     filters: [mar_c40_dimension: ">0"]
-    sql: STDDEV((((${TABLE}."mar_vlfrete" /  ${TABLE}."mar_c40") * 2) * ${TABLE}."mar_c40") / ${TABLE}."mar_c40");;
+    sql: STDDEV((((${TABLE}."mar_vlfrete" /  ${TABLE}."mar_teus") * 2) * ${TABLE}."mar_c40") / ${TABLE}."mar_c40");;
   }
 
 }
