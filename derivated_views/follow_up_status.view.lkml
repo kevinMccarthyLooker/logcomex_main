@@ -345,9 +345,59 @@ sql_trigger_value: select current_date;;
     sql: ${diff_10_day} ;;
   }
 
+  measure: diff_00_max_day  {
+    type: max
+    sql: ${diff_00_day} ;;
+  }
+
+  measure: diff_01_max_day  {
+    type: max
+    sql: ${diff_01_day} ;;
+  }
+
+  measure: diff_02_max_day  {
+    type: max
+    sql: ${diff_02_day} ;;
+  }
+
+  measure: diff_03_max_day  {
+    type: max
+    sql: ${diff_03_day} ;;
+  }
+
   measure: diff_04_max_day  {
     type: max
     sql: ${diff_04_day} ;;
+  }
+
+  measure: diff_05_max_day  {
+    type: max
+    sql: ${diff_05_day} ;;
+  }
+
+  measure: diff_06_max_day  {
+    type: max
+    sql: ${diff_06_day} ;;
+  }
+
+  measure: diff_07_max_day  {
+    type: max
+    sql: ${diff_07_day} ;;
+  }
+
+  measure: diff_08_max_day {
+    type: max
+    sql: ${diff_08_day} ;;
+  }
+
+  measure: diff_09_max_day  {
+    type: max
+    sql: ${diff_09_day} ;;
+  }
+
+  measure: diff_10_max_day  {
+    type: max
+    sql: ${diff_10_day} ;;
   }
 
 
