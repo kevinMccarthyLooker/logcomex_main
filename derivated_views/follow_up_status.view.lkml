@@ -345,5 +345,10 @@ sql_trigger_value: select current_date;;
     sql: ${diff_10_day} ;;
   }
 
+  measure: diff_04_max_day  {
+    type: max
+    sql: ${diff_04_day} ;;
+  }
+
 
 }
