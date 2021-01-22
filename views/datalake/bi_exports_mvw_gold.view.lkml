@@ -1454,7 +1454,7 @@ view: bi_exports_mvw_gold {
     type: number
     value_format: "$#.00;($#.00)"
     sql:
-       CASE WHEN ${TABLE}."mar_c20" > 0
+       CASE WHEN ${TABLE}."mar_c20_dimension" > 0
        THEN stddev(${TABLE}."mar_vlfrete")
        ELSE NULL
        END ;;
