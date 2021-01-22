@@ -8,6 +8,7 @@ c."name" as customer_name,
 tpi.force_certificate as force_certificate,
 fu1.tracking_id,
 date(t2.created_at) as created_at,
+t2."token" as cod_token,
 concat('maritimo|',fu1.tracking_id) as chave,
 case when (extract(epoch from (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 0 limit 1)::timestamp - (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 11 and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp)) / 3600.00 < 0 then null
      else (extract(epoch from (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 0 limit 1)::timestamp - (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_id = fu1.tracking_id AND follow_up.tracking_status_id = 11 and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp)) / 3600.00 end as diff_00,-- Documento -> VALIDANDO EMBARQUE
@@ -46,6 +47,7 @@ c."name" as customer_name,
 tpi.force_certificate as force_certificate,
 fu1.tracking_aerial_id as tracking_id,
 date(ta.created_at) as created_at,
+ta."token" as cod_token,
 concat('aereo|',fu1.tracking_aerial_id) as chave,
 case when (extract(epoch from (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 0 and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp - (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 10 and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp)) / 3600.00 < 0 then null
      else (extract(epoch from (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 0 and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp - (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 10 and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp)) / 3600.00 end AS diff_00,-- Aguardando Doc. -> Pendente Mantra
@@ -68,7 +70,7 @@ case when (extract(epoch from (SELECT min(follow_up.date_time) FROM follow_up WH
 case when (extract(epoch from (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 8 and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp - (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 9  and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp)) / 3600.00 < 0 then null
      else (extract(epoch from (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 8 and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp - (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 9  and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp)) / 3600.00 end AS diff_09,-- DI Parametrizada -> Di Desemb.
 case when (extract(epoch from (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 7 and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp - (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 8  and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp)) / 3600.00 < 0 then null
-     else (extract(epoch from (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 7 and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp - (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 8  and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp)) / 3600.00 end AS diff_10 -- Di Desemb. -> Recebida
+     else (extract(epoch from (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 7 and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp - (SELECT min(follow_up.date_time) FROM follow_up WHERE follow_up.tracking_aerial_id = fu1.tracking_aerial_id AND follow_up.tracking_aerial_status_id = 8  and extract('YEAR' from follow_up.date_time) > 1970 limit 1)::timestamp)) / 3600.00 end AS diff_10 -- DI Desemb. -> Recebida
 FROM follow_up fu1
 inner join tracking_aerial ta on ta.id = fu1.tracking_aerial_id
 inner join customer c on c.id = ta.customer_id
@@ -118,6 +120,15 @@ sql_trigger_value: select current_date;;
       year
     ]
     sql: ${TABLE}."created_at" ;;
+  }
+
+  dimension: cod_token {
+    type: string
+    sql: ${TABLE}.cod_token ;;
+    link: {
+      label: "Tracking-Logcomex"
+      url: "https://sistema.logcomex.io/#/tracking/{{ value }}"
+    }
   }
 
   dimension: diff_00_hour {
@@ -400,5 +411,59 @@ sql_trigger_value: select current_date;;
     sql: ${diff_10_day} ;;
   }
 
+  measure: diff_00_min_day  {
+    type: min
+    sql: ${diff_00_day} ;;
+  }
+
+  measure: diff_01_min_day  {
+    type: min
+    sql: ${diff_01_day} ;;
+  }
+
+  measure: diff_02_min_day  {
+    type: min
+    sql: ${diff_02_day} ;;
+  }
+
+  measure: diff_03_min_day  {
+    type: min
+    sql: ${diff_03_day} ;;
+  }
+
+  measure: diff_04_min_day  {
+    type: min
+    sql: ${diff_04_day} ;;
+  }
+
+  measure: diff_05_min_day  {
+    type: min
+    sql: ${diff_05_day} ;;
+  }
+
+  measure: diff_06_min_day  {
+    type: min
+    sql: ${diff_06_day} ;;
+  }
+
+  measure: diff_07_min_day  {
+    type: min
+    sql: ${diff_07_day} ;;
+  }
+
+  measure: diff_08_min_day {
+    type: min
+    sql: ${diff_08_day} ;;
+  }
+
+  measure: diff_09_min_day  {
+    type: min
+    sql: ${diff_09_day} ;;
+  }
+
+  measure: diff_10_min_day  {
+    type: min
+    sql: ${diff_10_day} ;;
+  }
 
 }
