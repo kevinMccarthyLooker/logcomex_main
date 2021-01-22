@@ -411,5 +411,19 @@ sql_trigger_value: select current_date;;
     sql: ${diff_10_day} ;;
   }
 
+  measure: diff_04_min_day  {
+    type: min
+    sql: ${diff_04_day} ;;
+  }
+
+  measure: diff_05_min_day  {
+    type: min
+    sql: ${diff_05_day} ;;
+  }
+
+  measure: diff_06_min_day  {
+    type: min
+    sql: ${diff_06_day} ;;
+  }
 
 }
