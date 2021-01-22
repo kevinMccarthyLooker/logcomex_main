@@ -1439,7 +1439,7 @@ view: bi_exports_mvw_gold {
   }
 
   measure: desvio_padrao_c20 {
-    type: average
+    type: number
     sql: stddev(${TABLE}."mar_vlfrete");;
   }
 
