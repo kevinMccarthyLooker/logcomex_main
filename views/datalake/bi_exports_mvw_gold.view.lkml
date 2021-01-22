@@ -1373,7 +1373,9 @@ view: bi_exports_mvw_gold {
 
   dimension: media_c20 {
     type: number
-    sql: ${TABLE}.mar_vlfrete_num;;
+    sql: case when ${TABLE}.mar_c20 = 0 then null
+             else stddev(${TABLE}.mar_vlfrete / ${TABLE}.mar_teus)
+             end;;
   }
 
   measure: mar_teus {
@@ -1445,7 +1447,7 @@ view: bi_exports_mvw_gold {
 
   measure: desvio_padrao_c20 {
     type: number
-    sql: stddev (${TABLE}."media_c20");;
+    sql: stddev (${media_c20});;
   }
 
   measure: desvio_padrao_c40 {
