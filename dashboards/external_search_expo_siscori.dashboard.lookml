@@ -4,8 +4,8 @@
   preferred_viewer: dashboards-next
   crossfilter_enabled: true
   elements:
-  - title: Valor Total Exportado (U$)
-    name: Valor Total Exportado (U$)
+  - title: Valor Total Exportado (USD)
+    name: Valor Total Exportado (USD)
     model: Dados_Expo
     explore: db_commodities_export
     type: single_value
@@ -81,6 +81,7 @@
     listen:
       Mês: db_commodities_export.anomes_Mes
       NCM: db_siscori_cod_ncm.cdncm_compl
+      HSCODE: db_siscori_cod_ncm.cdncm
     row: 0
     col: 0
     width: 7
@@ -122,6 +123,7 @@
     listen:
       Mês: db_commodities_export.anomes_Mes
       NCM: db_siscori_cod_ncm.cdncm_compl
+      HSCODE: db_siscori_cod_ncm.cdncm
     row: 3
     col: 0
     width: 7
@@ -217,12 +219,13 @@
     listen:
       Mês: db_commodities_export.anomes_Mes
       NCM: db_siscori_cod_ncm.cdncm_compl
+      HSCODE: db_siscori_cod_ncm.cdncm
     row: 0
     col: 7
     width: 17
     height: 6
-  - title: Valor Total por NCM
-    name: Valor Total por NCM
+  - title: Valor por NCM
+    name: Valor por NCM
     model: Dados_Expo
     explore: db_commodities_export
     type: looker_grid
@@ -307,6 +310,7 @@
     listen:
       Mês: db_commodities_export.anomes_Mes
       NCM: db_siscori_cod_ncm.cdncm_compl
+      HSCODE: db_siscori_cod_ncm.cdncm
     row: 6
     col: 12
     width: 12
@@ -319,6 +323,7 @@
     fields: [db_commodities_export.val_fob_us, db_siscori_unid_fiscal.uf]
     filters:
       db_siscori_unid_fiscal.uf: "-NULL"
+      db_commodities_export.val_fob_us: ">=2500000000"
     sorts: [db_commodities_export.val_fob_us desc]
     limit: 500
     query_timezone: America/Sao_Paulo
@@ -396,6 +401,7 @@
     listen:
       Mês: db_commodities_export.anomes_Mes
       NCM: db_siscori_cod_ncm.cdncm_compl
+      HSCODE: db_siscori_cod_ncm.cdncm
     row: 6
     col: 0
     width: 12
@@ -488,6 +494,7 @@
     listen:
       Mês: db_commodities_export.anomes_Mes
       NCM: db_siscori_cod_ncm.cdncm_compl
+      HSCODE: db_siscori_cod_ncm.cdncm
     row: 13
     col: 0
     width: 12
@@ -610,9 +617,13 @@
     labelColorEnabled: false
     labelColor: "#FFF"
     bar_range_max: 100000000000
+    note_state: collapsed
+    note_display: hover
+    note_text: Valores expressados em USD
     listen:
       Mês: db_commodities_export.anomes_Mes
       NCM: db_siscori_cod_ncm.cdncm_compl
+      HSCODE: db_siscori_cod_ncm.cdncm
     row: 13
     col: 12
     width: 12
@@ -625,7 +636,7 @@
     allow_multiple_values: true
     required: false
     ui_config:
-      type: advanced
+      type: checkboxes
       display: popover
     model: Dados_Expo
     explore: db_commodities_export
@@ -640,11 +651,22 @@
     ui_config:
       type: advanced
       display: inline
-      options:
-      - '1'
-      - '2'
-      - '3'
+      options: []
     model: Dados_Expo
     explore: db_commodities_export
     listens_to_filters: []
     field: db_siscori_cod_ncm.cdncm_compl
+  - name: HSCODE
+    title: HSCODE
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: advanced
+      display: inline
+      options: []
+    model: Dados_Expo
+    explore: db_commodities_export
+    listens_to_filters: []
+    field: db_siscori_cod_ncm.cdncm
