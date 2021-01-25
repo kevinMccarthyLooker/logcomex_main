@@ -16,7 +16,7 @@ view: db_siscori_cod_ncm {
 
   dimension: cdncm_compl {
     type: number
-    value_format: "0"
+    value_format: "0#######"
     sql: ${TABLE}."cdncm_compl" ;;
   }
 
@@ -76,5 +76,11 @@ view: db_siscori_cod_ncm {
   measure: count {
     type: count
     drill_fields: [id]
+  }
+
+  measure: ncm_hscode {
+    type: number
+    value_format: "0"
+    sql: LEFT (LPAD((${TABLE}."cdncm_compl")::TEXT 8,"0"),4);;
   }
 }

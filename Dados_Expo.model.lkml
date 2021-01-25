@@ -204,5 +204,4 @@ explore: db_commodities_export {
     sql_on: ${db_siscori_unid_fiscal.id} = ${db_commodities_export.id_unid_embq} ;;
     type: left_outer
   }
-
 }
