@@ -164,4 +164,14 @@ view: db_commodities_export {
     drill_fields: [id]
   }
 
+  measure: mes {
+    type: date_month
+    sql: ${TABLE}."anomes_Mes" ;;
+  }
+
+  measure: hscode {
+    type: number
+    sql: ${TABLE}."Cdncm_compl" ;;
+  }
+
 }
