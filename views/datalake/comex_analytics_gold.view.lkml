@@ -16,6 +16,41 @@ view: comex_analytics_gold {
 
   dimension_group: data_hora_registro {
     type: time
+    sql: ${TABLE}.data_hora_registro ;;
+  }
+
+  dimension: tipo_recolhimento {
+    type: string
+    sql: ${TABLE}.tipo_recolhimento ;;
+  }
+
+  dimension: mandato_judicial {
+    type: string
+    sql: ${TABLE}.mandato_judicial ;;
+  }
+
+  dimension: uf_icms {
+    type: string
+    sql: ${TABLE}.uf_icms ;;
+  }
+
+  dimension_group: data_pagamento {
+    type: time
+    sql: ${TABLE}.data_pagamento ;;
+  }
+
+  dimension: urf_despacho {
+    type: string
+    sql: ${TABLE}.urf_despacho ;;
+  }
+
+  # dimension_group: data_desembaraco {
+  #   type: time
+  #   sql: ${TABLE}.data_desembaraco ;;
+  # }
+
+  dimension_group: data_desembaraco {
+    type: time
     timeframes: [
       raw,
       date,
@@ -26,22 +61,17 @@ view: comex_analytics_gold {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.data_hora_registro ;;
+    sql: ${TABLE}.data_desembaraco ;;
   }
 
-  # dimension_group: data_hora_registro {
-  #   type: time
-  #   sql: ${TABLE}.data_hora_registro ;;
-  # }
-
-  dimension: uf {
+  dimension: modalidade_despacho {
     type: string
-    sql: ${TABLE}.uf ;;
+    sql: ${TABLE}.modalidade_despacho ;;
   }
 
-  dimension: data_registro_di {
-    type: date
-    sql: ${TABLE}.data_registro_di ;;
+  dimension: tipo_declaracao {
+    type: string
+    sql: ${TABLE}.tipo_declaracao ;;
   }
 
   dimension: canal {
@@ -64,19 +94,24 @@ view: comex_analytics_gold {
     sql: ${TABLE}.importador_endereco ;;
   }
 
-  dimension: pais_procedencia_cod {
-    type: string
-    sql: ${TABLE}.pais_procedencia_cod ;;
+  dimension: numero_ce {
+    type: number
+    sql: ${TABLE}.numero_ce ;;
   }
 
-  dimension: pais_procedencia_nome {
+  dimension: cd_pais_proced {
     type: string
-    sql: ${TABLE}.pais_procedencia_nome ;;
+    sql: ${TABLE}.cd_pais_proced ;;
   }
 
-  dimension: data_chegada_carga {
-    type: date
-    sql: ${TABLE}.data_chegada_carga ;;
+  dimension: nm_pais_proced {
+    type: string
+    sql: ${TABLE}.nm_pais_proced ;;
+  }
+
+  dimension_group: data_chegada {
+    type: time
+    sql: ${TABLE}.data_chegada ;;
   }
 
   dimension: urf_entrada_carga {
@@ -114,9 +149,9 @@ view: comex_analytics_gold {
     sql: ${TABLE}.embalagem ;;
   }
 
-  dimension: moeda {
+  dimension: moeda_frete {
     type: string
-    sql: ${TABLE}.moeda ;;
+    sql: ${TABLE}.moeda_frete ;;
   }
 
   dimension: prepaid {
@@ -134,9 +169,19 @@ view: comex_analytics_gold {
     sql: ${TABLE}.terr_nacional ;;
   }
 
-  dimension: totalmoeda {
+  dimension: val_frete_moeda {
     type: number
-    sql: ${TABLE}.totalmoeda ;;
+    sql: ${TABLE}.val_frete_moeda ;;
+  }
+
+  dimension: val_frete_us {
+    type: number
+    sql: ${TABLE}.val_frete_us ;;
+  }
+
+  dimension: val_frete_reais {
+    type: number
+    sql: ${TABLE}.val_frete_reais ;;
   }
 
   dimension: moeda_seguro {
@@ -144,14 +189,44 @@ view: comex_analytics_gold {
     sql: ${TABLE}.moeda_seguro ;;
   }
 
-  dimension: total_moeda_seguro {
+  dimension: val_segur_moeda {
     type: number
-    sql: ${TABLE}.total_moeda_seguro ;;
+    sql: ${TABLE}.val_segur_moeda ;;
   }
 
-  dimension: via_transporte {
+  dimension: val_segur_us {
+    type: number
+    sql: ${TABLE}.val_segur_us ;;
+  }
+
+  dimension: val_segur_reais {
+    type: number
+    sql: ${TABLE}.val_segur_reais ;;
+  }
+
+  dimension: val_vmle_us {
+    type: number
+    sql: ${TABLE}.val_vmle_us ;;
+  }
+
+  dimension: val_vmle_reais {
+    type: number
+    sql: ${TABLE}.val_vmle_reais ;;
+  }
+
+  dimension: val_vmld_us {
+    type: number
+    sql: ${TABLE}.val_vmld_us ;;
+  }
+
+  dimension: val_vmld_reais {
+    type: number
+    sql: ${TABLE}.val_vmld_reais ;;
+  }
+
+  dimension: via_transp {
     type: string
-    sql: ${TABLE}.via_transporte ;;
+    sql: ${TABLE}.via_transp ;;
   }
 
   dimension: multimodal {
@@ -169,14 +244,14 @@ view: comex_analytics_gold {
     sql: ${TABLE}.transportador ;;
   }
 
-  dimension: doc_chegada_carga_tipo {
+  dimension: doc_chegada_tipo {
     type: string
-    sql: ${TABLE}.doc_chegada_carga_tipo ;;
+    sql: ${TABLE}.doc_chegada_tipo ;;
   }
 
-  dimension: doc_chegada_carga_identificacao {
+  dimension: doc_chegada_identificacao {
     type: string
-    sql: ${TABLE}.doc_chegada_carga_identificacao ;;
+    sql: ${TABLE}.doc_chegada_identificacao ;;
   }
 
   dimension: local_embarque {
@@ -194,14 +269,9 @@ view: comex_analytics_gold {
     sql: ${TABLE}.utilizacao ;;
   }
 
-  dimension: informacoes_complementares {
-    type: string
-    sql: ${TABLE}.informacoes_complementares ;;
-  }
-
-  dimension_group: created_at {
-    type: time
-    sql: ${TABLE}.created_at ;;
+  dimension: val_multa {
+    type: number
+    sql: ${TABLE}.val_multa ;;
   }
 
   dimension: awb {
@@ -224,64 +294,14 @@ view: comex_analytics_gold {
     sql: ${TABLE}.crt ;;
   }
 
-  dimension: nm_pais_aquis {
+  dimension: adquirente_cnpj {
     type: string
-    sql: ${TABLE}.nm_pais_aquis ;;
+    sql: ${TABLE}.adquirente_cnpj ;;
   }
 
-  dimension: nm_pais_origem {
+  dimension: adquirente_nome {
     type: string
-    sql: ${TABLE}.nm_pais_origem ;;
-  }
-
-  dimension: cod_ncm {
-    type: number
-    sql: ${TABLE}.cod_ncm ;;
-  }
-
-  dimension: desc_mercadoria {
-    type: string
-    sql: ${TABLE}.desc_mercadoria ;;
-  }
-
-  dimension: qtd_med_estat {
-    type: number
-    sql: ${TABLE}.qtd_med_estat ;;
-  }
-
-  dimension: via_transp {
-    type: string
-    sql: ${TABLE}.via_transp ;;
-  }
-
-  dimension: pais_procedencia {
-    type: string
-    sql: ${TABLE}.pais_procedencia ;;
-  }
-
-  dimension: id_pais_procedencia {
-    type: string
-    sql: ${TABLE}.id_pais_procedencia ;;
-  }
-
-  dimension: urf_entrada {
-    type: string
-    sql: ${TABLE}.urf_entrada ;;
-  }
-
-  dimension: moeda_frete_carga {
-    type: string
-    sql: ${TABLE}.moeda_frete_carga ;;
-  }
-
-  dimension: val_frete_carga_moeda {
-    type: number
-    sql: ${TABLE}.val_frete_carga_moeda ;;
-  }
-
-  dimension: incoterm {
-    type: string
-    sql: ${TABLE}.incoterm ;;
+    sql: ${TABLE}.adquirente_nome ;;
   }
 
   dimension: id {
@@ -319,9 +339,9 @@ view: comex_analytics_gold {
     sql: ${TABLE}.deleted_at ;;
   }
 
-  dimension_group: created_at0 {
+  dimension_group: created_at {
     type: time
-    sql: ${TABLE}.created_at0 ;;
+    sql: ${TABLE}.created_at ;;
   }
 
   dimension_group: updated_at {
@@ -429,9 +449,9 @@ view: comex_analytics_gold {
     sql: ${TABLE}.deleted_at0 ;;
   }
 
-  dimension_group: created_at1 {
+  dimension_group: created_at0 {
     type: time
-    sql: ${TABLE}.created_at1 ;;
+    sql: ${TABLE}.created_at0 ;;
   }
 
   dimension_group: updated_at0 {
@@ -539,9 +559,9 @@ view: comex_analytics_gold {
     sql: ${TABLE}.deleted_at1 ;;
   }
 
-  dimension_group: created_at2 {
+  dimension_group: created_at1 {
     type: time
-    sql: ${TABLE}.created_at2 ;;
+    sql: ${TABLE}.created_at1 ;;
   }
 
   dimension_group: updated_at1 {
@@ -629,9 +649,9 @@ view: comex_analytics_gold {
     sql: ${TABLE}.deleted_at2 ;;
   }
 
-  dimension_group: created_at3 {
+  dimension_group: created_at2 {
     type: time
-    sql: ${TABLE}.created_at3 ;;
+    sql: ${TABLE}.created_at2 ;;
   }
 
   dimension_group: updated_at2 {
@@ -678,15 +698,22 @@ view: comex_analytics_gold {
   #   fields: [
   #     di_number,
   #     data_hora_registro_time,
-  #     uf,
-  #     data_registro_di,
+  #     tipo_recolhimento,
+  #     mandato_judicial,
+  #     uf_icms,
+  #     data_pagamento_time,
+  #     urf_despacho,
+  #     data_desembaraco_time,
+  #     modalidade_despacho,
+  #     tipo_declaracao,
   #     canal,
   #     importador_cnpj,
   #     importador_nome,
   #     importador_endereco,
-  #     pais_procedencia_cod,
-  #     pais_procedencia_nome,
-  #     data_chegada_carga,
+  #     numero_ce,
+  #     cd_pais_proced,
+  #     nm_pais_proced,
+  #     data_chegada_time,
   #     urf_entrada_carga,
   #     peso_bruto,
   #     peso_liquido,
@@ -694,40 +721,37 @@ view: comex_analytics_gold {
   #     armazem,
   #     qtde_volume,
   #     embalagem,
-  #     moeda,
+  #     moeda_frete,
   #     prepaid,
   #     collect,
   #     terr_nacional,
-  #     totalmoeda,
+  #     val_frete_moeda,
+  #     val_frete_us,
+  #     val_frete_reais,
   #     moeda_seguro,
-  #     total_moeda_seguro,
-  #     via_transporte,
+  #     val_segur_moeda,
+  #     val_segur_us,
+  #     val_segur_reais,
+  #     val_vmle_us,
+  #     val_vmle_reais,
+  #     val_vmld_us,
+  #     val_vmld_reais,
+  #     via_transp,
   #     multimodal,
   #     embarcacao,
   #     transportador,
-  #     doc_chegada_carga_tipo,
-  #     doc_chegada_carga_identificacao,
+  #     doc_chegada_tipo,
+  #     doc_chegada_identificacao,
   #     local_embarque,
   #     data_embarque_time,
   #     utilizacao,
-  #     informacoes_complementares,
-  #     created_at_time,
+  #     val_multa,
   #     awb,
   #     hwb,
   #     setor,
   #     crt,
-  #     nm_pais_aquis,
-  #     nm_pais_origem,
-  #     cod_ncm,
-  #     desc_mercadoria,
-  #     qtd_med_estat,
-  #     via_transp,
-  #     pais_procedencia,
-  #     id_pais_procedencia,
-  #     urf_entrada,
-  #     moeda_frete_carga,
-  #     val_frete_carga_moeda,
-  #     incoterm,
+  #     adquirente_cnpj,
+  #     adquirente_nome,
   #     id,
   #     customer_id,
   #     cnpj,
@@ -735,7 +759,7 @@ view: comex_analytics_gold {
   #     comments,
   #     user_id,
   #     deleted_at_time,
-  #     created_at0_time,
+  #     created_at_time,
   #     updated_at_time,
   #     dt_sync_mercante_time,
   #     dt_sync_siscomex_time,
@@ -757,7 +781,7 @@ view: comex_analytics_gold {
   #     slug,
   #     customer_type_id,
   #     deleted_at0_time,
-  #     created_at1_time,
+  #     created_at0_time,
   #     updated_at0_time,
   #     pay_day,
   #     custom_hex_color,
@@ -779,7 +803,7 @@ view: comex_analytics_gold {
   #     certificate_id,
   #     consignee_id,
   #     deleted_at1_time,
-  #     created_at2_time,
+  #     created_at1_time,
   #     updated_at1_time,
   #     ces_processed_at_time,
   #     id2,
@@ -797,7 +821,7 @@ view: comex_analytics_gold {
   #     error_message,
   #     profile,
   #     deleted_at2_time,
-  #     created_at3_time,
+  #     created_at2_time,
   #     updated_at2_time,
   #     file_hash,
   #     v2_id,
