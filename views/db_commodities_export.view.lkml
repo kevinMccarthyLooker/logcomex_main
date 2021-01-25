@@ -139,6 +139,21 @@ view: db_commodities_export {
          end ;;
   }
 
+  dimension_group: data_embarque {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}.anomes_Mes ;;
+  }
+
   measure: qtd_comerc {
     type: sum
     sql: ${TABLE}."qtd_comerc" ;;
