@@ -78,9 +78,9 @@ view: db_siscori_cod_ncm {
     drill_fields: [id]
   }
 
-  measure: ncm_hscode {
+  measure: ncm {
     type: number
     value_format: "0"
-    sql: left(${TABLE}."cdncm_compl",4);;
+    sql: ${TABLE}."cdncm_compl";;
   }
 }
