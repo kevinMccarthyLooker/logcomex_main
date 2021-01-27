@@ -1,6 +1,6 @@
 view: db_maritimo_gold {
   derived_table: {
-    sql: SELECT * FROM maritimo.db_maritimo_gold limit 10
+    sql: SELECT * FROM maritimo.db_maritimo_gold
       ;;
   }
 
