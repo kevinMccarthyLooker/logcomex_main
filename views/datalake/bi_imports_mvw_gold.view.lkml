@@ -444,6 +444,23 @@ view: bi_imports_mvw_gold {
 
 ########################## ----> Itens adicionados / alterados <---- ##########################
 
+  dimension: mais_de_um_tipo {
+    type: string
+    sql:  CASE WHEN (${TABLE}.c20 <> 0 and ${TABLE}.c40 <> 0) THEN "A"
+          else "B" end
+    ;;
+  }
+
+  measure: mais_de_um_tipo_sim {
+    type: count
+    filters: [mais_de_um_tipo: "=A"]
+  }
+
+  measure: mais_de_um_tipo_nao {
+    type: count
+    filters: [mais_de_um_tipo: "=B"]
+  }
+
   dimension: teus_dimension {
     type: number
     sql: ${TABLE}.teus ;;

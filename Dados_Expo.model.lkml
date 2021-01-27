@@ -18,6 +18,7 @@ include: "/**/db_siscori_unidmed.view.lkml"
 include: "/**/db_siscori_unid_fiscal.view.lkml"
 include: "/**/external_search_expo_nfs.dashboard.lookml"  #dashboard externo nfs para search expo
 include: "/**/external_search_expo_siscori.dashboard.lookml"  #dashboard externo siscori para search expo
+include: "/**/external_siscori.dashboard.lookml"
 
 datagroup: db_commodities_export_datagroup {
   sql_trigger: SELECT max(id) FROM public.db_commodities_export ;;

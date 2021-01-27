@@ -1,5 +1,5 @@
-- dashboard: siscori_expo
-  title: Siscori Expo
+- dashboard: ncmproduto_siscori
+  title: NCM/Produto (siscori)
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: true
