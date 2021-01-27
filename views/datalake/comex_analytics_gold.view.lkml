@@ -855,4 +855,14 @@ view: comex_analytics_gold {
     sql: ${TABLE}."val_vmld_reais";;
   }
 
+  measure: peso_bruto_total {
+    type: sum
+    sql: ${TABLE}."peso_bruto";;
+  }
+
+  measure: peso_liquido_total {
+    type: sum
+    sql: ${TABLE}."peso_liquido";;
+  }
+
 }
