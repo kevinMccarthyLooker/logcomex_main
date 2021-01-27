@@ -4,6 +4,7 @@ include: "/**/searchx_gold.view.lkml"
 include: "/**/searchx_gold_v2.view.lkml"
 include: "/**/searchx_importadores_agrupado.view.lkml"
 include: "/**/searchx_gold_v2_index.view.lkml"
+include: "/**/searchx_gold_2020_test_danilo.view.lkml"
 
 
 #datagroup: searchx_datagroup {
@@ -13,6 +14,10 @@ include: "/**/searchx_gold_v2_index.view.lkml"
 #  label: "ETL ID added"
 #  description: "Triggered when new ID is added to ETL log"
 #}
+
+explore:searchx_gold_2020_test_danilo  {
+  persist_for: "24 hours"
+}
 
 explore:searchx_gold_v2_index  {
   persist_for: "24 hours"
