@@ -865,4 +865,9 @@ view: comex_analytics_gold {
     sql: ${TABLE}."peso_liquido";;
   }
 
+  measure: di_total {
+    type: sum
+    sql: ${TABLE}."di_number";;
+  }
+
 }
