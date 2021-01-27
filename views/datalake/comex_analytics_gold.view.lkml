@@ -4,10 +4,9 @@ view: comex_analytics_gold {
       ;;
   }
 
-  # measure: count {
-  #   type: count
-  #   drill_fields: [detail*]
-  # }
+  measure: count {
+   type: count
+  }
 
   dimension: di_number {
     type: number
