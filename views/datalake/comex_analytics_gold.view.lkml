@@ -870,4 +870,9 @@ view: comex_analytics_gold {
     sql: ${TABLE}."di_number";;
   }
 
+  measure: valor_multa_total {
+    type: sum
+    sql: ${TABLE}."val_multa";;
+  }
+
 }
