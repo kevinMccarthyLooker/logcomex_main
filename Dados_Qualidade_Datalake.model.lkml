@@ -6,5 +6,7 @@ include: "/**/comex_analytics_gold.view.lkml"
 
 explore:db_maritimo_bronze  {
 }
+explore:db_maritimo_gold  {
+}
 explore:comex_analytics_gold  {
 }
