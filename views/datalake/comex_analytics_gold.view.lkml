@@ -837,22 +837,22 @@ view: comex_analytics_gold {
 
   measure: valor_vmle_us {
     type: sum
-    sql: ${TABLE}."val_vmle_us"" ;;
+    sql: ${TABLE}."val_vmle_us";;
   }
 
   measure: valor_vmle_reais {
     type: sum
-    sql: ${TABLE}."val_vmle_reais"" ;;
+    sql: ${TABLE}."val_vmle_reais";;
   }
 
   measure: valor_vmld_us {
     type: sum
-    sql: ${TABLE}."val_vmld_us"" ;;
+    sql: ${TABLE}."val_vmld_us";;
   }
 
   measure: valor_vmld_reais {
     type: sum
-    sql: ${TABLE}."val_vmld_reais"" ;;
+    sql: ${TABLE}."val_vmld_reais";;
   }
 
 }
