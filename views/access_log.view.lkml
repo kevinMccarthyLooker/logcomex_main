@@ -104,6 +104,12 @@ view: access_log {
     drill_fields: [user_id]
   }
 
+  measure: count_ip_distinc {
+    type: count_distinct
+    sql: ${TABLE}."ip" ;;
+    drill_fields: [user_id, created_raw, ip]
+  }
+
     measure: count_access_log {
     type: count
     drill_fields: [users.name]
