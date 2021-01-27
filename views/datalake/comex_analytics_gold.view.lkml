@@ -831,4 +831,28 @@ view: comex_analytics_gold {
   #     user_id0
   #   ]
   # }
+
+  #==================================================================================================
+  #dados inseridos
+
+  measure: valor_vmle_us {
+    type: sum
+    sql: ${TABLE}."val_vmle_us"" ;;
+  }
+
+  measure: valor_vmle_reais {
+    type: sum
+    sql: ${TABLE}."val_vmle_reais"" ;;
+  }
+
+  measure: valor_vmld_us {
+    type: sum
+    sql: ${TABLE}."val_vmld_us"" ;;
+  }
+
+  measure: valor_vmld_reais {
+    type: sum
+    sql: ${TABLE}."val_vmld_reais"" ;;
+  }
+
 }
