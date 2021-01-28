@@ -875,4 +875,9 @@ view: comex_analytics_gold {
     sql: ${TABLE}."val_multa";;
   }
 
+  measure: data_hora_registro {
+    type: max
+    sql: ${TABLE}."data_hora_registro";;
+  }
+
 }
