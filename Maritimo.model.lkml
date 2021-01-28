@@ -2,6 +2,7 @@ connection: "db"
 
 include: "/views/aereo_dados_no_tempo.view.lkml"
 include: "/views/health_data.view.lkml"
+include: "/views/nyk_base.view.lkml"
 include: "/views/antaqxmaritimo.view.lkml"
 include: "/views/cs_dash_imp.view.lkml"
 include: "/views/view_infografico.view.lkml"
@@ -135,6 +136,10 @@ explore: db_maritimo {
     relationship: many_to_one
     sql_on: ${db_export_cargo_reception_details.nrcemercante} = ${db_maritimo.nrcemercante} ;;
 
+  }
+  join: nyk_base {
+    relationship: many_to_many
+    sql_on: ${nyk_base.nm_embarque} = ${db_maritimo.nmembarcacao} ;;
   }
 }
 
