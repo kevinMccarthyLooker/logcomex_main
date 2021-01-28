@@ -5,6 +5,7 @@ view: db_maritimo {
   dimension: id {
     primary_key: yes
     type: number
+    label: "id_maritimo"
     sql: ${TABLE}."id" ;;
   }
 

@@ -5,6 +5,7 @@ view: nyk_base {
   dimension: id {
     primary_key: yes
     type: number
+    label: "id_nyk"
     sql: ${TABLE}."id" ;;
   }
 
