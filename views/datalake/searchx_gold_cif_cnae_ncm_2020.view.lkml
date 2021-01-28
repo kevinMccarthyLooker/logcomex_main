@@ -99,4 +99,9 @@ view: searchx_gold_cif_cnae_ncm_2020 {
     sql: ${importador_cnpj} ;;
     #drill_fields: [id, name, custom_name]
   }
+
+  measure: sum_valor_total {
+    type: sum
+    sql: ${valor_total} ;;
+  }
 }
