@@ -190,7 +190,13 @@ view: customer_plan {
     sql: case when (${start_raw} is null and ${trial_start_raw} is null) or (${expiration_raw} is null and ${trial_end_raw} is null) then true
               else false
          end;;
+  }
 
+  dimension: apenas_trial {  # verifica se o plano possui apenas trial sem contrato
+    type: yesno
+    sql: case when (${start_raw} is null and ${trial_start_raw} is not null) then true
+              else false
+         end;;
   }
 
   dimension: dias_trial {
@@ -235,8 +241,7 @@ view: customer_plan {
       customer.name,
       customer.custom_name,
       plan_complete.id,
-      plan_info.id,
-      report_log.count
+      plan_info.id
     ]
   }
   set: customer_detail {
