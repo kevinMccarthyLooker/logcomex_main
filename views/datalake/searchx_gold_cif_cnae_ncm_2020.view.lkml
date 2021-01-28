@@ -1,145 +1,10 @@
-view: searchx_importadores_agrupado {
+view: searchx_gold_cif_cnae_ncm_2020 {
+  sql_table_name: searchx.searchx_gold_cif_cnae_ncm_2020 ;;
 
-  derived_table: {
-    sql:select importador_nome,cod_cnae_import,desc_cnae_import,cdncm_compl,nome_ncm_pt,valor
-        from(
-        select
-        concat(importador_nome,cod_cnae_import,cod_cnae_import,cdncm_compl,nome_ncm_pt,desc_cnae_import) as id,
-        importador_nome,
-        cod_cnae_import,
-        cdncm_compl,
-        nome_ncm_pt,
-        desc_cnae_import,
-        sum(cast(val_vmle_us_subitem as float)) as valor
-        from searchx.searchx_gold_v2
-        GROUP BY 1,2,3,4,5,6) as qq1
-        where valor =
-        (
-        select max(valor)
-        from(
-        select
-        concat(importador_nome,cod_cnae_import,cod_cnae_import,cdncm_compl,nome_ncm_pt,desc_cnae_import) as id,
-        importador_nome,
-        cod_cnae_import,
-        cdncm_compl,
-        nome_ncm_pt,
-        desc_cnae_import,
-        sum(cast(val_vmle_us_subitem as float)) as valor
-        from searchx.searchx_gold_v2
-        GROUP BY 1,2,3,4,5,6) as qq2 where qq2.importador_nome = qq1.importador_nome
-        ) ;;
-  }
-
-  dimension: importador_nome_agp {
-    type: string
-    sql: ${TABLE}.importador_nome ;;
-  }
-
-  dimension: top_cod_cnae_import {
-    type: string
-    sql: ${TABLE}.cod_cnae_import ;;
-  }
-
-  dimension: cnae_segmento{
-    type: string
-    sql:
-    case
-    when left(${TABLE}.cod_cnae_import,2) = '01' then 'AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA'
-    when left(${TABLE}.cod_cnae_import,2) = '02' then 'AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA'
-    when left(${TABLE}.cod_cnae_import,2) = '03' then 'AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA'
-    when left(${TABLE}.cod_cnae_import,2) = '05' then 'INDÚSTRIAS EXTRATIVAS'
-    when left(${TABLE}.cod_cnae_import,2) = '06' then 'INDÚSTRIAS EXTRATIVAS'
-    when left(${TABLE}.cod_cnae_import,2) = '07' then 'INDÚSTRIAS EXTRATIVAS'
-    when left(${TABLE}.cod_cnae_import,2) = '08' then 'INDÚSTRIAS EXTRATIVAS'
-    when left(${TABLE}.cod_cnae_import,2) = '09' then 'INDÚSTRIAS EXTRATIVAS'
-    when left(${TABLE}.cod_cnae_import,2) = '10' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '11' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '12' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '13' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '14' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '15' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '16' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '17' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '18' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '19' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '20' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '21' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '22' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '23' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '24' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '25' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '26' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '27' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '28' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '29' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '30' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '31' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '32' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '33' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '35' then 'ELETRICIDADE E GÁS'
-    when left(${TABLE}.cod_cnae_import,2) = '36' then 'ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '37' then 'ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '38' then 'ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '39' then 'ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '41' then 'CONSTRUÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '42' then 'CONSTRUÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '43' then 'CONSTRUÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '45' then 'COMÉRCIO, REPARAÇÃO DE VEÍCULOS AUTOMOTORES E MOTOCICLETAS'
-    when left(${TABLE}.cod_cnae_import,2) = '46' then 'COMÉRCIO, REPARAÇÃO DE VEÍCULOS AUTOMOTORES E MOTOCICLETAS'
-    when left(${TABLE}.cod_cnae_import,2) = '47' then 'COMÉRCIO, REPARAÇÃO DE VEÍCULOS AUTOMOTORES E MOTOCICLETAS'
-    when left(${TABLE}.cod_cnae_import,2) = '49' then 'TRANSPORTE, ARMAZENAGEM E CORREIO'
-    when left(${TABLE}.cod_cnae_import,2) = '50' then 'TRANSPORTE, ARMAZENAGEM E CORREIO'
-    when left(${TABLE}.cod_cnae_import,2) = '51' then 'TRANSPORTE, ARMAZENAGEM E CORREIO'
-    when left(${TABLE}.cod_cnae_import,2) = '52' then 'TRANSPORTE, ARMAZENAGEM E CORREIO'
-    when left(${TABLE}.cod_cnae_import,2) = '53' then 'TRANSPORTE, ARMAZENAGEM E CORREIO'
-    when left(${TABLE}.cod_cnae_import,2) = '55' then 'ALOJAMENTO E ALIMENTAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '56' then 'ALOJAMENTO E ALIMENTAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '58' then 'INFORMAÇÃO E COMUNICAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '59' then 'INFORMAÇÃO E COMUNICAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '60' then 'INFORMAÇÃO E COMUNICAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '61' then 'INFORMAÇÃO E COMUNICAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '62' then 'INFORMAÇÃO E COMUNICAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '63' then 'INFORMAÇÃO E COMUNICAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '64' then 'ATIVIDADES FINANCEIRAS, DE SEGUROS E SERVIÇOS RELACIONADOS'
-    when left(${TABLE}.cod_cnae_import,2) = '65' then 'ATIVIDADES FINANCEIRAS, DE SEGUROS E SERVIÇOS RELACIONADOS'
-    when left(${TABLE}.cod_cnae_import,2) = '66' then 'ATIVIDADES FINANCEIRAS, DE SEGUROS E SERVIÇOS RELACIONADOS'
-    when left(${TABLE}.cod_cnae_import,2) = '68' then 'ATIVIDADES IMOBILIÁRIAS'
-    when left(${TABLE}.cod_cnae_import,2) = '69' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
-    when left(${TABLE}.cod_cnae_import,2) = '70' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
-    when left(${TABLE}.cod_cnae_import,2) = '71' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
-    when left(${TABLE}.cod_cnae_import,2) = '72' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
-    when left(${TABLE}.cod_cnae_import,2) = '73' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
-    when left(${TABLE}.cod_cnae_import,2) = '74' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
-    when left(${TABLE}.cod_cnae_import,2) = '75' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
-    when left(${TABLE}.cod_cnae_import,2) = '77' then 'ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES'
-    when left(${TABLE}.cod_cnae_import,2) = '78' then 'ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES'
-    when left(${TABLE}.cod_cnae_import,2) = '79' then 'ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES'
-    when left(${TABLE}.cod_cnae_import,2) = '80' then 'ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES'
-    when left(${TABLE}.cod_cnae_import,2) = '81' then 'ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES'
-    when left(${TABLE}.cod_cnae_import,2) = '82' then 'ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES'
-    when left(${TABLE}.cod_cnae_import,2) = '84' then 'ADMINISTRAÇÃO PÚBLICA, DEFESA E SEGURIDADE SOCIAL'
-    when left(${TABLE}.cod_cnae_import,2) = '85' then 'EDUCAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '86' then 'SAÚDE HUMANA E SERVIÇOS SOCIAIS'
-    when left(${TABLE}.cod_cnae_import,2) = '87' then 'SAÚDE HUMANA E SERVIÇOS SOCIAIS'
-    when left(${TABLE}.cod_cnae_import,2) = '88' then 'SAÚDE HUMANA E SERVIÇOS SOCIAIS'
-    when left(${TABLE}.cod_cnae_import,2) = '90' then 'ARTES, CULTURA, ESPORTE E RECREAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '91' then 'ARTES, CULTURA, ESPORTE E RECREAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '92' then 'ARTES, CULTURA, ESPORTE E RECREAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '93' then 'ARTES, CULTURA, ESPORTE E RECREAÇÃO'
-    when left(${TABLE}.cod_cnae_import,2) = '94' then 'OUTRAS ATIVIDADES DE SERVIÇOS'
-    when left(${TABLE}.cod_cnae_import,2) = '95' then 'OUTRAS ATIVIDADES DE SERVIÇOS'
-    when left(${TABLE}.cod_cnae_import,2) = '96' then 'OUTRAS ATIVIDADES DE SERVIÇOS'
-    when left(${TABLE}.cod_cnae_import,2) = '97' then 'SERVIÇOS DOMÉSTICOS'
-    when left(${TABLE}.cod_cnae_import,2) = '99' then 'ORGANISMOS INTERNACIONAIS E OUTRAS INSTITUIÇÕES EXTRATERRITORIAIS'
-    else 'Erro'
-    end;;
-  }
-
-  dimension: top_cdncm_compl {
+  dimension: cdncm_compl {
     type: string
     sql: ${TABLE}.cdncm_compl ;;
   }
-
 
   dimension: top_ncm_cap_desc {
     type: string
@@ -246,20 +111,213 @@ view: searchx_importadores_agrupado {
     end ;;
   }
 
-  dimension: top_nome_ncm_pt {
+  dimension: cod_cnae_import {
     type: string
-    sql: ${TABLE}.nome_ncm_pt ;;
+    sql: ${TABLE}.cod_cnae_import ;;
   }
 
-  dimension: top_desc_cnae_import {
+  dimension: cnae_segmento{
+    type: string
+    sql:
+    case
+    when left(${TABLE}.cod_cnae_import,2) = '01' then 'AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA'
+    when left(${TABLE}.cod_cnae_import,2) = '02' then 'AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA'
+    when left(${TABLE}.cod_cnae_import,2) = '03' then 'AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA'
+    when left(${TABLE}.cod_cnae_import,2) = '05' then 'INDÚSTRIAS EXTRATIVAS'
+    when left(${TABLE}.cod_cnae_import,2) = '06' then 'INDÚSTRIAS EXTRATIVAS'
+    when left(${TABLE}.cod_cnae_import,2) = '07' then 'INDÚSTRIAS EXTRATIVAS'
+    when left(${TABLE}.cod_cnae_import,2) = '08' then 'INDÚSTRIAS EXTRATIVAS'
+    when left(${TABLE}.cod_cnae_import,2) = '09' then 'INDÚSTRIAS EXTRATIVAS'
+    when left(${TABLE}.cod_cnae_import,2) = '10' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '11' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '12' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '13' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '14' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '15' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '16' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '17' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '18' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '19' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '20' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '21' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '22' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '23' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '24' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '25' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '26' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '27' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '28' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '29' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '30' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '31' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '32' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '33' then 'INDÚSTRIAS DE TRANSFORMAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '35' then 'ELETRICIDADE E GÁS'
+    when left(${TABLE}.cod_cnae_import,2) = '36' then 'ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '37' then 'ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '38' then 'ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '39' then 'ÁGUA, ESGOTO, ATIVIDADES DE GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '41' then 'CONSTRUÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '42' then 'CONSTRUÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '43' then 'CONSTRUÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '45' then 'COMÉRCIO, REPARAÇÃO DE VEÍCULOS AUTOMOTORES E MOTOCICLETAS'
+    when left(${TABLE}.cod_cnae_import,2) = '46' then 'COMÉRCIO, REPARAÇÃO DE VEÍCULOS AUTOMOTORES E MOTOCICLETAS'
+    when left(${TABLE}.cod_cnae_import,2) = '47' then 'COMÉRCIO, REPARAÇÃO DE VEÍCULOS AUTOMOTORES E MOTOCICLETAS'
+    when left(${TABLE}.cod_cnae_import,2) = '49' then 'TRANSPORTE, ARMAZENAGEM E CORREIO'
+    when left(${TABLE}.cod_cnae_import,2) = '50' then 'TRANSPORTE, ARMAZENAGEM E CORREIO'
+    when left(${TABLE}.cod_cnae_import,2) = '51' then 'TRANSPORTE, ARMAZENAGEM E CORREIO'
+    when left(${TABLE}.cod_cnae_import,2) = '52' then 'TRANSPORTE, ARMAZENAGEM E CORREIO'
+    when left(${TABLE}.cod_cnae_import,2) = '53' then 'TRANSPORTE, ARMAZENAGEM E CORREIO'
+    when left(${TABLE}.cod_cnae_import,2) = '55' then 'ALOJAMENTO E ALIMENTAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '56' then 'ALOJAMENTO E ALIMENTAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '58' then 'INFORMAÇÃO E COMUNICAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '59' then 'INFORMAÇÃO E COMUNICAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '60' then 'INFORMAÇÃO E COMUNICAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '61' then 'INFORMAÇÃO E COMUNICAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '62' then 'INFORMAÇÃO E COMUNICAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '63' then 'INFORMAÇÃO E COMUNICAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '64' then 'ATIVIDADES FINANCEIRAS, DE SEGUROS E SERVIÇOS RELACIONADOS'
+    when left(${TABLE}.cod_cnae_import,2) = '65' then 'ATIVIDADES FINANCEIRAS, DE SEGUROS E SERVIÇOS RELACIONADOS'
+    when left(${TABLE}.cod_cnae_import,2) = '66' then 'ATIVIDADES FINANCEIRAS, DE SEGUROS E SERVIÇOS RELACIONADOS'
+    when left(${TABLE}.cod_cnae_import,2) = '68' then 'ATIVIDADES IMOBILIÁRIAS'
+    when left(${TABLE}.cod_cnae_import,2) = '69' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
+    when left(${TABLE}.cod_cnae_import,2) = '70' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
+    when left(${TABLE}.cod_cnae_import,2) = '71' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
+    when left(${TABLE}.cod_cnae_import,2) = '72' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
+    when left(${TABLE}.cod_cnae_import,2) = '73' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
+    when left(${TABLE}.cod_cnae_import,2) = '74' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
+    when left(${TABLE}.cod_cnae_import,2) = '75' then 'ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS'
+    when left(${TABLE}.cod_cnae_import,2) = '77' then 'ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES'
+    when left(${TABLE}.cod_cnae_import,2) = '78' then 'ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES'
+    when left(${TABLE}.cod_cnae_import,2) = '79' then 'ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES'
+    when left(${TABLE}.cod_cnae_import,2) = '80' then 'ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES'
+    when left(${TABLE}.cod_cnae_import,2) = '81' then 'ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES'
+    when left(${TABLE}.cod_cnae_import,2) = '82' then 'ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES'
+    when left(${TABLE}.cod_cnae_import,2) = '84' then 'ADMINISTRAÇÃO PÚBLICA, DEFESA E SEGURIDADE SOCIAL'
+    when left(${TABLE}.cod_cnae_import,2) = '85' then 'EDUCAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '86' then 'SAÚDE HUMANA E SERVIÇOS SOCIAIS'
+    when left(${TABLE}.cod_cnae_import,2) = '87' then 'SAÚDE HUMANA E SERVIÇOS SOCIAIS'
+    when left(${TABLE}.cod_cnae_import,2) = '88' then 'SAÚDE HUMANA E SERVIÇOS SOCIAIS'
+    when left(${TABLE}.cod_cnae_import,2) = '90' then 'ARTES, CULTURA, ESPORTE E RECREAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '91' then 'ARTES, CULTURA, ESPORTE E RECREAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '92' then 'ARTES, CULTURA, ESPORTE E RECREAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '93' then 'ARTES, CULTURA, ESPORTE E RECREAÇÃO'
+    when left(${TABLE}.cod_cnae_import,2) = '94' then 'OUTRAS ATIVIDADES DE SERVIÇOS'
+    when left(${TABLE}.cod_cnae_import,2) = '95' then 'OUTRAS ATIVIDADES DE SERVIÇOS'
+    when left(${TABLE}.cod_cnae_import,2) = '96' then 'OUTRAS ATIVIDADES DE SERVIÇOS'
+    when left(${TABLE}.cod_cnae_import,2) = '97' then 'SERVIÇOS DOMÉSTICOS'
+    when left(${TABLE}.cod_cnae_import,2) = '99' then 'ORGANISMOS INTERNACIONAIS E OUTRAS INSTITUIÇÕES EXTRATERRITORIAIS'
+    else 'Erro'
+    end;;
+  }
+
+  dimension: customer_id {
+    type: number
+    sql: ${TABLE}.customer_id ;;
+  }
+
+  dimension: cliente {
+    type: yesno
+    sql: case when ${TABLE}.customer_id is null then false
+         else true
+         end;;
+  }
+
+  dimension: cliente_match {
+    type: yesno
+    sql: ${cliente} ;;
+    html: {% if value == 'Yes' %}
+            <font color="green">{{ cliente }}</font>
+          {% else %}
+            <font color="red">{{ cliente }}</font>
+          {% endif %};;
+  }
+
+  dimension: desc_cnae_import {
     type: string
     sql: ${TABLE}.desc_cnae_import ;;
   }
 
-  dimension: top_valor {
-    type: number
-    sql: ${TABLE}.valor ;;
+  dimension: importador_cnpj {
+    type: string
+    sql: ${TABLE}.importador_cnpj ;;
   }
 
+  dimension: importador_cnpj_8dig {
+    type: string
+    sql: left(${TABLE}.importador_cnpj,10) ;;
+  }
 
+  dimension: importador_nome {
+    type: string
+    sql: ${TABLE}.importador_nome ;;
+  }
+
+  dimension: importador_nome_tratado {
+    type: string
+    sql: case when (${TABLE}.importador_nome = '' or ${TABLE}.importador_nome is null) then 'NÃO ENCONTRADO'
+         else ${TABLE}.importador_nome
+         end ;;
+  }
+
+  dimension: importador_encontrado {
+    type: yesno
+    sql: case when (${TABLE}.importador_nome = '' or ${TABLE}.importador_nome is null) then false
+         else true
+         end ;;
+  }
+
+  dimension: nome_ncm_pt {
+    type: string
+    sql: ${TABLE}.nome_ncm_pt ;;
+  }
+
+  dimension: valor_cnae_ncm {
+    type: number
+    sql: ${TABLE}.valor_cnae_ncm ;;
+  }
+
+  dimension: valor_total {
+    type: number
+    sql: ${TABLE}.valor_total ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: []
+  }
+
+  measure: count_distinct_customer_id {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    drill_fields: [customer_id, importador_nome, importador_cnpj]
+  }
+
+  measure: count_distinc_imp_name {
+    type: count_distinct
+    sql: ${importador_nome} ;;
+    #drill_fields: [importador_nome]
+  }
+
+  measure: count_distinc_cnpj {
+    type: count_distinct
+    sql: ${importador_cnpj} ;;
+    #drill_fields: [id, name, custom_name]
+  }
+
+  measure: count_distinc_cnpj_8dig {
+    type: count_distinct
+    sql: ${importador_cnpj_8dig} ;;
+    #drill_fields: [id, name, custom_name]
+  }
+
+  measure: sum_valor_total {
+    type: sum
+    sql: ${valor_total} ;;
+  }
+
+  measure: sum_valor_cnae_ncm {
+    type: sum
+    sql: ${valor_cnae_ncm} ;;
+  }
 }

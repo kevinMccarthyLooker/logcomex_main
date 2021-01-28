@@ -4,10 +4,9 @@ view: comex_analytics_gold {
       ;;
   }
 
-  # measure: count {
-  #   type: count
-  #   drill_fields: [detail*]
-  # }
+  measure: count {
+   type: count
+  }
 
   dimension: di_number {
     type: number
@@ -161,7 +160,7 @@ view: comex_analytics_gold {
 
   dimension: collect {
     type: number
-    sql: ${TABLE}."collect" ;;
+    sql: ${TABLE}.collect ;;
   }
 
   dimension: terr_nacional {
@@ -832,4 +831,53 @@ view: comex_analytics_gold {
   #     user_id0
   #   ]
   # }
+
+  #==================================================================================================
+  #dados inseridos
+
+  measure: valor_vmle_us {
+    type: sum
+    sql: ${TABLE}."val_vmle_us";;
+  }
+
+  measure: valor_vmle_reais {
+    type: sum
+    sql: ${TABLE}."val_vmle_reais";;
+  }
+
+  measure: valor_vmld_us {
+    type: sum
+    sql: ${TABLE}."val_vmld_us";;
+  }
+
+  measure: valor_vmld_reais {
+    type: sum
+    sql: ${TABLE}."val_vmld_reais";;
+  }
+
+  measure: peso_bruto_total {
+    type: sum
+    sql: ${TABLE}."peso_bruto";;
+  }
+
+  measure: peso_liquido_total {
+    type: sum
+    sql: ${TABLE}."peso_liquido";;
+  }
+
+  measure: di_total {
+    type: sum
+    sql: ${TABLE}."di_number";;
+  }
+
+  measure: valor_multa_total {
+    type: sum
+    sql: ${TABLE}."val_multa";;
+  }
+
+  measure: data_hora_registro {
+    type: date
+    sql: MAX (${TABLE}."data_hora_registro");;
+  }
+
 }
