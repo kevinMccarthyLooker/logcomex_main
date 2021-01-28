@@ -1,7 +1,6 @@
 view: comex_analytics_gold {
   derived_table: {
-    sql: SELECT * FROM comex_analytics.comex_analytics_gold
-      ;;
+    sql: SELECT * FROM comex_analytics.comex_analytics_gold;;
   }
 
   measure: count {
