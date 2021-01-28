@@ -1,6 +1,6 @@
 view: comex_analytics_gold {
   derived_table: {
-    sql: SELECT * FROM comex_analytics.comex_analytics_gold
+    sql: SELECT 5000 FROM comex_analytics.comex_analytics_gold
       ;;
   }
 
@@ -160,7 +160,7 @@ view: comex_analytics_gold {
 
   dimension: collect {
     type: number
-    sql: ${TABLE}."collect" ;;
+    sql: ${TABLE}.collect ;;
   }
 
   dimension: terr_nacional {
