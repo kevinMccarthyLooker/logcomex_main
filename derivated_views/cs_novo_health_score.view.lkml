@@ -256,7 +256,7 @@ where current_date between cp.start and cp.expiration
   and pc.deleted_at is null
   and c.fake_customer is false
     ;;
-  indexes: ["id"]
+  indexes: ["customer_id"]
   sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60));;
   #datagroup_trigger: my_datagroup
   #indexes: ["customer_id"]
