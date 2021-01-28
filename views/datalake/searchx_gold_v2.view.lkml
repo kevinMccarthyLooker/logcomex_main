@@ -4,7 +4,7 @@ view: searchx_gold_v2 {
     sql:
     select *
     from searchx.searchx_gold_v2
-    where cast(data_hora_registro as date) >= current_date - interval '12' month;;
+    where to_date(concat(anomes,'01'), 'YYYYMMDD') between '2020-01-01' and '2020-12-31' ;;
   }
 
   drill_fields: [id]

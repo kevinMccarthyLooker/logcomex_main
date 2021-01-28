@@ -23,9 +23,28 @@ view: customer_api_relations {
     sql: ${TABLE}."id_movidesk" ;;
   }
 
+  dimension: hub_trigger_register_cs {
+    type: string
+    sql: ${TABLE}."hub_trigger_register_cs" ;;
+  }
+
   dimension: id_omie_customer {
     type: number
     sql: ${TABLE}."id_omie_customer" ;;
+  }
+
+  dimension_group: deleted {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."deleted_at" ;;
   }
 
   measure: count {
