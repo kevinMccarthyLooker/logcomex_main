@@ -315,4 +315,9 @@ view: searchx_gold_cif_cnae_ncm_2020 {
     type: sum
     sql: ${valor_total} ;;
   }
+
+  measure: sum_valor_cnae_ncm {
+    type: sum
+    sql: ${valor_cnae_ncm} ;;
+  }
 }
