@@ -876,8 +876,8 @@ view: comex_analytics_gold {
   }
 
   measure: data_hora_registro {
-    type: max
-    sql: ${TABLE}."data_hora_registro";;
+    type: date
+    sql: MAX (${TABLE}."data_hora_registro");;
   }
 
 }
