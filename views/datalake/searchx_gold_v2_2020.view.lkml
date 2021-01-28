@@ -238,6 +238,11 @@ view: searchx_gold_v2_2020 {
     sql: ${TABLE}.importador_cnpj ;;
   }
 
+  dimension: importador_cnpj_8dig {
+    type: string
+    sql: left(${TABLE}.importador_cnpj,10) ;;
+  }
+
   dimension: importador_nome {
     type: string
     sql: ${TABLE}.importador_nome ;;
@@ -251,6 +256,30 @@ view: searchx_gold_v2_2020 {
   measure: sum_valor_total {
     type: sum
     sql: ${val_vmle_us_subitem} ;;
+  }
+
+  measure: count_distinct_customer_id {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    drill_fields: [customer_id, importador_nome, importador_cnpj]
+  }
+
+  measure: count_distinc_imp_name {
+    type: count_distinct
+    sql: ${importador_nome} ;;
+    #drill_fields: [importador_nome]
+  }
+
+  measure: count_distinc_cnpj {
+    type: count_distinct
+    sql: ${importador_cnpj} ;;
+    #drill_fields: [id, name, custom_name]
+  }
+
+  measure: count_distinc_cnpj_8dig {
+    type: count_distinct
+    sql: ${importador_cnpj_8dig} ;;
+    #drill_fields: [id, name, custom_name]
   }
 
   measure: count {
