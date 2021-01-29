@@ -5,13 +5,17 @@ view: nyk_base {
   dimension: id {
     primary_key: yes
     type: number
-    label: "id_nyk"
     sql: ${TABLE}."id" ;;
   }
 
   dimension: altura {
     type: number
     sql: ${TABLE}."altura" ;;
+  }
+
+  dimension: ano {
+    type: number
+    sql: ${TABLE}."ano" ;;
   }
 
   dimension: cd_embarque {
@@ -47,6 +51,11 @@ view: nyk_base {
   dimension: nm_embarque {
     type: string
     sql: ${TABLE}."nm_embarque" ;;
+  }
+
+  dimension: periodo {
+    type: string
+    sql: ${TABLE}."periodo" ;;
   }
 
   dimension: peso {
