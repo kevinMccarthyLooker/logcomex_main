@@ -1,10 +1,10 @@
 view: nyk_sql {
   derived_table: {
-    sql: select periodo, nm_embarque, count(id) as id_nyk,mes,ano, (select count(m.id)
+    sql: select periodo, nm_embarque, count(id) as count_id_nyk,mes,ano, (select count(m.id)
                                             from db_maritimo m
                                             where extract(month from dtoperacao) = n.mes
                                             and extract(year from dtoperacao) = n.ano
-                                            and m.nmembarcacao = n.nm_embarque) as id_maritimo
+                                            and m.nmembarcacao = n.nm_embarque) as count_id_maritimo
 from nyk_base n
 group by periodo, nm_embarque,mes,ano
  ;;
@@ -27,7 +27,7 @@ group by periodo, nm_embarque,mes,ano
 
   dimension: id_nyk {
     type: number
-    sql: ${TABLE}."Count_id_nyk" ;;
+    sql: ${TABLE}."count_id_nyk" ;;
   }
 
   dimension: mes {
@@ -42,7 +42,7 @@ group by periodo, nm_embarque,mes,ano
 
   dimension: id_maritimo {
     type: number
-    sql: ${TABLE}."Count_id_maritimo" ;;
+    sql: ${TABLE}."count_id_maritimo" ;;
   }
 
   set: detail {
