@@ -1,6 +1,6 @@
 view: comex_analytics_gold {
   derived_table: {
-    sql: SELECT * FROM comex_analytics.comex_analytics_gold;;
+    sql: SELECT * FROM comex_analytics.comex_analytics_gold LIMIT 1000000;;
   }
 
   measure: count {
