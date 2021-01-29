@@ -1,11 +1,11 @@
 view: comex_analytics_gold {
   derived_table: {
-    sql: SELECT * FROM comex_analytics.comex_analytics_gold
-      ;;
+    sql: SELECT * FROM comex_analytics.comex_analytics_gold;;
   }
 
   measure: count {
-   type: count
+    type: count
+    drill_fields: [detail*]
   }
 
   dimension: di_number {
@@ -16,6 +16,16 @@ view: comex_analytics_gold {
   dimension_group: data_hora_registro {
     type: time
     sql: ${TABLE}.data_hora_registro ;;
+  }
+
+  dimension: cpf_representante {
+    type: string
+    sql: ${TABLE}.cpf_representante ;;
+  }
+
+  dimension: nome_representante {
+    type: string
+    sql: ${TABLE}.nome_representante ;;
   }
 
   dimension: tipo_recolhimento {
@@ -43,23 +53,8 @@ view: comex_analytics_gold {
     sql: ${TABLE}.urf_despacho ;;
   }
 
-  # dimension_group: data_desembaraco {
-  #   type: time
-  #   sql: ${TABLE}.data_desembaraco ;;
-  # }
-
   dimension_group: data_desembaraco {
     type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
     sql: ${TABLE}.data_desembaraco ;;
   }
 
@@ -94,7 +89,7 @@ view: comex_analytics_gold {
   }
 
   dimension: numero_ce {
-    type: number
+    type: string
     sql: ${TABLE}.numero_ce ;;
   }
 
@@ -160,7 +155,7 @@ view: comex_analytics_gold {
 
   dimension: collect {
     type: number
-    sql: ${TABLE}.collect ;;
+    sql: ${TABLE}."collect" ;;
   }
 
   dimension: terr_nacional {
@@ -301,6 +296,71 @@ view: comex_analytics_gold {
   dimension: adquirente_nome {
     type: string
     sql: ${TABLE}.adquirente_nome ;;
+  }
+
+  dimension: informacoes_complementares {
+    type: string
+    sql: ${TABLE}.informacoes_complementares ;;
+  }
+
+  dimension: add_ncm {
+    type: number
+    sql: ${TABLE}.add_ncm ;;
+  }
+
+  dimension: add_incoterm {
+    type: string
+    sql: ${TABLE}.add_incoterm ;;
+  }
+
+  dimension: add_qtd_estat {
+    type: number
+    sql: ${TABLE}.add_qtd_estat ;;
+  }
+
+  dimension: add_fornecedor_nome {
+    type: string
+    sql: ${TABLE}.add_fornecedor_nome ;;
+  }
+
+  dimension: add_fornecedor_endereco {
+    type: string
+    sql: ${TABLE}.add_fornecedor_endereco ;;
+  }
+
+  dimension: add_desc_prod {
+    type: string
+    sql: ${TABLE}.add_desc_prod ;;
+  }
+
+  dimension: add_nm_pais_origem {
+    type: string
+    sql: ${TABLE}.add_nm_pais_origem ;;
+  }
+
+  dimension: add_nm_pais_aquis {
+    type: string
+    sql: ${TABLE}.add_nm_pais_aquis ;;
+  }
+
+  dimension: add_qtd_item {
+    type: number
+    sql: ${TABLE}.add_qtd_item ;;
+  }
+
+  dimension: add_peso_liq_item {
+    type: number
+    sql: ${TABLE}.add_peso_liq_item ;;
+  }
+
+  dimension: ac_moedanegociadanome {
+    type: string
+    sql: ${TABLE}.ac_moedanegociadanome ;;
+  }
+
+  dimension: ac_valormoedanegociada {
+    type: number
+    sql: ${TABLE}.ac_valormoedanegociada ;;
   }
 
   dimension: id {
@@ -573,31 +633,6 @@ view: comex_analytics_gold {
     sql: ${TABLE}.ces_processed_at ;;
   }
 
-  dimension: id2 {
-    type: number
-    sql: ${TABLE}.id2 ;;
-  }
-
-  dimension: user_profile_customer_id {
-    type: number
-    sql: ${TABLE}.user_profile_customer_id ;;
-  }
-
-  dimension: file {
-    type: string
-    sql: ${TABLE}.file ;;
-  }
-
-  dimension: password {
-    type: string
-    sql: ${TABLE}.password ;;
-  }
-
-  dimension: valid_until {
-    type: date
-    sql: ${TABLE}.valid_until ;;
-  }
-
   dimension: owner_name {
     type: string
     sql: ${TABLE}.owner_name ;;
@@ -608,229 +643,137 @@ view: comex_analytics_gold {
     sql: ${TABLE}.owner_cpf ;;
   }
 
-  dimension: url {
-    type: string
-    sql: ${TABLE}.url ;;
+  set: detail {
+    fields: [
+      di_number,
+      data_hora_registro_time,
+      cpf_representante,
+      nome_representante,
+      tipo_recolhimento,
+      mandato_judicial,
+      uf_icms,
+      data_pagamento_time,
+      urf_despacho,
+      data_desembaraco_time,
+      modalidade_despacho,
+      tipo_declaracao,
+      canal,
+      importador_cnpj,
+      importador_nome,
+      importador_endereco,
+      numero_ce,
+      cd_pais_proced,
+      nm_pais_proced,
+      data_chegada_time,
+      urf_entrada_carga,
+      peso_bruto,
+      peso_liquido,
+      recinto_aduaneiro,
+      armazem,
+      qtde_volume,
+      embalagem,
+      moeda_frete,
+      prepaid,
+      collect,
+      terr_nacional,
+      val_frete_moeda,
+      val_frete_us,
+      val_frete_reais,
+      moeda_seguro,
+      val_segur_moeda,
+      val_segur_us,
+      val_segur_reais,
+      val_vmle_us,
+      val_vmle_reais,
+      val_vmld_us,
+      val_vmld_reais,
+      via_transp,
+      multimodal,
+      embarcacao,
+      transportador,
+      doc_chegada_tipo,
+      doc_chegada_identificacao,
+      local_embarque,
+      data_embarque_time,
+      utilizacao,
+      val_multa,
+      awb,
+      hwb,
+      setor,
+      crt,
+      adquirente_cnpj,
+      adquirente_nome,
+      informacoes_complementares,
+      add_ncm,
+      add_incoterm,
+      add_qtd_estat,
+      add_fornecedor_nome,
+      add_fornecedor_endereco,
+      add_desc_prod,
+      add_nm_pais_origem,
+      add_nm_pais_aquis,
+      add_qtd_item,
+      add_peso_liq_item,
+      ac_moedanegociadanome,
+      ac_valormoedanegociada,
+      id,
+      customer_id,
+      cnpj,
+      name,
+      comments,
+      user_id,
+      deleted_at_time,
+      created_at_time,
+      updated_at_time,
+      dt_sync_mercante_time,
+      dt_sync_siscomex_time,
+      dt_sync_history_sart_time,
+      dt_sync_history_done_time,
+      cert_id,
+      consignee_type_id,
+      country_id,
+      token,
+      v2_cert_id,
+      ibroker_integration,
+      id0,
+      name0,
+      cnpj0,
+      address,
+      phones,
+      site,
+      status_id,
+      slug,
+      customer_type_id,
+      deleted_at0_time,
+      created_at0_time,
+      updated_at0_time,
+      pay_day,
+      custom_hex_color,
+      custom_logo,
+      custom_name,
+      email_notify_immediate,
+      email_notify_hour,
+      email_reply_to,
+      tracking_processed_loads,
+      api_key,
+      tracking_maritime_days_to_archive,
+      tracking_aerial_days_to_archive,
+      email_notify_disabled,
+      executive_id,
+      fake_customer,
+      blocked,
+      pld,
+      id1,
+      certificate_id,
+      consignee_id,
+      deleted_at1_time,
+      created_at1_time,
+      updated_at1_time,
+      ces_processed_at_time,
+      owner_name,
+      owner_cpf
+    ]
   }
-
-  dimension: mercante_access {
-    type: string
-    sql: ${TABLE}.mercante_access ;;
-  }
-
-  dimension: siscarga_access {
-    type: string
-    sql: ${TABLE}.siscarga_access ;;
-  }
-
-  dimension: siscomex_access {
-    type: string
-    sql: ${TABLE}.siscomex_access ;;
-  }
-
-  dimension: transit_access {
-    type: string
-    sql: ${TABLE}.transit_access ;;
-  }
-
-  dimension: error_message {
-    type: string
-    sql: ${TABLE}.error_message ;;
-  }
-
-  dimension: profile {
-    type: string
-    sql: ${TABLE}.profile ;;
-  }
-
-  dimension_group: deleted_at2 {
-    type: time
-    sql: ${TABLE}.deleted_at2 ;;
-  }
-
-  dimension_group: created_at2 {
-    type: time
-    sql: ${TABLE}.created_at2 ;;
-  }
-
-  dimension_group: updated_at2 {
-    type: time
-    sql: ${TABLE}.updated_at2 ;;
-  }
-
-  dimension: file_hash {
-    type: string
-    sql: ${TABLE}.file_hash ;;
-  }
-
-  dimension: v2_id {
-    type: number
-    sql: ${TABLE}.v2_id ;;
-  }
-
-  dimension: customer_id0 {
-    type: number
-    sql: ${TABLE}.customer_id0 ;;
-  }
-
-  dimension_group: sent_invalid_mail {
-    type: time
-    sql: ${TABLE}.sent_invalid_mail ;;
-  }
-
-  dimension: payload_puc {
-    type: string
-    sql: ${TABLE}.payload_puc ;;
-  }
-
-  dimension: token0 {
-    type: string
-    sql: ${TABLE}.token0 ;;
-  }
-
-  dimension: user_id0 {
-    type: number
-    sql: ${TABLE}.user_id0 ;;
-  }
-
-  # set: detail {
-  #   fields: [
-  #     di_number,
-  #     data_hora_registro_time,
-  #     tipo_recolhimento,
-  #     mandato_judicial,
-  #     uf_icms,
-  #     data_pagamento_time,
-  #     urf_despacho,
-  #     data_desembaraco_time,
-  #     modalidade_despacho,
-  #     tipo_declaracao,
-  #     canal,
-  #     importador_cnpj,
-  #     importador_nome,
-  #     importador_endereco,
-  #     numero_ce,
-  #     cd_pais_proced,
-  #     nm_pais_proced,
-  #     data_chegada_time,
-  #     urf_entrada_carga,
-  #     peso_bruto,
-  #     peso_liquido,
-  #     recinto_aduaneiro,
-  #     armazem,
-  #     qtde_volume,
-  #     embalagem,
-  #     moeda_frete,
-  #     prepaid,
-  #     collect,
-  #     terr_nacional,
-  #     val_frete_moeda,
-  #     val_frete_us,
-  #     val_frete_reais,
-  #     moeda_seguro,
-  #     val_segur_moeda,
-  #     val_segur_us,
-  #     val_segur_reais,
-  #     val_vmle_us,
-  #     val_vmle_reais,
-  #     val_vmld_us,
-  #     val_vmld_reais,
-  #     via_transp,
-  #     multimodal,
-  #     embarcacao,
-  #     transportador,
-  #     doc_chegada_tipo,
-  #     doc_chegada_identificacao,
-  #     local_embarque,
-  #     data_embarque_time,
-  #     utilizacao,
-  #     val_multa,
-  #     awb,
-  #     hwb,
-  #     setor,
-  #     crt,
-  #     adquirente_cnpj,
-  #     adquirente_nome,
-  #     id,
-  #     customer_id,
-  #     cnpj,
-  #     name,
-  #     comments,
-  #     user_id,
-  #     deleted_at_time,
-  #     created_at_time,
-  #     updated_at_time,
-  #     dt_sync_mercante_time,
-  #     dt_sync_siscomex_time,
-  #     dt_sync_history_sart_time,
-  #     dt_sync_history_done_time,
-  #     cert_id,
-  #     consignee_type_id,
-  #     country_id,
-  #     token,
-  #     v2_cert_id,
-  #     ibroker_integration,
-  #     id0,
-  #     name0,
-  #     cnpj0,
-  #     address,
-  #     phones,
-  #     site,
-  #     status_id,
-  #     slug,
-  #     customer_type_id,
-  #     deleted_at0_time,
-  #     created_at0_time,
-  #     updated_at0_time,
-  #     pay_day,
-  #     custom_hex_color,
-  #     custom_logo,
-  #     custom_name,
-  #     email_notify_immediate,
-  #     email_notify_hour,
-  #     email_reply_to,
-  #     tracking_processed_loads,
-  #     api_key,
-  #     tracking_maritime_days_to_archive,
-  #     tracking_aerial_days_to_archive,
-  #     email_notify_disabled,
-  #     executive_id,
-  #     fake_customer,
-  #     blocked,
-  #     pld,
-  #     id1,
-  #     certificate_id,
-  #     consignee_id,
-  #     deleted_at1_time,
-  #     created_at1_time,
-  #     updated_at1_time,
-  #     ces_processed_at_time,
-  #     id2,
-  #     user_profile_customer_id,
-  #     file,
-  #     password,
-  #     valid_until,
-  #     owner_name,
-  #     owner_cpf,
-  #     url,
-  #     mercante_access,
-  #     siscarga_access,
-  #     siscomex_access,
-  #     transit_access,
-  #     error_message,
-  #     profile,
-  #     deleted_at2_time,
-  #     created_at2_time,
-  #     updated_at2_time,
-  #     file_hash,
-  #     v2_id,
-  #     customer_id0,
-  #     sent_invalid_mail_time,
-  #     payload_puc,
-  #     token0,
-  #     user_id0
-  #   ]
-  # }
 
   #==================================================================================================
   #dados inseridos
