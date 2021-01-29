@@ -3,6 +3,7 @@ connection: "db"
 include: "/views/aereo_dados_no_tempo.view.lkml"
 include: "/views/health_data.view.lkml"
 include: "/views/nyk_base.view.lkml"
+include: "/views/nyk_sql.view.lkml"
 include: "/views/antaqxmaritimo.view.lkml"
 include: "/views/cs_dash_imp.view.lkml"
 include: "/views/view_infografico.view.lkml"
@@ -151,4 +152,8 @@ explore: db_ce_mercante {
     relationship: one_to_one
     sql_on: ${db_maritimo.nrcemercante} = ${db_ce_mercante.numero_ce} ;;
   }
+}
+
+explore: nyk_sql {
+  label: "Base NYK Sql"
 }

@@ -14,6 +14,11 @@ view: nyk_base {
     sql: ${TABLE}."altura" ;;
   }
 
+  dimension: ano {
+    type: number
+    sql: ${TABLE}."ano" ;;
+  }
+
   dimension: cd_embarque {
     type: number
     sql: ${TABLE}."cd_embarque" ;;
@@ -47,6 +52,11 @@ view: nyk_base {
   dimension: nm_embarque {
     type: string
     sql: ${TABLE}."nm_embarque" ;;
+  }
+
+  dimension: periodo {
+    type: string
+    sql: ${TABLE}."periodo" ;;
   }
 
   dimension: peso {
