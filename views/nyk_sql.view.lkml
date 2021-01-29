@@ -27,7 +27,7 @@ group by periodo, nm_embarque,mes,ano
 
   dimension: id_nyk {
     type: number
-    sql: ${TABLE}."id_nyk" ;;
+    sql: ${TABLE}."Contador id_nyk" ;;
   }
 
   dimension: mes {
@@ -42,7 +42,7 @@ group by periodo, nm_embarque,mes,ano
 
   dimension: id_maritimo {
     type: number
-    sql: ${TABLE}."id_maritimo" ;;
+    sql: ${TABLE}."Contador id_maritimo" ;;
   }
 
   set: detail {
