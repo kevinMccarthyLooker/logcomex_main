@@ -1,6 +1,6 @@
 view: comex_analytics_gold {
   derived_table: {
-    sql: SELECT * FROM comex_analytics.comex_analytics_gold LIMIT 1000000;;
+    sql: SELECT * FROM comex_analytics.comex_analytics_gold LIMIT 5000000;;
   }
 
   measure: count {
@@ -820,6 +820,7 @@ view: comex_analytics_gold {
 
   measure: data_hora_registro {
     type: date
+    value_format: ""
     sql: MAX (${TABLE}."data_hora_registro");;
   }
 
