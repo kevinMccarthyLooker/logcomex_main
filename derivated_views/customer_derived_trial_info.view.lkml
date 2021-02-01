@@ -17,7 +17,7 @@ view: customer_derived_trial_info {
     customer."id"  AS customer_id,
     COUNT(
     CASE
-    WHEN customer_plan."expiration" < current_date + 60  --expiring soon
+    WHEN customer_plan."trial_end" < current_date + 60  --expiring soon
     --WHEN customer_plan."trial_end" < current_date +   --expiring soon
     and
     (current_date between (customer_plan."trial_start") and (customer_plan."trial_end")
