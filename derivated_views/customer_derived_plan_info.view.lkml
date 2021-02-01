@@ -51,15 +51,15 @@ customer_has_active_plan left join customer_has_soon_to_be_expired_plan on custo
   parameter: expiration_threshold_plans {
     type: number
     allowed_value: {
-      label: "30"
+      label: "30 Dias"
       value: "30"
     }
     allowed_value: {
-      label: "60"
+      label: "60 Dias"
       value: "60"
     }
     allowed_value: {
-      label: "90"
+      label: "90 Dias"
       value: "90"
     }
   }
