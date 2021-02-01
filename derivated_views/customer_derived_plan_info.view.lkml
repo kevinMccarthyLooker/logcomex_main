@@ -18,7 +18,7 @@ customer."id"  AS customer_id,
 COUNT(
 CASE
 --WHEN customer_plan."expiration" < current_date + 60  --expiring soon
-WHEN customer_plan."expiration" < current_date + {{expiration_threshold._parameter_value}}  --expiring soon
+WHEN customer_plan."expiration" < current_date + {{expiration_threshold_plans._parameter_value}}  --expiring soon
 and
 (current_date between (customer_plan."start") and (customer_plan."expiration")
 and (customer_plan."deleted_at") is null
@@ -43,7 +43,7 @@ customer_has_active_plan left join customer_has_soon_to_be_expired_plan on custo
     indexes: ["customer_id"]
   }
 
-  parameter: expiration_threshold {
+  parameter: expiration_threshold_plans {
     type: number
     default_value: "60"
   }
