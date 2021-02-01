@@ -809,7 +809,7 @@ view: comex_analytics_gold {
   }
 
   measure: di_total {
-    type: sum
+    type: count_distinct
     sql: ${TABLE}."di_number";;
   }
 
@@ -820,7 +820,6 @@ view: comex_analytics_gold {
 
   measure: data_hora_registro {
     type: date
-    value_format: ""
     sql: MAX (${TABLE}."data_hora_registro");;
   }
 
