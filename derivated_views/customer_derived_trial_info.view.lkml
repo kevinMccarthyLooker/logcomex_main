@@ -17,8 +17,8 @@ view: customer_derived_trial_info {
     customer."id"  AS customer_id,
     COUNT(
     CASE
-    --WHEN customer_plan."expiration" < current_date + 60  --expiring soon
-    WHEN customer_plan."trial_end" < current_date + {{expiration_threshold._parameter_value}}  --expiring soon
+    WHEN customer_plan."expiration" < current_date + 60  --expiring soon
+    --WHEN customer_plan."trial_end" < current_date +   --expiring soon
     and
     (current_date between (customer_plan."trial_start") and (customer_plan."trial_end")
     and (customer_plan."deleted_at") is null
@@ -42,10 +42,10 @@ view: customer_derived_trial_info {
       indexes: ["customer_id"]
     }
 
-    parameter: expiration_threshold {
-      type: number
-      default_value: "60"
-    }
+ #   parameter: expiration_threshold {
+  #    type: number
+   #   default_value: "60"
+  #  }
 
 
     dimension: count_soon_to_be_expired_trials {
