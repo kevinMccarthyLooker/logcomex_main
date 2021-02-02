@@ -60,6 +60,11 @@ view: valor_cif_2020_gold {
          end ;;
   }
 
+  dimension: qtd_registros {
+    type: number
+    sql: ${TABLE}.qtd_registros ;;
+  }
+
   dimension: valor_max_ncm {
     type: number
     sql: ${TABLE}.valor_max_ncm ;;
@@ -102,6 +107,11 @@ view: valor_cif_2020_gold {
   measure: sum_valor_total {
     type: sum
     sql: ${valor_total} ;;
+  }
+
+  measure: sum_qtd_registros {
+    type: sum
+    sql: ${qtd_registros} ;;
   }
 
   measure: sum_valor_ncm {
