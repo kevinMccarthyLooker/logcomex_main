@@ -11,6 +11,10 @@ view: valor_cif_2020_gold {
     sql: ${TABLE}.desc_ncm ;;
   }
 
+  dimension: branches_activity {
+    type: string
+    sql: ${TABLE}.branches_activity ;;
+  }
 
   dimension: customer_id {
     type: number
