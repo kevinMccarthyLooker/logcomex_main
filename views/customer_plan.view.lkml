@@ -192,9 +192,10 @@ view: customer_plan {
          end;;
   }
 
-  dimension: apenas_trial {  # verifica se o plano possui apenas trial sem contrato
+  dimension: apenas_trial {  # verifica se o plano possui apenas trial sem contrato ou trial realizado após um contrato
     type: yesno
     sql: case when (${start_raw} is null and ${trial_start_raw} is not null) then true
+              when ((${start_raw} is not null and ${trial_start_raw} is not null) and (${trial_start_raw} > ${start_raw})) then true
               else false
          end;;
   }

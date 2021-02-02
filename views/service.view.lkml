@@ -57,11 +57,11 @@ view: service {
       when: {label: "Search" sql: ${name} in ('Search') ;;}
       when: {label: "Tracking" sql: ${name} in ('Tracking') ;;}
       when: {label: "Siscomex Restituição" sql: ${name} in ('Siscomex Restituição') ;;}
-      when: {label: "Novo Exportação" sql: ${name} in ('[NOVO] Big Data Expo') ;;}
-      when: {label: "Exportação" sql: ${name} in ('Big Data Expo') ;;}
-      when: {label: "Importação" sql: ${name} in ('Big Data Impo Maritimo') ;;}
-      when: {label: "Aereo" sql: ${name} in ('Big Data Impo Aereo') ;;}
-      else: "BI"
+      when: {label: "[NOVO] Big Data Expo" sql: ${name} in ('Novo Exportação') ;;}
+      when: {label: "Big Data Expo" sql: ${name} in ('Exportação') ;;}
+      when: {label: "Big Data Impo Maritimo" sql: ${name} in ('Importação') ;;}
+      when: {label: "Big Data Impo Aereo" sql: ${name} in ('Aereo') ;;}
+      else: "Outros BIs"
     }
   }
 
