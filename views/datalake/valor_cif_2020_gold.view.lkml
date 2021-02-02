@@ -6,6 +6,12 @@ view: valor_cif_2020_gold {
     sql: ${TABLE}.cdncm_compl ;;
   }
 
+  dimension: desc_ncm {
+    type: string
+    sql: ${TABLE}.desc_ncm ;;
+  }
+
+
   dimension: customer_id {
     type: number
     sql: ${TABLE}.customer_id ;;
