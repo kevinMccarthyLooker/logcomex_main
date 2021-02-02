@@ -11,6 +11,23 @@ view: valor_cif_2020_gold {
     sql: ${TABLE}.customer_id ;;
   }
 
+  dimension: cliente {
+    type: yesno
+    sql: case when ${TABLE}.customer_id is null then false
+         else true
+         end;;
+  }
+
+  dimension: cliente_match {
+    type: yesno
+    sql: ${cliente} ;;
+    html: {% if value == 'Yes' %}
+            <font color="green">{{ cliente }}</font>
+          {% else %}
+            <font color="red">{{ cliente }}</font>
+          {% endif %};;
+  }
+
   dimension: importador_cnpj {
     type: string
     sql: ${TABLE}.importador_cnpj ;;
@@ -24,6 +41,13 @@ view: valor_cif_2020_gold {
   dimension: importador_nome {
     type: string
     sql: ${TABLE}.importador_nome ;;
+  }
+
+  dimension: importador_nome_tratado {
+    type: string
+    sql: case when (${TABLE}.importador_nome = '' or ${TABLE}.importador_nome is null) then 'NÃO ENCONTRADO'
+         else ${TABLE}.importador_nome
+         end ;;
   }
 
   dimension: valor_max_ncm {
