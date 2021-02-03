@@ -48,6 +48,11 @@ view: di_control_pu_token {
     sql: ${TABLE}."tries" ;;
   }
 
+  dimension: created_today {
+    type: yesno
+    sql: case when ${TABLE}."created_at" >= current_date then true else false end;;
+  }
+
   dimension_group: created_at {
     type: time
     timeframes: [
