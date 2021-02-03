@@ -138,6 +138,15 @@ view: customer {
     ;;
   }
 
+  dimension: executive_area {
+    type: string
+    sql:  CASE WHEN (customer.executive_id in (39, 44, 17, 52, 77, 57, 81, 89, 91, 92, 93, 94, 95, 59, 50, 10, 72, 71, 75, 76)) THEN 'CS'
+               WHEN (customer.executive_id in (11, 12, 41, 43, )) THEN 'Comercial'
+               WHEN (customer.executive_id is null) THEN 'Sem Executivo'
+          else CAST ( customer.executive_id AS TEXT ) end
+    ;;
+  }
+
   dimension: fake_customer {
     type: yesno
     sql: ${TABLE}."fake_customer" ;;
@@ -218,8 +227,7 @@ view: customer {
     fields: [
       id,
       name,
-      executive_name,
-      report_log.count
+      executive_name
     ]
   }
 

@@ -2,6 +2,8 @@ connection: "db"
 
 include: "/views/aereo_dados_no_tempo.view.lkml"
 include: "/views/health_data.view.lkml"
+include: "/views/nyk_base.view.lkml"
+include: "/views/nyk_sql.view.lkml"
 include: "/views/antaqxmaritimo.view.lkml"
 include: "/views/cs_dash_imp.view.lkml"
 include: "/views/view_infografico.view.lkml"
@@ -24,17 +26,6 @@ include: "/**/db_cad_pais.view.lkml"
 include: "/**/db_cad_porto.view.lkml"
 include: "/**/db_cad_fcl.view.lkml"
 include: "/**/puc_embarques.view.lkml"
-include: "/**/api_request.view.lkml"
-include: "/**/api_requests_empresas.view.lkml"
-
-
-explore: api_requests_empresas {
-  label: "API Request Empresas"
-}
-
-explore: api_request {
-  label: "API Request"
-}
 
 explore: puc_embarques {
   label: "Puc Embarques"
@@ -136,6 +127,10 @@ explore: db_maritimo {
     sql_on: ${db_export_cargo_reception_details.nrcemercante} = ${db_maritimo.nrcemercante} ;;
 
   }
+  join: nyk_base {
+    relationship: many_to_many
+    sql_on: ${nyk_base.nm_embarque} = ${db_maritimo.nmembarcacao} ;;
+  }
 }
 
 
@@ -146,4 +141,8 @@ explore: db_ce_mercante {
     relationship: one_to_one
     sql_on: ${db_maritimo.nrcemercante} = ${db_ce_mercante.numero_ce} ;;
   }
+}
+
+explore: nyk_sql {
+  label: "Base NYK Sql"
 }

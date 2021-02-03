@@ -6,10 +6,10 @@ include: "/**/nps_08_2020.view.lkml"
 include: "/**/user_profile_customer.view.lkml"
 include: "/**/users.view.lkml"
 include: "/**/cs_novo_health_score.view.lkml"
-include: "/**/external_health_score.dashboard.lookml"  # incluindos os dash do tipo lkml para serem visualizado
+include: "/**/external_health_score.dashboard.lookml"  # incluindo os dashs do tipo lkml para serem visualizados
 
-datagroup: my_datagroup {
-  sql_trigger: select count(*) from public.customer ;;
+datagroup: external_hs_datagroup {
+  sql_trigger: SELECT CURRENT_DATE;;
 }
 
 explore: customer{
