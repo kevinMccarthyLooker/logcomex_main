@@ -417,12 +417,12 @@ view: comex_analytics_di {
   }
 
   measure: cnpj_importador {
-    type: date
+    type: string
     sql:${TABLE}."importador_cnpj";;
   }
 
   measure: cpf_despachante {
-    type: date
+    type: string
     sql:${TABLE}."cpf_representante";;
   }
 }
