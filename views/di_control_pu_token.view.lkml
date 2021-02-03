@@ -86,4 +86,8 @@ view: di_control_pu_token {
     sql: ${TABLE}."cert_id" ;;
   }
 
+  measure: count {
+    type: count
+    drill_fields: [id]
+  }
 }
