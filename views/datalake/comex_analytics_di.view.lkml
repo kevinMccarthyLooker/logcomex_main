@@ -423,6 +423,6 @@ view: comex_analytics_di {
 
   measure: cnpj_importador {
     type: string
-    sql: replace(replace(replace(${TABLE}."importador_cnpj", '.', ''),'-','')'/','');;
+    sql: replace(replace(${TABLE}."importador_cnpj", '.', ''),'-','');;
   }
 }
