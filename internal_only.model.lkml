@@ -136,6 +136,10 @@ explore: usage_logs {
 
 }
 
+explore: certificate_api {
+  view_name: certificate
+}
+
 explore: consignee_radar {
   view_name: consignee
 
