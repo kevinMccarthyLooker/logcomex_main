@@ -418,11 +418,11 @@ view: comex_analytics_di {
 
   measure: representante_cpf{
     type: string
-    sql: replace(replace(${TABLE}."cpf_representante", '.', ''),'/','');;
+    sql: replace(replace(${TABLE}."cpf_representante", '.', ''),'-','');;
   }
 
   measure: cnpj_importador {
     type: string
-    sql: (${TABLE}."importador_cnpj");;
+    sql: replace(replace(replace(${TABLE}."importador_cnpj", '.', ''),'-','')'/','');;
   }
 }
