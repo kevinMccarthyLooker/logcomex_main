@@ -411,6 +411,11 @@ view: comex_analytics_di {
     sql: ${TABLE}."val_multa";;
   }
 
+  measure: valor_multa {
+    type: number
+    sql: ${TABLE}."val_multa";;
+  }
+
   measure: data_hora_registro {
     type: date
     sql: MAX (${TABLE}."data_hora_registro");;
