@@ -138,6 +138,12 @@ explore: usage_logs {
 
 explore: certificate_api {
   view_name: certificate
+
+  join: certificate_consignee_radar {
+    sql_on:  ${certificate.id}=${certificate_consignee_radar.certificate_id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
 }
 
 explore: consignee_radar {
