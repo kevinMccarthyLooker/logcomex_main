@@ -418,7 +418,7 @@ view: comex_analytics_di {
 
   measure: representante_cpf{
     type: string
-    sql: (${TABLE}."cpf_representante");;
+    sql: replace ((${TABLE}."cpf_representante"), ".", "");;
   }
 
   measure: cnpj_importador {
