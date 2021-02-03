@@ -416,13 +416,9 @@ view: comex_analytics_di {
     sql: MAX (${TABLE}."data_hora_registro");;
   }
 
-  measure: representante_cpf{
-    type: string
-    sql: replace(replace(${TABLE}."cpf_representante", '.', ''),'-','');;
-  }
-
-  measure: cnpj_importador {
+  measure: cnpj_importador{
     type: string
     sql: replace(replace(${TABLE}."importador_cnpj", '.', ''),'-','');;
   }
+
 }
