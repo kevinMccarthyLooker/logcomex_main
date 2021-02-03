@@ -366,4 +366,63 @@ view: comex_analytics_di {
       informacoes_complementares
     ]
   }
+
+
+  #==================================================================================================
+  #dados inseridos
+
+  measure: valor_vmle_us {
+    type: sum
+    sql: ${TABLE}."val_vmle_us";;
+  }
+
+  measure: valor_vmle_reais {
+    type: sum
+    sql: ${TABLE}."val_vmle_reais";;
+  }
+
+  measure: valor_vmld_us {
+    type: sum
+    sql: ${TABLE}."val_vmld_us";;
+  }
+
+  measure: valor_vmld_reais {
+    type: sum
+    sql: ${TABLE}."val_vmld_reais";;
+  }
+
+  measure: peso_bruto_total {
+    type: sum
+    sql: ${TABLE}."peso_bruto";;
+  }
+
+  measure: peso_liquido_total {
+    type: sum
+    sql: ${TABLE}."peso_liquido";;
+  }
+
+  measure: di_total {
+    type: count_distinct
+    sql: ${TABLE}."di_number";;
+  }
+
+  measure: valor_multa_total {
+    type: sum
+    sql: ${TABLE}."val_multa";;
+  }
+
+  measure: data_hora_registro {
+    type: date
+    sql: MAX (${TABLE}."data_hora_registro");;
+  }
+
+  measure: cnpj_importador {
+    type: string
+    sql:${TABLE}."importador_cnpj";;
+  }
+
+  measure: cpf_despachante {
+    type: string
+    sql:${TABLE}."cpf_representante";;
+  }
 }
