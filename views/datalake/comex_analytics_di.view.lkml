@@ -19,7 +19,7 @@ view: comex_analytics_di {
   }
 
   dimension: cpf_representante {
-    type: string
+    type: number
     sql: ${TABLE}.cpf_representante ;;
   }
 
@@ -74,7 +74,7 @@ view: comex_analytics_di {
   }
 
   dimension: importador_cnpj {
-    type: string
+    type: number
     sql: ${TABLE}.importador_cnpj ;;
   }
 
