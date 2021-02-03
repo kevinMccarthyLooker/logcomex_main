@@ -415,4 +415,14 @@ view: comex_analytics_di {
     type: date
     sql: MAX (${TABLE}."data_hora_registro");;
   }
+
+  measure: representante_cpf{
+    type: string
+    sql: (${TABLE}."cpf_representante");;
+  }
+
+  measure: cnpj_importador {
+    type: string
+    sql: (${TABLE}."importador_cnpj");;
+  }
 }
