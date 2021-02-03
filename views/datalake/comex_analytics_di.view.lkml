@@ -264,7 +264,7 @@ view: comex_analytics_di {
   }
 
   dimension: val_multa {
-    type: number
+    type: string
     sql: ${TABLE}.val_multa ;;
   }
 
@@ -415,4 +415,10 @@ view: comex_analytics_di {
     type: date
     sql: MAX (${TABLE}."data_hora_registro");;
   }
+
+  measure: representante_cpf{
+    type: string
+    sql: replace(replace(${TABLE}."cpf_representante", '.', ''),'-','');;
+  }
+
 }
