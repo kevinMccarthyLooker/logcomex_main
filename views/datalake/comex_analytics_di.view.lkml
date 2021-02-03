@@ -264,7 +264,7 @@ view: comex_analytics_di {
   }
 
   dimension: val_multa {
-    type: number
+    type: string
     sql: ${TABLE}.val_multa ;;
   }
 
