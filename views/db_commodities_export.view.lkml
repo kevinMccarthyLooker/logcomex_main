@@ -164,4 +164,9 @@ view: db_commodities_export {
     drill_fields: [id]
   }
 
+  dimension_group: embarque {
+    type: time
+    sql: ${TABLE}.anomes ;;
+  }
+
 }
