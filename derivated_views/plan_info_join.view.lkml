@@ -14,7 +14,7 @@ derived_table: {
     GROUP BY 1
      ;;
 
-    datagroup_trigger: my_datagroup
+    datagroup_trigger: internal_only_datagroup
   indexes: ["customer_plan_id"]
   }
 

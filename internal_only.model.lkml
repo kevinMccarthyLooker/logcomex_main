@@ -70,7 +70,7 @@ include: "/**/filters_names.view.lkml"
 include: "/**/trials_ativos_mes.view.lkml"
 include: "/**/clientes_sem_exportacao.view.lkml"
 
-datagroup: my_datagroup {
+datagroup: internal_only_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
 }
 
@@ -169,7 +169,7 @@ explore: usage {
 #     user_attribute: name
 #   }
 
-  persist_with: my_datagroup
+  persist_with: internal_only_datagroup
   view_name: customer
 
   join: customer_blocked_history {
@@ -587,7 +587,7 @@ explore: usage {
 }
 
 explore: Logistica_Internacional {
-  persist_with: my_datagroup
+  persist_with: internal_only_datagroup
   view_name: extra_data_container
 
   join: extra_data_container_history {
@@ -598,7 +598,7 @@ explore: Logistica_Internacional {
 }
 
 explore: Robos_Tracking {
-    persist_with: my_datagroup
+    persist_with: internal_only_datagroup
     view_name: filatrackingfollowup
 
   join: tracking_status {

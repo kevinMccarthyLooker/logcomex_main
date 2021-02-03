@@ -39,7 +39,7 @@ customer_has_active_plan left join customer_has_soon_to_be_expired_plan on custo
        ;;
 #     persist_for: "24 hour"
 #     sql_trigger_value: select count(*) from public.customer_plan ;;
-    datagroup_trigger: my_datagroup
+    datagroup_trigger: internal_only_datagroup
     indexes: ["customer_id"]
   }
 
