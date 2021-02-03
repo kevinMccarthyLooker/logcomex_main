@@ -9,7 +9,7 @@ include: "/**/cs_novo_health_score.view.lkml"
 include: "/**/external_health_score.dashboard.lookml"  # incluindo os dashs do tipo lkml para serem visualizados
 
 datagroup: external_hs_datagroup {
-  sql_trigger: select count(*) from public.customer ;;
+  sql_trigger: SELECT CURRENT_DATE;;
 }
 
 explore: customer{
