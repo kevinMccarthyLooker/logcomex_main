@@ -122,7 +122,7 @@ view: db_commodities_export {
              when ${TABLE}.anomes = 202009 then 'Setembro/2020'
              when ${TABLE}.anomes = 202010 then 'Outubro/2020'
              when ${TABLE}.anomes = 202011 then 'Novembro/2020'
-             when ${TABLE}.anomes = 202012 then 'Dezembro/2021'
+             when ${TABLE}.anomes = 202012 then 'Dezembro/2020'
              when ${TABLE}.anomes = 202101 then 'Janeiro/2021'
              when ${TABLE}.anomes = 202102 then 'Fevereiro/2021'
              when ${TABLE}.anomes = 202103 then 'Março/2021'
@@ -137,6 +137,25 @@ view: db_commodities_export {
              when ${TABLE}.anomes = 202112 then 'Dezembro/2021'
              else 'ERRO'
          end ;;
+  }
+
+  dimension: anomes_mes_conversao {
+    type: string
+    sql: to_date(concat(${TABLE}.anomes,'01'), 'YYYYMMDD');;
+  }
+
+  dimension_group: mes {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: to_date(concat(${TABLE}.anomes,'01'), 'YYYYMMDD');;
   }
 
   measure: qtd_comerc {
@@ -163,24 +182,4 @@ view: db_commodities_export {
     type: count
     drill_fields: [id]
   }
-
-  dimension: anomes_mes_conversao {
-    type: string
-    sql: to_date(concat(${TABLE}.anomes,'01'), 'YYYYMMDD');;
-  }
-
-  dimension_group: mes {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: to_date(concat(${TABLE}.anomes,'01'), 'YYYYMMDD');;
-  }
-
 }
