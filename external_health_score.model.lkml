@@ -11,8 +11,8 @@ include: "/**/external_health_score.dashboard.lookml"  # incluindo os dashs do t
 datagroup: hs_datagroup {
   sql_trigger: select CURRENT_DATE ;;
   #sql_trigger: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60)) ;; # a cada 12 horas
-  max_cache_age: "13 hours"
-  label: "hs_datagroup"
+  max_cache_age: "24 hours"
+  label: "hs_externo_datagroup"
   description: "DG do Health Score Externo, atualiza a cada 24h"
 }
 
