@@ -72,6 +72,17 @@ include: "/**/clientes_sem_exportacao.view.lkml"
 
 datagroup: internal_only_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
+  max_cache_age: "6 hours"
+  label: "internal_only_datagroup"
+  description: " DG Principal do Modelo Internal Only"
+}
+
+datagroup: hs_datagroup {
+  sql_trigger: select CURRENT_DATE ;;
+  #sql_trigger: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60)) ;; # a cada 12 horas
+  max_cache_age: "13 hours"
+  label: "hs_datagroup"
+  description: "DG do Health Score, atualiza a cada 12h"
 }
 
 explore: clientes_sem_exportacao{
@@ -617,6 +628,28 @@ explore: Robos_Tracking {
     relationship: one_to_many
   }
 
+}
 
+explore: cs_novo_health_score {
+  persist_with: hs_datagroup
+  sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
+
+  join: customer {
+    sql_on: ${cs_novo_health_score.customer_id} = ${customer.id} ;;
+    relationship: one_to_one
+    type: inner
+  }
+
+  join: customer_api_relations{
+    sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: hubspot_cs_deal {
+    sql_on: ${customer_api_relations.id} = ${hubspot_cs_deal.customer_api_relations_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
 
 }
