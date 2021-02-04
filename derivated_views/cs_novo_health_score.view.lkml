@@ -256,8 +256,10 @@ where current_date between cp.start and cp.expiration
   and pc.deleted_at is null
   and c.fake_customer is false;;
 
-indexes: ["customer_id"]
-sql_trigger_value: SELECT CURRENT_DATE;;
+#datagroup_trigger: hs_datagroup
+#indexes: ["customer_id"]
+#indexes: ["customer_id"]
+#sql_trigger_value: SELECT CURRENT_DATE;;
 }
 
   dimension: customer_id {
