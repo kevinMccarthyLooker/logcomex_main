@@ -10,7 +10,11 @@ include: "/**/external_health_score.dashboard.lookml"  # incluindo os dashs do t
 
 datagroup: external_hs_datagroup {
   sql_trigger: SELECT CURRENT_DATE;;
+  label: "external_hs_datagroup"
+  description: " Atualiza o Modelo Externo do HS a cada 24h"
 }
+
+persist_with: external_hs_datagroup
 
 explore: customer{
 
