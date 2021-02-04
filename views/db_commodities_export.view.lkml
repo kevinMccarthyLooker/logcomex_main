@@ -169,4 +169,18 @@ view: db_commodities_export {
     sql: to_date(concat(${TABLE}.anomes,'01'), 'YYYYMMDD');;
   }
 
+  dimension_group: mes {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: to_date(concat(${TABLE}.anomes,'01'), 'YYYYMMDD');;
+  }
+
 }
