@@ -640,6 +640,12 @@ explore: cs_novo_health_score {
     type: inner
   }
 
+  join: customer_info{
+    sql_on: ${customer.id}=${customer_info.customer_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
   join: user_profile_customer {
     sql_on: ${user_profile_customer.customer_id}=${customer.id} ;;
     relationship: many_to_one
