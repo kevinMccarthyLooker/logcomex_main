@@ -164,9 +164,9 @@ view: db_commodities_export {
     drill_fields: [id]
   }
 
-  dimension_group: embarque {
-    type: time
-    sql: ${TABLE}.anomes ;;
+  dimension: anomes_mes_conversao {
+    type: string
+    sql: to_date(concat(${TABLE}.anomes,'01'), 'YYYYMMDD');;
   }
 
 }
