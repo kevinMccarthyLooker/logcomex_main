@@ -640,6 +640,24 @@ explore: cs_novo_health_score {
     type: inner
   }
 
+  join: user_profile_customer {
+    sql_on: ${user_profile_customer.customer_id}=${customer.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: users {
+    sql_on: ${user_profile_customer.user_id}=${users.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: nps_11_2020 {
+    sql_on: ${users.email}=${nps_11_2020.email} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
   join: customer_api_relations{
     sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
     relationship: one_to_many
