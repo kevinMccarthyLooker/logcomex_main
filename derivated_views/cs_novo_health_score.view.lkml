@@ -255,7 +255,11 @@ where current_date between cp.start and cp.expiration
   and cp.deleted_at is null
   and pc.deleted_at is null
   and c.fake_customer is false;;
+
+indexes: ["customer_id"]
+sql_trigger_value: SELECT CURRENT_DATE;;
 }
+
   dimension: customer_id {
     hidden: yes
     type: string
