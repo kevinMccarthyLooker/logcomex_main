@@ -246,23 +246,23 @@ explore: usage {
 
   }
 
-  join: cs_healthscore{
-    sql_on: ${customer.id}=${cs_healthscore.customer_id} ;;
-    relationship: one_to_many
-    type: left_outer
-  }
+#  join: cs_healthscore{
+#    sql_on: ${customer.id}=${cs_healthscore.customer_id} ;;
+#    relationship: one_to_many
+#    type: left_outer
+#  }
 
-  join: cs_novo_health_score{
-    sql_on: ${customer.id}=${cs_novo_health_score.customer_id} ;;
-    relationship: one_to_one
-    type: inner
-  }
+#  join: cs_novo_health_score{
+#    sql_on: ${customer.id}=${cs_novo_health_score.customer_id} ;;
+#    relationship: one_to_one
+#    type: inner
+#  }
 
-  join: cs_healthscore_accesslog{
-    sql_on: ${customer.id}=${cs_healthscore_accesslog.customer_id} ;;
-    relationship: one_to_many
-    type: left_outer
-  }
+#  join: cs_healthscore_accesslog{
+#    sql_on: ${customer.id}=${cs_healthscore_accesslog.customer_id} ;;
+#    relationship: one_to_many
+#    type: left_outer
+#  }
 
   join: customer_info{
     sql_on: ${customer.id}=${customer_info.customer_id} ;;
