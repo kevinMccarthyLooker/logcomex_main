@@ -300,6 +300,11 @@ view: db_ce_mercante {
     ;;
   }
 
+  dimension: processado_hoje {
+    type: yesno
+    sql:  case when ${TABLE}."dt_processamento_date" >= current_date then true else false end;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
