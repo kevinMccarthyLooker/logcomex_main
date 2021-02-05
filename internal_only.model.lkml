@@ -78,8 +78,8 @@ datagroup: internal_only_datagroup {
 }
 
 datagroup: hs_datagroup {
-  sql_trigger: select CURRENT_DATE ;;
-  #sql_trigger: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60)) ;; # a cada 12 horas
+  #sql_trigger: select CURRENT_DATE ;; a cada 24 horas
+  sql_trigger: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60)) ;; # a cada 12 horas
   max_cache_age: "13 hours"
   label: "hs_datagroup"
   description: "DG do Health Score, atualiza a cada 12h"

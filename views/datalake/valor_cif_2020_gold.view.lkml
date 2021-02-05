@@ -83,7 +83,7 @@ view: valor_cif_2020_gold {
   measure: count_distinct_customer_id {
     type: count_distinct
     sql: ${customer_id} ;;
-    drill_fields: [customer_id, importador_nome, importador_cnpj]
+    drill_fields: [details*]
   }
 
   measure: count_distinc_imp_name {
@@ -117,5 +117,9 @@ view: valor_cif_2020_gold {
   measure: sum_valor_ncm {
     type: sum
     sql: ${valor_max_ncm} ;;
+  }
+
+  set: details {
+    fields: [customer_id, importador_nome, importador_cnpj]
   }
 }
