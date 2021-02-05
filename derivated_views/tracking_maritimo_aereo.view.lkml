@@ -130,7 +130,7 @@ where fu.tracking_aerial_id is not null and (fu.user_id is null or fu.user_id = 
 indexes: ["chave"]
 sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60));;
   }
-
+#teste de comentario
   dimension: modal {
     type: string
     sql: ${TABLE}."modal" ;;
