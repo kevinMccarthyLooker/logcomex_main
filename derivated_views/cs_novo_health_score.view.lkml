@@ -254,19 +254,13 @@ where current_date between cp.start and cp.expiration
   and c.deleted_at is null
   and cp.deleted_at is null
   and pc.deleted_at is null
-  and c.fake_customer is false
-    ;;
-  indexes: ["customer_id"]
-  sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60));;
-  #datagroup_trigger: my_datagroup
-  #indexes: ["customer_id"]
+  and c.fake_customer is false;;
 
+datagroup_trigger: hs_datagroup
+indexes: ["customer_id"]
+#indexes: ["customer_id"]
+#sql_trigger_value: SELECT CURRENT_DATE;;
 }
-
-  parameter: expiration_threshold {
-    type: number
-    default_value: "60"
-  }
 
   dimension: customer_id {
     hidden: yes
