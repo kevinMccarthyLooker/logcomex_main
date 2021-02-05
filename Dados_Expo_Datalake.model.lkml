@@ -17,11 +17,13 @@ datagroup: real_export_frete_export_embed_datagroup {
 explore:big_data_expo_datalake  {
   persist_with: real_export_frete_export_embed_datagroup
   label: "db_mar + cargo details via datalake"
+  #real exportador
 }
 
 explore:bi_exports_mvw_gold  {
   persist_with: real_export_frete_export_embed_datagroup
   label: "db_mar expo via datalake"
+  #frete exportação
 }
 
 explore: cargo_reception_items_silver {
