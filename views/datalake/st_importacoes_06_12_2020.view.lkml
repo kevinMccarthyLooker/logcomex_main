@@ -193,7 +193,11 @@ view: st_importacoes_06_12_2020 {
 
   dimension: ean_code {
     type: string
-    sql: ${TABLE}.ean_code ;;
+    sql: ${TABLE}.ean_code;;
+    link: {
+      label: "Procurar Produto"
+      url: " https://pt.product-search.net/?q={{ value }}"
+    }
   }
 
   dimension: embarcacao {
