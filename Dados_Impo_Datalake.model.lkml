@@ -1,12 +1,7 @@
 connection: "dremio_datalake"
 
 include: "/**/bi_imports_mvw_gold.view.lkml"
-include: "/**/comex_analytics_datalake.view.lkml"
-include: "/**/external_comex_analytics.dashboard.lookml"
-
+include: "/**/external_frete_imp_mar.dashboard"
 
 explore:bi_imports_mvw_gold  {
-}
-
-explore:comex_analytics_datalake  {
 }

@@ -10,7 +10,11 @@ view: search_filtros {
     fh."source" as fonte,
     campos.name as filtro,
     (case
-      when  campos.name ='period' and service_id = 21 and fh."source" <> 'UNKNOWN' then (case when CHAR_LENGTH(campos.value) = 12 then '1' else (SUBSTR(campos.value, 15, 8)::date - SUBSTR(campos.value, 3, 8)::date)::text end)
+      when  campos.name ='period' and service_id = 21 and fh."source" <> 'UNKNOWN' then
+        (case when CHAR_LENGTH(campos.value) = 12 then '1'
+              when CHAR_LENGTH(campos.value) = 24 then (SUBSTR(campos.value, 15, 8)::date - SUBSTR(campos.value, 3, 8)::date)::text
+              else 'Fora do Padrão'
+         end)
       when  campos.name ='period' and service_id = 19 and fh."source" <>  'UNKNOWN' and CHAR_LENGTH(campos.value) = 10 then (last_day(to_date(SUBSTR(campos.value, 3, 6),'YYYYMM')) - to_date(SUBSTR(campos.value, 3, 6),'YYYYMM'))::text
       when  campos.name ='period' and service_id = 19 and fh."source" <> 'UNKNOWN' and CHAR_LENGTH(campos.value) = 20  then (last_day(to_date(SUBSTR(campos.value, 13, 6),'YYYYMM')) - to_date(SUBSTR(campos.value, 3, 6),'YYYYMM'))::text
       when  campos.name ='period' and service_id = 19 and fh."source" = 'UNKNOWN' and CHAR_LENGTH(campos.value) = 20   then
@@ -130,6 +134,7 @@ view: search_filtros {
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["2", "0", "2", "0", "", "0", "2"]' then 'Fora do Padrão'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["2", "0", "2", "0", "", "0", "2"]' then 'Fora do Padrão'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor = '["last_3_months"]' then 'Fora do Padrão'
+    when ${TABLE}.filtro = 'period' and ${TABLE}.valor = 'Fora do Padrão' then 'Fora do Padrão'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 0 and 4 then '≅ 2 Dias'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 5 and 8 then '≅ 1 Semana'
     when ${TABLE}.filtro = 'period' and ${TABLE}.valor::int between 9 and 11 then '≅ 10 Dias'

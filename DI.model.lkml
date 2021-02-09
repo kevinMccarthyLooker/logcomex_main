@@ -10,6 +10,7 @@ include: "/**/di_pu_pagamentos.view.lkml"
 include: "/**/di_control_pu.view.lkml"
 include: "/**/di_control.view.lkml"
 include: "/**/di_control_pu_addition.view.lkml"
+include: "/**/di_control_pu_token.view.lkml"
 include: "/**/di_pendente_robos.view.lkml"
 include: "/derivated_views/di_pu_pendente.view.lkml"
 include: "/**/search_acuracidade.view.lkml"
@@ -35,6 +36,7 @@ include: "/**/search_acuracidade.view.lkml"
 explore: di_control{}
 explore: di_control_pu {}
 explore: di_pu {}
+explore: di_control_pu_token {}
 explore: di_control_pu_addition {}
 explore: di_pu_addition {}
 explore: di_pendente_robos {}

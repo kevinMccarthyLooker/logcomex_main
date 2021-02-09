@@ -70,8 +70,19 @@ include: "/**/filters_names.view.lkml"
 include: "/**/trials_ativos_mes.view.lkml"
 include: "/**/clientes_sem_exportacao.view.lkml"
 
-datagroup: my_datagroup {
+datagroup: internal_only_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
+  max_cache_age: "6 hours"
+  label: "internal_only_datagroup"
+  description: " DG Principal do Modelo Internal Only"
+}
+
+datagroup: hs_datagroup {
+  #sql_trigger: select CURRENT_DATE ;; a cada 24 horas
+  sql_trigger: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) / (12*60*60)) ;; # a cada 12 horas
+  max_cache_age: "13 hours"
+  label: "hs_datagroup"
+  description: "DG do Health Score, atualiza a cada 12h"
 }
 
 explore: clientes_sem_exportacao{
@@ -136,6 +147,16 @@ explore: usage_logs {
 
 }
 
+explore: certificate_api {
+  view_name: certificate
+
+  join: certificate_consignee_radar {
+    sql_on:  ${certificate.id}=${certificate_consignee_radar.certificate_id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+}
+
 explore: consignee_radar {
   view_name: consignee
 
@@ -169,7 +190,7 @@ explore: usage {
 #     user_attribute: name
 #   }
 
-  persist_with: my_datagroup
+  persist_with: internal_only_datagroup
   view_name: customer
 
   join: customer_blocked_history {
@@ -225,23 +246,23 @@ explore: usage {
 
   }
 
-  join: cs_healthscore{
-    sql_on: ${customer.id}=${cs_healthscore.customer_id} ;;
-    relationship: one_to_many
-    type: left_outer
-  }
+#  join: cs_healthscore{
+#    sql_on: ${customer.id}=${cs_healthscore.customer_id} ;;
+#    relationship: one_to_many
+#    type: left_outer
+#  }
 
-  join: cs_novo_health_score{
-    sql_on: ${customer.id}=${cs_novo_health_score.customer_id} ;;
-    relationship: one_to_one
-    type: inner
-  }
+#  join: cs_novo_health_score{
+#    sql_on: ${customer.id}=${cs_novo_health_score.customer_id} ;;
+#    relationship: one_to_one
+#    type: inner
+#  }
 
-  join: cs_healthscore_accesslog{
-    sql_on: ${customer.id}=${cs_healthscore_accesslog.customer_id} ;;
-    relationship: one_to_many
-    type: left_outer
-  }
+#  join: cs_healthscore_accesslog{
+#    sql_on: ${customer.id}=${cs_healthscore_accesslog.customer_id} ;;
+#    relationship: one_to_many
+#    type: left_outer
+#  }
 
   join: customer_info{
     sql_on: ${customer.id}=${customer_info.customer_id} ;;
@@ -587,7 +608,7 @@ explore: usage {
 }
 
 explore: Logistica_Internacional {
-  persist_with: my_datagroup
+  persist_with: internal_only_datagroup
   view_name: extra_data_container
 
   join: extra_data_container_history {
@@ -598,7 +619,7 @@ explore: Logistica_Internacional {
 }
 
 explore: Robos_Tracking {
-    persist_with: my_datagroup
+    persist_with: internal_only_datagroup
     view_name: filatrackingfollowup
 
   join: tracking_status {
@@ -607,6 +628,52 @@ explore: Robos_Tracking {
     relationship: one_to_many
   }
 
+}
 
+explore: cs_novo_health_score {
+  persist_with: hs_datagroup
+  sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
+
+  join: customer {
+    sql_on: ${cs_novo_health_score.customer_id} = ${customer.id} ;;
+    relationship: one_to_one
+    type: inner
+  }
+
+  join: customer_info{
+    sql_on: ${customer.id}=${customer_info.customer_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
+  join: user_profile_customer {
+    sql_on: ${user_profile_customer.customer_id}=${customer.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: users {
+    sql_on: ${user_profile_customer.user_id}=${users.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: nps_11_2020 {
+    sql_on: ${users.email}=${nps_11_2020.email} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: customer_api_relations{
+    sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: hubspot_cs_deal {
+    sql_on: ${customer_api_relations.id} = ${hubspot_cs_deal.customer_api_relations_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
 
 }

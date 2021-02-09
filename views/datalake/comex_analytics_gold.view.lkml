@@ -1,6 +1,6 @@
 view: comex_analytics_gold {
   derived_table: {
-    sql: SELECT * FROM comex_analytics.comex_analytics_gold;;
+    sql: SELECT * FROM comex_analytics.comex_analytics_gold LIMIT 100000;;
   }
 
   measure: count {
@@ -809,7 +809,7 @@ view: comex_analytics_gold {
   }
 
   measure: di_total {
-    type: sum
+    type: count_distinct
     sql: ${TABLE}."di_number";;
   }
 

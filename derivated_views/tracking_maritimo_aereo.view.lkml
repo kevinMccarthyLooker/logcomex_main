@@ -62,7 +62,7 @@ from follow_up fu2
 where (fu2.user_id is null or fu2.user_id = 7002) -- usuaio utilizado para inserir dados manualmente
 group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_id = fu.tracking_id
 where fu.tracking_id is not null and (fu.user_id is null or fu.user_id = 7002)) as qq2 on qq2.tracking_id = tracking.id
-where tracking.deleted_at is null
+--where tracking.deleted_at is null
 union
 select 'Aereo' as modal,
        tracking_aerial.id as tracking_id,
@@ -125,12 +125,12 @@ from follow_up fu2
 where (fu2.user_id is null or fu2.user_id = 7002) -- usuario utilizado para inserir dados manualmente
 group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_aerial_id = fu.tracking_aerial_id
 where fu.tracking_aerial_id is not null and (fu.user_id is null or fu.user_id = 7002)) as qq2 on qq2.tracking_aerial_id = tracking_aerial.id
-where tracking_aerial.deleted_at is null
+--where tracking_aerial.deleted_at is null
     ;;
 indexes: ["chave"]
 sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60));;
   }
-
+#teste de comentario
   dimension: modal {
     type: string
     sql: ${TABLE}."modal" ;;

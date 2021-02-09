@@ -2,29 +2,31 @@ connection: "dremio_datalake"
 
 include: "/**/searchx_gold.view.lkml"
 include: "/**/searchx_gold_v2.view.lkml"
-include: "/**/searchx_gold_cif_cnae_ncm_2020.view.lkml"
-include: "/**/searchx_gold_sum_cif_2020_mensal.view.lkml"
 include: "/**/searchx_gold_v2_2020.view.lkml"
+include: "/**/valor_cif_2020_gold.view.lkml"
+include: "/**/st_importacoes_06_12_2020.view.lkml"
 
-
-#datagroup: searchx_datagroup {
-#
-#  sql_trigger: SELECT max(id) FROM searchx.searchx_gold_v2_index ;;
-#  max_cache_age: "24 hours"
-#  label: "ETL ID added"
-#  description: "Triggered when new ID is added to ETL log"
-#}
-
-explore:searchx_gold_v2_2020  {
+datagroup: valor_cif_datagroup {
+  sql_trigger: SELECT CURRENT_DATE ;;
+  max_cache_age: "24 hours"
+  label: "valor_cif_datagroup"
+  description: " Valor CIF X Importadores Atualizados a cada 24h"
 }
 
-explore:searchx_gold_cif_cnae_ncm_2020  {
+explore: st_importacoes_06_12_2020 {
+
+}
+
+explore:valor_cif_2020_gold  {
+  persist_with: valor_cif_datagroup
+}
+
+explore:searchx_gold_v2_2020  {
+
 }
 
 explore:searchx_gold  {
-}
 
-explore:searchx_gold_sum_cif_2020_mensal  {
 }
 
 explore:searchx_gold_v2  {
