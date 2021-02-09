@@ -365,8 +365,8 @@ view: st_importacoes_06_12_2020 {
     sql: ${TABLE}.pais_proced ;;
   }
 
-  dimension: qtd_comerc {
-    type: string
+  measure: qtd_comerc {
+    type: number
     sql: ${TABLE}.qtd_comerc ;;
   }
 
@@ -528,6 +528,16 @@ view: st_importacoes_06_12_2020 {
   dimension: val_vmle_us_subitem_float {
     type: number
     sql: ${TABLE}.val_vmle_us_subitem_float ;;
+  }
+
+  measure: qtd_estat_sum {
+    type: sum
+    sql: cast(${qtd_estat} as float) ;;
+  }
+
+  measure: qtd_comerc_sum {
+    type: sum
+    sql: cast(${qtd_comerc} as float) ;;
   }
 
   measure: val_vmle_us_subitem_sum {

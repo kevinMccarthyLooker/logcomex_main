@@ -118,6 +118,11 @@ group by d.col,t.dtoperacao,t.tipoconhecimento
     sql: ${TABLE}."tipoconhecimento" ;;
     label: "Embarque"
   }
+  dimension: dtoperacao {
+    type: date
+    sql: ${TABLE}."dtoperacao" ;;
+    label: "Data"
+  }
 
   set: detail {
     fields: [col, null_count, not_null_count, empty]
