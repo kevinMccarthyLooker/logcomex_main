@@ -365,8 +365,8 @@ view: st_importacoes_06_12_2020 {
     sql: ${TABLE}.pais_proced ;;
   }
 
-  measure: qtd_comerc {
-    type: number
+  dimension: qtd_comerc {
+    type: string
     sql: ${TABLE}.qtd_comerc ;;
   }
 
