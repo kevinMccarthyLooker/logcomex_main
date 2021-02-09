@@ -342,6 +342,11 @@ view: exportacao_gold {
     sql: ${TABLE}.volumes ;;
   }
 
+  dimension: real_exportador_qtd {
+    type: number
+    sql: ${TABLE}.real_exportador_qtd ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]

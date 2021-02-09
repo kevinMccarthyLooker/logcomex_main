@@ -375,6 +375,16 @@ view: st_importacoes_06_12_2020 {
     sql: ${TABLE}.qtd_estat ;;
   }
 
+  dimension: qtd_comerc_float {
+    type: number
+    sql: ${TABLE}.qtd_comerc_float ;;
+  }
+
+  dimension: qtd_estat_float {
+    type: number
+    sql: ${TABLE}.qtd_estat_float ;;
+  }
+
   dimension: recinto_aduaneiro {
     type: string
     sql: ${TABLE}.recinto_aduaneiro ;;
@@ -532,12 +542,12 @@ view: st_importacoes_06_12_2020 {
 
   measure: qtd_estat_sum {
     type: sum
-    sql: cast(${qtd_estat} as float) ;;
+    sql: ${qtd_estat_float} ;;
   }
 
   measure: qtd_comerc_sum {
     type: sum
-    sql: cast(${qtd_comerc} as float) ;;
+    sql: ${qtd_comerc_float} ;;
   }
 
   measure: val_vmle_us_subitem_sum {
