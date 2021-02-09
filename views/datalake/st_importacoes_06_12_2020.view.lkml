@@ -540,6 +540,11 @@ view: st_importacoes_06_12_2020 {
     sql: ${TABLE}.val_vmle_us_subitem_float ;;
   }
 
+  dimension: val_vmle_us_subitem_unitario {
+    type: number
+    sql: ${TABLE}.val_vmle_us_subitem_float / ${TABLE}.qtd_comerc_float ;;
+  }
+
   measure: qtd_estat_sum {
     type: sum
     sql: ${qtd_estat_float} ;;
