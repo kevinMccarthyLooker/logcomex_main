@@ -6,6 +6,8 @@ include: "/**/cargo_reception_items_silver.view.lkml"
 include: "/**/external_real_exportador.dashboard.lookml"
 include: "/**/external_frete_export.dashboard.lookml"
 include: "/**/external_frete_exp_mar.dashboard.lookml"
+include: "/**/exportadores_2020_gold.view.lkml"
+
 
 datagroup: real_export_frete_export_embed_datagroup {
   sql_trigger: SELECT CURRENT_DATE ;;
@@ -13,6 +15,8 @@ datagroup: real_export_frete_export_embed_datagroup {
   label: "real_export_frete_export_embed_datagroup"
   description: " DG dos Dashs Embedados Real Exportador e Frete Exportacao, Atualizados a cada 24h"
 }
+
+explore: exportadores_2020_gold {}
 
 explore:big_data_expo_datalake  {
   persist_with: real_export_frete_export_embed_datagroup
