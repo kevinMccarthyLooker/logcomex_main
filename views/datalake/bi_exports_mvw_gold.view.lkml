@@ -1456,4 +1456,10 @@ view: bi_exports_mvw_gold {
     sql: stddev(${TABLE}."mar_vlfrete");;
   }
 
+  measure: count_dist_mvw_nome_exportador {
+    type: count_distinct
+    sql: ${mvw_nome_exportador} ;;
+    drill_fields: [mvw_nome_exportador,mvw_cnpj_exportador]
+  }
+
 }
