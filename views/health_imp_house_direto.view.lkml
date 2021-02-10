@@ -13,7 +13,7 @@ view: health_imp_house_direto {
 
       FROM db_maritimo m
       LEFT JOIN db_ce_history on db_ce_history.ce = m.nrcemercante
-      WHERE m.dtoperacao >= '2020-01-01 00:00:00'
+      WHERE m.dtoperacao >= date_trunc('month', CURRENT_DATE) - interval '1 month'
       AND m.categoriacarga = 'I'
       AND m.deleted_at IS NULL
       AND db_ce_history.deleted_at is NULL
@@ -36,7 +36,7 @@ view: health_imp_house_direto {
 
       FROM db_maritimo m
       LEFT JOIN db_ce_history on db_ce_history.ce = m.nrcemercante
-      WHERE m.dtoperacao >= '2020-01-01 00:00:00'
+      WHERE m.dtoperacao >= date_trunc('month', CURRENT_DATE) - interval '1 month'
       AND m.categoriacarga = 'I'
       AND m.deleted_at IS NULL
       AND db_ce_history.deleted_at is NULL
@@ -57,7 +57,7 @@ view: health_imp_house_direto {
                                                         AND recinto_aduaneiro_origem ~' PORT'
                                                         OR recinto_aduaneiro_origem LIKE '%.PORT%'
                                                         and tipoconhecimento in ('10','12')
-                                                        AND dtoperacao >= '2020-01-01')
+                                                        AND dtoperacao >= date_trunc('month', CURRENT_DATE) - interval '1 month')
       from db_ce_dta d
         inner join db_maritimo m on m.nrcemercante = d.ce
         where url_file is not null
@@ -65,7 +65,7 @@ view: health_imp_house_direto {
         AND recinto_aduaneiro_origem ~' PORT'
         OR recinto_aduaneiro_origem LIKE '%.PORT%'
         and tipoconhecimento in ('10','12')
-        AND dtoperacao >= '2020-01-01'
+        AND dtoperacao >= date_trunc('month', CURRENT_DATE) - interval '1 month'
        ;;
   }
 
