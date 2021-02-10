@@ -128,7 +128,7 @@ where fu.tracking_aerial_id is not null and (fu.user_id is null or fu.user_id = 
 --where tracking_aerial.deleted_at is null
     ;;
 indexes: ["chave"]
-sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) / (3*60*60));;
+sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) / (4*60*60));;
   }
 #teste de comentario
   dimension: modal {
