@@ -10,7 +10,7 @@ view: comex_analytics_di {
 
   dimension: di_number {
     type: number
-    sql: ${TABLE}.di_number ;;
+    sql: ${TABLE}.di_completo ;;
   }
 
   dimension_group: data_hora_registro {
@@ -403,7 +403,7 @@ view: comex_analytics_di {
 
   measure: di_total {
     type: count_distinct
-    sql: ${TABLE}."di_number";;
+    sql: ${TABLE}."di_completo";;
   }
 
   measure: valor_multa_total {
