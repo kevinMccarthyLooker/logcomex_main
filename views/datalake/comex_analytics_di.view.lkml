@@ -73,7 +73,7 @@ view: comex_analytics_di {
     sql: ${TABLE}.canal ;;
   }
 
-  dimension: importador_cnpj {
+  dimension: cnpj_importador {
     type: string
     sql: ${TABLE}.importador_cnpj ;;
   }
@@ -439,6 +439,21 @@ view: comex_analytics_di {
   measure: representante_cpf{
     type: string
     sql: replace(replace(${TABLE}."cpf_representante", '.', ''),'-','');;
+  }
+
+  measure: importador_cnpj{
+    type: string
+    sql: replace(replace(replace(${TABLE}."cnpj_importador", '.', ''),'-',''),'/','');;
+  }
+
+  measure: customer_cnpj {
+    type: string
+    sql: replace(replace(replace(${TABLE}."cnpj_customer", '.', ''),'-',''),'/','');;
+  }
+
+  measure: consignee_cnpj {
+    type: string
+    sql: replace(replace(replace(${TABLE}."cnpj_consignee", '.', ''),'-',''),'/','');;
   }
 
 }
