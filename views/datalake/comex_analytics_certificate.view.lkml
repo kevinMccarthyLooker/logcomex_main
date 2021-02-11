@@ -1,4 +1,4 @@
-view: comex_analytics_filter_access {
+view: comex_analytics_certificate {
   derived_table: {
     sql:
     select
@@ -16,9 +16,9 @@ view: comex_analytics_filter_access {
     di.tipo_recolhimento
     from api.customer c
     inner join api.consignee cg on cg.customer_id = c.id
-    inner join api.certificate_consignee_radar ccr on ccr.consignee_id = cg.id and ccr.deleted_at is null descomentar caso nao incluir os deletados
+    --inner join api.certificate_consignee_radar ccr on ccr.consignee_id = cg.id and ccr.deleted_at is null descomentar caso nao incluir os deletados
     inner join api.certificate ct on ct.id = cg.cert_id and ct.customer_id = cg.customer_id
-    inner join comex_analytics.comex_analytics_di di on replace(replace(replace(di.importador_cnpj,'-',''),'/',''),'.','') = cg.cnpj
+    inner join aereo.di_pu di on replace(replace(replace(di.importador_cnpj,'-',''),'/',''),'.','') = cg.cnpj
     where ct.valid_until >= current_date -- certificados válidos
     and di.data_hora_registro  >= current_date - interval '5' day -- diminuindo o periodo para teste
     --and c.id = 1536
