@@ -624,6 +624,29 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     drill_fields: [detail*]
   }
 
+  measure: count_customers_api {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    filters: [is_api: "yes"]
+    drill_fields: [detail_customer*]
+  }
+
+  measure: count_customers_seguir_emb {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    filters: [is_api: "no"]
+    filters: [user_id_null: "yes"]
+    drill_fields: [detail_customer*]
+  }
+
+  measure: count_customers_screen {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    filters: [is_api: "no"]
+    filters: [user_id_null: "no"]
+    drill_fields: [detail_customer*]
+  }
+
   measure: count {
     type: count_distinct
     sql: ${chave} ;;
@@ -696,5 +719,9 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     set: detail {
     fields: [customer_id, customer.name, status, internal_status, created_raw, token]
   }
+
+    set: detail_customer {
+      fields: [customer_id, customer.name,force_certificate]
+    }
 
 }
