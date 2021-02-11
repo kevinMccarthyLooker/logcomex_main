@@ -443,7 +443,7 @@ view: comex_analytics_di {
 
   measure: importador_cnpj{
     type: string
-    sql: replace(replace(${TABLE}."cnpj_importador", '.', ''),'-','');;
+    sql: replace(replace(replace(${TABLE}."importador_cnpj", '.', ''),'-',''),'/','');;
   }
 
   measure: customer_cnpj {
