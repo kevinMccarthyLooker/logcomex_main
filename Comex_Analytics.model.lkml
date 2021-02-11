@@ -13,10 +13,10 @@ datagroup: comex_analytics_embed_datagroup {
 
 explore:comex_analytics_di  {
 persist_with: comex_analytics_embed_datagroup
-  access_filter: {
-    field: comex_analytics_di.id_customer
-    user_attribute: customer_id
-  }
+##  access_filter: {
+##    field: comex_analytics_di.id_customer
+##    user_attribute: customer_id
+##  }
 }
 
 explore: comex_analytics_adicoes {
