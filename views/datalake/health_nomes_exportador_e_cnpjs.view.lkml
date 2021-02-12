@@ -9,6 +9,22 @@ view: health_nomes_exportador_e_cnpjs {
     drill_fields: [detail*]
   }
 
+
+  dimension: mvw_expo_ano_mes {
+    type: string
+    sql: ${TABLE}.mvw_expo_ano_mes ;;
+  }
+
+  dimension: mvw_expo_cnpj_exportador {
+    type: string
+    sql: ${TABLE}.mvw_expo_cnpj_exportador ;;
+  }
+
+  dimension: mvw_expo_nome_exportador {
+    type: string
+    sql: ${TABLE}.mvw_expo_nome_exportador ;;
+  }
+
   dimension: siscarga_embarcador {
     type: string
     sql: ${TABLE}.siscarga_embarcador ;;
@@ -76,6 +92,9 @@ view: health_nomes_exportador_e_cnpjs {
 
   set: detail {
     fields: [
+      mvw_expo_ano_mes,
+      mvw_expo_cnpj_exportador,
+      mvw_expo_nome_exportador,
       siscarga_embarcador,
       siscarga_embarcador_nome,
       siscarga_embarcador_cnpj,
