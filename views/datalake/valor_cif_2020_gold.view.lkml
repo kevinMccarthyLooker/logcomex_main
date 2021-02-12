@@ -11,6 +11,16 @@ view: valor_cif_2020_gold {
     sql: ${TABLE}.desc_ncm ;;
   }
 
+  dimension: seg_cdncm_compl {
+    type: string
+    sql: ${TABLE}.seg_cdncm_compl ;;
+  }
+
+  dimension: segmento_logcomex {
+    type: string
+    sql: ${TABLE}.segmento_logcomex ;;
+  }
+
   dimension: branches_activity {
     type: string
     sql: ${TABLE}.branches_activity ;;
