@@ -65,8 +65,8 @@ view: clientes_ativos_por_mes {
 
   set: detail {
     fields: [
-      customer_id,
-      customer_name
+      customer_name,
+      customer_id
     ]
   }
 
