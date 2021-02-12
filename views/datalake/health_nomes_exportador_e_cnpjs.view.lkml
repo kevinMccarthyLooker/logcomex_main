@@ -90,6 +90,12 @@ view: health_nomes_exportador_e_cnpjs {
     sql: ${TABLE}.mar_checked_at ;;
   }
 
+  measure: count_dist_mvw_expo_nome_exportador {
+    type: count_distinct
+    sql: ${mvw_expo_nome_exportador} ;;
+    drill_fields: [mvw_expo_nome_exportador,mvw_expo_cnpj_exportador]
+  }
+
   set: detail {
     fields: [
       mvw_expo_ano_mes,
