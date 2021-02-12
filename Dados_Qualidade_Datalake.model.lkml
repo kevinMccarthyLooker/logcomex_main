@@ -5,6 +5,7 @@ include: "/**/db_maritimo_gold.view.lkml"
 include: "/**/maritimo_exportacao_gold.view.lkml"
 include: "/**/comex_analytics_gold.view.lkml"
 include: "/**/exportacao_gold.view.lkml"
+include: "/**/health_nomes_exportador_e_cnpjs.view.lkml"
 
 
 datagroup: exportacao_gold_datagroup {
@@ -24,4 +25,6 @@ explore:db_maritimo_gold  {
 explore:comex_analytics_gold  {
 }
 explore:maritimo_exportacao_gold  {
+}
+explore:health_nomes_exportador_e_cnpjs  {
 }
