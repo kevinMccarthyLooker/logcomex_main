@@ -135,6 +135,7 @@
     type: looker_column
     fields: [db_commodities_export.val_peso_liq, db_commodities_export.val_fob_us,
       db_commodities_export.anomes_Mes]
+    sorts: [db_commodities_export.val_peso_liq desc]
     limit: 500
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -165,10 +166,10 @@
     totals_color: "#808080"
     color_application:
       collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
-      palette_id: 471a8295-662d-46fc-bd2d-2d0acd370c1e
+      palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825
       options:
         steps: 5
-        reverse: true
+        reverse: false
     y_axes: [{label: '', orientation: left, series: [{axisId: db_commodities_export.val_peso_liq,
             id: db_commodities_export.val_peso_liq, name: Peso Líquido}], showLabels: true,
         showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
@@ -184,7 +185,8 @@
     hide_legend: false
     series_types:
       db_commodities_export.val_peso_liq: line
-    series_colors: {}
+    series_colors:
+      db_commodities_export.val_peso_liq: "#77caff"
     series_labels:
       db_commodities_export.val_peso_liq: Peso Líquido
       db_commodities_export.val_fob_us: FOB USD
