@@ -1,6 +1,6 @@
 view: comex_analytics_di {
   derived_table: {
-    sql: SELECT * FROM comex_analytics_teste.comex_analytics_teste_gold;;
+    sql: SELECT * FROM comex_analytics_teste.comex_analytics_gold_certificate;;
   }
 
   measure: count {
@@ -303,6 +303,26 @@ view: comex_analytics_di {
     sql: ${TABLE}.informacoes_complementares ;;
   }
 
+  dimension: id_customer {
+    type: number
+    sql: ${TABLE}.id_customer ;;
+  }
+
+  dimension: name_customer {
+    type: string
+    sql: ${TABLE}.name_customer ;;
+  }
+
+  dimension: cnpj_customer {
+    type: string
+    sql: ${TABLE}.cnpj_customer ;;
+  }
+
+  dimension: cnpj_consignee {
+    type: string
+    sql: ${TABLE}.cnpj_consignee ;;
+  }
+
   set: detail {
     fields: [
       di_number,
@@ -420,5 +440,4 @@ view: comex_analytics_di {
     type: string
     sql: replace(replace(${TABLE}."cpf_representante", '.', ''),'-','');;
   }
-
 }
