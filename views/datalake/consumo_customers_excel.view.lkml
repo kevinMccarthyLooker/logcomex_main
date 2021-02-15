@@ -16,6 +16,21 @@ view: consumo_customers_excel {
     sql: ${TABLE}.name ;;
   }
 
+  dimension: user_id {
+    type: number
+    sql: ${TABLE}.user_id ;;
+  }
+
+  dimension: user_name {
+    type: string
+    sql: ${TABLE}.user_name ;;
+  }
+
+  dimension: user_email {
+    type: string
+    sql: ${TABLE}.user_email ;;
+  }
+
   dimension: plano {
     type: string
     sql: ${TABLE}.plano ;;
