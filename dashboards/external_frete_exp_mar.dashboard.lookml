@@ -384,7 +384,7 @@
         align: left
       bi_exports_mvw_gold.mar_vl_frete_por_c20:
         align: left
-      bi_exports_mvw_gold.mar_teus:
+      bi_exports_mvw_gold.mar_teus_total:
         align: left
       bi_exports_mvw_gold.mar_vl_frete_por_TEU:
         align: left
