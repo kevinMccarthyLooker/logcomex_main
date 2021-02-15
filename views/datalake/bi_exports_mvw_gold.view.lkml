@@ -1467,19 +1467,4 @@ view: bi_exports_mvw_gold {
     drill_fields: [mvw_nome_exportador,mvw_cnpj_exportador]
   }
 
-  measure: mar_teus_string {
-    type: sum
-    sql: ${TABLE}.mvw_teus ;;
-  }
-
-  measure: mar_c20_string {
-    type: string
-    sql: ${TABLE}.mar_c20 ;;
-  }
-
-  measure: mar_c40_string {
-    type: string
-    sql: ${TABLE}.mar_c40 ;;
-  }
-
 }
