@@ -1468,8 +1468,8 @@ view: bi_exports_mvw_gold {
   }
 
   measure: mar_teus_string {
-    type: string
-    sql: ${TABLE}.mar_teus ;;
+    type: sum
+    sql: ${TABLE}.mvw_teus ;;
   }
 
   measure: mar_c20_string {
