@@ -46,6 +46,18 @@ view: consumo_customers_excel {
     sql: ${TABLE}.service_id ;;
   }
 
+  dimension_group: periodo {
+    type: time
+    timeframes: [
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."periodo" ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [name]
