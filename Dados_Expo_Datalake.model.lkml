@@ -4,7 +4,6 @@ include: "/**/big_data_expo_datalake.view.lkml"
 include: "/**/bi_exports_mvw_gold.view.lkml"
 include: "/**/cargo_reception_items_silver.view.lkml"
 include: "/**/external_real_exportador.dashboard.lookml"
-include: "/**/external_frete_export.dashboard.lookml"
 include: "/**/external_frete_exp_mar.dashboard.lookml"
 include: "/**/exportadores_2020_gold.view.lkml"
 
