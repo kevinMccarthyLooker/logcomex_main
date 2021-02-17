@@ -3,7 +3,7 @@ view: search_filtros {
   derived_table: {
     sql:
     select
-    concat(fh."year",fh."month",'|',fh.customer_id,'|',fh."source",'|',campos.name) as id,
+    concat(fh."year",fh."month",'|',fh.customer_id,'|',fh.service_id,'|',fh."source",'|',campos.name,campos.value) as id,
     TO_TIMESTAMP(concat(fh."year",' ',fh."month") ,'YYYY MM') as periodo,
     fh.customer_id as customer_id,
     fh.service_id as service,
