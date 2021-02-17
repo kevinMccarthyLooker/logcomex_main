@@ -199,6 +199,11 @@ view: search_filtros {
     sql: ${TABLE}.qtd ;;
   }
 
+  measure: count_customers_distincts {
+    type: count_distinct
+    sql: ${customer} ;;
+  }
+
   set: detail {  #drills
     fields: [
       filtro,
