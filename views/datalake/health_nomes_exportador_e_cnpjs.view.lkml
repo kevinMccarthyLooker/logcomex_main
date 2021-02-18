@@ -80,6 +80,11 @@ view: health_nomes_exportador_e_cnpjs {
     sql: ${TABLE}.mar_cdshipper ;;
   }
 
+  dimension: mar_idshipper {
+    type: string
+    sql: ${TABLE}.mar_idshipper ;;
+  }
+
   dimension_group: mar_updated_at {
     type: time
     sql: ${TABLE}.mar_updated_at ;;
@@ -112,6 +117,7 @@ view: health_nomes_exportador_e_cnpjs {
       mar_nrcemercante,
       mar_txshipper,
       mar_cdshipper,
+      mar_idshipper,
       mar_updated_at_time,
       mar_checked_at_time
     ]
