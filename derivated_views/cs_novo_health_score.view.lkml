@@ -41,10 +41,10 @@ as usab_tracking,
 tracking.qtde_ultimos_30_dias as tracking_qtde_ultimos_30_dias,
 tracking.qtde_120_30_dias as tracking_qtde_120_30_dias,
 (case
-when tickets_movi.qtd_tickets = 0 then 10
-when tickets_movi.qtd_tickets isnull then 10
-when tickets_movi.qtd_tickets >= 1 and tickets_movi.qtd_tickets <= 6 then 5
-when tickets_movi.qtd_tickets > 6 then 0
+when tickets_hub.qtd_tickets = 0 then 10
+when tickets_hub.qtd_tickets is null then 10
+when tickets_hub.qtd_tickets >= 1 and tickets_hub.qtd_tickets <= 6 then 5
+when tickets_hub.qtd_tickets > 6 then 0
 else null
 end)
 as pontos_qtd_tickets,
@@ -185,14 +185,14 @@ from(
     ) a
 group by 1
      ) as acessos_usuarios on acessos_usuarios.customer_id = c.id
-left join(  -- adicionando dados dos tickets movidesk
-select tm.id_customer,
-count(*) as qtd_tickets
-from tickets_movidesk tm
-left join customer on customer.id = tm.id_customer
-where tm.created_date >= current_date - interval '30' day
+left join(  -- adicionando dados dos tickets hubspot
+select c.id as customer_id, count(distinct hubt.ticket_id) as qtd_tickets
+from public.hubspot_tickets hubt
+inner join customer_api_relations car on car.id = hubt.customer_api_relations_id
+inner join customer c on c.id = car.id_customer
+where hubt.create_date_ticket >= current_date - interval '30' day
 group by 1
-       ) as tickets_movi on tickets_movi.id_customer = c.id
+       ) as tickets_hub on tickets_hub.customer_id = c.id
 left join(  -- adicionando dados das pesquisa de satisfacao movidesk
 select qq1.id_customer,
 avg(qq1.value_response) as value_response

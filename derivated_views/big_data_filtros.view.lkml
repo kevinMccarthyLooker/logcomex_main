@@ -3,15 +3,30 @@ view: big_data_filtros {
   derived_table: {
     sql:
     select
-    row_number() over () as id,*
+    row_number() over () as id,
+    period,
+    service,
+    report_type_id,
+    customer_plan_id,
+    user_id,
+    filter,
+    (case
+    when filter = 'cdshipper' then regexp_replace(filter_value, '\D','','g')
+    else filter_value
+    end)as filter_value,
+    qtd
     from(
-    SELECT date_trunc('day',created_at) as period, json_filter->>'serviceId' as service, report_type_id, customer_plan_id, user_id, json_object_keys(json_filter) as filter, count(1) as qtd
-    FROM report_log
-    WHERE json_filter->>'serviceId' in ('1','2','3','6','8','9','10','11','12','13','14','15','16','17','18')
-    --and report_log.id in (6145047,6145046,6145045,6144138,6144134,6144131)
-    GROUP BY period,json_filter->>'serviceId', report_type_id,customer_plan_id,user_id,json_object_keys(json_filter)) qq1
+      SELECT date_trunc('day',created_at) as period, json_filter->>'serviceId' as service, report_type_id, customer_plan_id, user_id, js.key as filter,
+      js.value as filter_value,
+      count(1) as qtd
+      FROM report_log, json_each_text(report_log.json_filter) as js
+      WHERE json_filter->>'serviceId' in ('1','2','3','6','8','9','10','11','12','13','14','15','16','17','18')
+      --and js.key = 'cdshipper'
+      --and report_log.id in (6145275,6145274,6145273,6145272,6145047,6145046,6145045,6144138,6144134,6144131)
+      GROUP BY 1,2,3,4,5,6,7
+      )qq1
     where qq1.filter NOT IN ('', 'chartPath', 'dashboard', 'detalhes', 'export_excel', 'filter_date', 'filterName', 'grouper', 'grouper_value', 'id', 'isChart', 'isPivot', 'page', 'paginated', 'path', 'per_page', 'serviceId', 'serviceSlug', 'sort', 'sortBy', 'tabType', 'title', 'type', 'undefined', 'x-api-key', 'XDEBUG_SESSION_START');;
-  indexes: ["period"]
+  indexes: ["id","period","service"]
   sql_trigger_value: SELECT CURRENT_DATE;;
   }
 
@@ -41,6 +56,11 @@ view: big_data_filtros {
   dimension: filter {
     type: string
     sql: ${TABLE}.filter ;;
+  }
+
+  dimension: filter_value {
+    type: string
+    sql: ${TABLE}.filter_value ;;
   }
 
   dimension: service {
@@ -113,7 +133,17 @@ view: big_data_filtros {
   measure: total {
     type: sum
     sql: coalesce(${qtd},0) ;;
+    drill_fields: [detail*]
 
   }
+
+  set: detail {  #drills
+    fields: [
+      filter,
+      filter_value,
+      total
+    ]
+  }
+
 
 }
