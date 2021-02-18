@@ -133,7 +133,17 @@ view: big_data_filtros {
   measure: total {
     type: sum
     sql: coalesce(${qtd},0) ;;
+    drill_fields: [detail*]
 
   }
+
+  set: detail {  #drills
+    fields: [
+      filter,
+      filter_value,
+      total
+    ]
+  }
+
 
 }
