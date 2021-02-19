@@ -12,7 +12,7 @@ view: big_data_filtros {
     filter,
     (case
     when filter = 'cdshipper' then regexp_replace(filter_value, '\D','','g')  -- apenas numeros
-    when filter = 'periodo' and CHAR_LENGTH(filter_value) = 21 then -- filtro de periodo e no padrao de 21 caracteres
+    when filter = 'periodo' and CHAR_LENGTH(filter_value) = 21 and right(filter_value,10) !='2019-02-29' and left(filter_value,10) !='2019-02-29' then -- filtro de periodo e no padrao de 21 caracteres e retirando data inexistente
       (case when (right(filter_value,10)::timestamp - (left(filter_value,10)::timestamp))::text = '00:00:00' then '1 day' -- quando o filtro eh apenas um dia
       else (right(filter_value,10)::timestamp - (left(filter_value,10)::timestamp))::text
       end)
@@ -34,12 +34,12 @@ view: big_data_filtros {
         else js.value
         end) as filter_value,
         count(1) as qtd
-          FROM report_log, json_each_text(report_log.json_filter) as js
-          WHERE json_filter->>'serviceId' in ('1','2','3','6','8','9','10','11','12','13','14','15','16','17','18')
-          --and js.key = 'cdshipper'
-          --and report_log.id in (6145275,6145274,6145273,6145272,6145047,6145046,6145045,6144138,6144134,6144131)
-          GROUP BY 1,2,3,4,5,6,7
-        )qq1
+        FROM report_log, json_each_text(report_log.json_filter) as js
+        WHERE json_filter->>'serviceId' in ('1','2','3','6','8','9','10','11','12','13','14','15','16','17','18')
+        --and js.key = 'cdshipper'
+        --and report_log.id in (6145275,6145274,6145273,6145272,6145047,6145046,6145045,6144138,6144134,6144131)
+        GROUP BY 1,2,3,4,5,6,7
+      )qq1
     where qq1.filter NOT IN ('', 'chartPath', 'dashboard', 'detalhes', 'export_excel', 'filter_date', 'filterName', 'grouper', 'grouper_value', 'id',
     'isChart', 'isPivot', 'page', 'paginated', 'path', 'per_page', 'serviceId', 'serviceSlug', 'sort', 'sortBy', 'tabType', 'title', 'type',
     'undefined', 'x-api-key', 'XDEBUG_SESSION_START','{ "dashboard":_"id", "start_date":_"2019-01-01", "end_date":_"2019-03-13", "export_excel":_false, "filter_date":_"operation_date", "grouper":_"consignee_cnpj", "grouper_value":_"61194494000187", "isPivot":_true, "page":_1, "per_page":_15, "tabType":_"dynamicTable", "title":_"consignee_cnpj", "type":_"importacao" }',
