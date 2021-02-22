@@ -56,6 +56,11 @@ view: hubspot_cs_deal {
     sql: ${TABLE}."deleted_at" ;;
   }
 
+  dimension: divergence_of_data {
+    type: string
+    sql: ${TABLE}."divergence_of_data" ;;
+  }
+
   dimension: duration_of_implementation {
     type: number
     sql: ${TABLE}."duration_of_implementation" ;;
@@ -69,6 +74,96 @@ view: hubspot_cs_deal {
   dimension: first_days_access {
     type: yesno
     sql: ${TABLE}."first_days_access" ;;
+  }
+
+  dimension_group: follow_up_07 {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}."follow_up_07" ;;
+  }
+
+  dimension_group: follow_up_14 {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}."follow_up_14" ;;
+  }
+
+  dimension_group: follow_up_21 {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}."follow_up_21" ;;
+  }
+
+  dimension_group: follow_up_30 {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}."follow_up_30" ;;
+  }
+
+  dimension_group: follow_up_45 {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}."follow_up_45" ;;
+  }
+
+  dimension_group: follow_up_60 {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
+    sql: ${TABLE}."follow_up_60" ;;
   }
 
   dimension: hubspot_customer_id {
@@ -109,6 +204,16 @@ view: hubspot_cs_deal {
   dimension: pipeline {
     type: string
     sql: ${TABLE}."pipeline" ;;
+  }
+
+  dimension: question_company_challenges {
+    type: string
+    sql: ${TABLE}."question_company_challenges" ;;
+  }
+
+  dimension: question_objectives_of_the_hiring {
+    type: string
+    sql: ${TABLE}."question_objectives_of_the_hiring" ;;
   }
 
   dimension: released_without_payment {
@@ -218,24 +323,24 @@ view: hubspot_cs_deal {
     sql: ${TABLE}."training_duration_one" ;;
   }
 
-  dimension: training_duration_one_minutes {
-    type: number
-    sql: left(lpad(replace(${training_duration_one},':',''),4,'0'),2)::int * 60 + right(lpad(replace(${training_duration_one},':',''),4,'0'),2)::int;;
-  }
-
   dimension: training_duration_two {
     type: string
     sql: ${TABLE}."training_duration_two" ;;
   }
 
-  dimension: training_duration_two_minutes {
-    type: number
-    sql: left(lpad(replace(${training_duration_two},':',''),4,'0'),2)::int * 60 + right(lpad(replace(${training_duration_two},':',''),4,'0'),2)::int;;
-  }
-
   dimension: training_duration_three {
     type: string
     sql: ${TABLE}."training_duration_three" ;;
+  }
+
+  dimension: training_duration_one_minutes {
+    type: number
+    sql: left(lpad(replace(${training_duration_one},':',''),4,'0'),2)::int * 60 + right(lpad(replace(${training_duration_one},':',''),4,'0'),2)::int;;
+  }
+
+  dimension: training_duration_two_minutes {
+    type: number
+    sql: left(lpad(replace(${training_duration_two},':',''),4,'0'),2)::int * 60 + right(lpad(replace(${training_duration_two},':',''),4,'0'),2)::int;;
   }
 
   dimension: training_duration_three_minutes {
@@ -255,6 +360,11 @@ view: hubspot_cs_deal {
       year
     ]
     sql: ${TABLE}."updated_at" ;;
+  }
+
+  dimension: usability_frequency {
+    type: string
+    sql: ${TABLE}."usability_frequency" ;;
   }
 
   measure: count {
