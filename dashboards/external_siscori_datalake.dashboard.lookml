@@ -24,7 +24,6 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
-      Hscode: siscori_gold.hscode
       HSCODE: siscori_gold.hscode
       NCM: siscori_gold.ncm
     row: 0
@@ -126,7 +125,6 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
-      Hscode: siscori_gold.hscode
       HSCODE: siscori_gold.hscode
       NCM: siscori_gold.ncm
     row: 0
@@ -196,7 +194,6 @@
     hide_row_totals: false
     listen:
       Mês: siscori_gold.mes_month
-      Hscode: siscori_gold.hscode
       HSCODE: siscori_gold.hscode
       NCM: siscori_gold.ncm
     row: 6
@@ -249,7 +246,6 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
-      Hscode: siscori_gold.hscode
       HSCODE: siscori_gold.hscode
       NCM: siscori_gold.ncm
     row: 6
@@ -306,7 +302,6 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
-      Hscode: siscori_gold.hscode
       HSCODE: siscori_gold.hscode
       NCM: siscori_gold.ncm
     row: 16
@@ -370,7 +365,6 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
-      Hscode: siscori_gold.hscode
       HSCODE: siscori_gold.hscode
       NCM: siscori_gold.ncm
     row: 16

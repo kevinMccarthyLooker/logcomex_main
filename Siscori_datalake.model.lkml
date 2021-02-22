@@ -1,6 +1,7 @@
 connection: "dremio_datalake"
 
 include: "/**/siscori_gold.view.lkml"
+include: "/**/external_siscori_datalake.dashboard"
 
 datagroup: siscori_datagroup {
   sql_trigger: SELECT CURRENT_DATE ;;
