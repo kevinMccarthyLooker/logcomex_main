@@ -73,6 +73,10 @@
     series_types: {}
     hidden_fields: [big_data_expo_datalake.count_mar_id_com_dt, big_data_expo_datalake.mvw_teus,
       big_data_expo_datalake.mar_teus]
+    note_state: expanded
+    note_display: below
+    note_text: Dados disponíveis referentes aos meses de (Agosto/20, Setembro/20,
+      Outubro/20 e Novembro/20) e apenas embarques de cargas FCL (Full Container Load).
     listen:
       Data Embarque: big_data_expo_datalake.mvw_data_embarque_month
       Porto Destino: big_data_expo_datalake.mvw_porto_destino
@@ -85,16 +89,17 @@
     row: 0
     col: 16
     width: 8
-    height: 7
+    height: 11
   - title: Real Exportador
     name: Real Exportador
     model: Dados_Expo_Datalake
     explore: big_data_expo_datalake
     type: looker_grid
+    fields: [big_data_expo_datalake.nf_nome_emissor, big_data_expo_datalake.count_mar_id]
+    filters: {}
     sorts: [big_data_expo_datalake.count_mar_id desc]
     limit: 500
     total: true
-    query_timezone: America/Sao_Paulo
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -159,7 +164,12 @@
     interpolation: linear
     defaults_version: 1
     series_types: {}
+    hidden_fields: [is_null, big_data_expo_datalake.nf_nome_emissor_nulo]
     hidden_points_if_no:
+    note_state: expanded
+    note_display: below
+    note_text: Dados disponíveis referentes aos meses de (Agosto/20, Setembro/20,
+      Outubro/20 e Novembro/20) e apenas embarques de cargas FCL (Full Container Load).
     listen:
       HSCODE: big_data_expo_datalake.mvw_hs_code
       Data Embarque: big_data_expo_datalake.mvw_data_embarque_month
@@ -172,12 +182,12 @@
     row: 0
     col: 0
     width: 16
-    height: 7
+    height: 11
   filters:
   - name: Data Embarque
     title: Data Embarque
     type: field_filter
-    default_value: 2020-08
+    default_value: 2020-08,2020-09,2020-10,2020-11,2020-12
     allow_multiple_values: true
     required: false
     ui_config:
