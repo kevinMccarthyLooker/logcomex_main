@@ -91,11 +91,6 @@
     model: Dados_Expo_Datalake
     explore: big_data_expo_datalake
     type: looker_grid
-    fields: [big_data_expo_datalake.nf_nome_emissor, big_data_expo_datalake.nf_nome_emissor_nulo,
-      big_data_expo_datalake.count_mar_id, big_data_expo_datalake.count_mar_id_com_dt,
-      big_data_expo_datalake.mar_teus]
-    filters:
-      big_data_expo_datalake.nf_nome_emissor_nulo: 'No'
     sorts: [big_data_expo_datalake.count_mar_id desc]
     limit: 500
     total: true
@@ -164,8 +159,6 @@
     interpolation: linear
     defaults_version: 1
     series_types: {}
-    hidden_fields: [big_data_expo_datalake.count_mar_id_com_dt, big_data_expo_datalake.mar_teus,
-      is_null, big_data_expo_datalake.nf_nome_emissor_nulo]
     hidden_points_if_no:
     listen:
       HSCODE: big_data_expo_datalake.mvw_hs_code
