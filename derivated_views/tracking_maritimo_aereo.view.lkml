@@ -653,6 +653,11 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     drill_fields: [detail*]
   }
 
+  measure: count_with_zero {
+    type: number
+    sql: coalesce(${count},0) ;;
+  }
+
   measure: count_nao_encontrado {
     type: count_distinct
     sql: ${chave} ;;
