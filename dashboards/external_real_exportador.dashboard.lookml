@@ -74,9 +74,10 @@
     hidden_fields: [big_data_expo_datalake.count_mar_id_com_dt, big_data_expo_datalake.mvw_teus,
       big_data_expo_datalake.mar_teus]
     note_state: expanded
-    note_display: below
-    note_text: Dados disponíveis referentes aos meses de (Agosto/20, Setembro/20,
-      Outubro/20 e Novembro/20) e apenas embarques de cargas FCL (Full Container Load).
+    note_display: above
+    note_text: |
+      Embarques referentes à plataforma LogComex
+      .
     listen:
       Data Embarque: big_data_expo_datalake.mvw_data_embarque_month
       Porto Destino: big_data_expo_datalake.mvw_porto_destino
@@ -95,7 +96,7 @@
     model: Dados_Expo_Datalake
     explore: big_data_expo_datalake
     type: looker_grid
-    fields: [big_data_expo_datalake.nf_nome_emissor, big_data_expo_datalake.count_mar_id]
+    fields: [big_data_expo_datalake.count_mar_id, big_data_expo_datalake.nf_nome_emissor]
     filters: {}
     sorts: [big_data_expo_datalake.count_mar_id desc]
     limit: 500
@@ -167,9 +168,11 @@
     hidden_fields: [is_null, big_data_expo_datalake.nf_nome_emissor_nulo]
     hidden_points_if_no:
     note_state: expanded
-    note_display: below
-    note_text: Dados disponíveis referentes aos meses de (Agosto/20, Setembro/20,
-      Outubro/20 e Novembro/20) e apenas embarques de cargas FCL (Full Container Load).
+    note_display: above
+    note_text: Os dados são referentes aos meses de Agosto/20, Setembro/20, Outubro/20
+      e Novembro/20 e apenas a embarques de cargas FCL (Full Container Load). Apresentam
+      aproximadamente 70% dos reais exportadores para os embarques especificamente
+      pesquisados.
     listen:
       HSCODE: big_data_expo_datalake.mvw_hs_code
       Data Embarque: big_data_expo_datalake.mvw_data_embarque_month
