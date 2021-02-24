@@ -1394,6 +1394,17 @@ view: big_data_expo_datalake {
              else 'ERRO'
          end ;;
   }
+
+  dimension: nf_nome_emissor_filtro {
+    type: string
+    sql: ${TABLE}.nf_nome_emissor ;;
+  }
+
+  dimension: mvw_nome_exportador_filtro {
+    type: string
+    sql: ${TABLE}.mvw_nome_exportador ;;
+  }
+
   measure: mar_vl_frete_por_TEU {
     type: average
     value_format: "$#.00;($#.00)"
