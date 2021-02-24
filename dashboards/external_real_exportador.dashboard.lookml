@@ -169,10 +169,8 @@
     hidden_points_if_no:
     note_state: expanded
     note_display: above
-    note_text: Os dados são referentes aos meses de Agosto/20, Setembro/20, Outubro/20
-      e Novembro/20 e apenas a embarques de cargas FCL (Full Container Load). Apresentam
-      aproximadamente 70% dos reais exportadores para os embarques especificamente
-      pesquisados.
+    note_text: 'Dados com o processamento completos: de Agosto a Novembro/2020, para
+      cargas FCL (Full Container Load). Acuracidade das informações: até 70%.'
     listen:
       HSCODE: big_data_expo_datalake.mvw_hs_code
       Data Embarque: big_data_expo_datalake.mvw_data_embarque_month
@@ -190,7 +188,7 @@
   - name: Data Embarque
     title: Data Embarque
     type: field_filter
-    default_value: 2020-08,2020-09,2020-10,2020-11,2020-12
+    default_value: 2020-08
     allow_multiple_values: true
     required: false
     ui_config:
