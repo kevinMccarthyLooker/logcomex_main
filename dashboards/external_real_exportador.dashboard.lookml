@@ -9,12 +9,12 @@
     model: Dados_Expo_Datalake
     explore: big_data_expo_datalake
     type: looker_grid
-    fields: [big_data_expo_datalake.count_mar_id, big_data_expo_datalake.count_mar_id_com_dt,
-      big_data_expo_datalake.mar_teus, big_data_expo_datalake.mvw_teus, big_data_expo_datalake.mvw_nome_exportador]
+    fields: [big_data_expo_datalake.count_mar_id, big_data_expo_datalake.mvw_nome_exportador]
+    filters:
+      big_data_expo_datalake.mvw_nome_exportador: "-NULL"
     sorts: [big_data_expo_datalake.count_mar_id desc]
     limit: 500
     total: true
-    query_timezone: America/Sao_Paulo
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -71,8 +71,7 @@
     interpolation: linear
     defaults_version: 1
     series_types: {}
-    hidden_fields: [big_data_expo_datalake.count_mar_id_com_dt, big_data_expo_datalake.mvw_teus,
-      big_data_expo_datalake.mar_teus]
+    hidden_fields: []
     note_state: expanded
     note_display: above
     note_text: |
@@ -83,10 +82,10 @@
       Porto Destino: big_data_expo_datalake.mvw_porto_destino
       Porto Origem: big_data_expo_datalake.mvw_porto_origem
       País Destino: big_data_expo_datalake.mvw_pais_de_destino
-      Exportador (Big Data): big_data_expo_datalake.mvw_nome_exportador
       HSCODE: big_data_expo_datalake.mvw_hs_code
-      Real Exportador: big_data_expo_datalake.nf_nome_emissor
       Tipo Embarque: big_data_expo_datalake.mar_tipoconhecimento_nome
+      Real Exportador: big_data_expo_datalake.nf_nome_emissor_filtro
+      Exportador (Big Data): big_data_expo_datalake.mvw_nome_exportador_filtro
     row: 0
     col: 16
     width: 8
@@ -97,7 +96,8 @@
     explore: big_data_expo_datalake
     type: looker_grid
     fields: [big_data_expo_datalake.count_mar_id, big_data_expo_datalake.nf_nome_emissor]
-    filters: {}
+    filters:
+      big_data_expo_datalake.nf_nome_emissor: "-NULL"
     sorts: [big_data_expo_datalake.count_mar_id desc]
     limit: 500
     total: true
@@ -177,9 +177,9 @@
       Porto Destino: big_data_expo_datalake.mvw_porto_destino
       Porto Origem: big_data_expo_datalake.mvw_porto_origem
       País Destino: big_data_expo_datalake.mvw_pais_de_destino
-      Exportador (Big Data): big_data_expo_datalake.mvw_nome_exportador
-      Real Exportador: big_data_expo_datalake.nf_nome_emissor
       Tipo Embarque: big_data_expo_datalake.mar_tipoconhecimento_nome
+      Real Exportador: big_data_expo_datalake.nf_nome_emissor_filtro
+      Exportador (Big Data): big_data_expo_datalake.mvw_nome_exportador_filtro
     row: 0
     col: 0
     width: 16
@@ -199,6 +199,34 @@
     explore: big_data_expo_datalake
     listens_to_filters: []
     field: big_data_expo_datalake.mvw_data_embarque_month
+  - name: Real Exportador
+    title: Real Exportador
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+      options: []
+    model: Dados_Expo_Datalake
+    explore: big_data_expo_datalake
+    listens_to_filters: []
+    field: big_data_expo_datalake.nf_nome_emissor_filtro
+  - name: Exportador (Big Data)
+    title: Exportador (Big Data)
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+      options: []
+    model: Dados_Expo_Datalake
+    explore: big_data_expo_datalake
+    listens_to_filters: []
+    field: big_data_expo_datalake.mvw_nome_exportador_filtro
   - name: HSCODE
     title: HSCODE
     type: field_filter
@@ -213,32 +241,6 @@
     explore: big_data_expo_datalake
     listens_to_filters: []
     field: big_data_expo_datalake.mvw_hs_code
-  - name: Real Exportador
-    title: Real Exportador
-    type: field_filter
-    default_value: ''
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: tag_list
-      display: popover
-    model: Dados_Expo_Datalake
-    explore: big_data_expo_datalake
-    listens_to_filters: []
-    field: big_data_expo_datalake.nf_nome_emissor
-  - name: Exportador (Big Data)
-    title: Exportador (Big Data)
-    type: field_filter
-    default_value: ''
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: tag_list
-      display: popover
-    model: Dados_Expo_Datalake
-    explore: big_data_expo_datalake
-    listens_to_filters: []
-    field: big_data_expo_datalake.mvw_nome_exportador
   - name: Porto Origem
     title: Porto Origem
     type: field_filter
