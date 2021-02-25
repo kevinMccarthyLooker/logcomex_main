@@ -1,5 +1,5 @@
 view: bi_exports_mvw_gold {
-  sql_table_name: big_data_expo.bi_exports_mvw_gold ;;
+  sql_table_name: big_data_expo.bi_exports_mvw_gold_v2 ;;
 
   dimension_group: mar_available {
     type: time
