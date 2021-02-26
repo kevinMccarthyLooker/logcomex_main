@@ -33,24 +33,9 @@ view: agentes_de_carga_gold {
           {% endif %};;
   }
 
-  dimension: desc_ncm {
-    type: string
-    sql: ${TABLE}.desc_ncm ;;
-  }
-
-  dimension: name {
+   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
-  }
-
-  dimension: ncm {
-    type: string
-    sql: ${TABLE}.ncm ;;
-  }
-
-  dimension: ncm_teus {
-    type: number
-    sql: ${TABLE}.ncm_teus ;;
   }
 
   dimension: nmempnavegdesconmaster {
@@ -65,14 +50,9 @@ view: agentes_de_carga_gold {
          end ;;
   }
 
-  dimension: qtd_registros {
+  dimension: volume {
     type: number
-    sql: ${TABLE}.qtd_registros ;;
-  }
-
-  dimension: total_teus {
-    type: number
-    sql: ${TABLE}.total_teus ;;
+    sql: ${TABLE}.volume ;;
   }
 
   measure: count_distinct_customer_id {
@@ -99,14 +79,9 @@ view: agentes_de_carga_gold {
     #drill_fields: [id, name, custom_name]
   }
 
-  measure: sum_total_teus {
+  measure: sum_volume{
     type: sum
-    sql: ${total_teus} ;;
-  }
-
-  measure: sum_qtd_registros {
-    type: sum
-    sql: ${qtd_registros} ;;
+    sql: ${volume} ;;
   }
 
   measure: count {
