@@ -40,9 +40,33 @@ view: recintos_aduaneiros_customers {
     sql: ${TABLE}.recinto_aduaneiro ;;
   }
 
+  dimension: recinto_aduaneiro_tratado {
+    type: string
+    sql: case when (${TABLE}.recinto_aduaneiro = '' or ${TABLE}.recinto_aduaneiro is null) then 'NÃO ENCONTRADO'
+         else ${TABLE}.recinto_aduaneiro
+         end ;;
+  }
+
   dimension: customer_id {
     type: number
     sql: ${TABLE}.customer_id ;;
+  }
+
+  dimension: cliente {
+    type: yesno
+    sql: case when ${TABLE}.customer_id is null then false
+         else true
+         end;;
+  }
+
+  dimension: cliente_match {
+    type: yesno
+    sql: ${cliente} ;;
+    html: {% if value == 'Yes' %}
+            <font color="green">{{ cliente }}</font>
+          {% else %}
+            <font color="red">{{ cliente }}</font>
+          {% endif %};;
   }
 
   dimension: name {
