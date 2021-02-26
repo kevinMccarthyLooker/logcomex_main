@@ -101,6 +101,7 @@ view: recintos_aduaneiros_customers {
   measure: count_distinct_customers {
     type: count_distinct
     sql: ${customer_id} ;;
+    drill_fields: [customer_id,name,cnpj_customer]
   }
 
   measure: count_distinct_recintos {
