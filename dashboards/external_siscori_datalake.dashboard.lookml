@@ -24,6 +24,8 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
+      HSCODE: siscori_gold.cdncm
+      NCM: siscori_gold.cdncm_compl
     row: 0
     col: 0
     width: 4
@@ -48,6 +50,8 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
+      HSCODE: siscori_gold.cdncm
+      NCM: siscori_gold.cdncm_compl
     row: 3
     col: 0
     width: 4
@@ -121,6 +125,8 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
+      HSCODE: siscori_gold.cdncm
+      NCM: siscori_gold.cdncm_compl
     row: 0
     col: 4
     width: 20
@@ -188,6 +194,8 @@
     hide_row_totals: false
     listen:
       Mês: siscori_gold.mes_month
+      HSCODE: siscori_gold.cdncm
+      NCM: siscori_gold.cdncm_compl
     row: 6
     col: 0
     width: 12
@@ -244,6 +252,8 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
+      HSCODE: siscori_gold.cdncm
+      NCM: siscori_gold.cdncm_compl
     row: 6
     col: 12
     width: 12
@@ -298,6 +308,8 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
+      HSCODE: siscori_gold.cdncm
+      NCM: siscori_gold.cdncm_compl
     row: 16
     col: 0
     width: 12
@@ -359,6 +371,8 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
+      HSCODE: siscori_gold.cdncm
+      NCM: siscori_gold.cdncm_compl
     row: 16
     col: 12
     width: 12
@@ -380,21 +394,29 @@
     field: siscori_gold.mes_month
   - name: HSCODE
     title: HSCODE
-    type: string_filter
+    type: field_filter
     default_value: ''
     allow_multiple_values: true
     required: false
     ui_config:
       type: advanced
-      display: inline
+      display: popover
       options: []
+    model: Siscori_datalake
+    explore: siscori_gold
+    listens_to_filters: []
+    field: siscori_gold.cdncm
   - name: NCM
     title: NCM
-    type: string_filter
+    type: field_filter
     default_value: ''
     allow_multiple_values: true
     required: false
     ui_config:
       type: advanced
-      display: inline
+      display: popover
       options: []
+    model: Siscori_datalake
+    explore: siscori_gold
+    listens_to_filters: []
+    field: siscori_gold.cdncm_compl
