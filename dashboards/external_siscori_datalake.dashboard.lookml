@@ -24,8 +24,6 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
-      HSCODE: siscori_gold.hscode
-      NCM: siscori_gold.ncm
     row: 0
     col: 0
     width: 4
@@ -50,8 +48,6 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
-      HSCODE: siscori_gold.hscode
-      NCM: siscori_gold.ncm
     row: 3
     col: 0
     width: 4
@@ -125,8 +121,6 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
-      HSCODE: siscori_gold.hscode
-      NCM: siscori_gold.ncm
     row: 0
     col: 4
     width: 20
@@ -194,8 +188,6 @@
     hide_row_totals: false
     listen:
       Mês: siscori_gold.mes_month
-      HSCODE: siscori_gold.hscode
-      NCM: siscori_gold.ncm
     row: 6
     col: 0
     width: 12
@@ -226,6 +218,10 @@
     show_sql_query_menu_options: false
     show_totals: true
     show_row_totals: true
+    series_labels:
+      siscori_gold.ncm_desc: Descrição
+      siscori_gold.cdncm_compl: NCM
+      siscori_gold.val_fob_us_total: FOD USD
     series_cell_visualizations:
       siscori_gold.val_fob_us_total:
         is_active: true
@@ -236,6 +232,8 @@
           - "#89bcd6"
           - "#589fbf"
           - "#0960c2"
+    series_value_format:
+      siscori_gold.cdncm_compl: "#00000000"
     custom_color_enabled: true
     show_single_value_title: true
     show_comparison: false
@@ -246,8 +244,6 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
-      HSCODE: siscori_gold.hscode
-      NCM: siscori_gold.ncm
     row: 6
     col: 12
     width: 12
@@ -302,8 +298,6 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
-      HSCODE: siscori_gold.hscode
-      NCM: siscori_gold.ncm
     row: 16
     col: 0
     width: 12
@@ -365,8 +359,6 @@
     defaults_version: 1
     listen:
       Mês: siscori_gold.mes_month
-      HSCODE: siscori_gold.hscode
-      NCM: siscori_gold.ncm
     row: 16
     col: 12
     width: 12
@@ -394,7 +386,7 @@
     required: false
     ui_config:
       type: advanced
-      display: popover
+      display: inline
       options: []
   - name: NCM
     title: NCM
@@ -404,5 +396,5 @@
     required: false
     ui_config:
       type: advanced
-      display: popover
+      display: inline
       options: []

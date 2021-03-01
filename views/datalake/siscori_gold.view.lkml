@@ -532,14 +532,12 @@ view: siscori_gold {
     sql: ${TABLE}."val_peso_liq" ;;
   }
 
-  measure: ncm {
-    type: string
-    sql: ${TABLE}."cdncm_compl" ;;
-  }
-
-  measure: hscode {
-    type: string
-    sql: ${TABLE}."cdncm" ;;
-  }
-
+##  measure: ncm {
+##    type: string
+##    sql: ${TABLE}."cdncm_compl" ;;
+##  }
+##  measure: hscode {
+##    type: string
+##    sql: ${TABLE}."cdncm" ;;
+##  }
 }
