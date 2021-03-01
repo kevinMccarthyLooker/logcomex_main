@@ -15,6 +15,8 @@ view: recintos_aduaneiros_customers {
         SELECT DISTINCT c.id as customer_id,
         (case
         when c.name = 'CONCESSIONARIA DO AEROPORTO INTERNACIONAL DE CONFINS S/A' then 'CONC. AEROPORTO INTERNACIONAL DE CONFINS S/A'
+        when c.name = 'SANTOS BRASIL PARTICIPACOES S.A.' then 'SANTOS BRASIL LOGÍSTICA S.A.'
+        when c.name = 'PORTONAVE S/A - TERMINAIS PORTUARIOS DE NAVEGANTES' then 'PORT. FLUVIAL DE USO PRIVAT. MISTO_- PORTONAVE S/A'
         else c."name"
         end),
         c.cnpj, ci.branches_activity
