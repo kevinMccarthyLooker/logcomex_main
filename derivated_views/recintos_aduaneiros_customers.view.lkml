@@ -12,7 +12,12 @@ view: recintos_aduaneiros_customers {
       ) as qq1
     left join
       (
-        SELECT DISTINCT c.id as customer_id, c.name, c.cnpj, ci.branches_activity
+        SELECT DISTINCT c.id as customer_id,
+        (case
+        when c.name = 'CONCESSIONARIA DO AEROPORTO INTERNACIONAL DE CONFINS S/A' then 'CONC. AEROPORTO INTERNACIONAL DE CONFINS S/A'
+        else c."name"
+        end),
+        c.cnpj, ci.branches_activity
         FROM "api"."customer" c
         INNER JOIN "api"."customer_info" ci ON c.id = ci.customer_id
         INNER JOIN "api"."customer_plan" cp on cp.customer_id = c.id
