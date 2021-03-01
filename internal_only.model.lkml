@@ -70,6 +70,7 @@ include: "/**/filters_names.view.lkml"
 include: "/**/trials_ativos_mes.view.lkml"
 include: "/**/clientes_sem_exportacao.view.lkml"
 include: "/**/hubspot_stage_cs_deal.view.lkml"
+include: "/**/hubspot_tickets.view.lkml"
 
 datagroup: internal_only_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -219,6 +220,12 @@ explore: usage {
   join: customer_api_relations{
     sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
     relationship: one_to_many
+    type: left_outer
+  }
+
+  join: hubspot_tickets {
+    sql_on: ${customer_api_relations.id} = ${hubspot_tickets.customer_api_relations_id} ;;
+    relationship: one_to_one
     type: left_outer
   }
 
