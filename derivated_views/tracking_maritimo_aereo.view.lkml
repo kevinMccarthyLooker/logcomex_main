@@ -599,6 +599,7 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
   measure: count_distinct_users {
     type: count_distinct
     sql: ${user_id} ;;
+    drill_fields: [user_id,customer_id]
   }
 
   measure: count_api {
