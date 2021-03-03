@@ -25,12 +25,12 @@
     series_types: {}
     defaults_version: 1
     listen:
-      Importador: comex_analytics_di.importador_nome
       URF Despacho: comex_analytics_di.urf_despacho
       URF Entrada Carga: comex_analytics_di.urf_entrada_carga
       CPF Representante: comex_analytics_di.cpf_representante
       Representante: comex_analytics_di.nome_representante
       Mês de Chegada: comex_analytics_di.data_chegada_month
+      Importador: comex_analytics_di.importador_nome
     row: 0
     col: 0
     width: 4
@@ -55,12 +55,12 @@
     series_types: {}
     defaults_version: 1
     listen:
-      Importador: comex_analytics_di.importador_nome
       URF Despacho: comex_analytics_di.urf_despacho
       URF Entrada Carga: comex_analytics_di.urf_entrada_carga
       CPF Representante: comex_analytics_di.cpf_representante
       Representante: comex_analytics_di.nome_representante
       Mês de Chegada: comex_analytics_di.data_chegada_month
+      Importador: comex_analytics_di.importador_nome
     row: 0
     col: 4
     width: 5
@@ -85,12 +85,12 @@
     series_types: {}
     defaults_version: 1
     listen:
-      Importador: comex_analytics_di.importador_nome
       URF Despacho: comex_analytics_di.urf_despacho
       URF Entrada Carga: comex_analytics_di.urf_entrada_carga
       CPF Representante: comex_analytics_di.cpf_representante
       Representante: comex_analytics_di.nome_representante
       Mês de Chegada: comex_analytics_di.data_chegada_month
+      Importador: comex_analytics_di.importador_nome
     row: 0
     col: 9
     width: 5
@@ -115,12 +115,12 @@
     series_types: {}
     defaults_version: 1
     listen:
-      Importador: comex_analytics_di.importador_nome
       URF Despacho: comex_analytics_di.urf_despacho
       URF Entrada Carga: comex_analytics_di.urf_entrada_carga
       CPF Representante: comex_analytics_di.cpf_representante
       Representante: comex_analytics_di.nome_representante
       Mês de Chegada: comex_analytics_di.data_chegada_month
+      Importador: comex_analytics_di.importador_nome
     row: 0
     col: 14
     width: 5
@@ -145,12 +145,12 @@
     series_types: {}
     defaults_version: 1
     listen:
-      Importador: comex_analytics_di.importador_nome
       URF Despacho: comex_analytics_di.urf_despacho
       URF Entrada Carga: comex_analytics_di.urf_entrada_carga
       CPF Representante: comex_analytics_di.cpf_representante
       Representante: comex_analytics_di.nome_representante
       Mês de Chegada: comex_analytics_di.data_chegada_month
+      Importador: comex_analytics_di.importador_nome
     row: 0
     col: 19
     width: 5
@@ -228,12 +228,12 @@
     show_null_points: true
     interpolation: linear
     listen:
-      Importador: comex_analytics_di.importador_nome
       URF Despacho: comex_analytics_di.urf_despacho
       URF Entrada Carga: comex_analytics_di.urf_entrada_carga
       CPF Representante: comex_analytics_di.cpf_representante
       Representante: comex_analytics_di.nome_representante
       Mês de Chegada: comex_analytics_di.data_chegada_month
+      Importador: comex_analytics_di.importador_nome
     row: 2
     col: 0
     width: 24
@@ -333,7 +333,12 @@
     show_null_points: true
     interpolation: linear
     listen:
+      URF Despacho: comex_analytics_di.urf_despacho
+      URF Entrada Carga: comex_analytics_di.urf_entrada_carga
+      CPF Representante: comex_analytics_di.cpf_representante
+      Representante: comex_analytics_di.nome_representante
       Mês de Chegada: comex_analytics_di.data_chegada_month
+      Importador: comex_analytics_di.importador_nome
     row: 10
     col: 0
     width: 13
@@ -442,12 +447,12 @@
     show_null_points: true
     interpolation: linear
     listen:
-      Importador: comex_analytics_di.importador_nome
       URF Despacho: comex_analytics_di.urf_despacho
       URF Entrada Carga: comex_analytics_di.urf_entrada_carga
       CPF Representante: comex_analytics_di.cpf_representante
       Representante: comex_analytics_di.nome_representante
       Mês de Chegada: comex_analytics_di.data_chegada_month
+      Importador: comex_analytics_di.importador_nome
     row: 10
     col: 13
     width: 11
@@ -576,7 +581,12 @@
     show_null_points: true
     interpolation: linear
     listen:
+      URF Despacho: comex_analytics_di.urf_despacho
+      URF Entrada Carga: comex_analytics_di.urf_entrada_carga
+      CPF Representante: comex_analytics_di.cpf_representante
+      Representante: comex_analytics_di.nome_representante
       Mês de Chegada: comex_analytics_di.data_chegada_month
+      Importador: comex_analytics_di.importador_nome
     row: 16
     col: 0
     width: 13
@@ -585,15 +595,40 @@
     name: Consulta de Canal
     model: Comex_Analytics
     explore: comex_analytics_di
-    type: looker_grid
-    fields: [comex_analytics_di.importador_nome, comex_analytics_di.di_number, comex_analytics_di.importador_cnpj,
-      comex_analytics_di.canal, comex_analytics_di.data_hora_registro_date]
-    filters:
-      comex_analytics_di.canal: '"-"'
+    type: looker_pie
+    fields: [comex_analytics_di.canal, comex_analytics_di.di_total]
     limit: 500
     dynamic_fields: [{measure: count_of_di_number, based_on: comex_analytics_di.di_number,
         expression: '', label: Count of Di Number, type: count_distinct, _kind_hint: measure,
+        _type_hint: number}, {measure: count_of_canal, based_on: comex_analytics_di.canal,
+        expression: '', label: Count of Canal, type: count_distinct, _kind_hint: measure,
         _type_hint: number}]
+    value_labels: legend
+    label_type: labPer
+    color_application:
+      collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+      palette_id: 471a8295-662d-46fc-bd2d-2d0acd370c1e
+      options:
+        steps: 5
+    series_colors:
+      Verde: "#22b515"
+      Cinz: "#c2c2c2"
+      "-": "#2747d1"
+      Amarelo: "#d3d429"
+      Vermelho: "#c41611"
+      Cinza: "#c2c2c2"
+    series_labels:
+      comex_analytics_di.di_total: DI
+      comex_analytics_di.valor_vmld_reais: VMLD R$
+      comex_analytics_di.valor_vmle_reais: VMLE R$
+      comex_analytics_di.cpf_representante: CPF
+      comex_analytics_di.nome_representante: Representante
+      comex_analytics_di.importador_nome: Importador
+      comex_analytics_di.data_hora_registro: Data
+      comex_analytics_di.di_number: DI
+      comex_analytics_di.importador_cnpj: CNPJ
+      comex_analytics_di.val_multa: Multa
+      comex_analytics_di.valor_multa_total: Multa
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -609,29 +644,12 @@
     rows_font_size: '12'
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
-    color_application:
-      collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
-      palette_id: 471a8295-662d-46fc-bd2d-2d0acd370c1e
-      options:
-        steps: 5
     show_sql_query_menu_options: false
     column_order: ["$$$_row_numbers_$$$", comex_analytics_di.di_number, comex_analytics_di.importador_nome,
       comex_analytics_di.importador_cnpj, comex_analytics_di.val_multa, comex_analytics_di.valor_multa_total,
       comex_analytics_di.valor_vmld_reais, comex_analytics_di.valor_vmle_reais]
     show_totals: true
     show_row_totals: true
-    series_labels:
-      comex_analytics_di.di_total: DI
-      comex_analytics_di.valor_vmld_reais: VMLD R$
-      comex_analytics_di.valor_vmle_reais: VMLE R$
-      comex_analytics_di.cpf_representante: CPF
-      comex_analytics_di.nome_representante: Representante
-      comex_analytics_di.importador_nome: Importador
-      comex_analytics_di.data_hora_registro: Data
-      comex_analytics_di.di_number: DI
-      comex_analytics_di.importador_cnpj: CNPJ
-      comex_analytics_di.val_multa: Multa
-      comex_analytics_di.valor_multa_total: Multa
     series_column_widths:
       comex_analytics_di.cpf_representante: 98
       comex_analytics_di.data_hora_registro: 87
@@ -704,7 +722,12 @@
     show_null_points: true
     interpolation: linear
     listen:
+      URF Despacho: comex_analytics_di.urf_despacho
+      URF Entrada Carga: comex_analytics_di.urf_entrada_carga
+      CPF Representante: comex_analytics_di.cpf_representante
+      Representante: comex_analytics_di.nome_representante
       Mês de Chegada: comex_analytics_di.data_chegada_month
+      Importador: comex_analytics_di.importador_nome
     row: 16
     col: 13
     width: 11

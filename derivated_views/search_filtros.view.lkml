@@ -94,6 +94,7 @@ view: search_filtros {
           when ${TABLE}.fonte = 'load_url' then 'URL Compartilhada'
           when ${TABLE}.fonte = 'home' then 'Página Inicial'
           when ${TABLE}.fonte = 'home_saved_filter' then 'Filtro Salvo'
+          when ${TABLE}.fonte = 'quick_chart_filter' then 'Filtros Automáticos'
           end
           ;;
   }

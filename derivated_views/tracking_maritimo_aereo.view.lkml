@@ -599,6 +599,7 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
   measure: count_distinct_users {
     type: count_distinct
     sql: ${user_id} ;;
+    drill_fields: [user_id,customer_id]
   }
 
   measure: count_api {
@@ -651,6 +652,11 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     type: count_distinct
     sql: ${chave} ;;
     drill_fields: [detail*]
+  }
+
+  measure: count_with_zero {
+    type: number
+    sql: coalesce(${count},0) ;;
   }
 
   measure: count_nao_encontrado {

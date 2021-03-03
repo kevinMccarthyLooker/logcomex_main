@@ -391,6 +391,11 @@ view: comex_analytics_di {
   #==================================================================================================
   #dados inseridos
 
+  dimension: id_radar_certificate {
+    type: number
+    sql: ${TABLE}.id_radar_certificate ;;
+  }
+
   measure: valor_vmle_us {
     type: sum
     sql: ${TABLE}."val_vmle_us";;
