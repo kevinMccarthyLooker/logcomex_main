@@ -35,4 +35,16 @@ view: st_importacoes_segmentacao_excel {
     type: count
     drill_fields: []
   }
+
+  measure: count_grupo {
+    type: count_distinct
+    sql:${TABLE}.grupo_do_produto ;;
+  }
+
+  measure: count_classe {
+    type: count_distinct
+    sql:${TABLE}.classe_do_produto ;;
+  }
+
+
 }
