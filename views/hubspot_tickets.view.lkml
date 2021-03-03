@@ -146,6 +146,40 @@ view: hubspot_tickets {
     sql: ${TABLE}."priority" ;;
   }
 
+  dimension: treated_priority {
+    type: string
+    sql: case
+         when ${TABLE}."priority" = 'Urgente' then 'Crítica'
+         when ${TABLE}."priority" = 'Alta' then 'Alta'
+         when ${TABLE}."priority" = 'HIGH' then 'Alta'
+         when ${TABLE}."priority" = 'Médio' then 'Média'
+         when ${TABLE}."priority" = 'MEDIUM' then 'Média'
+         when ${TABLE}."priority" = 'Baixo' then 'Baixa'
+         when ${TABLE}."priority" = 'LOW' then 'Baixa'
+         when ${TABLE}."priority" is null then 'Indefinido'
+         else ${TABLE}."priority" end ;;
+  }
+
+  dimension: sla_posicionamento { #tempo em segundos
+    type: number
+    sql: case
+         when ${treated_priority} = 'Crítica' then 14400
+         when ${treated_priority} = 'Alta' then 21600
+         when ${treated_priority} = 'Média' then 28800
+         when ${treated_priority} = 'Baixa' then 57600
+         else 0 end  ;;
+  }
+
+  dimension: sla_resposta { #tempo em segundos
+    type: number
+    sql: case
+         when ${treated_priority} = 'Crítica' then 57600
+         when ${treated_priority} = 'Alta' then 86400
+         when ${treated_priority} = 'Média' then 144000
+         when ${treated_priority} = 'Baixa' then 288000
+         else 0 end  ;;
+  }
+
   dimension: service {
     type: string
     sql: ${TABLE}."service" ;;
