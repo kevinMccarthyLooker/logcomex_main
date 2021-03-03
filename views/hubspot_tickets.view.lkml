@@ -166,6 +166,13 @@ view: hubspot_tickets {
     sql: ${TABLE}."stage" ;;
   }
 
+  dimension: situation {
+    type: string
+    sql: case
+         when ${TABLE}."stage" = 'Closed' then 'Closed'
+         else 'Open' end;;
+  }
+
   dimension: subject {
     type: string
     sql: ${TABLE}."subject" ;;
