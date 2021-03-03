@@ -190,6 +190,24 @@ view: hubspot_tickets {
          else 0 end  ;;
   }
 
+  dimension: sla_p_resposta_no_prazo {
+    type: string
+    sql: case
+         when ${sla_primeira_resposta} - ${time_to_first_agent_reply} >= 0 then 'yes'
+         when ${time_to_first_agent_reply} is null then null
+         else 'no'
+         end;;
+  }
+
+  dimension: sla_resposta_no_prazo {
+    type: string
+    sql: case
+         when ${sla_resposta} - (${time_to_close} - coalesce(${awaiting_return_time},0)) >= 0 then 'yes'
+         when ${time_to_close} is null then null
+         else 'no'
+         end;;
+  }
+
   dimension: service {
     type: string
     sql: ${TABLE}."service" ;;
