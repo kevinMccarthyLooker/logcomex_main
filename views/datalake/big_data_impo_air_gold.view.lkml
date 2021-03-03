@@ -509,14 +509,26 @@ view: big_data_impo_air_gold {
     ]
   }
   ##===================++++++++Campos adicionados===========================
+
   measure: total_frete {
-    type: sum
+  type: sum
+  value_format: "$#.00;($#.00)"
     sql: ${TABLE}."val_frete" ;;
   }
 
   measure: media_frete {
     type: average
+    value_format: "$#.00;($#.00)"
+    filters: [val_frete: ">0"]
     sql: ${TABLE}."total_frete" ;;
   }
+
+  measure: media_frete2 {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [val_frete: ">0"]
+    sql: ${TABLE}."val_frete" ;;
+  }
+
 
 }
