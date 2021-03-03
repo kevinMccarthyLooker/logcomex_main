@@ -31,6 +31,15 @@ view: big_data_impo_air_gold {
 
   dimension_group: data_hora_registro {
     type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.data_hora_registro ;;
   }
 
@@ -46,6 +55,15 @@ view: big_data_impo_air_gold {
 
   dimension_group: data_pagamento {
     type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.data_pagamento ;;
   }
 
@@ -56,11 +74,29 @@ view: big_data_impo_air_gold {
 
   dimension_group: data_registro_despacho {
     type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.data_registro_despacho ;;
   }
 
   dimension_group: data_desembaraco {
     type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.data_desembaraco ;;
   }
 
@@ -106,6 +142,15 @@ view: big_data_impo_air_gold {
 
   dimension_group: data_chegada_carga {
     type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.data_chegada_carga ;;
   }
 
@@ -246,11 +291,29 @@ view: big_data_impo_air_gold {
 
   dimension_group: notify_processed_at {
     type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.notify_processed_at ;;
   }
 
   dimension_group: updated_maritimo_notify_at {
     type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.updated_maritimo_notify_at ;;
   }
 
@@ -445,4 +508,19 @@ view: big_data_impo_air_gold {
       val_frete
     ]
   }
+  ##===================++++++++Campos adicionados===========================
+
+
+  measure: media_frete {
+    type: average
+    sql: ${TABLE}.val_frete ;;
+  }
+
+  measure: total_frete {
+    type: sum
+    sql: ${TABLE}.val_frete ;;
+  }
+
+
+
 }
