@@ -194,6 +194,7 @@ view: hubspot_tickets {
     type: yesno
     sql: case
          when ${sla_primeira_resposta} - ${time_to_first_agent_reply} >= 0 then true
+         when ${time_to_first_agent_reply} is null then null
          else false
          end;;
   }
@@ -202,6 +203,7 @@ view: hubspot_tickets {
     type: yesno
     sql: case
          when ${sla_resposta} - (${time_to_close} - coalesce(${awaiting_return_time},0)) >= 0 then true
+         when ${time_to_close} is null then null
          else false
          end;;
   }
