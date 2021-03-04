@@ -611,6 +611,17 @@ view: searchx_gold_v2_2020_produtos {
     sql: cast(${TABLE}.val_vmle_us_subitem as float) ;;
   }
 
+  dimension: plu {
+    type: number
+    sql: ${TABLE}.plu ;;
+  }
+
+  dimension: embalagem {
+    type: number
+    sql: ${TABLE}.embalagem ;;
+  }
+
+
   measure: cif_sum {
     type: sum
     sql: ${val_vmld_us_subitem_num};;
