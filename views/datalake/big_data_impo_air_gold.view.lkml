@@ -44,7 +44,7 @@ view: big_data_impo_air_gold {
   }
 
   dimension: data_operacao {
-    type: string
+    type: date
     sql: ${TABLE}.data_operacao ;;
   }
 
