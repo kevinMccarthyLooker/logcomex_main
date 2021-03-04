@@ -137,11 +137,13 @@ view: big_data_impo_air_gold {
 
   measure: total_frete {
     type: sum
+    value_format: "$#.00;($#.00)"
     sql: ${TABLE}."valor_frete" ;;
   }
 
   measure: media_frete{
     type: average
+    value_format: "$#.00;($#.00)"
     sql: ${TABLE}."valor_frete" ;;
   }
 }
