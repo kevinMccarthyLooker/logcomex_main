@@ -12,7 +12,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: altura {
-    type: number
+    type: string
     sql: ${TABLE}.Altura ;;
   }
 
@@ -47,7 +47,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: capacidade {
-    type: number
+    type: string
     sql: ${TABLE}.Capacidade ;;
   }
 
@@ -117,17 +117,17 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: composicao {
-    type: number
+    type: string
     sql: ${TABLE}.Composicao ;;
   }
 
   dimension: comprimento {
-    type: number
+    type: string
     sql: ${TABLE}.Comprimento ;;
   }
 
   dimension: cor {
-    type: number
+    type: string
     sql: ${TABLE}.Cor ;;
   }
 
@@ -207,7 +207,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: ean {
-    type: number
+    type: string
     sql: ${TABLE}.EAN ;;
   }
 
@@ -217,7 +217,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: espessura {
-    type: number
+    type: string
     sql: ${TABLE}.Espessura ;;
   }
 
@@ -232,7 +232,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: genero {
-    type: number
+    type: string
     sql: ${TABLE}.Genero ;;
   }
 
@@ -272,7 +272,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: largura {
-    type: number
+    type: string
     sql: ${TABLE}.Largura ;;
   }
 
@@ -402,12 +402,12 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: peso {
-    type: number
+    type: string
     sql: ${TABLE}.Peso ;;
   }
 
   dimension: potencia {
-    type: number
+    type: string
     sql: ${TABLE}.Potencia ;;
   }
 
@@ -582,7 +582,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: voltagem {
-    type: number
+    type: string
     sql: ${TABLE}.Voltagem ;;
   }
 
@@ -612,15 +612,14 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: plu {
-    type: number
+    type: string
     sql: ${TABLE}.plu ;;
   }
 
   dimension: embalagem {
-    type: number
+    type: string
     sql: ${TABLE}.embalagem ;;
   }
-
 
   measure: cif_sum {
     type: sum
