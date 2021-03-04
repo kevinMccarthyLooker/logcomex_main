@@ -48,6 +48,20 @@ view: big_data_impo_air_gold {
     sql: ${TABLE}.data_operacao ;;
   }
 
+  dimension_group: data_operacao {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.data_operacao ;;
+  }
+
   dimension: data_hora_chegada {
     type: string
     sql: ${TABLE}.data_hora_chegada ;;
