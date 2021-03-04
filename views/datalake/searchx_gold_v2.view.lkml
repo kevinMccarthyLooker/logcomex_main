@@ -641,6 +641,11 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.val_fob_un_us ;;
   }
 
+  dimension: val_fob_un_us_num {
+    type: number
+    sql: cast(${TABLE}.val_fob_un_us as float) ;;
+  }
+
   dimension: val_fob_us_subitem {
     type: string
     sql: ${TABLE}.val_fob_us_subitem ;;
@@ -756,12 +761,12 @@ view: searchx_gold_v2 {
 
   measure: cif_sum {
     type: sum
-    sql: ${val_vmle_us_subitem_num};;
+    sql: ${val_vmld_us_subitem_num};;
   }
 
   measure: fob_sum {
     type: sum
-    sql: ${val_vmld_us_subitem_num};;
+    sql: ${val_vmle_us_subitem_num};;
   }
 
   measure: qtde_comerc_sum {
