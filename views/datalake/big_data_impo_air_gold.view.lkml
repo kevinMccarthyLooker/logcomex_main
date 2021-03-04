@@ -43,22 +43,8 @@ view: big_data_impo_air_gold {
     sql: ${TABLE}.aeroporto_destino ;;
   }
 
-  dimension: data_operacao {
-    type: date
-    sql: ${TABLE}.data_operacao ;;
-  }
-
   dimension_group: data_operacao {
     type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
     sql: ${TABLE}.data_operacao ;;
   }
 
@@ -131,7 +117,7 @@ view: big_data_impo_air_gold {
       pais_de_origem,
       aeroporto_origem,
       aeroporto_destino,
-      data_operacao,
+      data_operacao_time,
       data_hora_chegada,
       transit_time,
       aereo_cidade,
