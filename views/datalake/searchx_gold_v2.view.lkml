@@ -507,6 +507,11 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.qtd_comerc ;;
   }
 
+  dimension: qtd_comerc_num {
+    type: number
+    sql: cast(${TABLE}.qtd_comerc as float) ;;
+  }
+
   dimension: qtd_estat {
     type: string
     sql: ${TABLE}.qtd_estat ;;
@@ -696,6 +701,11 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.val_vmld_us_subitem ;;
   }
 
+  dimension: val_vmld_us_subitem_num {
+    type: number
+    sql: cast(${TABLE}.val_vmld_us_subitem as float) ;;
+  }
+
   dimension: val_vmle_us {
     type: string
     sql: ${TABLE}.val_vmle_us ;;
@@ -748,4 +758,16 @@ view: searchx_gold_v2 {
     type: sum
     sql: ${val_vmle_us_subitem_num};;
   }
+
+  measure: fob_sum {
+    type: sum
+    sql: ${val_vmld_us_subitem_num};;
+  }
+
+  measure: qtde_comerc_sum {
+    type: sum
+    sql: ${qtd_comerc_num};;
+  }
+
+
 }
