@@ -774,5 +774,9 @@ view: searchx_gold_v2 {
     sql: ${qtd_comerc_num};;
   }
 
+  measure: val_fob_un_us_num_avg {
+    type: average
+    sql: ${val_fob_un_us_num};;
+  }
 
 }
