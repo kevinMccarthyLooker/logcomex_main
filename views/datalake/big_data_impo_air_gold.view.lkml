@@ -133,7 +133,7 @@ view: big_data_impo_air_gold {
     ]
   }
 
-  ##===================++++++++Campos adicionados===========================
+  ##==================++++++++Campos adicionados===========================
 
   measure: total_frete {
     type: sum
