@@ -1,5 +1,10 @@
 view: searchx_gold_v2_2020_produtos {
-  sql_table_name: importadores_cif.searchx_gold_v2_2020_produtos ;;
+  derived_table: {
+    sql:
+    select *
+    from importadores_cif.searchx_gold_v2_2020_produtos
+    where to_date(concat(anomes,'01'), 'YYYYMMDD') between '2020-01-01' and '2020-12-31' ;;
+  }
 
   dimension: addition_number {
     type: string
