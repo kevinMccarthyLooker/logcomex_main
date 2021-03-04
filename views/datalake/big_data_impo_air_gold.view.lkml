@@ -146,11 +146,4 @@ view: big_data_impo_air_gold {
     value_format: "$#.00;($#.00)"
     sql: ${TABLE}."valor_frete" ;;
   }
-
-  measure: total_media_frete{
-    type: average
-    value_format: "$#.00;($#.00)"
-    sql: ${TABLE}."total_frete" ;;
-  }
-
 }
