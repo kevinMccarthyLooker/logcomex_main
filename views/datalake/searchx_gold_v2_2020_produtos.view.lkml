@@ -648,7 +648,7 @@ view: searchx_gold_v2_2020_produtos {
          when ${cdpaisorigem} = 'BR' THEN -47.8827
          when ${cdpaisorigem} = 'DE' THEN 09.0000
          when ${cdpaisorigem} = 'FR' THEN 02.0000
-         when ${cdpaisorigem} = 'AR' THEN -58.3815
+         when ${cdpaisorigem} = 'AR' THEN -62.3815
          when ${cdpaisorigem} = 'KR' THEN 127.3000
          when ${cdpaisorigem} = 'JP' THEN 138.0000
          when ${cdpaisorigem} = 'IT' THEN 12.5000
