@@ -641,7 +641,14 @@ view: searchx_gold_v2_2020_produtos {
          when ${cdpaisorigem} = 'VN' THEN 21.0285
          when ${cdpaisorigem} = 'ES' THEN 40.4167
          when ${cdpaisorigem} = 'NO' THEN 59.9114
-
+         when ${cdpaisorigem} = 'TR' THEN 41.0151
+         when ${cdpaisorigem} = 'CZ' THEN 50.0736
+         when ${cdpaisorigem} = 'EG' THEN 30.0333
+         when ${cdpaisorigem} = 'ID' THEN -6.2000
+         when ${cdpaisorigem} = 'LK' THEN 6.8940
+         when ${cdpaisorigem} = 'BE' THEN 51.0499
+         when ${cdpaisorigem} = 'BD' THEN 23.8103
+         when ${cdpaisorigem} = 'PY' THEN -25.2819
          else 0
          end;;
   }
@@ -665,6 +672,14 @@ view: searchx_gold_v2_2020_produtos {
          when ${cdpaisorigem} = 'VN' THEN 105.8048
          when ${cdpaisorigem} = 'ES' THEN -3.7037
          when ${cdpaisorigem} = 'NO' THEN 10.757933
+         when ${cdpaisorigem} = 'TR' THEN 28.9795
+         when ${cdpaisorigem} = 'CZ' THEN 14.4185
+         when ${cdpaisorigem} = 'EG' THEN 31.2333
+         when ${cdpaisorigem} = 'ID' THEN 106.8166
+         when ${cdpaisorigem} = 'LK' THEN 79.9024
+         when ${cdpaisorigem} = 'BE' THEN 3.7333
+         when ${cdpaisorigem} = 'BD' THEN 90.4125
+         when ${cdpaisorigem} = 'PY' THEN -57.635
          else 0
          end;;
   }
