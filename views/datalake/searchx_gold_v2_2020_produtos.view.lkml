@@ -625,7 +625,7 @@ view: searchx_gold_v2_2020_produtos {
   dimension: latitude {
     type: number
     sql: case
-         when ${cdpaisorigem} = 'CN' THEN 350000
+         when ${cdpaisorigem} = 'CN' THEN 35.0000
          else 0
          end;;
   }
@@ -633,7 +633,7 @@ view: searchx_gold_v2_2020_produtos {
   dimension: longitude {
     type: number
     sql: case
-         when ${cdpaisorigem} = 'CN' THEN 1030000
+         when ${cdpaisorigem} = 'CN' THEN 103.0000
          else 0
          end;;
   }
