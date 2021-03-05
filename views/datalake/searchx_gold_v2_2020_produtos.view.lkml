@@ -622,6 +622,28 @@ view: searchx_gold_v2_2020_produtos {
     sql: ${TABLE}.embalagem ;;
   }
 
+  dimension: latitude {
+    type: number
+    sql: case
+         when ${cdpaisorigem} = 'CN' THEN 350000
+         else 0
+         end;;
+  }
+
+  dimension: longitude {
+    type: number
+    sql: case
+         when ${cdpaisorigem} = 'CN' THEN 1030000
+         else 0
+         end;;
+  }
+
+  dimension: store_location {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
+  }
+
   measure: cif_sum {
     type: sum
     sql: ${val_vmld_us_subitem_num};;
