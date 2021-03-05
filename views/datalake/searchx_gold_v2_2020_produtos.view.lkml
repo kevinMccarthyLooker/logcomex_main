@@ -73,6 +73,7 @@ view: searchx_gold_v2_2020_produtos {
 
   dimension: cdpaisorigem {
     type: string
+    map_layer_name: countries
     sql: ${TABLE}.cdpaisorigem ;;
   }
 
