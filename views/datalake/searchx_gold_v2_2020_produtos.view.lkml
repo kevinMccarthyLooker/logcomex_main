@@ -644,7 +644,7 @@ view: searchx_gold_v2_2020_produtos {
     type: number
     sql: case
          when ${cdpaisorigem} = 'CN' THEN 103.0000
-         when ${cdpaisorigem} = 'US' THEN  97.0000
+         when ${cdpaisorigem} = 'US' THEN  -97.0000
          when ${cdpaisorigem} = 'BR' THEN 55.0000
          when ${cdpaisorigem} = 'DE' THEN 09.0000
          when ${cdpaisorigem} = 'FR' THEN 02.0000
