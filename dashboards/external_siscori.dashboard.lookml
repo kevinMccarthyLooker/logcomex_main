@@ -79,9 +79,9 @@
     total_color: "#C2DD67"
     x_axis_scale: auto
     listen:
-      Mês: db_commodities_export.anomes_Mes
-      NCM: db_siscori_cod_ncm.cdncm_compl
       HSCODE: db_siscori_cod_ncm.cdncm
+      NCM: db_siscori_cod_ncm.cdncm_compl
+      Mês: db_commodities_export.mes_month
     row: 0
     col: 0
     width: 7
@@ -121,23 +121,23 @@
     series_column_widths:
       db_commodities_export.anomes: 161
     listen:
-      Mês: db_commodities_export.anomes_Mes
-      NCM: db_siscori_cod_ncm.cdncm_compl
       HSCODE: db_siscori_cod_ncm.cdncm
+      NCM: db_siscori_cod_ncm.cdncm_compl
+      Mês: db_commodities_export.mes_month
     row: 3
     col: 0
     width: 7
     height: 3
-  - title: Valor e Peso - Mês à Mês
-    name: Valor e Peso - Mês à Mês
+  - title: Valor e Peso - Timeline
+    name: Valor e Peso - Timeline
     model: Dados_Expo
     explore: db_commodities_export
     type: looker_column
-    fields: [db_commodities_export.val_peso_liq, db_commodities_export.anomes, db_commodities_export.val_fob_us,
-      db_commodities_export.anomes_Mes]
-    sorts: [db_commodities_export.anomes]
+    fields: [db_commodities_export.val_peso_liq, db_commodities_export.val_fob_us,
+      db_commodities_export.mes_month]
+    fill_fields: [db_commodities_export.mes_month]
+    sorts: [db_commodities_export.mes_month]
     limit: 500
-    query_timezone: America/Sao_Paulo
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_view_names: false
@@ -187,7 +187,7 @@
     series_types:
       db_commodities_export.val_peso_liq: line
     series_colors:
-      db_commodities_export.val_peso_liq: "#64bdff"
+      db_commodities_export.val_peso_liq: "#77caff"
     series_labels:
       db_commodities_export.val_peso_liq: Peso Líquido
       db_commodities_export.val_fob_us: FOB USD
@@ -215,11 +215,14 @@
     rows_font_size: 12
     series_column_widths:
       db_commodities_export.anomes: 161
-    hidden_fields: [db_commodities_export.anomes]
+    hidden_fields: []
+    note_state: collapsed
+    note_display: hover
+    note_text: 'Considerado apenas meses fechados. '
     listen:
-      Mês: db_commodities_export.anomes_Mes
       NCM: db_siscori_cod_ncm.cdncm_compl
       HSCODE: db_siscori_cod_ncm.cdncm
+      Mês: db_commodities_export.mes_month
     row: 0
     col: 7
     width: 17
@@ -308,9 +311,9 @@
     show_comparison_label: true
     defaults_version: 1
     listen:
-      Mês: db_commodities_export.anomes_Mes
-      NCM: db_siscori_cod_ncm.cdncm_compl
       HSCODE: db_siscori_cod_ncm.cdncm
+      NCM: db_siscori_cod_ncm.cdncm_compl
+      Mês: db_commodities_export.mes_month
     row: 6
     col: 12
     width: 12
@@ -323,10 +326,8 @@
     fields: [db_commodities_export.val_fob_us, db_siscori_unid_fiscal.uf]
     filters:
       db_siscori_unid_fiscal.uf: "-NULL"
-      db_commodities_export.val_fob_us: ">=2500000000"
     sorts: [db_commodities_export.val_fob_us desc]
     limit: 500
-    query_timezone: America/Sao_Paulo
     value_labels: legend
     label_type: labPer
     color_application:
@@ -399,9 +400,9 @@
       db_siscori_unid_fiscal.nome_unid_fiscal: 362
       db_siscori_unid_fiscal.uf: 187
     listen:
-      Mês: db_commodities_export.anomes_Mes
       NCM: db_siscori_cod_ncm.cdncm_compl
       HSCODE: db_siscori_cod_ncm.cdncm
+      Mês: db_commodities_export.mes_month
     row: 6
     col: 0
     width: 12
@@ -492,9 +493,9 @@
     show_comparison_label: true
     defaults_version: 1
     listen:
-      Mês: db_commodities_export.anomes_Mes
-      NCM: db_siscori_cod_ncm.cdncm_compl
       HSCODE: db_siscori_cod_ncm.cdncm
+      NCM: db_siscori_cod_ncm.cdncm_compl
+      Mês: db_commodities_export.mes_month
     row: 13
     col: 0
     width: 12
@@ -621,9 +622,9 @@
     note_display: hover
     note_text: Valores expressados em USD
     listen:
-      Mês: db_commodities_export.anomes_Mes
-      NCM: db_siscori_cod_ncm.cdncm_compl
       HSCODE: db_siscori_cod_ncm.cdncm
+      NCM: db_siscori_cod_ncm.cdncm_compl
+      Mês: db_commodities_export.mes_month
     row: 13
     col: 12
     width: 12
@@ -632,30 +633,17 @@
   - name: Mês
     title: Mês
     type: field_filter
-    default_value: ''
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: checkboxes
-      display: popover
-    model: Dados_Expo
-    explore: db_commodities_export
-    listens_to_filters: []
-    field: db_commodities_export.anomes_Mes
-  - name: NCM
-    title: NCM
-    type: field_filter
-    default_value: ''
+    default_value: 6 month
     allow_multiple_values: true
     required: false
     ui_config:
       type: advanced
-      display: inline
+      display: popover
       options: []
     model: Dados_Expo
     explore: db_commodities_export
     listens_to_filters: []
-    field: db_siscori_cod_ncm.cdncm_compl
+    field: db_commodities_export.mes_month
   - name: HSCODE
     title: HSCODE
     type: field_filter
@@ -664,9 +652,23 @@
     required: false
     ui_config:
       type: advanced
-      display: inline
+      display: popover
       options: []
     model: Dados_Expo
     explore: db_commodities_export
     listens_to_filters: []
     field: db_siscori_cod_ncm.cdncm
+  - name: NCM
+    title: NCM
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: advanced
+      display: popover
+      options: []
+    model: Dados_Expo
+    explore: db_commodities_export
+    listens_to_filters: []
+    field: db_siscori_cod_ncm.cdncm_compl

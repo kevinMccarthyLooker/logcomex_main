@@ -3,7 +3,7 @@ view: search_filtros {
   derived_table: {
     sql:
     select
-    concat(fh."year",fh."month",'|',fh.customer_id,'|',fh."source",'|',campos.name) as id,
+    concat(fh."year",fh."month",'|',fh.customer_id,'|',fh.service_id,'|',fh."source",'|',campos.name,campos.value) as id,
     TO_TIMESTAMP(concat(fh."year",' ',fh."month") ,'YYYY MM') as periodo,
     fh.customer_id as customer_id,
     fh.service_id as service,
@@ -94,6 +94,7 @@ view: search_filtros {
           when ${TABLE}.fonte = 'load_url' then 'URL Compartilhada'
           when ${TABLE}.fonte = 'home' then 'Página Inicial'
           when ${TABLE}.fonte = 'home_saved_filter' then 'Filtro Salvo'
+          when ${TABLE}.fonte = 'quick_chart_filter' then 'Filtros Automáticos'
           end
           ;;
   }
@@ -197,6 +198,11 @@ view: search_filtros {
   measure: max {
     type: max
     sql: ${TABLE}.qtd ;;
+  }
+
+  measure: count_customers_distincts {
+    type: count_distinct
+    sql: ${customer} ;;
   }
 
   set: detail {  #drills

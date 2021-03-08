@@ -1,25 +1,5 @@
-view: valor_cif_2020_gold {
-  sql_table_name: importadores_cif.valor_cif_2020_gold ;;
-
-  dimension: cdncm_compl {
-    type: string
-    sql: ${TABLE}.cdncm_compl ;;
-  }
-
-  dimension: desc_ncm {
-    type: string
-    sql: ${TABLE}.desc_ncm ;;
-  }
-
-  dimension: seg_cdncm_compl {
-    type: string
-    sql: ${TABLE}.seg_cdncm_compl ;;
-  }
-
-  dimension: segmento_logcomex {
-    type: string
-    sql: ${TABLE}.segmento_logcomex ;;
-  }
+view: exportadores_2020_gold {
+  sql_table_name: exportadores_teus.exportadores_2020_gold ;;
 
   dimension: branches_activity {
     type: string
@@ -48,25 +28,35 @@ view: valor_cif_2020_gold {
           {% endif %};;
   }
 
-  dimension: importador_cnpj {
+  dimension: desc_ncm {
     type: string
-    sql: ${TABLE}.importador_cnpj ;;
+    sql: ${TABLE}.desc_ncm ;;
   }
 
-  dimension: importador_cnpj_8dig {
+  dimension: mar_itemcarga_cdncms {
     type: string
-    sql: left(${TABLE}.importador_cnpj,10) ;;
+    sql: ${TABLE}.mar_itemcarga_cdncms ;;
   }
 
-  dimension: importador_nome {
+  dimension: mvw_cnpj_exportador {
     type: string
-    sql: ${TABLE}.importador_nome ;;
+    sql: ${TABLE}.mvw_cnpj_exportador ;;
   }
 
-  dimension: importador_nome_tratado {
+  dimension: mvw_cnpj_exportador_8dig {
     type: string
-    sql: case when (${TABLE}.importador_nome = '' or ${TABLE}.importador_nome is null) then 'NÃO ENCONTRADO'
-         else ${TABLE}.importador_nome
+    sql: left(${TABLE}.mvw_cnpj_exportador,8) ;;
+  }
+
+  dimension: mvw_nome_exportador {
+    type: string
+    sql: ${TABLE}.mvw_nome_exportador ;;
+  }
+
+  dimension: mvw_nome_exportador_tratado {
+    type: string
+    sql: case when (${TABLE}.mvw_nome_exportador = '' or ${TABLE}.mvw_nome_exportador is null) then 'NÃO ENCONTRADO'
+         else ${TABLE}.mvw_nome_exportador
          end ;;
   }
 
@@ -75,14 +65,14 @@ view: valor_cif_2020_gold {
     sql: ${TABLE}.qtd_registros ;;
   }
 
-  dimension: valor_max_ncm {
+  dimension: valor_ncm {
     type: number
-    sql: ${TABLE}.valor_max_ncm ;;
+    sql: ${TABLE}.valor ;;
   }
 
-  dimension: valor_total {
+  dimension: valor_teus {
     type: number
-    sql: ${TABLE}.valor_total ;;
+    sql: ${TABLE}.valor_teus ;;
   }
 
   measure: count {
@@ -98,25 +88,25 @@ view: valor_cif_2020_gold {
 
   measure: count_distinc_imp_name {
     type: count_distinct
-    sql: ${importador_nome} ;;
+    sql: ${mvw_nome_exportador} ;;
     #drill_fields: [importador_nome]
   }
 
   measure: count_distinc_cnpj {
     type: count_distinct
-    sql: ${importador_cnpj} ;;
+    sql: ${mvw_cnpj_exportador} ;;
     #drill_fields: [id, name, custom_name]
   }
 
   measure: count_distinc_cnpj_8dig {
     type: count_distinct
-    sql: ${importador_cnpj_8dig} ;;
+    sql: ${mvw_cnpj_exportador_8dig} ;;
     #drill_fields: [id, name, custom_name]
   }
 
-  measure: sum_valor_total {
+  measure: sum_valor_teus_total {
     type: sum
-    sql: ${valor_total} ;;
+    sql: ${valor_teus} ;;
   }
 
   measure: sum_qtd_registros {
@@ -124,12 +114,8 @@ view: valor_cif_2020_gold {
     sql: ${qtd_registros} ;;
   }
 
-  measure: sum_valor_ncm {
-    type: sum
-    sql: ${valor_max_ncm} ;;
+  set: details {
+    fields: [customer_id, mvw_nome_exportador, mvw_cnpj_exportador]
   }
 
-  set: details {
-    fields: [customer_id, importador_nome, importador_cnpj]
-  }
 }

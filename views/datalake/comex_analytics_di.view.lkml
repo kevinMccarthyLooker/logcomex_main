@@ -1,6 +1,6 @@
 view: comex_analytics_di {
   derived_table: {
-    sql: SELECT * FROM comex_analytics_teste.comex_analytics_teste_gold;;
+    sql: SELECT * FROM comex_analytics_teste.comex_analytics_gold_certificate;;
   }
 
   measure: count {
@@ -10,7 +10,7 @@ view: comex_analytics_di {
 
   dimension: di_number {
     type: number
-    sql: ${TABLE}.di_number ;;
+    sql: ${TABLE}.di_completo ;;
   }
 
   dimension_group: data_hora_registro {
@@ -303,6 +303,26 @@ view: comex_analytics_di {
     sql: ${TABLE}.informacoes_complementares ;;
   }
 
+  dimension: id_customer {
+    type: number
+    sql: ${TABLE}.id_customer ;;
+  }
+
+  dimension: name_customer {
+    type: string
+    sql: ${TABLE}.name_customer ;;
+  }
+
+  dimension: cnpj_customer {
+    type: string
+    sql: ${TABLE}.cnpj_customer ;;
+  }
+
+  dimension: cnpj_consignee {
+    type: string
+    sql: ${TABLE}.cnpj_consignee ;;
+  }
+
   set: detail {
     fields: [
       di_number,
@@ -371,6 +391,11 @@ view: comex_analytics_di {
   #==================================================================================================
   #dados inseridos
 
+  dimension: id_radar_certificate {
+    type: number
+    sql: ${TABLE}.id_radar_certificate ;;
+  }
+
   measure: valor_vmle_us {
     type: sum
     sql: ${TABLE}."val_vmle_us";;
@@ -403,7 +428,7 @@ view: comex_analytics_di {
 
   measure: di_total {
     type: count_distinct
-    sql: ${TABLE}."di_number";;
+    sql: ${TABLE}."di_completo";;
   }
 
   measure: valor_multa_total {
@@ -420,5 +445,4 @@ view: comex_analytics_di {
     type: string
     sql: replace(replace(${TABLE}."cpf_representante", '.', ''),'-','');;
   }
-
 }

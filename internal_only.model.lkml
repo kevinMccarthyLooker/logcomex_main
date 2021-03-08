@@ -69,6 +69,8 @@ include: "/**/hubspot_cs_deal.view.lkml"
 include: "/**/filters_names.view.lkml"
 include: "/**/trials_ativos_mes.view.lkml"
 include: "/**/clientes_sem_exportacao.view.lkml"
+include: "/**/hubspot_stage_cs_deal.view.lkml"
+include: "/**/hubspot_tickets.view.lkml"
 
 datagroup: internal_only_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -79,7 +81,7 @@ datagroup: internal_only_datagroup {
 
 datagroup: hs_datagroup {
   #sql_trigger: select CURRENT_DATE ;; a cada 24 horas
-  sql_trigger: SELECT FLOOR(EXTRACT(epoch from NOW()) / (12*60*60)) ;; # a cada 12 horas
+  sql_trigger: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) / (12*60*60)) ;; # a cada 12 horas
   max_cache_age: "13 hours"
   label: "hs_datagroup"
   description: "DG do Health Score, atualiza a cada 12h"
@@ -221,8 +223,20 @@ explore: usage {
     type: left_outer
   }
 
+  join: hubspot_tickets {
+    sql_on: ${customer_api_relations.id} = ${hubspot_tickets.customer_api_relations_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
   join: hubspot_cs_deal {
     sql_on: ${customer_api_relations.id} = ${hubspot_cs_deal.customer_api_relations_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
+  join: hubspot_stage_cs_deal {
+    sql_on: ${customer_api_relations.id} = ${hubspot_stage_cs_deal.customer_api_relations_id} ;;
     relationship: one_to_one
     type: left_outer
   }

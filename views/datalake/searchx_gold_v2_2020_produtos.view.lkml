@@ -1,18 +1,9 @@
-view: searchx_gold_v2 {
-
+view: searchx_gold_v2_2020_produtos {
   derived_table: {
     sql:
     select *
-    from searchx.searchx_gold_v2
+    from importadores_cif.searchx_gold_v2_2020_produtos_2
     where to_date(concat(anomes,'01'), 'YYYYMMDD') between '2020-01-01' and '2020-12-31' ;;
-  }
-
-  drill_fields: [id]
-
-  dimension: id {
-    primary_key: yes
-    type: number
-    sql: ${TABLE}.id ;;
   }
 
   dimension: addition_number {
@@ -20,19 +11,14 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.addition_number ;;
   }
 
-  dimension: address {
+  dimension: altura {
     type: string
-    sql: ${TABLE}.address ;;
+    sql: ${TABLE}.Altura ;;
   }
 
   dimension: anomes {
     type: string
     sql: ${TABLE}.anomes ;;
-  }
-
-  dimension: api_key {
-    type: string
-    sql: ${TABLE}.api_key ;;
   }
 
   dimension: armazem {
@@ -50,11 +36,6 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.bandeira ;;
   }
 
-  dimension: blocked {
-    type: yesno
-    sql: ${TABLE}.blocked ;;
-  }
-
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
@@ -63,6 +44,11 @@ view: searchx_gold_v2 {
   dimension: canal {
     type: string
     sql: ${TABLE}.canal ;;
+  }
+
+  dimension: capacidade {
+    type: string
+    sql: ${TABLE}.Capacidade ;;
   }
 
   dimension: cd_pais_proced {
@@ -87,6 +73,7 @@ view: searchx_gold_v2 {
 
   dimension: cdpaisorigem {
     type: string
+    map_layer_name: countries
     sql: ${TABLE}.cdpaisorigem ;;
   }
 
@@ -103,11 +90,6 @@ view: searchx_gold_v2 {
   dimension: cidade_import {
     type: string
     sql: ${TABLE}.cidade_import ;;
-  }
-
-  dimension: cnpj {
-    type: string
-    sql: ${TABLE}.cnpj ;;
   }
 
   dimension: cnpj_adquirente {
@@ -135,72 +117,24 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.cod_cnpj_import ;;
   }
 
-  dimension_group: created {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.created_at ;;
+  dimension: composicao {
+    type: string
+    sql: ${TABLE}.Composicao ;;
+  }
+
+  dimension: comprimento {
+    type: string
+    sql: ${TABLE}.Comprimento ;;
+  }
+
+  dimension: cor {
+    type: string
+    sql: ${TABLE}.Cor ;;
   }
 
   dimension: crt {
     type: string
     sql: ${TABLE}.crt ;;
-  }
-
-  dimension: custom_hex_color {
-    type: string
-    sql: ${TABLE}.custom_hex_color ;;
-  }
-
-  dimension: custom_logo {
-    type: string
-    sql: ${TABLE}.custom_logo ;;
-  }
-
-  dimension: custom_name {
-    type: string
-    sql: ${TABLE}.custom_name ;;
-  }
-
-  dimension: customer_id {
-    type: number
-    sql: ${TABLE}.customer_id ;;
-  }
-
-  dimension: cliente {
-    type: yesno
-    sql: case when ${TABLE}.customer_id is null then false
-         else true
-         end;;
-  }
-
-  dimension: cliente_match {
-    type: yesno
-    sql: ${cliente} ;;
-    html: {% if value == 'Yes' %}
-            <font color="green">{{ cliente }}</font>
-          {% else %}
-            <font color="red">{{ cliente }}</font>
-          {% endif %};;
-  }
-
-  dimension: customer_type_id {
-    type: number
-    sql: ${TABLE}.customer_type_id ;;
-  }
-
-  dimension: customer_type {
-    type: string
-    sql: case when ${TABLE}.customer_type_id = 6 then 'Importador'
-         else 'Outro'
-         end;;
   }
 
   dimension: data_chegada_carga {
@@ -223,24 +157,9 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.data_hora_registro ;;
   }
 
-
   dimension: data_pagamento {
     type: string
     sql: ${TABLE}.data_pagamento ;;
-  }
-
-  dimension_group: deleted {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.deleted_at ;;
   }
 
   dimension: desc_cnae_import {
@@ -268,6 +187,11 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.desc_unid_estat ;;
   }
 
+  dimension: descricao {
+    type: string
+    sql: ${TABLE}.Descricao ;;
+  }
+
   dimension: di_number {
     type: string
     sql: ${TABLE}.di_number ;;
@@ -283,24 +207,9 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.doc_chegada_carga_tipo ;;
   }
 
-  dimension: email_notify_disabled {
-    type: yesno
-    sql: ${TABLE}.email_notify_disabled ;;
-  }
-
-  dimension: email_notify_hour {
-    type: number
-    sql: ${TABLE}.email_notify_hour ;;
-  }
-
-  dimension: email_notify_immediate {
-    type: yesno
-    sql: ${TABLE}.email_notify_immediate ;;
-  }
-
-  dimension: email_reply_to {
+  dimension: ean {
     type: string
-    sql: ${TABLE}.email_reply_to ;;
+    sql: ${TABLE}.EAN ;;
   }
 
   dimension: embarcacao {
@@ -308,9 +217,9 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.embarcacao ;;
   }
 
-  dimension: executive_id {
-    type: number
-    sql: ${TABLE}.executive_id ;;
+  dimension: espessura {
+    type: string
+    sql: ${TABLE}.Espessura ;;
   }
 
   dimension: exportador_endereco {
@@ -323,9 +232,9 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.exportador_nome ;;
   }
 
-  dimension: fake_customer {
-    type: yesno
-    sql: ${TABLE}.fake_customer ;;
+  dimension: genero {
+    type: string
+    sql: ${TABLE}.Genero ;;
   }
 
   dimension: hwb {
@@ -358,28 +267,29 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.importador_nome ;;
   }
 
-  dimension: importador_nome_tratado {
-    type: string
-    sql: case when (${TABLE}.importador_nome = '' or ${TABLE}.importador_nome is null) then 'NÃO ENCONTRADO'
-         else ${TABLE}.importador_nome
-         end ;;
-  }
-
-  dimension: importador_encontrado {
-    type: yesno
-    sql: case when (${TABLE}.importador_nome = '' or ${TABLE}.importador_nome is null) then false
-         else true
-         end ;;
-  }
-
   dimension: incoterm {
     type: string
     sql: ${TABLE}.incoterm ;;
   }
 
+  dimension: largura {
+    type: string
+    sql: ${TABLE}.Largura ;;
+  }
+
   dimension: loc_embarque {
     type: string
     sql: ${TABLE}.loc_embarque ;;
+  }
+
+  dimension: marca {
+    type: string
+    sql: ${TABLE}.Marca ;;
+  }
+
+  dimension: material {
+    type: string
+    sql: ${TABLE}.Material ;;
   }
 
   dimension: modalidade_despacho {
@@ -392,9 +302,14 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.model ;;
   }
 
-  dimension: name {
+  dimension: modelo {
     type: string
-    sql: ${TABLE}.name ;;
+    sql: ${TABLE}.Modelo ;;
+  }
+
+  dimension: ncm {
+    type: string
+    sql: ${TABLE}.NCM ;;
   }
 
   dimension: ncm_desc {
@@ -487,29 +402,24 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.pais_proced ;;
   }
 
-  dimension: pay_day {
-    type: number
-    sql: ${TABLE}.pay_day ;;
-  }
-
-  dimension: phones {
+  dimension: peso {
     type: string
-    sql: ${TABLE}.phones ;;
+    sql: ${TABLE}.Peso ;;
   }
 
-  dimension: pld {
-    type: yesno
-    sql: ${TABLE}.pld ;;
+  dimension: potencia {
+    type: string
+    sql: ${TABLE}.Potencia ;;
+  }
+
+  dimension: produto {
+    type: string
+    sql: ${TABLE}.Produto ;;
   }
 
   dimension: qtd_comerc {
     type: string
     sql: ${TABLE}.qtd_comerc ;;
-  }
-
-  dimension: qtd_comerc_num {
-    type: number
-    sql: cast(${TABLE}.qtd_comerc as float) ;;
   }
 
   dimension: qtd_estat {
@@ -532,19 +442,9 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.sgl_uf_import ;;
   }
 
-  dimension: site {
+  dimension: tamanho {
     type: string
-    sql: ${TABLE}.site ;;
-  }
-
-  dimension: slug {
-    type: string
-    sql: ${TABLE}.slug ;;
-  }
-
-  dimension: status_id {
-    type: number
-    sql: ${TABLE}.status_id ;;
+    sql: ${TABLE}.Tamanho ;;
   }
 
   dimension: tipo_declaracao {
@@ -577,38 +477,9 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.tp_unid_comerc ;;
   }
 
-  dimension: tracking_aerial_days_to_archive {
-    type: number
-    sql: ${TABLE}.tracking_aerial_days_to_archive ;;
-  }
-
-  dimension: tracking_maritime_days_to_archive {
-    type: number
-    sql: ${TABLE}.tracking_maritime_days_to_archive ;;
-  }
-
-  dimension: tracking_processed_loads {
-    type: yesno
-    sql: ${TABLE}.tracking_processed_loads ;;
-  }
-
   dimension: transportador {
     type: string
     sql: ${TABLE}.transportador ;;
-  }
-
-  dimension_group: updated {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.updated_at ;;
   }
 
   dimension: urf_despacho {
@@ -631,19 +502,9 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.val_cif_un_us ;;
   }
 
-  dimension: val_cif_un_us_num {
-    type: number
-    sql: cast(${TABLE}.val_cif_un_us as float) ;;
-  }
-
   dimension: val_fob_un_us {
     type: string
     sql: ${TABLE}.val_fob_un_us ;;
-  }
-
-  dimension: val_fob_un_us_num {
-    type: number
-    sql: cast(${TABLE}.val_fob_un_us as float) ;;
   }
 
   dimension: val_fob_us_subitem {
@@ -706,11 +567,6 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.val_vmld_us_subitem ;;
   }
 
-  dimension: val_vmld_us_subitem_num {
-    type: number
-    sql: cast(${TABLE}.val_vmld_us_subitem as float) ;;
-  }
-
   dimension: val_vmle_us {
     type: string
     sql: ${TABLE}.val_vmle_us ;;
@@ -721,42 +577,117 @@ view: searchx_gold_v2 {
     sql: ${TABLE}.val_vmle_us_subitem ;;
   }
 
-  dimension: val_vmle_us_subitem_num {
-    type: number
-    sql: cast(${TABLE}.val_vmle_us_subitem as float) ;;
-  }
-
-  dimension: branches_activity {
-    type: string
-    sql: ${TABLE}.branches_activity ;;
-  }
-
   dimension: via_transp {
     type: string
     sql: ${TABLE}.via_transp ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [id, name, custom_name]
+  dimension: voltagem {
+    type: string
+    sql: ${TABLE}.Voltagem ;;
   }
 
-  measure: count_distinct_customer_id {
-    type: count_distinct
-    sql: ${customer_id} ;;
-    drill_fields: [customer_id, name, custom_name]
+  dimension: qtd_comerc_num {
+    type: number
+    sql: cast(${TABLE}.qtd_comerc as float) ;;
   }
 
-  measure: count_distinc_imp_name {
-    type: count_distinct
-    sql: ${importador_nome} ;;
-    drill_fields: [importador_nome]
+  dimension: val_cif_un_us_num {
+    type: number
+    sql: cast(${TABLE}.val_cif_un_us as float) ;;
   }
 
-  measure: count_distinc_cnpj {
-    type: count_distinct
-    sql: ${importador_cnpj} ;;
-    drill_fields: [id, name, custom_name]
+  dimension: val_fob_un_us_num {
+    type: number
+    sql: cast(${TABLE}.val_fob_un_us as float) ;;
+  }
+
+  dimension: val_vmld_us_subitem_num {
+    type: number
+    sql: cast(${TABLE}.val_vmld_us_subitem as float) ;;
+  }
+
+  dimension: val_vmle_us_subitem_num {
+    type: number
+    sql: cast(${TABLE}.val_vmle_us_subitem as float) ;;
+  }
+
+  dimension: plu {
+    type: string
+    sql: ${TABLE}.plu ;;
+  }
+
+  dimension: embalagem {
+    type: string
+    sql: ${TABLE}.embalagem ;;
+  }
+
+  dimension: latitude {
+    type: number
+    sql: case
+         when ${cdpaisorigem} = 'CN' THEN 35.0000
+         when ${cdpaisorigem} = 'US' THEN 38.0000
+         when ${cdpaisorigem} = 'BR' THEN -15.7938
+         when ${cdpaisorigem} = 'DE' THEN 51.0000
+         when ${cdpaisorigem} = 'FR' THEN 46.0000
+         when ${cdpaisorigem} = 'AR' THEN -34.6037
+         when ${cdpaisorigem} = 'KR' THEN 37.0000
+         when ${cdpaisorigem} = 'JP' THEN 36.0000
+         when ${cdpaisorigem} = 'IT' THEN 42.5000
+         when ${cdpaisorigem} = 'MX' THEN 19.0000
+         when ${cdpaisorigem} = 'IN' THEN 22.0000
+         when ${cdpaisorigem} = 'PT' THEN 38.7369
+         when ${cdpaisorigem} = 'CL' THEN -33.4474
+         when ${cdpaisorigem} = 'VN' THEN 21.0285
+         when ${cdpaisorigem} = 'ES' THEN 40.4167
+         when ${cdpaisorigem} = 'NO' THEN 59.9114
+         when ${cdpaisorigem} = 'TR' THEN 41.0151
+         when ${cdpaisorigem} = 'CZ' THEN 50.0736
+         when ${cdpaisorigem} = 'EG' THEN 30.0333
+         when ${cdpaisorigem} = 'ID' THEN -6.2000
+         when ${cdpaisorigem} = 'LK' THEN 6.8940
+         when ${cdpaisorigem} = 'BE' THEN 51.0499
+         when ${cdpaisorigem} = 'BD' THEN 23.8103
+         when ${cdpaisorigem} = 'PY' THEN -25.2819
+         else 0
+         end;;
+  }
+
+  dimension: longitude {
+    type: number
+    sql: case
+         when ${cdpaisorigem} = 'CN' THEN 103.0000
+         when ${cdpaisorigem} = 'US' THEN -97.0000
+         when ${cdpaisorigem} = 'BR' THEN -47.8827
+         when ${cdpaisorigem} = 'DE' THEN 09.0000
+         when ${cdpaisorigem} = 'FR' THEN 02.0000
+         when ${cdpaisorigem} = 'AR' THEN -62.3815
+         when ${cdpaisorigem} = 'KR' THEN 127.3000
+         when ${cdpaisorigem} = 'JP' THEN 138.0000
+         when ${cdpaisorigem} = 'IT' THEN 12.5000
+         when ${cdpaisorigem} = 'MX' THEN -102.3667
+         when ${cdpaisorigem} = 'IN' THEN 77.0000
+         when ${cdpaisorigem} = 'PT' THEN -9.1426
+         when ${cdpaisorigem} = 'CL' THEN -70.6736
+         when ${cdpaisorigem} = 'VN' THEN 105.8048
+         when ${cdpaisorigem} = 'ES' THEN -3.7037
+         when ${cdpaisorigem} = 'NO' THEN 10.757933
+         when ${cdpaisorigem} = 'TR' THEN 28.9795
+         when ${cdpaisorigem} = 'CZ' THEN 14.4185
+         when ${cdpaisorigem} = 'EG' THEN 31.2333
+         when ${cdpaisorigem} = 'ID' THEN 106.8166
+         when ${cdpaisorigem} = 'LK' THEN 79.9024
+         when ${cdpaisorigem} = 'BE' THEN 3.7333
+         when ${cdpaisorigem} = 'BD' THEN 90.4125
+         when ${cdpaisorigem} = 'PY' THEN -57.635
+         else 0
+         end;;
+  }
+
+  dimension: store_location {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
   }
 
   measure: cif_sum {
@@ -779,4 +710,8 @@ view: searchx_gold_v2 {
     sql: ${val_fob_un_us_num};;
   }
 
+  measure: count {
+    type: count
+    drill_fields: []
+  }
 }
