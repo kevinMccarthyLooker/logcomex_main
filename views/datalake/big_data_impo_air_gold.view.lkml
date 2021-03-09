@@ -152,4 +152,12 @@ view: big_data_impo_air_gold {
     value_format: "$#.00;($#.00)"
     sql: ${TABLE}."valor_frete" ;;
   }
+
+  measure: desvio_frete {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [valor_frete: ">0"]
+    sql: STDDEV(${TABLE}."valor_frete");;
+  }
+
 }
