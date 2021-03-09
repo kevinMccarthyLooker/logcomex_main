@@ -185,8 +185,15 @@ from(
     ) a
 group by 1
      ) as acessos_usuarios on acessos_usuarios.customer_id = c.id
-left join(
--- adicionando dados das pesquisa de satisfacao movidesk e hubspot
+left join(  -- adicionando dados dos tickets hubspot
+select c.id as customer_id, count(distinct hubt.ticket_id) as qtd_tickets
+from public.hubspot_tickets hubt
+inner join customer_api_relations car on car.id = hubt.customer_api_relations_id
+inner join customer c on c.id = car.id_customer
+where hubt.create_date_ticket >= current_date - interval '30' day
+group by 1
+       ) as tickets_hub on tickets_hub.customer_id = c.id
+left join( -- adicionando dados das pesquisa de satisfacao movidesk e hubspot
 select qq1.id_customer,
 avg(qq1.value_response) as value_response
 from(
