@@ -1,22 +1,12 @@
 connection: "logbot"
 
-include: "/views/logbot/shipowner.view.lkml"                # include all views in the views/ folder in this project
-# include: "/**/*.view.lkml"                 # include all views in this project
-# include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
+include: "/**/logbot/shipowner.view.lkml"
+include: "/**/logbot/shipowner_processing_queue.view.lkml"
+
 explore: shipowner {
   label: "Armadores logbot"
 }
-# # Select the views that should be a part of this model,
-# # and define the joins that connect them together.
-#
-# explore: order_items {
-#   join: orders {
-#     relationship: many_to_one
-#     sql_on: ${orders.id} = ${order_items.order_id} ;;
-#   }
-#
-#   join: users {
-#     relationship: many_to_one
-#     sql_on: ${users.id} = ${orders.user_id} ;;
-#   }
-# }
+
+explore: shipowner_processing_queue {
+  label: "Fila de processamento Armadores"
+}
