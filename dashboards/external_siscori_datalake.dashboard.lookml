@@ -230,7 +230,7 @@
     series_labels:
       siscori_gold.ncm_desc: Descrição
       siscori_gold.cdncm_compl: NCM
-      siscori_gold.val_fob_us_total: FOD USD
+      siscori_gold.val_fob_us_total: FOB USD
     series_cell_visualizations:
       siscori_gold.val_fob_us_total:
         is_active: true
