@@ -146,4 +146,10 @@ view: big_data_impo_air_gold {
     value_format: "$#.00;($#.00)"
     sql: ${TABLE}."valor_frete" ;;
   }
+
+  measure: mediana_frete {
+    type: number
+    value_format: "$#.00;($#.00)"
+    sql: ${TABLE}."valor_frete" ;;
+  }
 }
