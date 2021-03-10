@@ -262,8 +262,8 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
   dimension_group: transit_time {
     type: duration
     intervals: [day, hour]
-    sql_start: ${TABLE}."operacao" ;;
-    sql_end: ${TABLE}."documento_emit_date";;
+    sql_start: ${TABLE}."documento_emit_date" ;;
+    sql_end: ${TABLE}."operacao";;
   }
 
   dimension: ultima_atualizacao {
