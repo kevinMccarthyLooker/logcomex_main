@@ -136,6 +136,19 @@ view: hubspot_tickets {
     sql: ${TABLE}."nps_score" ;;
   }
 
+  dimension: satisfacao_normalizado {
+    type: number
+    sql:
+    case
+    when ${TABLE}."nps_score" between 1 and 2 then 1
+    when ${TABLE}."nps_score" = 3 then 2
+    when ${TABLE}."nps_score" = 4 then 3
+    when ${TABLE}."nps_score" = 5 then 3
+    when ${TABLE}."nps_score" = 6 then 4
+    when ${TABLE}."nps_score" = 7 then 5
+    end   ;;
+  }
+
   dimension: pipeline {
     type: string
     sql: ${TABLE}."pipeline" ;;
