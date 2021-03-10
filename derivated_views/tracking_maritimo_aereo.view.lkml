@@ -729,6 +729,11 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     sql: ${days_last_execution} ;;
   }
 
+  measure: avg_transit_time {
+    type: average
+    sql: ${days_transit_time} ;;
+  }
+
     set: detail {
     fields: [customer_id, customer.name, status, internal_status, created_raw, token]
   }
