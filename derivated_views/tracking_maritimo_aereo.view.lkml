@@ -263,7 +263,7 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     type: duration
     intervals: [day, hour]
     sql_start: ${TABLE}."documento_emit_date" ;;
-    sql_end: ${TABLE}."operacao";;
+    sql_end: ${TABLE}."operacao";; #manifest_date
   }
 
   dimension: ultima_atualizacao {
