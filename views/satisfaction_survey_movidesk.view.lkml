@@ -43,7 +43,7 @@ view: satisfaction_survey_movidesk {
   }
 
   dimension: satisfacao_normalizado {
-    type: string
+    type: number
     sql: case
          when ${question_id} = 'l8zW' then (case when ${TABLE}."value_response" = 1 then 5 else 1 end )
          when ${question_id} = 'n7rK' then ${TABLE}."value_response"
