@@ -259,6 +259,13 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     sql_end: CURRENT_TIMESTAMP;;
   }
 
+  dimension_group: transit_time {
+    type: duration
+    intervals: [day, hour]
+    sql_start: ${TABLE}."operacao" ;;
+    sql_end: ${TABLE}."documento_emit_date";;
+  }
+
   dimension: ultima_atualizacao {
     type:  string
     sql:  CASE WHEN (${days_last_execution} < 1) THEN 'A - 0 dias'
