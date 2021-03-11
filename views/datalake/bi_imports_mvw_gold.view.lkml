@@ -8,363 +8,9 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.id ;;
   }
 
-  dimension: anooperacao {
-    type: number
-    sql: ${TABLE}.anooperacao ;;
-  }
-
-  dimension: armazem_destino {
-    type: string
-    sql: ${TABLE}.armazem_destino ;;
-  }
-
-  dimension: atividade {
-    type: string
-    sql: ${TABLE}.atividade ;;
-  }
-
-  dimension: atv_prefix {
-    type: number
-    sql: ${TABLE}.atv_prefix ;;
-  }
-
-  dimension: atv_principal_code {
-    type: string
-    sql: ${TABLE}.atv_principal_code ;;
-  }
-
-  dimension: carga_perigosa {
-    type: string
-    sql: ${TABLE}.carga_perigosa ;;
-  }
-
-  dimension: cdempnavegdesconmaster {
-    type: string
-    sql: ${TABLE}.cdempnavegdesconmaster ;;
-  }
-
-  dimension: cdnotifypart {
-    type: string
-    sql: ${TABLE}.cdnotifypart ;;
-  }
-
-  dimension: cidade {
-    type: string
-    sql: ${TABLE}.cidade ;;
-  }
-
-  dimension: cnpj_consignatario {
-    type: string
-    sql: ${TABLE}.cnpj_consignatario ;;
-  }
-
-  dimension: cnpj_consignatario_int {
-    type: number
-    sql: ${TABLE}.cnpj_consignatario_int ;;
-  }
-
-  dimension: cnpj_consignatario_raw_text {
-    type: string
-    sql: ${TABLE}.cnpj_consignatario_raw_text ;;
-  }
-
-  dimension: cod_dest_port {
-    type: string
-    sql: ${TABLE}.cod_dest_port ;;
-  }
-
-  dimension: cod_origin_port {
-    type: string
-    sql: ${TABLE}.cod_origin_port ;;
-  }
-
-  dimension: cod_porto_descarga {
-    type: string
-    sql: ${TABLE}.cod_porto_descarga ;;
-  }
-
-  dimension: cod_shipment_port {
-    type: string
-    sql: ${TABLE}.cod_shipment_port ;;
-  }
-
-  dimension: consignatario_final {
-    type: string
-    sql: ${TABLE}.consignatario_final ;;
-  }
-
-  dimension: consignatario_final_qtd {
-    type: number
-    sql: ${TABLE}.consignatario_final_qtd ;;
-  }
-
-  dimension: consignatario_uf {
-    type: string
-    sql: ${TABLE}.consignatario_uf ;;
-  }
-
-  dimension_group: data_embarque {
-    type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql: ${TABLE}.data_embarque ;;
-  }
-
-  dimension_group: data_operacao {
-    type: time
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql: ${TABLE}.data_operacao ;;
-  }
-
-  dimension_group: data_saida {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.data_saida ;;
-  }
-
-  dimension: desc_segmento {
-    type: string
-    sql: ${TABLE}.desc_segmento ;;
-  }
-
-  dimension: detalhes {
-    type: string
-    sql: ${TABLE}.detalhes ;;
-  }
-
-  dimension: email {
-    type: string
-    sql: ${TABLE}.email ;;
-  }
-
-  dimension: embarque {
-    type: string
-    sql: ${TABLE}.embarque ;;
-  }
-
-  dimension: indmodalidadefrete {
-    type: string
-    sql: ${TABLE}.indmodalidadefrete ;;
-  }
-
-  dimension: itemcarga_cdncms {
-    type: string
-    sql: ${TABLE}.itemcarga_cdncms ;;
-  }
-
-  dimension: month_year {
-    type: string
-    sql: ${TABLE}.month_year ;;
-  }
-
-  dimension: nmagtnavegmaster {
-    type: string
-    sql: ${TABLE}.nmagtnavegmaster ;;
-  }
-
-  dimension: nmconsignatario {
-    type: string
-    sql: ${TABLE}.nmconsignatario ;;
-  }
-
-  dimension: nmembarcacao {
-    type: string
-    sql: ${TABLE}.nmembarcacao ;;
-  }
-
-  dimension: nmempnavegdesconmaster {
-    type: string
-    sql: ${TABLE}.nmempnavegdesconmaster ;;
-  }
-
-  dimension: nmempnavegdesconmaster_code {
-    type: number
-    sql: ${TABLE}.nmempnavegdesconmaster_code ;;
-  }
-
-  dimension: nmempresanavegacao {
-    type: string
-    sql: ${TABLE}.nmempresanavegacao ;;
-  }
-
-  dimension: nmempresanavegacao_code {
-    type: number
-    sql: ${TABLE}.nmempresanavegacao_code ;;
-  }
-
-  dimension: nmmoedafrete {
-    type: string
-    sql: ${TABLE}.nmmoedafrete ;;
-  }
-
-  dimension: nmpaisprocedencia {
-    type: string
-    sql: ${TABLE}.nmpaisprocedencia ;;
-  }
-
-  dimension: nmpaisprocedencia_code {
-    type: number
-    sql: ${TABLE}.nmpaisprocedencia_code ;;
-  }
-
-  dimension: nmportodestino {
-    type: string
-    sql: ${TABLE}.nmportodestino ;;
-  }
-
-  dimension: nmportodestino_code {
-    type: number
-    sql: ${TABLE}.nmportodestino_code ;;
-  }
-
-  dimension: nmportoorigem {
-    type: string
-    sql: ${TABLE}.nmportoorigem ;;
-  }
-
-  dimension: nmportoorigem_code {
-    type: number
-    sql: ${TABLE}.nmportoorigem_code ;;
-  }
-
-  dimension: nmterminalportuario {
-    type: number
-    sql: ${TABLE}.nmterminalportuario ;;
-  }
-
-  dimension: notify_city {
-    type: string
-    sql: ${TABLE}.notify_city ;;
-  }
-
-  dimension: notify_uf {
-    type: string
-    sql: ${TABLE}.notify_uf ;;
-  }
-
-  dimension: numero_bl {
-    type: string
-    sql: ${TABLE}.numero_bl ;;
-  }
-
-  dimension: numero_ce {
-    type: number
-    sql: ${TABLE}.numero_ce ;;
-  }
-
-  dimension: numero_container {
-    type: string
-    sql: ${TABLE}.numero_container ;;
-  }
-
-  dimension: nvocc {
-    type: string
-    sql: ${TABLE}.nvocc ;;
-  }
-
-  dimension: oprecolhimentofrete {
-    type: string
-    sql: ${TABLE}.oprecolhimentofrete ;;
-  }
-
-  dimension: pagamento {
-    type: string
-    sql: ${TABLE}.pagamento ;;
-  }
-
-  dimension: pais_embarque {
-    type: string
-    sql: ${TABLE}.pais_embarque ;;
-  }
-
-  dimension: pais_origem {
-    type: string
-    sql: ${TABLE}.pais_origem ;;
-  }
-
-  dimension: pais_origem_code {
-    type: number
-    sql: ${TABLE}.pais_origem_code ;;
-  }
-
-  dimension: peso_bruto {
-    type: number
-    sql: ${TABLE}.peso_bruto ;;
-  }
-
-  dimension: porto_descarga {
-    type: string
-    sql: ${TABLE}.porto_descarga ;;
-  }
-
-  dimension: porto_embarque {
-    type: string
-    sql: ${TABLE}.porto_embarque ;;
-  }
-
-  dimension: qtde_fcl {
-    type: number
-    sql: ${TABLE}.qtde_fcl ;;
-  }
-
-  dimension: quantidade_veiculos {
-    type: number
-    sql: ${TABLE}.quantidade_veiculos ;;
-  }
-
-  dimension: recinto_aduaneiro_destino {
-    type: string
-    sql: ${TABLE}.recinto_aduaneiro_destino ;;
-  }
-
-  dimension: release_location {
-    type: string
-    sql: ${TABLE}.release_location ;;
-  }
-
-  dimension: telefone {
-    type: string
-    sql: ${TABLE}.telefone ;;
-  }
-
-  dimension: tempo_porto {
-    type: number
-    sql: ${TABLE}.tempo_porto ;;
-  }
-
-  dimension: terminal_descarga {
-    type: string
-    sql: ${TABLE}.terminal_descarga ;;
-  }
-
-  dimension: teus_parcial {
-    type: number
-    sql: ${TABLE}.teus_parcial ;;
+  measure: count {
+    type: count
+    drill_fields: [detail*]
   }
 
   dimension: tipo_carga {
@@ -372,14 +18,19 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.tipo_carga ;;
   }
 
-  dimension: tipo_dta {
-    type: string
-    sql: ${TABLE}.tipo_dta ;;
+  dimension: data_embarque {
+    type: date
+    sql: ${TABLE}.data_embarque ;;
   }
 
-  dimension: tipo_fcl {
+  dimension: data_operacao {
+    type: date
+    sql: ${TABLE}.data_operacao ;;
+  }
+
+  dimension: embarque {
     type: string
-    sql: ${TABLE}.tipo_fcl ;;
+    sql: ${TABLE}.embarque ;;
   }
 
   dimension: tipoconhecimento {
@@ -387,34 +38,119 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.tipoconhecimento ;;
   }
 
-  dimension: trade_lane_origem {
+  dimension: pais_origem {
     type: string
-    sql: ${TABLE}.trade_lane_origem ;;
+    sql: ${TABLE}.pais_origem ;;
   }
 
-  dimension: trade_origem {
+  dimension: nmportoorigem {
     type: string
-    sql: ${TABLE}.trade_origem ;;
+    sql: ${TABLE}.nmportoorigem ;;
   }
 
-  dimension: transit_time {
+  dimension: pais_embarque {
+    type: string
+    sql: ${TABLE}.pais_embarque ;;
+  }
+
+  dimension: porto_embarque {
+    type: string
+    sql: ${TABLE}.porto_embarque ;;
+  }
+
+  dimension: porto_descarga {
+    type: string
+    sql: ${TABLE}.porto_descarga ;;
+  }
+
+  dimension: nmportodestino {
+    type: string
+    sql: ${TABLE}.nmportodestino ;;
+  }
+
+  dimension: nmempresanavegacao {
+    type: string
+    sql: ${TABLE}.nmempresanavegacao ;;
+  }
+
+  dimension: nmempnavegdesconmaster {
+    type: string
+    sql: ${TABLE}.nmempnavegdesconmaster ;;
+  }
+
+  dimension: nvocc {
+    type: string
+    sql: ${TABLE}.nvocc ;;
+  }
+
+  dimension: nmagtnavegmaster {
+    type: string
+    sql: ${TABLE}.nmagtnavegmaster ;;
+  }
+
+  dimension: pagamento {
+    type: string
+    sql: ${TABLE}.pagamento ;;
+  }
+
+  dimension: tipo_fcl {
+    type: string
+    sql: ${TABLE}.tipo_fcl ;;
+  }
+
+  dimension: itemcarga_cdncms {
+    type: string
+    sql: ${TABLE}.itemcarga_cdncms ;;
+  }
+
+  dimension: mercadoria {
+    type: string
+    sql: ${TABLE}.mercadoria ;;
+  }
+
+  dimension: d.teus {
     type: number
-    sql: ${TABLE}.transit_time ;;
+    sql: ${TABLE}.teus ;;
   }
 
-  dimension: transportador_nome {
+  dimension: detalhes {
     type: string
-    sql: ${TABLE}.transportador_nome ;;
+    sql: ${TABLE}.detalhes ;;
   }
 
-  dimension: txnotifypart {
-    type: string
-    sql: ${TABLE}.txnotifypart ;;
+  dimension: d.c20 {
+    type: number
+    sql: ${TABLE}.c20 ;;
   }
 
-  dimension: txshipper {
+  dimension: d.c40 {
+    type: number
+    sql: ${TABLE}.c40 ;;
+  }
+
+  dimension: qtde_fcl {
+    type: number
+    sql: ${TABLE}.qtde_fcl ;;
+  }
+
+  dimension: volumes {
+    type: number
+    sql: ${TABLE}.volumes ;;
+  }
+
+  dimension: peso_bruto {
+    type: number
+    sql: ${TABLE}.peso_bruto ;;
+  }
+
+  dimension: nmmoedafrete {
     type: string
-    sql: ${TABLE}.txshipper ;;
+    sql: ${TABLE}.nmmoedafrete ;;
+  }
+
+  dimension: tipo_dta {
+    type: string
+    sql: ${TABLE}.tipo_dta ;;
   }
 
   dimension: valor_dolar {
@@ -427,19 +163,52 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.valor_reais ;;
   }
 
-  dimension: viagem {
-    type: string
-    sql: ${TABLE}.viagem ;;
-  }
-
-  dimension: volumes {
+  dimension: d.vlfretetotal {
     type: number
-    sql: ${TABLE}.volumes ;;
+    sql: ${TABLE}.vlfretetotal ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [id]
+  dimension: d.vlfrete {
+    type: number
+    sql: ${TABLE}.vlfrete ;;
+  }
+
+  set: detail {
+    fields: [
+      id,
+      tipo_carga,
+      data_embarque,
+      data_operacao,
+      embarque,
+      tipoconhecimento,
+      pais_origem,
+      nmportoorigem,
+      pais_embarque,
+      porto_embarque,
+      porto_descarga,
+      nmportodestino,
+      nmempresanavegacao,
+      nmempnavegdesconmaster,
+      nvocc,
+      nmagtnavegmaster,
+      pagamento,
+      tipo_fcl,
+      itemcarga_cdncms,
+      mercadoria,
+      teus,
+      detalhes,
+      c20,
+      c40,
+      qtde_fcl,
+      volumes,
+      peso_bruto,
+      nmmoedafrete,
+      tipo_dta,
+      valor_dolar,
+      valor_reais,
+      vlfretetotal,
+      vlfrete
+    ]
   }
 
 ########################## ----> Itens adicionados / alterados <---- ##########################
@@ -542,6 +311,5 @@ view: bi_imports_mvw_gold {
     filters: [c40_dimension: ">0"]
     sql: (((${TABLE}."vlfrete" /  ${TABLE}."teus") * 2) * ${TABLE}."c40") / ${TABLE}."c40";;
   }
-
 
 }

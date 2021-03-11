@@ -137,7 +137,6 @@
     listen:
       Porto Destino: bi_imports_mvw_gold.nmportodestino
       País Embarque: bi_imports_mvw_gold.pais_embarque
-      Data Operação: bi_imports_mvw_gold.data_operacao_month
       Porto Origem: bi_imports_mvw_gold.nmportoorigem
       País Origem: bi_imports_mvw_gold.pais_origem
       Tipo Container: bi_imports_mvw_gold.tipo_fcl
@@ -257,7 +256,6 @@
     listen:
       Porto Destino: bi_imports_mvw_gold.nmportodestino
       País Embarque: bi_imports_mvw_gold.pais_embarque
-      Data Operação: bi_imports_mvw_gold.data_operacao_month
       Porto Origem: bi_imports_mvw_gold.nmportoorigem
       País Origem: bi_imports_mvw_gold.pais_origem
       Tipo Container: bi_imports_mvw_gold.tipo_fcl
@@ -270,13 +268,11 @@
     model: Dados_Impo_Datalake
     explore: bi_imports_mvw_gold
     type: looker_line
-    fields: [bi_imports_mvw_gold.data_operacao_month, bi_imports_mvw_gold.vl_frete_por_c20,
+    fields: [bi_imports_mvw_gold.vl_frete_por_c20,
       bi_imports_mvw_gold.vl_frete_por_c40, bi_imports_mvw_gold.teus]
-    fill_fields: [bi_imports_mvw_gold.data_operacao_month]
     filters:
       bi_imports_mvw_gold.nmmoedafrete: DOLAR DOS EUA
       bi_imports_mvw_gold.tipoconhecimento: '10,12'
-    sorts: [bi_imports_mvw_gold.data_operacao_month desc]
     limit: 500
     query_timezone: America/Sao_Paulo
     x_axis_gridlines: false
@@ -368,7 +364,6 @@
     listen:
       Porto Destino: bi_imports_mvw_gold.nmportodestino
       País Embarque: bi_imports_mvw_gold.pais_embarque
-      Data Operação: bi_imports_mvw_gold.data_operacao_month
       Porto Origem: bi_imports_mvw_gold.nmportoorigem
       País Origem: bi_imports_mvw_gold.pais_origem
       Tipo Container: bi_imports_mvw_gold.tipo_fcl
@@ -377,20 +372,6 @@
     width: 24
     height: 7
   filters:
-  - name: Data Operação
-    title: Data Operação
-    type: field_filter
-    default_value: 6 month
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: advanced
-      display: popover
-      options: []
-    model: Dados_Impo_Datalake
-    explore: bi_imports_mvw_gold
-    listens_to_filters: []
-    field: bi_imports_mvw_gold.data_operacao_month
   - name: Porto Origem
     title: Porto Origem
     type: field_filter
