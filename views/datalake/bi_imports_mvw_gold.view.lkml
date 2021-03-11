@@ -10,7 +10,6 @@ view: bi_imports_mvw_gold {
 
   measure: count {
     type: count
-    drill_fields: [detail*]
   }
 
   dimension: tipo_carga {
@@ -23,11 +22,20 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.data_embarque ;;
   }
 
-  dimension: data_operacao {
-    type: date
+  dimension_group: data_operacao {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.data_operacao ;;
   }
-
   dimension: embarque {
     type: string
     sql: ${TABLE}.embarque ;;
@@ -171,44 +179,6 @@ view: bi_imports_mvw_gold {
   dimension: d.vlfrete {
     type: number
     sql: ${TABLE}.vlfrete ;;
-  }
-
-  set: detail {
-    fields: [
-      id,
-      tipo_carga,
-      data_embarque,
-      data_operacao,
-      embarque,
-      tipoconhecimento,
-      pais_origem,
-      nmportoorigem,
-      pais_embarque,
-      porto_embarque,
-      porto_descarga,
-      nmportodestino,
-      nmempresanavegacao,
-      nmempnavegdesconmaster,
-      nvocc,
-      nmagtnavegmaster,
-      pagamento,
-      tipo_fcl,
-      itemcarga_cdncms,
-      mercadoria,
-      teus,
-      detalhes,
-      c20,
-      c40,
-      qtde_fcl,
-      volumes,
-      peso_bruto,
-      nmmoedafrete,
-      tipo_dta,
-      valor_dolar,
-      valor_reais,
-      vlfretetotal,
-      vlfrete
-    ]
   }
 
 ########################## ----> Itens adicionados / alterados <---- ##########################
