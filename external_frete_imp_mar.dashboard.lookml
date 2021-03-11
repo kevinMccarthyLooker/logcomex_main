@@ -139,7 +139,7 @@
       Porto Destino: bi_imports_mvw_gold.nmportodestino
       Data de Operação: bi_imports_mvw_gold.data_operacao_month
       Tipo Container: bi_imports_mvw_gold.tipo_fcl
-    row: 7
+    row: 0
     col: 0
     width: 15
     height: 6
@@ -257,7 +257,7 @@
       Porto Destino: bi_imports_mvw_gold.nmportodestino
       Data de Operação: bi_imports_mvw_gold.data_operacao_month
       Tipo Container: bi_imports_mvw_gold.tipo_fcl
-    row: 7
+    row: 0
     col: 15
     width: 9
     height: 6
@@ -364,7 +364,7 @@
       Porto Destino: bi_imports_mvw_gold.nmportodestino
       Data de Operação: bi_imports_mvw_gold.data_operacao_month
       Tipo Container: bi_imports_mvw_gold.tipo_fcl
-    row: 0
+    row: 6
     col: 0
     width: 24
     height: 7
