@@ -1,23 +1,27 @@
 connection: "dremio_datalake"
 
-##include: "/**/comex_analytics_di.view.lkml"
-##include: "/**/comex_analytics_adicoes.view.lkml"
-##include: "/**/comex_analytics.dashboard"
+include: "/**/tracking_air.view.lkml"
+include: "/**/tracking_sea.view.lkml"
 
-##datagroup: comex_analytics_embed_datagroup {
-##  sql_trigger: SELECT CURRENT_DATE ;;
-##  max_cache_age: "24 hours"
-##  label: "comex_analytics_embed_datagroup"
-##  description: "DG do Dash Embedado Comex Analytics, Atualizados a cada 24h"
-##}
+datagroup: tracking_embed_datagroup {
+  sql_trigger: SELECT CURRENT_DATE ;;
+  max_cache_age: "24 hours"
+  label: "tracking_embed_datagroup"
+  description: "DG do Dash Embedado tracking, Atualizados a cada 24h"
+}
 
-##explore:comex_analytics_di  {
-##persist_with: comex_analytics_embed_datagroup
-##access_filter: {
-##  field: comex_analytics_di.id_customer
-##  user_attribute: customer_id
-##}
-##}
-##
-##explore: comex_analytics_adicoes {
-##}
+explore: tracking_air {
+persist_with: tracking_embed_datagroup
+access_filter: {
+  field: tracking_air.customer_id
+  user_attribute: customer_id
+}
+}
+
+explore: tracking_sea {
+persist_with: tracking_embed_datagroup
+access_filter: {
+  field: tracking_sea.customer_id
+  user_attribute: customer_id
+}
+}
