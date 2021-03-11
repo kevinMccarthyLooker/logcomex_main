@@ -84,7 +84,7 @@ inner join customer c on c.id = ta.customer_id
 inner join customer_plan cp on cp.customer_id = c.id
 inner join tracking_plan_info tpi on tpi.id = cp.tracking_plan_info_id
 where c.fake_customer is false and c.deleted_at is null
-and cp.deleted_at is null
+and cp.deleted_at is null;;
 indexes: ["chave"]
 sql_trigger_value: select current_date;;
 }
