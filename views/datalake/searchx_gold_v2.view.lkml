@@ -87,6 +87,7 @@ view: searchx_gold_v2 {
 
   dimension: cdpaisorigem {
     type: string
+    map_layer_name: countries
     sql: ${TABLE}.cdpaisorigem ;;
   }
 
