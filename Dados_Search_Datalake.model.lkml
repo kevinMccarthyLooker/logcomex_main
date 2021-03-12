@@ -32,7 +32,4 @@ explore:searchx_gold  {
 
 }
 
-explore:searchx_gold_v2  {
-  persist_for: "24 hours"
-
-}
+explore:searchx_gold_v2  {}

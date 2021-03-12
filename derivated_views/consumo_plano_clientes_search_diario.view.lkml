@@ -125,6 +125,7 @@ view: consumo_plano_clientes_search_diario {
     timeframes: [
       raw,
       date,
+      week,
       month,
       year
     ]

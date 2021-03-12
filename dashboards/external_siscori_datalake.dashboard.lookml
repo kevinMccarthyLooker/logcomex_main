@@ -23,12 +23,12 @@
     series_types: {}
     defaults_version: 1
     listen:
-      Mês: siscori_gold.mes_month
       HSCODE: siscori_gold.cdncm
       NCM: siscori_gold.cdncm_compl
+      Mês: siscori_gold.mes_month
     row: 0
     col: 0
-    width: 4
+    width: 8
     height: 3
   - title: Peso Total Exportado (Kg)
     name: Peso Total Exportado (Kg)
@@ -49,12 +49,12 @@
     series_types: {}
     defaults_version: 1
     listen:
-      Mês: siscori_gold.mes_month
       HSCODE: siscori_gold.cdncm
       NCM: siscori_gold.cdncm_compl
+      Mês: siscori_gold.mes_month
     row: 3
     col: 0
-    width: 4
+    width: 8
     height: 3
   - title: Valores e  Pesos - Timeline
     name: Valores e  Pesos - Timeline
@@ -62,7 +62,8 @@
     explore: siscori_gold
     type: looker_column
     fields: [siscori_gold.val_fob_us_total, siscori_gold.val_peso_liq_total, siscori_gold.mes_month]
-    fill_fields: [siscori_gold.mes_month]
+    filters:
+      siscori_gold.val_fob_us_total: NOT NULL
     sorts: [siscori_gold.mes_month]
     limit: 500
     x_axis_gridlines: false
@@ -124,12 +125,12 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     listen:
-      Mês: siscori_gold.mes_month
       HSCODE: siscori_gold.cdncm
       NCM: siscori_gold.cdncm_compl
+      Mês: siscori_gold.mes_month
     row: 0
-    col: 4
-    width: 20
+    col: 8
+    width: 16
     height: 6
   - title: Valor Total por Estado
     name: Valor Total por Estado
@@ -193,9 +194,9 @@
     hide_totals: false
     hide_row_totals: false
     listen:
-      Mês: siscori_gold.mes_month
       HSCODE: siscori_gold.cdncm
       NCM: siscori_gold.cdncm_compl
+      Mês: siscori_gold.mes_month
     row: 6
     col: 0
     width: 12
@@ -229,7 +230,7 @@
     series_labels:
       siscori_gold.ncm_desc: Descrição
       siscori_gold.cdncm_compl: NCM
-      siscori_gold.val_fob_us_total: FOD USD
+      siscori_gold.val_fob_us_total: FOB USD
     series_cell_visualizations:
       siscori_gold.val_fob_us_total:
         is_active: true
@@ -251,9 +252,9 @@
     series_types: {}
     defaults_version: 1
     listen:
-      Mês: siscori_gold.mes_month
       HSCODE: siscori_gold.cdncm
       NCM: siscori_gold.cdncm_compl
+      Mês: siscori_gold.mes_month
     row: 6
     col: 12
     width: 12
@@ -307,9 +308,9 @@
     series_types: {}
     defaults_version: 1
     listen:
-      Mês: siscori_gold.mes_month
       HSCODE: siscori_gold.cdncm
       NCM: siscori_gold.cdncm_compl
+      Mês: siscori_gold.mes_month
     row: 16
     col: 0
     width: 12
@@ -370,9 +371,9 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     listen:
-      Mês: siscori_gold.mes_month
       HSCODE: siscori_gold.cdncm
       NCM: siscori_gold.cdncm_compl
+      Mês: siscori_gold.mes_month
     row: 16
     col: 12
     width: 12

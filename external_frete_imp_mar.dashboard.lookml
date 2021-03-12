@@ -14,7 +14,6 @@
       bi_imports_mvw_gold.vlfrete, bi_imports_mvw_gold.media_vl_frete_por_c20, bi_imports_mvw_gold.media_vl_frete_por_c40]
     filters:
       bi_imports_mvw_gold.nmmoedafrete: DOLAR DOS EUA
-      bi_imports_mvw_gold.tipoconhecimento: '10,12'
     sorts: [bi_imports_mvw_gold.teus desc]
     limit: 500
     dynamic_fields: [{table_calculation: mediana_20, label: Mediana 20', expression: "(((${bi_imports_mvw_gold.vlfrete}/${bi_imports_mvw_gold.teus})*${bi_imports_mvw_gold.c20})/${bi_imports_mvw_gold.c20})",
@@ -22,7 +21,6 @@
         _type_hint: number}, {table_calculation: mediana_40, label: Mediana 40', expression: "(((${bi_imports_mvw_gold.vlfrete}/${bi_imports_mvw_gold.teus})*(2*\
           \ ${bi_imports_mvw_gold.c40})/${bi_imports_mvw_gold.c40}))", value_format: !!null '',
         value_format_name: !!null '', _kind_hint: measure, _type_hint: number}]
-    query_timezone: America/Sao_Paulo
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -135,11 +133,11 @@
 
       '
     listen:
-      Porto Destino: bi_imports_mvw_gold.nmportodestino
       País Embarque: bi_imports_mvw_gold.pais_embarque
-      Data Operação: bi_imports_mvw_gold.data_operacao_month
-      Porto Origem: bi_imports_mvw_gold.nmportoorigem
       País Origem: bi_imports_mvw_gold.pais_origem
+      Porto Origem: bi_imports_mvw_gold.nmportoorigem
+      Porto Destino: bi_imports_mvw_gold.nmportodestino
+      Data de Operação: bi_imports_mvw_gold.data_operacao_month
       Tipo Container: bi_imports_mvw_gold.tipo_fcl
     row: 0
     col: 0
@@ -154,10 +152,8 @@
       bi_imports_mvw_gold.media_vl_frete_por_c40, bi_imports_mvw_gold.teus]
     filters:
       bi_imports_mvw_gold.nmmoedafrete: DOLAR DOS EUA
-      bi_imports_mvw_gold.tipoconhecimento: '10,12'
     sorts: [bi_imports_mvw_gold.teus desc]
     limit: 500
-    query_timezone: America/Sao_Paulo
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -255,11 +251,11 @@
 
       '
     listen:
-      Porto Destino: bi_imports_mvw_gold.nmportodestino
       País Embarque: bi_imports_mvw_gold.pais_embarque
-      Data Operação: bi_imports_mvw_gold.data_operacao_month
-      Porto Origem: bi_imports_mvw_gold.nmportoorigem
       País Origem: bi_imports_mvw_gold.pais_origem
+      Porto Origem: bi_imports_mvw_gold.nmportoorigem
+      Porto Destino: bi_imports_mvw_gold.nmportodestino
+      Data de Operação: bi_imports_mvw_gold.data_operacao_month
       Tipo Container: bi_imports_mvw_gold.tipo_fcl
     row: 0
     col: 15
@@ -270,15 +266,12 @@
     model: Dados_Impo_Datalake
     explore: bi_imports_mvw_gold
     type: looker_line
-    fields: [bi_imports_mvw_gold.data_operacao_month, bi_imports_mvw_gold.vl_frete_por_c20,
-      bi_imports_mvw_gold.vl_frete_por_c40, bi_imports_mvw_gold.teus]
+    fields: [bi_imports_mvw_gold.vl_frete_por_c20, bi_imports_mvw_gold.vl_frete_por_c40,
+      bi_imports_mvw_gold.teus, bi_imports_mvw_gold.data_operacao_month]
     fill_fields: [bi_imports_mvw_gold.data_operacao_month]
     filters:
       bi_imports_mvw_gold.nmmoedafrete: DOLAR DOS EUA
-      bi_imports_mvw_gold.tipoconhecimento: '10,12'
-    sorts: [bi_imports_mvw_gold.data_operacao_month desc]
     limit: 500
-    query_timezone: America/Sao_Paulo
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_view_names: false
@@ -366,19 +359,18 @@
 
       '
     listen:
-      Porto Destino: bi_imports_mvw_gold.nmportodestino
-      País Embarque: bi_imports_mvw_gold.pais_embarque
-      Data Operação: bi_imports_mvw_gold.data_operacao_month
-      Porto Origem: bi_imports_mvw_gold.nmportoorigem
       País Origem: bi_imports_mvw_gold.pais_origem
+      Porto Origem: bi_imports_mvw_gold.nmportoorigem
+      Porto Destino: bi_imports_mvw_gold.nmportodestino
+      Data de Operação: bi_imports_mvw_gold.data_operacao_month
       Tipo Container: bi_imports_mvw_gold.tipo_fcl
     row: 6
     col: 0
     width: 24
     height: 7
   filters:
-  - name: Data Operação
-    title: Data Operação
+  - name: Data de Operação
+    title: Data de Operação
     type: field_filter
     default_value: 6 month
     allow_multiple_values: true
@@ -450,7 +442,7 @@
     allow_multiple_values: true
     required: false
     ui_config:
-      type: checkboxes
+      type: button_group
       display: popover
       options:
       - DRY

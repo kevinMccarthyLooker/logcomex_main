@@ -49,10 +49,10 @@ else null
 end)
 as pontos_qtd_tickets,
 (case
-when (survey_movi.value_response) >= 4 then 15
-when (survey_movi.value_response) between 3 and 3.9 then 7
-when (survey_movi.value_response) < 3 then 0
-when (survey_movi.value_response) isnull then 7  -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
+when (survey_movi_hub.value_response) >= 4 then 15
+when (survey_movi_hub.value_response) between 3 and 3.9 then 7
+when (survey_movi_hub.value_response) < 3 then 0
+when (survey_movi_hub.value_response) isnull then 7  -- nunca respondeu uma pesquisa ou nao tem chamado, nota maxima para nao ser penalizado
 end)
 as satisfaction,
 (case
@@ -193,7 +193,7 @@ inner join customer c on c.id = car.id_customer
 where hubt.create_date_ticket >= current_date - interval '30' day
 group by 1
        ) as tickets_hub on tickets_hub.customer_id = c.id
-left join(  -- adicionando dados das pesquisa de satisfacao movidesk
+left join( -- adicionando dados das pesquisa de satisfacao movidesk e hubspot
 select qq1.id_customer,
 avg(qq1.value_response) as value_response
 from(
@@ -205,9 +205,21 @@ else null
 end) as value_response
 from satisfaction_survey_movidesk ssm
 inner join tickets_movidesk tm on ssm.tickets_movidesk_id = tm.id
-where question_id in ('l8zW','n7rK')) as qq1
-group by qq1.id_customer
-       ) as survey_movi on survey_movi.id_customer = c.id
+where question_id in ('l8zW','n7rK')
+union all
+select c.id as id_customer,
+(case
+when ht.nps_score between 1 and 2 then 1
+when ht.nps_score = 3 then 2
+when ht.nps_score = 4 then 3
+when ht.nps_score = 5 then 3
+when ht.nps_score = 6 then 4
+when ht.nps_score = 7 then 5
+end) as value_response
+from hubspot_tickets ht
+inner join customer_api_relations car on car.id = ht.customer_api_relations_id
+inner join customer c on c.id = car.id_customer) as qq1
+group by qq1.id_customer) as survey_movi_hub on survey_movi_hub.id_customer = c.id
 left join ( -- adicionando pagamentos do omie
 select c.id as customer_id,
 sum(case

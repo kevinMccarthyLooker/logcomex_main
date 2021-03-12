@@ -2,7 +2,7 @@ view: searchx_gold_v2_2020_produtos {
   derived_table: {
     sql:
     select *
-    from importadores_cif.searchx_gold_v2_2020_produtos
+    from importadores_cif.searchx_gold_v2_2020_produtos_2
     where to_date(concat(anomes,'01'), 'YYYYMMDD') between '2020-01-01' and '2020-12-31' ;;
   }
 
@@ -12,7 +12,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: altura {
-    type: number
+    type: string
     sql: ${TABLE}.Altura ;;
   }
 
@@ -47,7 +47,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: capacidade {
-    type: number
+    type: string
     sql: ${TABLE}.Capacidade ;;
   }
 
@@ -73,6 +73,7 @@ view: searchx_gold_v2_2020_produtos {
 
   dimension: cdpaisorigem {
     type: string
+    map_layer_name: countries
     sql: ${TABLE}.cdpaisorigem ;;
   }
 
@@ -117,17 +118,17 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: composicao {
-    type: number
+    type: string
     sql: ${TABLE}.Composicao ;;
   }
 
   dimension: comprimento {
-    type: number
+    type: string
     sql: ${TABLE}.Comprimento ;;
   }
 
   dimension: cor {
-    type: number
+    type: string
     sql: ${TABLE}.Cor ;;
   }
 
@@ -207,7 +208,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: ean {
-    type: number
+    type: string
     sql: ${TABLE}.EAN ;;
   }
 
@@ -217,7 +218,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: espessura {
-    type: number
+    type: string
     sql: ${TABLE}.Espessura ;;
   }
 
@@ -232,7 +233,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: genero {
-    type: number
+    type: string
     sql: ${TABLE}.Genero ;;
   }
 
@@ -272,7 +273,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: largura {
-    type: number
+    type: string
     sql: ${TABLE}.Largura ;;
   }
 
@@ -402,12 +403,12 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: peso {
-    type: number
+    type: string
     sql: ${TABLE}.Peso ;;
   }
 
   dimension: potencia {
-    type: number
+    type: string
     sql: ${TABLE}.Potencia ;;
   }
 
@@ -582,7 +583,7 @@ view: searchx_gold_v2_2020_produtos {
   }
 
   dimension: voltagem {
-    type: number
+    type: string
     sql: ${TABLE}.Voltagem ;;
   }
 
@@ -609,6 +610,84 @@ view: searchx_gold_v2_2020_produtos {
   dimension: val_vmle_us_subitem_num {
     type: number
     sql: cast(${TABLE}.val_vmle_us_subitem as float) ;;
+  }
+
+  dimension: plu {
+    type: string
+    sql: ${TABLE}.plu ;;
+  }
+
+  dimension: embalagem {
+    type: string
+    sql: ${TABLE}.embalagem ;;
+  }
+
+  dimension: latitude {
+    type: number
+    sql: case
+         when ${cdpaisorigem} = 'CN' THEN 35.0000
+         when ${cdpaisorigem} = 'US' THEN 38.0000
+         when ${cdpaisorigem} = 'BR' THEN -15.7938
+         when ${cdpaisorigem} = 'DE' THEN 51.0000
+         when ${cdpaisorigem} = 'FR' THEN 46.0000
+         when ${cdpaisorigem} = 'AR' THEN -34.6037
+         when ${cdpaisorigem} = 'KR' THEN 37.0000
+         when ${cdpaisorigem} = 'JP' THEN 36.0000
+         when ${cdpaisorigem} = 'IT' THEN 42.5000
+         when ${cdpaisorigem} = 'MX' THEN 19.0000
+         when ${cdpaisorigem} = 'IN' THEN 22.0000
+         when ${cdpaisorigem} = 'PT' THEN 38.7369
+         when ${cdpaisorigem} = 'CL' THEN -33.4474
+         when ${cdpaisorigem} = 'VN' THEN 21.0285
+         when ${cdpaisorigem} = 'ES' THEN 40.4167
+         when ${cdpaisorigem} = 'NO' THEN 59.9114
+         when ${cdpaisorigem} = 'TR' THEN 41.0151
+         when ${cdpaisorigem} = 'CZ' THEN 50.0736
+         when ${cdpaisorigem} = 'EG' THEN 30.0333
+         when ${cdpaisorigem} = 'ID' THEN -6.2000
+         when ${cdpaisorigem} = 'LK' THEN 6.8940
+         when ${cdpaisorigem} = 'BE' THEN 51.0499
+         when ${cdpaisorigem} = 'BD' THEN 23.8103
+         when ${cdpaisorigem} = 'PY' THEN -25.2819
+         else 0
+         end;;
+  }
+
+  dimension: longitude {
+    type: number
+    sql: case
+         when ${cdpaisorigem} = 'CN' THEN 103.0000
+         when ${cdpaisorigem} = 'US' THEN -97.0000
+         when ${cdpaisorigem} = 'BR' THEN -47.8827
+         when ${cdpaisorigem} = 'DE' THEN 09.0000
+         when ${cdpaisorigem} = 'FR' THEN 02.0000
+         when ${cdpaisorigem} = 'AR' THEN -62.3815
+         when ${cdpaisorigem} = 'KR' THEN 127.3000
+         when ${cdpaisorigem} = 'JP' THEN 138.0000
+         when ${cdpaisorigem} = 'IT' THEN 12.5000
+         when ${cdpaisorigem} = 'MX' THEN -102.3667
+         when ${cdpaisorigem} = 'IN' THEN 77.0000
+         when ${cdpaisorigem} = 'PT' THEN -9.1426
+         when ${cdpaisorigem} = 'CL' THEN -70.6736
+         when ${cdpaisorigem} = 'VN' THEN 105.8048
+         when ${cdpaisorigem} = 'ES' THEN -3.7037
+         when ${cdpaisorigem} = 'NO' THEN 10.757933
+         when ${cdpaisorigem} = 'TR' THEN 28.9795
+         when ${cdpaisorigem} = 'CZ' THEN 14.4185
+         when ${cdpaisorigem} = 'EG' THEN 31.2333
+         when ${cdpaisorigem} = 'ID' THEN 106.8166
+         when ${cdpaisorigem} = 'LK' THEN 79.9024
+         when ${cdpaisorigem} = 'BE' THEN 3.7333
+         when ${cdpaisorigem} = 'BD' THEN 90.4125
+         when ${cdpaisorigem} = 'PY' THEN -57.635
+         else 0
+         end;;
+  }
+
+  dimension: store_location {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
   }
 
   measure: cif_sum {

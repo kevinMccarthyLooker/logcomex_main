@@ -259,6 +259,13 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     sql_end: CURRENT_TIMESTAMP;;
   }
 
+  dimension_group: transit_time {
+    type: duration
+    intervals: [day, hour]
+    sql_start: ${TABLE}."documento_emit_date" ;;
+    sql_end: ${TABLE}."operacao";; #manifest_date
+  }
+
   dimension: ultima_atualizacao {
     type:  string
     sql:  CASE WHEN (${days_last_execution} < 1) THEN 'A - 0 dias'
@@ -720,6 +727,11 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     type: average_distinct
     sql_distinct_key: ${chave} ;;
     sql: ${days_last_execution} ;;
+  }
+
+  measure: avg_transit_time {
+    type: average
+    sql: ${days_transit_time} ;;
   }
 
     set: detail {
