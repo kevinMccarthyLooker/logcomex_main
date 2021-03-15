@@ -26,6 +26,8 @@ view: recintos_aduaneiros_customers {
         INNER JOIN "api"."plan_complete" pc on pc.id = cp.plan_complete_id
         WHERE c.fake_customer IS FALSE AND c.deleted_at IS NULL
         AND cp.deleted_at IS NULL and CURRENT_DATE BETWEEN cp."start" and cp."expiration"
+        AND c.cnpj is not null  -- removendo estrangeiras
+        AND c.cnpj != ''  -- removendo estrangeiras
         --AND C.customer_type_id in(2,3,4,14,23) -- porto,armazem, terminal, aeroporto, terminal/armazem - recintos aduaneiros
         AND c.id IN -- para pegar apenas um id, quando ha clientes com filiais cadastradas
         (   SELECT qq1.max_id
