@@ -13,6 +13,7 @@ include: "/views/db_siscori_incoterm.view.lkml"
 include: "/views/client_documents_by_method.view.lkml"
 include: "/views/health_imp_house_direto.view.lkml"
 include: "/views/health_data_exp.view.lkml"
+include: "/views/health_nome_exp.view.lkml"
 include: "/views/antaqxmaritimo_exp.view.lkml"
 include: "/views/db_cad_armador.view.lkml"
 include: "/views/db_maritimo.view.lkml"
@@ -41,6 +42,7 @@ explore:crescimento_consignatario  {
 
 explore: health_data {}
 explore: health_data_exp {}
+explore: health_nome_exp {}
 explore: cs_dash_imp {}
 explore: health_imp_house_direto {}
 explore: antaqxmaritimo_exp {
