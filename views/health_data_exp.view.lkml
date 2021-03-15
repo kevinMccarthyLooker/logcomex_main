@@ -26,8 +26,6 @@ from (
             vw_db_consignatarios.uf AS "UF ORIGEM",
             db_maritimo.cdshipper AS "CNPJ EXPORTADOR",
             db_cad_shipper.nome_real AS "EXPORTADOR",
-            db_embarcador.codigo    AS "CNPJ EMBARCADOR COMP",
-            db_embarcador.nome_real AS "NOME EMBARCADOR COMP",
             vw_db_consignatarios.atv_principal_text AS "ATIVIDADE",
             vw_db_consignatarios.municipio AS "CIDADE",
             vw_db_consignatarios.email AS "EMAIL",
@@ -55,9 +53,8 @@ from (
       LEFT JOIN db_cad_porto as db_cad_porto_descarga ON db_maritimo.id_porto_descarga = db_cad_porto_descarga.id
       LEFT JOIN db_cad_porto as db_cad_porto_destino ON db_maritimo.id_porto_destino = db_cad_porto_destino.id
       LEFT JOIN db_cad_shipper ON db_maritimo.id_shipper = db_cad_shipper.id
-      LEFT JOIN db_cad_shipper db_embarcador ON db_maritimo.id_embarcador_comp = db_cad_shipper.id
       LEFT JOIN db_cad_terminal as db_cad_terminal_carga ON db_maritimo.id_terminal_carga = db_cad_terminal_carga.id
-      where db_maritimo.dtoperacao >= '2021-01-01 00:00:00' and db_maritimo.deleted_at IS NULL
+      where db_maritimo.dtoperacao >= '2020-01-01 00:00:00' and db_maritimo.deleted_at IS NULL
       AND db_maritimo.categoriacarga = 'E'
       AND db_maritimo.tipoconhecimento in ('10','11')
      ) as t
