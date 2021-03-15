@@ -57,7 +57,7 @@ from (
       LEFT JOIN db_cad_shipper ON db_maritimo.id_shipper = db_cad_shipper.id
       LEFT JOIN db_cad_shipper db_embarcador ON db_maritimo.id_embarcador_comp = db_cad_shipper.id
       LEFT JOIN db_cad_terminal as db_cad_terminal_carga ON db_maritimo.id_terminal_carga = db_cad_terminal_carga.id
-      where db_maritimo.dtoperacao >= '2020-01-01 00:00:00' and db_maritimo.deleted_at IS NULL
+      where db_maritimo.dtoperacao >= '2021-01-01 00:00:00' and db_maritimo.deleted_at IS NULL
       AND db_maritimo.categoriacarga = 'E'
       AND db_maritimo.tipoconhecimento in ('10','11')
      ) as t
