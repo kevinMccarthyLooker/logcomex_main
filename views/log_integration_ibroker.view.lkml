@@ -37,6 +37,16 @@ view: log_integration_ibroker {
     sql: ${TABLE}."execution_token" ;;
   }
 
+  dimension: token_tracking {
+    type: string
+    sql: ${TABLE}."token_tracking" ;;
+  }
+
+  dimension: reference {
+    type: string
+    sql: ${TABLE}."token_tracking" ;;
+  }
+
   dimension: has_error {
     type: yesno
     sql: ${TABLE}."has_error" ;;
@@ -83,4 +93,28 @@ view: log_integration_ibroker {
     type: count
     drill_fields: [id]
   }
+
+  measure: count_error {
+    type: count
+    filters: [has_error: "yes"]
+    drill_fields: [id]
+  }
+
+  measure: count_integracoes {
+    type: count_distinct
+    sql: ${execution_token} ;;
+    drill_fields: [id]
+  }
+
+  measure: count_embarques {
+    type: count_distinct
+    sql: ${token_tracking} ;;
+    drill_fields: [id]
+  }
+
+  measure: data_ultima_integracao {
+    type:  max
+    sql: ${created_raw} ;;
+  }
+
 }

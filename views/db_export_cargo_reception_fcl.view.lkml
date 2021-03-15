@@ -59,6 +59,6 @@ view: db_export_cargo_reception_fcl {
 
   measure: count {
     type: count
-    drill_fields: [id]
+    drill_fields: [id, conteiner]
   }
 }

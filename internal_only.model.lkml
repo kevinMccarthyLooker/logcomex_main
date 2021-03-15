@@ -21,14 +21,16 @@ include: "/**/plan_info_join.view.lkml"
 include: "/**/cs_healthscore.view.lkml"
 include: "/**/cs_novo_health_score.view.lkml"
 include: "/**/cs_healthscore_accesslog.view.lkml"
-include: "/**/bi_filtros.view.lkml"
+include: "/**/bi_filtros_agrupado.view.lkml"
 include: "/**/customer_info.view.lkml"
 include: "/**/filter_history.view.lkml"
 include: "/**/customer_api_relations.view.lkml"
 include: "/**/billing_contract_omie.view.lkml"
 include: "/**/service_order_omie.view.lkml"
+include: "/**/financial_securities_omie.view.lkml"
 include: "/**/NPS.view.lkml"
 include: "/**/nps_08_2020.view.lkml"
+include: "/**/nps_11_2020.view.lkml"
 include: "/**/clientes_ativos_por_mes.view.lkml"
 include: "/**/customer_block_status.view.lkml"
 include: "/**/customer_blocked_history.view.lkml"
@@ -41,7 +43,8 @@ include: "/**/follow_up.view.lkml"
 include: "/**/FilaTrackingFollowUp.view.lkml"
 include: "/**/tracking_status.view.lkml"
 include: "/**/planos_ativos_detalhes.view.lkml"
-include: "/**/consumo_plano_clientes.view.lkml"
+include: "/**/consumo_plano_clientes_search_mensal.view.lkml"
+include: "/**/consumo_plano_clientes_search_diario.view.lkml"
 include: "/**/excel_controller.view.lkml"
 include: "/**/log_integration_ibroker.view.lkml"
 include: "/**/jira_tasks.view.lkml"
@@ -53,10 +56,47 @@ include: "/**/plan_info_derivated.view.lkml"
 include: "/**/bi_filters.view.lkml"
 include: "/**/bi_column_customer_plan_derivated.view.lkml"
 include: "/**/bi_column.view.lkml"
+include: "/**/permission.view.lkml"
+include: "/**/permission_group.view.lkml"
+include: "/**/group.view.lkml"
+include: "/**/consignee.view.lkml"
+include: "/**/certificate_consignee_radar.view.lkml"
+include: "/**/certificate.view.lkml"
+include: "/**/follow_up_status.view.lkml"
+include: "/**/big_data_filtros.view.lkml"
+include: "/**/search_filtros_agrupados.view.lkml"
+include: "/**/hubspot_cs_deal.view.lkml"
+include: "/**/filters_names.view.lkml"
+include: "/**/trials_ativos_mes.view.lkml"
+include: "/**/clientes_sem_exportacao.view.lkml"
+include: "/**/hubspot_stage_cs_deal.view.lkml"
+include: "/**/hubspot_tickets.view.lkml"
 
-
-datagroup: my_datagroup {
+datagroup: internal_only_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
+  max_cache_age: "6 hours"
+  label: "internal_only_datagroup"
+  description: " DG Principal do Modelo Internal Only"
+}
+
+datagroup: hs_datagroup {
+  #sql_trigger: select CURRENT_DATE ;; a cada 24 horas
+  sql_trigger: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) / (12*60*60)) ;; # a cada 12 horas
+  max_cache_age: "13 hours"
+  label: "hs_datagroup"
+  description: "DG do Health Score, atualiza a cada 12h"
+}
+
+explore: clientes_sem_exportacao{
+
+}
+
+explore: follow_up_status {
+  label: "Tempo no Status - Tracking"
+}
+
+explore: search_filtros_agrupados {
+  label: "Search e Novo Expo Filtros AGG"
 }
 
 explore: dau_wau_mau {
@@ -109,6 +149,41 @@ explore: usage_logs {
 
 }
 
+explore: certificate_api {
+  view_name: certificate
+
+  join: certificate_consignee_radar {
+    sql_on:  ${certificate.id}=${certificate_consignee_radar.certificate_id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+}
+
+explore: consignee_radar {
+  view_name: consignee
+
+  join: certificate_consignee_radar {
+    sql_on: ${consignee.id}=${certificate_consignee_radar.consignee_id} ;;
+    relationship: one_to_many
+    type: inner
+  }
+
+  join: certificate {
+    sql_on: ${consignee.cert_id}=${certificate.id}
+        and ${certificate.customer_id}=${consignee.customer_id};;
+    sql_where: ${certificate.valid_until_date} > now() ;;
+    relationship: many_to_one
+    type: inner
+  }
+
+  join: customer {
+    sql_on: ${consignee.customer_id}=${customer.id};;
+    relationship: many_to_one
+    type: left_outer
+    }
+}
+
+
 explore: usage {
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
 #   always_filter: {}
@@ -117,14 +192,14 @@ explore: usage {
 #     user_attribute: name
 #   }
 
-  persist_with: my_datagroup
+  persist_with: internal_only_datagroup
   view_name: customer
 
   join: customer_blocked_history {
     view_label: "Customer"
-    sql_on: ${customer.id}=${customer_blocked_history.customer_id} ;;
+    sql_on: ${customer.id}=${customer_blocked_history.customer_id} and ${customer_blocked_history.deleted_date} is null ;;
     type: left_outer
-    sql_where: ${customer_blocked_history.deleted_date} is null ;;
+    #sql_where: ${customer_blocked_history.deleted_date} is null ;;
     relationship: one_to_one
   }
 
@@ -148,6 +223,24 @@ explore: usage {
     type: left_outer
   }
 
+  join: hubspot_tickets {
+    sql_on: ${customer_api_relations.id} = ${hubspot_tickets.customer_api_relations_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
+  join: hubspot_cs_deal {
+    sql_on: ${customer_api_relations.id} = ${hubspot_cs_deal.customer_api_relations_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
+  join: hubspot_stage_cs_deal {
+    sql_on: ${customer_api_relations.id} = ${hubspot_stage_cs_deal.customer_api_relations_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
   join: billing_contract_omie{
     sql_on: ${customer_api_relations.id}=${billing_contract_omie.customer_api_relations_id} ;;
     relationship: one_to_many
@@ -160,23 +253,30 @@ explore: usage {
     type: left_outer
   }
 
-  join: cs_healthscore{
-    sql_on: ${customer.id}=${cs_healthscore.customer_id} ;;
+  join: financial_securities_omie {
+    sql_on: ${service_order_omie.id} = ${financial_securities_omie.service_order_id} ;;
     relationship: one_to_many
     type: left_outer
+
   }
 
-  join: cs_novo_health_score{
-    sql_on: ${customer.id}=${cs_novo_health_score.customer_id} ;;
-    relationship: one_to_one
-    type: inner
-  }
+#  join: cs_healthscore{
+#    sql_on: ${customer.id}=${cs_healthscore.customer_id} ;;
+#    relationship: one_to_many
+#    type: left_outer
+#  }
 
-  join: cs_healthscore_accesslog{
-    sql_on: ${customer.id}=${cs_healthscore_accesslog.customer_id} ;;
-    relationship: one_to_many
-    type: left_outer
-  }
+#  join: cs_novo_health_score{
+#    sql_on: ${customer.id}=${cs_novo_health_score.customer_id} ;;
+#    relationship: one_to_one
+#    type: inner
+#  }
+
+#  join: cs_healthscore_accesslog{
+#    sql_on: ${customer.id}=${cs_healthscore_accesslog.customer_id} ;;
+#    relationship: one_to_many
+#    type: left_outer
+#  }
 
   join: customer_info{
     sql_on: ${customer.id}=${customer_info.customer_id} ;;
@@ -204,6 +304,24 @@ explore: usage {
     type: left_outer
   }
 
+  join: group {
+    sql_on: ${user_profile_customer.group_id} = ${group.id} ;;
+    relationship: many_to_one
+    type: inner
+  }
+
+  join: permission_group {
+    sql_on: ${group.id} = ${permission_group.group_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: permission {
+    sql_on: ${permission_group.permission_id} = ${permission.id} ;;
+    relationship: many_to_one
+    type: inner
+  }
+
   join: acessos_produtos {
     sql_on: ${acessos_produtos.customer_id}=${customer.id} ;;
     relationship: many_to_one
@@ -223,7 +341,21 @@ explore: usage {
   }
 
   join: search_filtros{
-    sql_on: ${search_filtros.customer} = ${customer.id};;
+    sql_on: ${customer.id} = ${search_filtros.customer} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: filters_names_search  {
+    from: filters_names
+    view_label: "Filters Names Search"
+    sql_on: ${filters_names_search.name} = ${search_filtros.filtro} and ${search_filtros.service_id} = ${filters_names_search.service_id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: search_filtros_agrupados{
+    sql_on: ${customer.id} = ${search_filtros_agrupados.customer_id};;
     relationship: one_to_many
     type: left_outer
   }
@@ -253,6 +385,12 @@ explore: usage {
     type: left_outer
   }
 
+  join: nps_11_2020 {
+    sql_on: ${users.email}=${nps_11_2020.email} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
   join: user_derived_info {
     view_label: "Users"
     sql_on: ${users.id}=${user_derived_info.user_id} ;;
@@ -266,10 +404,22 @@ explore: usage {
     type: left_outer
   }
 
-  join: bi_filtros{
+  join: bi_filtros_agrupado{
     view_label: "Report Log"
-    sql_on: ${report_log.id}=${bi_filtros.filters_report_log_id} ;;
+    sql_on: ${report_log.id}=${bi_filtros_agrupado.filters_report_log_id} ;;
     relationship: one_to_one
+    type: left_outer
+  }
+
+  join: big_data_filtros {
+    sql_on: ${users.id} = ${big_data_filtros.user_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: filters_names {
+    sql_on: ${big_data_filtros.filter} = ${filters_names.bi_field} and ${big_data_filtros.service_id} = ${filters_names.service_id} ;;
+    relationship: many_to_one
     type: left_outer
   }
 
@@ -340,6 +490,14 @@ explore: usage {
 
   }
 
+  join: report_log_plan {
+    from: report_log
+    view_label: "Report Log Customer Plan "
+    sql_on: ${customer_plan.id}=${report_log_plan.customer_plan_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
   join: plan_complete {
     sql_on: ${customer_plan.plan_complete_id}=${plan_complete.id} ;;
     relationship: many_to_one
@@ -374,7 +532,13 @@ explore: usage {
   }
 
   join: clientes_ativos_por_mes {
-    sql_on: ${customer.id}=${clientes_ativos_por_mes.customer_id} ;;
+    sql_on: ${customer_plan.id}=${clientes_ativos_por_mes.customer_plan_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: trials_ativos_mes {
+    sql_on: ${customer_plan.id}=${trials_ativos_mes.customer_plan_id} ;;
     relationship: one_to_many
     type: left_outer
   }
@@ -386,9 +550,15 @@ explore: usage {
     type: left_outer
   }
 
-  # view com o consumo dos planos
-  join: consumo_plano_clientes {
-    sql_on: ${customer.id} = ${consumo_plano_clientes.customer_id} ;;
+ # view com o consumo dos planos
+  join: consumo_plano_clientes_search_mensal {
+    sql_on: ${customer.id} = ${consumo_plano_clientes_search_mensal.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: consumo_plano_clientes_search_diario {
+    sql_on: ${customer.id} = ${consumo_plano_clientes_search_diario.customer_id} ;;
     relationship: one_to_many
     type: left_outer
   }
@@ -452,7 +622,7 @@ explore: usage {
 }
 
 explore: Logistica_Internacional {
-  persist_with: my_datagroup
+  persist_with: internal_only_datagroup
   view_name: extra_data_container
 
   join: extra_data_container_history {
@@ -463,13 +633,61 @@ explore: Logistica_Internacional {
 }
 
 explore: Robos_Tracking {
-    persist_with: my_datagroup
+    persist_with: internal_only_datagroup
     view_name: filatrackingfollowup
 
   join: tracking_status {
     sql_on: ${tracking_status.id}=${filatrackingfollowup.status_id} ;;
     type: left_outer
     relationship: one_to_many
+  }
+
+}
+
+explore: cs_novo_health_score {
+  persist_with: hs_datagroup
+  sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
+
+  join: customer {
+    sql_on: ${cs_novo_health_score.customer_id} = ${customer.id} ;;
+    relationship: one_to_one
+    type: inner
+  }
+
+  join: customer_info{
+    sql_on: ${customer.id}=${customer_info.customer_id} ;;
+    relationship: one_to_one
+    type: left_outer
+  }
+
+  join: user_profile_customer {
+    sql_on: ${user_profile_customer.customer_id}=${customer.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: users {
+    sql_on: ${user_profile_customer.user_id}=${users.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: nps_11_2020 {
+    sql_on: ${users.email}=${nps_11_2020.email} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: customer_api_relations{
+    sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: hubspot_cs_deal {
+    sql_on: ${customer_api_relations.id} = ${hubspot_cs_deal.customer_api_relations_id} ;;
+    relationship: one_to_one
+    type: left_outer
   }
 
 }

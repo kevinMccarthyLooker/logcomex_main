@@ -57,6 +57,11 @@ view: filter_history {
     sql: ${TABLE}."total_lines" ;;
   }
 
+  dimension: debited {
+    type: yesno
+    sql: ${TABLE}."debited" ;;
+  }
+
   dimension_group: updated {
     type: time
     timeframes: [
@@ -81,6 +86,16 @@ view: filter_history {
     sql: ${TABLE}."year" ;;
   }
 
+  dimension: possibleImporter {
+    type: yesno
+    sql: filters @> '[{"name": "possibleImporter"}]' ;;
+  }
+
+  dimension: possibleExporter {
+    type: yesno
+    sql: filters @> '[{"name": "possibleExporter"}]' ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
@@ -92,25 +107,52 @@ view: filter_history {
     drill_fields: [id]
   }
 
-measure: count_consulta_last_30_days {
-  type: count_distinct
-  filters: [created_date: "30 days"]
-  sql: ${source_hash} ;;
-  drill_fields: [id]
-}
+  measure: count_consulta_expo {
+    type: count_distinct
+    filters: [service_id: "21"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
 
-measure: count_consulta_this_month {
-  type: count_distinct
-  filters: [created_date: "this month"]
-  sql: ${source_hash} ;;
-  drill_fields: [id]
-}
+  measure: count_consulta_last_30_days {
+    type: count_distinct
+    filters: [created_date: "30 days"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
+
+  measure: count_consulta_this_month {
+    type: count_distinct
+    filters: [created_date: "this month"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
+
+  measure: count_consulta_perfil_impo {
+    type: count_distinct
+    filters: [possibleImporter: "yes"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
+
+  measure: count_consulta_perfil_expo {
+    type: count_distinct
+    filters: [possibleExporter: "yes"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
 
   measure: count_consulta_6_months {
     type: count_distinct
     filters: [created_date: "6 months"]
     sql: ${source_hash} ;;
     drill_fields: [id]
+  }
+
+  measure: min_created{
+    type: date
+    sql: min(${created_raw}) ;;
+    convert_tz: no
   }
 
 }

@@ -104,28 +104,45 @@ view: customer {
 
   dimension: executive_name {
     type: string
-    sql:  CASE WHEN (customer.executive_id = 39) THEN 'Renan'
-              WHEN (customer.executive_id = 44) THEN 'Irene'
-              WHEN (customer.executive_id = 17) THEN 'Elaine'
+    sql:  CASE WHEN (customer.executive_id = 39) THEN 'Renan Goncalves'
+              WHEN (customer.executive_id = 44) THEN 'Irene Lima'
+              WHEN (customer.executive_id = 17) THEN 'Elaine Ribeiro'
               WHEN (customer.executive_id = 16) THEN 'Nickelson'
               WHEN (customer.executive_id = 37) THEN 'Jessica Moreira'
-              WHEN (customer.executive_id = 52) THEN 'Mirele'
-              WHEN (customer.executive_id = 59) THEN 'Valeria'
+              WHEN (customer.executive_id = 52) THEN 'Mirele Benato'
+              WHEN (customer.executive_id = 59) THEN 'Valeria Antunes'
               WHEN (customer.executive_id = 50) THEN 'Jessica Steinheusen'
-              WHEN (customer.executive_id = 10) THEN 'Andreza'
+              WHEN (customer.executive_id = 10) THEN 'Andreza Sandim'
               WHEN (customer.executive_id = 4) THEN 'Helmuth'
               WHEN (customer.executive_id = 55) THEN 'Danilo'
               WHEN (customer.executive_id = 36) THEN 'Gabriela'
-              WHEN (customer.executive_id = 72) THEN 'Sthephanny'
-              WHEN (customer.executive_id = 71) THEN 'Rafael'
-              WHEN (customer.executive_id = 75) THEN 'Maxi'
-              WHEN (customer.executive_id = 76) THEN 'Leandro'
+              WHEN (customer.executive_id = 72) THEN 'Sthephanny Andrade'
+              WHEN (customer.executive_id = 71) THEN 'Rafael Gehrke'
+              WHEN (customer.executive_id = 75) THEN 'Maxi Mendes'
+              WHEN (customer.executive_id = 76) THEN 'Leandro Oliveira'
               WHEN (customer.executive_id = 11) THEN 'Laryssa Andrade'
               WHEN (customer.executive_id = 12) THEN 'Daniela Vasconcelos'
               WHEN (customer.executive_id = 41) THEN 'Caroline Bilibio'
               WHEN (customer.executive_id = 43) THEN 'Gilson Almeida'
               WHEN (customer.executive_id = 77) THEN 'Bruna Soares'
+              WHEN (customer.executive_id = 57) THEN 'Kathia Festa'
+              WHEN (customer.executive_id = 81) THEN 'Edgar Oliveira'
+              WHEN (customer.executive_id = 89) THEN 'Natalia Mariano'
+              WHEN (customer.executive_id = 91) THEN 'Clarisse Souza'
+              WHEN (customer.executive_id = 92) THEN 'Thais Costa'
+              WHEN (customer.executive_id = 93) THEN 'Roberta Miglioli'
+              WHEN (customer.executive_id = 94) THEN 'Marina Kaminski'
+              WHEN (customer.executive_id = 95) THEN 'Giovanna Welter'
               when (customer.executive_id is null) then CAST ( customer.executive_id AS TEXT )
+          else CAST ( customer.executive_id AS TEXT ) end
+    ;;
+  }
+
+  dimension: executive_area {
+    type: string
+    sql:  CASE WHEN (customer.executive_id in (39, 44, 17, 52, 77, 57, 81, 89, 91, 92, 93, 94, 95, 59, 50, 10, 72, 71, 75, 76)) THEN 'CS'
+               WHEN (customer.executive_id in (11, 12, 41, 43, )) THEN 'Comercial'
+               WHEN (customer.executive_id is null) THEN 'Sem Executivo'
           else CAST ( customer.executive_id AS TEXT ) end
     ;;
   }
@@ -202,7 +219,7 @@ view: customer {
   measure: count_distinc {
     type: count_distinct
     sql: ${customer.id} ;;
-    drill_fields: [detail*]
+    drill_fields: [detail_light*]
   }
 
   # ----- Sets of fields for drilling ------
@@ -210,8 +227,14 @@ view: customer {
     fields: [
       id,
       name,
-      executive_name,
-      report_log.count
+      executive_name
+    ]
+  }
+
+  set: detail_light{
+    fields: [
+      id,
+      name
     ]
   }
 }

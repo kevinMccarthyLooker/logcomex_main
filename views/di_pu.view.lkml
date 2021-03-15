@@ -480,4 +480,9 @@ view: di_pu {
     drill_fields: [id]
   }
 
+  measure: count_distinct_cnpj {
+    type: count_distinct
+    sql: ${importador_cnpj} ;;
+  }
+
 }

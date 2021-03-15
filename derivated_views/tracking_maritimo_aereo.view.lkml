@@ -1,12 +1,17 @@
 view: tracking_maritimo_aereo {
   derived_table: {
     sql:
-   select 'Maritimo' as modal,
+select 'Maritimo' as modal,
        tracking.id as tracking_id,
        tracking.id as tracking_maritimo_id,
        0 as tracking_aereo_id,
        ('Maritimo' || to_char(tracking.id, '999999')) as chave,
        tracking.customer_id,
+       (case
+       when customer_id in (select c.id from customer c inner join customer_plan cp on cp.customer_id = c.id inner join tracking_plan_info tpi on tpi.id = cp.tracking_plan_info_id
+              where c.deleted_at is null  and c.fake_customer is false and cp.deleted_at is null and tpi.force_certificate is false) then 'No'
+     else 'Yes'
+     end) as force_certificate,
        tracking_status.description as status,
        tracking.bl_number as documento,
        tracking.ce_number as ce_number,
@@ -14,6 +19,7 @@ view: tracking_maritimo_aereo {
        tracking.created_at,
        tracking.updated_at,
        tracking.deleted_at,
+       tracking.archived_at,
        tracking.reference,
        tracking.token,
        tracking.executed_at,
@@ -21,7 +27,7 @@ view: tracking_maritimo_aereo {
        tracking_internal_status.description as internal_status,
        tracking.is_master,
        tracking.shipowner_id as armador_ciaaerea,
-       tracking.completed_at,
+       --tracking.completed_at,
        tracking.tracking_robot_id,
        tracking.operation_date as operacao,
        tracking.di_desembaracada_date,
@@ -33,6 +39,8 @@ view: tracking_maritimo_aereo {
        tracking.load_presence_date as load_presence_date,
        tracking.release_loading_date as release_loading_date,
        tracking.completed_at as completed_at,
+       tracking.robot_updated_at as robot_updated_at,
+       tracking.is_api as is_api,
        qq2.created_at as last_follow_up,
        qq2.comment as last_workflow,
        qq2.date_time as last_workflow_date
@@ -54,7 +62,7 @@ from follow_up fu2
 where (fu2.user_id is null or fu2.user_id = 7002) -- usuaio utilizado para inserir dados manualmente
 group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_id = fu.tracking_id
 where fu.tracking_id is not null and (fu.user_id is null or fu.user_id = 7002)) as qq2 on qq2.tracking_id = tracking.id
-where tracking.deleted_at is null
+--where tracking.deleted_at is null
 union
 select 'Aereo' as modal,
        tracking_aerial.id as tracking_id,
@@ -62,6 +70,11 @@ select 'Aereo' as modal,
        tracking_aerial.id as tracking_aereo_id,
        ('Aereo' || to_char(tracking_aerial.id, '999999')) as chave,
        customer_id,
+       (case
+       when customer_id in (select c.id from customer c inner join customer_plan cp on cp.customer_id = c.id inner join tracking_plan_info tpi on tpi.id = cp.tracking_plan_info_id
+              where c.deleted_at is null  and c.fake_customer is false and cp.deleted_at is null and tpi.force_certificate is false) then 'No'
+     else 'Yes'
+     end) as force_certificate,
        tracking_aerial_status.description as status,
        (coalesce((awb),'') || '-' || coalesce((hwb),'')) as documento,
        0 as ce_number,
@@ -69,6 +82,7 @@ select 'Aereo' as modal,
        tracking_aerial.created_at,
        tracking_aerial.updated_at,
        tracking_aerial.deleted_at,
+       tracking_aerial.archived_at,
        tracking_aerial.reference,
        tracking_aerial.token,
        tracking_aerial.executed_at,
@@ -76,7 +90,7 @@ select 'Aereo' as modal,
        tracking_aerial_internal_status.description as internal_status,
        false as is_master,
        tracking_aerial.airline_id as armador_ciaaerea,
-       '2000-01-01' as completed_at,
+       --'2000-01-01' as completed_at,
        999 as tracking_robot_id,
        '2000-01-01' as operacao,
        '2000-01-01' as di_desembaracada_date,
@@ -87,7 +101,9 @@ select 'Aereo' as modal,
        '2000-01-01' as manifest_date,
        '2000-01-01' as load_presence_date,
        '2000-01-01' as release_loading_date,
-       '2000-01-01' as completed_at,
+       null::timestamp as completed_at,
+       tracking_aerial.robot_updated_at as robot_updated_at,
+       tracking_aerial.is_api as is_api,
        qq2.created_at as last_follow_up,
        qq2.comment as last_workflow,
        qq2.date_time as last_workflow_date
@@ -106,13 +122,15 @@ select max(fu2.date_time) as date_time,
 max(fu2.created_at) as created_at,
 fu2.tracking_aerial_id as tracking_aerial_id
 from follow_up fu2
-where (fu2.user_id is null or fu2.user_id = 7002) -- usuaio utilizado para inserir dados manualmente
+where (fu2.user_id is null or fu2.user_id = 7002) -- usuario utilizado para inserir dados manualmente
 group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_aerial_id = fu.tracking_aerial_id
 where fu.tracking_aerial_id is not null and (fu.user_id is null or fu.user_id = 7002)) as qq2 on qq2.tracking_aerial_id = tracking_aerial.id
-where tracking_aerial.deleted_at is null
+--where tracking_aerial.deleted_at is null
     ;;
+indexes: ["chave"]
+sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) / (4*60*60));;
   }
-
+#teste de comentario
   dimension: modal {
     type: string
     sql: ${TABLE}."modal" ;;
@@ -143,10 +161,46 @@ where tracking_aerial.deleted_at is null
     sql: ${TABLE}."customer_id" ;;
   }
 
+  dimension: force_certificate {
+    type: string
+    sql: ${TABLE}."force_certificate" ;;
+  }
+
   dimension: status {
     type: string
     sql: ${TABLE}."status" ;;
   }
+
+  dimension: status_ordenado_maritimo {
+    type: string
+    sql: case when ${status} = 'Aguardando BL' then '0 - Aguardando BL'
+              when ${status} = 'Validando Embarque' then '1 - Validando Embarque'
+              when ${status} = 'Em Transito Internacional' then '2 - Em Transito Internacional'
+              when ${status} = 'Manifestado' then '3 - Manifestado'
+              when ${status} = 'Carga Carregada/Descarregada' then '4 - Carga Carregada/Descarregada'
+              when ${status} = 'Registro Presenca de carga' then '5 - Registro Presenca de carga'
+              when ${status} = 'Registro DTA' then '6 - Registro DTA'
+              when ${status} = 'Registro DI' then '7 - Registro DI'
+              when ${status} = 'DI Desembaraçada' then '8 - DI Desembaraçada'
+              when ${status} = 'Liberado p/ Carregamento' then '9 - Liberado p/ Carregamento'
+              else ${status} end;;
+  }
+
+  dimension: status_ordenado_aereo {
+    type: string
+    sql: case when ${status} = 'Pendente mantra' then '0 - Pendente mantra'
+              when ${status} = 'Trânsito Internacional' then '1 - Trânsito Internacional'
+              when ${status} = 'Chegada destino' then '2 - Chegada destino'
+              when ${status} = 'Registro DTA' then '3 - Registro DTA'
+              when ${status} = 'Visado' then '4 - Visado'
+              when ${status} = 'DTA desembaraçada' then '5 - DTA desembaraçada'
+              when ${status} = 'Registro DI' then '6 - Registro DI'
+              when ${status} = 'DI parametrizada' then '7 - DI parametrizada'
+              when ${status} = 'DI desembaraçada' then '8 - DI desembaraçada'
+              when ${status} = 'Recebida' then '9 - Recebida'
+              else ${status} end;;
+  }
+
 
   dimension: documento {
     type: string
@@ -161,6 +215,14 @@ where tracking_aerial.deleted_at is null
   dimension: user_id {
     type: number
     sql: ${TABLE}."user_id" ;;
+  }
+
+  dimension: user_id_null {
+    type: yesno
+    hidden: yes
+    sql: case when ${TABLE}."user_id" is null then true
+         else false
+         end;;
   }
 
   dimension_group: executed_vs_followup {
@@ -188,6 +250,20 @@ where tracking_aerial.deleted_at is null
     intervals: [day, hour]
     sql_start: ${TABLE}."executed_at" ;;
     sql_end: CURRENT_TIMESTAMP;;
+  }
+
+  dimension_group: last_update {
+    type: duration
+    intervals: [day, hour]
+    sql_start: ${robot_updated_at_raw} ;;
+    sql_end: CURRENT_TIMESTAMP;;
+  }
+
+  dimension_group: transit_time {
+    type: duration
+    intervals: [day, hour]
+    sql_start: ${TABLE}."documento_emit_date" ;;
+    sql_end: ${TABLE}."operacao";; #manifest_date
   }
 
   dimension: ultima_atualizacao {
@@ -243,6 +319,20 @@ where tracking_aerial.deleted_at is null
       year
     ]
     sql: ${TABLE}."deleted_at" ;;
+  }
+
+  dimension_group: archived {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."archived_at" ;;
   }
 
   dimension: reference {
@@ -494,10 +584,86 @@ where tracking_aerial.deleted_at is null
     sql: ${TABLE}."completed_at" ;;
   }
 
+  dimension_group: robot_updated_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."robot_updated_at" ;;
+  }
+
+  dimension: is_api {
+    type: yesno
+    sql: ${TABLE}."is_api" ;;
+  }
+
+  measure: count_distinct_users {
+    type: count_distinct
+    sql: ${user_id} ;;
+    drill_fields: [user_id,customer_id]
+  }
+
+  measure: count_api {
+    type: count_distinct
+    sql: ${chave} ;;
+    filters: [is_api: "yes"]
+    drill_fields: [detail*]
+  }
+
+  measure: count_seguir_emb {
+    type: count_distinct
+    sql: ${chave} ;;
+    filters: [is_api: "no"]
+    filters: [user_id_null: "yes"]
+    drill_fields: [detail*]
+  }
+
+  measure: count_screen {
+    type: count_distinct
+    sql: ${chave} ;;
+    filters: [is_api: "no"]
+    filters: [user_id_null: "no"]
+    drill_fields: [detail*]
+  }
+
+  measure: count_customers_api {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    filters: [is_api: "yes"]
+    drill_fields: [detail_customer*]
+  }
+
+  measure: count_customers_seguir_emb {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    filters: [is_api: "no"]
+    filters: [user_id_null: "yes"]
+    drill_fields: [detail_customer*]
+  }
+
+  measure: count_customers_screen {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    filters: [is_api: "no"]
+    filters: [user_id_null: "no"]
+    drill_fields: [detail_customer*]
+  }
+
   measure: count {
     type: count_distinct
     sql: ${chave} ;;
     drill_fields: [detail*]
+  }
+
+  measure: count_with_zero {
+    type: number
+    sql: coalesce(${count},0) ;;
   }
 
   measure: count_nao_encontrado {
@@ -563,8 +729,17 @@ where tracking_aerial.deleted_at is null
     sql: ${days_last_execution} ;;
   }
 
+  measure: avg_transit_time {
+    type: average
+    sql: ${days_transit_time} ;;
+  }
+
     set: detail {
     fields: [customer_id, customer.name, status, internal_status, created_raw, token]
   }
+
+    set: detail_customer {
+      fields: [customer_id, customer.name,force_certificate]
+    }
 
 }

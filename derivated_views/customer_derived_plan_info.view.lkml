@@ -17,8 +17,8 @@ SELECT
 customer."id"  AS customer_id,
 COUNT(
 CASE
---WHEN customer_plan."expiration" < current_date + 60  --expiring soon
-WHEN customer_plan."expiration" < current_date + {{expiration_threshold._parameter_value}}  --expiring soon
+WHEN customer_plan."expiration" < current_date + 60  --expiring soon
+--#WHEN customer_plan."expiration" < current_date +   --expiring soon
 and
 (current_date between (customer_plan."start") and (customer_plan."expiration")
 and (customer_plan."deleted_at") is null
@@ -39,14 +39,30 @@ customer_has_active_plan left join customer_has_soon_to_be_expired_plan on custo
        ;;
 #     persist_for: "24 hour"
 #     sql_trigger_value: select count(*) from public.customer_plan ;;
-    datagroup_trigger: my_datagroup
+    datagroup_trigger: internal_only_datagroup
     indexes: ["customer_id"]
   }
 
-  parameter: expiration_threshold {
-    type: number
-    default_value: "60"
-  }
+ # parameter: expiration_threshold_plans {
+#    type: number
+#    default_value: "60"
+#  }
+
+#  parameter: expiration_threshold_plans {
+#    type: number
+#    allowed_value: {
+#      label: "30 Dias"
+#      value: "30"
+#    }
+#    allowed_value: {
+#      label: "60 Dias"
+#      value: "60"
+#    }
+#    allowed_value: {
+#      label: "90 Dias"
+#      value: "90"
+#    }
+ # }
 
 
   dimension: count_soon_to_be_expired_plans {

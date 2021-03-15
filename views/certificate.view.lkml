@@ -169,6 +169,11 @@ view: certificate {
     sql: ${TABLE}."valid_until" ;;
   }
 
+  dimension: is_valid {
+    type: yesno
+    sql: case when ${TABLE}."valid_until" >= current_date then true else false end;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, owner_name]

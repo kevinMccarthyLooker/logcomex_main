@@ -1,30 +1,36 @@
 - dashboard: external_health_score
   title: Health Score 2 - Em Construcao
   layout: newspaper
+  preferred_viewer: dashboards
   elements:
   - title: Health Score
     name: Health Score
     model: external_health_score
     explore: customer
     type: looker_grid
-    fields: [customer.id, customer.name, customer.executive_name, cs_novo_health_score.pontuacao_usab_big_search,
-      cs_novo_health_score.pontuacao_usab_tracking, cs_novo_health_score.pontuacao_acessos_usuarios,
-      cs_novo_health_score.pontuacao_tickets, cs_novo_health_score.pontuacao_survey,
-      cs_novo_health_score.pontos_crescimento_cliente, customer_info.hub_atualizado_em_date,
-      nps_08_2020.media_nota]
-    sorts: [nps_08_2020.media_nota desc]
+    fields: [customer.id, customer.name, customer.executive_name, cs_novo_health_score.pontuacao_usab_big_data,
+      cs_novo_health_score.pontuacao_usab_search, cs_novo_health_score.pontuacao_usab_tracking,
+      cs_novo_health_score.pontuacao_acessos_usuarios, cs_novo_health_score.pontuacao_tickets,
+      cs_novo_health_score.pontuacao_survey, cs_novo_health_score.pontos_crescimento_cliente,
+      customer_info.hub_atualizado_em_date, nps_08_2020.media_nota, cs_novo_health_score.pontuacao_titulos_omie]
+    sorts: [cs_novo_health_score.pontuacao_titulos_omie desc]
     limit: 500
     dynamic_fields: [{table_calculation: pontuacao_nps, label: Pontuacao NPS, expression: "if(${nps_08_2020.media_nota}>8,20,\n\
           \  if(${nps_08_2020.media_nota}>6,10,\n    if(${nps_08_2020.media_nota}>-1,0,\n\
-          \      if(is_null(${nps_08_2020.media_nota}),5,null))))", value_format: !!null '',
+          \      if(is_null(${nps_08_2020.media_nota}),7,null))))", value_format: !!null '',
         value_format_name: !!null '', _kind_hint: measure, _type_hint: number}, {
         table_calculation: total_pontuacao, label: Total Pontuação, expression: "coalesce(${pontuacao_usab_total},0)+\n\
           coalesce(${cs_novo_health_score.pontuacao_acessos_usuarios},\n  0)+ \ncoalesce(${cs_novo_health_score.pontuacao_tickets},0)+\n\
           coalesce(${cs_novo_health_score.pontuacao_survey},0)+\ncoalesce(${pontuacao_nps},0)+\n\
-          coalesce(${cs_novo_health_score.pontos_crescimento_cliente},0)", value_format: !!null '',
-        value_format_name: !!null '', _kind_hint: measure, _type_hint: number}, {
-        table_calculation: pontuacao_usab_total, label: pontuacao_usab_total, expression: "(coalesce(${cs_novo_health_score.pontuacao_usab_big_search},${cs_novo_health_score.pontuacao_usab_tracking})\
-          \ + coalesce(${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_big_search}))/2",
+          coalesce(${cs_novo_health_score.pontuacao_titulos_omie},0)+\ncoalesce(${cs_novo_health_score.pontos_crescimento_cliente},0)",
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}, {table_calculation: pontuacao_usab_total, label: pontuacao_usab_total,
+        expression: "(coalesce(${cs_novo_health_score.pontuacao_usab_big_data},${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_search})\
+          \ + coalesce(${cs_novo_health_score.pontuacao_usab_big_data},${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_tracking})+\
+          \ coalesce(${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_big_data},${cs_novo_health_score.pontuacao_usab_search})+\
+          \ coalesce(${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_big_data})+\
+          \ coalesce(${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_big_data},${cs_novo_health_score.pontuacao_usab_tracking})+\
+          \ coalesce(${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_big_data}))/6",
         value_format: !!null '', value_format_name: !!null '', _kind_hint: dimension,
         _type_hint: number}]
     show_view_names: false
@@ -44,10 +50,11 @@
     conditional_formatting_include_nulls: false
     show_sql_query_menu_options: false
     column_order: ["$$$_row_numbers_$$$", customer.id, customer.name, customer.executive_name,
-      customer_info.hub_atualizado_em_date, pontuacao_usab_total, cs_novo_health_score.pontuacao_usab_big_search,
-      cs_novo_health_score.pontuacao_usab_tracking, cs_novo_health_score.pontuacao_acessos_usuarios,
-      cs_novo_health_score.pontuacao_tickets, cs_novo_health_score.pontuacao_survey,
-      pontuacao_nps, cs_novo_health_score.pontos_crescimento_cliente, total_pontuacao]
+      customer_info.hub_atualizado_em_date, pontuacao_usab_total, cs_novo_health_score.pontuacao_usab_big_data,
+      cs_novo_health_score.pontuacao_usab_search, cs_novo_health_score.pontuacao_usab_tracking,
+      cs_novo_health_score.pontuacao_acessos_usuarios, cs_novo_health_score.pontuacao_tickets,
+      cs_novo_health_score.pontuacao_survey, pontuacao_nps, cs_novo_health_score.pontuacao_titulos_omie,
+      cs_novo_health_score.pontos_crescimento_cliente, total_pontuacao]
     show_totals: true
     show_row_totals: true
     series_labels:
@@ -63,62 +70,59 @@
       total_pontuacao: Total
       customer.executive_name: Executivo(a)
       customer_info.hub_atualizado_em_date: Últ. Contato
-    series_column_widths:
-      cs_novo_health_score.pontuacao_usab_big_search: 90
-      cs_novo_health_score.pontuacao_usab_tracking: 90
-      total_pontuacao: 63
-      pontuacao_nps: 61
-      customer.name: 161
-      customer.id: 85
-      customer.executive_name: 144
-      pontuacao_usab_total: 98
+      cs_novo_health_score.pontuacao_usab_search: Usab Search
+      cs_novo_health_score.pontuacao_usab_big_data: Usab Big Data
+      cs_novo_health_score.pontuacao_titulos_omie: Inadimplência
+    series_column_widths: {}
     conditional_formatting: [{type: equal to, value: 20, background_color: "#72D16D",
         font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
           palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688, options: {constraints: {
               min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
             mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
-        strikethrough: false, fields: [cs_novo_health_score.pontuacao_usab_big_search,
-          cs_novo_health_score.pontuacao_usab_tracking, cs_novo_health_score.pontuacao_acessos_usuarios,
-          pontuacao_usab_total, pontuacao_nps, cs_novo_health_score.pontuacao_survey,
-          cs_novo_health_score.pontuacao_tickets]}, {type: equal to, value: 10, background_color: "#FFD95F",
-        font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
+        strikethrough: false, fields: [cs_novo_health_score.pontuacao_usab_tracking,
+          cs_novo_health_score.pontuacao_acessos_usuarios, pontuacao_usab_total, pontuacao_nps,
+          cs_novo_health_score.pontuacao_usab_big_data, cs_novo_health_score.pontuacao_usab_search]},
+      {type: equal to, value: 10, background_color: "#FFD95F", font_color: !!null '',
+        color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7, palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688,
+          options: {constraints: {min: {type: minimum}, mid: {type: number, value: 0},
+              max: {type: maximum}}, mirror: true, reverse: false, stepped: false}},
+        bold: false, italic: false, strikethrough: false, fields: [cs_novo_health_score.pontuacao_usab_tracking,
+          cs_novo_health_score.pontuacao_acessos_usuarios, pontuacao_nps, cs_novo_health_score.pontuacao_usab_big_data,
+          cs_novo_health_score.pontuacao_usab_search]}, {type: equal to, value: 0,
+        background_color: "#B32F37", font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
           palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688, options: {constraints: {
               min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
             mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
-        strikethrough: false, fields: [cs_novo_health_score.pontuacao_usab_big_search,
-          cs_novo_health_score.pontuacao_usab_tracking, cs_novo_health_score.pontuacao_acessos_usuarios,
-          pontuacao_usab_total, pontuacao_nps, cs_novo_health_score.pontuacao_survey,
-          cs_novo_health_score.pontuacao_tickets]}, {type: equal to, value: 0, background_color: "#B32F37",
-        font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
-          palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688, options: {constraints: {
-              min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
-            mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
-        strikethrough: false, fields: [cs_novo_health_score.pontuacao_usab_big_search,
-          cs_novo_health_score.pontuacao_usab_tracking, cs_novo_health_score.pontuacao_acessos_usuarios,
-          cs_novo_health_score.pontuacao_tickets, cs_novo_health_score.pontuacao_survey,
-          pontuacao_nps, pontuacao_usab_total, cs_novo_health_score.pontos_crescimento_cliente]},
+        strikethrough: false, fields: [cs_novo_health_score.pontuacao_usab_tracking,
+          cs_novo_health_score.pontuacao_acessos_usuarios, cs_novo_health_score.pontuacao_tickets,
+          cs_novo_health_score.pontuacao_survey, pontuacao_nps, pontuacao_usab_total,
+          cs_novo_health_score.pontos_crescimento_cliente, cs_novo_health_score.pontuacao_usab_big_data,
+          cs_novo_health_score.pontuacao_usab_search, cs_novo_health_score.pontuacao_titulos_omie]},
       {type: equal to, value: 10, background_color: "#72D16D", font_color: !!null '',
         color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7, palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688,
           options: {constraints: {min: {type: minimum}, mid: {type: number, value: 0},
               max: {type: maximum}}, mirror: true, reverse: false, stepped: false}},
-        bold: false, italic: false, strikethrough: false, fields: [cs_novo_health_score.pontos_crescimento_cliente]},
-      {type: equal to, value: 5, background_color: "#FFD95F", font_color: !!null '',
-        color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7, palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688,
-          options: {constraints: {min: {type: minimum}, mid: {type: number, value: 0},
-              max: {type: maximum}}, mirror: true, reverse: false, stepped: false}},
         bold: false, italic: false, strikethrough: false, fields: [cs_novo_health_score.pontos_crescimento_cliente,
-          cs_novo_health_score.pontuacao_survey, pontuacao_nps]}, {type: greater than,
-        value: 69, background_color: "#72D16D", font_color: !!null '', color_application: {
-          collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7, palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688,
-          options: {constraints: {min: {type: minimum}, mid: {type: number, value: 0},
-              max: {type: maximum}}, mirror: true, reverse: false, stepped: false}},
-        bold: false, italic: false, strikethrough: false, fields: [total_pontuacao]},
-      {type: between, value: [49, 69], background_color: "#FFD95F", font_color: !!null '',
+          cs_novo_health_score.pontuacao_tickets]}, {type: equal to, value: 5, background_color: "#FFD95F",
+        font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
+          palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688, options: {constraints: {
+              min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
+            mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
+        strikethrough: false, fields: [cs_novo_health_score.pontos_crescimento_cliente,
+          cs_novo_health_score.pontuacao_survey, cs_novo_health_score.pontuacao_titulos_omie,
+          cs_novo_health_score.pontuacao_tickets, cs_novo_health_score.pontuacao_usab_big_data,
+          cs_novo_health_score.pontuacao_usab_search, cs_novo_health_score.pontuacao_usab_tracking]},
+      {type: greater than, value: 69.99, background_color: "#72D16D", font_color: !!null '',
         color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7, palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688,
           options: {constraints: {min: {type: minimum}, mid: {type: number, value: 0},
               max: {type: maximum}}, mirror: true, reverse: false, stepped: false}},
         bold: false, italic: false, strikethrough: false, fields: [total_pontuacao]},
-      {type: less than, value: 50, background_color: "#B32F37", font_color: !!null '',
+      {type: between, value: [49.99, 69.99], background_color: "#FFD95F", font_color: !!null '',
+        color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7, palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688,
+          options: {constraints: {min: {type: minimum}, mid: {type: number, value: 0},
+              max: {type: maximum}}, mirror: true, reverse: false, stepped: false}},
+        bold: false, italic: false, strikethrough: false, fields: [total_pontuacao]},
+      {type: less than, value: 49.99, background_color: "#B32F37", font_color: !!null '',
         color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7, palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688,
           options: {constraints: {min: {type: minimum}, mid: {type: number, value: 0},
               max: {type: maximum}}, mirror: true, reverse: false, stepped: false}},
@@ -127,13 +131,26 @@
         color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7, palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688,
           options: {constraints: {min: {type: minimum}, mid: {type: number, value: 0},
               max: {type: maximum}}, mirror: true, reverse: false, stepped: false}},
-        bold: false, italic: false, strikethrough: false, fields: [pontuacao_usab_total]},
+        bold: false, italic: false, strikethrough: false, fields: [pontuacao_usab_total,
+          cs_novo_health_score.pontuacao_acessos_usuarios, cs_novo_health_score.pontuacao_usab_big_data,
+          cs_novo_health_score.pontuacao_usab_search, cs_novo_health_score.pontuacao_usab_tracking]},
       {type: equal to, value: 15, background_color: "#72D16D", font_color: !!null '',
         color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7, palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688,
           options: {constraints: {min: {type: minimum}, mid: {type: number, value: 0},
               max: {type: maximum}}, mirror: true, reverse: false, stepped: false}},
-        bold: false, italic: false, strikethrough: false, fields: [cs_novo_health_score.pontuacao_tickets,
-          cs_novo_health_score.pontuacao_survey]}]
+        bold: false, italic: false, strikethrough: false, fields: [cs_novo_health_score.pontuacao_survey,
+          cs_novo_health_score.pontuacao_titulos_omie]}, {type: equal to, value: 7,
+        background_color: "#FFD95F", font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
+          palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688, options: {constraints: {
+              min: {type: minimum}, mid: {type: number, value: 0}, max: {type: maximum}},
+            mirror: true, reverse: false, stepped: false}}, bold: false, italic: false,
+        strikethrough: false, fields: [cs_novo_health_score.pontuacao_survey, pontuacao_nps,
+          cs_novo_health_score.pontuacao_titulos_omie]}, {type: between, value: [
+          1, 19], background_color: "#FFD95F", font_color: !!null '', color_application: {
+          collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7, palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688,
+          options: {constraints: {min: {type: minimum}, mid: {type: number, value: 0},
+              max: {type: maximum}}, mirror: true, reverse: false, stepped: false}},
+        bold: false, italic: false, strikethrough: false, fields: [pontuacao_usab_total]}]
     series_types: {}
     defaults_version: 1
     hidden_fields: [nps_08_2020.media_nota]
@@ -154,13 +171,17 @@
     limit: 500
     dynamic_fields: [{table_calculation: pontuacao_nps, label: Pontuacao NPS, expression: "if(${nps_08_2020.media_nota}>8,20,\n\
           \  if(${nps_08_2020.media_nota}>6,10,\n    if(${nps_08_2020.media_nota}>-1,0,\n\
-          \      if(is_null(${nps_08_2020.media_nota}),5,null))))", value_format: !!null '',
+          \      if(is_null(${nps_08_2020.media_nota}),7,null))))", value_format: !!null '',
         value_format_name: !!null '', _kind_hint: measure, _type_hint: number}, {
         table_calculation: total_pontuacao, label: Total Pontuação, expression: "coalesce(${cs_novo_health_score.healthScore_Total},0)+\n\
           coalesce(${pontuacao_nps},0)", value_format: !!null '', value_format_name: !!null '',
         _kind_hint: measure, _type_hint: number}, {table_calculation: pontuacao_usab_total,
-        label: pontuacao_usab_total, expression: "(coalesce(${cs_novo_health_score.pontuacao_usab_big_search},${cs_novo_health_score.pontuacao_usab_tracking})\
-          \ + coalesce(${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_big_search}))/2",
+        label: pontuacao_usab_total, expression: "(coalesce(${cs_novo_health_score.pontuacao_usab_big_data},${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_search})\
+          \ + coalesce(${cs_novo_health_score.pontuacao_usab_big_data},${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_tracking})+\
+          \ coalesce(${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_big_data},${cs_novo_health_score.pontuacao_usab_search})+\
+          \ coalesce(${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_big_data})+\
+          \ coalesce(${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_big_data},${cs_novo_health_score.pontuacao_usab_tracking})+\
+          \ coalesce(${cs_novo_health_score.pontuacao_usab_search},${cs_novo_health_score.pontuacao_usab_tracking},${cs_novo_health_score.pontuacao_usab_big_data}))/6",
         value_format: !!null '', value_format_name: !!null '', is_disabled: true,
         _kind_hint: dimension, _type_hint: number}, {table_calculation: countverde,
         label: CountVerde, expression: 'count(if(${total_pontuacao}>69,1,null))',
@@ -267,7 +288,7 @@
       Cliente: customer.name
       Executivo(a): customer.executive_name
     row: 0
-    col: 3
+    col: 2
     width: 4
     height: 2
   - title: Vermelho <  50
@@ -280,7 +301,7 @@
     limit: 500
     dynamic_fields: [{table_calculation: pontuacao_nps, label: Pontuacao NPS, expression: "if(${nps_08_2020.media_nota}>8,20,\n\
           \  if(${nps_08_2020.media_nota}>6,10,\n    if(${nps_08_2020.media_nota}>-1,0,\n\
-          \      if(is_null(${nps_08_2020.media_nota}),5,null))))", value_format: !!null '',
+          \      if(is_null(${nps_08_2020.media_nota}),7,null))))", value_format: !!null '',
         value_format_name: !!null '', _kind_hint: measure, _type_hint: number}, {
         table_calculation: total_pontuacao, label: Total Pontuação, expression: "coalesce(${cs_novo_health_score.healthScore_Total},0)+\n\
           coalesce(${pontuacao_nps},0)", value_format: !!null '', value_format_name: !!null '',
@@ -406,7 +427,7 @@
     limit: 500
     dynamic_fields: [{table_calculation: pontuacao_nps, label: Pontuacao NPS, expression: "if(${nps_08_2020.media_nota}>8,20,\n\
           \  if(${nps_08_2020.media_nota}>6,10,\n    if(${nps_08_2020.media_nota}>-1,0,\n\
-          \      if(is_null(${nps_08_2020.media_nota}),5,null))))", value_format: !!null '',
+          \      if(is_null(${nps_08_2020.media_nota}),7,null))))", value_format: !!null '',
         value_format_name: !!null '', _kind_hint: measure, _type_hint: number}, {
         table_calculation: total_pontuacao, label: Total Pontuação, expression: "coalesce(${cs_novo_health_score.healthScore_Total},0)+\n\
           coalesce(${pontuacao_nps},0)", value_format: !!null '', value_format_name: !!null '',
@@ -519,53 +540,162 @@
       Cliente: customer.name
       Executivo(a): customer.executive_name
     row: 0
-    col: 10
+    col: 9
     width: 4
     height: 2
-  - title: New Tile
-    name: New Tile
+  - title: Porcentagem Verde
+    name: Porcentagem Verde
     model: external_health_score
     explore: customer
     type: single_value
-    fields: [customer_info.hub_atualizado_em_date]
-    fill_fields: [customer_info.hub_atualizado_em_date]
-    filters:
-      customer.name: LESCHACO AGENTE DE TRANSPORTES E COMERCIO INTERN LTDA
-    sorts: [customer_info.hub_atualizado_em_date desc]
+    fields: [nps_08_2020.media_nota, customer.id, customer.name, cs_novo_health_score.healthScore_Total]
+    sorts: [nps_08_2020.media_nota desc]
     limit: 500
-    column_limit: 50
+    dynamic_fields: [{table_calculation: pontuacao_nps, label: pontuacao_nps, expression: "if(${nps_08_2020.media_nota}>8,20,\n\
+          \  if(${nps_08_2020.media_nota}>6,10,\n    if(${nps_08_2020.media_nota}>-1,0,\n\
+          \      if(is_null(${nps_08_2020.media_nota}),7,null))))\n", value_format: !!null '',
+        value_format_name: !!null '', _kind_hint: measure, _type_hint: number}, {
+        table_calculation: total_pontuacao, label: total_pontuacao, expression: " \
+          \     coalesce(${cs_novo_health_score.healthScore_Total},0)+\ncoalesce(${pontuacao_nps},0)",
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}, {table_calculation: pverde, label: pverde, expression: 'count(if(${total_pontuacao}>69,1,null))/count(${total_pontuacao})',
+        value_format: !!null '', value_format_name: percent_1, _kind_hint: measure,
+        _type_hint: number}]
     custom_color_enabled: true
-    show_single_value_title: true
+    show_single_value_title: false
     show_comparison: false
     comparison_type: value
     comparison_reverse_colors: false
     show_comparison_label: true
-    enable_conditional_formatting: true
+    enable_conditional_formatting: false
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
-    conditional_formatting: [{type: greater than, value: 70, background_color: "#72D16D",
-        font_color: "#fafcff", color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
-          palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825}, bold: false, italic: false,
-        strikethrough: false, fields: !!null ''}, {type: between, value: [40, 70],
-        background_color: "#FBB555", font_color: "#f2fffc", color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
-          palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825}, bold: false, italic: false,
-        strikethrough: false, fields: !!null ''}, {type: less than, value: 40, background_color: "#B32F37",
-        font_color: "#f8f8ff", color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
-          palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825}, bold: false, italic: false,
-        strikethrough: false, fields: !!null ''}]
+    custom_color: "#72D16D"
     show_view_names: false
     show_row_numbers: true
-    truncate_column_names: false
+    transpose: false
+    truncate_text: true
     hide_totals: false
     hide_row_totals: false
-    table_theme: editable
+    size_to_fit: true
+    table_theme: white
     limit_displayed_rows: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
     defaults_version: 1
     series_types: {}
-    row: 12
-    col: 0
-    width: 8
-    height: 6
+    hidden_fields: [customer.id, customer.name, cs_novo_health_score.healthScore_Total,
+      nps_08_2020.media_nota, pontuacao_nps, total_pontuacao]
+    listen:
+      Cliente: customer.name
+      Executivo(a): customer.executive_name
+    row: 0
+    col: 6
+    width: 2
+    height: 2
+  - title: Porcentagem Verde (copy)
+    name: Porcentagem Verde (copy)
+    model: external_health_score
+    explore: customer
+    type: single_value
+    fields: [nps_08_2020.media_nota, customer.id, customer.name, cs_novo_health_score.healthScore_Total]
+    sorts: [nps_08_2020.media_nota desc]
+    limit: 500
+    dynamic_fields: [{table_calculation: pontuacao_nps, label: pontuacao_nps, expression: "if(${nps_08_2020.media_nota}>8,20,\n\
+          \  if(${nps_08_2020.media_nota}>6,10,\n    if(${nps_08_2020.media_nota}>-1,0,\n\
+          \      if(is_null(${nps_08_2020.media_nota}),7,null))))\n", value_format: !!null '',
+        value_format_name: !!null '', _kind_hint: measure, _type_hint: number}, {
+        table_calculation: total_pontuacao, label: total_pontuacao, expression: " \
+          \     coalesce(${cs_novo_health_score.healthScore_Total},0)+\ncoalesce(${pontuacao_nps},0)",
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}, {table_calculation: pamarelo, label: pamarelo, expression: 'count(if(${total_pontuacao}>49
+          AND ${total_pontuacao}<70 ,1,null))/count(${total_pontuacao})', value_format: !!null '',
+        value_format_name: percent_1, _kind_hint: measure, _type_hint: number}]
+    custom_color_enabled: true
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#FFD95F"
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: [customer.id, customer.name, cs_novo_health_score.healthScore_Total,
+      nps_08_2020.media_nota, pontuacao_nps, total_pontuacao]
+    listen:
+      Cliente: customer.name
+      Executivo(a): customer.executive_name
+    row: 0
+    col: 13
+    width: 2
+    height: 2
+  - title: Porcentagem Verde (copy 2)
+    name: Porcentagem Verde (copy 2)
+    model: external_health_score
+    explore: customer
+    type: single_value
+    fields: [nps_08_2020.media_nota, customer.id, customer.name, cs_novo_health_score.healthScore_Total]
+    sorts: [nps_08_2020.media_nota desc]
+    limit: 500
+    dynamic_fields: [{table_calculation: pontuacao_nps, label: pontuacao_nps, expression: "if(${nps_08_2020.media_nota}>8,20,\n\
+          \  if(${nps_08_2020.media_nota}>6,10,\n    if(${nps_08_2020.media_nota}>-1,0,\n\
+          \      if(is_null(${nps_08_2020.media_nota}),7,null))))\n", value_format: !!null '',
+        value_format_name: !!null '', _kind_hint: measure, _type_hint: number}, {
+        table_calculation: total_pontuacao, label: total_pontuacao, expression: " \
+          \     coalesce(${cs_novo_health_score.healthScore_Total},0)+\ncoalesce(${pontuacao_nps},0)",
+        value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}, {table_calculation: pvermelho, label: pvermelho, expression: 'count(if(${total_pontuacao}<50
+          ,1,null))/count(${total_pontuacao})', value_format: !!null '', value_format_name: percent_1,
+        _kind_hint: measure, _type_hint: number}]
+    custom_color_enabled: true
+    show_single_value_title: false
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#B32F37"
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: [customer.id, customer.name, cs_novo_health_score.healthScore_Total,
+      nps_08_2020.media_nota, pontuacao_nps, total_pontuacao]
+    listen:
+      Cliente: customer.name
+      Executivo(a): customer.executive_name
+    row: 0
+    col: 21
+    width: 2
+    height: 2
   filters:
   - name: Cliente
     title: Cliente

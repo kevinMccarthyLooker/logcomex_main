@@ -1,7 +1,5 @@
 view: antaqxmaritimo_exp {
   derived_table: {
-    indexes: ["origem"]
-    persist_for: "24 hours"
     sql: select origem,  mes,ano,sum(teu) as Teus_Antaq, (SELECT sum(teus) as Teus_Log
                                         from view_AntaqMaritimo
                                         where dtoperacao >='2019-01-01'
@@ -12,7 +10,7 @@ view: antaqxmaritimo_exp {
                                         and extract(year from dtoperacao) = a.ano)
 from antaq_carga c
 inner join antaq_atracacao a on a.idatracacao = c.idatracacao
-where c.tpoopercarga like 'LONGO CURSO EXPORTAÇÃO%'
+where c.tpoopercarga like 'LONGO CURSO EXPORT%'
 and c.natucarga = 'CARGA CONTEINERIZADA'
 and c.conteineest = 'CHEIO'
 and length(origem) = 5
@@ -21,6 +19,8 @@ and sentido = 'EMBARCADOS'
 group by  origem, mes,ano
 order by ano,mes
  ;;
+   indexes: ["origem"]
+   sql_trigger_value: SELECT CURRENT_DATE;;
   }
 
   measure: count {

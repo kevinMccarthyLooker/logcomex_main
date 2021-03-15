@@ -53,6 +53,11 @@ view: di_control_pu {
     sql: ${TABLE}."locked" ;;
   }
 
+  dimension: created_today {
+    type: yesno
+    sql: case when ${TABLE}."created_at" >= current_date then true else false end;;
+  }
+
   dimension_group: processed_successfully {
     type: time
     timeframes: [

@@ -17,9 +17,9 @@ view: planos_ativos_detalhes {
 (case when indice_meses_historico = 1 then 1 else 0 end ) as padrao_exato_historico,
 (case when indice_usuarios = 1 then 1 else 0 end ) as padrao_exato_usuarios
 from (select *,
-quantidade_de_pesquisas/200::float as indice_qtd_pesquisas,
+quantidade_de_pesquisas/300::float as indice_qtd_pesquisas,
 registros_por_pesquisa/5000::float as indice_registros_pesquisas,
-busca_perfil_empresas/5::float as indice_busca_perfil_empresas,
+busca_perfil_empresas/15::float as indice_busca_perfil_empresas,
 (case
 when qtd_excel >0 then 1.5
 else 0
@@ -37,7 +37,7 @@ end) as indice_meses_historico,
 usuarios/1::float as indice_usuarios,
 case
 when
-quantidade_de_pesquisas = 200 and registros_por_pesquisa = 5000 and busca_perfil_empresas = 5
+quantidade_de_pesquisas = 300 and registros_por_pesquisa = 5000 and busca_perfil_empresas = 15
 and qtd_excel = 0 and linhas_excel = 0 and meses_historico = 6 and usuarios = 1 then 'Padrão'
 else 'Fora do Padrao'
 end as padrao
@@ -73,18 +73,18 @@ union
 select *,
 quantidade_de_pesquisas/1000::float as indice_qtd_pesquisas,
 registros_por_pesquisa/10000::float as indice_registros_pesquisas,
-busca_perfil_empresas/25::float as indice_busca_perfil_empresas,
+busca_perfil_empresas/40::float as indice_busca_perfil_empresas,
 qtd_excel/5::float as indice_export_excel,
 linhas_excel/1000::float as indice_linhas_excel,
 (case
 when meses_historico <=24 then meses_historico::float/12
 else meses_historico::float/365
 end) as indice_meses_historico,
-usuarios/2::float as indice_usuarios,
+usuarios/1::float as indice_usuarios,
 case
 when
-quantidade_de_pesquisas = 1000 and registros_por_pesquisa = 10000 and busca_perfil_empresas = 25
-and qtd_excel = 5 and linhas_excel = 1000 and meses_historico = 12 and usuarios = 2 then 'Padrão'
+quantidade_de_pesquisas = 1000 and registros_por_pesquisa = 10000 and busca_perfil_empresas = 40
+and qtd_excel = 5 and linhas_excel = 1000 and meses_historico = 12 and usuarios = 1 then 'Padrão'
 else 'Fora do Padrao'
 end as padrao
 from (select
@@ -163,11 +163,11 @@ customer.fake_customer is false) as a1
 union
 
 select *,
-quantidade_de_pesquisas/10000::float as indice_qtd_pesquisas,
+quantidade_de_pesquisas/6000::float as indice_qtd_pesquisas,
 registros_por_pesquisa/30000::float as indice_registros_pesquisas,
 busca_perfil_empresas/400::float as indice_busca_perfil_empresas,
 qtd_excel/100::float as indice_export_excel,
-linhas_excel/20000::float as indice_linhas_excel,
+linhas_excel/10000::float as indice_linhas_excel,
 (case
 when meses_historico <=24 then meses_historico::float/12
 else meses_historico::float/365
@@ -175,8 +175,8 @@ end) as indice_meses_historico,
 usuarios/5::float as indice_usuarios,
 case
 when
-quantidade_de_pesquisas = 10000 and registros_por_pesquisa = 30000 and busca_perfil_empresas = 400
-and qtd_excel = 100 and linhas_excel = 20000 and meses_historico = 12 and usuarios = 5 then 'Padrão'
+quantidade_de_pesquisas = 6000 and registros_por_pesquisa = 30000 and busca_perfil_empresas = 400
+and qtd_excel = 100 and linhas_excel = 10000 and meses_historico = 12 and usuarios = 5 then 'Padrão'
 else 'Fora do Padrao'
 end as padrao
 from (select
@@ -209,20 +209,20 @@ customer.fake_customer is false) as a1
 union
 
 select *,
-quantidade_de_pesquisas/50000::float as indice_qtd_pesquisas,
+quantidade_de_pesquisas/12000::float as indice_qtd_pesquisas,
 registros_por_pesquisa/100000::float as indice_registros_pesquisas,
 busca_perfil_empresas/1000::float as indice_busca_perfil_empresas,
 qtd_excel/200::float as indice_export_excel,
-linhas_excel/30000::float as indice_linhas_excel,
+linhas_excel/20000::float as indice_linhas_excel,
 (case
 when meses_historico <=24 then meses_historico::float/24
 else meses_historico::float/730
 end) as indice_meses_historico,
-usuarios/5::float as indice_usuarios,
+usuarios/7::float as indice_usuarios,
 case
 when
-quantidade_de_pesquisas = 10000 and registros_por_pesquisa = 30000 and busca_perfil_empresas = 400
-and qtd_excel = 100 and linhas_excel = 20000 and meses_historico = 12 and usuarios = 5 then 'Padrão'
+quantidade_de_pesquisas = 12000 and registros_por_pesquisa = 100000 and busca_perfil_empresas = 1000
+and qtd_excel = 200 and linhas_excel = 20000 and meses_historico = 24 and usuarios = 7 then 'Padrão'
 else 'Fora do Padrao'
 end as padrao
 from (select
@@ -358,6 +358,7 @@ customer.fake_customer is false) as a1) as qq1
 # medidas utilizadas para calcular a qtd de beneficios com valor menor ou igual ao dos planos vendidos
   measure: numero_de_planos {
     type: count
+    drill_fields: [detail*]
   }
 
   measure: qtd_padrao_pesquisa {
@@ -553,4 +554,15 @@ customer.fake_customer is false) as a1) as qq1
         END
     ;;
   }
+
+  set: detail {  #drills para o planos
+    fields: [
+      customer_id,
+      name,
+      plano,
+      padrao
+    ]
+  }
+
+
 }

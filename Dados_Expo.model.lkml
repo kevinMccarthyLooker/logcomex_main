@@ -16,6 +16,13 @@ include: "/**/db_siscori_sitdesp.view.lkml"
 include: "/**/db_siscori_unidcomerc.view.lkml"
 include: "/**/db_siscori_unidmed.view.lkml"
 include: "/**/db_siscori_unid_fiscal.view.lkml"
+include: "/**/external_search_expo_nfs.dashboard.lookml"  #dashboard externo nfs para search expo
+include: "/**/external_siscori.dashboard.lookml"
+
+datagroup: db_commodities_export_datagroup {
+  sql_trigger: SELECT max(id) FROM public.db_commodities_export ;;
+  max_cache_age: "24 hours"
+}
 
 explore:db_maritimo_agosto_2020  {
   label: "db_maritimo agosto 2020"
@@ -23,13 +30,66 @@ explore:db_maritimo_agosto_2020  {
 
 explore: db_maritimo {
   label: "db maritimo + cargo reception details"
-  sql_always_where: ${categoriacarga} = 'E' and ${dtoperacao_raw} >= '2020/08/01' and ${dtoperacao_raw} < '2020/09/01';;   # limitando tipo e periodo
+  sql_always_where: ${categoriacarga} = 'E' and ${dtoperacao_raw} >= '2020/01/01';;
 
   join: db_export_cargo_reception_details {
     relationship: many_to_one
     sql_on: ${db_export_cargo_reception_details.nrcemercante} = ${db_maritimo.nrcemercante};;
-    type: inner
+    type: left_outer
   }
+
+  join: db_export_cargo_reception_nf {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_nf.id_exp_cargo_details} = ${db_export_cargo_reception_details.id} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_nf_itens {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_nf_itens.id_nf} = ${db_export_cargo_reception_nf.id_nf};;
+    type: left_outer
+  }
+
+  join: db_siscori_cod_ncm {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_nf_itens.cdncm_compl} = ${db_siscori_cod_ncm.cdncm_compl};;
+    type: left_outer
+  }
+
+
+  join: db_export_cargo_reception_fcl  {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_fcl.id_exp_cargo_details} = ${db_export_cargo_reception_details.id}
+      or ${db_export_cargo_reception_fcl.id_nf} = ${db_export_cargo_reception_nf.id_nf} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_fcl_via_nota  {
+    from: db_export_cargo_reception_fcl
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_fcl.id_nf} = ${db_export_cargo_reception_nf.id_nf} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_fcl_via_det  {
+    from: db_export_cargo_reception_fcl
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_fcl.id_exp_cargo_details} = ${db_export_cargo_reception_details.id} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_carga  {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_carga.id_exp_cargo_details} = ${db_export_cargo_reception_details.id} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_item_due  {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_item_due.id_exp_cargo_details} = ${db_export_cargo_reception_details.id} ;;
+    type: left_outer
+  }
+
 }
 
 explore: db_export_cargo_reception_details {
@@ -43,15 +103,35 @@ explore: db_export_cargo_reception_details {
 
   join: db_export_cargo_reception_nf_itens {
     relationship: many_to_one
-    sql_on: ${db_export_cargo_reception_nf_itens.id_exp_cargo_details} = ${db_export_cargo_reception_details.id}
-            and ${db_export_cargo_reception_nf_itens.id_nf} = ${db_export_cargo_reception_nf.id_nf};;
+    sql_on: ${db_export_cargo_reception_nf_itens.id_nf} = ${db_export_cargo_reception_nf.id_nf};;
     type: left_outer
   }
+
+  join: db_siscori_cod_ncm {
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_nf_itens.cdncm_compl} = ${db_siscori_cod_ncm.cdncm_compl};;
+    type: left_outer
+  }
+
 
   join: db_export_cargo_reception_fcl  {
     relationship: many_to_one
     sql_on: ${db_export_cargo_reception_fcl.id_exp_cargo_details} = ${db_export_cargo_reception_details.id}
-            and ${db_export_cargo_reception_fcl.id_nf} = ${db_export_cargo_reception_nf.id_nf} ;;
+      or ${db_export_cargo_reception_fcl.id_nf} = ${db_export_cargo_reception_nf.id_nf} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_fcl_via_nota  {
+    from: db_export_cargo_reception_fcl
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_fcl.id_nf} = ${db_export_cargo_reception_nf.id_nf} ;;
+    type: left_outer
+  }
+
+  join: db_export_cargo_reception_fcl_via_det  {
+    from: db_export_cargo_reception_fcl
+    relationship: many_to_one
+    sql_on: ${db_export_cargo_reception_fcl.id_exp_cargo_details} = ${db_export_cargo_reception_details.id} ;;
     type: left_outer
   }
 
@@ -70,7 +150,9 @@ explore: db_export_cargo_reception_details {
 }
 
 explore: db_commodities_export {
+  persist_with: db_commodities_export_datagroup
   label: "siscori exportacao"
+  sql_always_where: ${anomes} > 201912 ;;
 
   join: db_siscori_cod_ncm {
     relationship: many_to_one
@@ -122,5 +204,4 @@ explore: db_commodities_export {
     sql_on: ${db_siscori_unid_fiscal.id} = ${db_commodities_export.id_unid_embq} ;;
     type: left_outer
   }
-
 }

@@ -5,7 +5,6 @@ view: db_maritimo_agosto_2020 {
     sql: select *
          from db_maritimo
          where categoriacarga = 'E' and dtoperacao >= '2020/08/01' and dtoperacao < '2020/09/01' ;;
-
   }
 
   dimension: id {
@@ -1053,4 +1052,11 @@ view: db_maritimo_agosto_2020 {
     type: count
     drill_fields: [id]
   }
+
+  measure: count_distinct_ce {
+    type: count_distinct
+    sql: ${TABLE}."nrcemercante" ;;
+    drill_fields: [id]
+  }
+
 }
