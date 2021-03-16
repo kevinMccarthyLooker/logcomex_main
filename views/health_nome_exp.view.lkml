@@ -13,10 +13,10 @@ from (
       select
             db_maritimo.tipoconhecimento,
             db_maritimo.dtoperacao,
-            db_maritimo.cdshipper AS "CNPJ EXPORTADOR",
-            db_cad_shipper.nome_real AS "EXPORTADOR",
-            db_embarcador.codigo    AS "CNPJ EMBARCADOR COMP",
-            db_embarcador.nome_real AS "NOME EMBARCADOR COMP"
+            substr(db_maritimo.cdshipper,1,15)    AS "CNPJ EXPORTADOR",
+            substr(db_cad_shipper.nome_real,1,15) AS "EXPORTADOR",
+            substr(db_embarcador.codigo,1,15)     AS "CNPJ EMBARCADOR COMP",
+            substr(db_embarcador.nome_real,1,15)  AS "NOME EMBARCADOR COMP"
       FROM db_maritimo
       LEFT JOIN vw_db_consignatarios ON vw_db_consignatarios.cnpj = db_maritimo.cdshipper
       LEFT JOIN db_cad_shipper ON db_maritimo.id_shipper = db_cad_shipper.id
