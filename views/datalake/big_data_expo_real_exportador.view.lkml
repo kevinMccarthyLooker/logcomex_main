@@ -100,15 +100,16 @@ view: big_data_expo_real_exportador {
 
   ####################### --------------> Measures e Dimensions Criadas / Alteradas <-------------------- #########################
 
-  dimension: nf_nome_emissor_filtro {
-    type: string
-    sql: ${TABLE}.nf_nome_emissor ;;
-  }
-
   dimension: nome_exportador_filtro {
     type: string
     sql: ${TABLE}.nome_exportador ;;
   }
+
+  dimension: nf_nome_emissor_2 {
+    type: string
+    sql: ${TABLE}.nf_nome_emissor ;;
+  }
+
 
   measure: count_mar_id {
     type: count_distinct
