@@ -47,6 +47,21 @@ view: filter_history {
     sql: ${TABLE}."source" ;;
   }
 
+  dimension: fonte {
+    type: string
+    sql: case
+          when ${TABLE}.source = 'filter' then 'Filtro Lateral'
+          when ${TABLE}.source = 'UNKNOWN' then 'API'
+          when ${TABLE}.source = 'recent_search' then 'Busca Recente'
+          when ${TABLE}.source = 'quick_filter' then 'Quick Filter'
+          when ${TABLE}.source = 'load_url' then 'URL Compartilhada'
+          when ${TABLE}.source = 'home' then 'Página Inicial'
+          when ${TABLE}.source = 'home_saved_filter' then 'Filtro Salvo'
+          when ${TABLE}.source = 'quick_chart_filter' then 'Filtros Automáticos'
+          end
+          ;;
+  }
+
   dimension: source_hash {
     type: string
     sql: ${TABLE}."source_hash" ;;
