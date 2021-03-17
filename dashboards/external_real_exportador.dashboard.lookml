@@ -10,7 +10,8 @@
     explore: big_data_expo_real_exportador
     type: looker_grid
     fields: [big_data_expo_real_exportador.count_mar_id, big_data_expo_real_exportador.nf_nome_emissor_2]
-    filters: {}
+    filters:
+      big_data_expo_real_exportador.nf_nome_emissor_2: "-NULL"
     sorts: [big_data_expo_real_exportador.count_mar_id desc]
     limit: 500
     show_view_names: false
