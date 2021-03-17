@@ -110,6 +110,25 @@ view: big_data_expo_real_exportador {
     sql: ${TABLE}.nf_nome_emissor ;;
   }
 
+  dimension: nf_nome_emissor_3 {
+    type: string
+    sql: ${TABLE}.nf_nome_emissor ;;
+  }
+
+  dimension: nf_nome_emissor_4 {
+    type: string
+    sql: ${TABLE}.nf_nome_emissor ;;
+  }
+
+  dimension: nf_nome_emissor_5 {
+    type: string
+    sql: ${TABLE}.nf_nome_emissor ;;
+  }
+
+  dimension: nf_nome_emissor_6 {
+    type: string
+    sql: ${TABLE}.nf_nome_emissor ;;
+  }
 
   measure: count_mar_id {
     type: count_distinct
