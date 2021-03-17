@@ -10,7 +10,7 @@ view: trials_ativos_mes {
     customer_plan.id as customer_plan_id
     FROM public.customer  AS customer
     LEFT JOIN public.customer_plan  AS customer_plan ON (customer."id")=(customer_plan."customer_id")
-    LEFT JOIN (select last_day(date '2019-06-01' + (interval '1' month * generate_series(0,20))) as mes) as meses on 1 = 1
+    LEFT JOIN (select last_day(date '2019-06-01' + (interval '1' month * generate_series(0,30))) as mes) as meses on 1 = 1
     WHERE (meses.mes between (customer_plan.trial_start) and last_day(customer_plan.trial_end)
     --WHERE (meses.mes between (customer_plan.trial_start) and (customer_plan.trial_end)
         and (customer_plan."deleted_at") is null) AND ((customer."fake_customer")=false
