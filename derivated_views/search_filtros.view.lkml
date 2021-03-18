@@ -89,6 +89,16 @@ view: search_filtros {
 
   }
 
+  dimension: user_id {
+    type: number
+    sql: ${TABLE}.user_id;;
+  }
+
+  dimension: email {
+    type: string
+    sql: ${TABLE}.email;;
+  }
+
   dimension: fonte {
     type: string
     sql: case
