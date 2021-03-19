@@ -44,8 +44,8 @@ select 'Maritimo' as modal,
        qq2.created_at as last_follow_up,
        qq2.comment as last_workflow,
        qq2.date_time as last_workflow_date,
-       null:timestamp as aereo_data_embarque_ets,
-       null:timestamp as aereo_data_hora_chegada
+       null::timestamp as aereo_data_embarque_ets,
+       null::timestamp as aereo_data_hora_chegada
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
 inner join tracking_internal_status on tracking.internal_status_id = tracking_internal_status.id
