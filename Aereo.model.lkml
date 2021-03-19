@@ -6,6 +6,7 @@ include: "/views/aereo_awb_details.view.lkml"
 include: "/views/company_info.view.lkml"
 include: "/views/company.view.lkml"
 include: "/views/recinto_aduaneiro.view.lkml"
+include: "/**/**/aereo_transit_time.view.lkml"
 
 #explore: aereo_dados_no_tempo {}
 
@@ -34,3 +35,5 @@ explore: aereo_details {
   from: aereo_awb_details
   label: "Aereo"
 }
+
+explore: aereo_transit_time {}
