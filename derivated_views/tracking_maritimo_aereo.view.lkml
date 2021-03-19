@@ -656,7 +656,7 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
   }
 
 
-  measure: avg_days_transit_time {
+  measure: avg_days_transit_time_aereo {
     type: average
     sql: ${days_aereo_transit_time} ;;
   }
