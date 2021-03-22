@@ -71,6 +71,7 @@ include: "/**/trials_ativos_mes.view.lkml"
 include: "/**/clientes_sem_exportacao.view.lkml"
 include: "/**/hubspot_stage_cs_deal.view.lkml"
 include: "/**/hubspot_tickets.view.lkml"
+include: "/**/nps_02_2021.view.lkml"
 
 datagroup: internal_only_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -387,6 +388,12 @@ explore: usage {
 
   join: nps_11_2020 {
     sql_on: ${users.email}=${nps_11_2020.email} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: nps_02_2021 {
+    sql_on: ${users.email}=${nps_02_2021.email} ;;
     relationship: one_to_many
     type: left_outer
   }
