@@ -685,6 +685,12 @@ explore: cs_novo_health_score {
     type: left_outer
   }
 
+  join: nps_02_2021 {
+    sql_on: ${users.email}=${nps_02_2021.email} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
   join: customer_api_relations{
     sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
     relationship: one_to_many
