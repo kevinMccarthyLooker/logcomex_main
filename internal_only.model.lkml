@@ -72,6 +72,7 @@ include: "/**/clientes_sem_exportacao.view.lkml"
 include: "/**/hubspot_stage_cs_deal.view.lkml"
 include: "/**/hubspot_tickets.view.lkml"
 include: "/**/nps_02_2021.view.lkml"
+include: "/**/quick_ratio.view.lkml"
 
 datagroup: internal_only_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -88,9 +89,9 @@ datagroup: hs_datagroup {
   description: "DG do Health Score, atualiza a cada 12h"
 }
 
-explore: clientes_sem_exportacao{
+explore: clientes_sem_exportacao{}
 
-}
+explore: quick_ratio {}
 
 explore: follow_up_status {
   label: "Tempo no Status - Tracking"
