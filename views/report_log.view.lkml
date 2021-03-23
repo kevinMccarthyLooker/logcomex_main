@@ -193,4 +193,9 @@ view: report_log {
     convert_tz: no
   }
 
+  measure: ultimo_acesso{
+    type: date
+    sql: MAX (${TABLE}."created_at");;
+  }
+
 }
