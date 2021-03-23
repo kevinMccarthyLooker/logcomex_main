@@ -114,4 +114,10 @@ view: access_log {
     type: count
     drill_fields: [users.name]
   }
+
+  measure: ultimo_acesso{
+    type: date
+    sql: MAX (${TABLE}."created_at");;
+  }
+
 }
