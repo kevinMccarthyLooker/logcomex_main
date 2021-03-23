@@ -71,6 +71,8 @@ view: searchx_gold_v2_2020_produtos {
     sql: ${TABLE}.cdpaisaquis ;;
   }
 
+
+  #ISO 3166-1 alfa-2
   dimension: cdpaisorigem {
     type: string
     map_layer_name: countries
@@ -622,6 +624,7 @@ view: searchx_gold_v2_2020_produtos {
     sql: ${TABLE}.embalagem ;;
   }
 
+  #Graus decimais (DD, na sigla em inglês): 41.40338, 2.17403
   dimension: latitude {
     type: number
     sql: case
