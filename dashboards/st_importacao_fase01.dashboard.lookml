@@ -3,14 +3,12 @@
   layout: newspaper
   preferred_viewer: dashboards-next
   elements:
-  - title: Dados
-    name: Dados
+  - title: Dados (EM DESENVOLVIMENTO)
+    name: Dados (EM DESENVOLVIMENTO)
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_grid
-    fields: [st_importacoes_fase01.anomes, st_importacoes_fase01.count, st_importacoes_fase01.importador_cnpj,
-      st_importacoes_fase01.marca, st_importacoes_fase01.material, st_importacoes_fase01.genero,
-      st_importacoes_fase01.produto]
+    fields: [st_importacoes_fase01.material, st_importacoes_fase01.genero, st_importacoes_fase01.produto]
     limit: 500
     show_view_names: false
     show_row_numbers: true
@@ -30,7 +28,16 @@
     series_types: {}
     defaults_version: 1
     listen: {}
+    row: 3
+    col: 0
+    width: 8
+    height: 6
+  - name: ST IMPORTAÇÕES
+    type: text
+    title_text: ST IMPORTAÇÕES
+    subtitle_text: ''
+    body_text: ''
     row: 0
     col: 0
     width: 24
-    height: 9
+    height: 3
