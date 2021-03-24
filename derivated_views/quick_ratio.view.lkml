@@ -12,7 +12,11 @@ view: quick_ratio {
             customer."id" AS customer_id,
             customer."id" AS customer_id_measure,
             customer_plan.id as customer_plan_id,
-            pc.service_id as service
+            pc.service_id as service,
+            case
+            when extract(year from meses.mes) = extract(year from customer_plan."expiration") and extract(month from meses.mes) = extract(month from customer_plan."expiration") then true
+            else false
+            end as churn
             FROM public.customer  AS customer
             inner join public.customer_plan  AS customer_plan ON (customer."id")=(customer_plan."customer_id")
             inner join public.plan_complete pc on pc.id = customer_plan.plan_complete_id
@@ -22,6 +26,7 @@ view: quick_ratio {
             and (customer."fake_customer")=false
             and pc.service_id in (1,2,5,6,19,21)
            ) as qq1
+        where qq1.churn is false
         group by 1,2,3
       ) as qq2
     left join
