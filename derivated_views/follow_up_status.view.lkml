@@ -503,4 +503,64 @@ sql_trigger_value: select current_date;;
     sql: ${diff_11_day} ;;
   }
 
+  measure: diff_00__min_hour {
+    type: min
+    sql: ${diff_00_hour} ;;
+  }
+
+  measure: diff_01__min_hour {
+    type: min
+    sql: ${diff_01_hour} ;;
+  }
+
+  measure: diff_02__min_hour {
+    type: min
+    sql: ${diff_02_hour} ;;
+  }
+
+  measure: diff_03__min_hour {
+    type: min
+    sql: ${diff_03_hour} ;;
+  }
+
+  measure: diff_04__min_hour {
+    type: min
+    sql: ${diff_04_hour} ;;
+  }
+
+  measure: diff_05__min_hour {
+    type: min
+    sql: ${diff_05_hour} ;;
+  }
+
+  measure: diff_06__min_hour {
+    type: min
+    sql: ${diff_06_hour} ;;
+  }
+
+  measure: diff_07__min_hour {
+    type: min
+    sql: ${diff_07_hour} ;;
+  }
+
+  measure: diff_08__min_hour {
+    type: min
+    sql: ${diff_08_hour} ;;
+  }
+
+  measure: diff_09__min_hour {
+    type: min
+    sql: ${diff_09_hour} ;;
+  }
+
+  measure: diff_10__min_hour {
+    type: min
+    sql: ${diff_10_hour} ;;
+  }
+
+  measure: diff_11__min_hour {
+    type: min
+    sql: ${diff_11_hour} ;;
+  }
+
 }
