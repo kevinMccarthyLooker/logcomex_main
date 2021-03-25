@@ -11,7 +11,7 @@
     type: looker_grid
     fields: [bi_imports_mvw_gold.nmportoorigem, bi_imports_mvw_gold.nmportodestino,
       bi_imports_mvw_gold.teus, bi_imports_mvw_gold.c20, bi_imports_mvw_gold.c40,
-      bi_imports_mvw_gold.vlfrete, bi_imports_mvw_gold.media_vl_frete_por_c20, bi_imports_mvw_gold.media_vl_frete_por_c40]
+      bi_imports_mvw_gold.vlfrete, bi_imports_mvw_gold.media_frete_c20, bi_imports_mvw_gold.media_frete_c40]
     filters:
       bi_imports_mvw_gold.nmmoedafrete: DOLAR DOS EUA
     sorts: [bi_imports_mvw_gold.teus desc]
@@ -39,19 +39,19 @@
     show_sql_query_menu_options: false
     pinned_columns: {}
     column_order: ["$$$_row_numbers_$$$", bi_imports_mvw_gold.nmportoorigem, bi_imports_mvw_gold.nmportodestino,
-      bi_imports_mvw_gold.vl_frete_por_TEU, bi_imports_mvw_gold.vl_frete_por_c20,
-      bi_imports_mvw_gold.vl_frete_por_c40, bi_imports_mvw_gold.teus]
+      bi_imports_mvw_gold.media_frete_TEU, bi_imports_mvw_gold.media_frete_c20,
+      bi_imports_mvw_gold.media_frete_c40, bi_imports_mvw_gold.teus]
     show_totals: true
     show_row_totals: true
     series_labels:
       bi_imports_mvw_gold.teus: TEUs
-      bi_imports_mvw_gold.vl_frete_por_TEU: TEU
-      bi_imports_mvw_gold.vl_frete_por_c20: 20'
-      bi_imports_mvw_gold.vl_frete_por_c40: 40'
+      bi_imports_mvw_gold.media_frete_TEU: TEU
+      bi_imports_mvw_gold.media_frete_c20: 20'
+      bi_imports_mvw_gold.media_frete_c40: 40'
       bi_imports_mvw_gold.nmportoorigem: Origem
       bi_imports_mvw_gold.nmportodestino: Destino
-      bi_imports_mvw_gold.media_vl_frete_por_c20: Média 20'
-      bi_imports_mvw_gold.media_vl_frete_por_c40: Média 40'
+      bi_imports_mvw_gold.media_frete_c20: Média 20'
+      bi_imports_mvw_gold.media_frete_c40: Média 40'
     series_column_widths:
       bi_imports_mvw_gold.rota: 214
       bi_imports_mvw_gold.teus: 120
@@ -61,14 +61,14 @@
         palette:
           palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825
           collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
-      bi_imports_mvw_gold.vl_frete_por_TEU:
+      bi_imports_mvw_gold.media_frete_TEU:
         is_active: false
     series_text_format:
-      bi_imports_mvw_gold.vl_frete_por_TEU:
+      bi_imports_mvw_gold.media_frete_TEU:
         align: left
-      bi_imports_mvw_gold.vl_frete_por_c20:
+      bi_imports_mvw_gold.media_frete_c20:
         align: left
-      bi_imports_mvw_gold.vl_frete_por_c40:
+      bi_imports_mvw_gold.media_frete_c40:
         align: left
       bi_imports_mvw_gold.nmportoorigem: {}
       bi_imports_mvw_gold.nmportodestino:
@@ -77,9 +77,9 @@
         align: left
       mediana_40:
         align: left
-      bi_imports_mvw_gold.media_vl_frete_por_c40:
+      bi_imports_mvw_gold.media_frete_c40:
         align: left
-      bi_imports_mvw_gold.media_vl_frete_por_c20:
+      bi_imports_mvw_gold.media_frete_c20:
         align: left
     series_value_format:
       mediana_20:
@@ -90,11 +90,11 @@
         name: usd
         format_string: "$#,##0.00"
         label: U.S. Dollars (2)
-      bi_imports_mvw_gold.media_vl_frete_por_c20:
+      bi_imports_mvw_gold.media_frete_c20:
         name: usd
         format_string: "$#,##0.00"
         label: U.S. Dollars (2)
-      bi_imports_mvw_gold.media_vl_frete_por_c40:
+      bi_imports_mvw_gold.media_frete_c40:
         name: usd
         format_string: "$#,##0.00"
         label: U.S. Dollars (2)
@@ -148,8 +148,8 @@
     model: Dados_Impo_Datalake
     explore: bi_imports_mvw_gold
     type: looker_grid
-    fields: [bi_imports_mvw_gold.pais_origem, bi_imports_mvw_gold.media_vl_frete_por_c20,
-      bi_imports_mvw_gold.media_vl_frete_por_c40, bi_imports_mvw_gold.teus]
+    fields: [bi_imports_mvw_gold.pais_origem, bi_imports_mvw_gold.media_frete_c20,
+      bi_imports_mvw_gold.media_frete_c40, bi_imports_mvw_gold.teus]
     filters:
       bi_imports_mvw_gold.nmmoedafrete: DOLAR DOS EUA
     sorts: [bi_imports_mvw_gold.teus desc]
@@ -171,19 +171,19 @@
     conditional_formatting_include_nulls: false
     show_sql_query_menu_options: false
     pinned_columns: {}
-    column_order: ["$$$_row_numbers_$$$", bi_imports_mvw_gold.pais_origem, bi_imports_mvw_gold.vl_frete_por_TEU,
-      bi_imports_mvw_gold.vl_frete_por_c20, bi_imports_mvw_gold.vl_frete_por_c40,
+    column_order: ["$$$_row_numbers_$$$", bi_imports_mvw_gold.pais_origem, bi_imports_mvw_gold.media_frete_TEU,
+      bi_imports_mvw_gold.media_frete_c20, bi_imports_mvw_gold.media_frete_c40,
       bi_imports_mvw_gold.teus]
     show_totals: true
     show_row_totals: true
     series_labels:
       bi_imports_mvw_gold.pais_origem: País
       bi_imports_mvw_gold.teus: TEUs
-      bi_imports_mvw_gold.vl_frete_por_TEU: TEU
-      bi_imports_mvw_gold.vl_frete_por_c20: 20'
-      bi_imports_mvw_gold.vl_frete_por_c40: 40'
-      bi_imports_mvw_gold.media_vl_frete_por_c20: Média 20'
-      bi_imports_mvw_gold.media_vl_frete_por_c40: Média 40'
+      bi_imports_mvw_gold.media_frete_TEU: TEU
+      bi_imports_mvw_gold.media_frete_c20: 20'
+      bi_imports_mvw_gold.media_frete_c40: 40'
+      bi_imports_mvw_gold.media_frete_c20: Média 20'
+      bi_imports_mvw_gold.media_frete_c40: Média 40'
     series_column_widths:
       bi_imports_mvw_gold.rota: 228
       bi_imports_mvw_gold.teus: 146
@@ -193,27 +193,27 @@
         palette:
           palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825
           collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
-      bi_imports_mvw_gold.vl_frete_por_TEU:
+      bi_imports_mvw_gold.media_frete_TEU:
         is_active: false
     series_text_format:
       bi_imports_mvw_gold.pais_origem:
         align: left
-      bi_imports_mvw_gold.vl_frete_por_TEU:
+      bi_imports_mvw_gold.media_frete_TEU:
         align: left
-      bi_imports_mvw_gold.vl_frete_por_c20:
+      bi_imports_mvw_gold.media_frete_c20:
         align: left
-      bi_imports_mvw_gold.vl_frete_por_c40:
+      bi_imports_mvw_gold.media_frete_c40:
         align: left
-      bi_imports_mvw_gold.media_vl_frete_por_c20:
+      bi_imports_mvw_gold.media_frete_c20:
         align: left
-      bi_imports_mvw_gold.media_vl_frete_por_c40:
+      bi_imports_mvw_gold.media_frete_c40:
         align: left
     series_value_format:
-      bi_imports_mvw_gold.media_vl_frete_por_c20:
+      bi_imports_mvw_gold.media_frete_c20:
         name: usd
         format_string: "$#,##0.00"
         label: U.S. Dollars (2)
-      bi_imports_mvw_gold.media_vl_frete_por_c40:
+      bi_imports_mvw_gold.media_frete_c40:
         name: usd
         format_string: "$#,##0.00"
         label: U.S. Dollars (2)
@@ -266,7 +266,7 @@
     model: Dados_Impo_Datalake
     explore: bi_imports_mvw_gold
     type: looker_line
-    fields: [bi_imports_mvw_gold.vl_frete_por_c20, bi_imports_mvw_gold.vl_frete_por_c40,
+    fields: [bi_imports_mvw_gold.media_frete_c20, bi_imports_mvw_gold.media_frete_c40,
       bi_imports_mvw_gold.teus, bi_imports_mvw_gold.data_operacao_month]
     fill_fields: [bi_imports_mvw_gold.data_operacao_month]
     filters:
@@ -302,9 +302,9 @@
       options:
         steps: 5
         reverse: false
-    y_axes: [{label: '', orientation: left, series: [{axisId: bi_imports_mvw_gold.vl_frete_por_c20,
-            id: bi_imports_mvw_gold.vl_frete_por_c20, name: 20&#39;}, {axisId: bi_imports_mvw_gold.vl_frete_por_c40,
-            id: bi_imports_mvw_gold.vl_frete_por_c40, name: 40&#39;}], showLabels: true,
+    y_axes: [{label: '', orientation: left, series: [{axisId: bi_imports_mvw_gold.media_frete_c20,
+            id: bi_imports_mvw_gold.media_frete_c20, name: 20&#39;}, {axisId: bi_imports_mvw_gold.media_frete_c40,
+            id: bi_imports_mvw_gold.media_frete_c40, name: 40&#39;}], showLabels: true,
         showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
         type: linear}, {label: !!null '', orientation: left, series: [{axisId: bi_imports_mvw_gold.teus,
             id: bi_imports_mvw_gold.teus, name: TEUs}], showLabels: true, showValues: true,
@@ -312,11 +312,11 @@
     series_types:
       bi_imports_mvw_gold.teus: column
     series_colors:
-      bi_imports_mvw_gold.vl_frete_por_c20: "#bbd0ff"
+      bi_imports_mvw_gold.media_frete_c20: "#bbd0ff"
     series_labels:
-      bi_imports_mvw_gold.vl_frete_por_TEU: TEU
-      bi_imports_mvw_gold.vl_frete_por_c20: 20'
-      bi_imports_mvw_gold.vl_frete_por_c40: 40'
+      bi_imports_mvw_gold.media_frete_TEU: TEU
+      bi_imports_mvw_gold.media_frete_c20: 20'
+      bi_imports_mvw_gold.media_frete_c40: 40'
       bi_imports_mvw_gold.teus: TEUs
     show_row_numbers: true
     transpose: false
@@ -332,7 +332,7 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     show_sql_query_menu_options: false
-    column_order: ["$$$_row_numbers_$$$", bi_imports_mvw_gold.rota, bi_imports_mvw_gold.vl_frete_por_TEU,
+    column_order: ["$$$_row_numbers_$$$", bi_imports_mvw_gold.rota, bi_imports_mvw_gold.media_frete_TEU,
       bi_imports_mvw_gold.teus]
     show_totals: true
     show_row_totals: true
@@ -344,7 +344,7 @@
         palette:
           palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825
           collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
-      bi_imports_mvw_gold.vl_frete_por_TEU:
+      bi_imports_mvw_gold.media_frete_TEU:
         is_active: false
     ordering: none
     show_null_labels: false
