@@ -1,7 +1,7 @@
 view: tracking_maritimo_aereo {
   derived_table: {
     sql:
-select 'Maritimo' as modal,
+    select 'Maritimo' as modal,
        tracking.id as tracking_id,
        tracking.id as tracking_maritimo_id,
        0 as tracking_aereo_id,
@@ -16,6 +16,8 @@ select 'Maritimo' as modal,
        tracking.bl_number as documento,
        tracking.ce_number as ce_number,
        tracking.user_id,
+       u2."name" as user_name,
+       u2.email as user_email,
        tracking.created_at,
        tracking.updated_at,
        tracking.deleted_at,
@@ -49,6 +51,7 @@ select 'Maritimo' as modal,
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
 inner join tracking_internal_status on tracking.internal_status_id = tracking_internal_status.id
+left join users u2 on u2.id = tracking.user_id
 left join(
 select
 fu.tracking_id,
@@ -81,6 +84,8 @@ select 'Aereo' as modal,
        (coalesce((tracking_aerial.awb),'') || '-' || coalesce((tracking_aerial.hwb),'')) as documento,
        0 as ce_number,
        tracking_aerial.user_id,
+       u2."name" as user_name,
+       u2.email as user_email,
        tracking_aerial.created_at,
        tracking_aerial.updated_at,
        tracking_aerial.deleted_at,
@@ -114,6 +119,7 @@ select 'Aereo' as modal,
 from tracking_aerial
 inner join tracking_aerial_status on tracking_aerial.tracking_aerial_status_id = tracking_aerial_status.id
 inner join tracking_aerial_internal_status on tracking_aerial.internal_status = tracking_aerial_internal_status.id
+left join users u2 on u2.id = tracking_aerial.user_id
 left join (
 select
 fu.tracking_aerial_id,
@@ -144,6 +150,7 @@ left join
           ) as qq3 on qq3.awb = tracking_aerial.awb and qq3.hwb = tracking_aerial.hwb
 --where tracking_aerial.deleted_at is null
     ;;
+
 indexes: ["chave"]
 sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) / (4*60*60));;
   }
@@ -232,6 +239,16 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
   dimension: user_id {
     type: number
     sql: ${TABLE}."user_id" ;;
+  }
+
+  dimension: user_name {
+    type: string
+    sql: ${TABLE}."user_name" ;;
+  }
+
+  dimension: user_email {
+    type: string
+    sql: ${TABLE}."user_email" ;;
   }
 
   dimension: user_id_null {
