@@ -107,7 +107,7 @@
     explore: st_importacoes_fase01
     type: looker_column
     fields: [st_importacoes_fase01.anomes, st_importacoes_fase01.fob_sum, st_importacoes_fase01.count]
-    sorts: [st_importacoes_fase01.fob_sum desc]
+    sorts: [st_importacoes_fase01.anomes]
     limit: 500
     dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_fase01.fob_sum}",
         value_format: "$#,##0", value_format_name: !!null '', _kind_hint: measure,
@@ -188,18 +188,18 @@
       Produto: st_importacoes_fase01.produto
     row: 3
     col: 5
-    width: 11
+    width: 19
     height: 6
-  - title: Ranking de Importadores
-    name: Ranking de Importadores
+  - title: Ranking de Importadores - TOP 15
+    name: Ranking de Importadores - TOP 15
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
     fields: [st_importacoes_fase01.importador_nome, st_importacoes_fase01.fob_sum,
       st_importacoes_fase01.count]
     filters: {}
-    sorts: [st_importacoes_fase01.fob_sum]
-    limit: 500
+    sorts: [st_importacoes_fase01.fob_sum desc]
+    limit: 15
     dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_fase01.fob_sum}",
         value_format: "$#,##0", value_format_name: !!null '', _kind_hint: measure,
         _type_hint: number}]
@@ -218,7 +218,7 @@
     plot_size_by_field: false
     trellis: ''
     stacking: ''
-    limit_displayed_rows: false
+    limit_displayed_rows: true
     legend_position: center
     point_style: none
     show_value_labels: true
@@ -237,6 +237,10 @@
         series: [{axisId: st_importacoes_fase01.count, id: st_importacoes_fase01.count,
             name: Quantidade}], showLabels: true, showValues: true, unpinAxis: false,
         tickDensity: default, tickDensityCustom: 5, type: linear}]
+    limit_displayed_rows_values:
+      show_hide: show
+      first_last: first
+      num_rows: '15'
     series_types:
       st_importacoes_fase01.count: line
     series_colors:
@@ -252,10 +256,10 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 23
+    row: 35
     col: 0
     width: 24
-    height: 6
+    height: 8
   - title: NCMs Importados
     name: NCMs Importados
     model: external_st_importacoes
@@ -321,10 +325,10 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 3
-    col: 16
+    row: 9
+    col: 0
     width: 8
-    height: 6
+    height: 10
   - title: País Origem
     name: País Origem
     model: external_st_importacoes
@@ -403,11 +407,11 @@
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
     row: 9
-    col: 12
-    width: 12
-    height: 8
-  - title: Unidades Comercializadas
-    name: Unidades Comercializadas
+    col: 8
+    width: 16
+    height: 10
+  - title: Unidades Importadas
+    name: Unidades Importadas
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_grid
@@ -436,8 +440,8 @@
     show_row_totals: true
     series_labels:
       st_importacoes_fase01.count: Quantidade
-      st_importacoes_fase01.tp_unid_comerc: Unid. Comercializada
-      st_importacoes_fase01.qtde_comerc_sum: Qtde Comercializada
+      st_importacoes_fase01.tp_unid_comerc: Unid. Importada
+      st_importacoes_fase01.qtde_comerc_sum: Qtde Importada
     series_cell_visualizations:
       st_importacoes_fase01.qtde_comerc_sum:
         is_active: true
@@ -506,19 +510,19 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 29
+    row: 43
     col: 0
     width: 12
     height: 6
-  - title: Unid Comercializadas Modal
-    name: Unid Comercializadas Modal
+  - title: Unid Importadas - Modal
+    name: Unid Importadas - Modal
     model: external_st_importacoes
     explore: st_importacoes_fase01
-    type: looker_grid
-    fields: [st_importacoes_fase01.qtde_comerc_sum, st_importacoes_fase01.via_transp,
-      st_importacoes_fase01.fob_sum]
-    sorts: [st_importacoes_fase01.qtde_comerc_sum desc]
+    type: looker_pie
+    fields: [st_importacoes_fase01.via_transp, st_importacoes_fase01.fob_sum]
     limit: 500
+    value_labels: legend
+    label_type: labPer
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -613,7 +617,7 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 29
+    row: 43
     col: 12
     width: 12
     height: 6
@@ -730,91 +734,10 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 35
+    row: 49
     col: 0
     width: 24
     height: 6
-  - title: País Origem (Mapa de Calor)
-    name: País Origem (Mapa de Calor)
-    model: external_st_importacoes
-    explore: st_importacoes_fase01
-    type: looker_map
-    fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.cdpaisorigem]
-    sorts: [st_importacoes_fase01.fob_sum]
-    limit: 500
-    map_plot_mode: points
-    heatmap_gridlines: false
-    heatmap_gridlines_empty: false
-    heatmap_opacity: 0.5
-    show_region_field: true
-    draw_map_labels_above_data: true
-    map_tile_provider: light
-    map_position: custom
-    map_scale_indicator: 'off'
-    map_pannable: true
-    map_zoomable: true
-    map_marker_type: circle
-    map_marker_icon_name: default
-    map_marker_radius_mode: proportional_value
-    map_marker_units: pixels
-    map_marker_proportional_scale_type: linear
-    map_marker_color_mode: value
-    show_view_names: false
-    show_legend: true
-    quantize_map_value_colors: true
-    reverse_map_value_colors: false
-    map_latitude: 4.565473550710278
-    map_longitude: 2.9882812500000004
-    map_zoom: 2
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    limit_displayed_rows: false
-    legend_position: center
-    point_style: none
-    show_value_labels: false
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_fase01.fob_sum,
-            id: st_importacoes_fase01.fob_sum, name: Fob Sum}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}, {label: !!null '', orientation: right, series: [{axisId: st_importacoes_fase01.count,
-            id: st_importacoes_fase01.count, name: Quantidade}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}]
-    series_types: {}
-    series_labels:
-      st_importacoes_fase01.count: Quantidade
-    defaults_version: 1
-    map: auto
-    map_projection: ''
-    quantize_colors: false
-    listen:
-      Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
-      NCM: st_importacoes_fase01.cdncm_compl
-      Produto: st_importacoes_fase01.produto
-    row: 9
-    col: 0
-    width: 12
-    height: 8
   - title: Gênero - FOB
     name: Gênero - FOB
     model: external_st_importacoes
@@ -831,10 +754,10 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 17
-    col: 8
-    width: 6
-    height: 6
+    row: 27
+    col: 0
+    width: 5
+    height: 8
   - title: Produtos - FOB
     name: Produtos - FOB
     model: external_st_importacoes
@@ -880,15 +803,15 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 17
+    row: 19
     col: 0
-    width: 8
-    height: 6
+    width: 24
+    height: 8
   - title: Material - FOB
     name: Material - FOB
     model: external_st_importacoes
     explore: st_importacoes_fase01
-    type: looker_bar
+    type: looker_column
     fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.material]
     sorts: [st_importacoes_fase01.fob_sum desc]
     limit: 500
@@ -929,10 +852,10 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 17
-    col: 14
-    width: 10
-    height: 6
+    row: 27
+    col: 5
+    width: 19
+    height: 8
   filters:
   - name: Importador Nome
     title: Importador Nome
