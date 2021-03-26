@@ -91,7 +91,7 @@ view: st_importacoes_fase01 {
          when ${cdpaisorigem} = 'BE' THEN 51.0499
          when ${cdpaisorigem} = 'BD' THEN 23.8103
          when ${cdpaisorigem} = 'PY' THEN -25.2819
-         else 0
+         else null
          end;;
   }
 
@@ -122,7 +122,7 @@ view: st_importacoes_fase01 {
          when ${cdpaisorigem} = 'BE' THEN 3.7333
          when ${cdpaisorigem} = 'BD' THEN 90.4125
          when ${cdpaisorigem} = 'PY' THEN -57.635
-         else 0
+         else null
          end;;
   }
 
