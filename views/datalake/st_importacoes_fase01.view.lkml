@@ -1,5 +1,6 @@
 view: st_importacoes_fase01 {
-  sql_table_name: st_importacoes.st_importacoes_fase01 ;;
+  #sql_table_name: st_importacoes.st_importacoes_fase01 ;;  dados fake
+   sql_table_name: searchx.search_ncm_vestuario_gold ;; #dados finais
 
   dimension: addition_number {
     type: string
@@ -409,6 +410,11 @@ view: st_importacoes_fase01 {
   dimension: produto {
     type: string
     sql: ${TABLE}.produto ;;
+  }
+
+  dimension: percentual {
+    type: string
+    sql: ${TABLE}.percentual ;;
   }
 
   dimension: qtd_comerc {
