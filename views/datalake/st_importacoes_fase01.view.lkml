@@ -580,7 +580,7 @@ view: st_importacoes_fase01 {
   dimension: via_transp_norm {
     type: string
     sql: case
-         when ${TABLE}.via_transp = 'MARÍTIMA' then 'MARÍTIMO'
+         when ${TABLE}.via_transp = 'MARíTIMA' then 'MARÍTIMO'
          when ${TABLE}.via_transp = 'AÉREA' then 'AÉREO'
          when ${TABLE}.via_transp = 'RODOVIÁRIA' then 'RODOVIÁRIO'
          else ${TABLE}.via_transp
