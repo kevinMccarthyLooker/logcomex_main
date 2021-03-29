@@ -139,6 +139,11 @@
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
+    color_application:
+      collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+      palette_id: afd46b40-e939-4ace-bffd-69d1bb16ee05
+      options:
+        steps: 5
     y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_fase01.fob_sum,
             id: st_importacoes_fase01.fob_sum, name: Fob Sum}], showLabels: true,
         showValues: true, valueFormat: "$#,##0", unpinAxis: false, tickDensity: default,
@@ -150,8 +155,8 @@
     series_types:
       st_importacoes_fase01.count: line
     series_colors:
-      calculation_1: "#3EB0D5"
-      st_importacoes_fase01.count: "#B1399E"
+      calculation_1: "#7a7a7a"
+      st_importacoes_fase01.count: "#97d921"
     series_labels:
       st_importacoes_fase01.count: Quantidade
       calculation_1: Fob Sum
@@ -244,8 +249,8 @@
     series_types:
       st_importacoes_fase01.count: line
     series_colors:
-      st_importacoes_fase01.count: "#B1399E"
-      calculation_1: "#3EB0D5"
+      st_importacoes_fase01.count: "#98d91e"
+      calculation_1: "#7a7a7a"
     series_labels:
       st_importacoes_fase01.count: Quantidade
       calculation_1: Fob Sum
@@ -291,6 +296,13 @@
     series_cell_visualizations:
       st_importacoes_fase01.fob_sum:
         is_active: true
+        palette:
+          palette_id: 93b1041b-bcf8-8f4a-9f74-2760fca37dbe
+          collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+          custom_colors:
+          - "#d3f5b8"
+          - "#aaf52d"
+          - "#699114"
     series_value_format:
       st_importacoes_fase01.fob_sum: "$#,##0.00"
     x_axis_gridlines: false
@@ -445,6 +457,13 @@
     series_cell_visualizations:
       st_importacoes_fase01.qtde_comerc_sum:
         is_active: true
+        palette:
+          palette_id: f7d21386-e95a-66f4-4a59-76a9191df774
+          collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+          custom_colors:
+          - "#d3f5b8"
+          - "#aaf52d"
+          - "#699114"
     map_plot_mode: points
     heatmap_gridlines: false
     heatmap_gridlines_empty: false
@@ -524,6 +543,27 @@
     limit: 500
     value_labels: legend
     label_type: labPer
+    color_application:
+      collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+      custom:
+        id: 4c001d26-59f3-9065-46c6-3aa667d7d8f1
+        label: Custom
+        type: continuous
+        stops:
+        - color: "#aaf52d"
+          offset: 0
+        - color: "#C2DD67"
+          offset: 50
+        - color: "#699114"
+          offset: 100
+      options:
+        steps: 5
+        reverse: true
+    series_colors: {}
+    series_labels:
+      st_importacoes_fase01.count: Quantidade
+      st_importacoes_fase01.via_transp: Transporte
+      st_importacoes_fase01.qtde_comerc_sum: Qtde Comercializada
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -542,10 +582,6 @@
     show_sql_query_menu_options: false
     show_totals: true
     show_row_totals: true
-    series_labels:
-      st_importacoes_fase01.count: Quantidade
-      st_importacoes_fase01.via_transp: Transporte
-      st_importacoes_fase01.qtde_comerc_sum: Qtde Comercializada
     series_cell_visualizations:
       st_importacoes_fase01.qtde_comerc_sum:
         is_active: true
@@ -664,6 +700,13 @@
         is_active: false
       st_importacoes_fase01.fob_sum:
         is_active: true
+        palette:
+          palette_id: 19afa5c6-5113-180d-7828-8461a755931c
+          collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+          custom_colors:
+          - "#d3f5b8"
+          - "#aaf52d"
+          - "#699114"
     series_value_format:
       st_importacoes_fase01.fob_sum: "$#,##0"
       st_importacoes_fase01.val_fob_un_us_num_avg:
@@ -745,9 +788,27 @@
     explore: st_importacoes_fase01
     type: looker_pie
     fields: [st_importacoes_fase01.genero, st_importacoes_fase01.fob_sum]
+    sorts: [st_importacoes_fase01.fob_sum desc]
     limit: 500
     value_labels: legend
     label_type: labPer
+    color_application:
+      collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+      custom:
+        id: 909b0aca-066f-2a33-a393-9e6a0737a345
+        label: Custom
+        type: continuous
+        stops:
+        - color: "#aaf52d"
+          offset: 0
+        - color: "#C2DD67"
+          offset: 50
+        - color: "#699114"
+          offset: 100
+      options:
+        steps: 5
+        reverse: true
+    series_colors: {}
     series_types: {}
     defaults_version: 1
     listen:
@@ -796,6 +857,8 @@
     totals_color: "#808080"
     label_value_format: "$#,##0"
     series_types: {}
+    series_colors:
+      st_importacoes_fase01.fob_sum: "#7a7a7a"
     value_labels: legend
     label_type: labPer
     defaults_version: 1
@@ -845,6 +908,8 @@
     totals_color: "#808080"
     label_value_format: "$#,##0"
     series_types: {}
+    series_colors:
+      st_importacoes_fase01.fob_sum: "#7a7a7a"
     value_labels: legend
     label_type: labPer
     defaults_version: 1
