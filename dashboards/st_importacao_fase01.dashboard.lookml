@@ -519,7 +519,8 @@
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_pie
-    fields: [st_importacoes_fase01.via_transp, st_importacoes_fase01.fob_sum]
+    fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.via_transp_norm]
+    sorts: [st_importacoes_fase01.fob_sum desc]
     limit: 500
     value_labels: legend
     label_type: labPer
