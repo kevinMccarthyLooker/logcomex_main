@@ -577,6 +577,15 @@ view: st_importacoes_fase01 {
     sql: ${TABLE}.via_transp ;;
   }
 
+  dimension: via_transp_norm {
+    type: string
+    sql: case
+         when ${TABLE}.via_transp = 'MARÍTIMA' then 'MARÍTIMO'
+         when ${TABLE}.via_transp = 'AÉREA' then 'AÉREO'
+         when ${TABLE}.via_transp = 'RODOVIÁRIA' then 'RODOVIÁRIO'
+         else ${TABLE}.via_transp ;;
+  }
+
   dimension: store_location {
     type: location
     sql_latitude: ${latitude} ;;
