@@ -583,7 +583,8 @@ view: st_importacoes_fase01 {
          when ${TABLE}.via_transp = 'MARÍTIMA' then 'MARÍTIMO'
          when ${TABLE}.via_transp = 'AÉREA' then 'AÉREO'
          when ${TABLE}.via_transp = 'RODOVIÁRIA' then 'RODOVIÁRIO'
-         else ${TABLE}.via_transp ;;
+         else ${TABLE}.via_transp
+         end;;
   }
 
   dimension: store_location {
