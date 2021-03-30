@@ -6,7 +6,7 @@ include: "/**/cargo_reception_items_silver.view.lkml"
 include: "/**/external_real_exportador.dashboard.lookml"
 include: "/**/external_frete_exp_mar.dashboard.lookml"
 include: "/**/exportadores_2020_gold.view.lkml"
-include: "/**/due_teste.view"
+include: "/**/due_gold.view"
 include: "/**/big_data_expo_real_exportador.view"
 
 
@@ -33,6 +33,6 @@ explore: cargo_reception_items_silver {
   persist_with: real_export_frete_export_embed_datagroup
 }
 
-explore: due_teste {}
+explore: due_gold {}
 
 explore: big_data_expo_real_exportador {}
