@@ -53,6 +53,8 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
     row: 3
     col: 0
     width: 5
@@ -92,17 +94,22 @@
     rows_font_size: 12
     series_types: {}
     defaults_version: 1
+    note_state: collapsed
+    note_display: hover
+    note_text: A Quantidade de registros da base de dados.
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 6
-    col: 0
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+    row: 3
+    col: 5
     width: 5
     height: 3
-  - title: Tendência - FOB
-    name: Tendência - FOB
+  - title: FOB Total - Tendência
+    name: FOB Total - Tendência
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
@@ -185,21 +192,20 @@
     header_font_size: 12
     rows_font_size: 12
     defaults_version: 1
-    hidden_fields: [st_importacoes_fase01.fob_sum]
-    note_state: collapsed
-    note_display: hover
-    note_text: A Quantidade se refere aos registros da base de dados.
+    hidden_fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.count]
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 3
-    col: 5
-    width: 19
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+    row: 6
+    col: 0
+    width: 24
     height: 6
-  - title: Ranking de Importadores - TOP 10
-    name: Ranking de Importadores - TOP 10
+  - title: FOB Total - Top 10 Importadores
+    name: FOB Total - Top 10 Importadores
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
@@ -258,16 +264,15 @@
       st_importacoes_fase01.count: Quantidade
       calculation_1: Fob Sum
     defaults_version: 1
-    hidden_fields: [st_importacoes_fase01.fob_sum]
-    note_state: collapsed
-    note_display: hover
-    note_text: A Quantidade se refere aos registros da base de dados.
+    hidden_fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.count]
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 35
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+    row: 38
     col: 0
     width: 24
     height: 8
@@ -303,12 +308,11 @@
       st_importacoes_fase01.fob_sum:
         is_active: true
         palette:
-          palette_id: 93b1041b-bcf8-8f4a-9f74-2760fca37dbe
+          palette_id: 1d226da9-6ef2-4271-18c3-68d6209ca6ad
           collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
           custom_colors:
-          - "#d3f5b8"
-          - "#aaf52d"
-          - "#699114"
+          - "#c2c2c2"
+          - "#363636"
     series_value_format:
       st_importacoes_fase01.fob_sum: "$#,##0.00"
     x_axis_gridlines: false
@@ -343,7 +347,9 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 9
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+    row: 12
     col: 0
     width: 8
     height: 10
@@ -355,6 +361,9 @@
     fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.store_location]
     sorts: [st_importacoes_fase01.fob_sum]
     limit: 500
+    dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_fase01.fob_sum}",
+        value_format: "$#,##0", value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}]
     map_plot_mode: points
     heatmap_gridlines: false
     heatmap_gridlines_empty: false
@@ -419,12 +428,15 @@
     map: auto
     map_projection: ''
     quantize_colors: false
+    hidden_fields: [st_importacoes_fase01.fob_sum]
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 9
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+    row: 12
     col: 8
     width: 16
     height: 10
@@ -464,12 +476,11 @@
       st_importacoes_fase01.qtde_comerc_sum:
         is_active: true
         palette:
-          palette_id: f7d21386-e95a-66f4-4a59-76a9191df774
+          palette_id: f071d74e-c3af-3d62-e2eb-291c9a57c9c0
           collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
           custom_colors:
-          - "#d3f5b8"
-          - "#aaf52d"
-          - "#699114"
+          - "#c2c2c2"
+          - "#363636"
     map_plot_mode: points
     heatmap_gridlines: false
     heatmap_gridlines_empty: false
@@ -535,9 +546,11 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 43
-    col: 0
-    width: 12
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+    row: 46
+    col: 9
+    width: 6
     height: 6
   - title: Unid Importadas - Modal
     name: Unid Importadas - Modal
@@ -563,7 +576,9 @@
       options:
         steps: 5
         reverse: true
-    series_colors: {}
+    series_colors:
+      MARÍTIMO: "#96d623"
+      AÉREO: "#464646"
     series_labels:
       st_importacoes_fase01.count: Quantidade
       st_importacoes_fase01.via_transp: Transporte
@@ -658,17 +673,19 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 43
-    col: 12
-    width: 12
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+    row: 46
+    col: 15
+    width: 9
     height: 6
   - title: Descrições
     name: Descrições
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_grid
-    fields: [st_importacoes_fase01.qtde_comerc_sum, st_importacoes_fase01.desc_prodt,
-      st_importacoes_fase01.tp_unid_comerc, st_importacoes_fase01.fob_sum, st_importacoes_fase01.val_fob_un_us_num_avg]
+    fields: [st_importacoes_fase01.produto, st_importacoes_fase01.tp_unid_comerc,
+      st_importacoes_fase01.qtde_comerc_sum, st_importacoes_fase01.fob_sum, st_importacoes_fase01.val_fob_un_us_num_avg]
     filters:
       st_importacoes_fase01.tp_unid_comerc: "-EMPTY"
     sorts: [st_importacoes_fase01.qtde_comerc_sum desc]
@@ -689,7 +706,7 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     show_sql_query_menu_options: false
-    column_order: ["$$$_row_numbers_$$$", st_importacoes_fase01.desc_prodt, st_importacoes_fase01.qtde_comerc_sum,
+    column_order: ["$$$_row_numbers_$$$", st_importacoes_fase01.produto, st_importacoes_fase01.qtde_comerc_sum,
       st_importacoes_fase01.tp_unid_comerc, st_importacoes_fase01.fob_sum, st_importacoes_fase01.val_fob_un_us_num_avg]
     show_totals: true
     show_row_totals: true
@@ -705,12 +722,11 @@
       st_importacoes_fase01.fob_sum:
         is_active: true
         palette:
-          palette_id: 19afa5c6-5113-180d-7828-8461a755931c
+          palette_id: 39dda765-0763-514e-e2ac-8db862369f0f
           collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
           custom_colors:
-          - "#d3f5b8"
-          - "#aaf52d"
-          - "#699114"
+          - "#c2c2c2"
+          - "#363636"
     series_value_format:
       st_importacoes_fase01.fob_sum: "$#,##0"
       st_importacoes_fase01.val_fob_un_us_num_avg:
@@ -777,12 +793,15 @@
     map: auto
     map_projection: ''
     quantize_colors: false
+    hidden_fields:
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 49
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+    row: 52
     col: 0
     width: 24
     height: 6
@@ -810,7 +829,9 @@
       options:
         steps: 5
         reverse: true
-    series_colors: {}
+    series_colors:
+      FEMININO: "#96d623"
+      MASCULINO: "#464646"
     series_types: {}
     defaults_version: 1
     listen:
@@ -818,12 +839,14 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 27
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+    row: 46
     col: 0
-    width: 5
-    height: 8
-  - title: Produtos Top 15 - FOB
-    name: Produtos Top 15 - FOB
+    width: 9
+    height: 6
+  - title: FOB Total - Top 15 Produtos
+    name: FOB Total - Top 15 Produtos
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
@@ -873,12 +896,14 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 19
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+    row: 22
     col: 0
     width: 24
     height: 8
-  - title: Material - FOB
-    name: Material - FOB
+  - title: FOB Total - Top 10 Materiais
+    name: FOB Total - Top 10 Materiais
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
@@ -900,7 +925,7 @@
     plot_size_by_field: false
     trellis: ''
     stacking: ''
-    limit_displayed_rows: false
+    limit_displayed_rows: true
     legend_position: center
     point_style: none
     show_value_labels: true
@@ -912,6 +937,10 @@
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
+    limit_displayed_rows_values:
+      show_hide: show
+      first_last: first
+      num_rows: '10'
     label_value_format: "$#,##0"
     series_types: {}
     series_colors:
@@ -924,15 +953,17 @@
       Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
-    row: 27
-    col: 5
-    width: 19
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+    row: 30
+    col: 0
+    width: 24
     height: 8
   filters:
   - name: Importador Nome
     title: Importador Nome
     type: field_filter
-    default_value: ZARA BRASIL LTDA
+    default_value: ''
     allow_multiple_values: true
     required: false
     ui_config:
@@ -985,3 +1016,31 @@
     explore: st_importacoes_fase01
     listens_to_filters: []
     field: st_importacoes_fase01.produto
+  - name: Material
+    title: Material
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+      options: []
+    model: external_st_importacoes
+    explore: st_importacoes_fase01
+    listens_to_filters: []
+    field: st_importacoes_fase01.material
+  - name: Gênero
+    title: Gênero
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+      options: []
+    model: external_st_importacoes
+    explore: st_importacoes_fase01
+    listens_to_filters: []
+    field: st_importacoes_fase01.genero
