@@ -822,8 +822,8 @@
     col: 0
     width: 5
     height: 8
-  - title: Produtos - FOB
-    name: Produtos - FOB
+  - title: Produtos Top 15 - FOB
+    name: Produtos Top 15 - FOB
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
@@ -845,7 +845,7 @@
     plot_size_by_field: false
     trellis: ''
     stacking: ''
-    limit_displayed_rows: false
+    limit_displayed_rows: true
     legend_position: center
     point_style: none
     show_value_labels: true
@@ -857,6 +857,10 @@
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
+    limit_displayed_rows_values:
+      show_hide: hide
+      first_last: first
+      num_rows: '15'
     label_value_format: "$#,##0"
     series_types: {}
     series_colors:
