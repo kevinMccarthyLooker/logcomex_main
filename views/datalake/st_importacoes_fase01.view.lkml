@@ -720,7 +720,7 @@ view: st_importacoes_fase01 {
     type: string
     sql:
     case
-    when ${TABLE}.genero is null or ${TABLE}.genero = '' then 'Não Identificado'
+    when ${TABLE}.genero is null or ${TABLE}.genero = '' then 'NÃO IDENTIFICADO'
     else ${TABLE}.genero
     end ;;
   }
@@ -754,7 +754,7 @@ view: st_importacoes_fase01 {
     type: string
     sql:
     case
-    when ${TABLE}.importador_nome is null or ${TABLE}.importador_nome = '' then 'Não Identificado'
+    when ${TABLE}.importador_nome is null or ${TABLE}.importador_nome = '' then 'NÃO IDENTIFICADO'
     else ${TABLE}.importador_nome
     end;;
   }
@@ -778,7 +778,7 @@ view: st_importacoes_fase01 {
     type: string
     sql:
     case
-    when ${TABLE}.material is null or ${TABLE}.material = '' then 'Não Identificado'
+    when ${TABLE}.material is null or ${TABLE}.material = '' then 'NÃO IDENTIFICADO'
     else ${TABLE}.material
     end;;
 
@@ -888,7 +888,7 @@ view: st_importacoes_fase01 {
     type: string
     sql:
     case
-    when ${TABLE}.produto is null or ${TABLE}.produto = '' then 'Não Identificado'
+    when ${TABLE}.produto is null or ${TABLE}.produto = '' then 'NÃO IDENTIFICADO'
     else ${TABLE}.produto
     end;;
   }
@@ -1064,7 +1064,7 @@ view: st_importacoes_fase01 {
          when ${TABLE}.via_transp = 'MARíTIMA' then 'MARÍTIMO'
          when ${TABLE}.via_transp = 'AÉREA' then 'AÉREO'
          when ${TABLE}.via_transp = 'RODOVIÁRIA' then 'RODOVIÁRIO'
-         when ${TABLE}.via_transp = '' or ${TABLE}.via_transp is null then 'Não Identificado'
+         when ${TABLE}.via_transp = '' or ${TABLE}.via_transp is null then 'NÃO IDENTIFICADO'
          else ${TABLE}.via_transp
          end;;
   }
