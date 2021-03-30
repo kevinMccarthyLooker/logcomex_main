@@ -718,7 +718,11 @@ view: st_importacoes_fase01 {
 
   dimension: genero {
     type: string
-    sql: ${TABLE}.genero ;;
+    sql:
+    case
+    when ${TABLE}.genero is null or ${TABLE}.genero = '' then 'Não Identificado'
+    else ${TABLE}.genero
+    end ;;
   }
 
   dimension: hwb {
@@ -748,7 +752,11 @@ view: st_importacoes_fase01 {
 
   dimension: importador_nome {
     type: string
-    sql: ${TABLE}.importador_nome ;;
+    sql:
+    case
+    when ${TABLE}.importador_nome is null or ${TABLE}.importador_nome = '' then 'Não Identificado'
+    else ${TABLE}.importador_nome
+    end;;
   }
 
   dimension: incoterm {
@@ -768,7 +776,12 @@ view: st_importacoes_fase01 {
 
   dimension: material {
     type: string
-    sql: ${TABLE}.material ;;
+    sql:
+    case
+    when ${TABLE}.material is null or ${TABLE}.material = '' then 'Não Identificado'
+    else ${TABLE}.material
+    end;;
+
   }
 
   dimension: modalidade_despacho {
@@ -873,7 +886,11 @@ view: st_importacoes_fase01 {
 
   dimension: produto {
     type: string
-    sql: ${TABLE}.produto ;;
+    sql:
+    case
+    when ${TABLE}.produto is null or ${TABLE}.produto = '' then 'Não Identificado'
+    else ${TABLE}.produto
+    end;;
   }
 
   dimension: percentual {
@@ -1047,6 +1064,7 @@ view: st_importacoes_fase01 {
          when ${TABLE}.via_transp = 'MARíTIMA' then 'MARÍTIMO'
          when ${TABLE}.via_transp = 'AÉREA' then 'AÉREO'
          when ${TABLE}.via_transp = 'RODOVIÁRIA' then 'RODOVIÁRIO'
+         when ${TABLE}.via_transp = '' or ${TABLE}.via_transp is null then 'Não Identificado'
          else ${TABLE}.via_transp
          end;;
   }
