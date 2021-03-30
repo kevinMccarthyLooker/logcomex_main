@@ -186,6 +186,9 @@
     rows_font_size: 12
     defaults_version: 1
     hidden_fields: [st_importacoes_fase01.fob_sum]
+    note_state: collapsed
+    note_display: hover
+    note_text: A Quantidade se refere aos registros da base de dados.
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
       Período: st_importacoes_fase01.anomes
@@ -256,6 +259,9 @@
       calculation_1: Fob Sum
     defaults_version: 1
     hidden_fields: [st_importacoes_fase01.fob_sum]
+    note_state: collapsed
+    note_display: hover
+    note_text: A Quantidade se refere aos registros da base de dados.
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
       Período: st_importacoes_fase01.anomes
