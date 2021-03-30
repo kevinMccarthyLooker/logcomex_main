@@ -881,7 +881,7 @@
     show_silhouette: false
     totals_color: "#808080"
     limit_displayed_rows_values:
-      show_hide: hide
+      show_hide: show
       first_last: first
       num_rows: '15'
     label_value_format: "$#,##0"
