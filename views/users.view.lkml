@@ -59,7 +59,7 @@ view: users {
   }
 
   dimension: twofactor_code_verified {
-    type: yesno
+    type: string
     sql: ${TABLE}."twofactor_code_verified" ;;
   }
 
