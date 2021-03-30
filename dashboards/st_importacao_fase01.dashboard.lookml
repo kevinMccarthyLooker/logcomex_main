@@ -198,8 +198,8 @@
     col: 5
     width: 19
     height: 6
-  - title: Ranking de Importadores - TOP 15
-    name: Ranking de Importadores - TOP 15
+  - title: Ranking de Importadores - TOP 10
+    name: Ranking de Importadores - TOP 10
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
@@ -248,7 +248,7 @@
     limit_displayed_rows_values:
       show_hide: show
       first_last: first
-      num_rows: '15'
+      num_rows: '10'
     series_types:
       st_importacoes_fase01.count: line
     series_colors:
@@ -552,15 +552,13 @@
     color_application:
       collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
       custom:
-        id: 4c001d26-59f3-9065-46c6-3aa667d7d8f1
+        id: 93fcc1b6-c368-4337-343f-d6c9cba07479
         label: Custom
         type: continuous
         stops:
-        - color: "#aaf52d"
+        - color: "#C2C2C2"
           offset: 0
-        - color: "#C2DD67"
-          offset: 50
-        - color: "#699114"
+        - color: "#363636"
           offset: 100
       options:
         steps: 5
@@ -801,15 +799,13 @@
     color_application:
       collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
       custom:
-        id: 909b0aca-066f-2a33-a393-9e6a0737a345
+        id: 5a83e23e-be83-378d-3a7e-efbc7c5a99f1
         label: Custom
         type: continuous
         stops:
-        - color: "#aaf52d"
+        - color: "#c2c2c2"
           offset: 0
-        - color: "#C2DD67"
-          offset: 50
-        - color: "#699114"
+        - color: "#363636"
           offset: 100
       options:
         steps: 5
