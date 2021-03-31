@@ -163,4 +163,37 @@ view: certificate_radar_queue_gold {
       deleted_customer_time
     ]
   }
+
+  ##======================================================
+  ## Campos adicionados
+
+  measure: created_at_max {
+    type: time
+    sql: MAX ${TABLE}.created_at ;;
+  }
+
+  measure: updated_at_max {
+    type: time
+    sql: MAX ${TABLE}.updated_at ;;
+  }
+
+  measure: processed_at_max {
+    type: time
+    sql: MAX ${TABLE}.processed_at ;;
+  }
+
+  measure: created_at_min {
+    type: time
+    sql: MIN ${TABLE}.created_at ;;
+  }
+
+  measure: updated_at_min {
+    type: time
+    sql: MIN ${TABLE}.updated_at ;;
+  }
+
+  measure: processed_at_min {
+    type: time
+    sql: MIN ${TABLE}.processed_at ;;
+  }
 }
