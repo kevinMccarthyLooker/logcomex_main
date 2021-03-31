@@ -3,6 +3,7 @@ connection: "dremio_datalake"
 include: "/**/comex_analytics_di.view.lkml"
 include: "/**/comex_analytics_adicoes.view.lkml"
 include: "/**/comex_analytics.dashboard"
+include: "/**/certificate_radar_queue_gold.view.lkml"
 
 datagroup: comex_analytics_embed_datagroup {
   sql_trigger: SELECT CURRENT_DATE ;;
@@ -20,4 +21,7 @@ persist_with: comex_analytics_embed_datagroup
 }
 
 explore: comex_analytics_adicoes {
+}
+
+explore: certificate_radar_queue_gold {
 }
