@@ -108,8 +108,8 @@
     col: 5
     width: 5
     height: 3
-  - title: FOB Total - Tendência
-    name: FOB Total - Tendência
+  - title: FOB Total - Tendência Mensal
+    name: FOB Total - Tendência Mensal
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
@@ -349,10 +349,10 @@
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
-    row: 12
+    row: 52
     col: 0
-    width: 8
-    height: 10
+    width: 12
+    height: 9
   - title: País Origem
     name: País Origem
     model: external_st_importacoes
@@ -437,8 +437,8 @@
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
     row: 12
-    col: 8
-    width: 16
+    col: 0
+    width: 24
     height: 10
   - title: Unidades Importadas
     name: Unidades Importadas
@@ -548,12 +548,12 @@
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
-    row: 46
-    col: 9
-    width: 6
-    height: 6
-  - title: Unid Importadas - Modal
-    name: Unid Importadas - Modal
+    row: 52
+    col: 12
+    width: 12
+    height: 9
+  - title: FOB Total - Modal
+    name: FOB Total - Modal
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_pie
@@ -676,8 +676,8 @@
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
     row: 46
-    col: 15
-    width: 9
+    col: 12
+    width: 12
     height: 6
   - title: Descrições
     name: Descrições
@@ -801,12 +801,12 @@
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
-    row: 52
+    row: 61
     col: 0
     width: 24
     height: 6
-  - title: Gênero - FOB
-    name: Gênero - FOB
+  - title: FOB Total - Gênero
+    name: FOB Total - Gênero
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_pie
@@ -843,7 +843,7 @@
       Gênero: st_importacoes_fase01.genero
     row: 46
     col: 0
-    width: 9
+    width: 12
     height: 6
   - title: FOB Total - Top 15 Produtos
     name: FOB Total - Top 15 Produtos
