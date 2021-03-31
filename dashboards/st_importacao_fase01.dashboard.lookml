@@ -105,7 +105,7 @@
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
     row: 3
-    col: 13
+    col: 12
     width: 7
     height: 3
   - title: Valor FOB Total - Tendência Mensal
