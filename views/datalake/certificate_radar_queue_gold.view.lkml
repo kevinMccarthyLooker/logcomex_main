@@ -167,9 +167,11 @@ view: certificate_radar_queue_gold {
   ##======================================================
   ## Campos adicionados
 
+
   measure: created_at_max {
-    type: date_minute
-    sql: MAX ${created_at_raw} ;;
+    type: date
+    sql: MAX(${created_at_raw}) ;;
+    convert_tz: no
   }
 
   measure: updated_at_max {
