@@ -170,47 +170,52 @@ view: certificate_radar_queue_gold {
 
   measure: created_at_max {
     type: date_minute
-    sql: MAX(${created_at_raw}) ;;
+    sql: MAX(${created_at_raw});;
     convert_tz: no
   }
 
   measure: updated_at_max {
     type: date_minute
-    sql: MAX ${TABLE}.updated_at ;;
+    sql: MAX(${updated_at_raw}) ;;
+    convert_tz: no
   }
 
   measure: processed_at_max {
     type: date_minute
-    sql: MAX ${TABLE}.processed_at ;;
+    sql: MAX(${processed_at_raw}) ;;
+    convert_tz: no
   }
 
   measure: created_at_min {
     type: date_minute
-    sql: MIN ${TABLE}.created_at ;;
+    sql: MIN(${created_at_raw}) ;;
+    convert_tz: no
   }
 
   measure: updated_at_min {
     type: date_minute
-    sql: MIN ${TABLE}.updated_at ;;
+    sql: MIN(${updated_at_raw}) ;;
+    convert_tz: no
   }
 
   measure: processed_at_min {
     type: date_minute
-    sql: MIN ${TABLE}.processed_at ;;
+    sql: MIN(${processed_at_raw}) ;;
+    convert_tz: no
   }
 
   measure: created_at_dif {
     type: date_minute
-    sql: ((MAX ${TABLE}."created_at") - (MIN ${TABLE}."created_at"));;
+    sql: ((MAX(${created_at_raw})) - (MIN(${created_at_raw})));;
   }
 
   measure: updated_at_dif {
     type: date_minute
-    sql: ((MAX ${TABLE}."update_at_max" -  (MIN ${TABLE}."update_at_max"));;
+    sql: ((MAX(${updated_at_raw}) - (MIN(${updated_at_raw})));;
   }
 
   measure: processed_at_dif {
     type: date_minute
-    sql: ((MAX ${TABLE}."processed_at") -  (MIN ${TABLE}."processed_at"));;
+    sql: ((MAX(${processed_at_raw})) - (MIN(${processed_at_raw})));;
   }
 }
