@@ -214,10 +214,37 @@ view: certificate_radar_queue_gold {
   measure: media_tempo_execucao_min {
     type: average
     sql: ${minutes_tempo_execucao};;
+    value_format:"0.00"
   }
 
   measure: media_tempo_execucao_hour {
     type: average
     sql: ${hours_tempo_execucao};;
+    value_format:"0.00"
   }
+
+  measure: max_tempo_execucao_min {
+    type: number
+    sql: MAX ${minutes_tempo_execucao};;
+    value_format: "0.00"
+  }
+
+  measure: max_tempo_execucao_hour {
+    type: number
+    sql: MAX ${hours_tempo_execucao};;
+    value_format:"0.00"
+  }
+
+  measure: min_tempo_execucao_min {
+    type: number
+    sql: MIN ${minutes_tempo_execucao};;
+    value_format:"0.00"
+  }
+
+  measure: min_tempo_execucao_hour {
+    type: number
+    sql: MIN ${hours_tempo_execucao};;
+    value_format:"0.00"
+  }
+
 }
