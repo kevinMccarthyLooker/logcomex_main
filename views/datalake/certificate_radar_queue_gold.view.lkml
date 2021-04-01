@@ -168,8 +168,8 @@ view: certificate_radar_queue_gold {
   ## Campos adicionados
 
   measure: created_at_max {
-    type: date_minute
-    sql: MAX ${TABLE}.created_at ;;
+    type: max
+    sql: ${TABLE}.created_at ;;
   }
 
   measure: updated_at_max {
