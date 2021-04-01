@@ -204,8 +204,11 @@ view: certificate_radar_queue_gold {
     convert_tz: no
   }
 
-  measure: diff_minutes {
-    type: number
-    sql: diff_minutes(${created_at_minute}, ${updated_at_minute});;
+  dimension_group: tempo_execucao {
+    type: duration
+    intervals: [hour,minute]
+    sql_start: ${TABLE}."created_at" ;;
+    sql_end: ${TABLE}."updated_at";;
   }
+
 }
