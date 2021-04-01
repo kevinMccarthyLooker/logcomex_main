@@ -204,18 +204,8 @@ view: certificate_radar_queue_gold {
     convert_tz: no
   }
 
-  measure: created_at_dif {
+  measure: diff_minutes {
     type: date_minute
-    sql: ((MAX(${created_at_raw})) - (MIN(${created_at_raw})));;
-  }
-
-  measure: updated_at_dif {
-    type: date_minute
-    sql: ((MAX(${updated_at_raw}) - (MIN(${updated_at_raw})));;
-  }
-
-  measure: processed_at_dif {
-    type: date_minute
-    sql: ((MAX(${processed_at_raw})) - (MIN(${processed_at_raw})));;
+    sql: diff_minutes(${created_at_raw}, ${updated_at_raw});;
   }
 }
