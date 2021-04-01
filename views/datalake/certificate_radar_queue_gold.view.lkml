@@ -205,7 +205,7 @@ view: certificate_radar_queue_gold {
   }
 
   measure: diff_minutes {
-    type: date_minute
-    sql: diff_minutes(${created_at_raw}, ${updated_at_raw});;
+    type: number
+    sql: diff_minutes(${created_at_minute}, ${updated_at_minute});;
   }
 }
