@@ -169,7 +169,7 @@ view: certificate_radar_queue_gold {
 
   measure: created_at_max {
     type: max
-    sql: ${TABLE}.created_at ;;
+    sql: ${created_at_raw} ;;
   }
 
   measure: updated_at_max {
