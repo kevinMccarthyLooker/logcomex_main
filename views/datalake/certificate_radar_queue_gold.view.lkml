@@ -206,7 +206,7 @@ view: certificate_radar_queue_gold {
 
   dimension_group: tempo_execucao {
     type: duration
-    intervals: [hour,minute]
+    intervals: [hour,minute,second]
     sql_start: ${TABLE}."created_at" ;;
     sql_end: ${TABLE}."updated_at";;
   }
@@ -244,6 +244,12 @@ view: certificate_radar_queue_gold {
   measure: min_tempo_execucao_hour {
     type: number
     sql: MIN ${hours_tempo_execucao};;
+    value_format:"0.00"
+  }
+
+  measure: min_tempo_execucao_secs {
+    type: number
+    sql: MIN ${seconds_tempo_execucao};;
     value_format:"0.00"
   }
 
