@@ -196,4 +196,19 @@ view: certificate_radar_queue_gold {
     type: time
     sql: MIN ${TABLE}.processed_at ;;
   }
+
+  measure: created_at_dif {
+    type: time
+    sql: ${TABLE}."created_at_max" -  ${TABLE}."created_at_min";;
+  }
+
+  measure: updated_at_dif {
+    type: time
+    sql: ${TABLE}."update_at_max" -  ${TABLE}."update_at_max";;
+  }
+
+  measure: processed_at_dif {
+    type: time
+    sql: ${TABLE}."processed_at_max" -  ${TABLE}."processed_at_min";;
+  }
 }
