@@ -211,4 +211,13 @@ view: certificate_radar_queue_gold {
     sql_end: ${TABLE}."updated_at";;
   }
 
+  measure: media_tempo_execucao_min {
+    type: average
+    sql: ${minutes_tempo_execucao};;
+  }
+
+  measure: media_tempo_execucao_hour {
+    type: average
+    sql: ${hours_tempo_execucao};;
+  }
 }
