@@ -12,6 +12,50 @@ view: st_importacoes_fase01 {
     sql: ${TABLE}.anomes ;;
   }
 
+  dimension: anomes_norm {
+    type: string
+    sql:
+    case
+    when ${TABLE}.anomes = '202001' then 'JAN 20'
+    when ${TABLE}.anomes = '202002' then 'FEV 20'
+    when ${TABLE}.anomes = '202003' then 'MAR 20'
+    when ${TABLE}.anomes = '202004' then 'ABR 20'
+    when ${TABLE}.anomes = '202005' then 'MAI 20'
+    when ${TABLE}.anomes = '202006' then 'JUN 20'
+    when ${TABLE}.anomes = '202007' then 'JUL 20'
+    when ${TABLE}.anomes = '202008' then 'AGO 20'
+    when ${TABLE}.anomes = '202009' then 'SET 20'
+    when ${TABLE}.anomes = '202010' then 'OUT 20'
+    when ${TABLE}.anomes = '202011' then 'NOV 20'
+    when ${TABLE}.anomes = '202012' then 'DEZ 20'
+    when ${TABLE}.anomes = '202101' then 'JAN 21'
+    when ${TABLE}.anomes = '202102' then 'FEV 21'
+    when ${TABLE}.anomes = '202103' then 'MAR 21'
+    when ${TABLE}.anomes = '202104' then 'ABR 21'
+    when ${TABLE}.anomes = '202105' then 'MAI 21'
+    when ${TABLE}.anomes = '202106' then 'JUN 21'
+    when ${TABLE}.anomes = '202107' then 'JUL 21'
+    when ${TABLE}.anomes = '202108' then 'AGO 21'
+    when ${TABLE}.anomes = '202109' then 'SET 21'
+    when ${TABLE}.anomes = '202110' then 'OUT 21'
+    when ${TABLE}.anomes = '202111' then 'NOV 21'
+    when ${TABLE}.anomes = '202112' then 'DEZ 21'
+    when ${TABLE}.anomes = '202201' then 'JAN 22'
+    when ${TABLE}.anomes = '202202' then 'FEV 22'
+    when ${TABLE}.anomes = '202203' then 'MAR 22'
+    when ${TABLE}.anomes = '202204' then 'ABR 22'
+    when ${TABLE}.anomes = '202205' then 'MAI 22'
+    when ${TABLE}.anomes = '202206' then 'JUN 22'
+    when ${TABLE}.anomes = '202207' then 'JUL 22'
+    when ${TABLE}.anomes = '202208' then 'AGO 22'
+    when ${TABLE}.anomes = '202209' then 'SET 22'
+    when ${TABLE}.anomes = '202210' then 'OUT 22'
+    when ${TABLE}.anomes = '202211' then 'NOV 22'
+    when ${TABLE}.anomes = '202212' then 'DEZ 22'
+    else 'ERRO'
+    end;;
+  }
+
   dimension: armazem {
     type: string
     sql: ${TABLE}.armazem ;;
