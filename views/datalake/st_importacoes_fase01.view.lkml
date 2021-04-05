@@ -713,7 +713,11 @@ view: st_importacoes_fase01 {
 
   dimension: exportador_nome {
     type: string
-    sql: ${TABLE}.exportador_nome ;;
+    sql:
+    case
+    when ${TABLE}.exportador_nome is null or ${TABLE}.exportador_nome = '' then 'NÃO IDENTIFICADO'
+    else ${TABLE}.exportador_nome
+    end ;;
   }
 
   dimension: genero {
