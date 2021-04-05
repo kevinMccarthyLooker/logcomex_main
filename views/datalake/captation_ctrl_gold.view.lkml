@@ -274,5 +274,209 @@ view: captation_ctrl_gold {
 
   ## ================ Campos adicionados ========================
 
+##============ Minimo e Máximo do CTRL ========================
+  measure: created_at_ctrl_max {
+    type: date_minute
+    sql: MAX(${created_at_ctrl_raw});;
+    convert_tz: no
+  }
+  measure: created_at_ctrl_min {
+    type: date_minute
+    sql: MIN(${created_at_ctrl_raw}) ;;
+    convert_tz: no
+  }
+    measure: updated_at_ctrl_max {
+    type: date_minute
+    sql: MAX(${updated_at_ctrl_raw});;
+    convert_tz: no
+  }
+  measure: updated_at_ctrl_min {
+    type: date_minute
+    sql: MIN(${updated_at_ctrl_raw}) ;;
+    convert_tz: no
+  }
+
+  ##============ Minimo e Máximo do List ========================
+  measure: created_at_list_max {
+    type: date_minute
+    sql: MAX(${created_at_list_raw});;
+    convert_tz: no
+  }
+  measure: created_at_list_min {
+    type: date_minute
+    sql: MIN(${created_at_list_raw}) ;;
+    convert_tz: no
+  }
+    measure: updated_at_list_max {
+    type: date_minute
+    sql: MAX(${updated_at_list_raw});;
+    convert_tz: no
+  }
+  measure: updated_at_list_min {
+    type: date_minute
+    sql: MIN(${updated_at_list_raw}) ;;
+    convert_tz: no
+  }
+
+  ##============ Minimo e Máximo do Item ========================
+
+  measure: created_at_item_max {
+    type: date_minute
+    sql: MAX(${created_at_item_raw});;
+    convert_tz: no
+  }
+  measure: created_at_item_min {
+    type: date_minute
+    sql: MIN(${created_at_item_raw}) ;;
+    convert_tz: no
+  }
+    measure: updated_at_item_max {
+    type: date_minute
+    sql: MAX(${updated_at_item_raw});;
+    convert_tz: no
+  }
+  measure: updated_at_item_min {
+    type: date_minute
+    sql: MIN(${updated_at_item_raw}) ;;
+    convert_tz: no
+  }
+
+  ##============ Tempos de Execução ========================
+
+  dimension_group: tempo_execucao_ctrl {
+    type: duration
+    intervals: [hour,minute,second]
+    sql_start: ${TABLE}."created_at_ctrl" ;;
+    sql_end: ${TABLE}."updated_at_ctrl";;
+  }
+
+  dimension_group: tempo_execucao_list {
+    type: duration
+    intervals: [hour,minute,second]
+    sql_start: ${TABLE}."created_at_list" ;;
+    sql_end: ${TABLE}."updated_at_list";;
+  }
+
+  dimension_group: tempo_execucao_item {
+    type: duration
+    intervals: [hour,minute,second]
+    sql_start: ${TABLE}."created_at_item" ;;
+    sql_end: ${TABLE}."updated_at_item";;
+  }
+
+  measure: media_tempo_execucao_ctrl_minutes {
+    type: average
+    sql: ${minutes_tempo_execucao_ctrl};;
+    value_format:"0.00"
+  }
+    measure: media_tempo_execucao_ctrl_hour {
+    type: average
+    sql: ${hours_tempo_execucao_ctrl};;
+    value_format:"0.00"
+  }
+
+  measure: media_tempo_execucao_list_minutes {
+    type: average
+    sql: ${minutes_tempo_execucao_list};;
+    value_format:"0.00"
+  }
+  measure: media_tempo_execucao_list_hour {
+    type: average
+    sql: ${hours_tempo_execucao_list};;
+    value_format:"0.00"
+  }
+
+  measure: media_tempo_execucao_item_minutes {
+    type: average
+    sql: ${minutes_tempo_execucao_item};;
+    value_format:"0.00"
+  }
+  measure: media_tempo_execucao_item_hour {
+    type: average
+    sql: ${hours_tempo_execucao_item};;
+    value_format:"0.00"
+  }
+
+    ##============ Min e Max Tempos de Execução ========================
+
+  measure: max_tempo_execucao_ctrl_hours {
+    type: number
+    sql: MAX ${hours_tempo_execucao_ctrl};;
+    value_format:"0.00"
+  }
+  measure: max_tempo_execucao_ctrl_minutes {
+    type: number
+    sql: MAX ${minutes_tempo_execucao_ctrl};;
+    value_format: "0.00"
+  }
+  measure: min_tempo_execucao_ctrl_hours {
+    type: number
+    sql: MIN ${hours_tempo_execucao_ctrl};;
+    value_format:"0.00"
+  }
+  measure: min_tempo_execucao_ctrl_minutes {
+    type: number
+    sql: MIN ${minutes_tempo_execucao_ctrl};;
+    value_format:"0.00"
+  }
+    measure: min_tempo_execucao_ctrl_secs {
+    type: number
+    sql: MIN ${seconds_tempo_execucao_ctrl};;
+    value_format:"0.00"
+  }
+
+
+  measure: max_tempo_execucao_list_hours {
+    type: number
+    sql: MAX ${hours_tempo_execucao_list};;
+    value_format:"0.00"
+  }
+  measure: max_tempo_execucao_list_minutes {
+    type: number
+    sql: MAX ${minutes_tempo_execucao_list};;
+    value_format: "0.00"
+  }
+  measure: min_tempo_execucao_list_hours {
+    type: number
+    sql: MIN ${hours_tempo_execucao_list};;
+    value_format:"0.00"
+  }
+  measure: min_tempo_execucao_list_minutes {
+    type: number
+    sql: MIN ${minutes_tempo_execucao_list};;
+    value_format:"0.00"
+  }
+  measure: min_tempo_execucao_list_secs {
+    type: number
+    sql: MIN ${seconds_tempo_execucao_list};;
+    value_format:"0.00"
+  }
+
+
+  measure: max_tempo_execucao_item_hours {
+    type: number
+    sql: MAX ${hours_tempo_execucao_item};;
+    value_format:"0.00"
+  }
+  measure: max_tempo_execucao_item_minutes {
+    type: number
+    sql: MAX ${minutes_tempo_execucao_item};;
+    value_format: "0.00"
+  }
+  measure: min_tempo_execucao_item_hours {
+    type: number
+    sql: MIN ${hours_tempo_execucao_item};;
+    value_format:"0.00"
+  }
+  measure: min_tempo_execucao_item_minutes {
+    type: number
+    sql: MIN ${minutes_tempo_execucao_item};;
+    value_format:"0.00"
+  }
+  measure: min_tempo_execucao_item_secs {
+    type: number
+    sql: MIN ${seconds_tempo_execucao_item};;
+    value_format:"0.00"
+  }
 
 }
