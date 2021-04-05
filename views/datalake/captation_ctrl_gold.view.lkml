@@ -364,6 +364,19 @@ view: captation_ctrl_gold {
     sql_end: ${TABLE}."updated_at_item";;
   }
 
+  dimension_group: tempo_execucao_total {
+    type: duration
+    intervals: [hour,minute,second]
+    sql_start: ${TABLE}."created_at_ctrl" ;;
+    sql_end: ${TABLE}."updated_at_item";;
+  }
+
+  measure: tempo_execucao_total {
+    type: average
+    sql: ${hours_tempo_execucao_total};;
+    value_format:"0.00"
+  }
+
   measure: media_tempo_execucao_ctrl_minutes {
     type: average
     sql: ${minutes_tempo_execucao_ctrl};;
