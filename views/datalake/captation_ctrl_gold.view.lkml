@@ -410,6 +410,18 @@ view: captation_ctrl_gold {
     value_format:"0.00"
   }
 
+  measure: media_tempo_execucao_total_minutes {
+    type: average
+    sql: ${minutes_tempo_execucao_total};;
+    value_format:"0.00"
+  }
+  measure: media_tempo_execucao_total_hour {
+    type: average
+    sql: ${hours_tempo_execucao_total};;
+    value_format:"0.00"
+  }
+
+
     ##============ Min e Max Tempos de Execução ========================
 
   measure: max_tempo_execucao_ctrl_hours {
@@ -489,6 +501,33 @@ view: captation_ctrl_gold {
   measure: min_tempo_execucao_item_secs {
     type: number
     sql: MIN ${seconds_tempo_execucao_item};;
+    value_format:"0.00"
+  }
+
+
+  measure: max_tempo_execucao_total_hours {
+    type: number
+    sql: MAX ${hours_tempo_execucao_total};;
+    value_format:"0.00"
+  }
+  measure: max_tempo_execucao_total_minutes {
+    type: number
+    sql: MAX ${minutes_tempo_execucao_total};;
+    value_format: "0.00"
+  }
+  measure: min_tempo_execucao_total_hours {
+    type: number
+    sql: MIN ${hours_tempo_execucao_total};;
+    value_format:"0.00"
+  }
+  measure: min_tempo_execucao_total_minutes {
+    type: number
+    sql: MIN ${minutes_tempo_execucao_total};;
+    value_format:"0.00"
+  }
+  measure: min_tempo_execucao_total_secs {
+    type: number
+    sql: MIN ${seconds_tempo_execucao_total};;
     value_format:"0.00"
   }
 
