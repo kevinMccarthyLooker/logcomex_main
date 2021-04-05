@@ -299,12 +299,12 @@ view: captation_ctrl_gold {
   ##============ Minimo e Máximo do List ========================
   measure: created_at_list_max {
     type: date_minute
-    sql: MAX(${created_at_list_raw});;
+    sql: MAX(${created_at_ctrl_raw});;
     convert_tz: no
   }
   measure: created_at_list_min {
     type: date_minute
-    sql: MIN(${created_at_list_raw}) ;;
+    sql: MIN(${created_at_ctrl_raw}) ;;
     convert_tz: no
   }
     measure: updated_at_list_max {
@@ -353,7 +353,7 @@ view: captation_ctrl_gold {
   dimension_group: tempo_execucao_list {
     type: duration
     intervals: [hour,minute,second]
-    sql_start: ${TABLE}."created_at_list" ;;
+    sql_start: ${TABLE}."created_at_ctrl" ;;
     sql_end: ${TABLE}."updated_at_list";;
   }
 
