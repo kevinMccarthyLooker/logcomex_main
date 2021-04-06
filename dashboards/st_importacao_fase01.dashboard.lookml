@@ -57,8 +57,9 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 3
-    col: 5
+    col: 0
     width: 7
     height: 3
   - title: Quantidade Total de Itens Importados
@@ -108,8 +109,9 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 3
-    col: 12
+    col: 7
     width: 7
     height: 3
   - title: Valor FOB Total - Tendência Mensal
@@ -117,7 +119,8 @@
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
-    fields: [st_importacoes_fase01.anomes, st_importacoes_fase01.fob_sum, st_importacoes_fase01.count]
+    fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.count, st_importacoes_fase01.anomes_norm,
+      st_importacoes_fase01.anomes]
     sorts: [st_importacoes_fase01.anomes]
     limit: 500
     dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_fase01.fob_sum}",
@@ -197,7 +200,7 @@
     header_font_size: 12
     rows_font_size: 12
     defaults_version: 1
-    hidden_fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.count]
+    hidden_fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.count, st_importacoes_fase01.anomes]
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
       Período: st_importacoes_fase01.anomes
@@ -207,6 +210,7 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 6
     col: 0
     width: 24
@@ -281,6 +285,7 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 46
     col: 0
     width: 24
@@ -361,6 +366,7 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 67
     col: 0
     width: 24
@@ -450,6 +456,7 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 12
     col: 0
     width: 24
@@ -583,6 +590,7 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 61
     col: 12
     width: 12
@@ -716,8 +724,7 @@
     hidden_fields:
     note_state: collapsed
     note_display: hover
-    note_text: "A Média Valor Unidade é calculada com base no valor unitário. O valor\
-      \ unitário é o valor FOB dividido pela quantidade comercializada no mesmo registro.\n\
+    note_text: "A Média Valor Unidade é calculada com o valor unitário de cada registro.\n\
       A média simples é a somatória do valor FOB dividido pela quantidade  comercializada\
       \ para todos os registros. "
     listen:
@@ -729,6 +736,7 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 76
     col: 0
     width: 24
@@ -775,6 +783,7 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 61
     col: 0
     width: 12
@@ -785,6 +794,7 @@
     explore: st_importacoes_fase01
     type: looker_column
     fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.produto]
+    filters: {}
     sorts: [st_importacoes_fase01.fob_sum desc]
     limit: 500
     x_axis_gridlines: false
@@ -839,6 +849,7 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 22
     col: 0
     width: 24
@@ -903,6 +914,7 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 38
     col: 0
     width: 24
@@ -975,6 +987,7 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 30
     col: 0
     width: 24
@@ -1048,10 +1061,27 @@
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
+      Modelo: st_importacoes_fase01.modelo
     row: 54
     col: 0
     width: 24
     height: 7
+  - name: ''
+    type: text
+    title_text: ''
+    subtitle_text: Regras dos Materiais
+    body_text: |-
+      1. Na condição de 2 materiais sendo um algodão: de 1%  à 60,9% algodão = descrever o outro material;  de 61% à 99% algodão = predominantemente Algodão.
+
+      2. Na condição de 2 materiais e nenhum deles for algodão: considerar fibras diversas
+
+      3. Na condição de ter 3 ou mais materiais (independente se 1 deles for algodão): considerar fibras diversas.
+
+      4. Na condição de apenas Algodão (sem o percentual): considerar 100% Algodão.
+    row: 3
+    col: 14
+    width: 10
+    height: 3
   filters:
   - name: Importador Nome
     title: Importador Nome
@@ -1080,7 +1110,7 @@
     model: external_st_importacoes
     explore: st_importacoes_fase01
     listens_to_filters: []
-    field: st_importacoes_fase01.anomes
+    field: st_importacoes_fase01.anomes_norm
   - name: NCM
     title: NCM
     type: field_filter
@@ -1165,3 +1195,17 @@
     explore: st_importacoes_fase01
     listens_to_filters: []
     field: st_importacoes_fase01.nm_pais_origem
+  - name: Modelo
+    title: Modelo
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+      options: []
+    model: external_st_importacoes
+    explore: st_importacoes_fase01
+    listens_to_filters: []
+    field: st_importacoes_fase01.modelo
