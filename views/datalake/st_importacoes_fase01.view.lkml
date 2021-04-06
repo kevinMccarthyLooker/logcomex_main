@@ -947,6 +947,15 @@ view: st_importacoes_fase01 {
     end;;
   }
 
+  dimension: produto_check {
+    type: yesno
+    sql:
+    case
+    when ${produto} = 'NÃO IDENTIFICADO' then false
+    else true
+    end;;
+  }
+
   dimension: percentual {
     type: string
     sql: ${TABLE}.percentual ;;
