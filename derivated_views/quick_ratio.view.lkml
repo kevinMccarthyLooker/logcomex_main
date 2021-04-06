@@ -56,7 +56,7 @@ view: quick_ratio {
         and extract(year from meses.mes) = extract(year from cp."expiration")
         and extract(month from meses.mes) = extract(month from cp."expiration")
         group by 1,2,3
-       ) as qq4 on qq4.ano = qq3.ano and qq4.mes = qq3.mes and qq4.service = qq3.service;;
+       ) as qq4 on qq4.ano = qq2.ano and qq4.mes = qq2.mes and qq4.service = qq2.service;;
 
   }
 
