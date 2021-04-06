@@ -842,6 +842,11 @@ view: st_importacoes_fase01 {
     sql: ${TABLE}.model ;;
   }
 
+  dimension: modelo {
+    type: string
+    sql: ${TABLE}.modelo ;;
+  }
+
   dimension: ncm_desc {
     type: string
     sql: ${TABLE}.ncm_desc ;;
