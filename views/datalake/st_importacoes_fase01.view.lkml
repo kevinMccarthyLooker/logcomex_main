@@ -803,6 +803,7 @@ view: st_importacoes_fase01 {
     sql:
     case
     when ${TABLE}.importador_nome is null or ${TABLE}.importador_nome = '' then 'NÃO IDENTIFICADO'
+    when ${TABLE}.importador_nome = 'HAVAN LOJAS DE DEPARTAMENTOS LTDA' then 'HAVAN SA'
     else ${TABLE}.importador_nome
     end;;
   }
