@@ -764,6 +764,16 @@ view: st_importacoes_fase01 {
     end ;;
   }
 
+  dimension: exportador_check {
+    type: yesno
+    sql:
+    case
+    when ${exportador_nome} = 'NÃO IDENTIFICADO' then false
+    else true
+    end;;
+  }
+
+
   dimension: genero {
     type: string
     sql:
@@ -771,6 +781,15 @@ view: st_importacoes_fase01 {
     when ${TABLE}.genero is null or ${TABLE}.genero = '' then 'NÃO IDENTIFICADO'
     else ${TABLE}.genero
     end ;;
+  }
+
+  dimension: genero_check {
+    type: yesno
+    sql:
+    case
+    when ${genero} = 'NÃO IDENTIFICADO' then false
+    else true
+    end;;
   }
 
   dimension: hwb {
@@ -808,6 +827,15 @@ view: st_importacoes_fase01 {
     end;;
   }
 
+  dimension: importador_check {
+    type: yesno
+    sql:
+    case
+    when ${importador_nome} = 'NÃO IDENTIFICADO' then false
+    else true
+    end;;
+  }
+
   dimension: incoterm {
     type: string
     sql: ${TABLE}.incoterm ;;
@@ -831,6 +859,15 @@ view: st_importacoes_fase01 {
     else ${TABLE}.material
     end;;
 
+  }
+
+  dimension: material_check {
+    type: yesno
+    sql:
+    case
+    when ${material} = 'NÃO IDENTIFICADO' then false
+    else true
+    end;;
   }
 
   dimension: modalidade_despacho {
@@ -1130,6 +1167,15 @@ view: st_importacoes_fase01 {
          when ${TABLE}.via_transp = '' or ${TABLE}.via_transp is null then 'NÃO IDENTIFICADO'
          else ${TABLE}.via_transp
          end;;
+  }
+
+  dimension: via_transp_norm_check {
+    type: yesno
+    sql:
+    case
+    when ${via_transp_norm} = 'NÃO IDENTIFICADO' then false
+    else true
+    end;;
   }
 
   dimension: store_location {
