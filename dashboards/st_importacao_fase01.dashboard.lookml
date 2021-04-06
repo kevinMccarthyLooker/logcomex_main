@@ -50,14 +50,13 @@
     defaults_version: 1
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 3
     col: 0
     width: 7
@@ -102,14 +101,13 @@
     note_text: A Quantidade de registros da base de dados.
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 3
     col: 7
     width: 7
@@ -203,14 +201,13 @@
     hidden_fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.count, st_importacoes_fase01.anomes]
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 6
     col: 0
     width: 24
@@ -278,14 +275,13 @@
     hidden_fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.count]
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 46
     col: 0
     width: 24
@@ -359,14 +355,13 @@
     series_types: {}
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 67
     col: 0
     width: 24
@@ -449,14 +444,13 @@
     hidden_fields: [st_importacoes_fase01.fob_sum]
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 12
     col: 0
     width: 24
@@ -583,14 +577,13 @@
     hidden_fields: [st_importacoes_fase01.fob_sum]
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 61
     col: 12
     width: 12
@@ -729,14 +722,13 @@
       \ para todos os registros. "
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 76
     col: 0
     width: 24
@@ -776,14 +768,13 @@
     hidden_fields: [st_importacoes_fase01.fob_sum]
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 61
     col: 0
     width: 12
@@ -842,14 +833,13 @@
     note_text: NAO IDENTIFICADO - Produto não identificado na descrição do item
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 22
     col: 0
     width: 24
@@ -907,14 +897,13 @@
     note_text: NAO IDENTIFICADO - Material não identificado na descrição do produto
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 38
     col: 0
     width: 24
@@ -980,14 +969,13 @@
       não identificado na descrição do item.'
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 30
     col: 0
     width: 24
@@ -1054,14 +1042,13 @@
     hidden_fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.count]
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
-      Período: st_importacoes_fase01.anomes
       NCM: st_importacoes_fase01.cdncm_compl
       Produto: st_importacoes_fase01.produto
       Material: st_importacoes_fase01.material
       Gênero: st_importacoes_fase01.genero
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
-      Modelo: st_importacoes_fase01.modelo
+      Período: st_importacoes_fase01.anomes_norm
     row: 54
     col: 0
     width: 24
@@ -1195,17 +1182,3 @@
     explore: st_importacoes_fase01
     listens_to_filters: []
     field: st_importacoes_fase01.nm_pais_origem
-  - name: Modelo
-    title: Modelo
-    type: field_filter
-    default_value: ''
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: tag_list
-      display: popover
-      options: []
-    model: external_st_importacoes
-    explore: st_importacoes_fase01
-    listens_to_filters: []
-    field: st_importacoes_fase01.modelo
