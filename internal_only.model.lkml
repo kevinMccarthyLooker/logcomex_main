@@ -90,6 +90,8 @@ datagroup: hs_datagroup {
   description: "DG do Health Score, atualiza a cada 12h"
 }
 
+explore: clientes_trials_acessos_plataforma {}
+
 explore: clientes_sem_exportacao{}
 
 explore: quick_ratio {}
