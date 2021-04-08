@@ -15,7 +15,7 @@ view: shipowner_processing_queue {
   }
 
   dimension: shipowner_name {
-    type: number
+    type: string
     sql:
     case
     when ${shipowner_id} = 1  then 'HamburgSud'
