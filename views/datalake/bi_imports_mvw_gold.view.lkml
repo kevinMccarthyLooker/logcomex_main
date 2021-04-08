@@ -181,6 +181,7 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.vlfrete ;;
   }
 
+
 ########################## ----> Itens adicionados / alterados <---- ##########################
 
   dimension: mais_de_um_tipo {
@@ -188,6 +189,37 @@ view: bi_imports_mvw_gold {
     sql:  CASE WHEN (${TABLE}.c20 <> 0 and ${TABLE}.c40 <> 0) THEN "A"
           else "B" end
     ;;
+  }
+
+
+  dimension: nrcemercante {
+    type: number
+    sql: ${TABLE}.nrcemercante ;;
+  }
+
+  dimension: nrcemaster {
+    type: string
+    sql: ${TABLE}.nrcemaster ;;
+  }
+
+  dimension: nrmanifesto {
+    type: string
+    sql: ${TABLE}.nrmanifesto ;;
+  }
+
+  dimension: cdmoedafretetotalbld {
+    type: string
+    sql: ${TABLE}.cdmoedafretetotalbld ;;
+  }
+
+  dimension: vlfretetotalbld {
+    type: string
+    sql: ${TABLE}.vlfretetotalbld ;;
+  }
+
+  dimension: nrblconhecimento {
+    type: string
+    sql: ${TABLE}.nrblconhecimento ;;
   }
 
   measure: mais_de_um_tipo_sim {
