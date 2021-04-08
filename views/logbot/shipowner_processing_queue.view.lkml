@@ -14,6 +14,24 @@ view: shipowner_processing_queue {
     sql: ${TABLE}."shipowner_id";;
   }
 
+  dimension: shipowner_name {
+    type: number
+    sql:
+    case
+    when ${shipowner_id} = 1  then 'HamburgSud'
+    when ${shipowner_id} = 2  then 'MSC'
+    when ${shipowner_id} = 3  then 'HapagLloyd'
+    when ${shipowner_id} = 4  then 'CMA-CGM'
+    when ${shipowner_id} = 5  then 'Cosco'
+    when ${shipowner_id} = 6  then 'One'
+    when ${shipowner_id} = 7  then 'Evergreen'
+    when ${shipowner_id} = 8  then 'Maersk'
+    when ${shipowner_id} = 9  then 'PIL'
+    when ${shipowner_id} = 10 then 'Yang Ming'
+    else 'VERIFICAR'
+    end ;;
+  }
+
   dimension: bl {
     type: string
     sql: ${TABLE}."bl" ;;
