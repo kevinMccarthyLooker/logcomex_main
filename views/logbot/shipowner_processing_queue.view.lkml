@@ -26,8 +26,8 @@ view: shipowner_processing_queue {
     when ${shipowner_id} = 6  then 'One'
     when ${shipowner_id} = 7  then 'Evergreen'
     when ${shipowner_id} = 8  then 'Maersk'
-    when ${shipowner_id} = 9  then 'PIL'
-    when ${shipowner_id} = 10 then 'Yang Ming'
+    when ${shipowner_id} = 9  then 'Yang Ming'
+    when ${shipowner_id} = 10 then 'PIL'
     else 'VERIFICAR'
     end ;;
   }
