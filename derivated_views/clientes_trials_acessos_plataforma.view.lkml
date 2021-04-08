@@ -23,7 +23,7 @@ view: clientes_trials_acessos_plataforma {
           and (customer."fake_customer")=false
           and customer.deleted_at is null
           and customer_plan.deleted_at is null
-          and mes between '06-01-2019' and '01-31-2021'
+          and mes between '06-01-2019' and '01-31-2031'
         group by 1,2,3
         union
         select
@@ -37,7 +37,7 @@ view: clientes_trials_acessos_plataforma {
             and (customer_plan."deleted_at") is null
             AND (customer."fake_customer")=false
             and (customer."deleted_at") is null
-            and mes between '06-01-2019' and '01-31-2021'
+            and mes between '06-01-2019' and '01-31-2031'
         group by 1,2,3
       ) as qq1
     left join
@@ -49,7 +49,7 @@ view: clientes_trials_acessos_plataforma {
         inner join customer c2 on c2.id = al.customer_id
         inner join customer_plan cp on cp.customer_id = c2.id
         where (date(al.created_at) between cp."start" and cp.expiration or date(al.created_at) between cp.trial_start and cp.trial_end)
-        and al.created_at between '06-01-2019' and '01-31-2021'
+        and al.created_at between '06-01-2019' and '01-31-2031'
         and c2.fake_customer is false and c2.deleted_at is null
         and cp.deleted_at is null
         group by 1,2
