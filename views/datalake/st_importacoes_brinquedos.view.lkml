@@ -774,6 +774,24 @@ view: st_importacoes_brinquedos {
   }
 
 
+  dimension: genero {
+    type: string
+    sql:
+    case
+    when ${TABLE}.genero is null or ${TABLE}.genero = '' then 'NÃO IDENTIFICADO'
+    else ${TABLE}.genero
+    end ;;
+  }
+
+  dimension: genero_check {
+    type: yesno
+    sql:
+    case
+    when ${genero} = 'NÃO IDENTIFICADO' then false
+    else true
+    end;;
+  }
+
   dimension: hwb {
     type: string
     sql: ${TABLE}.hwb ;;
@@ -862,6 +880,25 @@ view: st_importacoes_brinquedos {
     when ${idade} = 'NÃO IDENTIFICADO' then false
     else true
     end;;
+  }
+
+  dimension: material {
+    type: string
+    sql:
+    case
+    when ${TABLE}.material is null or ${TABLE}.material = '' then 'NÃO IDENTIFICADO'
+    else ${TABLE}.material
+    end;;
+
+    }
+
+  dimension: material_check {
+    type: yesno
+    sql:
+  case
+  when ${material} = 'NÃO IDENTIFICADO' then false
+  else true
+  end;;
   }
 
   dimension: modalidade_despacho {
@@ -1238,4 +1275,17 @@ view: st_importacoes_brinquedos {
     sql: ${val_fob_un_us_num};;
   }
 
-  }
+#  measure: val_fob_un_us_num_p25 {
+#   type: percentile
+#    percentile: 25
+#    sql: ${val_fob_un_us_num};;
+#  }
+
+#  measure: val_fob_un_us_num_p75 {
+#    type: percentile
+#    percentile: 75
+#    sql: ${val_fob_un_us_num};;
+#  }
+
+
+}
