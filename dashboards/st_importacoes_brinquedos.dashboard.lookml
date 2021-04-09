@@ -52,12 +52,11 @@
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
     row: 3
     col: 0
     width: 7
@@ -104,12 +103,11 @@
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
     row: 3
     col: 7
     width: 7
@@ -200,17 +198,17 @@
     header_font_size: 12
     rows_font_size: 12
     defaults_version: 1
-    hidden_fields: [st_importacoes_brinquedos.fob_sum, st_importacoes_brinquedos.count, st_importacoes_brinquedos.anomes]
+    hidden_fields: [st_importacoes_brinquedos.fob_sum, st_importacoes_brinquedos.count,
+      st_importacoes_brinquedos.anomes]
     listen:
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
     row: 6
     col: 0
     width: 24
@@ -281,13 +279,12 @@
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
-    row: 54
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
+    row: 46
     col: 0
     width: 24
     height: 8
@@ -296,7 +293,8 @@
     model: external_st_importacoes
     explore: st_importacoes_brinquedos
     type: looker_grid
-    fields: [st_importacoes_brinquedos.ncm_desc, st_importacoes_brinquedos.fob_sum, st_importacoes_brinquedos.count]
+    fields: [st_importacoes_brinquedos.ncm_desc, st_importacoes_brinquedos.fob_sum,
+      st_importacoes_brinquedos.count]
     sorts: [st_importacoes_brinquedos.fob_sum desc]
     limit: 500
     show_view_names: false
@@ -362,13 +360,12 @@
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
-    row: 75
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
+    row: 67
     col: 0
     width: 24
     height: 9
@@ -381,8 +378,8 @@
     sorts: [st_importacoes_brinquedos.fob_sum]
     limit: 500
     dynamic_fields: [{table_calculation: valor_fob_total, label: Valor Fob Total,
-        expression: "${st_importacoes_brinquedos.fob_sum}", value_format: "$#,##0", value_format_name: !!null '',
-        _kind_hint: measure, _type_hint: number}]
+        expression: "${st_importacoes_brinquedos.fob_sum}", value_format: "$#,##0",
+        value_format_name: !!null '', _kind_hint: measure, _type_hint: number}]
     map_plot_mode: points
     heatmap_gridlines: false
     heatmap_gridlines_empty: false
@@ -452,12 +449,11 @@
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
     row: 12
     col: 0
     width: 24
@@ -473,8 +469,8 @@
     sorts: [st_importacoes_brinquedos.fob_sum desc]
     limit: 500
     dynamic_fields: [{table_calculation: valor_fob_total, label: Valor FOB Total,
-        expression: "${st_importacoes_brinquedos.fob_sum}", value_format: "$#,##0", value_format_name: !!null '',
-        _kind_hint: measure, _type_hint: number}]
+        expression: "${st_importacoes_brinquedos.fob_sum}", value_format: "$#,##0",
+        value_format_name: !!null '', _kind_hint: measure, _type_hint: number}]
     value_labels: legend
     label_type: labPer
     color_application:
@@ -588,13 +584,12 @@
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
-    row: 69
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
+    row: 61
     col: 12
     width: 12
     height: 6
@@ -604,7 +599,8 @@
     explore: st_importacoes_brinquedos
     type: looker_grid
     fields: [st_importacoes_brinquedos.produto, st_importacoes_brinquedos.tp_unid_comerc,
-      st_importacoes_brinquedos.qtde_comerc_sum, st_importacoes_brinquedos.fob_sum, st_importacoes_brinquedos.val_fob_un_us_num_avg]
+      st_importacoes_brinquedos.qtde_comerc_sum, st_importacoes_brinquedos.fob_sum,
+      st_importacoes_brinquedos.val_fob_un_us_num_avg]
     filters:
       st_importacoes_brinquedos.tp_unid_comerc: "-EMPTY"
     sorts: [st_importacoes_brinquedos.qtde_comerc_sum desc]
@@ -629,7 +625,8 @@
     conditional_formatting_include_nulls: false
     show_sql_query_menu_options: false
     column_order: ["$$$_row_numbers_$$$", st_importacoes_brinquedos.produto, st_importacoes_brinquedos.qtde_comerc_sum,
-      st_importacoes_brinquedos.tp_unid_comerc, st_importacoes_brinquedos.fob_sum, st_importacoes_brinquedos.val_fob_un_us_num_avg]
+      st_importacoes_brinquedos.tp_unid_comerc, st_importacoes_brinquedos.fob_sum,
+      st_importacoes_brinquedos.val_fob_un_us_num_avg]
     show_totals: true
     show_row_totals: true
     series_labels:
@@ -745,29 +742,26 @@
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
-    row: 84
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
+    row: 76
     col: 0
     width: 24
     height: 6
-  - title: Valor FOB Total - Gênero
-    name: Valor FOB Total - Gênero
+  - title: Valor FOB Total - Idade
+    name: Valor FOB Total - Idade
     model: external_st_importacoes
     explore: st_importacoes_brinquedos
     type: looker_pie
-    fields: [st_importacoes_brinquedos.genero, st_importacoes_brinquedos.fob_sum]
-    filters:
-      st_importacoes_brinquedos.genero_check: 'Yes'
+    fields: [st_importacoes_brinquedos.fob_sum, st_importacoes_brinquedos.idade]
     sorts: [st_importacoes_brinquedos.fob_sum desc]
     limit: 500
     dynamic_fields: [{table_calculation: valor_fob_total, label: Valor FOB Total,
-        expression: "${st_importacoes_brinquedos.fob_sum}", value_format: "$#,##0", value_format_name: !!null '',
-        _kind_hint: measure, _type_hint: number}]
+        expression: "${st_importacoes_brinquedos.fob_sum}", value_format: "$#,##0",
+        value_format_name: !!null '', _kind_hint: measure, _type_hint: number}]
     value_labels: legend
     label_type: labPer
     color_application:
@@ -794,13 +788,12 @@
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
-    row: 69
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
+    row: 61
     col: 0
     width: 12
     height: 6
@@ -860,79 +853,12 @@
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
     row: 22
-    col: 0
-    width: 24
-    height: 8
-  - title: Valor FOB Total - Ranking Materiais
-    name: Valor FOB Total - Ranking Materiais
-    model: external_st_importacoes
-    explore: st_importacoes_brinquedos
-    type: looker_column
-    fields: [st_importacoes_brinquedos.fob_sum, st_importacoes_brinquedos.material]
-    filters:
-      st_importacoes_brinquedos.material_check: 'Yes'
-    sorts: [st_importacoes_brinquedos.fob_sum desc]
-    limit: 500
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    limit_displayed_rows: true
-    legend_position: center
-    point_style: none
-    show_value_labels: true
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    limit_displayed_rows_values:
-      show_hide: show
-      first_last: first
-      num_rows: '10'
-    label_value_format: "$#,##0"
-    series_types: {}
-    series_colors:
-      st_importacoes_brinquedos.fob_sum: "#7a7a7a"
-    series_labels:
-      st_importacoes_brinquedos.fob_sum: Valor Fob Total
-    value_labels: legend
-    label_type: labPer
-    defaults_version: 1
-    note_state: collapsed
-    note_display: below
-    listen:
-      Importador Nome: st_importacoes_brinquedos.importador_nome
-      NCM: st_importacoes_brinquedos.cdncm_compl
-      Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
-      Modal: st_importacoes_brinquedos.via_transp_norm
-      País de Origem: st_importacoes_brinquedos.nm_pais_origem
-      Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
-    row: 46
     col: 0
     width: 24
     height: 8
@@ -941,7 +867,8 @@
     model: external_st_importacoes
     explore: st_importacoes_brinquedos
     type: looker_column
-    fields: [st_importacoes_brinquedos.fob_sum, st_importacoes_brinquedos.produto, st_importacoes_brinquedos.qtde_comerc_sum]
+    fields: [st_importacoes_brinquedos.fob_sum, st_importacoes_brinquedos.produto,
+      st_importacoes_brinquedos.qtde_comerc_sum]
     filters:
       st_importacoes_brinquedos.tp_unid_comerc: UNIDADE
       st_importacoes_brinquedos.produto_check: 'Yes'
@@ -999,12 +926,11 @@
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
     row: 38
     col: 0
     width: 24
@@ -1074,28 +1000,23 @@
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
-    row: 62
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
+    row: 54
     col: 0
     width: 24
     height: 7
   - name: ''
     type: text
     title_text: ''
-    subtitle_text: Regras dos Materiais
+    subtitle_text: Regras dos Brinquedos
     body_text: |-
-      1. Na condição de 2 materiais sendo um algodão: de 1%  à 60,9% algodão = descrever o outro material;  de 61% à 99% algodão = predominantemente Algodão.
+      xxxxxxxxxxxxxxxxxxxxxxxxx
 
-      2. Na condição de 2 materiais e nenhum deles for algodão: considerar fibras diversas
-
-      3. Na condição de ter 3 ou mais materiais (independente se 1 deles for algodão): considerar fibras diversas.
-
-      4. Na condição de apenas Algodão (sem o percentual): considerar 100% Algodão.
+      xxxxxxxxxxxxxxxxxxxxxxxx
     row: 3
     col: 14
     width: 10
@@ -1193,12 +1114,11 @@
       Importador Nome: st_importacoes_brinquedos.importador_nome
       NCM: st_importacoes_brinquedos.cdncm_compl
       Produto: st_importacoes_brinquedos.produto
-      Material: st_importacoes_brinquedos.material
-      Gênero: st_importacoes_brinquedos.genero
       Modal: st_importacoes_brinquedos.via_transp_norm
       País de Origem: st_importacoes_brinquedos.nm_pais_origem
       Período: st_importacoes_brinquedos.anomes_norm
-      Modelo: st_importacoes_brinquedos.modelo
+      Idade: st_importacoes_brinquedos.idade
+      Marca: st_importacoes_brinquedos.marca
     row: 30
     col: 0
     width: 24
@@ -1260,8 +1180,8 @@
     explore: st_importacoes_brinquedos
     listens_to_filters: []
     field: st_importacoes_brinquedos.produto
-  - name: Material
-    title: Material
+  - name: Marca
+    title: Marca
     type: field_filter
     default_value: ''
     allow_multiple_values: true
@@ -1273,9 +1193,9 @@
     model: external_st_importacoes
     explore: st_importacoes_brinquedos
     listens_to_filters: []
-    field: st_importacoes_brinquedos.material
-  - name: Gênero
-    title: Gênero
+    field: st_importacoes_brinquedos.marca
+  - name: Idade
+    title: Idade
     type: field_filter
     default_value: ''
     allow_multiple_values: true
@@ -1287,7 +1207,7 @@
     model: external_st_importacoes
     explore: st_importacoes_brinquedos
     listens_to_filters: []
-    field: st_importacoes_brinquedos.genero
+    field: st_importacoes_brinquedos.idade
   - name: Modal
     title: Modal
     type: field_filter
