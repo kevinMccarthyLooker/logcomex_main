@@ -773,25 +773,6 @@ view: st_importacoes_brinquedos {
     end;;
   }
 
-
-  dimension: genero {
-    type: string
-    sql:
-    case
-    when ${TABLE}.genero is null or ${TABLE}.genero = '' then 'NÃO IDENTIFICADO'
-    else ${TABLE}.genero
-    end ;;
-  }
-
-  dimension: genero_check {
-    type: yesno
-    sql:
-    case
-    when ${genero} = 'NÃO IDENTIFICADO' then false
-    else true
-    end;;
-  }
-
   dimension: hwb {
     type: string
     sql: ${TABLE}.hwb ;;
@@ -880,25 +861,6 @@ view: st_importacoes_brinquedos {
     when ${idade} = 'NÃO IDENTIFICADO' then false
     else true
     end;;
-  }
-
-  dimension: material {
-    type: string
-    sql:
-    case
-    when ${TABLE}.material is null or ${TABLE}.material = '' then 'NÃO IDENTIFICADO'
-    else ${TABLE}.material
-    end;;
-
-    }
-
-  dimension: material_check {
-    type: yesno
-    sql:
-  case
-  when ${material} = 'NÃO IDENTIFICADO' then false
-  else true
-  end;;
   }
 
   dimension: modalidade_despacho {
