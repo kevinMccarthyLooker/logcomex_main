@@ -74,6 +74,8 @@ include: "/**/hubspot_tickets.view.lkml"
 include: "/**/nps_02_2021.view.lkml"
 include: "/**/quick_ratio.view.lkml"
 include: "/**/clientes_trials_acessos_plataforma.view.lkml"
+include: "/**/clientes_acessos_plataforma.view.lkml"
+include: "/**/trials_acessos_plataforma.view.lkml"
 
 datagroup: internal_only_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -91,6 +93,8 @@ datagroup: hs_datagroup {
 }
 
 explore: clientes_trials_acessos_plataforma {}
+explore: clientes_acessos_plataforma {}
+explore: trials_acessos_plataforma {}
 
 explore: clientes_sem_exportacao{}
 
