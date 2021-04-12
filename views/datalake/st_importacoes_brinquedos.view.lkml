@@ -875,7 +875,20 @@ view: st_importacoes_brinquedos {
 
   dimension: modelo {
     type: string
-    sql: ${TABLE}.modelo ;;
+    sql:
+    case
+    when ${TABLE}.modelo is null or ${TABLE}.modelo = '' then 'NÃO IDENTIFICADO'
+    else ${TABLE}.modelo
+    end;;
+  }
+
+  dimension: modelo_check {
+    type: yesno
+    sql:
+    case
+    when ${modelo} = 'NÃO IDENTIFICADO' then false
+    else true
+    end;;
   }
 
   dimension: ncm_desc {
