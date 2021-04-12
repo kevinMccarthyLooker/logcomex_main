@@ -47,6 +47,20 @@ view: hubspot_stage_cs_deal {
     sql: ${TABLE}."created_at" ;;
   }
 
+  dimension_group: deleted {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."deleted_at" ;;
+  }
+
   dimension: customer_api_relations_id {
     type: number
     sql: ${TABLE}."customer_api_relations_id" ;;
