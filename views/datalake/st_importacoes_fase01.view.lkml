@@ -833,7 +833,7 @@ view: st_importacoes_fase01 {
     html: {% if value == 'ST IMPORTACOES LTDA' %}
             <font color="green">{{ importador_nome }}</font>
           {% else %}
-            <font color="black">{{ importador_nome }}</font>
+            <font color="white">{{ importador_nome }}</font>
           {% endif %};;
   }
 
