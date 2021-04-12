@@ -828,7 +828,7 @@ view: st_importacoes_fase01 {
   }
 
   dimension: importador_colorido {
-    type: yesno
+    type: string
     sql: ${importador_nome} ;;
     html: {% if value == 'ST IMPORTACOES LTDA' %}
             <font color="green">{{ importador_nome }}</font>
