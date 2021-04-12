@@ -1,5 +1,5 @@
 - dashboard: st_importacao_fase01
-  title: FASE 01
+  title: FASE 01 - Moda
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: true
@@ -57,6 +57,7 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
+      Modelo: st_importacoes_fase01.modelo
     row: 3
     col: 0
     width: 7
@@ -108,6 +109,7 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
+      Modelo: st_importacoes_fase01.modelo
     row: 3
     col: 7
     width: 7
@@ -208,18 +210,20 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
+      Modelo: st_importacoes_fase01.modelo
     row: 6
     col: 0
     width: 24
     height: 6
-  - title: Valor FOB Total - Top 10 Importadores
-    name: Valor FOB Total - Top 10 Importadores
+  - title: Valor FOB Total - Ranking Importadores
+    name: Valor FOB Total - Ranking Importadores
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
     fields: [st_importacoes_fase01.importador_nome, st_importacoes_fase01.fob_sum,
-      st_importacoes_fase01.count]
-    filters: {}
+      st_importacoes_fase01.count, st_importacoes_fase01.importador_colorido]
+    filters:
+      st_importacoes_fase01.importador_check: 'Yes'
     sorts: [st_importacoes_fase01.fob_sum desc]
     limit: 15
     dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_fase01.fob_sum}",
@@ -272,7 +276,7 @@
       st_importacoes_fase01.count: Quantidade
       calculation_1: Valor Fob Total
     defaults_version: 1
-    hidden_fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.count]
+    hidden_fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.count, st_importacoes_fase01.importador_nome]
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
       NCM: st_importacoes_fase01.cdncm_compl
@@ -282,7 +286,8 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
-    row: 46
+      Modelo: st_importacoes_fase01.modelo
+    row: 54
     col: 0
     width: 24
     height: 8
@@ -362,7 +367,8 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
-    row: 67
+      Modelo: st_importacoes_fase01.modelo
+    row: 75
     col: 0
     width: 24
     height: 9
@@ -451,6 +457,7 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
+      Modelo: st_importacoes_fase01.modelo
     row: 12
     col: 0
     width: 24
@@ -461,6 +468,8 @@
     explore: st_importacoes_fase01
     type: looker_pie
     fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.via_transp_norm]
+    filters:
+      st_importacoes_fase01.via_transp_norm_check: 'Yes'
     sorts: [st_importacoes_fase01.fob_sum desc]
     limit: 500
     dynamic_fields: [{table_calculation: valor_fob_total, label: Valor FOB Total,
@@ -584,7 +593,8 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
-    row: 61
+      Modelo: st_importacoes_fase01.modelo
+    row: 69
     col: 12
     width: 12
     height: 6
@@ -627,7 +637,7 @@
       st_importacoes_fase01.desc_prodt: Produto
       st_importacoes_fase01.tp_unid_comerc: Tipo Unidade
       st_importacoes_fase01.qtde_comerc_sum: Quantidade
-      st_importacoes_fase01.val_fob_un_us_num_avg: Média Valor Unidade
+      st_importacoes_fase01.val_fob_un_us_num_avg: Média Ponderada
       st_importacoes_fase01.fob_sum: Valor FOB Total
     series_cell_visualizations:
       st_importacoes_fase01.qtde_comerc_sum:
@@ -640,6 +650,17 @@
           custom_colors:
           - "#c2c2c2"
           - "#363636"
+    series_text_format:
+      st_importacoes_fase01.produto:
+        align: left
+      st_importacoes_fase01.tp_unid_comerc:
+        align: left
+      st_importacoes_fase01.qtde_comerc_sum:
+        align: left
+      st_importacoes_fase01.val_fob_un_us_num_avg:
+        align: left
+      media_simples:
+        align: left
     series_value_format:
       st_importacoes_fase01.fob_sum: "$#,##0"
       st_importacoes_fase01.val_fob_un_us_num_avg:
@@ -717,7 +738,7 @@
     hidden_fields:
     note_state: collapsed
     note_display: hover
-    note_text: "A Média Valor Unidade é calculada com o valor unitário de cada registro.\n\
+    note_text: "A Média Ponderada é calculada com o valor unitário de cada registro.\n\
       A média simples é a somatória do valor FOB dividido pela quantidade  comercializada\
       \ para todos os registros. "
     listen:
@@ -729,7 +750,8 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
-    row: 76
+      Modelo: st_importacoes_fase01.modelo
+    row: 84
     col: 0
     width: 24
     height: 6
@@ -739,6 +761,8 @@
     explore: st_importacoes_fase01
     type: looker_pie
     fields: [st_importacoes_fase01.genero, st_importacoes_fase01.fob_sum]
+    filters:
+      st_importacoes_fase01.genero_check: 'Yes'
     sorts: [st_importacoes_fase01.fob_sum desc]
     limit: 500
     dynamic_fields: [{table_calculation: valor_fob_total, label: Valor FOB Total,
@@ -775,17 +799,19 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
-    row: 61
+      Modelo: st_importacoes_fase01.modelo
+    row: 69
     col: 0
     width: 12
     height: 6
-  - title: Valor FOB Total - Top 15 Produtos
-    name: Valor FOB Total - Top 15 Produtos
+  - title: Valor FOB Total - Ranking Produtos
+    name: Valor FOB Total - Ranking Produtos
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
     fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.produto]
-    filters: {}
+    filters:
+      st_importacoes_fase01.produto_check: 'Yes'
     sorts: [st_importacoes_fase01.fob_sum desc]
     limit: 500
     x_axis_gridlines: false
@@ -830,7 +856,6 @@
     defaults_version: 1
     note_state: collapsed
     note_display: below
-    note_text: NAO IDENTIFICADO - Produto não identificado na descrição do item
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
       NCM: st_importacoes_fase01.cdncm_compl
@@ -840,16 +865,19 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
+      Modelo: st_importacoes_fase01.modelo
     row: 22
     col: 0
     width: 24
     height: 8
-  - title: Valor FOB Total - Top 10 Materiais
-    name: Valor FOB Total - Top 10 Materiais
+  - title: Valor FOB Total - Ranking Materiais
+    name: Valor FOB Total - Ranking Materiais
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
     fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.material]
+    filters:
+      st_importacoes_fase01.material_check: 'Yes'
     sorts: [st_importacoes_fase01.fob_sum desc]
     limit: 500
     x_axis_gridlines: false
@@ -894,7 +922,6 @@
     defaults_version: 1
     note_state: collapsed
     note_display: below
-    note_text: NAO IDENTIFICADO - Material não identificado na descrição do produto
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
       NCM: st_importacoes_fase01.cdncm_compl
@@ -904,18 +931,20 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
-    row: 38
+      Modelo: st_importacoes_fase01.modelo
+    row: 46
     col: 0
     width: 24
     height: 8
-  - title: Média Simples Valor FOB - Top 15 Produtos
-    name: Média Simples Valor FOB - Top 15 Produtos
+  - title: Média Simples Valor FOB - Ranking Produtos
+    name: Média Simples Valor FOB - Ranking Produtos
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
     fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.produto, st_importacoes_fase01.qtde_comerc_sum]
     filters:
-      st_importacoes_fase01.tp_unid_comerc: PEÇA,UNIDADE
+      st_importacoes_fase01.tp_unid_comerc: UNIDADE
+      st_importacoes_fase01.produto_check: 'Yes'
     sorts: [st_importacoes_fase01.fob_sum desc]
     limit: 500
     dynamic_fields: [{table_calculation: media_simples, label: Média Simples, expression: "${st_importacoes_fase01.fob_sum}\
@@ -965,8 +994,7 @@
     hidden_fields: [st_importacoes_fase01.qtde_comerc_sum, st_importacoes_fase01.fob_sum]
     note_state: collapsed
     note_display: below
-    note_text: 'Considera apenas os tipos: PEÇA e UNIDADE. / NAO IDENTIFICADO - Produto
-      não identificado na descrição do item.'
+    note_text: Considera apenas o tipos UNIDADE.
     listen:
       Importador Nome: st_importacoes_fase01.importador_nome
       NCM: st_importacoes_fase01.cdncm_compl
@@ -976,17 +1004,19 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
-    row: 30
+      Modelo: st_importacoes_fase01.modelo
+    row: 38
     col: 0
     width: 24
     height: 8
-  - title: Valor FOB Total - Top 10 Exportadores
-    name: Valor FOB Total - Top 10 Exportadores
+  - title: Valor FOB Total - Ranking Exportadores
+    name: Valor FOB Total - Ranking Exportadores
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: looker_column
     fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.count, st_importacoes_fase01.exportador_nome]
-    filters: {}
+    filters:
+      st_importacoes_fase01.exportador_check: 'Yes'
     sorts: [st_importacoes_fase01.fob_sum desc]
     limit: 15
     dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_fase01.fob_sum}",
@@ -1049,7 +1079,8 @@
       Modal: st_importacoes_fase01.via_transp_norm
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
-    row: 54
+      Modelo: st_importacoes_fase01.modelo
+    row: 62
     col: 0
     width: 24
     height: 7
@@ -1058,7 +1089,7 @@
     title_text: ''
     subtitle_text: Regras dos Materiais
     body_text: |-
-      1. Na condição de 2 materiais sendo um algodão: de 1%  à 60,9% algodão = descrever o outro material;  de 61% à 99% algodão = predominantemente Algodão.
+      1. Na condição de 2 materiais sendo um algodão: de 1%  à 60,9% algodão, descrever o outro material;  de 61% à 99% algodão, predominantemente Algodão.
 
       2. Na condição de 2 materiais e nenhum deles for algodão: considerar fibras diversas
 
@@ -1069,6 +1100,110 @@
     col: 14
     width: 10
     height: 3
+  - title: BoxPlot Valor FOB Unitário - Ranking Produtos
+    name: BoxPlot Valor FOB Unitário - Ranking Produtos
+    model: external_st_importacoes
+    explore: st_importacoes_fase01
+    type: looker_boxplot
+    fields: [st_importacoes_fase01.produto, st_importacoes_fase01.val_fob_un_us_num_min,
+      st_importacoes_fase01.val_fob_un_us_num_avg, st_importacoes_fase01.val_fob_un_us_num_max,
+      st_importacoes_fase01.fob_sum]
+    filters:
+      st_importacoes_fase01.tp_unid_comerc: UNIDADE
+      st_importacoes_fase01.produto_check: 'Yes'
+    sorts: [st_importacoes_fase01.fob_sum desc]
+    limit: 15
+    dynamic_fields: [{table_calculation: media_simples, label: Média Simples, expression: "${st_importacoes_fase01.fob_sum}\
+          \ / ${st_importacoes_fase01.qtde_comerc_sum}", value_format: !!null '',
+        value_format_name: usd, is_disabled: true, _kind_hint: dimension, _type_hint: number},
+      {table_calculation: min_calc, label: min_calc, expression: "${st_importacoes_fase01.val_fob_un_us_num_min}",
+        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number},
+      {table_calculation: avg_calc, label: avg_calc, expression: "${st_importacoes_fase01.val_fob_un_us_num_avg}",
+        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number},
+      {table_calculation: max_calc, label: max_calc, expression: "${st_importacoes_fase01.val_fob_un_us_num_max}",
+        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    color_application:
+      collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+      custom:
+        id: 2356e3f8-e429-ff4a-5d46-913479ad6381
+        label: Custom
+        type: discrete
+        colors:
+        - "#7a7a7a"
+        - "#B1399E"
+        - "#C2DD67"
+        - "#592EC2"
+        - "#4276BE"
+        - "#72D16D"
+        - "#FFD95F"
+        - "#B32F37"
+        - "#9174F0"
+        - "#E57947"
+        - "#75E2E2"
+        - "#FBB555"
+      options:
+        steps: 5
+    y_axis_value_format: "#,##0.00"
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: true
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    limit_displayed_rows_values:
+      show_hide: show
+      first_last: first
+      num_rows: '15'
+    label_value_format: ''
+    series_types: {}
+    series_colors:
+      st_importacoes_fase01.fob_sum: "#7a7a7a"
+      media_simples: "#7a7a7a"
+    series_labels:
+      st_importacoes_fase01.fob_sum: Valor Fob Total
+    value_labels: legend
+    label_type: labPer
+    defaults_version: 1
+    hidden_fields: [st_importacoes_fase01.val_fob_un_us_num_min, st_importacoes_fase01.val_fob_un_us_num_avg,
+      st_importacoes_fase01.val_fob_un_us_num_max, st_importacoes_fase01.fob_sum]
+    note_state: collapsed
+    note_display: below
+    note_text: Considera apenas o tipos UNIDADE.
+    listen:
+      Importador Nome: st_importacoes_fase01.importador_nome
+      NCM: st_importacoes_fase01.cdncm_compl
+      Produto: st_importacoes_fase01.produto
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+      Modal: st_importacoes_fase01.via_transp_norm
+      País de Origem: st_importacoes_fase01.nm_pais_origem
+      Período: st_importacoes_fase01.anomes_norm
+      Modelo: st_importacoes_fase01.modelo
+    row: 30
+    col: 0
+    width: 24
+    height: 8
   filters:
   - name: Importador Nome
     title: Importador Nome
@@ -1154,8 +1289,8 @@
     explore: st_importacoes_fase01
     listens_to_filters: []
     field: st_importacoes_fase01.genero
-  - name: Modal
-    title: Modal
+  - name: Modelo
+    title: Modelo
     type: field_filter
     default_value: ''
     allow_multiple_values: true
@@ -1167,7 +1302,7 @@
     model: external_st_importacoes
     explore: st_importacoes_fase01
     listens_to_filters: []
-    field: st_importacoes_fase01.via_transp_norm
+    field: st_importacoes_fase01.modelo
   - name: País de Origem
     title: País de Origem
     type: field_filter
@@ -1182,3 +1317,17 @@
     explore: st_importacoes_fase01
     listens_to_filters: []
     field: st_importacoes_fase01.nm_pais_origem
+  - name: Modal
+    title: Modal
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+      options: []
+    model: external_st_importacoes
+    explore: st_importacoes_fase01
+    listens_to_filters: []
+    field: st_importacoes_fase01.via_transp_norm
