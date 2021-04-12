@@ -136,7 +136,8 @@ view: health_score_2021 {
 
   dimension: pontuacao_total {
     type: number
-    sql: coalesce(${acessos_usuarios},0)
+    sql: ${usab_geral}
+         + coalesce(${acessos_usuarios},0)
          + coalesce(${pontos_qtd_tickets},0)
          + coalesce(${satisfaction},0)
          + coalesce(${pontuacao_nps_02_2021},0)
@@ -144,9 +145,51 @@ view: health_score_2021 {
          + coalesce(${pontos_crescimento_cliente},0);;
   }
 
+  dimension: status {
+    type: string
+    sql:
+    case
+    when ${pontuacao_total}) < 50 then 'Vermelho'
+    when (${pontuacao_total} >= 50 and ${pontuacao_total} < 70) then 'Amarelo'
+    when ${pontuacao_total} >= 70 then 'Verde'
+    else 'Erro'
+    end;;
+  }
+
   measure: pontuacao_total_sum {
     type: sum
     sql: ${pontuacao_total} ;;
+  }
+
+  measure: usab_geral_sum {
+    type: sum
+    sql: ${usab_geral} ;;
+  }
+
+  measure: acessos_sum {
+    type: sum
+    sql: ${acessos_usuarios} ;;
+  }
+  measure: pontos_qtd_tickets_sum {
+    type: sum
+    sql: ${pontos_qtd_tickets} ;;
+  }
+  measure: satisfaction_sum {
+    type: sum
+    sql: ${satisfaction} ;;
+  }
+  measure: pontuacao_nps_02_2021_sum {
+    type: sum
+    sql: ${pontuacao_nps_02_2021} ;;
+  }
+  measure: pontos_titulos_omie_sum {
+    type: sum
+    sql: ${pontos_titulos_omie} ;;
+  }
+
+  measure: pontos_crescimento_cliente_sum {
+    type: sum
+    sql: ${pontos_crescimento_cliente} ;;
   }
 
   measure: count {
