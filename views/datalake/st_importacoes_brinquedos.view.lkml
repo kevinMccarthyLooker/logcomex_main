@@ -808,6 +808,16 @@ view: st_importacoes_brinquedos {
     end;;
   }
 
+  dimension: importador_colorido {
+    type: string
+    sql: ${importador_nome} ;;
+    html: {% if value == 'ST IMPORTACOES LTDA' %}
+            <font color="green">{{ importador_nome }}</font>
+          {% else %}
+            <font color="black">{{ importador_nome }}</font>
+          {% endif %};;
+  }
+
   dimension: importador_check {
     type: yesno
     sql:
