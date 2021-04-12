@@ -131,7 +131,7 @@ view: health_score_2021 {
     + coalesce(${usab_tracking},${usab_big_data},${usab_search})
     + coalesce(${usab_tracking},${usab_search},${usab_big_data})
     + coalesce(${usab_search},${usab_big_data},${usab_tracking})
-    + coalesce(${usab_search},${usab_tracking},${usab_big_data}))/6;;
+    + coalesce(${usab_search},${usab_tracking},${usab_big_data}))::float/6;;
   }
 
   dimension: pontuacao_total {
