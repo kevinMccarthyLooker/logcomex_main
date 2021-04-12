@@ -76,6 +76,7 @@ include: "/**/quick_ratio.view.lkml"
 include: "/**/clientes_trials_acessos_plataforma.view.lkml"
 include: "/**/clientes_acessos_plataforma.view.lkml"
 include: "/**/trials_acessos_plataforma.view.lkml"
+include: "/**/health_score_2021.view.lkml"
 
 datagroup: internal_only_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -666,6 +667,12 @@ explore: cs_novo_health_score {
   join: customer {
     sql_on: ${cs_novo_health_score.customer_id} = ${customer.id} ;;
     relationship: one_to_one
+    type: inner
+  }
+
+  join: health_score_2021 {
+    sql_on: ${health_score_2021.customer_id} = ${customer.id} ;;
+    relationship: one_to_many
     type: inner
   }
 
