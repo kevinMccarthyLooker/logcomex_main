@@ -125,7 +125,7 @@ view: health_score_2021 {
 
   dimension: pontuacao_total {
     type: number
-    sql: ${acessos_usuarios}
+    sql: colalesce(${acessos_usuarios},0)
          + colalesce(${pontos_qtd_tickets},0)
          + colalesce(${satisfaction},0)
          + colalesce(${pontuacao_nps_02_2021},0)
