@@ -123,6 +123,16 @@ view: health_score_2021 {
     sql: ${TABLE}."usab_tracking" ;;
   }
 
+  dimension: pontuacao_total {
+    type: number
+    sql: ${acessos_usuarios}
+         + colalesce(${pontos_qtd_tickets},0)
+         + colalesce(${satisfaction},0)
+         + colalesce(${pontuacao_nps_02_2021},0)
+         + colalesce(${pontos_titulos_omie},0)
+         + colalesce(${pontos_crescimento_cliente},0);;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
