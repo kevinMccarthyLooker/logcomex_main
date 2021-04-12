@@ -123,6 +123,17 @@ view: health_score_2021 {
     sql: ${TABLE}."usab_tracking" ;;
   }
 
+  dimension: usab_geral {
+    type: number
+    sql:
+    (coalesce(${usab_big_data},${usab_tracking},${usab_search})
+    + coalesce(${usab_big_data},${usab_search},${usab_tracking})
+    + coalesce(${usab_tracking},${usab_big_data},${usab_search})
+    + coalesce(${usab_tracking},${usab_search},${usab_big_data})
+    + coalesce(${usab_search},${usab_big_data},${usab_tracking})
+    + coalesce(${usab_search},${usab_tracking},${usab_big_data}))/6;;
+  }
+
   dimension: pontuacao_total {
     type: number
     sql: coalesce(${acessos_usuarios},0)
