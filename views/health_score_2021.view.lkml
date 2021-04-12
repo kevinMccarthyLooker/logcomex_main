@@ -149,7 +149,7 @@ view: health_score_2021 {
     type: string
     sql:
     case
-    when ${pontuacao_total}) < 50 then 'Vermelho'
+    when ${pontuacao_total} < 50 then 'Vermelho'
     when (${pontuacao_total} >= 50 and ${pontuacao_total} < 70) then 'Amarelo'
     when ${pontuacao_total} >= 70 then 'Verde'
     else 'Erro'
