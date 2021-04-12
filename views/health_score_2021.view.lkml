@@ -136,13 +136,13 @@ view: health_score_2021 {
 
   dimension: pontuacao_total {
     type: number
-    sql: ${usab_geral}
+    sql: (${usab_geral}
          + coalesce(${acessos_usuarios},0)
          + coalesce(${pontos_qtd_tickets},0)
          + coalesce(${satisfaction},0)
          + coalesce(${pontuacao_nps_02_2021},0)
          + coalesce(${pontos_titulos_omie},0)
-         + coalesce(${pontos_crescimento_cliente},0);;
+         + coalesce(${pontos_crescimento_cliente},0))::float;;
   }
 
   dimension: status {
