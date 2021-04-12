@@ -144,6 +144,11 @@ view: health_score_2021 {
          + coalesce(${pontos_crescimento_cliente},0);;
   }
 
+  measure: pontuacao_total_sum {
+    type: sum
+    sql: ${pontuacao_total} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
