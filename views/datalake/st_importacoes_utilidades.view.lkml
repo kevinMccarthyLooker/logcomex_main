@@ -845,20 +845,20 @@ view: st_importacoes_utilidades {
     end;;
   }
 
-  dimension: idade {
+  dimension: tamanho {
     type: string
     sql:
     case
-    when ${TABLE}.idade is null or ${TABLE}.idade = '' then 'NÃO IDENTIFICADO'
-    else ${TABLE}.idade
+    when ${TABLE}.tamanho is null or ${TABLE}.tamanho = '' then 'NÃO IDENTIFICADO'
+    else ${TABLE}.tamanho
     end;;
   }
 
-  dimension: idade_check {
+  dimension: tamanho_check {
     type: yesno
     sql:
     case
-    when ${idade} = 'NÃO IDENTIFICADO' then false
+    when ${tamanho} = 'NÃO IDENTIFICADO' then false
     else true
     end;;
   }
