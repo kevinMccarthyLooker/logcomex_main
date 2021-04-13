@@ -40,8 +40,13 @@
       big_data_expo_real_exportador.count_mar_id:
         is_active: true
         palette:
-          palette_id: 471a8295-662d-46fc-bd2d-2d0acd370c1e
+          palette_id: 3548f388-d316-c608-29b6-a3415a28d90e
           collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+          custom_colors:
+          - "#e0aaff"
+          - "#9d4edd"
+          - "#5a189a"
+        value_display: true
     series_text_format:
       big_data_expo_real_exportador.nf_nome_emissor:
         align: left
@@ -108,8 +113,12 @@
       big_data_expo_real_exportador.count_mar_id:
         is_active: true
         palette:
-          palette_id: 471a8295-662d-46fc-bd2d-2d0acd370c1e
+          palette_id: a26e2b9c-08f2-998b-a738-181ba285401a
           collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+          custom_colors:
+          - "#e0aaff"
+          - "#9d4edd"
+          - "#5a189a"
     series_text_format:
       big_data_expo_real_exportador.nf_nome_emissor:
         align: left
