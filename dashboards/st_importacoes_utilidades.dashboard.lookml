@@ -55,9 +55,9 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
     row: 3
     col: 0
     width: 7
@@ -107,9 +107,9 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
     row: 3
     col: 7
     width: 7
@@ -209,9 +209,9 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
     row: 6
     col: 0
     width: 24
@@ -221,10 +221,10 @@
     model: external_st_importacoes
     explore: st_importacoes_utilidades
     type: looker_column
-    fields: [st_importacoes_utilidades.importador_nome, st_importacoes_utilidades.fob_sum,
-      st_importacoes_utilidades.count]
+    fields: [st_importacoes_utilidades.fob_sum, st_importacoes_utilidades.count, st_importacoes_utilidades.importador_nome]
     filters:
       st_importacoes_utilidades.importador_check: 'Yes'
+      st_importacoes_utilidades.importador_colorido: "-ST IMPORTACOES LTDA"
     sorts: [st_importacoes_utilidades.fob_sum desc]
     limit: 15
     dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_utilidades.fob_sum}",
@@ -285,12 +285,12 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
-    row: 58
-    col: 0
-    width: 24
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
+    row: 51
+    col: 4
+    width: 20
     height: 7
   - title: NCMs Importados
     name: NCMs Importados
@@ -367,9 +367,9 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
     row: 86
     col: 0
     width: 24
@@ -457,9 +457,9 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
     row: 13
     col: 0
     width: 24
@@ -593,9 +593,9 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
     row: 79
     col: 0
     width: 12
@@ -752,9 +752,9 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
     row: 95
     col: 0
     width: 24
@@ -818,9 +818,9 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
     row: 23
     col: 0
     width: 24
@@ -884,7 +884,7 @@
     hidden_fields: [st_importacoes_utilidades.qtde_comerc_sum, st_importacoes_utilidades.fob_sum]
     note_state: collapsed
     note_display: below
-    note_text: Considera apenas o tipos UNIDADE.
+    note_text: Considera apenas o tipo UNIDADE.
     listen:
       Importador Nome: st_importacoes_utilidades.importador_nome
       NCM: st_importacoes_utilidades.cdncm_compl
@@ -892,9 +892,9 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
     row: 37
     col: 0
     width: 24
@@ -967,41 +967,30 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
-    row: 65
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
+    row: 58
     col: 0
     width: 24
     height: 7
-  - name: ''
-    type: text
-    title_text: ''
-    subtitle_text: Regras dos Brinquedos
-    body_text: |-
-      xxxxxxxxxxxxxxxxxxxxxxxxx
-
-      xxxxxxxxxxxxxxxxxxxxxxxx
-    row: 3
-    col: 14
-    width: 10
-    height: 3
   - title: BoxPlot Valor FOB Unitário - Ranking Produtos
     name: BoxPlot Valor FOB Unitário - Ranking Produtos
     model: external_st_importacoes
     explore: st_importacoes_utilidades
     type: looker_boxplot
     fields: [st_importacoes_utilidades.produto, st_importacoes_utilidades.val_fob_un_us_num_min,
-      st_importacoes_utilidades.val_fob_un_us_num_avg, st_importacoes_utilidades.val_fob_un_us_num_max]
+      st_importacoes_utilidades.val_fob_un_us_num_avg, st_importacoes_utilidades.val_fob_un_us_num_max,
+      st_importacoes_utilidades.fob_sum]
     filters:
       st_importacoes_utilidades.tp_unid_comerc: UNIDADE
       st_importacoes_utilidades.produto_check: 'Yes'
-    sorts: [st_importacoes_utilidades.produto]
+    sorts: [st_importacoes_utilidades.fob_sum desc]
     limit: 15
     dynamic_fields: [{table_calculation: media_simples, label: Média Simples, expression: "${st_importacoes_utilidades.fob_sum}\
           \ / ${st_importacoes_utilidades.qtde_comerc_sum}", value_format: !!null '',
-        value_format_name: usd, is_disabled: true, _kind_hint: dimension, _type_hint: number},
-      {table_calculation: min_calc, label: min_calc, expression: "${st_importacoes_utilidades.val_fob_un_us_num_min}",
+        value_format_name: usd, is_disabled: true, _kind_hint: measure, _type_hint: number},
+      {table_calculation: valores, label: 'Valores:', expression: "${st_importacoes_utilidades.val_fob_un_us_num_min}",
         value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number},
       {table_calculation: avg_calc, label: avg_calc, expression: "${st_importacoes_utilidades.val_fob_un_us_num_avg}",
         value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number},
@@ -1041,6 +1030,7 @@
         - "#FBB555"
       options:
         steps: 5
+    y_axis_labels: [Valor]
     y_axis_value_format: "#,##0.00"
     trellis: ''
     stacking: ''
@@ -1071,10 +1061,10 @@
     label_type: labPer
     defaults_version: 1
     hidden_fields: [st_importacoes_utilidades.val_fob_un_us_num_min, st_importacoes_utilidades.val_fob_un_us_num_avg,
-      st_importacoes_utilidades.val_fob_un_us_num_max]
+      st_importacoes_utilidades.val_fob_un_us_num_max, st_importacoes_utilidades.fob_sum]
     note_state: collapsed
     note_display: below
-    note_text: Considera apenas o tipos UNIDADE.
+    note_text: Considera apenas o tipo UNIDADE.
     listen:
       Importador Nome: st_importacoes_utilidades.importador_nome
       NCM: st_importacoes_utilidades.cdncm_compl
@@ -1082,94 +1072,21 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
     row: 30
     col: 0
     width: 24
     height: 7
-  - title: Valor FOB Total - Ranking Marcas
-    name: Valor FOB Total - Ranking Marcas
+  - title: Valor FOB Total - Tamanho
+    name: Valor FOB Total - Tamanho
     model: external_st_importacoes
     explore: st_importacoes_utilidades
     type: looker_column
-    fields: [st_importacoes_utilidades.fob_sum, st_importacoes_utilidades.count, st_importacoes_utilidades.marca]
+    fields: [st_importacoes_utilidades.fob_sum, st_importacoes_utilidades.tamanho]
     filters:
-      st_importacoes_utilidades.marca_check: 'Yes'
-    sorts: [st_importacoes_utilidades.fob_sum desc]
-    limit: 15
-    dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_utilidades.fob_sum}",
-        value_format: "$#,##0", value_format_name: !!null '', _kind_hint: measure,
-        _type_hint: number}]
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    limit_displayed_rows: true
-    legend_position: center
-    point_style: none
-    show_value_labels: true
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_utilidades.fob_sum,
-            id: st_importacoes_utilidades.fob_sum, name: Fob Sum}], showLabels: true,
-        showValues: true, valueFormat: "$#,##0", unpinAxis: false, tickDensity: default,
-        tickDensityCustom: 5, type: linear}, {label: !!null '', orientation: right,
-        series: [{axisId: st_importacoes_utilidades.count, id: st_importacoes_utilidades.count,
-            name: Quantidade}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 5, type: linear}]
-    limit_displayed_rows_values:
-      show_hide: show
-      first_last: first
-      num_rows: '10'
-    series_types:
-      st_importacoes_utilidades.count: line
-    series_colors:
-      st_importacoes_utilidades.count: "#98d91e"
-      calculation_1: "#7a7a7a"
-    series_labels:
-      st_importacoes_utilidades.count: Quantidade
-      calculation_1: Valor Fob Total
-    defaults_version: 1
-    hidden_fields: [st_importacoes_utilidades.fob_sum, st_importacoes_utilidades.count]
-    listen:
-      Importador Nome: st_importacoes_utilidades.importador_nome
-      NCM: st_importacoes_utilidades.cdncm_compl
-      Produto: st_importacoes_utilidades.produto
-      Modal: st_importacoes_utilidades.via_transp_norm
-      País de Origem: st_importacoes_utilidades.nm_pais_origem
-      Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
-      Modelo: st_importacoes_utilidades.modelo
-    row: 51
-    col: 0
-    width: 24
-    height: 7
-  - title: Valor FOB Total - Idade %
-    name: Valor FOB Total - Idade %
-    model: external_st_importacoes
-    explore: st_importacoes_utilidades
-    type: looker_column
-    fields: [st_importacoes_utilidades.fob_sum, st_importacoes_utilidades.idade]
+      st_importacoes_utilidades.tamanho_check: 'Yes'
     sorts: [st_importacoes_utilidades.fob_sum desc]
     limit: 15
     dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_utilidades.fob_sum}",
@@ -1234,10 +1151,10 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
-    row: 72
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
+    row: 65
     col: 0
     width: 24
     height: 7
@@ -1309,10 +1226,174 @@
       Modal: st_importacoes_utilidades.via_transp_norm
       País de Origem: st_importacoes_utilidades.nm_pais_origem
       Período: st_importacoes_utilidades.anomes_norm
-      Idade: st_importacoes_utilidades.idade
-      Marca: st_importacoes_utilidades.marca
       Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
     row: 44
+    col: 0
+    width: 24
+    height: 7
+  - title: Valor FOB Total - ST IMPORTAÇÕES
+    name: Valor FOB Total - ST IMPORTAÇÕES
+    model: external_st_importacoes
+    explore: st_importacoes_utilidades
+    type: single_value
+    fields: [st_importacoes_utilidades.fob_sum, st_importacoes_utilidades.count, st_importacoes_utilidades.importador_nome]
+    filters:
+      st_importacoes_utilidades.importador_check: 'Yes'
+      st_importacoes_utilidades.importador_colorido: ST IMPORTACOES LTDA
+    sorts: [st_importacoes_utilidades.fob_sum desc]
+    limit: 15
+    dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_utilidades.fob_sum}",
+        value_format: "$#,##0", value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}]
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    custom_color: "#72D16D"
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: true
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_utilidades.fob_sum,
+            id: st_importacoes_utilidades.fob_sum, name: Fob Sum}], showLabels: true,
+        showValues: true, valueFormat: "$#,##0", unpinAxis: false, tickDensity: default,
+        tickDensityCustom: 5, type: linear}, {label: !!null '', orientation: right,
+        series: [{axisId: st_importacoes_utilidades.count, id: st_importacoes_utilidades.count,
+            name: Quantidade}], showLabels: true, showValues: true, unpinAxis: false,
+        tickDensity: default, tickDensityCustom: 5, type: linear}]
+    limit_displayed_rows_values:
+      show_hide: show
+      first_last: first
+      num_rows: '10'
+    series_types: {}
+    series_colors:
+      st_importacoes_utilidades.count: "#98d91e"
+      calculation_1: "#7a7a7a"
+    series_labels:
+      st_importacoes_utilidades.count: Quantidade
+      calculation_1: Valor Fob Total
+    defaults_version: 1
+    hidden_fields: [st_importacoes_utilidades.fob_sum, st_importacoes_utilidades.count]
+    listen:
+      Importador Nome: st_importacoes_utilidades.importador_nome
+      NCM: st_importacoes_utilidades.cdncm_compl
+      Produto: st_importacoes_utilidades.produto
+      Modal: st_importacoes_utilidades.via_transp_norm
+      País de Origem: st_importacoes_utilidades.nm_pais_origem
+      Período: st_importacoes_utilidades.anomes_norm
+      Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
+    row: 51
+    col: 0
+    width: 4
+    height: 7
+  - title: Valor FOB Total - Material
+    name: Valor FOB Total - Material
+    model: external_st_importacoes
+    explore: st_importacoes_utilidades
+    type: looker_column
+    fields: [st_importacoes_utilidades.fob_sum, st_importacoes_utilidades.material]
+    filters:
+      st_importacoes_utilidades.tamanho_check: 'Yes'
+    sorts: [st_importacoes_utilidades.fob_sum desc]
+    limit: 15
+    dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_utilidades.fob_sum}",
+        value_format: "$#,##0", value_format_name: !!null '', _kind_hint: measure,
+        _type_hint: number}, {table_calculation: percent_of_total, label: percent_of_total,
+        expression: "${st_importacoes_utilidades.fob_sum}/sum(${st_importacoes_utilidades.fob_sum})",
+        value_format: !!null '', value_format_name: percent_3, _kind_hint: measure,
+        _type_hint: number}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_utilidades.fob_sum,
+            id: st_importacoes_utilidades.fob_sum, name: Fob Sum}], showLabels: true,
+        showValues: true, valueFormat: "$#,##0", unpinAxis: false, tickDensity: default,
+        tickDensityCustom: 5, type: linear}, {label: !!null '', orientation: right,
+        series: [{axisId: st_importacoes_utilidades.count, id: st_importacoes_utilidades.count,
+            name: Quantidade}], showLabels: true, showValues: true, unpinAxis: false,
+        tickDensity: default, tickDensityCustom: 5, type: linear}]
+    limit_displayed_rows_values:
+      show_hide: show
+      first_last: first
+      num_rows: '10'
+    series_types:
+      st_importacoes_utilidades.count: line
+    series_colors:
+      st_importacoes_utilidades.count: "#98d91e"
+      calculation_1: "#7a7a7a"
+      percent_of_total: "#7a7a7a"
+    series_labels:
+      st_importacoes_utilidades.count: Quantidade
+      calculation_1: Valor Fob Total
+    defaults_version: 1
+    hidden_fields: [st_importacoes_utilidades.fob_sum, percent_of_total]
+    listen:
+      Importador Nome: st_importacoes_utilidades.importador_nome
+      NCM: st_importacoes_utilidades.cdncm_compl
+      Produto: st_importacoes_utilidades.produto
+      Modal: st_importacoes_utilidades.via_transp_norm
+      País de Origem: st_importacoes_utilidades.nm_pais_origem
+      Período: st_importacoes_utilidades.anomes_norm
+      Modelo: st_importacoes_utilidades.modelo
+      Tamanho: st_importacoes_utilidades.tamanho
+      Material: st_importacoes_utilidades.material
+    row: 72
     col: 0
     width: 24
     height: 7
@@ -1373,8 +1454,8 @@
     explore: st_importacoes_utilidades
     listens_to_filters: []
     field: st_importacoes_utilidades.produto
-  - name: Marca
-    title: Marca
+  - name: Tamanho
+    title: Tamanho
     type: field_filter
     default_value: ''
     allow_multiple_values: true
@@ -1386,9 +1467,9 @@
     model: external_st_importacoes
     explore: st_importacoes_utilidades
     listens_to_filters: []
-    field: st_importacoes_utilidades.marca
-  - name: Idade
-    title: Idade
+    field: st_importacoes_utilidades.tamanho
+  - name: Modelo
+    title: Modelo
     type: field_filter
     default_value: ''
     allow_multiple_values: true
@@ -1400,7 +1481,21 @@
     model: external_st_importacoes
     explore: st_importacoes_utilidades
     listens_to_filters: []
-    field: st_importacoes_utilidades.idade
+    field: st_importacoes_utilidades.modelo
+  - name: Material
+    title: Material
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+      options: []
+    model: external_st_importacoes
+    explore: st_importacoes_utilidades
+    listens_to_filters: []
+    field: st_importacoes_utilidades.material
   - name: Modal
     title: Modal
     type: field_filter
@@ -1429,17 +1524,3 @@
     explore: st_importacoes_utilidades
     listens_to_filters: []
     field: st_importacoes_utilidades.nm_pais_origem
-  - name: Modelo
-    title: Modelo
-    type: field_filter
-    default_value: ''
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: tag_list
-      display: popover
-      options: []
-    model: external_st_importacoes
-    explore: st_importacoes_utilidades
-    listens_to_filters: []
-    field: st_importacoes_utilidades.modelo
