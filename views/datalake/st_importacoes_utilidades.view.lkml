@@ -873,6 +873,24 @@ view: st_importacoes_utilidades {
     end;;
   }
 
+  dimension: material {
+    type: string
+    sql:
+    case
+    when ${TABLE}.material is null or ${TABLE}.material = '' then 'NÃO IDENTIFICADO'
+    else ${TABLE}.material
+    end;;
+  }
+
+  dimension: material_check {
+    type: yesno
+    sql:
+    case
+    when ${material} = 'NÃO IDENTIFICADO' then false
+    else true
+    end;;
+  }
+
   dimension: modalidade_despacho {
     type: string
     sql: ${TABLE}.modalidade_despacho ;;
