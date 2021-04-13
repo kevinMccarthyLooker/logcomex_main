@@ -1144,6 +1144,9 @@
       calculation_1: Valor Fob Total
     defaults_version: 1
     hidden_fields: [st_importacoes_utilidades.fob_sum, calculation_1]
+    note_state: collapsed
+    note_display: hover
+    note_text: Não considera tamanhos não identificados.
     listen:
       Importador Nome: st_importacoes_utilidades.importador_nome
       NCM: st_importacoes_utilidades.cdncm_compl
