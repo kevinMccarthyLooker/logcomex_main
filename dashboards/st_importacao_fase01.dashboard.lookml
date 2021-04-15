@@ -1294,6 +1294,173 @@
     col: 0
     width: 4
     height: 7
+  - title: Registros - Analítico
+    name: Registros - Analítico
+    model: external_st_importacoes
+    explore: st_importacoes_fase01
+    type: looker_grid
+    fields: [st_importacoes_fase01.id_import, st_importacoes_fase01.importador_nome,
+      st_importacoes_fase01.exportador_nome, st_importacoes_fase01.anomes_norm, st_importacoes_fase01.via_transp_norm,
+      st_importacoes_fase01.tp_unid_comerc, st_importacoes_fase01.genero, st_importacoes_fase01.material,
+      st_importacoes_fase01.modelo, st_importacoes_fase01.nm_pais_origem, st_importacoes_fase01.ncm_desc,
+      st_importacoes_fase01.produto, st_importacoes_fase01.qtd_comerc_num, st_importacoes_fase01.val_fob_un_us_num,
+      st_importacoes_fase01.val_vmle_us_subitem_num]
+    sorts: [st_importacoes_fase01.produto]
+    limit: 500
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    column_order: ["$$$_row_numbers_$$$", st_importacoes_fase01.id_import, st_importacoes_fase01.importador_nome,
+      st_importacoes_fase01.exportador_nome, st_importacoes_fase01.anomes_norm, st_importacoes_fase01.via_transp_norm,
+      st_importacoes_fase01.tp_unid_comerc, st_importacoes_fase01.genero, st_importacoes_fase01.material,
+      st_importacoes_fase01.modelo, st_importacoes_fase01.nm_pais_origem, st_importacoes_fase01.ncm_desc,
+      st_importacoes_fase01.produto, st_importacoes_fase01.qtd_comerc_num, st_importacoes_fase01.val_fob_un_us_num,
+      st_importacoes_fase01.val_vmle_us_subitem_num]
+    show_totals: true
+    show_row_totals: true
+    series_labels:
+      st_importacoes_fase01.count: Quantidade
+      st_importacoes_fase01.desc_prodt: Produto
+      st_importacoes_fase01.tp_unid_comerc: Tipo Unidade
+      st_importacoes_fase01.qtde_comerc_sum: Quantidade
+      st_importacoes_fase01.val_fob_un_us_num_avg: Média Ponderada
+      st_importacoes_fase01.fob_sum: Valor FOB Total
+      st_importacoes_fase01.id_import: ID
+      st_importacoes_fase01.anomes_norm: Periodo
+      st_importacoes_fase01.via_transp_norm: Modal
+      st_importacoes_fase01.nm_pais_origem: Pais de Origem
+      st_importacoes_fase01.ncm_desc: NCM Desc.
+      st_importacoes_fase01.qtd_comerc_num: Quantidade
+      st_importacoes_fase01.val_fob_un_us_num: Valor FOB Unidade
+      st_importacoes_fase01.val_vmle_us_subitem_num: Valor FOB
+    series_column_widths:
+      st_importacoes_fase01.exportador_nome: 132
+    series_cell_visualizations:
+      st_importacoes_fase01.qtde_comerc_sum:
+        is_active: false
+      st_importacoes_fase01.fob_sum:
+        is_active: true
+        palette:
+          palette_id: 39dda765-0763-514e-e2ac-8db862369f0f
+          collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+          custom_colors:
+          - "#c2c2c2"
+          - "#363636"
+    series_text_format:
+      st_importacoes_fase01.produto:
+        align: left
+      st_importacoes_fase01.tp_unid_comerc:
+        align: left
+      st_importacoes_fase01.qtde_comerc_sum:
+        align: left
+      st_importacoes_fase01.val_fob_un_us_num_avg:
+        align: left
+      media_simples:
+        align: left
+    series_value_format:
+      st_importacoes_fase01.fob_sum: "$#,##0"
+      st_importacoes_fase01.val_fob_un_us_num_avg:
+        name: usd
+        format_string: "$#,##0.00"
+        label: U.S. Dollars (2)
+      st_importacoes_fase01.qtde_comerc_sum:
+        name: decimal_0
+        format_string: "#,##0"
+        label: Decimals (0)
+      media_simples:
+        name: usd
+        format_string: "$#,##0.00"
+        label: U.S. Dollars (2)
+    map_plot_mode: points
+    heatmap_gridlines: false
+    heatmap_gridlines_empty: false
+    heatmap_opacity: 0.5
+    show_region_field: true
+    draw_map_labels_above_data: true
+    map_tile_provider: light
+    map_position: custom
+    map_latitude: 4.565473550710278
+    map_longitude: 2.9882812500000004
+    map_zoom: 2
+    map_scale_indicator: 'off'
+    map_pannable: true
+    map_zoomable: true
+    map_marker_type: circle
+    map_marker_icon_name: default
+    map_marker_radius_mode: proportional_value
+    map_marker_units: pixels
+    map_marker_proportional_scale_type: linear
+    map_marker_color_mode: value
+    show_legend: true
+    quantize_map_value_colors: true
+    reverse_map_value_colors: false
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_fase01.fob_sum,
+            id: st_importacoes_fase01.fob_sum, name: Fob Sum}], showLabels: true,
+        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
+        type: linear}, {label: !!null '', orientation: right, series: [{axisId: st_importacoes_fase01.count,
+            id: st_importacoes_fase01.count, name: Quantidade}], showLabels: true,
+        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
+        type: linear}]
+    series_types: {}
+    defaults_version: 1
+    map: auto
+    map_projection: ''
+    quantize_colors: false
+    hidden_fields:
+    note_state: expanded
+    note_display: above
+    listen:
+      Importador Nome: st_importacoes_fase01.importador_nome
+      NCM: st_importacoes_fase01.cdncm_compl
+      Produto: st_importacoes_fase01.produto
+      Material: st_importacoes_fase01.material
+      Gênero: st_importacoes_fase01.genero
+      Modal: st_importacoes_fase01.via_transp_norm
+      País de Origem: st_importacoes_fase01.nm_pais_origem
+      Período: st_importacoes_fase01.anomes_norm
+      Modelo: st_importacoes_fase01.modelo
+    row: 86
+    col: 0
+    width: 24
+    height: 7
   filters:
   - name: Importador Nome
     title: Importador Nome
