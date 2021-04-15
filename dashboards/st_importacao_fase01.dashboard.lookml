@@ -1304,7 +1304,8 @@
       st_importacoes_fase01.tp_unid_comerc, st_importacoes_fase01.genero, st_importacoes_fase01.material,
       st_importacoes_fase01.modelo, st_importacoes_fase01.nm_pais_origem, st_importacoes_fase01.ncm_desc,
       st_importacoes_fase01.desc_prodt, st_importacoes_fase01.produto, st_importacoes_fase01.qtd_comerc_num,
-      st_importacoes_fase01.val_fob_un_us_num, st_importacoes_fase01.val_vmle_us_subitem_num]
+      st_importacoes_fase01.val_fob_un_us_num, st_importacoes_fase01.val_vmle_us_subitem_num,
+      st_importacoes_fase01.cdncm_compl]
     sorts: [st_importacoes_fase01.produto]
     limit: 500
     show_view_names: false
@@ -1323,12 +1324,13 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     show_sql_query_menu_options: false
-    column_order: ["$$$_row_numbers_$$$", st_importacoes_fase01.id_import, st_importacoes_fase01.importador_nome,
-      st_importacoes_fase01.exportador_nome, st_importacoes_fase01.anomes_norm, st_importacoes_fase01.via_transp_norm,
-      st_importacoes_fase01.tp_unid_comerc, st_importacoes_fase01.genero, st_importacoes_fase01.material,
-      st_importacoes_fase01.modelo, st_importacoes_fase01.nm_pais_origem, st_importacoes_fase01.ncm_desc,
-      st_importacoes_fase01.desc_prodt, st_importacoes_fase01.produto, st_importacoes_fase01.qtd_comerc_num,
-      st_importacoes_fase01.val_fob_un_us_num, st_importacoes_fase01.val_vmle_us_subitem_num]
+    column_order: ["$$$_row_numbers_$$$", st_importacoes_fase01.via_transp_norm, st_importacoes_fase01.id_import,
+      st_importacoes_fase01.qtd_comerc_num, st_importacoes_fase01.val_fob_un_us_num,
+      st_importacoes_fase01.exportador_nome, st_importacoes_fase01.cdncm_compl, st_importacoes_fase01.tp_unid_comerc,
+      st_importacoes_fase01.desc_prodt, st_importacoes_fase01.nm_pais_origem, st_importacoes_fase01.val_vmle_us_subitem_num,
+      st_importacoes_fase01.importador_nome, st_importacoes_fase01.anomes_norm, st_importacoes_fase01.genero,
+      st_importacoes_fase01.material, st_importacoes_fase01.modelo, st_importacoes_fase01.ncm_desc,
+      st_importacoes_fase01.produto]
     show_totals: true
     show_row_totals: true
     series_labels:
@@ -1347,8 +1349,18 @@
       st_importacoes_fase01.val_fob_un_us_num: Valor FOB Unidade
       st_importacoes_fase01.val_vmle_us_subitem_num: Valor FOB
       st_importacoes_fase01.produto: Produto
+      st_importacoes_fase01.cdncm_compl: NCM
     series_column_widths:
       st_importacoes_fase01.exportador_nome: 132
+      st_importacoes_fase01.qtd_comerc_num: 109
+      st_importacoes_fase01.val_fob_un_us_num: 168
+      st_importacoes_fase01.importador_nome: 141
+      st_importacoes_fase01.tp_unid_comerc: 117
+      st_importacoes_fase01.desc_prodt: 125
+      st_importacoes_fase01.nm_pais_origem: 131
+      st_importacoes_fase01.val_vmle_us_subitem_num: 129
+      st_importacoes_fase01.anomes_norm: 94
+      st_importacoes_fase01.genero: 121
     series_cell_visualizations:
       st_importacoes_fase01.qtde_comerc_sum:
         is_active: false
