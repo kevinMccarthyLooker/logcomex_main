@@ -1303,8 +1303,8 @@
       st_importacoes_fase01.exportador_nome, st_importacoes_fase01.anomes_norm, st_importacoes_fase01.via_transp_norm,
       st_importacoes_fase01.tp_unid_comerc, st_importacoes_fase01.genero, st_importacoes_fase01.material,
       st_importacoes_fase01.modelo, st_importacoes_fase01.nm_pais_origem, st_importacoes_fase01.ncm_desc,
-      st_importacoes_fase01.produto, st_importacoes_fase01.qtd_comerc_num, st_importacoes_fase01.val_fob_un_us_num,
-      st_importacoes_fase01.val_vmle_us_subitem_num]
+      st_importacoes_fase01.desc_prodt, st_importacoes_fase01.produto, st_importacoes_fase01.qtd_comerc_num,
+      st_importacoes_fase01.val_fob_un_us_num, st_importacoes_fase01.val_vmle_us_subitem_num]
     sorts: [st_importacoes_fase01.produto]
     limit: 500
     show_view_names: false
@@ -1327,13 +1327,13 @@
       st_importacoes_fase01.exportador_nome, st_importacoes_fase01.anomes_norm, st_importacoes_fase01.via_transp_norm,
       st_importacoes_fase01.tp_unid_comerc, st_importacoes_fase01.genero, st_importacoes_fase01.material,
       st_importacoes_fase01.modelo, st_importacoes_fase01.nm_pais_origem, st_importacoes_fase01.ncm_desc,
-      st_importacoes_fase01.produto, st_importacoes_fase01.qtd_comerc_num, st_importacoes_fase01.val_fob_un_us_num,
-      st_importacoes_fase01.val_vmle_us_subitem_num]
+      st_importacoes_fase01.desc_prodt, st_importacoes_fase01.produto, st_importacoes_fase01.qtd_comerc_num,
+      st_importacoes_fase01.val_fob_un_us_num, st_importacoes_fase01.val_vmle_us_subitem_num]
     show_totals: true
     show_row_totals: true
     series_labels:
       st_importacoes_fase01.count: Quantidade
-      st_importacoes_fase01.desc_prodt: Produto
+      st_importacoes_fase01.desc_prodt: Desc Produto
       st_importacoes_fase01.tp_unid_comerc: Tipo Unidade
       st_importacoes_fase01.qtde_comerc_sum: Quantidade
       st_importacoes_fase01.val_fob_un_us_num_avg: Média Ponderada
@@ -1342,10 +1342,11 @@
       st_importacoes_fase01.anomes_norm: Periodo
       st_importacoes_fase01.via_transp_norm: Modal
       st_importacoes_fase01.nm_pais_origem: Pais de Origem
-      st_importacoes_fase01.ncm_desc: NCM Desc.
+      st_importacoes_fase01.ncm_desc: NCM Desc
       st_importacoes_fase01.qtd_comerc_num: Quantidade
       st_importacoes_fase01.val_fob_un_us_num: Valor FOB Unidade
       st_importacoes_fase01.val_vmle_us_subitem_num: Valor FOB
+      st_importacoes_fase01.produto: Produto
     series_column_widths:
       st_importacoes_fase01.exportador_nome: 132
     series_cell_visualizations:
