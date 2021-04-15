@@ -7,7 +7,7 @@ view: recintos_aduaneiros_customers {
       (
         select recinto_aduaneiro, sum(total_reais) as total_reais, sum(total_dolares) as total_dolares
         from di_pu
-        where di_pu.data_chegada_carga >= current_date - interval '6' month -- ultimos 6 meses
+        where di_pu.data_chegada_carga >= current_date - interval '12' month -- ultimos 12 meses
         group by 1
       ) as qq1
     left join
