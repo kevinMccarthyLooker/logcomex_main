@@ -279,7 +279,7 @@ view: bi_imports_mvw_gold {
 
   measure: total_teus {
     type: sum
-    value_format: "$#;($#)"
+    value_format: "#;(#)"
     sql: ${TABLE}.teus_parcial  ;;
   }
 
