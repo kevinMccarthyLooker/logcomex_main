@@ -126,16 +126,6 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.detalhes ;;
   }
 
-  dimension: d.c20 {
-    type: number
-    sql: ${TABLE}.c20 ;;
-  }
-
-  dimension: d.c40 {
-    type: number
-    sql: ${TABLE}.c40 ;;
-  }
-
   dimension: qtde_fcl {
     type: number
     sql: ${TABLE}.qtde_fcl ;;
@@ -247,6 +237,31 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.c40 ;;
   }
 
+  dimension: d_c20 {
+    type: number
+    sql: ${TABLE}.c20 ;;
+  }
+
+  dimension: c20_parcial {
+    type: number
+    sql: ${TABLE}.c20_parcial ;;
+  }
+
+  dimension: d_c40 {
+    type: number
+    sql: ${TABLE}.c40 ;;
+  }
+
+  dimension: c40_parcial {
+    type: number
+    sql: ${TABLE}.c40_parcial ;;
+  }
+
+  dimension: teus_parcial {
+    type: number
+    sql: ${TABLE}.teus_parcial ;;
+  }
+
   measure: teus {
     type: sum
     sql: ${TABLE}.teus ;;
@@ -300,6 +315,24 @@ view: bi_imports_mvw_gold {
     sql: (((${TABLE}."vlfretetotal" /  ${TABLE}."teus") * 2) * ${TABLE}."c40") / ${TABLE}."c40";;
   }
 
+    measure: media_frete_TEU_real {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [teus_dimension: ">0"]
+    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."teus_parcial" ;;
+  }
 
+  measure: media_frete_c20_real {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [c20_dimension: ">0"]
+    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."c20_parcial";;
+  }
 
+  measure: media_frete_c40_real {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [c40_dimension: ">0"]
+    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."c40_parcial";;
+  }
 }
