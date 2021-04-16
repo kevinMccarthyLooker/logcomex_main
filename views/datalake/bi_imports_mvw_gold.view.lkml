@@ -318,21 +318,21 @@ view: bi_imports_mvw_gold {
     measure: media_frete_TEU_real {
     type: average
     value_format: "$#.00;($#.00)"
-    filters: [teus_dimension: ">0"]
+    filters: [teus_parcial: ">0"]
     sql: ${TABLE}."vlfretetotal" /  ${TABLE}."teus_parcial" ;;
   }
 
   measure: media_frete_c20_real {
     type: average
     value_format: "$#.00;($#.00)"
-    filters: [c20_dimension: ">0"]
+    filters: [c20_parcial: ">0"]
     sql: ${TABLE}."vlfretetotal" /  ${TABLE}."c20_parcial";;
   }
 
   measure: media_frete_c40_real {
     type: average
     value_format: "$#.00;($#.00)"
-    filters: [c40_dimension: ">0"]
+    filters: [c40_parcial: ">0"]
     sql: ${TABLE}."vlfretetotal" /  ${TABLE}."c40_parcial";;
   }
 }
