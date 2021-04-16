@@ -277,6 +277,21 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.c40 ;;
   }
 
+  measure: total_teus {
+    type: sum
+    sql: ${TABLE}.teus_parcial  ;;
+  }
+
+  measure: total_c20 {
+    type: sum
+    sql: ${TABLE}.c20_parcial  ;;
+  }
+
+  measure: total_c40 {
+    type: sum
+    sql: ${TABLE}.c40_parcial  ;;
+  }
+
   dimension: rota {
     type: string
     sql: ${TABLE}."nmportoorigem"  || ' >> ' ||  ${TABLE}."nmportodestino";;
