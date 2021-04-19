@@ -1,7 +1,7 @@
 view: tracking_maritimo_aereo {
   derived_table: {
     sql:
-    select 'Maritimo' as modal,
+select 'Maritimo' as modal,
        tracking.id as tracking_id,
        tracking.id as tracking_maritimo_id,
        0 as tracking_aereo_id,
@@ -47,10 +47,17 @@ view: tracking_maritimo_aereo {
        qq2.comment as last_workflow,
        qq2.date_time as last_workflow_date,
        null::timestamp as aereo_data_embarque_ets,
-       null::timestamp as aereo_data_hora_chegada
+       null::timestamp as aereo_data_hora_chegada,
+       (case
+       when dbm.categoriacarga = 'I' then 'Importação'
+       when dbm.categoriacarga = 'E' then 'Exportação'
+       when dbm.categoriacarga = 'N' then 'Cabotagem'
+       else dbm.categoriacarga
+       end) as categoriacarga
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
 inner join tracking_internal_status on tracking.internal_status_id = tracking_internal_status.id
+left join sistema.db_maritimo dbm on tracking.ce_number = dbm.nrcemercante
 left join users u2 on u2.id = tracking.user_id
 left join(
 select
@@ -115,7 +122,8 @@ select 'Aereo' as modal,
        qq2.comment as last_workflow,
        qq2.date_time as last_workflow_date,
        qq3.data_embarque_ets as aereo_data_embarque_ets,
-       qq3.data_hora_chegada as aereo_data_hora_chegada
+       qq3.data_hora_chegada as aereo_data_hora_chegada,
+       null::text as categoriacarga
 from tracking_aerial
 inner join tracking_aerial_status on tracking_aerial.tracking_aerial_status_id = tracking_aerial_status.id
 inner join tracking_aerial_internal_status on tracking_aerial.internal_status = tracking_aerial_internal_status.id
@@ -150,7 +158,6 @@ left join
           ) as qq3 on qq3.awb = tracking_aerial.awb and qq3.hwb = tracking_aerial.hwb
 --where tracking_aerial.deleted_at is null
     ;;
-
 indexes: ["chave"]
 sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) / (4*60*60));;
   }
