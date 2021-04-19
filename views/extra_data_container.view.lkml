@@ -47,6 +47,11 @@ view: extra_data_container {
     sql: ${TABLE}."destination" ;;
   }
 
+  dimension: destination_port_code {
+    type: string
+    sql: ${TABLE}."destination_port_code" ;;
+  }
+
   dimension: destination_city {
     type: string
     sql: ${TABLE}."destination_city" ;;
@@ -119,6 +124,11 @@ view: extra_data_container {
   dimension: origin {
     type: string
     sql: ${TABLE}."origin" ;;
+  }
+
+  dimension: origin_port_code {
+    type: string
+    sql: ${TABLE}."origin_port_code" ;;
   }
 
   dimension: origin_city {
