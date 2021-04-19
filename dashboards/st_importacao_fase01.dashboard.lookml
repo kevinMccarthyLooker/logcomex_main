@@ -1,4 +1,4 @@
-- dashboard: st_importacoes_fase01
+- dashboard: st_importacao_fase01
   title: 'Visão de Mercado - Fase 01: Moda'
   layout: newspaper
   preferred_viewer: dashboards-next
@@ -49,7 +49,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 4
+    row: 5
     col: 2
     width: 9
     height: 4
@@ -101,8 +101,8 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 4
-    col: 12
+    row: 5
+    col: 13
     width: 9
     height: 4
   - title: Valor FOB Total (US$) - Tendência Mensal
@@ -202,7 +202,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 8
+    row: 9
     col: 0
     width: 24
     height: 7
@@ -281,7 +281,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 25
+    row: 26
     col: 7
     width: 17
     height: 7
@@ -362,7 +362,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 39
+    row: 40
     col: 0
     width: 24
     height: 9
@@ -452,7 +452,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 15
+    row: 16
     col: 0
     width: 24
     height: 10
@@ -592,7 +592,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 76
+    row: 77
     col: 0
     width: 8
     height: 7
@@ -749,7 +749,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 76
+    row: 77
     col: 8
     width: 16
     height: 7
@@ -802,7 +802,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 69
+    row: 70
     col: 0
     width: 8
     height: 7
@@ -868,7 +868,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 48
+    row: 49
     col: 0
     width: 24
     height: 7
@@ -934,7 +934,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 69
+    row: 70
     col: 8
     width: 16
     height: 7
@@ -1007,7 +1007,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 62
+    row: 63
     col: 0
     width: 24
     height: 7
@@ -1082,7 +1082,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 32
+    row: 33
     col: 0
     width: 24
     height: 7
@@ -1098,7 +1098,7 @@
       3. Na condição de ter 3 ou mais materiais (independente se 1 deles for algodão): considerar fibras diversas.
 
       4. Na condição de apenas Algodão (sem o percentual): considerar 100% Algodão.
-    row: 90
+    row: 91
     col: 0
     width: 11
     height: 5
@@ -1204,12 +1204,12 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 55
+    row: 56
     col: 0
     width: 24
     height: 7
-  - title: ST IMPORTAÇÕES
-    name: ST IMPORTAÇÕES
+  - title: Valor FOB Total (US$) - ST Importações
+    name: Valor FOB Total (US$) - ST Importações
     model: external_st_importacoes
     explore: st_importacoes_fase01
     type: single_value
@@ -1223,7 +1223,7 @@
         value_format: "$#,##0", value_format_name: !!null '', _kind_hint: measure,
         _type_hint: number}]
     custom_color_enabled: true
-    show_single_value_title: false
+    show_single_value_title: true
     show_comparison: false
     comparison_type: value
     comparison_reverse_colors: false
@@ -1297,7 +1297,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 25
+    row: 26
     col: 0
     width: 7
     height: 7
@@ -1477,7 +1477,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 83
+    row: 84
     col: 0
     width: 24
     height: 7
@@ -1487,9 +1487,9 @@
     subtitle_text: ''
     body_text: <img src="https://drive.google.com/uc?export=view&id=1NpOJPe-eAjUY7w5qHgn4ndPyEu0baTDI"/>
     row: 0
-    col: 5
-    width: 13
-    height: 4
+    col: 6
+    width: 12
+    height: 5
   filters:
   - name: Importador Nome
     title: Importador Nome
