@@ -172,6 +172,11 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     sql: ${TABLE}."chave" ;;
   }
 
+  dimension: categoriacarga {
+    type: string
+    sql: ${TABLE}."categoriacarga" ;;
+  }
+
   dimension: tracking_id {
     type: number
     sql: ${TABLE}."tracking_id" ;;
