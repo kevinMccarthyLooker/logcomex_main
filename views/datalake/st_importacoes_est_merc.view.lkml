@@ -1,11 +1,10 @@
-view: st_importacoes_estrutura_mercadologica {
+view: st_importacoes_est_merc {
 
   derived_table: {
-    sql: st_importacoes.estrutura_mercadologica_bronze  ;;
+    sql: st_importacoes.estrutura_mercadologica_bronze;;
   }
 
   dimension: id {
-    primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
   }
