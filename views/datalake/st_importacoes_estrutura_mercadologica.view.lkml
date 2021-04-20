@@ -76,21 +76,25 @@ view: st_importacoes_estrutura_mercadologica {
   measure: count_dsc_departamento {
     type: count_distinct
     sql:${TABLE}.dsc_departamento ;;
+    drill_fields: [dsc_departamento]
   }
 
   measure: count_dsc_familia {
     type: count_distinct
     sql:${TABLE}.dsc_familia ;;
+    drill_fields: [dsc_familia]
   }
 
   measure: count_dsc_linha{
     type: count_distinct
     sql:${TABLE}.dsc_linha ;;
+    drill_fields: [dsc_linha]
   }
 
   measure: count_dsc_subfamilia{
     type: count_distinct
     sql:${TABLE}.dsc_subfamilia ;;
+    drill_fields: [dsc_subfamilia]
   }
 
 }
