@@ -33,6 +33,14 @@ view: st_importacoes_estrutura_mercadologica {
     sql: ${TABLE}.dsc_departamento ;;
   }
 
+  dimension: dsc_departamento_cama {
+    type: yesno
+    sql: case
+         when ${TABLE}.dsc_departamento = 'CAMA MESA & BANHO' then true
+         else false
+         end;;
+  }
+
   dimension: dsc_familia {
     type: string
     sql: ${TABLE}.dsc_familia ;;
