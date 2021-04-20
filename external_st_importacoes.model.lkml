@@ -14,4 +14,4 @@ explore: st_importacoes_brinquedos {}
 
 explore: st_importacoes_utilidades {}
 
-#explore: st_importacoes_estrutura_mercadologica {}
+explore: st_importacoes_estrutura_mercadologica {}
