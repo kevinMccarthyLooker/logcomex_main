@@ -71,6 +71,5 @@ view: st_importacoes_est_merc {
 
   measure: count {
     type: count
-    drill_fields: [id]
   }
 }
