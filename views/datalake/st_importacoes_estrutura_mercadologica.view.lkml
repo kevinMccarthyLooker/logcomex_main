@@ -1,4 +1,4 @@
-view: estrutura_mercadologica_bronze {
+view: st_importacoes_estrutura_mercadologica {
   sql_table_name: st_importacoes.estrutura_mercadologica_bronze ;;
   drill_fields: [id]
 
