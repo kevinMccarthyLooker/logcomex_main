@@ -1,5 +1,5 @@
 - dashboard: st_importacao_fase01
-  title: 'Visão de Mercado - Fase 01: Moda'
+  title: Visão de Mercado - Moda
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: true
@@ -166,6 +166,7 @@
     series_labels:
       st_importacoes_fase01.count: Quantidade
       calculation_1: Valor Fob Total
+    label_color: ["#7a7a7a"]
     custom_color_enabled: true
     show_single_value_title: true
     value_format: ''
@@ -474,19 +475,19 @@
     color_application:
       collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
       custom:
-        id: 0b90c511-e7c1-074a-03be-0fdf015ad1ca
+        id: 201824b8-1b91-4101-2cee-fc2ebb3dcf18
         label: Custom
         type: continuous
         stops:
         - color: "#AAF52D"
           offset: 0
-        - color: "#89BB35"
+        - color: "#464646"
           offset: 25
-        - color: "#799F39"
+        - color: "#6B6B6B"
           offset: 50
-        - color: "#68823D"
+        - color: "#909090"
           offset: 75
-        - color: "#586641"
+        - color: "#B4B4B4"
           offset: 100
       options:
         steps: 5
@@ -771,19 +772,19 @@
     color_application:
       collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
       custom:
-        id: 11904d6c-781a-ebd7-b7d8-c1bcbad4f8ea
+        id: 75ef86db-16cf-46b6-8767-efc8c8a542b2
         label: Custom
         type: continuous
         stops:
         - color: "#AAF52D"
           offset: 0
-        - color: "#89BB35"
+        - color: "#464646"
           offset: 25
-        - color: "#799F39"
+        - color: "#6B6B6B"
           offset: 50
-        - color: "#68823D"
+        - color: "#909090"
           offset: 75
-        - color: "#586641"
+        - color: "#B4B4B4"
           offset: 100
       options:
         steps: 5
@@ -990,6 +991,7 @@
       media_simples: "#9BDA32"
     series_labels:
       st_importacoes_fase01.fob_sum: Valor Fob Total
+    label_color: ["#7a7a7a"]
     value_labels: legend
     label_type: labPer
     defaults_version: 1
@@ -1070,6 +1072,7 @@
     series_labels:
       st_importacoes_fase01.count: Quantidade
       calculation_1: Valor Fob Total
+    label_color: ["#7a7a7a"]
     defaults_version: 1
     hidden_fields: [st_importacoes_fase01.fob_sum, st_importacoes_fase01.count]
     listen:
