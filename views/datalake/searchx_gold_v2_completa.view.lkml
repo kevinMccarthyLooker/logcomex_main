@@ -29,6 +29,11 @@ view: searchx_gold_v2_completa{
     sql: ${TABLE}.anomes ;;
   }
 
+  dimension: ano {
+    type: string
+    sql: left(${TABLE}.anomes,4) ;;
+  }
+
   dimension: api_key {
     type: string
     sql: ${TABLE}.api_key ;;
