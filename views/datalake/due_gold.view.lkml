@@ -9,9 +9,9 @@ view: due_gold {
     drill_fields: [detail*]
   }
 
-  dimension: id {
+  dimension: id_due {
     type: number
-    sql: ${TABLE}.id ;;
+    sql: ${TABLE}.id_due ;;
   }
 
   dimension: due_number {
@@ -39,14 +39,44 @@ view: due_gold {
     sql: ${TABLE}.updated_at_due ;;
   }
 
+  dimension: id_info_bl {
+    type: number
+    sql: ${TABLE}.id_info_bl ;;
+  }
+
   dimension: dat {
     type: string
     sql: ${TABLE}.dat ;;
   }
 
+  dimension: via_internacional_transportation {
+    type: string
+    sql: ${TABLE}.via_internacional_transportation ;;
+  }
+
   dimension: internacional_bill_of_landing {
     type: string
     sql: ${TABLE}.internacional_bill_of_landing ;;
+  }
+
+  dimension: pu_due_id {
+    type: number
+    sql: ${TABLE}.pu_due_id ;;
+  }
+
+  dimension_group: created_at_info_bl {
+    type: time
+    sql: ${TABLE}.created_at_info_bl ;;
+  }
+
+  dimension_group: updated_at_info_bl {
+    type: time
+    sql: ${TABLE}.updated_at_info_bl ;;
+  }
+
+  dimension: id_historico {
+    type: number
+    sql: ${TABLE}.id_historico ;;
   }
 
   dimension_group: event_datetime {
@@ -64,6 +94,21 @@ view: due_gold {
     sql: ${TABLE}.responsible ;;
   }
 
+  dimension_group: created_at_historico {
+    type: time
+    sql: ${TABLE}.created_at_historico ;;
+  }
+
+  dimension_group: updated_at_historico {
+    type: time
+    sql: ${TABLE}.updated_at_historico ;;
+  }
+
+  dimension: id_container {
+    type: number
+    sql: ${TABLE}.id_container ;;
+  }
+
   dimension: identification {
     type: string
     sql: ${TABLE}.identification ;;
@@ -77,6 +122,31 @@ view: due_gold {
   dimension: seal {
     type: string
     sql: ${TABLE}.seal ;;
+  }
+
+  dimension: pu_due_id1 {
+    type: number
+    sql: ${TABLE}.pu_due_id1 ;;
+  }
+
+  dimension_group: created_at_container {
+    type: time
+    sql: ${TABLE}.created_at_container ;;
+  }
+
+  dimension_group: updated_at_container {
+    type: time
+    sql: ${TABLE}.updated_at_container ;;
+  }
+
+  dimension: id_complement {
+    type: number
+    sql: ${TABLE}.id_complement ;;
+  }
+
+  dimension: pu_reference_id {
+    type: number
+    sql: ${TABLE}.pu_reference_id ;;
   }
 
   dimension: ruc_number {
@@ -249,9 +319,64 @@ view: due_gold {
     sql: ${TABLE}.db_channel ;;
   }
 
+  dimension: pu_due_id2 {
+    type: number
+    sql: ${TABLE}.pu_due_id2 ;;
+  }
+
+  dimension_group: processed_at_complement {
+    type: time
+    sql: ${TABLE}.processed_at_complement ;;
+  }
+
+  dimension_group: created_at_complement {
+    type: time
+    sql: ${TABLE}.created_at_complement ;;
+  }
+
+  dimension_group: updated_at_complement {
+    type: time
+    sql: ${TABLE}.updated_at_complement ;;
+  }
+
+  dimension: id_manifestation_shipping_data {
+    type: number
+    sql: ${TABLE}.id_manifestation_shipping_data ;;
+  }
+
   dimension: via_transport_value {
     type: string
     sql: ${TABLE}.via_transport_value ;;
+  }
+
+  dimension: urf_key_location {
+    type: number
+    sql: ${TABLE}.urf_key_location ;;
+  }
+
+  dimension: urf_value_location {
+    type: string
+    sql: ${TABLE}.urf_value_location ;;
+  }
+
+  dimension: pu_due_customs_transit_id {
+    type: number
+    sql: ${TABLE}.pu_due_customs_transit_id ;;
+  }
+
+  dimension_group: created_at_manifestation_shipping_data {
+    type: time
+    sql: ${TABLE}.created_at_manifestation_shipping_data ;;
+  }
+
+  dimension_group: updated_at_manifestation_shipping_data {
+    type: time
+    sql: ${TABLE}.updated_at_manifestation_shipping_data ;;
+  }
+
+  dimension: id_manifestation_shipping_data_detail {
+    type: number
+    sql: ${TABLE}.id_manifestation_shipping_data_detail ;;
   }
 
   dimension: manifest_key_sequence {
@@ -274,6 +399,26 @@ view: due_gold {
     sql: ${TABLE}.manifest_issue_date ;;
   }
 
+  dimension: pu_due_manifestation_shipping_data_id {
+    type: number
+    sql: ${TABLE}.pu_due_manifestation_shipping_data_id ;;
+  }
+
+  dimension_group: created_at_manifestation_shipping_data_detail {
+    type: time
+    sql: ${TABLE}.created_at_manifestation_shipping_data_detail ;;
+  }
+
+  dimension_group: updated_at_manifestation_shipping_data_detail {
+    type: time
+    sql: ${TABLE}.updated_at_manifestation_shipping_data_detail ;;
+  }
+
+  dimension: id_manifestation_shipping_data_detail_knowledges {
+    type: number
+    sql: ${TABLE}.id_manifestation_shipping_data_detail_knowledges ;;
+  }
+
   dimension: nr_bill_of_lading {
     type: string
     sql: ${TABLE}.nr_bill_of_lading ;;
@@ -282,6 +427,26 @@ view: due_gold {
   dimension: date_issue_bill_of_landing {
     type: date
     sql: ${TABLE}.date_issue_bill_of_landing ;;
+  }
+
+  dimension: pu_due_manifestation_shipping_data_detail_id {
+    type: number
+    sql: ${TABLE}.pu_due_manifestation_shipping_data_detail_id ;;
+  }
+
+  dimension_group: created_at_manifestation_shipping_data_detail_knowledges {
+    type: time
+    sql: ${TABLE}.created_at_manifestation_shipping_data_detail_knowledges ;;
+  }
+
+  dimension_group: created_at_manifestation_shipping_data_detail_knowledges0 {
+    type: time
+    sql: ${TABLE}.created_at_manifestation_shipping_data_detail_knowledges0 ;;
+  }
+
+  dimension: id_manifestation_shipping_data_detailed_by_knowledge {
+    type: number
+    sql: ${TABLE}.id_manifestation_shipping_data_detailed_by_knowledge ;;
   }
 
   dimension: consignee_destination_country_value {
@@ -294,9 +459,24 @@ view: due_gold {
     sql: ${TABLE}.consignee_name ;;
   }
 
-  dimension: identification0 {
-    type: string
-    sql: ${TABLE}.identification0 ;;
+  dimension: pu_due_manifestation_shipping_data_detail_knowledges_id {
+    type: number
+    sql: ${TABLE}.pu_due_manifestation_shipping_data_detail_knowledges_id ;;
+  }
+
+  dimension_group: created_at_manifestation_shipping_data_detailed_by_knowledge {
+    type: time
+    sql: ${TABLE}.created_at_manifestation_shipping_data_detailed_by_knowledge ;;
+  }
+
+  dimension_group: updated_at_manifestation_shipping_data_detailed_by_knowledge {
+    type: time
+    sql: ${TABLE}.updated_at_manifestation_shipping_data_detailed_by_knowledge ;;
+  }
+
+  dimension: id_manifestation_shipping_data_detailed_by_knowledge_cl {
+    type: number
+    sql: ${TABLE}.id_manifestation_shipping_data_detailed_by_knowledge_cl ;;
   }
 
   dimension: urf_key {
@@ -307,11 +487,6 @@ view: due_gold {
   dimension: urf_value {
     type: string
     sql: ${TABLE}.urf_value ;;
-  }
-
-  dimension: tare0 {
-    type: number
-    sql: ${TABLE}.tare0 ;;
   }
 
   dimension: no_seals_required {
@@ -329,22 +504,51 @@ view: due_gold {
     sql: ${TABLE}.measured_weight ;;
   }
 
+  dimension: pu_due_manifestation_shipping_data_detailed_by_knowledge_id {
+    type: number
+    sql: ${TABLE}.pu_due_manifestation_shipping_data_detailed_by_knowledge_id ;;
+  }
+
+  dimension_group: created_at_manifestation_shipping_data_detailed_by_knowledge_cl {
+    type: time
+    sql: ${TABLE}.created_at_manifestation_shipping_data_detailed_by_knowledge_cl ;;
+  }
+
+  dimension_group: updated_at_manifestation_shipping_data_detailed_by_knowledge_cl {
+    type: time
+    sql: ${TABLE}.updated_at_manifestation_shipping_data_detailed_by_knowledge_cl ;;
+  }
+
   set: detail {
     fields: [
-      id,
+      id_due,
       due_number,
       digit,
       processed_at_due_time,
       created_at_due_time,
       updated_at_due_time,
+      id_info_bl,
       dat,
+      via_internacional_transportation,
       internacional_bill_of_landing,
+      pu_due_id,
+      created_at_info_bl_time,
+      updated_at_info_bl_time,
+      id_historico,
       event_datetime_time,
       event,
       responsible,
+      created_at_historico_time,
+      updated_at_historico_time,
+      id_container,
       identification,
       tare,
       seal,
+      pu_due_id1,
+      created_at_container_time,
+      updated_at_container_time,
+      id_complement,
+      pu_reference_id,
       ruc_number,
       importing_country_code,
       importing_country_name,
@@ -379,22 +583,46 @@ view: due_gold {
       cba_depositary_name,
       administrative_control,
       db_channel,
+      pu_due_id2,
+      processed_at_complement_time,
+      created_at_complement_time,
+      updated_at_complement_time,
+      id_manifestation_shipping_data,
       via_transport_value,
+      urf_key_location,
+      urf_value_location,
+      pu_due_customs_transit_id,
+      created_at_manifestation_shipping_data_time,
+      updated_at_manifestation_shipping_data_time,
+      id_manifestation_shipping_data_detail,
       manifest_key_sequence,
       cpf_cnpj_manifestator_key,
       cpf_cnpj_manifestator_value,
       manifest_issue_date,
+      pu_due_manifestation_shipping_data_id,
+      created_at_manifestation_shipping_data_detail_time,
+      updated_at_manifestation_shipping_data_detail_time,
+      id_manifestation_shipping_data_detail_knowledges,
       nr_bill_of_lading,
       date_issue_bill_of_landing,
+      pu_due_manifestation_shipping_data_detail_id,
+      created_at_manifestation_shipping_data_detail_knowledges_time,
+      created_at_manifestation_shipping_data_detail_knowledges0_time,
+      id_manifestation_shipping_data_detailed_by_knowledge,
       consignee_destination_country_value,
       consignee_name,
-      identification0,
+      pu_due_manifestation_shipping_data_detail_knowledges_id,
+      created_at_manifestation_shipping_data_detailed_by_knowledge_time,
+      updated_at_manifestation_shipping_data_detailed_by_knowledge_time,
+      id_manifestation_shipping_data_detailed_by_knowledge_cl,
       urf_key,
       urf_value,
-      tare0,
       no_seals_required,
       seals,
-      measured_weight
+      measured_weight,
+      pu_due_manifestation_shipping_data_detailed_by_knowledge_id,
+      created_at_manifestation_shipping_data_detailed_by_knowledge_cl_time,
+      updated_at_manifestation_shipping_data_detailed_by_knowledge_cl_time
     ]
   }
 }
