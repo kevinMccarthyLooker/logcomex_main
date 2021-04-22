@@ -49,7 +49,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 5
+    row: 6
     col: 2
     width: 9
     height: 4
@@ -101,7 +101,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 5
+    row: 6
     col: 13
     width: 9
     height: 4
@@ -203,7 +203,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 9
+    row: 10
     col: 0
     width: 24
     height: 7
@@ -282,7 +282,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 26
+    row: 27
     col: 7
     width: 17
     height: 7
@@ -363,7 +363,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 40
+    row: 41
     col: 0
     width: 24
     height: 9
@@ -453,7 +453,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 16
+    row: 17
     col: 0
     width: 24
     height: 10
@@ -593,7 +593,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 77
+    row: 78
     col: 0
     width: 8
     height: 7
@@ -750,7 +750,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 77
+    row: 78
     col: 8
     width: 16
     height: 7
@@ -803,7 +803,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 70
+    row: 71
     col: 0
     width: 8
     height: 7
@@ -869,7 +869,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 49
+    row: 50
     col: 0
     width: 24
     height: 7
@@ -935,7 +935,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 70
+    row: 71
     col: 8
     width: 16
     height: 7
@@ -1009,7 +1009,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 63
+    row: 64
     col: 0
     width: 24
     height: 7
@@ -1085,7 +1085,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 33
+    row: 34
     col: 0
     width: 24
     height: 7
@@ -1101,7 +1101,7 @@
       3. Na condição de ter 3 ou mais materiais (independente se 1 deles for algodão): considerar fibras diversas.
 
       4. Na condição de apenas Algodão (sem o percentual): considerar 100% Algodão.
-    row: 91
+    row: 92
     col: 0
     width: 11
     height: 5
@@ -1207,7 +1207,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 56
+    row: 57
     col: 0
     width: 24
     height: 7
@@ -1300,7 +1300,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 26
+    row: 27
     col: 0
     width: 7
     height: 7
@@ -1480,7 +1480,7 @@
       País de Origem: st_importacoes_fase01.nm_pais_origem
       Período: st_importacoes_fase01.anomes_norm
       Modelo: st_importacoes_fase01.modelo
-    row: 84
+    row: 85
     col: 0
     width: 24
     height: 7
@@ -1491,8 +1491,8 @@
     body_text: <img src="https://drive.google.com/uc?export=view&id=1NpOJPe-eAjUY7w5qHgn4ndPyEu0baTDI"/>
     row: 0
     col: 6
-    width: 12
-    height: 5
+    width: 13
+    height: 6
   filters:
   - name: Importador Nome
     title: Importador Nome
