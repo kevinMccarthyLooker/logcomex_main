@@ -162,8 +162,7 @@
     type: looker_column
     fields: [comex_analytics_di.data_chegada_month, comex_analytics_di.di_total, comex_analytics_di.valor_vmld_reais,
       comex_analytics_di.valor_vmle_reais]
-    filters:
-      comex_analytics_di.di_total: ">2"
+    filters: {}
     sorts: [comex_analytics_di.data_chegada_month]
     limit: 500
     dynamic_fields: [{measure: count_of_di_number, based_on: comex_analytics_di.di_number,
@@ -211,6 +210,10 @@
     series_types:
       comex_analytics_di.valor_vmld_reais: line
       comex_analytics_di.valor_vmle_reais: line
+    series_colors:
+      comex_analytics_di.di_total: "#5a189a"
+      comex_analytics_di.valor_vmld_reais: "#ff6d00"
+      comex_analytics_di.valor_vmle_reais: "#ff9e00"
     series_labels:
       comex_analytics_di.di_total: DI
       comex_analytics_di.valor_vmld_reais: VMLD R$
@@ -589,7 +592,7 @@
       Importador: comex_analytics_di.importador_nome
     row: 16
     col: 0
-    width: 13
+    width: 15
     height: 6
   - title: Consulta de Canal
     name: Consulta de Canal
@@ -597,6 +600,8 @@
     explore: comex_analytics_di
     type: looker_pie
     fields: [comex_analytics_di.canal, comex_analytics_di.di_total]
+    filters:
+      comex_analytics_di.canal: "-%-%"
     limit: 500
     dynamic_fields: [{measure: count_of_di_number, based_on: comex_analytics_di.di_number,
         expression: '', label: Count of Di Number, type: count_distinct, _kind_hint: measure,
@@ -729,8 +734,8 @@
       Mês de Chegada: comex_analytics_di.data_chegada_month
       Importador: comex_analytics_di.importador_nome
     row: 16
-    col: 13
-    width: 11
+    col: 15
+    width: 9
     height: 6
   filters:
   - name: Mês de Chegada
