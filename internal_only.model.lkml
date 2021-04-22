@@ -658,6 +658,18 @@ explore: Logistica_Internacional {
     type: left_outer
     relationship: many_to_one
   }
+
+  join: customer_plan {
+    sql_on: ${customer_plan.customer_id} = ${customer.id};;
+    type: left_outer
+    relationship: one_to_many
+  }
+
+  join: plan_complete {
+    sql_on: ${plan_complete.id} = ${customer_plan.plan_complete_id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
 }
 
 explore: Robos_Tracking {
