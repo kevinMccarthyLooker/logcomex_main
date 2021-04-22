@@ -6,6 +6,8 @@ include: "/**/searchx_gold_v2_2020.view.lkml"
 include: "/**/searchx_gold_v2_2020_produtos.view.lkml"
 include: "/**/valor_cif_2020_gold.view.lkml"
 include: "/**/st_importacoes_06_12_2020.view.lkml"
+include: "/**/searchx_gold_v2_completa.view.lkml"
+
 
 datagroup: valor_cif_datagroup {
   sql_trigger: SELECT CURRENT_DATE ;;
@@ -31,5 +33,7 @@ explore:searchx_gold_v2_2020  {
 explore:searchx_gold  {
 
 }
+
+explore: searchx_gold_v2_completa {}
 
 explore:searchx_gold_v2  {}
