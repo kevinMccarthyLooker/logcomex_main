@@ -214,4 +214,9 @@ view: extra_data_container {
     type: count
     drill_fields: [id]
   }
+
+  measure: distincts_bls {
+    type: count_distinct
+    sql: ${bl} ;;
+  }
 }

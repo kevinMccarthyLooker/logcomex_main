@@ -71,6 +71,21 @@ view: shipowner_processing_queue {
     sql: ${TABLE}."shipowner_processing_queue" ;;
   }
 
+  dimension_group: processed {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."processed_at" ;;
+  }
+
+
   dimension: failed_description {
     type: string
     sql: ${TABLE}."failed_description" ;;

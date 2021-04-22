@@ -646,6 +646,18 @@ explore: Logistica_Internacional {
     type: left_outer
     relationship: one_to_many
   }
+
+  join: tracking_maritimo_aereo {
+    sql_on: ${extra_data_container.bl} = ${tracking_maritimo_aereo.documento} ;;
+    type: left_outer
+    relationship: one_to_many
+  }
+
+  join: customer {
+    sql_on: ${customer.id} = ${tracking_maritimo_aereo.customer_id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
 }
 
 explore: Robos_Tracking {
