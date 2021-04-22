@@ -600,8 +600,7 @@
     explore: comex_analytics_di
     type: looker_pie
     fields: [comex_analytics_di.canal, comex_analytics_di.di_total]
-    filters:
-      comex_analytics_di.canal: "-%-%"
+    sorts: [comex_analytics_di.di_total desc]
     limit: 500
     dynamic_fields: [{measure: count_of_di_number, based_on: comex_analytics_di.di_number,
         expression: '', label: Count of Di Number, type: count_distinct, _kind_hint: measure,
