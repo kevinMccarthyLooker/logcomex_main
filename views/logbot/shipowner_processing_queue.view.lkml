@@ -28,7 +28,7 @@ view: shipowner_processing_queue {
     when ${shipowner_id} = 8  then 'Maersk'
     when ${shipowner_id} = 9  then 'Yang Ming'
     when ${shipowner_id} = 10 then 'PIL'
-    else 'VERIFICAR'
+    else ${shipowner_id}
     end ;;
   }
 
@@ -70,6 +70,21 @@ view: shipowner_processing_queue {
     ]
     sql: ${TABLE}."shipowner_processing_queue" ;;
   }
+
+  dimension_group: processed {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."processed_at" ;;
+  }
+
 
   dimension: failed_description {
     type: string
