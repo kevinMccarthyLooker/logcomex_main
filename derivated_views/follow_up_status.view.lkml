@@ -2,7 +2,7 @@ view: follow_up_status {
   derived_table: {
     sql:
 SELECT distinct 'maritimo' as modal,
-dbm.categoriacarga,
+null::text as categoriacarga,
 c.id as customer_id,
 c."name" as customer_name,
 tpi.force_certificate as force_certificate,
@@ -40,7 +40,7 @@ inner join tracking t2 on t2.id = fu1.tracking_id
 inner join customer c on c.id = t2.customer_id
 inner join customer_plan cp on cp.customer_id = c.id
 inner join tracking_plan_info tpi on tpi.id = cp.tracking_plan_info_id
-left join sistema.db_maritimo dbm on dbm.nrcemercante = t2.ce_number
+--left join sistema.db_maritimo dbm on dbm.nrcemercante = t2.ce_number
 where fu1.deleted_at is null
 and c.deleted_at is null
 and c.fake_customer is false
