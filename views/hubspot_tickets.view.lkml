@@ -1,5 +1,29 @@
 view: hubspot_tickets {
-  sql_table_name: public.hubspot_tickets ;;
+
+  derived_table: {
+    sql:select *,
+        case
+        when qq1.tempo_util - qq1.awaiting_return_time < 0 then null
+        else qq1.tempo_util - coalesce(qq1.awaiting_return_time,0)
+        end as tempo_real
+        from
+          (
+            select ht.*,
+            (case
+            when date(ht.create_date_ticket) = date(ht.close_date_ticket) -- aberto e fechado no mesmo dia
+            then extract(EPOCH from (ht.close_date_ticket - ht.create_date_ticket))
+            when ht.create_date_ticket > date(ht.create_date_ticket) + interval '18 hours'
+            then 0 + ((sum(case when extract(dow from s) in (1,2,3,4,5) then 1 else 0 end) - 2) * 9 * 3600) + extract(EPOCH from ( ht.close_date_ticket - (date(ht.close_date_ticket) + interval '8 hours')))
+            else extract(EPOCH from (date(ht.create_date_ticket) + interval '18 hours' - ht.create_date_ticket)) + ((sum(case when extract(dow from s) in (1,2,3,4,5) then 1 else 0 end) - 2) * 9 * 3600) + extract(EPOCH from ( ht.close_date_ticket - (date(ht.close_date_ticket) + interval '8 hours')))
+            end) as tempo_util
+            from hubspot_tickets ht
+            inner join generate_series(date(ht.create_date_ticket) ,date(ht.close_date_ticket), '1 day'::interval) s on true
+            --where ht.id = 243
+            where stage = 'Closed'
+            group by ht.id
+          ) as qq1 ;;
+  }
+
   drill_fields: [id]
 
   dimension: id {
@@ -114,6 +138,16 @@ view: hubspot_tickets {
   dimension: development_team_time {
     type: number
     sql: ${TABLE}."development_team_time" ;;
+  }
+
+  dimension: tempo_util { # tempo entre a abertura do chamado e o fechamento, considerando 9h de servico por dia e descontando final de semana
+    type: number
+    sql: ${TABLE}."tempo_util" ;;
+  }
+
+  dimension: tempo_real { # tempo util menos o tempo de espera da resposta do cliente
+    type: number
+    sql: ${TABLE}."tempo_real" ;;
   }
 
   dimension: new_time {
