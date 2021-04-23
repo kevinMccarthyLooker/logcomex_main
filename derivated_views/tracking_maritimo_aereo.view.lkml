@@ -48,16 +48,17 @@ select 'Maritimo' as modal,
        qq2.date_time as last_workflow_date,
        null::timestamp as aereo_data_embarque_ets,
        null::timestamp as aereo_data_hora_chegada,
-       (case
+       /*(case
        when dbm.categoriacarga = 'I' then 'Importação'
        when dbm.categoriacarga = 'E' then 'Exportação'
        when dbm.categoriacarga = 'N' then 'Cabotagem'
        else dbm.categoriacarga
-       end) as categoriacarga
+       end) */
+       null:text as categoriacarga
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
 inner join tracking_internal_status on tracking.internal_status_id = tracking_internal_status.id
-left join sistema.db_maritimo dbm on tracking.ce_number = dbm.nrcemercante
+--left join sistema.db_maritimo dbm on tracking.ce_number = dbm.nrcemercante
 left join users u2 on u2.id = tracking.user_id
 left join(
 select
