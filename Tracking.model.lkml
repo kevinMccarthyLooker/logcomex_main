@@ -12,16 +12,16 @@ datagroup: tracking_embed_datagroup {
 
 explore: tracking_air {
 persist_with: tracking_embed_datagroup
-access_filter: {
-  field: tracking_air.customer_id
-  user_attribute: customer_id
-}
+##access_filter: {
+##  field: tracking_air.id_customer
+##  user_attribute: id_customer
+##}
 }
 
 explore: tracking_sea {
 persist_with: tracking_embed_datagroup
-access_filter: {
-  field: tracking_sea.customer_id
-  user_attribute: customer_id
-}
+##access_filter: {
+##  field: tracking_sea.id_customer
+##  user_attribute: id_customer
+##}
 }
