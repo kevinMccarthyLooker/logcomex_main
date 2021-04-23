@@ -17,9 +17,7 @@ view: hubspot_tickets {
             else extract(EPOCH from (date(ht.create_date_ticket) + interval '18 hours' - ht.create_date_ticket)) + ((sum(case when extract(dow from s) in (1,2,3,4,5) then 1 else 0 end) - 2) * 9 * 3600) + extract(EPOCH from ( ht.close_date_ticket - (date(ht.close_date_ticket) + interval '8 hours')))
             end) as tempo_util
             from hubspot_tickets ht
-            inner join generate_series(date(ht.create_date_ticket) ,date(ht.close_date_ticket), '1 day'::interval) s on true
-            --where ht.id = 243
-            --where stage = 'Closed'
+            left join generate_series(date(ht.create_date_ticket) ,date(ht.close_date_ticket), '1 day'::interval) s on true
             group by ht.id
           ) as qq1 ;;
   }
