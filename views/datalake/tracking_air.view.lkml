@@ -9,164 +9,129 @@ view: tracking_air {
     drill_fields: [detail*]
   }
 
-  dimension: id {
-    type: number
-    sql: ${TABLE}.id ;;
-  }
-
-  dimension: customer_id {
-    type: number
-    sql: ${TABLE}.customer_id ;;
-  }
-
-  dimension: user_id {
-    type: number
-    sql: ${TABLE}.user_id ;;
-  }
-
-  dimension: tracking_aerial_status_id {
-    type: number
-    sql: ${TABLE}.tracking_aerial_status_id ;;
-  }
-
-  dimension: reference {
+  dimension: pas_de_origem {
     type: string
-    sql: ${TABLE}.reference ;;
+    label: "País de origem"
+    sql: ${TABLE}."País de origem" ;;
   }
 
-  dimension: token {
+  dimension: aeroporto_de_origem {
     type: string
-    sql: ${TABLE}.token ;;
+    label: "Aeroporto de Origem"
+    sql: ${TABLE}."Aeroporto de Origem" ;;
   }
 
-  dimension_group: archived_at {
+  dimension: aeroporto_de_destino {
+    type: string
+    label: "Aeroporto de Destino"
+    sql: ${TABLE}."Aeroporto de Destino" ;;
+  }
+
+  dimension: consignatrio {
+    type: string
+    sql: ${TABLE}."Consignatário" ;;
+  }
+
+  dimension: cnpj_do_consignatrio {
+    type: string
+    label: "CNPJ do Consignatário"
+    sql: ${TABLE}."CNPJ do Consignatário" ;;
+  }
+
+  dimension: agente_de_carga {
+    type: string
+    label: "Agente de Carga"
+    sql: ${TABLE}."Agente de Carga" ;;
+  }
+
+  dimension: cnpj_agente_de_carga {
+    type: string
+    label: "CNPJ Agente de Carga"
+    sql: ${TABLE}."CNPJ Agente de Carga" ;;
+  }
+
+  dimension: tipo_de_frete {
+    type: string
+    label: "Tipo de Frete"
+    sql: ${TABLE}."Tipo de Frete" ;;
+  }
+
+  dimension: embalagem {
+    type: string
+    sql: ${TABLE}.Embalagem ;;
+  }
+
+  dimension: companhia_area {
+    type: string
+    label: "Companhia Aérea"
+    sql: ${TABLE}."Companhia Aérea" ;;
+  }
+
+  dimension: canal {
+    type: string
+    sql: ${TABLE}.Canal ;;
+  }
+
+  dimension: di {
+    type: number
+    sql: ${TABLE}.DI ;;
+  }
+
+  dimension_group: data_chegada {
     type: time
-    sql: ${TABLE}.archived_at ;;
+    label: "Data Chegada"
+    sql: ${TABLE}."Data Chegada" ;;
   }
 
-  dimension: hawb_emit_date {
+  dimension_group: data_embarque {
+    type: time
+    label: "Data Embarque"
+    sql: ${TABLE}."Data Embarque" ;;
+  }
+
+  dimension: moeda {
+    type: string
+    sql: ${TABLE}.Moeda ;;
+  }
+
+  dimension: cnpj_consignee {
+    type: string
+    sql: ${TABLE}.cnpj_consignee ;;
+  }
+
+  dimension_group: deleted_consignee {
+    type: time
+    sql: ${TABLE}.deleted_consignee ;;
+  }
+
+  dimension: id_radar {
+    type: number
+    sql: ${TABLE}.id_radar ;;
+  }
+
+  dimension: id_radar_certificate {
+    type: number
+    sql: ${TABLE}.id_radar_certificate ;;
+  }
+
+  dimension: id_radar_consignee {
+    type: number
+    sql: ${TABLE}.id_radar_consignee ;;
+  }
+
+  dimension_group: deleted_radar {
+    type: time
+    sql: ${TABLE}.deleted_radar ;;
+  }
+
+  dimension_group: deleted_certificate {
+    type: time
+    sql: ${TABLE}.deleted_certificate ;;
+  }
+
+  dimension: certificate_valid {
     type: date
-    sql: ${TABLE}.hawb_emit_date ;;
-  }
-
-  dimension: awb {
-    type: string
-    sql: ${TABLE}.awb ;;
-  }
-
-  dimension: hwb {
-    type: string
-    sql: ${TABLE}.hwb ;;
-  }
-
-  dimension_group: created_at {
-    type: time
-    sql: ${TABLE}.created_at ;;
-  }
-
-  dimension_group: updated_at {
-    type: time
-    sql: ${TABLE}.updated_at ;;
-  }
-
-  dimension_group: deleted_at {
-    type: time
-    sql: ${TABLE}.deleted_at ;;
-  }
-
-  dimension: first_event_only {
-    type: string
-    sql: ${TABLE}.first_event_only ;;
-  }
-
-  dimension: internal_status {
-    type: number
-    sql: ${TABLE}.internal_status ;;
-  }
-
-  dimension_group: executed_at {
-    type: time
-    sql: ${TABLE}.executed_at ;;
-  }
-
-  dimension: consignee_id {
-    type: number
-    sql: ${TABLE}.consignee_id ;;
-  }
-
-  dimension: free_load {
-    type: string
-    sql: ${TABLE}.free_load ;;
-  }
-
-  dimension: aereo_awb_list_id {
-    type: number
-    sql: ${TABLE}.aereo_awb_list_id ;;
-  }
-
-  dimension: airline_id {
-    type: number
-    sql: ${TABLE}.airline_id ;;
-  }
-
-  dimension: incoterm_id {
-    type: number
-    sql: ${TABLE}.incoterm_id ;;
-  }
-
-  dimension: ets {
-    type: date
-    sql: ${TABLE}.ets ;;
-  }
-
-  dimension: eta {
-    type: date
-    sql: ${TABLE}.eta ;;
-  }
-
-  dimension: origin_airport_id {
-    type: number
-    sql: ${TABLE}.origin_airport_id ;;
-  }
-
-  dimension: destination_airport_id {
-    type: number
-    sql: ${TABLE}.destination_airport_id ;;
-  }
-
-  dimension: commodities {
-    type: string
-    sql: ${TABLE}.commodities ;;
-  }
-
-  dimension: comments {
-    type: string
-    sql: ${TABLE}.comments ;;
-  }
-
-  dimension: is_api {
-    type: string
-    sql: ${TABLE}.is_api ;;
-  }
-
-  dimension_group: robot_updated_at {
-    type: time
-    sql: ${TABLE}.robot_updated_at ;;
-  }
-
-  dimension: shipper_name {
-    type: string
-    sql: ${TABLE}.shipper_name ;;
-  }
-
-  dimension: cargo_unavailability {
-    type: string
-    sql: ${TABLE}.cargo_unavailability ;;
-  }
-
-  dimension: id0 {
-    type: number
-    sql: ${TABLE}.id0 ;;
+    sql: ${TABLE}.certificate_valid ;;
   }
 
   dimension: name {
@@ -174,197 +139,62 @@ view: tracking_air {
     sql: ${TABLE}.name ;;
   }
 
-  dimension: cnpj {
+  dimension: cpf {
     type: string
-    sql: ${TABLE}.cnpj ;;
+    sql: ${TABLE}.cpf ;;
   }
 
-  dimension: address {
-    type: string
-    sql: ${TABLE}.address ;;
-  }
-
-  dimension: phones {
-    type: string
-    sql: ${TABLE}.phones ;;
-  }
-
-  dimension: site {
-    type: string
-    sql: ${TABLE}.site ;;
-  }
-
-  dimension: status_id {
+  dimension: id_customer {
     type: number
-    sql: ${TABLE}.status_id ;;
+    sql: ${TABLE}.id_customer ;;
   }
 
-  dimension: slug {
+  dimension: name_customer {
     type: string
-    sql: ${TABLE}.slug ;;
+    sql: ${TABLE}.name_customer ;;
   }
 
-  dimension: customer_type_id {
-    type: number
-    sql: ${TABLE}.customer_type_id ;;
+  dimension: cnpj_customer {
+    type: string
+    sql: ${TABLE}.cnpj_customer ;;
   }
 
-  dimension_group: deleted_at0 {
+  dimension_group: deleted_customer {
     type: time
-    sql: ${TABLE}.deleted_at0 ;;
-  }
-
-  dimension_group: created_at0 {
-    type: time
-    sql: ${TABLE}.created_at0 ;;
-  }
-
-  dimension_group: updated_at0 {
-    type: time
-    sql: ${TABLE}.updated_at0 ;;
-  }
-
-  dimension: pay_day {
-    type: number
-    sql: ${TABLE}.pay_day ;;
-  }
-
-  dimension: custom_hex_color {
-    type: string
-    sql: ${TABLE}.custom_hex_color ;;
-  }
-
-  dimension: custom_logo {
-    type: string
-    sql: ${TABLE}.custom_logo ;;
-  }
-
-  dimension: custom_name {
-    type: string
-    sql: ${TABLE}.custom_name ;;
-  }
-
-  dimension: email_notify_immediate {
-    type: string
-    sql: ${TABLE}.email_notify_immediate ;;
-  }
-
-  dimension: email_notify_hour {
-    type: number
-    sql: ${TABLE}.email_notify_hour ;;
-  }
-
-  dimension: email_reply_to {
-    type: string
-    sql: ${TABLE}.email_reply_to ;;
-  }
-
-  dimension: tracking_processed_loads {
-    type: string
-    sql: ${TABLE}.tracking_processed_loads ;;
-  }
-
-  dimension: api_key {
-    type: string
-    sql: ${TABLE}.api_key ;;
-  }
-
-  dimension: tracking_maritime_days_to_archive {
-    type: number
-    sql: ${TABLE}.tracking_maritime_days_to_archive ;;
-  }
-
-  dimension: tracking_aerial_days_to_archive {
-    type: number
-    sql: ${TABLE}.tracking_aerial_days_to_archive ;;
-  }
-
-  dimension: email_notify_disabled {
-    type: string
-    sql: ${TABLE}.email_notify_disabled ;;
-  }
-
-  dimension: executive_id {
-    type: number
-    sql: ${TABLE}.executive_id ;;
-  }
-
-  dimension: fake_customer {
-    type: string
-    sql: ${TABLE}.fake_customer ;;
-  }
-
-  dimension: blocked {
-    type: string
-    sql: ${TABLE}.blocked ;;
-  }
-
-  dimension: pld {
-    type: string
-    sql: ${TABLE}.pld ;;
+    sql: ${TABLE}.deleted_customer ;;
   }
 
   set: detail {
     fields: [
-      id,
-      customer_id,
-      user_id,
-      tracking_aerial_status_id,
-      reference,
-      token,
-      archived_at_time,
-      hawb_emit_date,
-      awb,
-      hwb,
-      created_at_time,
-      updated_at_time,
-      deleted_at_time,
-      first_event_only,
-      internal_status,
-      executed_at_time,
-      consignee_id,
-      free_load,
-      aereo_awb_list_id,
-      airline_id,
-      incoterm_id,
-      ets,
-      eta,
-      origin_airport_id,
-      destination_airport_id,
-      commodities,
-      comments,
-      is_api,
-      robot_updated_at_time,
-      shipper_name,
-      cargo_unavailability,
-      id0,
+      pas_de_origem,
+      aeroporto_de_origem,
+      aeroporto_de_destino,
+      consignatrio,
+      cnpj_do_consignatrio,
+      agente_de_carga,
+      cnpj_agente_de_carga,
+      tipo_de_frete,
+      embalagem,
+      companhia_area,
+      canal,
+      di,
+      data_chegada_time,
+      data_embarque_time,
+      moeda,
+      cnpj_consignee,
+      deleted_consignee_time,
+      id_radar,
+      id_radar_certificate,
+      id_radar_consignee,
+      deleted_radar_time,
+      deleted_certificate_time,
+      certificate_valid,
       name,
-      cnpj,
-      address,
-      phones,
-      site,
-      status_id,
-      slug,
-      customer_type_id,
-      deleted_at0_time,
-      created_at0_time,
-      updated_at0_time,
-      pay_day,
-      custom_hex_color,
-      custom_logo,
-      custom_name,
-      email_notify_immediate,
-      email_notify_hour,
-      email_reply_to,
-      tracking_processed_loads,
-      api_key,
-      tracking_maritime_days_to_archive,
-      tracking_aerial_days_to_archive,
-      email_notify_disabled,
-      executive_id,
-      fake_customer,
-      blocked,
-      pld
+      cpf,
+      id_customer,
+      name_customer,
+      cnpj_customer,
+      deleted_customer_time
     ]
   }
 }
