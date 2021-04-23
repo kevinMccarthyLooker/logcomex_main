@@ -249,8 +249,8 @@ view: hubspot_tickets {
   dimension: sla_resposta_no_prazo {
     type: string
     sql: case
-         when ${sla_resposta} - (${time_to_close} - coalesce(${awaiting_return_time},0)) >= 0 then 'yes'
-         when ${time_to_close} is null then null
+         when ${sla_resposta} - (${tempo_real}) >= 0 then 'yes'
+         when ${tempo_real} is null then null
          else 'no'
          end;;
   }
