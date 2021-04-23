@@ -54,7 +54,7 @@ select 'Maritimo' as modal,
        when dbm.categoriacarga = 'N' then 'Cabotagem'
        else dbm.categoriacarga
        end) */
-       null:text as categoriacarga
+       null::text as categoriacarga
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
 inner join tracking_internal_status on tracking.internal_status_id = tracking_internal_status.id
