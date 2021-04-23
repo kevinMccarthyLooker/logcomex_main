@@ -19,7 +19,7 @@ view: hubspot_tickets {
             from hubspot_tickets ht
             inner join generate_series(date(ht.create_date_ticket) ,date(ht.close_date_ticket), '1 day'::interval) s on true
             --where ht.id = 243
-            where stage = 'Closed'
+            --where stage = 'Closed'
             group by ht.id
           ) as qq1 ;;
   }
