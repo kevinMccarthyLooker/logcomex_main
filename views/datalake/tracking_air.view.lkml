@@ -164,6 +164,11 @@ view: tracking_air {
     sql: ${TABLE}.deleted_customer ;;
   }
 
+  dimension: id_di {
+    type: number
+    sql: ${TABLE}.id_di ;;
+  }
+
   set: detail {
     fields: [
       pas_de_origem,
