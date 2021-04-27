@@ -93,9 +93,16 @@ dimension: description {
   sql: ${TABLE}.description ;;
 }
 
-dimension: canal_id {
+dimension: canal {
   type: string
-  sql: ${TABLE}.canal_id ;;
+  sql: case
+  when ${TABLE}.canal_id = NULL then 'Ag. Parametrização'
+  when ${TABLE}.canal_id = 'VERDE' then 'Verde'
+  when ${TABLE}.canal_id = 'AMARELO' then 'Amarelo'
+  when ${TABLE}.canal_id = 'VERMELHO' then 'Vermelho'
+  when ${TABLE}.canal_id = 'CINZA' then 'Cinza'
+  else 'ERRO'
+  end ;;
 }
 
 dimension: dtoperacao {
@@ -201,7 +208,7 @@ set: detail {
     conhecimento_ce,
     ce_number,
     description,
-    canal_id,
+    canal,
     dtoperacao,
     data_registro_di_time,
     data_liberacao,
