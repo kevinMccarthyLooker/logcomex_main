@@ -96,7 +96,7 @@ dimension: description {
 dimension: canal {
   type: string
   sql: case
-  when ${TABLE}.canal_id = NULL then 'Ag. Parametrização'
+  when ${TABLE}.canal_id = '' then 'Ag. Parametrização'
   when ${TABLE}.canal_id = 'VERDE' then 'Verde'
   when ${TABLE}.canal_id = 'AMARELO' then 'Amarelo'
   when ${TABLE}.canal_id = 'VERMELHO' then 'Vermelho'
