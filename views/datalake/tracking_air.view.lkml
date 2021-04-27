@@ -71,11 +71,11 @@ view: tracking_air {
     type: string
     sql: case
       when ${TABLE}.Canal = '-' then 'Ag. Parametrização'
-      when ${TABLE}.service = '001' then 'Verde'
-      when ${TABLE}.service = '002' then 'Amarelo'
-      when ${TABLE}.service = '000' then 'Cinza'
-      when ${TABLE}.service = '003' then 'Vermelho'
-      when ${TABLE}.service = 'Cinz' then 'Cinza'
+      when ${TABLE}.Canal = '001' then 'Verde'
+      when ${TABLE}.Canal = '002' then 'Amarelo'
+      when ${TABLE}.Canal = '000' then 'Cinza'
+      when ${TABLE}.Canal = '003' then 'Vermelho'
+      when ${TABLE}.Canal = 'Cinz' then 'Cinza'
       else 'ERRO'
     end ;;
   }
