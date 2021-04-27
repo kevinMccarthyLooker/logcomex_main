@@ -181,6 +181,12 @@ view: tracking_air {
     sql: ${TABLE}.id_di ;;
   }
 
+  dimension: status {
+    type: string
+    sql: ${TABLE}.description ;;
+  }
+
+
   set: detail {
     fields: [
       pas_de_origem,
