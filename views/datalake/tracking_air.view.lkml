@@ -76,6 +76,10 @@ view: tracking_air {
       when ${TABLE}.Canal = '000' then 'Cinza'
       when ${TABLE}.Canal = '003' then 'Vermelho'
       when ${TABLE}.Canal = 'Cinz' then 'Cinza'
+      when ${TABLE}.Canal = 'Verde' then 'Verde'
+      when ${TABLE}.Canal = 'Amarelo' then 'Amarelo'
+      when ${TABLE}.Canal = 'Cinza' then 'Cinza'
+      when ${TABLE}.Canal = 'Vermelho' then 'Vermelho'
       else 'ERRO'
     end ;;
   }
