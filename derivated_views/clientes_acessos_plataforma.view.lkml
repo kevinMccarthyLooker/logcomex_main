@@ -71,8 +71,10 @@ view: clientes_acessos_plataforma {
     case
     when ${qtd_acessos} is null then '0 Acessos'
     when ${qtd_acessos} = 1 then '1 Acesso Mensal'
-    when ${qtd_acessos} between 2 and 10 then 'até 10 Acessos Mensais'
-    when ${qtd_acessos} between 11 and 50 then 'até 50 Acessos Mensais'
+    when ${qtd_acessos} between 2 and 5 then 'até 5 Acessos Mensais'
+    when ${qtd_acessos} between 6 and 10 then 'até 10 Acessos Mensais'
+    when ${qtd_acessos} between 11 and 30 then 'até 30 Acessos Mensais'
+    when ${qtd_acessos} between 31 and 50 then 'até 50 Acessos Mensais'
     when ${qtd_acessos} between 51 and 100 then 'até 100 Acessos Mensais'
     when ${qtd_acessos} > 100 then 'Acima de 100 Acessos Mensais'
     else ${qtd_acessos}::text
@@ -85,11 +87,13 @@ view: clientes_acessos_plataforma {
     case
     when ${qtd_acessos} is null then 0
     when ${qtd_acessos} = 1 then 1
-    when ${qtd_acessos} between 2 and 10 then 2
-    when ${qtd_acessos} between 11 and 50 then 3
-    when ${qtd_acessos} between 51 and 100 then 4
-    when ${qtd_acessos} > 100 then 5
-    else 6
+    when ${qtd_acessos} between 2 and 5 then 2
+    when ${qtd_acessos} between 6 and 10 then 3
+    when ${qtd_acessos} between 11 and 30 then 4
+    when ${qtd_acessos} between 31 and 50 then 5
+    when ${qtd_acessos} between 51 and 100 then 6
+    when ${qtd_acessos} > 100 then 7
+    else 8
     end ;;
   }
 
