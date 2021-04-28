@@ -75,6 +75,7 @@ include: "/**/nps_02_2021.view.lkml"
 include: "/**/quick_ratio.view.lkml"
 include: "/**/clientes_trials_acessos_plataforma.view.lkml"
 include: "/**/clientes_acessos_plataforma.view.lkml"
+include: "/**/usuarios_clientes_acessos_plataforma.view.lkml"
 include: "/**/trials_acessos_plataforma.view.lkml"
 include: "/**/health_score_2021.view.lkml"
 
