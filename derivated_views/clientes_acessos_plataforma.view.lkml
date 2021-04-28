@@ -69,7 +69,7 @@ view: clientes_acessos_plataforma {
     type: string
     sql:
     case
-    when ${qtd_acessos} is null then null
+    when ${qtd_acessos} is null then '0 Acessos'
     when ${qtd_acessos} = 1 then '1 Acesso Mensal'
     when ${qtd_acessos} between 2 and 10 then 'até 10 Acessos Mensais'
     when ${qtd_acessos} between 11 and 50 then 'até 50 Acessos Mensais'
@@ -78,7 +78,21 @@ view: clientes_acessos_plataforma {
     when ${qtd_acessos} > 500 then 'Acima de 500 Acessos Mensais'
     else ${qtd_acessos}::text
     end ;;
+  }
 
+  dimension: cluster_sequencia{
+    type: number
+    sql:
+    case
+    when ${qtd_acessos} is null then 0
+    when ${qtd_acessos} = 1 then 1
+    when ${qtd_acessos} between 2 and 10 then 2
+    when ${qtd_acessos} between 11 and 50 then 3
+    when ${qtd_acessos} between 51 and 100 then 4
+    when ${qtd_acessos} between 100 and 500 then 5
+    when ${qtd_acessos} > 500 then 6
+    else 7
+    end ;;
   }
 
   dimension_group: anomes {
