@@ -9,7 +9,8 @@ view: clientes_acessos_plataforma {
     case
     when qq2.customer_id is null then false
     else true
-    end as acessou
+    end as acessou,
+    qq2.qtd_acessos
     from
       (
         select
@@ -30,7 +31,8 @@ view: clientes_acessos_plataforma {
       (
         select
         last_day(al.created_at) as anomes,
-        al.customer_id
+        al.customer_id,
+        count(distinct al.id) as qtd_acessos
         FROM access_log al
         inner join customer c2 on c2.id = al.customer_id
         inner join customer_plan cp on cp.customer_id = c2.id
@@ -58,6 +60,28 @@ view: clientes_acessos_plataforma {
     sql: ${TABLE}."acessou" ;;
   }
 
+  dimension: qtd_acessos {
+    type: number
+    sql: ${TABLE}."qtd_acessos" ;;
+  }
+
+  dimension: cluster_acessos{
+    type: string
+    sql:
+    case
+    when ${qtd_acessos} is null then null
+    when ${qtd_acessos} = 1 then '1 Acesso Mensal'
+    when ${qtd_acessos} between 2 and 10 then 'até 10 Acessos Mensais'
+    when ${qtd_acessos} between 11 and 50 then 'até 50 Acessos Mensais'
+    when ${qtd_acessos} between 51 and 100 then 'até 100 Acessos Mensais'
+    when ${qtd_acessos} between 100 and 500 then 'até 500 Acessos Mensais'
+    when ${qtd_acessos} > 500 then 'Acima de 500 Acessos Mensais'
+    else ${qtd_acessos}
+    end;
+    ;;
+
+
+  }
 
   dimension_group: anomes {
     type: time
