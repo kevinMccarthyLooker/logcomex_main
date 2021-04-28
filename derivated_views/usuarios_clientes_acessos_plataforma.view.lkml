@@ -2,6 +2,13 @@ view: usuarios_clientes_acessos_plataforma {
 
   derived_table: {
     sql:
+    select *,
+case
+when user_created <= anomes then true
+else false
+end as existia
+from
+  (
     select
     qq1.anomes,
     qq1.customer_name,
@@ -9,6 +16,7 @@ view: usuarios_clientes_acessos_plataforma {
     qq1.user_name,
     qq1.user_email,
     qq1.user_id,
+    qq1.user_created,
     case
     when qq2.user_id is null then false
     else true
@@ -21,7 +29,8 @@ view: usuarios_clientes_acessos_plataforma {
         customer."id" AS customer_id,
         u."name" as user_name,
         u.id as user_id,
-        u.email as user_email
+        u.email as user_email,
+        last_day(u.created_at) as user_created
         FROM public.customer  AS customer
         inner join user_profile_customer upc on upc.customer_id = customer.id
         inner join users u on u.id = upc.user_id
@@ -36,7 +45,7 @@ view: usuarios_clientes_acessos_plataforma {
           and u.deleted_at is null
           and customer.id = 1259
           and u.email not like '%@logcomex.com'
-        group by 1,2,3,4,5,6
+        group by 1,2,3,4,5,6,7
       ) as qq1
     left join
       (
@@ -53,7 +62,8 @@ view: usuarios_clientes_acessos_plataforma {
         and cp.deleted_at is null
         group by 1,2,3
         --order by 1 asc
-      ) as qq2 on qq2.anomes = qq1.anomes and qq2.customer_id = qq1.customer_id and qq2.user_id = qq1.user_id;;
+      ) as qq2 on qq2.anomes = qq1.anomes and qq2.customer_id = qq1.customer_id and qq2.user_id = qq1.user_id
+  ) as qq3;;
   }
 
   dimension: customer_id {
@@ -86,6 +96,10 @@ view: usuarios_clientes_acessos_plataforma {
     sql: ${TABLE}."acessou" ;;
   }
 
+  dimension: existia {
+    type: yesno
+    sql: ${TABLE}."existia" ;;
+  }
 
   dimension_group: anomes {
     type: time
