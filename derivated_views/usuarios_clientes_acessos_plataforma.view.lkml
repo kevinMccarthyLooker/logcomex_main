@@ -43,7 +43,7 @@ from
           and mes between '06-01-2019' and '01-31-2031'
           and upc.deleted_at is null
           and u.deleted_at is null
-          and customer.id = 1259
+          --and customer.id = 1259
           and u.email not like '%@logcomex.com'
         group by 1,2,3,4,5,6,7
       ) as qq1
@@ -117,7 +117,7 @@ from
 
   measure: count {
     type: count
-    drill_fields: [customer_id,customer_name,anomes_month]
+    drill_fields: [anomes_month,customer_id,customer_name,user_name,user_email,user_id]
   }
 
 
