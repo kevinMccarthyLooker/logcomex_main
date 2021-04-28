@@ -117,7 +117,7 @@ from
 
   measure: count {
     type: count
-    drill_fields: [anomes_month,customer_id,customer_name,user_name,user_email,user_id]
+    drill_fields: [customer_id,customer_name,user_name,user_email,user_id,anomes_month]
   }
 
 
