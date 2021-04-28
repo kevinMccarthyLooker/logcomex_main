@@ -76,7 +76,7 @@ view: clientes_acessos_plataforma {
     when ${qtd_acessos} between 51 and 100 then 'até 100 Acessos Mensais'
     when ${qtd_acessos} between 100 and 500 then 'até 500 Acessos Mensais'
     when ${qtd_acessos} > 500 then 'Acima de 500 Acessos Mensais'
-    else ${qtd_acessos}
+    else ${qtd_acessos}::text
     end ;;
 
   }
