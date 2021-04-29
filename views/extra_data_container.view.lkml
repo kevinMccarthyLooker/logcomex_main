@@ -111,7 +111,7 @@ view: extra_data_container {
     when ${id_armador} = 1712 then 'Evergreen'
     when ${id_armador} = 1767 then 'Yang Ming'
     when ${id_armador} = 1879136 then 'One'
-    else ${id_armador}::text
+    else 'Outros'
     end;;
 
   }
