@@ -822,7 +822,7 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
   }
 
     set: detail {
-    fields: [customer_id, customer.name, status, internal_status, created_raw, token]
+    fields: [customer_id, customer.name, status, internal_status, created_raw, token,documento]
   }
 
     set: detail_customer {
