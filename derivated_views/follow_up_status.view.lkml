@@ -2,7 +2,12 @@ view: follow_up_status {
   derived_table: {
     sql:
 SELECT distinct 'maritimo' as modal,
-null::text as categoriacarga,
+(case
+ when t2.tracking_maritime_load_category_id = 1 then 'Importação'
+ when t2.tracking_maritime_load_category_id = 2 then 'Exportação'
+ when t2.tracking_maritime_load_category_id = 3 then 'Cabotagem'
+ else t2.tracking_maritime_load_category_id::text
+ end) as categoriacarga,
 c.id as customer_id,
 c."name" as customer_name,
 tpi.force_certificate as force_certificate,
@@ -47,7 +52,7 @@ and c.fake_customer is false
 and cp.deleted_at is null
 union
 SELECT distinct 'aereo' as modal,
-null::text as categoriacarga,
+'aereo_sem_categ'::text as categoriacarga,
 c.id as customer_id,
 c."name" as customer_name,
 tpi.force_certificate as force_certificate,
