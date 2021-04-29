@@ -48,13 +48,12 @@ select 'Maritimo' as modal,
        qq2.date_time as last_workflow_date,
        null::timestamp as aereo_data_embarque_ets,
        null::timestamp as aereo_data_hora_chegada,
-       /*(case
-       when dbm.categoriacarga = 'I' then 'Importação'
-       when dbm.categoriacarga = 'E' then 'Exportação'
-       when dbm.categoriacarga = 'N' then 'Cabotagem'
-       else dbm.categoriacarga
-       end) */
-       null::text as categoriacarga
+       (case
+       when tracking.tracking_maritime_load_category_id = 1 then 'Importação'
+       when tracking.tracking_maritime_load_category_id = 2 then 'Exportação'
+       when tracking.tracking_maritime_load_category_id = 3 then 'Cabotagem'
+       else tracking.tracking_maritime_load_category_id::text
+       end) as categoriacarga
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
 inner join tracking_internal_status on tracking.internal_status_id = tracking_internal_status.id
@@ -124,7 +123,7 @@ select 'Aereo' as modal,
        qq2.date_time as last_workflow_date,
        qq3.data_embarque_ets as aereo_data_embarque_ets,
        qq3.data_hora_chegada as aereo_data_hora_chegada,
-       null::text as categoriacarga
+       "aereo_sem_categ" as categoriacarga
 from tracking_aerial
 inner join tracking_aerial_status on tracking_aerial.tracking_aerial_status_id = tracking_aerial_status.id
 inner join tracking_aerial_internal_status on tracking_aerial.internal_status = tracking_aerial_internal_status.id
