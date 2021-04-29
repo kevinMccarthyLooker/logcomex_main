@@ -519,6 +519,11 @@ view: due_gold {
     sql: ${TABLE}.updated_at_manifestation_shipping_data_detailed_by_knowledge_cl ;;
   }
 
+  dimension: status {
+    type: number
+    sql: ${TABLE}.status ;;
+  }
+
   set: detail {
     fields: [
       id_due,
@@ -622,7 +627,8 @@ view: due_gold {
       measured_weight,
       pu_due_manifestation_shipping_data_detailed_by_knowledge_id,
       created_at_manifestation_shipping_data_detailed_by_knowledge_cl_time,
-      updated_at_manifestation_shipping_data_detailed_by_knowledge_cl_time
+      updated_at_manifestation_shipping_data_detailed_by_knowledge_cl_time,
+      status
     ]
   }
 }
