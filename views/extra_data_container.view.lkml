@@ -166,6 +166,11 @@ view: extra_data_container {
     sql: ${TABLE}."transhipment" ;;
   }
 
+  dimension: container_list {
+    type: string
+    sql: ${TABLE}."container_list" ;;
+  }
+
   dimension: type_error_id {
     type: number
     sql: ${TABLE}."type_error_id" ;;
@@ -218,5 +223,10 @@ view: extra_data_container {
   measure: distincts_bls {
     type: count_distinct
     sql: ${bl} ;;
+    drill_fields: [detail*]
+  }
+
+  set: detail {
+    fields: [armador_nome,bl,container_list,vessel,eta_date,origin_country,destination_country]
   }
 }

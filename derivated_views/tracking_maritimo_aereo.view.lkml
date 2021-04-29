@@ -821,12 +821,12 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     sql: ${days_transit_time} ;;
   }
 
-    set: detail {
+  set: detail {
     fields: [customer_id, customer.name, status, internal_status, created_raw, token,documento]
   }
 
-    set: detail_customer {
-      fields: [customer_id, customer.name,force_certificate]
-    }
+  set: detail_customer {
+    fields: [customer_id, customer.name,force_certificate]
+  }
 
 }
