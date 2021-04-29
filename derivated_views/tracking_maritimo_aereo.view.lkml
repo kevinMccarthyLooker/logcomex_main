@@ -123,7 +123,7 @@ select 'Aereo' as modal,
        qq2.date_time as last_workflow_date,
        qq3.data_embarque_ets as aereo_data_embarque_ets,
        qq3.data_hora_chegada as aereo_data_hora_chegada,
-       "aereo_sem_categ" as categoriacarga
+       'aereo_sem_categ' as categoriacarga
 from tracking_aerial
 inner join tracking_aerial_status on tracking_aerial.tracking_aerial_status_id = tracking_aerial_status.id
 inner join tracking_aerial_internal_status on tracking_aerial.internal_status = tracking_aerial_internal_status.id
