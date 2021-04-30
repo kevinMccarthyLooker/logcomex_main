@@ -22,7 +22,7 @@ explore: db_chile {
   join: chile_porto_destino {
     from: chile_porto
     view_label: "chile porto destino"
-    sql_on: ${chile_porto.cd_porto} = ${db_chile.pto_desem} ;;
+    sql_on: ${chile_porto_destino.cd_porto} = ${db_chile.pto_desem} ;;
     relationship: many_to_one
     type: left_outer
   }
