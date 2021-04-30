@@ -65,9 +65,18 @@ view: mvw_db_ace_shipment {
     sql: ${TABLE}.nm_city_unlading;;
   }
 
-  dimension: estimated_arrival_date {
-    type: string
-    sql: ${TABLE}.estimated_arrival_date;;
+  dimension_group: estimated_arrival {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."estimated_arrival_date" ;;
   }
 
   dimension: cd_port_foreign_lading {
@@ -81,7 +90,7 @@ view: mvw_db_ace_shipment {
   }
 
   dimension: cd_country_lading {
-    type: string
+    type: number
     sql: ${TABLE}.cd_country_lading;;
   }
 
@@ -96,7 +105,7 @@ view: mvw_db_ace_shipment {
   }
 
   dimension: manifest_quantity {
-    type: string
+    type: number
     sql: ${TABLE}.manifest_quantity;;
   }
 
@@ -106,7 +115,7 @@ view: mvw_db_ace_shipment {
   }
 
   dimension: weight {
-    type: string
+    type: number
     sql: ${TABLE}.weight;;
   }
 
@@ -116,7 +125,7 @@ view: mvw_db_ace_shipment {
   }
 
   dimension: units {
-    type: string
+    type: number
     sql: ${TABLE}.units;;
   }
 
@@ -156,7 +165,7 @@ view: mvw_db_ace_shipment {
   }
 
   dimension: cd_country_dest {
-    type: string
+    type: number
     sql: ${TABLE}.cd_country_dest;;
   }
 
@@ -190,9 +199,18 @@ view: mvw_db_ace_shipment {
     sql: ${TABLE}.secondary_notify_party;;
   }
 
-  dimension: actual_arrival_date {
-    type: string
-    sql: ${TABLE}.actual_arrival_date;;
+  dimension_group: actual_arrival {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."actual_arrival_date" ;;
   }
 
   dimension: container_number {
@@ -205,14 +223,32 @@ view: mvw_db_ace_shipment {
     sql: ${TABLE}.item_number;;
   }
 
-  dimension: trade_update_date {
-    type: string
-    sql: ${TABLE}.trade_update_date;;
+  dimension_group: trade_update {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."trade_update_date" ;;
   }
 
-  dimension: run_date {
-    type: string
-    sql: ${TABLE}.run_date;;
+  dimension_group: run {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."run_date" ;;
   }
 
   dimension: desc_item {
@@ -226,17 +262,17 @@ view: mvw_db_ace_shipment {
   }
 
   dimension: hs_value {
-    type: string
+    type: number
     sql: ${TABLE}.hs_value;;
   }
 
   dimension: piece_count {
-    type: string
+    type: number
     sql: ${TABLE}.piece_count;;
   }
 
   dimension: hs_weight {
-    type: string
+    type: number
     sql: ${TABLE}.hs_weight;;
   }
 
@@ -315,6 +351,130 @@ view: mvw_db_ace_shipment {
     sql: ${TABLE}.notify_party_communication_type;;
   }
 
+  dimension: notify_party_contact_number {
+    type: string
+    sql: ${TABLE}.notify_party_contact_number;;
+  }
+
+  dimension: container_number_haz {
+    type: string
+    sql: ${TABLE}.container_number_haz;;
+  }
+
+  dimension: seq_number_hazmat {
+    type: string
+    sql: ${TABLE}.seq_number_hazmat;;
+  }
+
+  dimension: cod_hazmat {
+    type: string
+    sql: ${TABLE}.cod_hazmat;;
+  }
+
+  dimension: class_hazmat {
+    type: string
+    sql: ${TABLE}.class_hazmat;;
+  }
+
+  dimension: cod_qualifier_hazmat {
+    type: string
+    sql: ${TABLE}.cod_qualifier_hazmat;;
+  }
+
+  dimension: contact_hazmat {
+    type: string
+    sql: ${TABLE}.contact_hazmat;;
+  }
+
+  dimension: num_page_hazmat {
+    type: string
+    sql: ${TABLE}.num_page_hazmat;;
+  }
+
+  dimension: temp_hazmat {
+    type: string
+    sql: ${TABLE}.temp_hazmat;;
+  }
+
+  dimension: temp_neg_hazmat {
+    type: string
+    sql: ${TABLE}.temp_neg_hazmat;;
+  }
+
+  dimension: temp_unit {
+    type: string
+    sql: ${TABLE}.temp_unit;;
+  }
+
+  dimension: descr_hazmat {
+    type: string
+    sql: ${TABLE}.descr_hazmat;;
+  }
+
+  dimension: descr_class_hazmat {
+    type: string
+    sql: ${TABLE}.descr_class_hazmat;;
+  }
+
+  dimension: container_number_cnt {
+    type: string
+    sql: ${TABLE}.container_number_cnt;;
+  }
+
+  dimension: num_seal {
+    type: string
+    sql: ${TABLE}.num_seal;;
+  }
+
+  dimension: cod_descr_equip {
+    type: string
+    sql: ${TABLE}.cod_descr_equip;;
+  }
+
+  dimension: container_length {
+    type: number
+    sql: ${TABLE}.container_length;;
+  }
+
+  dimension: container_width {
+    type: number
+    sql: ${TABLE}.container_width;;
+  }
+
+  dimension: container_heigth {
+    type: number
+    sql: ${TABLE}.container_heigth;;
+  }
+
+  dimension: qty_teus {
+    type: number
+    sql: ${TABLE}.qty_teus;;
+  }
+
+  dimension: type_container {
+    type: string
+    sql: ${TABLE}.type_container;;
+  }
+
+  dimension: status_load {
+    type: string
+    sql: ${TABLE}.status_load;;
+  }
+
+  dimension: type_service {
+    type: string
+    sql: ${TABLE}.type_service;;
+  }
+
+  dimension: descr_service {
+    type: string
+    sql: ${TABLE}.descr_service;;
+  }
+
+  dimension: mark_num {
+    type: string
+    sql: ${TABLE}.mark_num;;
+  }
 
   measure:count{
     type: count
