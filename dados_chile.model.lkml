@@ -27,3 +27,28 @@ explore: db_chile {
     type: left_outer
   }
 }
+
+explore: db_chile_exp {
+  join: chile_pais {
+    view_label: "chile pais destino"
+    sql_on: ${chile_pais.cod} = ${db_chile_exp.paisdestino} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: chile_porto {
+    view_label: "chile porto desembarque"
+    sql_on: ${chile_porto.cd_porto} = cast(${db_chile_exp.puertodesemb} as int) ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: chile_porto_embarque {
+    from: chile_porto
+    view_label: "chile porto embarque"
+    sql_on: ${chile_porto_embarque.cd_porto} = cast(${db_chile_exp.puertoemb} as int) ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+}
