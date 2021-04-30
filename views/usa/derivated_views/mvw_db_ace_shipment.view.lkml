@@ -1,7 +1,11 @@
 view: mvw_db_ace_shipment {
 
   derived_table: {
-    sql: select * from mvw_db_ace_shipment_202008 ;;
+    sql: select * from mvw_db_ace_shipment_202008
+         union all
+         select * from mvw_db_ace_shipment_202009
+         union all
+         select * from mvw_db_ace_shipment_202010;;
   }
 
   dimension: id {
