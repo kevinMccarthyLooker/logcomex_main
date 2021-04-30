@@ -1,5 +1,9 @@
 connection: "db"
 
-include: "/views/chile/chile_pais.view.lkml"                # include all views in the views/ folder in this project
+include: "/views/chile/db_chile.view.lkml"
 
-explore: chile_pais {}
+include: "/views/chile/db_chile_exp.view.lkml"
+
+explore: db_chile {}
+
+explore: db_chile_exp {}
