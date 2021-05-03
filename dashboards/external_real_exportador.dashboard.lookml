@@ -2,6 +2,7 @@
   title: Real Exportador
   layout: newspaper
   preferred_viewer: dashboards-next
+  crossfilter_enabled: true
   elements:
   - title: Real Exportador
     name: Real Exportador
