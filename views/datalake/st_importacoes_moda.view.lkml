@@ -1,6 +1,6 @@
 view: st_importacoes_moda {
   #sql_table_name: st_importacoes.st_importacoes_fase01 ;;  dados fake
-  sql_table_name: search_ncm_vesturio_st ;; #dados finais
+  sql_table_name: search_ncm_vestuario_st ;; #dados finais
 
   dimension: addition_number {
     type: string
