@@ -10,7 +10,8 @@ view: clientes_acessos_plataforma {
     when qq2.customer_id is null then false
     else true
     end as acessou,
-    qq2.qtd_acessos
+    qq2.qtd_acessos,
+    qq2.qtd_dias_acessados
     from
       (
         select
@@ -32,7 +33,8 @@ view: clientes_acessos_plataforma {
         select
         last_day(al.created_at) as anomes,
         al.customer_id,
-        count(distinct al.id) as qtd_acessos
+        count(distinct al.id) as qtd_acessos,
+        count(distinct date(al.created_at)) as qtd_dias_acessados
         FROM access_log al
         inner join customer c2 on c2.id = al.customer_id
         inner join customer_plan cp on cp.customer_id = c2.id
@@ -65,6 +67,11 @@ view: clientes_acessos_plataforma {
     sql: ${TABLE}."qtd_acessos" ;;
   }
 
+  dimension: qtd_dias_acessados {
+    type: number
+    sql: ${TABLE}."qtd_dias_acessados" ;;
+  }
+
   dimension: cluster_acessos{
     type: string
     sql:
@@ -81,6 +88,21 @@ view: clientes_acessos_plataforma {
     end ;;
   }
 
+  dimension: cluster_dias{
+    type: string
+    sql:
+    case
+    when ${qtd_dias_acessados} is null then '0 Dias'
+    when ${qtd_dias_acessados} = 1 then '1 Dia Mensal'
+    when ${qtd_dias_acessados} between 2 and 3 then 'até 3 Dias Mensais'
+    when ${qtd_dias_acessados} between 4 and 7 then 'até 7 Dias Mensais'
+    when ${qtd_dias_acessados} between 8 and 15 then 'até 15 Dias Mensais'
+    when ${qtd_dias_acessados} between 16 and 20 then 'até 20 Dias Mensais'
+    when ${qtd_dias_acessados} > 20  then 'Acima de 20 Dias Mensais'
+    else ${qtd_dias_acessados}::text
+    end ;;
+  }
+
   dimension: cluster_sequencia{
     type: number
     sql:
@@ -94,6 +116,21 @@ view: clientes_acessos_plataforma {
     when ${qtd_acessos} between 51 and 100 then 6
     when ${qtd_acessos} > 100 then 7
     else 8
+    end ;;
+  }
+
+  dimension: cluster_sequencia_dias{
+    type: number
+    sql:
+    case
+    when ${qtd_dias_acessados} is null then 0
+    when ${qtd_dias_acessados} = 1 then 1
+    when ${qtd_dias_acessados} between 2 and 3 then 2
+    when ${qtd_dias_acessados} between 4 and 7 then 3
+    when ${qtd_dias_acessados} between 8 and 15 then 4
+    when ${qtd_dias_acessados} between 16 and 20 then 5
+    when ${qtd_dias_acessados} > 20  then 6
+    else null
     end ;;
   }
 
