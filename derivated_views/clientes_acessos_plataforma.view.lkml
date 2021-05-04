@@ -150,7 +150,7 @@ view: clientes_acessos_plataforma {
 
   measure: count {
     type: count
-    drill_fields: [customer_id,customer_name,anomes_month]
+    drill_fields: [customer_id,customer_name,qtd_acessos,qtd_dias_acessados,anomes_month]
   }
 
 
