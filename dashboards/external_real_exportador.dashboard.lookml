@@ -62,7 +62,7 @@
     defaults_version: 1
     note_state: expanded
     note_display: above
-    note_text: 'Dados com o processamento completos: de Agosto a Novembro/2020, para
+    note_text: 'Dados com o processamento completos: de Agosto a Dezembro/2020, para
       cargas FCL (Full Container Load). Acuracidade das informações: até 70%.'
     listen:
       Data Embarque: big_data_expo_real_exportador.data_embarque_month
