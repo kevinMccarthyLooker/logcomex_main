@@ -92,13 +92,13 @@ view: clientes_acessos_plataforma {
     type: string
     sql:
     case
-    when ${qtd_dias_acessados} is null then '0 Dias'
-    when ${qtd_dias_acessados} = 1 then '1 Dia Mensal'
-    when ${qtd_dias_acessados} between 2 and 3 then 'até 3 Dias Mensais'
-    when ${qtd_dias_acessados} between 4 and 7 then 'até 7 Dias Mensais'
-    when ${qtd_dias_acessados} between 8 and 15 then 'até 15 Dias Mensais'
-    when ${qtd_dias_acessados} between 16 and 20 then 'até 20 Dias Mensais'
-    when ${qtd_dias_acessados} > 20  then 'Acima de 20 Dias Mensais'
+    when ${qtd_dias_acessados} is null then '0 Days in the month'
+    when ${qtd_dias_acessados} = 1 then '1 Day in the month'
+    when ${qtd_dias_acessados} between 2 and 3 then 'up to 3 days in the month'
+    when ${qtd_dias_acessados} between 4 and 7 then 'up to 7 days in the month'
+    when ${qtd_dias_acessados} between 8 and 15 then 'up to 15 days in the month'
+    when ${qtd_dias_acessados} between 16 and 20 then 'up to 20 days in the month'
+    when ${qtd_dias_acessados} > 20  then 'Over 20 days in the month'
     else ${qtd_dias_acessados}::text
     end ;;
   }
