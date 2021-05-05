@@ -77,7 +77,7 @@ view: clientes_acessos_plataforma {
     sql:
     case
     when ${qtd_acessos} is null then '0 access in the month'
-    when ${qtd_acessos} = 1 then '1 access per month'
+    when ${qtd_acessos} = 1 then '1 access in the month'
     when ${qtd_acessos} between 2 and 5 then 'up to 5 accesses in the month'
     when ${qtd_acessos} between 6 and 10 then 'up to 10 accesses in the month'
     when ${qtd_acessos} between 11 and 30 then 'up to 30 accesses in the month'
