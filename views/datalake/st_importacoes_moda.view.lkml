@@ -1254,17 +1254,22 @@ view: st_importacoes_moda {
       sql: ${val_fob_un_us_num};;
     }
 
-#  measure: val_fob_un_us_num_p25 {
-#   type: percentile
-#    percentile: 25
-#    sql: ${val_fob_un_us_num};;
-#  }
+    measure: val_fob_un_us_num_med {
+      type: median
+      sql: ${val_fob_un_us_num};;
+    }
 
-#  measure: val_fob_un_us_num_p75 {
-#    type: percentile
-#    percentile: 75
-#    sql: ${val_fob_un_us_num};;
-#  }
+    measure: val_fob_un_us_num_p25 {
+     type: percentile
+      percentile: 25
+      sql: ${val_fob_un_us_num};;
+    }
+
+    measure: val_fob_un_us_num_p75 {
+      type: percentile
+      percentile: 75
+      sql: ${val_fob_un_us_num};;
+    }
 
 
   }
