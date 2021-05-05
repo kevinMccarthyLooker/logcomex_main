@@ -76,14 +76,14 @@ view: clientes_acessos_plataforma {
     type: string
     sql:
     case
-    when ${qtd_acessos} is null then '0 Acessos'
-    when ${qtd_acessos} = 1 then '1 Acesso Mensal'
-    when ${qtd_acessos} between 2 and 5 then 'até 5 Acessos Mensais'
-    when ${qtd_acessos} between 6 and 10 then 'até 10 Acessos Mensais'
-    when ${qtd_acessos} between 11 and 30 then 'até 30 Acessos Mensais'
-    when ${qtd_acessos} between 31 and 50 then 'até 50 Acessos Mensais'
-    when ${qtd_acessos} between 51 and 100 then 'até 100 Acessos Mensais'
-    when ${qtd_acessos} > 100 then 'Acima de 100 Acessos Mensais'
+    when ${qtd_acessos} is null then '0 access in the month'
+    when ${qtd_acessos} = 1 then '1 access per month'
+    when ${qtd_acessos} between 2 and 5 then 'up to 5 accesses in the month'
+    when ${qtd_acessos} between 6 and 10 then 'up to 10 accesses in the month'
+    when ${qtd_acessos} between 11 and 30 then 'up to 30 accesses in the month'
+    when ${qtd_acessos} between 31 and 50 then 'up to 50 accesses in the month'
+    when ${qtd_acessos} between 51 and 100 then 'up to 100 accesses in the month'
+    when ${qtd_acessos} > 100 then 'over 100 accesses in the month'
     else ${qtd_acessos}::text
     end ;;
   }
