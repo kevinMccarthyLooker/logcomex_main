@@ -43,6 +43,7 @@ view: hubspot_stage_cs_deal {
     when ${contract_time} = '2 anos e 06 meses a 3 anos' then 8
     when ${contract_time} = '3 anos' then 9
     else null
+    end
     ;;
 
   }
