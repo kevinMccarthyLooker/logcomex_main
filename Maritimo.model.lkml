@@ -27,6 +27,11 @@ include: "/**/db_cad_pais.view.lkml"
 include: "/**/db_cad_porto.view.lkml"
 include: "/**/db_cad_fcl.view.lkml"
 include: "/**/puc_embarques.view.lkml"
+include: "/**/db_siscarga_basico_erro.view.lkml"
+
+explore: db_siscarga_basico_erro {
+  label: "DB Siscarga Basico Erro"
+}
 
 explore: puc_embarques {
   label: "Puc Embarques"
