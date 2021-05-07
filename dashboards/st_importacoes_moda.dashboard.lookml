@@ -46,9 +46,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 6
     col: 2
     width: 9
@@ -98,9 +98,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 6
     col: 13
     width: 9
@@ -199,9 +199,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 10
     col: 0
     width: 24
@@ -277,9 +277,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 27
     col: 7
     width: 17
@@ -358,9 +358,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 54
     col: 0
     width: 24
@@ -447,9 +447,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 17
     col: 0
     width: 24
@@ -586,9 +586,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 97
     col: 0
     width: 8
@@ -742,9 +742,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 97
     col: 8
     width: 16
@@ -795,9 +795,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 90
     col: 0
     width: 8
@@ -861,9 +861,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 63
     col: 0
     width: 24
@@ -927,9 +927,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 90
     col: 8
     width: 16
@@ -1001,9 +1001,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 83
     col: 0
     width: 24
@@ -1076,9 +1076,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 47
     col: 0
     width: 24
@@ -1202,9 +1202,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 70
     col: 7
     width: 17
@@ -1294,8 +1294,8 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 27
     col: 0
     width: 7
@@ -1471,9 +1471,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 104
     col: 0
     width: 24
@@ -1621,9 +1621,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 77
     col: 7
     width: 17
@@ -1733,9 +1733,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 34
     col: 7
     width: 17
@@ -1911,9 +1911,9 @@
       Gênero: st_importacoes_moda.genero
       Modal: st_importacoes_moda.via_transp_norm
       País de Origem: st_importacoes_moda.nm_pais_origem
-      Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
       Importador Nome: st_importacoes_moda.importador_nome
+      Período: st_importacoes_moda.anomes_norm_ord
     row: 41
     col: 7
     width: 17
