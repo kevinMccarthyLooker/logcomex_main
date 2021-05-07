@@ -55,7 +55,7 @@ view: trials_ativos_mes {
   }
 
   set: detail {
-    fields: [customer_id, nome,customer.executive_name]
+    fields: [customer_id, nome,customer.executive_name, service.name]
   }
 
 }
