@@ -1,5 +1,5 @@
 - dashboard: st_importacoes_moda
-  title: Visão de Mercado - Moda
+  title: Visão de Mercado - Moda - postgres
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: true
@@ -40,7 +40,6 @@
     series_types: {}
     defaults_version: 1
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -49,6 +48,7 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
+      Importador Nome: st_importacoes_moda.importador_nome
     row: 6
     col: 2
     width: 9
@@ -92,7 +92,6 @@
     note_display: hover
     note_text: A Quantidade de registros da base de dados.
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -101,6 +100,7 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
+      Importador Nome: st_importacoes_moda.importador_nome
     row: 6
     col: 13
     width: 9
@@ -150,12 +150,11 @@
       options:
         steps: 5
     y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_moda.fob_sum,
-            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true,
-        showValues: true, valueFormat: "$#,##0", unpinAxis: false, tickDensity: default,
-        tickDensityCustom: 5, type: linear}, {label: !!null '', orientation: right,
-        series: [{axisId: st_importacoes_moda.count, id: st_importacoes_moda.count,
-            name: Quantidade}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 5, type: linear}]
+            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true, showValues: true,
+        valueFormat: "$#,##0", unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
+        type: linear}, {label: !!null '', orientation: right, series: [{axisId: st_importacoes_moda.count,
+            id: st_importacoes_moda.count, name: Quantidade}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     x_axis_label: Mês / Ano
     label_value_format: ''
     series_types:
@@ -194,7 +193,6 @@
     defaults_version: 1
     hidden_fields: [st_importacoes_moda.fob_sum, st_importacoes_moda.count, st_importacoes_moda.anomes]
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -203,6 +201,7 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
+      Importador Nome: st_importacoes_moda.importador_nome
     row: 10
     col: 0
     width: 24
@@ -212,8 +211,8 @@
     model: external_st_importacoes_postgres
     explore: st_importacoes_moda
     type: looker_column
-    fields: [st_importacoes_moda.importador_nome, st_importacoes_moda.fob_sum,
-      st_importacoes_moda.count, st_importacoes_moda.importador_colorido]
+    fields: [st_importacoes_moda.importador_nome, st_importacoes_moda.fob_sum, st_importacoes_moda.count,
+      st_importacoes_moda.importador_colorido]
     filters:
       st_importacoes_moda.importador_check: 'Yes'
       st_importacoes_moda.importador_colorido: "-ST IMPORTACOES LTDA"
@@ -250,12 +249,11 @@
     show_silhouette: false
     totals_color: "#808080"
     y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_moda.fob_sum,
-            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true,
-        showValues: true, valueFormat: "$#,##0", unpinAxis: false, tickDensity: default,
-        tickDensityCustom: 5, type: linear}, {label: !!null '', orientation: right,
-        series: [{axisId: st_importacoes_moda.count, id: st_importacoes_moda.count,
-            name: Quantidade}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 5, type: linear}]
+            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true, showValues: true,
+        valueFormat: "$#,##0", unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
+        type: linear}, {label: !!null '', orientation: right, series: [{axisId: st_importacoes_moda.count,
+            id: st_importacoes_moda.count, name: Quantidade}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     x_axis_label: Importador Nome
     limit_displayed_rows_values:
       show_hide: show
@@ -273,7 +271,6 @@
     defaults_version: 1
     hidden_fields: [st_importacoes_moda.fob_sum, st_importacoes_moda.count, st_importacoes_moda.importador_colorido]
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -282,6 +279,7 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
+      Importador Nome: st_importacoes_moda.importador_nome
     row: 27
     col: 7
     width: 17
@@ -354,7 +352,6 @@
     defaults_version: 1
     series_types: {}
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -363,7 +360,8 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
-    row: 41
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 54
     col: 0
     width: 24
     height: 9
@@ -429,12 +427,11 @@
     show_silhouette: false
     totals_color: "#808080"
     y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_moda.fob_sum,
-            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}, {label: !!null '', orientation: right, series: [{axisId: st_importacoes_moda.count,
-            id: st_importacoes_moda.count, name: Quantidade}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}]
+            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear},
+      {label: !!null '', orientation: right, series: [{axisId: st_importacoes_moda.count,
+            id: st_importacoes_moda.count, name: Quantidade}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     series_types: {}
     series_labels:
       st_importacoes_moda.count: Quantidade
@@ -444,7 +441,6 @@
     quantize_colors: false
     hidden_fields: [st_importacoes_moda.fob_sum]
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -453,6 +449,7 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
+      Importador Nome: st_importacoes_moda.importador_nome
     row: 17
     col: 0
     width: 24
@@ -571,12 +568,11 @@
     show_silhouette: false
     totals_color: "#808080"
     y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_moda.fob_sum,
-            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}, {label: !!null '', orientation: right, series: [{axisId: st_importacoes_moda.count,
-            id: st_importacoes_moda.count, name: Quantidade}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}]
+            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear},
+      {label: !!null '', orientation: right, series: [{axisId: st_importacoes_moda.count,
+            id: st_importacoes_moda.count, name: Quantidade}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     series_types: {}
     defaults_version: 1
     map: auto
@@ -584,7 +580,6 @@
     quantize_colors: false
     hidden_fields: [st_importacoes_moda.fob_sum]
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -593,7 +588,8 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
-    row: 78
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 97
     col: 0
     width: 8
     height: 7
@@ -602,15 +598,15 @@
     model: external_st_importacoes_postgres
     explore: st_importacoes_moda
     type: looker_grid
-    fields: [st_importacoes_moda.produto, st_importacoes_moda.tp_unid_comerc,
-      st_importacoes_moda.qtde_comerc_sum, st_importacoes_moda.fob_sum, st_importacoes_moda.val_fob_un_us_num_avg]
+    fields: [st_importacoes_moda.produto, st_importacoes_moda.tp_unid_comerc, st_importacoes_moda.qtde_comerc_sum,
+      st_importacoes_moda.fob_sum, st_importacoes_moda.val_fob_un_us_num_avg]
     filters:
       st_importacoes_moda.tp_unid_comerc: "-EMPTY"
     sorts: [st_importacoes_moda.qtde_comerc_sum desc]
     limit: 500
     dynamic_fields: [{table_calculation: media_simples, label: Média Simples, expression: "${st_importacoes_moda.fob_sum}\
-          \ / ${st_importacoes_moda.qtde_comerc_sum}", value_format: !!null '',
-        value_format_name: decimal_2, _kind_hint: measure, _type_hint: number}]
+          \ / ${st_importacoes_moda.qtde_comerc_sum}", value_format: !!null '', value_format_name: decimal_2,
+        _kind_hint: measure, _type_hint: number}]
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -723,12 +719,11 @@
     show_silhouette: false
     totals_color: "#808080"
     y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_moda.fob_sum,
-            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}, {label: !!null '', orientation: right, series: [{axisId: st_importacoes_moda.count,
-            id: st_importacoes_moda.count, name: Quantidade}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}]
+            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear},
+      {label: !!null '', orientation: right, series: [{axisId: st_importacoes_moda.count,
+            id: st_importacoes_moda.count, name: Quantidade}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     series_types: {}
     defaults_version: 1
     map: auto
@@ -741,7 +736,6 @@
       A média simples é a somatória do valor FOB dividido pela quantidade  comercializada\
       \ para todos os registros. "
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -750,7 +744,8 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
-    row: 78
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 97
     col: 8
     width: 16
     height: 7
@@ -794,7 +789,6 @@
     defaults_version: 1
     hidden_fields: [st_importacoes_moda.fob_sum]
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -803,7 +797,8 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
-    row: 71
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 90
     col: 0
     width: 8
     height: 7
@@ -860,7 +855,6 @@
     note_state: collapsed
     note_display: below
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -869,7 +863,8 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
-    row: 50
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 63
     col: 0
     width: 24
     height: 7
@@ -926,7 +921,6 @@
     note_state: collapsed
     note_display: below
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -935,7 +929,8 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
-    row: 71
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 90
     col: 8
     width: 16
     height: 7
@@ -951,8 +946,8 @@
     sorts: [media_simples desc]
     limit: 500
     dynamic_fields: [{table_calculation: media_simples, label: Média Simples, expression: "${st_importacoes_moda.fob_sum}\
-          \ / ${st_importacoes_moda.qtde_comerc_sum}", value_format: !!null '',
-        value_format_name: usd, _kind_hint: measure, _type_hint: number}]
+          \ / ${st_importacoes_moda.qtde_comerc_sum}", value_format: !!null '', value_format_name: usd,
+        _kind_hint: measure, _type_hint: number}]
     x_axis_gridlines: false
     y_axis_gridlines: false
     show_view_names: false
@@ -1000,7 +995,6 @@
     note_display: below
     note_text: Considera apenas o tipo UNIDADE.
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -1009,7 +1003,8 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
-    row: 64
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 83
     col: 0
     width: 24
     height: 7
@@ -1054,12 +1049,11 @@
     show_silhouette: false
     totals_color: "#808080"
     y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_moda.fob_sum,
-            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true,
-        showValues: true, valueFormat: "$#,##0", unpinAxis: false, tickDensity: default,
-        tickDensityCustom: 5, type: linear}, {label: !!null '', orientation: right,
-        series: [{axisId: st_importacoes_moda.count, id: st_importacoes_moda.count,
-            name: Quantidade}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 5, type: linear}]
+            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true, showValues: true,
+        valueFormat: "$#,##0", unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
+        type: linear}, {label: !!null '', orientation: right, series: [{axisId: st_importacoes_moda.count,
+            id: st_importacoes_moda.count, name: Quantidade}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     limit_displayed_rows_values:
       show_hide: show
       first_last: first
@@ -1076,7 +1070,6 @@
     defaults_version: 1
     hidden_fields: [st_importacoes_moda.fob_sum, st_importacoes_moda.count]
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -1085,7 +1078,8 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
-    row: 34
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 47
     col: 0
     width: 24
     height: 7
@@ -1101,7 +1095,7 @@
       3. Na condição de ter 3 ou mais materiais (independente se 1 deles for algodão): considerar fibras diversas.
 
       4. Na condição de apenas Algodão (sem o percentual): considerar 100% Algodão.
-    row: 92
+    row: 111
     col: 0
     width: 11
     height: 5
@@ -1111,21 +1105,24 @@
     explore: st_importacoes_moda
     type: looker_boxplot
     fields: [st_importacoes_moda.produto, st_importacoes_moda.val_fob_un_us_num_min,
-      st_importacoes_moda.val_fob_un_us_num_avg, st_importacoes_moda.val_fob_un_us_num_max,
-      st_importacoes_moda.fob_sum]
+      st_importacoes_moda.val_fob_un_us_num_p25, st_importacoes_moda.val_fob_un_us_num_med,
+      st_importacoes_moda.val_fob_un_us_num_p75, st_importacoes_moda.val_fob_un_us_num_max]
     filters:
       st_importacoes_moda.tp_unid_comerc: UNIDADE
       st_importacoes_moda.produto_check: 'Yes'
     sorts: [st_importacoes_moda.val_fob_un_us_num_max desc]
-    limit: 15
-    dynamic_fields: [{table_calculation: media_simples, label: Média Simples, expression: "${st_importacoes_moda.fob_sum}\
-          \ / ${st_importacoes_moda.qtde_comerc_sum}", value_format: !!null '',
-        value_format_name: usd, is_disabled: true, _kind_hint: measure, _type_hint: number},
-      {table_calculation: valores, label: 'Valores:', expression: "${st_importacoes_moda.val_fob_un_us_num_min}",
-        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number},
-      {table_calculation: avg_calc, label: avg_calc, expression: "${st_importacoes_moda.val_fob_un_us_num_avg}",
-        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number},
-      {table_calculation: max_calc, label: max_calc, expression: "${st_importacoes_moda.val_fob_un_us_num_max}",
+    limit: 10
+    dynamic_fields: [{_kind_hint: measure, table_calculation: valores, _type_hint: number,
+        category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_min}",
+        label: 'Valores:', value_format: !!null '', value_format_name: usd}, {_kind_hint: measure,
+        table_calculation: p25_cal, _type_hint: number, category: table_calculation,
+        expression: "${st_importacoes_moda.val_fob_un_us_num_p25}", label: p25_cal,
+        value_format: !!null '', value_format_name: usd}, {_kind_hint: measure, table_calculation: med_calc,
+        _type_hint: number, category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_med}",
+        label: med_calc, value_format: !!null '', value_format_name: usd}, {_kind_hint: measure,
+        table_calculation: p75, _type_hint: number, category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_p75}",
+        label: p75, value_format: !!null '', value_format_name: usd}, {table_calculation: max_calc,
+        label: max_calc, expression: "${st_importacoes_moda.val_fob_un_us_num_max}",
         value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
     x_axis_gridlines: false
     y_axis_gridlines: false
@@ -1143,11 +1140,11 @@
     color_application:
       collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
       custom:
-        id: 2356e3f8-e429-ff4a-5d46-913479ad6381
+        id: e078e232-21d8-e195-aa52-e4d706bea71a
         label: Custom
         type: discrete
         colors:
-        - "#7a7a7a"
+        - "#000000"
         - "#B1399E"
         - "#C2DD67"
         - "#592EC2"
@@ -1192,13 +1189,13 @@
     value_labels: legend
     label_type: labPer
     defaults_version: 1
-    hidden_fields: [st_importacoes_moda.val_fob_un_us_num_min, st_importacoes_moda.val_fob_un_us_num_avg,
-      st_importacoes_moda.val_fob_un_us_num_max, st_importacoes_moda.fob_sum]
+    hidden_fields: [avg_calc, st_importacoes_moda.val_fob_un_us_num_min, st_importacoes_moda.val_fob_un_us_num_p25,
+      st_importacoes_moda.val_fob_un_us_num_med, st_importacoes_moda.val_fob_un_us_num_p75,
+      st_importacoes_moda.val_fob_un_us_num_max]
     note_state: collapsed
     note_display: below
     note_text: Considera apenas o tipo UNIDADE.
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -1207,9 +1204,10 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
-    row: 57
-    col: 0
-    width: 24
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 70
+    col: 7
+    width: 17
     height: 7
   - title: Valor FOB Total (US$) - ST Importações
     name: Valor FOB Total (US$) - ST Importações
@@ -1269,12 +1267,11 @@
     show_silhouette: false
     totals_color: "#808080"
     y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_moda.fob_sum,
-            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true,
-        showValues: true, valueFormat: "$#,##0", unpinAxis: false, tickDensity: default,
-        tickDensityCustom: 5, type: linear}, {label: !!null '', orientation: right,
-        series: [{axisId: st_importacoes_moda.count, id: st_importacoes_moda.count,
-            name: Quantidade}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 5, type: linear}]
+            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true, showValues: true,
+        valueFormat: "$#,##0", unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
+        type: linear}, {label: !!null '', orientation: right, series: [{axisId: st_importacoes_moda.count,
+            id: st_importacoes_moda.count, name: Quantidade}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     limit_displayed_rows_values:
       show_hide: show
       first_last: first
@@ -1291,7 +1288,6 @@
     note_state: expanded
     note_display: above
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -1309,13 +1305,12 @@
     model: external_st_importacoes_postgres
     explore: st_importacoes_moda
     type: looker_grid
-    fields: [st_importacoes_moda.id_import, st_importacoes_moda.importador_nome,
-      st_importacoes_moda.exportador_nome, st_importacoes_moda.anomes_norm, st_importacoes_moda.via_transp_norm,
-      st_importacoes_moda.tp_unid_comerc, st_importacoes_moda.genero, st_importacoes_moda.material,
-      st_importacoes_moda.modelo, st_importacoes_moda.nm_pais_origem, st_importacoes_moda.ncm_desc,
-      st_importacoes_moda.desc_prodt, st_importacoes_moda.produto, st_importacoes_moda.qtd_comerc_num,
-      st_importacoes_moda.val_fob_un_us_num, st_importacoes_moda.val_vmle_us_subitem_num,
-      st_importacoes_moda.cdncm_compl]
+    fields: [st_importacoes_moda.id_import, st_importacoes_moda.importador_nome, st_importacoes_moda.exportador_nome,
+      st_importacoes_moda.anomes_norm, st_importacoes_moda.via_transp_norm, st_importacoes_moda.tp_unid_comerc,
+      st_importacoes_moda.genero, st_importacoes_moda.material, st_importacoes_moda.modelo,
+      st_importacoes_moda.nm_pais_origem, st_importacoes_moda.ncm_desc, st_importacoes_moda.desc_prodt,
+      st_importacoes_moda.produto, st_importacoes_moda.qtd_comerc_num, st_importacoes_moda.val_fob_un_us_num,
+      st_importacoes_moda.val_vmle_us_subitem_num, st_importacoes_moda.cdncm_compl]
     sorts: [st_importacoes_moda.produto]
     limit: 500
     show_view_names: false
@@ -1335,9 +1330,9 @@
     conditional_formatting_include_nulls: false
     show_sql_query_menu_options: false
     column_order: ["$$$_row_numbers_$$$", st_importacoes_moda.via_transp_norm, st_importacoes_moda.id_import,
-      st_importacoes_moda.qtd_comerc_num, st_importacoes_moda.val_fob_un_us_num,
-      st_importacoes_moda.exportador_nome, st_importacoes_moda.cdncm_compl, st_importacoes_moda.tp_unid_comerc,
-      st_importacoes_moda.desc_prodt, st_importacoes_moda.nm_pais_origem, st_importacoes_moda.val_vmle_us_subitem_num,
+      st_importacoes_moda.qtd_comerc_num, st_importacoes_moda.val_fob_un_us_num, st_importacoes_moda.exportador_nome,
+      st_importacoes_moda.cdncm_compl, st_importacoes_moda.tp_unid_comerc, st_importacoes_moda.desc_prodt,
+      st_importacoes_moda.nm_pais_origem, st_importacoes_moda.val_vmle_us_subitem_num,
       st_importacoes_moda.importador_nome, st_importacoes_moda.anomes_norm, st_importacoes_moda.genero,
       st_importacoes_moda.material, st_importacoes_moda.modelo, st_importacoes_moda.ncm_desc,
       st_importacoes_moda.produto]
@@ -1456,12 +1451,11 @@
     show_silhouette: false
     totals_color: "#808080"
     y_axes: [{label: '', orientation: left, series: [{axisId: st_importacoes_moda.fob_sum,
-            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}, {label: !!null '', orientation: right, series: [{axisId: st_importacoes_moda.count,
-            id: st_importacoes_moda.count, name: Quantidade}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}]
+            id: st_importacoes_moda.fob_sum, name: Fob Sum}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear},
+      {label: !!null '', orientation: right, series: [{axisId: st_importacoes_moda.count,
+            id: st_importacoes_moda.count, name: Quantidade}], showLabels: true, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     series_types: {}
     defaults_version: 1
     map: auto
@@ -1471,7 +1465,6 @@
     note_state: expanded
     note_display: above
     listen:
-      Importador Nome: st_importacoes_moda.importador_nome
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
       Material: st_importacoes_moda.material
@@ -1480,7 +1473,8 @@
       País de Origem: st_importacoes_moda.nm_pais_origem
       Período: st_importacoes_moda.anomes_norm
       Modelo: st_importacoes_moda.modelo
-    row: 85
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 104
     col: 0
     width: 24
     height: 7
@@ -1492,6 +1486,437 @@
     row: 0
     col: 6
     width: 13
+    height: 6
+  - name: " (3)"
+    type: text
+    title_text: ''
+    subtitle_text: ''
+    body_text: <img src="https://drive.google.com/uc?export=view&id=1ow5lQtG8wqhV69P8xn5FrU54LvA8BFoQ"/>
+    row: 70
+    col: 0
+    width: 7
+    height: 7
+  - title: Variação do Valor FOB Unitário (US$) por Produto - Valores
+    name: Variação do Valor FOB Unitário (US$) por Produto - Valores
+    model: external_st_importacoes_postgres
+    explore: st_importacoes_moda
+    type: looker_grid
+    fields: [st_importacoes_moda.produto, st_importacoes_moda.val_fob_un_us_num_min,
+      st_importacoes_moda.val_fob_un_us_num_p25, st_importacoes_moda.val_fob_un_us_num_med,
+      st_importacoes_moda.val_fob_un_us_num_p75, st_importacoes_moda.val_fob_un_us_num_max]
+    filters:
+      st_importacoes_moda.tp_unid_comerc: UNIDADE
+      st_importacoes_moda.produto_check: 'Yes'
+    sorts: [st_importacoes_moda.val_fob_un_us_num_max desc]
+    limit: 10
+    dynamic_fields: [{_kind_hint: measure, table_calculation: valores, _type_hint: number,
+        category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_min}",
+        label: 'Valores:', value_format: !!null '', value_format_name: usd}, {_kind_hint: measure,
+        table_calculation: p25_cal, _type_hint: number, category: table_calculation,
+        expression: "${st_importacoes_moda.val_fob_un_us_num_p25}", label: p25_cal,
+        value_format: !!null '', value_format_name: usd}, {_kind_hint: measure, table_calculation: med_calc,
+        _type_hint: number, category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_med}",
+        label: med_calc, value_format: !!null '', value_format_name: usd}, {_kind_hint: measure,
+        table_calculation: p75, _type_hint: number, category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_p75}",
+        label: p75, value_format: !!null '', value_format_name: usd}, {table_calculation: max_calc,
+        label: max_calc, expression: "${st_importacoes_moda.val_fob_un_us_num_max}",
+        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
+    show_view_names: true
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: true
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    color_application:
+      collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+      custom:
+        id: 2356e3f8-e429-ff4a-5d46-913479ad6381
+        label: Custom
+        type: discrete
+        colors:
+        - "#7a7a7a"
+        - "#B1399E"
+        - "#C2DD67"
+        - "#592EC2"
+        - "#4276BE"
+        - "#72D16D"
+        - "#FFD95F"
+        - "#B32F37"
+        - "#9174F0"
+        - "#E57947"
+        - "#75E2E2"
+        - "#FBB555"
+      options:
+        steps: 5
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    series_labels:
+      st_importacoes_moda.fob_sum: Valor Fob Total
+      st_importacoes_moda.produto: Produto
+      valores: Valor Mínimo
+      p25_cal: 25% dos Valores
+      med_calc: 50% dos Valores
+      p75: 75% dos Valores
+      max_calc: Valor Máximo
+    limit_displayed_rows_values:
+      show_hide: show
+      first_last: first
+      num_rows: '15'
+    x_axis_gridlines: false
+    y_axis_gridlines: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    y_axis_labels: [Valor]
+    y_axis_value_format: "#,##0.00"
+    x_axis_label: Produto
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    label_value_format: ''
+    series_types: {}
+    series_colors:
+      st_importacoes_moda.fob_sum: "#7a7a7a"
+      media_simples: "#7a7a7a"
+    value_labels: legend
+    label_type: labPer
+    defaults_version: 1
+    hidden_fields: [avg_calc, st_importacoes_moda.val_fob_un_us_num_min, st_importacoes_moda.val_fob_un_us_num_p25,
+      st_importacoes_moda.val_fob_un_us_num_med, st_importacoes_moda.val_fob_un_us_num_p75,
+      st_importacoes_moda.val_fob_un_us_num_max]
+    note_state: collapsed
+    note_display: below
+    note_text: Considera apenas o tipo UNIDADE.
+    listen:
+      NCM: st_importacoes_moda.cdncm_compl
+      Produto: st_importacoes_moda.produto
+      Material: st_importacoes_moda.material
+      Gênero: st_importacoes_moda.genero
+      Modal: st_importacoes_moda.via_transp_norm
+      País de Origem: st_importacoes_moda.nm_pais_origem
+      Período: st_importacoes_moda.anomes_norm
+      Modelo: st_importacoes_moda.modelo
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 77
+    col: 7
+    width: 17
+    height: 6
+  - title: Variação do Valor FOB Unitário (US$) por Importador
+    name: Variação do Valor FOB Unitário (US$) por Importador
+    model: external_st_importacoes_postgres
+    explore: st_importacoes_moda
+    type: looker_boxplot
+    fields: [st_importacoes_moda.val_fob_un_us_num_min, st_importacoes_moda.val_fob_un_us_num_p25,
+      st_importacoes_moda.val_fob_un_us_num_med, st_importacoes_moda.val_fob_un_us_num_p75,
+      st_importacoes_moda.val_fob_un_us_num_max, st_importacoes_moda.importador_nome,
+      st_importacoes_moda.fob_sum]
+    filters:
+      st_importacoes_moda.importador_colorido: "-ST IMPORTACOES LTDA"
+      st_importacoes_moda.importador_check: 'Yes'
+      st_importacoes_moda.tp_unid_comerc: UNIDADE
+    sorts: [st_importacoes_moda.fob_sum desc]
+    limit: 10
+    dynamic_fields: [{_kind_hint: measure, table_calculation: valores, _type_hint: number,
+        category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_min}",
+        label: 'Valores:', value_format: !!null '', value_format_name: usd}, {_kind_hint: measure,
+        table_calculation: p25_cal, _type_hint: number, category: table_calculation,
+        expression: "${st_importacoes_moda.val_fob_un_us_num_p25}", label: p25_cal,
+        value_format: !!null '', value_format_name: usd}, {_kind_hint: measure, table_calculation: med_calc,
+        _type_hint: number, category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_med}",
+        label: med_calc, value_format: !!null '', value_format_name: usd}, {_kind_hint: measure,
+        table_calculation: p75, _type_hint: number, category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_p75}",
+        label: p75, value_format: !!null '', value_format_name: usd}, {table_calculation: max_calc,
+        label: max_calc, expression: "${st_importacoes_moda.val_fob_un_us_num_max}",
+        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
+    x_axis_gridlines: false
+    y_axis_gridlines: false
+    show_view_names: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    color_application:
+      collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+      custom:
+        id: 72f5ee02-ce6b-7c6c-09e5-516add08a835
+        label: Custom
+        type: discrete
+        colors:
+        - "#000000"
+        - "#B1399E"
+        - "#C2DD67"
+        - "#592EC2"
+        - "#4276BE"
+        - "#72D16D"
+        - "#FFD95F"
+        - "#B32F37"
+        - "#9174F0"
+        - "#E57947"
+        - "#75E2E2"
+        - "#FBB555"
+      options:
+        steps: 5
+    y_axis_labels: [Valor]
+    y_axis_value_format: "#,##0.00"
+    x_axis_label: Importador Nome
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: true
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    limit_displayed_rows_values:
+      show_hide: show
+      first_last: first
+      num_rows: '15'
+    label_value_format: ''
+    series_types: {}
+    series_colors:
+      st_importacoes_moda.fob_sum: "#7a7a7a"
+      media_simples: "#7a7a7a"
+    series_labels:
+      st_importacoes_moda.fob_sum: Valor Fob Total
+    value_labels: legend
+    label_type: labPer
+    defaults_version: 1
+    hidden_fields: [avg_calc, st_importacoes_moda.val_fob_un_us_num_min, st_importacoes_moda.val_fob_un_us_num_p25,
+      st_importacoes_moda.val_fob_un_us_num_med, st_importacoes_moda.val_fob_un_us_num_p75,
+      st_importacoes_moda.val_fob_un_us_num_max, st_importacoes_moda.fob_sum]
+    note_state: collapsed
+    note_display: below
+    note_text: Considera apenas o tipo UNIDADE.
+    listen:
+      NCM: st_importacoes_moda.cdncm_compl
+      Produto: st_importacoes_moda.produto
+      Material: st_importacoes_moda.material
+      Gênero: st_importacoes_moda.genero
+      Modal: st_importacoes_moda.via_transp_norm
+      País de Origem: st_importacoes_moda.nm_pais_origem
+      Período: st_importacoes_moda.anomes_norm
+      Modelo: st_importacoes_moda.modelo
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 34
+    col: 7
+    width: 17
+    height: 7
+  - name: BoxPlot
+    type: text
+    title_text: BoxPlot
+    subtitle_text: ''
+    body_text: |-
+      Máximo: o maior valor.
+
+      75%: três quartos dos valores são menores ou iguais ao valor informado.
+
+      50%(Mediana): metade dos valores são menores ou iguais ao valor informado.
+
+      25%: um quarto dos valores são menores ou iguais ao valor informado.
+
+      Mínimo: o menor valor.
+    row: 77
+    col: 0
+    width: 7
+    height: 6
+  - name: BoxPlot (2)
+    type: text
+    title_text: BoxPlot
+    subtitle_text: ''
+    body_text: |-
+      Máximo: o maior valor.
+
+      75%: três quartos dos valores são menores ou iguais ao valor informado.
+
+      50%(Mediana): metade dos valores são menores ou iguais ao valor informado.
+
+      25%: um quarto dos valores são menores ou iguais ao valor informado.
+
+      Mínimo: o menor valor.
+    row: 41
+    col: 0
+    width: 7
+    height: 6
+  - name: " (4)"
+    type: text
+    title_text: ''
+    subtitle_text: ''
+    body_text: <img src="https://drive.google.com/uc?export=view&id=1ow5lQtG8wqhV69P8xn5FrU54LvA8BFoQ"/>
+    row: 34
+    col: 0
+    width: 7
+    height: 7
+  - title: Variação do Valor FOB Unitário (US$) por Importador - Valores
+    name: Variação do Valor FOB Unitário (US$) por Importador - Valores
+    model: external_st_importacoes_postgres
+    explore: st_importacoes_moda
+    type: looker_grid
+    fields: [st_importacoes_moda.val_fob_un_us_num_min, st_importacoes_moda.val_fob_un_us_num_p25,
+      st_importacoes_moda.val_fob_un_us_num_med, st_importacoes_moda.val_fob_un_us_num_p75,
+      st_importacoes_moda.val_fob_un_us_num_max, st_importacoes_moda.importador_nome,
+      st_importacoes_moda.fob_sum]
+    filters:
+      st_importacoes_moda.importador_colorido: "-ST IMPORTACOES LTDA"
+      st_importacoes_moda.importador_check: 'Yes'
+      st_importacoes_moda.tp_unid_comerc: UNIDADE
+    sorts: [st_importacoes_moda.fob_sum desc]
+    limit: 10
+    dynamic_fields: [{_kind_hint: measure, table_calculation: valores, _type_hint: number,
+        category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_min}",
+        label: 'Valores:', value_format: !!null '', value_format_name: usd}, {_kind_hint: measure,
+        table_calculation: p25_cal, _type_hint: number, category: table_calculation,
+        expression: "${st_importacoes_moda.val_fob_un_us_num_p25}", label: p25_cal,
+        value_format: !!null '', value_format_name: usd}, {_kind_hint: measure, table_calculation: med_calc,
+        _type_hint: number, category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_med}",
+        label: med_calc, value_format: !!null '', value_format_name: usd}, {_kind_hint: measure,
+        table_calculation: p75, _type_hint: number, category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_p75}",
+        label: p75, value_format: !!null '', value_format_name: usd}, {table_calculation: max_calc,
+        label: max_calc, expression: "${st_importacoes_moda.val_fob_un_us_num_max}",
+        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
+    show_view_names: true
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: true
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    color_application:
+      collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+      custom:
+        id: 2356e3f8-e429-ff4a-5d46-913479ad6381
+        label: Custom
+        type: discrete
+        colors:
+        - "#7a7a7a"
+        - "#B1399E"
+        - "#C2DD67"
+        - "#592EC2"
+        - "#4276BE"
+        - "#72D16D"
+        - "#FFD95F"
+        - "#B32F37"
+        - "#9174F0"
+        - "#E57947"
+        - "#75E2E2"
+        - "#FBB555"
+      options:
+        steps: 5
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    series_labels:
+      st_importacoes_moda.fob_sum: Valor Fob Total
+      valores: Valor Mínimo
+      p25_cal: 25% dos Valores
+      med_calc: 50% dos Valores
+      p75: 75% dos Valores
+      max_calc: Valor Máximo
+    limit_displayed_rows_values:
+      show_hide: show
+      first_last: first
+      num_rows: '15'
+    x_axis_gridlines: false
+    y_axis_gridlines: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    y_axis_labels: [Valor]
+    y_axis_value_format: "#,##0.00"
+    x_axis_label: Produto
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: true
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    label_value_format: ''
+    series_types: {}
+    series_colors:
+      st_importacoes_moda.fob_sum: "#7a7a7a"
+      media_simples: "#7a7a7a"
+    value_labels: legend
+    label_type: labPer
+    defaults_version: 1
+    hidden_fields: [avg_calc, st_importacoes_moda.val_fob_un_us_num_min, st_importacoes_moda.val_fob_un_us_num_p25,
+      st_importacoes_moda.val_fob_un_us_num_med, st_importacoes_moda.val_fob_un_us_num_p75,
+      st_importacoes_moda.val_fob_un_us_num_max, st_importacoes_moda.fob_sum]
+    note_state: collapsed
+    note_display: below
+    note_text: Considera apenas o tipo UNIDADE.
+    listen:
+      NCM: st_importacoes_moda.cdncm_compl
+      Produto: st_importacoes_moda.produto
+      Material: st_importacoes_moda.material
+      Gênero: st_importacoes_moda.genero
+      Modal: st_importacoes_moda.via_transp_norm
+      País de Origem: st_importacoes_moda.nm_pais_origem
+      Período: st_importacoes_moda.anomes_norm
+      Modelo: st_importacoes_moda.modelo
+      Importador Nome: st_importacoes_moda.importador_nome
+    row: 41
+    col: 7
+    width: 17
     height: 6
   filters:
   - name: Importador Nome
@@ -1521,7 +1946,7 @@
     model: external_st_importacoes_postgres
     explore: st_importacoes_moda
     listens_to_filters: []
-    field: st_importacoes_moda.anomes_norm
+    field: st_importacoes_moda.anomes_norm_ord
   - name: NCM
     title: NCM
     type: field_filter
