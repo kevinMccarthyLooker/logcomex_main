@@ -381,4 +381,11 @@ view: bi_exports_inner_join_due_via_bl {
     type: count
     drill_fields: [id, ni_exporter_name, consignee_name]
   }
+
+  measure: count_id {
+    type: count_distinct
+    sql: ${TABLE}.id ;;
+    drill_fields: [id, ni_exporter_name, consignee_name]
+  }
+
 }
