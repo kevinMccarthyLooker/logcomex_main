@@ -1,5 +1,5 @@
 - dashboard: st_importacoes_moda
-  title: Visão de Mercado - Moda - postgres
+  title: Visão de Mercado - Moda
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: true
