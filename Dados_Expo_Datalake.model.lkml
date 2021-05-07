@@ -8,7 +8,7 @@ include: "/**/external_frete_exp_mar.dashboard.lookml"
 include: "/**/exportadores_2020_gold.view.lkml"
 include: "/**/due_gold.view"
 include: "/**/big_data_expo_real_exportador.view"
-
+include: "/**/bi_exports_inner_join_due_via_bl.view"
 
 datagroup: real_export_frete_export_embed_datagroup {
   sql_trigger: SELECT CURRENT_DATE ;;
@@ -36,3 +36,5 @@ explore: cargo_reception_items_silver {
 explore: due_gold {}
 
 explore: big_data_expo_real_exportador {}
+
+explore: bi_exports_inner_join_due_via_bl {}
