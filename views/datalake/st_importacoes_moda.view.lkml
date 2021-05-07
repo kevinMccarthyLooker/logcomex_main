@@ -56,6 +56,50 @@ view: st_importacoes_moda {
     end;;
   }
 
+  dimension: anomes_norm_ord {
+    type: string
+    sql:
+    case
+    when ${TABLE}.anomes = '202001' then '2020.01'
+    when ${TABLE}.anomes = '202002' then '2020.02'
+    when ${TABLE}.anomes = '202003' then '2020.03'
+    when ${TABLE}.anomes = '202004' then '2020.04'
+    when ${TABLE}.anomes = '202005' then '2020.05'
+    when ${TABLE}.anomes = '202006' then '2020.06'
+    when ${TABLE}.anomes = '202007' then '2020.07'
+    when ${TABLE}.anomes = '202008' then '2020.08'
+    when ${TABLE}.anomes = '202009' then '2020.09'
+    when ${TABLE}.anomes = '202010' then '2020.10'
+    when ${TABLE}.anomes = '202011' then '2020.11'
+    when ${TABLE}.anomes = '202012' then '2020.12'
+    when ${TABLE}.anomes = '202101' then '2021.01'
+    when ${TABLE}.anomes = '202102' then '2021.02'
+    when ${TABLE}.anomes = '202103' then '2021.03'
+    when ${TABLE}.anomes = '202104' then '2021.04'
+    when ${TABLE}.anomes = '202105' then '2021.05'
+    when ${TABLE}.anomes = '202106' then '2021.06'
+    when ${TABLE}.anomes = '202107' then '2021.07'
+    when ${TABLE}.anomes = '202108' then '2021.08'
+    when ${TABLE}.anomes = '202109' then '2021.09'
+    when ${TABLE}.anomes = '202110' then '2021.10'
+    when ${TABLE}.anomes = '202111' then '2021.11'
+    when ${TABLE}.anomes = '202112' then '2021.12'
+    when ${TABLE}.anomes = '202201' then '2022.01'
+    when ${TABLE}.anomes = '202202' then '2022.02'
+    when ${TABLE}.anomes = '202203' then '2022.03'
+    when ${TABLE}.anomes = '202204' then '2022.04'
+    when ${TABLE}.anomes = '202205' then '2022.05'
+    when ${TABLE}.anomes = '202206' then '2022.06'
+    when ${TABLE}.anomes = '202207' then '2022.07'
+    when ${TABLE}.anomes = '202208' then '2022.08'
+    when ${TABLE}.anomes = '202209' then '2022.09'
+    when ${TABLE}.anomes = '202210' then '2022.10'
+    when ${TABLE}.anomes = '202211' then '2022.11'
+    when ${TABLE}.anomes = '202212' then '2022.12'
+    else 'ERRO'
+    end;;
+  }
+
   dimension: armazem {
     type: string
     sql: ${TABLE}.armazem ;;
