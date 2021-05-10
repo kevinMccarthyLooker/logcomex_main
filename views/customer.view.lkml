@@ -125,6 +125,7 @@ view: customer {
               WHEN (customer.executive_id = 63) THEN 'Carolyne Rocha'
               WHEN (customer.executive_id = 64) THEN 'Diego Sandeski'
               WHEN (customer.executive_id = 71) THEN 'Rafael Gehrke'
+              WHEN (customer.executive_id = 19) THEN 'Kamilla Scheidt'
               WHEN (customer.executive_id = 75) THEN 'Maxi Mendes'
               WHEN (customer.executive_id = 76) THEN 'Leandro Oliveira'
               WHEN (customer.executive_id = 78) THEN 'Luana Nascimento'
@@ -154,7 +155,7 @@ view: customer {
     sql:  CASE WHEN (customer.executive_id in (39, 17, 52, 77,56, 57, 81, 89, 91, 92, 93, 94, 95, 59, 50, 10, 72, 75, 76)) THEN 'CS'
                WHEN (customer.executive_id in (11,12,23,30,41,43,44,48,49,63,64,71,78,80,84 )) THEN 'Comercial'
                WHEN (customer.executive_id is null) THEN 'Sem Executivo'
-          else CAST ( customer.executive_id AS TEXT ) end
+          else 'Outro' end
     ;;
   }
 
