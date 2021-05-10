@@ -144,7 +144,14 @@ view: customer {
               WHEN (customer.executive_id = 93) THEN 'Roberta Miglioli'
               WHEN (customer.executive_id = 94) THEN 'Marina Kaminski'
               WHEN (customer.executive_id = 95) THEN 'Giovanna Welter'
+              WHEN (customer.executive_id = 101) THEN 'Jocimara Siedlecki'
               WHEN (customer.executive_id = 102) THEN 'Tatiane Rupel'
+              WHEN (customer.executive_id = 105) THEN 'Marcos Filipe'
+              WHEN (customer.executive_id = 106) THEN 'Vinicius Iglesias'
+              WHEN (customer.executive_id = 108) THEN 'Luana Paes'
+              WHEN (customer.executive_id = 109) THEN 'Beatriz Camilo'
+              WHEN (customer.executive_id = 110) THEN 'Allan Schmitt'
+              WHEN (customer.executive_id = 111) THEN 'Leonel Lima'
               when (customer.executive_id is null) then CAST ( customer.executive_id AS TEXT )
           else CAST ( customer.executive_id AS TEXT ) end
     ;;
@@ -152,8 +159,8 @@ view: customer {
 
   dimension: executive_area {
     type: string
-    sql:  CASE WHEN (customer.executive_id in (39, 17, 52, 77,56, 57, 81, 89, 91, 92, 93, 94, 95, 59, 50, 10, 72, 75, 76)) THEN 'CS'
-               WHEN (customer.executive_id in (11,12,23,30,41,43,44,48,49,63,64,71,78,80,84 )) THEN 'Comercial'
+    sql:  CASE WHEN (customer.executive_id in (39, 17, 52, 77,56, 57, 81, 89, 91, 92, 93, 94, 95, 59, 50, 72, 75, 76,102,105,106,108,109,111)) THEN 'CS'
+               WHEN (customer.executive_id in (10,11,12,23,30,41,43,44,48,49,63,64,71,78,80,84,101,110 )) THEN 'Comercial'
                WHEN (customer.executive_id is null) THEN 'Sem Executivo'
           else 'Outro' end
     ;;
