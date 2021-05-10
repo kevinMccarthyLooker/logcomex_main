@@ -112,6 +112,7 @@ view: customer {
               WHEN (customer.executive_id = 16) THEN 'Nickelson'
               WHEN (customer.executive_id = 37) THEN 'Jessica Moreira'
               WHEN (customer.executive_id = 52) THEN 'Mirele Benato'
+              WHEN (customer.executive_id = 56) THEN 'Milena Biffi'
               WHEN (customer.executive_id = 48) THEN 'Ianaomy Nascimento'
               WHEN (customer.executive_id = 49) THEN 'Jheniffer Cruz'
               WHEN (customer.executive_id = 59) THEN 'Valeria Antunes'
@@ -150,7 +151,7 @@ view: customer {
 
   dimension: executive_area {
     type: string
-    sql:  CASE WHEN (customer.executive_id in (39, 17, 52, 77, 57, 81, 89, 91, 92, 93, 94, 95, 59, 50, 10, 72, 75, 76)) THEN 'CS'
+    sql:  CASE WHEN (customer.executive_id in (39, 17, 52, 77,56, 57, 81, 89, 91, 92, 93, 94, 95, 59, 50, 10, 72, 75, 76)) THEN 'CS'
                WHEN (customer.executive_id in (11,12,23,30,41,43,44,48,49,63,64,71,78,80,84 )) THEN 'Comercial'
                WHEN (customer.executive_id is null) THEN 'Sem Executivo'
           else CAST ( customer.executive_id AS TEXT ) end
