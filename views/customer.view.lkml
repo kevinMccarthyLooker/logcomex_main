@@ -159,7 +159,7 @@ view: customer {
 
   dimension: executive_area {
     type: string
-    sql:  CASE WHEN (customer.executive_id in (39, 17, 52, 77,56, 57, 81, 89, 91, 92, 93, 94, 95, 59, 50, 72, 75, 76,102,105,106,108,109,111)) THEN 'CS'
+    sql:  CASE WHEN (customer.executive_id in (36,37,39,17, 52, 77,56, 57, 81, 89, 91, 92, 93, 94, 95, 59, 50, 72, 75, 76,102,105,106,108,109,111)) THEN 'CS'
                WHEN (customer.executive_id in (10,11,12,23,30,41,43,44,48,49,63,64,71,78,80,84,101,110 )) THEN 'Comercial'
                WHEN (customer.executive_id is null) THEN 'Sem Executivo'
           else 'Outro' end
