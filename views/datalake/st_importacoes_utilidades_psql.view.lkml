@@ -1,6 +1,6 @@
 view: st_importacoes_utilidades_psql {
   #sql_table_name: st_importacoes.st_importacoes_fase01 ;;  dados fake
-  sql_table_name: public.searchx_ncm_utilidades_st ;; #dados finais
+  sql_table_name: public.search_ncm_utilidades_st ;; #dados finais
 
   dimension: addition_number {
     type: string
