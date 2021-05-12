@@ -261,9 +261,9 @@ view: customer_plan {
   }
   set: customer_detail2 {
     fields: [
-      customer.id,
+      customer_id,
       customer.name,
-      customer.executive,
+      customer.executive_name,
       customer.executive_area,
       start_date,
       expiration_date
