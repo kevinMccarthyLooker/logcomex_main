@@ -246,7 +246,9 @@ view: customer {
     fields: [
       id,
       name,
-      executive_name
+      executive_name,
+      customer_plan.start,
+      customer_plan.expiration
     ]
   }
 
