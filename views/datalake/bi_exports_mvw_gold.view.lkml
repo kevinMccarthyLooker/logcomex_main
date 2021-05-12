@@ -1378,17 +1378,17 @@ view: bi_exports_mvw_gold {
 
   measure: mar_teus {
     type: sum
-    sql: ${TABLE}.mar_teus_parcial ;;
+    sql: ${TABLE}.mar_teus ;;
   }
 
   measure: mar_c20 {
     type: sum
-    sql: ${TABLE}.mar_c20_parcial ;;
+    sql: ${TABLE}.mar_c20 ;;
   }
 
   measure: mar_c40 {
     type: sum
-    sql: ${TABLE}.mar_c40_parcial ;;
+    sql: ${TABLE}.mar_c40 ;;
   }
 
   measure: count_mar_id {
