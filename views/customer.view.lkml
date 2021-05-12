@@ -247,6 +247,7 @@ view: customer {
       id,
       name,
       executive_name,
+      executive_area,
       customer_plan.start,
       customer_plan.expiration
     ]
