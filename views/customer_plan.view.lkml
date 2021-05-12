@@ -234,6 +234,12 @@ view: customer_plan {
     filters: [trial: "Yes"]
   }
 
+  measure: count_distinct_customers {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    drill_fields: [customer_detail2*]
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
@@ -251,6 +257,16 @@ view: customer_plan {
       service.name,
       plan.name
 
+    ]
+  }
+  set: customer_detail2 {
+    fields: [
+      customer_id,
+      customer.name,
+      customer.executive_name,
+      customer.executive_area,
+      start_date,
+      expiration_date
     ]
   }
 }
