@@ -61,7 +61,9 @@ view: service {
       when: {label: "Big Data Expo" sql: ${name} in ('Exportação') ;;}
       when: {label: "Big Data Impo Maritimo" sql: ${name} in ('Importação') ;;}
       when: {label: "Big Data Impo Aereo" sql: ${name} in ('Aereo') ;;}
-
+      when: {label: "Automação" sql: ${name} in ('Automação') ;;}
+      when: {label: "Log Manager" sql: ${name} in ('Log Manager') ;;}
+      when: {label: "LogComex V1" sql: ${name} in ('LogComex V1') ;;}
       else: "Outros BIs"
     }
   }
