@@ -217,6 +217,12 @@ view: bi_exports_inner_join_due_via_bl {
     sql: ${TABLE}.ni_exporter_name ;;
   }
 
+  dimension: ni_exporter_name_null {
+    type: yesno
+    sql:  CASE WHEN (ni_exporter_name is null) THEN true else false end
+    ;;
+    }
+
   dimension: nome_exportador {
     type: string
     sql: ${TABLE}.nome_exportador ;;
@@ -382,7 +388,7 @@ view: bi_exports_inner_join_due_via_bl {
     drill_fields: [id, ni_exporter_name, consignee_name]
   }
 
-  measure: count_id {
+  measure: count_db_maritimo {
     type: count_distinct
     sql: ${TABLE}.id ;;
     drill_fields: [id, ni_exporter_name, consignee_name]

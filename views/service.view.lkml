@@ -61,6 +61,7 @@ view: service {
       when: {label: "Big Data Expo" sql: ${name} in ('Exportação') ;;}
       when: {label: "Big Data Impo Maritimo" sql: ${name} in ('Importação') ;;}
       when: {label: "Big Data Impo Aereo" sql: ${name} in ('Aereo') ;;}
+
       else: "Outros BIs"
     }
   }
