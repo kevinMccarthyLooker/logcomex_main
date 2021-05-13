@@ -176,6 +176,6 @@ view: certificate {
 
   measure: count {
     type: count
-    drill_fields: [id, owner_name]
+    drill_fields: [id,created_date, owner_name, profile, valid_until_date]
   }
 }
