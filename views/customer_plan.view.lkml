@@ -268,7 +268,8 @@ view: customer_plan {
       start_date,
       expiration_date,
       trial_start_date,
-      trial_end_date
+      trial_end_date,
+      certificate.count
     ]
   }
 }
