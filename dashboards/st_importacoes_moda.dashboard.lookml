@@ -211,11 +211,9 @@
     model: external_st_importacoes_postgres
     explore: st_importacoes_moda
     type: looker_column
-    fields: [st_importacoes_moda.importador_nome, st_importacoes_moda.fob_sum, st_importacoes_moda.count,
-      st_importacoes_moda.importador_colorido]
+    fields: [st_importacoes_moda.importador_nome, st_importacoes_moda.fob_sum, st_importacoes_moda.count]
     filters:
       st_importacoes_moda.importador_check: 'Yes'
-      st_importacoes_moda.importador_colorido: "-ST IMPORTACOES LTDA"
     sorts: [st_importacoes_moda.fob_sum desc]
     limit: 15
     dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_moda.fob_sum}",
@@ -269,7 +267,7 @@
       st_importacoes_moda.count: Quantidade
       calculation_1: Valor Fob Total
     defaults_version: 1
-    hidden_fields: [st_importacoes_moda.fob_sum, st_importacoes_moda.count, st_importacoes_moda.importador_colorido]
+    hidden_fields: [st_importacoes_moda.fob_sum, st_importacoes_moda.count]
     listen:
       NCM: st_importacoes_moda.cdncm_compl
       Produto: st_importacoes_moda.produto
@@ -1106,11 +1104,12 @@
     type: looker_boxplot
     fields: [st_importacoes_moda.produto, st_importacoes_moda.val_fob_un_us_num_min,
       st_importacoes_moda.val_fob_un_us_num_p25, st_importacoes_moda.val_fob_un_us_num_med,
-      st_importacoes_moda.val_fob_un_us_num_p75, st_importacoes_moda.val_fob_un_us_num_max]
+      st_importacoes_moda.val_fob_un_us_num_p75, st_importacoes_moda.val_fob_un_us_num_max,
+      st_importacoes_moda.fob_sum]
     filters:
       st_importacoes_moda.tp_unid_comerc: UNIDADE
       st_importacoes_moda.produto_check: 'Yes'
-    sorts: [st_importacoes_moda.val_fob_un_us_num_max desc]
+    sorts: [st_importacoes_moda.fob_sum desc]
     limit: 10
     dynamic_fields: [{_kind_hint: measure, table_calculation: valores, _type_hint: number,
         category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_min}",
@@ -1191,7 +1190,7 @@
     defaults_version: 1
     hidden_fields: [avg_calc, st_importacoes_moda.val_fob_un_us_num_min, st_importacoes_moda.val_fob_un_us_num_p25,
       st_importacoes_moda.val_fob_un_us_num_med, st_importacoes_moda.val_fob_un_us_num_p75,
-      st_importacoes_moda.val_fob_un_us_num_max]
+      st_importacoes_moda.val_fob_un_us_num_max, st_importacoes_moda.fob_sum]
     note_state: collapsed
     note_display: below
     note_text: Considera apenas o tipo UNIDADE.
@@ -1503,11 +1502,12 @@
     type: looker_grid
     fields: [st_importacoes_moda.produto, st_importacoes_moda.val_fob_un_us_num_min,
       st_importacoes_moda.val_fob_un_us_num_p25, st_importacoes_moda.val_fob_un_us_num_med,
-      st_importacoes_moda.val_fob_un_us_num_p75, st_importacoes_moda.val_fob_un_us_num_max]
+      st_importacoes_moda.val_fob_un_us_num_p75, st_importacoes_moda.val_fob_un_us_num_max,
+      st_importacoes_moda.fob_sum]
     filters:
       st_importacoes_moda.tp_unid_comerc: UNIDADE
       st_importacoes_moda.produto_check: 'Yes'
-    sorts: [st_importacoes_moda.val_fob_un_us_num_max desc]
+    sorts: [st_importacoes_moda.fob_sum desc]
     limit: 10
     dynamic_fields: [{_kind_hint: measure, table_calculation: valores, _type_hint: number,
         category: table_calculation, expression: "${st_importacoes_moda.val_fob_un_us_num_min}",
@@ -1610,7 +1610,7 @@
     defaults_version: 1
     hidden_fields: [avg_calc, st_importacoes_moda.val_fob_un_us_num_min, st_importacoes_moda.val_fob_un_us_num_p25,
       st_importacoes_moda.val_fob_un_us_num_med, st_importacoes_moda.val_fob_un_us_num_p75,
-      st_importacoes_moda.val_fob_un_us_num_max]
+      st_importacoes_moda.val_fob_un_us_num_max, st_importacoes_moda.fob_sum]
     note_state: collapsed
     note_display: below
     note_text: Considera apenas o tipo UNIDADE.
@@ -1638,7 +1638,6 @@
       st_importacoes_moda.val_fob_un_us_num_max, st_importacoes_moda.importador_nome,
       st_importacoes_moda.fob_sum]
     filters:
-      st_importacoes_moda.importador_colorido: "-ST IMPORTACOES LTDA"
       st_importacoes_moda.importador_check: 'Yes'
       st_importacoes_moda.tp_unid_comerc: UNIDADE
     sorts: [st_importacoes_moda.fob_sum desc]
@@ -1795,7 +1794,6 @@
       st_importacoes_moda.val_fob_un_us_num_max, st_importacoes_moda.importador_nome,
       st_importacoes_moda.fob_sum]
     filters:
-      st_importacoes_moda.importador_colorido: "-ST IMPORTACOES LTDA"
       st_importacoes_moda.importador_check: 'Yes'
       st_importacoes_moda.tp_unid_comerc: UNIDADE
     sorts: [st_importacoes_moda.fob_sum desc]
@@ -1858,6 +1856,7 @@
       med_calc: 50% dos Valores
       p75: 75% dos Valores
       max_calc: Valor Máximo
+      st_importacoes_moda.importador_nome: Importador Nome
     limit_displayed_rows_values:
       show_hide: show
       first_last: first
