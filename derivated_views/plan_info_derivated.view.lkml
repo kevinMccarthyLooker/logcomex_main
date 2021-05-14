@@ -67,6 +67,10 @@ view: plan_info_derivated {
     when (pi_custom.deadline_month_new_data = 0 or pi_custom.deadline_month_new_data is null) then pi_default.deadline_month_new_data
     else pi_custom.deadline_month_new_data
     end as deadline_month_new_data,
+    case
+    when (pi_custom.expo_real_exporter_functionality is true or pi_default.expo_real_exporter_functionality is true) then true
+    else false
+    end as expo_real_exporter_functionality,
     pi_custom.created_at as created_at_pi_custom,
     pi_default.created_at as created_at_pi_default,
     pi_custom.updated_at as updated_at_pi_custom,
@@ -154,6 +158,11 @@ view: plan_info_derivated {
     dimension: monthly_searches {
       type: number
       sql: ${TABLE}."monthly_searches" ;;
+    }
+
+    dimension: expo_real_exporter_functionality {
+      type: number
+      sql: ${TABLE}."expo_real_exporter_functionality" ;;
     }
 
     dimension: search_days_limit {
