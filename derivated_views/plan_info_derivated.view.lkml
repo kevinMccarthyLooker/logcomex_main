@@ -161,7 +161,7 @@ view: plan_info_derivated {
     }
 
     dimension: expo_real_exporter_functionality {
-      type: number
+      type: yesno
       sql: ${TABLE}."expo_real_exporter_functionality" ;;
     }
 
