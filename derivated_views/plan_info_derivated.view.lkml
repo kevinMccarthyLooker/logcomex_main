@@ -68,9 +68,33 @@ view: plan_info_derivated {
     else pi_custom.deadline_month_new_data
     end as deadline_month_new_data,
     case
+    when pi_custom.api_massive_lines is null then pi_default.api_massive_lines
+    else pi_custom.api_massive_lines
+    end as api_massive_lines,
+    case
+    when pi_custom.expo_product_functionality is null then pi_default.expo_product_functionality
+    else pi_custom.expo_product_functionality
+    end as expo_product_functionality,
+    case
+    when pi_custom.expo_dashbard_chart_year_to_date is null then pi_default.expo_dashbard_chart_year_to_date
+    else pi_custom.expo_dashbard_chart_year_to_date
+    end as expo_dashbard_chart_year_to_date,
+    case
     when pi_custom.expo_real_exporter_functionality is null then pi_default.expo_real_exporter_functionality
     else pi_custom.expo_real_exporter_functionality
     end as expo_real_exporter_functionality,
+    case
+    when pi_custom.expo_average_shipment_functionality is null then pi_default.expo_average_shipment_functionality
+    else pi_custom.expo_average_shipment_functionality
+    end as expo_average_shipment_functionality,
+    case
+    when pi_custom.upload_size_limit_mb is null then pi_default.upload_size_limit_mb
+    else pi_custom.upload_size_limit_mb
+    end as upload_size_limit_mb,
+    case
+    when pi_custom.alerts_data_functionality is null then pi_default.alerts_data_functionality
+    else pi_custom.alerts_data_functionality
+    end as alerts_data_functionality,
     pi_custom.created_at as created_at_pi_custom,
     pi_default.created_at as created_at_pi_default,
     pi_custom.updated_at as updated_at_pi_custom,
@@ -79,162 +103,192 @@ view: plan_info_derivated {
     inner join plan_complete pc on pc.id = cp.plan_complete_id
     LEFT JOIN plan_info as pi_custom ON cp.plan_info_id = pi_custom.id
     LEFT JOIN plan_info as pi_default ON pc.plan_info_id = pi_default.id ;;
-
   }
 
 
 
-    dimension: id {
-      hidden: yes
-      primary_key: yes
-      type: string
-      sql: ${TABLE}."id" ;;
-    }
-
-    dimension: customer_plan_id {
-      type: number
-      sql: ${TABLE}."customer_plan_id" ;;
-    }
-
-    dimension: plan_info_id_custom {
-      type: number
-      sql: ${TABLE}."plan_info_id_custom" ;;
-    }
-
-    dimension: plan_info_id_default {
-      type: number
-      sql: ${TABLE}."plan_info_id_default" ;;
-    }
-
-    dimension: api_access {
-      type: yesno
-      sql: ${TABLE}."api_access" ;;
-    }
-
-    dimension_group: created_at_pi_custom {
-      type: time
-      timeframes: [
-        raw,
-        time,
-        date,
-        week,
-        month,
-        quarter,
-        year
-      ]
-      sql: ${TABLE}."created_at_pi_custom" ;;
-    }
-
-
-    dimension_group: created_at_pi_default {
-      type: time
-      timeframes: [
-        raw,
-        time,
-        date,
-        week,
-        month,
-        quarter,
-        year
-      ]
-      sql: ${TABLE}."created_at_pi_default" ;;
-    }
-
-    dimension: excel_downloads {
-      type: number
-      sql: ${TABLE}."excel_downloads" ;;
-    }
-
-    dimension: excel_export {
-      type: yesno
-      sql: ${TABLE}."excel_export" ;;
-    }
-
-    dimension: excel_lines {
-      type: number
-      sql: ${TABLE}."excel_lines" ;;
-    }
-
-    dimension: monthly_searches {
-      type: number
-      sql: ${TABLE}."monthly_searches" ;;
-    }
-
-    dimension: expo_real_exporter_functionality {
-      type: yesno
-      sql: ${TABLE}."expo_real_exporter_functionality" ;;
-    }
-
-    dimension: search_days_limit {
-      type: number
-      sql: ${TABLE}."search_days_limit" ;;
-    }
-
-    dimension: search_days_range {
-      type: number
-      sql: ${TABLE}."search_days_range" ;;
-    }
-
-    dimension_group: updated_at_pi_default {
-      type: time
-      timeframes: [
-        raw,
-        time,
-        date,
-        week,
-        month,
-        quarter,
-        year
-      ]
-      sql: ${TABLE}."updated_at_pi_default" ;;
-    }
-
-
-    dimension_group: updated_at_pi_custom {
-      type: time
-      timeframes: [
-        raw,
-        time,
-        date,
-        week,
-        month,
-        quarter,
-        year
-      ]
-      sql: ${TABLE}."updated_at_pi_custom" ;;
-    }
-
-    dimension: use_bi_condition_filter {
-      type: yesno
-      sql: ${TABLE}."use_bi_condition_filter" ;;
-    }
-
-    dimension: user_limit {
-      type: number
-      sql: ${TABLE}."user_limit" ;;
-    }
-
-    dimension: search_lines_limit{
-      type: number
-      sql: ${TABLE}."search_lines_limit" ;;
-    }
-
-    dimension: filter_possible_guys_limit {
-      type: number
-      sql: ${TABLE}."filter_possible_guys_limit" ;;
-    }
-
-    dimension: update_period {
-      type: string
-      sql: ${TABLE}."update_period" ;;
-    }
-
-    dimension: deadline_month_new_data {
-      type: number
-      sql: ${TABLE}."deadline_month_new_data" ;;
-    }
-
-    measure: count {
-      type: count
-    }
+  dimension: id {
+    hidden: yes
+    primary_key: yes
+    type: string
+    sql: ${TABLE}."id" ;;
   }
+
+  dimension: customer_plan_id {
+    type: number
+    sql: ${TABLE}."customer_plan_id" ;;
+  }
+
+  dimension: plan_info_id_custom {
+    type: number
+    sql: ${TABLE}."plan_info_id_custom" ;;
+  }
+
+  dimension: plan_info_id_default {
+    type: number
+    sql: ${TABLE}."plan_info_id_default" ;;
+  }
+
+  dimension: api_access {
+    type: yesno
+    sql: ${TABLE}."api_access" ;;
+  }
+
+  dimension_group: created_at_pi_custom {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."created_at_pi_custom" ;;
+  }
+
+
+  dimension_group: created_at_pi_default {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."created_at_pi_default" ;;
+  }
+
+  dimension: excel_downloads {
+    type: number
+    sql: ${TABLE}."excel_downloads" ;;
+  }
+
+  dimension: excel_export {
+    type: yesno
+    sql: ${TABLE}."excel_export" ;;
+  }
+
+  dimension: excel_lines {
+    type: number
+    sql: ${TABLE}."excel_lines" ;;
+  }
+
+  dimension: monthly_searches {
+    type: number
+    sql: ${TABLE}."monthly_searches" ;;
+  }
+
+  dimension: api_massive_lines {
+    type: yesno
+    sql: ${TABLE}."api_massive_lines" ;;
+  }
+
+  dimension: expo_product_functionality {
+    type: yesno
+    sql: ${TABLE}."expo_product_functionality" ;;
+  }
+
+  dimension: expo_dashboard_chart_year_to_date {
+    type: yesno
+    sql: ${TABLE}."expo_dashbard_chart_year_to_date" ;;
+  }
+
+  dimension: expo_real_exporter_functionality {
+    type: yesno
+    sql: ${TABLE}."expo_real_exporter_functionality" ;;
+  }
+
+  dimension: expo_average_shipment_functionality {
+    type: yesno
+    sql: ${TABLE}."expo_average_shipment_functionality" ;;
+  }
+
+  dimension: upload_size_limit_mb {
+    type: number
+    sql: ${TABLE}."upload_size_limit_mb" ;;
+  }
+
+  dimension: alerts_data_functionality {
+    type: yesno
+    sql: ${TABLE}."alerts_data_functionality" ;;
+  }
+
+  dimension: search_days_limit {
+    type: number
+    sql: ${TABLE}."search_days_limit" ;;
+  }
+
+  dimension: search_days_range {
+    type: number
+    sql: ${TABLE}."search_days_range" ;;
+  }
+
+  dimension_group: updated_at_pi_default {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."updated_at_pi_default" ;;
+  }
+
+
+  dimension_group: updated_at_pi_custom {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."updated_at_pi_custom" ;;
+  }
+
+  dimension: use_bi_condition_filter {
+    type: yesno
+    sql: ${TABLE}."use_bi_condition_filter" ;;
+  }
+
+  dimension: user_limit {
+    type: number
+    sql: ${TABLE}."user_limit" ;;
+  }
+
+  dimension: search_lines_limit{
+    type: number
+    sql: ${TABLE}."search_lines_limit" ;;
+  }
+
+  dimension: filter_possible_guys_limit {
+    type: number
+    sql: ${TABLE}."filter_possible_guys_limit" ;;
+  }
+
+  dimension: update_period {
+    type: string
+    sql: ${TABLE}."update_period" ;;
+  }
+
+  dimension: deadline_month_new_data {
+    type: number
+    sql: ${TABLE}."deadline_month_new_data" ;;
+  }
+
+  measure: count {
+    type: count
+  }
+
+}
