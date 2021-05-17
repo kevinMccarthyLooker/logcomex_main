@@ -2,8 +2,8 @@ view: st_brinquedos_teste_st {
 
   derived_table: {
     sql: select * from public.search_ncm_brinquedo_st ;;
-    indexes: ["id_import"]
-    sql_trigger_value: select current_date;;
+  #  indexes: ["id_import"]
+  #  sql_trigger_value: select current_date;;
   }
 
 
