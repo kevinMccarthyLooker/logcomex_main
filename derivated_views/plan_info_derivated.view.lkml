@@ -68,8 +68,8 @@ view: plan_info_derivated {
     else pi_custom.deadline_month_new_data
     end as deadline_month_new_data,
     case
-    when (pi_custom.expo_real_exporter_functionality is true or pi_default.expo_real_exporter_functionality is true) then true
-    else false
+    when pi_custom.expo_real_exporter_functionality is null then pi_default.expo_real_exporter_functionality
+    else pi_custom.expo_real_exporter_functionality
     end as expo_real_exporter_functionality,
     pi_custom.created_at as created_at_pi_custom,
     pi_default.created_at as created_at_pi_default,
