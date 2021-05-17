@@ -19,7 +19,7 @@ view: st_brinquedos_teste_st {
   }
 
   measure: count {
-    sql: ${count} ;;
+    type: count
   }
 
 
