@@ -421,6 +421,10 @@ view: nps {
     sql: ${TABLE}.Impacto ;;
   }
 
+  measure: media_nota {
+    type: average
+    sql: ${nota} ;;
+  }
   #
   # dimension: lifetime_orders {
   #   description: "The total number of orders for each user"
