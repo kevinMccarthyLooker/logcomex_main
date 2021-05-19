@@ -1,4 +1,4 @@
-view: nps {
+view: nps_04_2020 {
   derived_table: {
   sql:
       select 'sistema.logcomex.io/#/inteligencia/aereo' as page , 'joseane.vilela@expedited-america.com' as email , 7 as nota , 'ja observei informaÃ§Ãµes incompletas' as observacao , 'Pouco impactado' as Impacto union all
