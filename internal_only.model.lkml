@@ -78,7 +78,6 @@ include: "/**/clientes_acessos_plataforma.view.lkml"
 include: "/**/usuarios_clientes_acessos_plataforma.view.lkml"
 include: "/**/trials_acessos_plataforma.view.lkml"
 include: "/**/health_score_2021.view.lkml"
-include: "/**/events_20210518.view.lkml"
 
 
 datagroup: internal_only_datagroup {
@@ -94,28 +93,6 @@ datagroup: hs_datagroup {
   max_cache_age: "13 hours"
   label: "hs_datagroup"
   description: "DG do Health Score, atualiza a cada 12h"
-}
-
-explore: events_20210518 {
-  #hidden: no
-
-  join: events_20210518__items {
-    view_label: "Events 20210518: Items"
-    sql: LEFT JOIN UNNEST(${events_20210518.items}) as events_20210518__items ;;
-    relationship: one_to_many
-  }
-
-  join: events_20210518__event_params {
-    view_label: "Events 20210518: Event Params"
-    sql: LEFT JOIN UNNEST(${events_20210518.event_params}) as events_20210518__event_params ;;
-    relationship: one_to_many
-  }
-
-  join: events_20210518__user_properties {
-    view_label: "Events 20210518: User Properties"
-    sql: LEFT JOIN UNNEST(${events_20210518.user_properties}) as events_20210518__user_properties ;;
-    relationship: one_to_many
-  }
 }
 
 explore: usuarios_clientes_acessos_plataforma {}
