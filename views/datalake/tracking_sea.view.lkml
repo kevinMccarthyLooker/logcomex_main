@@ -48,7 +48,11 @@ view: tracking_sea {
   dimension: tipo_de_frete {
     type: string
     label: "Tipo de Frete"
-    sql: ${TABLE}."Tipo de Frete" ;;
+    sql: case
+          when ${TABLE}."Tipo de Frete" = 'COLL' then 'Collect'
+          when ${TABLE}."Tipo de Frete" = 'PREP' then 'Prepaid'
+          else 'ERRO'
+          end ;;
   }
 
   dimension: armador {
