@@ -1,4 +1,4 @@
-view: estrutura_mercadologica_prev_prata {
+view: st_estrutura_mercadologica {
   sql_table_name: st_importacoes.estrutura_mercadologica_prev_prata ;;
   drill_fields: [id]
 
