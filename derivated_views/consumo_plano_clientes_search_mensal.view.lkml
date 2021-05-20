@@ -1,87 +1,91 @@
 view: consumo_plano_clientes_search_mensal {
   # Or, you could make this view a derived table, like this:
   derived_table: {
-    sql:select *,
+    sql:
+    select *,
     (case when qq.quantidade_de_pesquisas_plano = 0 or quantidade_de_pesquisas_plano = 9999999 then true else false end) as pesquisas_ilimitadas,
-      (case when qq.busca_perfil_empresas_plano = 0 or qq.busca_perfil_empresas_plano = 9999999 then true else false end) as perfil_ilimitados,
-      qq.qtd_pesquisas::float/qq.quantidade_de_pesquisas_plano::float as percentual_pesquisas,
-      (qq.quantity_possible_importer + qq.quantity_possible_exporter) as qtd_perfil,
-      (qq.quantity_possible_importer + qq.quantity_possible_exporter)::float/(case when qq.busca_perfil_empresas_plano = 0 then 9999999 else qq.busca_perfil_empresas_plano end)::float as percentual_perfil
-      from(
-      select
-      concat(extract("year" from fh.created_at),extract("month" from fh.created_at),fh.customer_id) as id_table,
-      TO_TIMESTAMP(concat(extract("year" from fh.created_at),' ',extract("month" from fh.created_at)) ,'YYYY MM') as periodo,
-      extract("year" from fh.created_at) as ano,
-      extract("month" from fh.created_at) as mes,
-      fh.customer_id,
-      c2."name" as nome,
-      coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) AS quantidade_de_pesquisas_plano,
-      coalesce(pi_custom.filter_possible_guys_limit, pi_default.filter_possible_guys_limit,9999999) AS busca_perfil_empresas_plano,
-      coalesce(pi_custom.excel_downloads, pi_default.excel_downloads) as qtd_excel_plano,
-      coalesce(pi_custom.excel_lines , pi_default.excel_lines) as excel_lines_plano,
-      coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) as search_lines_plano,
-      plan."name" as plano,
-      cp."start"  as data_inicio,
-      cp.expiration as data_fim,
-      cp.trial_start as data_inicio_trial,
-      cp.trial_end as data_fim_trial,
-      extrapolados.data_extrapolou,
-      extrapolados.dias_extrapolou,
-      count(*) as qtd_pesquisas,
-      sum(case when fh.filters @> '[{"name": "possibleImporter"}]' then 1 else 0 end) as quantity_possible_importer,
-      sum(case when fh.filters @> '[{"name": "possibleExporter"}]' then 1 else 0 end) as quantity_possible_exporter,
-      sum(case when fh.total_lines > coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) then 1 else 0 end) as qtd_extrapoled,
-      coalesce(avg(case when fh.total_lines > coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) then fh.total_lines - coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit)  else null end),0) as avg_extrapoled
-      from filter_history fh
-      inner join user_profile_customer upc on upc.user_id = fh.user_id and fh.customer_id = upc.customer_id
-      inner join customer c2 on c2.id = fh.customer_id
-      inner join customer_plan cp on cp.customer_id = c2.id
-      inner join plan_complete pc2 on pc2.id = cp.plan_complete_id
-      inner join plan on plan.id = pc2.plan_id
-      LEFT JOIN plan_info as pi_default ON pc2.plan_info_id = pi_default.id
-      LEFT JOIN plan_info as pi_custom ON cp.plan_info_id = pi_custom.id
-      left join(
-      select qq2.customer_id, qq2.mes , qq2.ano as ano, min(qq2.data_consulta) as data_extrapolou, min(dias) as dias_extrapolou
-      from(
-      select fh.customer_id,extract(month from fh.created_at ) as mes, extract(year from fh.created_at ) as ano, date(fh.created_at) as data_consulta,
-      coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) AS quantidade_de_pesquisas_plano,
-      sum(count(fh.source_hash)) OVER (PARTITION by fh.customer_id, extract(month from fh.created_at ),extract(year from fh.created_at ) ORDER BY date(fh.created_at)),
-      sum(count(fh.source_hash)) OVER (PARTITION by fh.customer_id, extract(month from fh.created_at ),extract(year from fh.created_at ) ORDER BY date(fh.created_at))/coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) as percentual,
-      count(date(fh.created_at)) OVER (PARTITION by fh.customer_id, extract(month from fh.created_at ),extract(year from fh.created_at ) ORDER BY date(fh.created_at)) as dias
-      from filter_history fh
-      inner join user_profile_customer upc on upc.user_id = fh.user_id and fh.customer_id = upc.customer_id
-      inner join customer c2 on c2.id = fh.customer_id
-      inner join customer_plan cp on cp.customer_id = c2.id
-      inner join plan_complete pc2 on pc2.id = cp.plan_complete_id
-      inner join plan on plan.id = pc2.plan_id
-      LEFT JOIN plan_info as pi_default ON pc2.plan_info_id = pi_default.id
-      LEFT JOIN plan_info as pi_custom ON cp.plan_info_id = pi_custom.id
-      where fh.debited = true -- flag que contabiliza
-      and fh.service_id = 19 -- produto search
-      and pc2.service_id = 19 -- plano com search
-      and c2.deleted_at is null -- verifica se foi deletado
-      and c2.fake_customer is false -- verifica se é cliente teste
-      and cp.deleted_at is null -- verifica se o plano foi deletado
-      and upc.logcomex_fake is false -- nao contabiliza pesquisas de usuarios logcomex
-      --and fh.customer_id = 2102
-      group by fh.customer_id,mes, ano, date(fh.created_at),quantidade_de_pesquisas_plano
-      order by 2) as qq2
-      where qq2.percentual > 1
-      group by qq2.customer_id,qq2.mes, qq2.ano) as extrapolados on extrapolados.customer_id = fh.customer_id and extrapolados.mes = extract(month from fh.created_at) and extrapolados.ano = extract(year from fh.created_at)
-      where fh.debited = true -- flag que contabiliza
-      and fh.service_id = 19 -- produto search
-      and pc2.service_id = 19 -- plano com search
-      and c2.deleted_at is null -- verifica se foi deletado
-      and c2.fake_customer is false -- verifica se é cliente teste
-      and cp.deleted_at is null -- verifica se o plano foi deletado
-      and upc.logcomex_fake is false -- nao contabiliza pesquisas de usuarios logcomex
-      --and c2.id = 2102
-      group by id_table, periodo, extract("year" from fh.created_at) , extract("month" from fh.created_at) ,fh.customer_id, nome,
-      quantidade_de_pesquisas_plano,busca_perfil_empresas_plano,qtd_excel_plano,
-      excel_lines_plano,search_lines_plano,plano,data_inicio,data_fim,data_inicio_trial,
-      data_fim_trial, extrapolados.data_extrapolou, extrapolados.dias_extrapolou
-      order by periodo) as qq
-      ;;
+    (case when qq.busca_perfil_empresas_plano = 0 or qq.busca_perfil_empresas_plano = 9999999 then true else false end) as perfil_ilimitados,
+    qq.qtd_pesquisas::float/qq.quantidade_de_pesquisas_plano::float as percentual_pesquisas,
+    (qq.quantity_possible_importer + qq.quantity_possible_exporter) as qtd_perfil,
+    (qq.quantity_possible_importer + qq.quantity_possible_exporter)::float/(case when qq.busca_perfil_empresas_plano = 0 then 9999999 else qq.busca_perfil_empresas_plano end)::float as percentual_perfil
+    from(
+    select
+    concat(extract("year" from fh.created_at),extract("month" from fh.created_at),fh.customer_id) as id_table,
+    TO_TIMESTAMP(concat(extract("year" from fh.created_at),' ',extract("month" from fh.created_at)) ,'YYYY MM') as periodo,
+    extract("year" from fh.created_at) as ano,
+    extract("month" from fh.created_at) as mes,
+    fh.customer_id,
+    c2."name" as nome,
+    coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) AS quantidade_de_pesquisas_plano,
+    coalesce(pi_custom.filter_possible_guys_limit, pi_default.filter_possible_guys_limit,9999999) AS busca_perfil_empresas_plano,
+    coalesce(pi_custom.excel_downloads, pi_default.excel_downloads) as qtd_excel_plano,
+    coalesce(pi_custom.excel_lines , pi_default.excel_lines) as excel_lines_plano,
+    coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) as search_lines_plano,
+    plan."name" as plano,
+    cp."start"  as data_inicio,
+    cp.expiration as data_fim,
+    cp.trial_start as data_inicio_trial,
+    cp.trial_end as data_fim_trial,
+    extrapolados.data_extrapolou,
+    extrapolados.dias_extrapolou,
+    count(*) as qtd_pesquisas,
+    sum(case when fh.filters @> '[{"name": "possibleImporter"}]' then 1 else 0 end) as quantity_possible_importer,
+    sum(case when fh.filters @> '[{"name": "possibleExporter"}]' then 1 else 0 end) as quantity_possible_exporter,
+    sum(case when fh.total_lines > coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) then 1 else 0 end) as qtd_extrapoled,
+    coalesce(avg(case when fh.total_lines > coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) then fh.total_lines - coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit)  else null end),0) as avg_extrapoled
+    from filter_history fh
+    --inner join user_profile_customer upc on upc.user_id = fh.user_id and fh.customer_id = upc.customer_id
+    inner join customer c2 on c2.id = fh.customer_id
+    inner join users u on u.id = fh.user_id
+    inner join customer_plan cp on cp.customer_id = c2.id
+    inner join plan_complete pc2 on pc2.id = cp.plan_complete_id
+    inner join plan on plan.id = pc2.plan_id
+    LEFT JOIN plan_info as pi_default ON pc2.plan_info_id = pi_default.id
+    LEFT JOIN plan_info as pi_custom ON cp.plan_info_id = pi_custom.id
+    left join(
+    select qq2.customer_id, qq2.mes , qq2.ano as ano, min(qq2.data_consulta) as data_extrapolou, min(dias) as dias_extrapolou
+    from(
+    select fh.customer_id,extract(month from fh.created_at ) as mes, extract(year from fh.created_at ) as ano, date(fh.created_at) as data_consulta,
+    coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) AS quantidade_de_pesquisas_plano,
+    sum(count(fh.source_hash)) OVER (PARTITION by fh.customer_id, extract(month from fh.created_at ),extract(year from fh.created_at ) ORDER BY date(fh.created_at)),
+    sum(count(fh.source_hash)) OVER (PARTITION by fh.customer_id, extract(month from fh.created_at ),extract(year from fh.created_at ) ORDER BY date(fh.created_at))/coalesce(pi_custom.monthly_searches, pi_default.monthly_searches) as percentual,
+    count(date(fh.created_at)) OVER (PARTITION by fh.customer_id, extract(month from fh.created_at ),extract(year from fh.created_at ) ORDER BY date(fh.created_at)) as dias
+    from filter_history fh
+    --inner join user_profile_customer upc on upc.user_id = fh.user_id and fh.customer_id = upc.customer_id
+    inner join customer c2 on c2.id = fh.customer_id
+    inner join users u on u.id = fh.user_id
+    inner join customer_plan cp on cp.customer_id = c2.id
+    inner join plan_complete pc2 on pc2.id = cp.plan_complete_id
+    inner join plan on plan.id = pc2.plan_id
+    LEFT JOIN plan_info as pi_default ON pc2.plan_info_id = pi_default.id
+    LEFT JOIN plan_info as pi_custom ON cp.plan_info_id = pi_custom.id
+    where fh.debited = true -- flag que contabiliza
+    and fh.service_id = 19 -- produto search
+    and pc2.service_id = 19 -- plano com search
+    and c2.deleted_at is null -- verifica se foi deletado
+    and c2.fake_customer is false -- verifica se é cliente teste
+    and cp.deleted_at is null -- verifica se o plano foi deletado
+    and u.email not like '%@logcomex.com'
+    --and upc.logcomex_fake is false -- nao contabiliza pesquisas de usuarios logcomex
+    --and fh.customer_id = 2102
+    group by fh.customer_id,mes, ano, date(fh.created_at),quantidade_de_pesquisas_plano
+    order by 2) as qq2
+    where qq2.percentual > 1
+    group by qq2.customer_id,qq2.mes, qq2.ano) as extrapolados on extrapolados.customer_id = fh.customer_id and extrapolados.mes = extract(month from fh.created_at) and extrapolados.ano = extract(year from fh.created_at)
+    where fh.debited = true -- flag que contabiliza
+    and fh.service_id = 19 -- produto search
+    and pc2.service_id = 19 -- plano com search
+    and c2.deleted_at is null -- verifica se foi deletado
+    and c2.fake_customer is false -- verifica se é cliente teste
+    and cp.deleted_at is null -- verifica se o plano foi deletado
+    and u.email not like '%@logcomex.com'
+    --and upc.logcomex_fake is false -- nao contabiliza pesquisas de usuarios logcomex
+    --and c2.id = 2102
+    group by id_table, periodo, extract("year" from fh.created_at) , extract("month" from fh.created_at) ,fh.customer_id, nome,
+    quantidade_de_pesquisas_plano,busca_perfil_empresas_plano,qtd_excel_plano,
+    excel_lines_plano,search_lines_plano,plano,data_inicio,data_fim,data_inicio_trial,
+    data_fim_trial, extrapolados.data_extrapolou, extrapolados.dias_extrapolou
+    order by periodo) as qq;;
   }
 
   dimension: id {

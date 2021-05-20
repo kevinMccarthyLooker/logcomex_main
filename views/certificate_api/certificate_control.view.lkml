@@ -209,7 +209,7 @@ view: certificate_control {
 
   measure: count {
     type: count
-    drill_fields: [id]
+    drill_fields: [id,created_at_date,owner_cpf,owner,profile,valid_until_date,customer_id]
   }
 
 }

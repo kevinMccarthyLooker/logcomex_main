@@ -16,6 +16,8 @@ select 'Maritimo' as modal,
        tracking.bl_number as documento,
        tracking.ce_number as ce_number,
        tracking.user_id,
+       u2."name" as user_name,
+       u2.email as user_email,
        tracking.created_at,
        tracking.updated_at,
        tracking.deleted_at,
@@ -43,10 +45,20 @@ select 'Maritimo' as modal,
        tracking.is_api as is_api,
        qq2.created_at as last_follow_up,
        qq2.comment as last_workflow,
-       qq2.date_time as last_workflow_date
+       qq2.date_time as last_workflow_date,
+       null::timestamp as aereo_data_embarque_ets,
+       null::timestamp as aereo_data_hora_chegada,
+       (case
+       when tracking.tracking_maritime_load_category_id = 1 then 'Importação'
+       when tracking.tracking_maritime_load_category_id = 2 then 'Exportação'
+       when tracking.tracking_maritime_load_category_id = 3 then 'Cabotagem'
+       else tracking.tracking_maritime_load_category_id::text
+       end) as categoriacarga
 from tracking
 inner join tracking_status on tracking.status_id = tracking_status.id
 inner join tracking_internal_status on tracking.internal_status_id = tracking_internal_status.id
+--left join sistema.db_maritimo dbm on tracking.ce_number = dbm.nrcemercante
+left join users u2 on u2.id = tracking.user_id
 left join(
 select
 fu.tracking_id,
@@ -76,9 +88,11 @@ select 'Aereo' as modal,
      else 'Yes'
      end) as force_certificate,
        tracking_aerial_status.description as status,
-       (coalesce((awb),'') || '-' || coalesce((hwb),'')) as documento,
+       (coalesce((tracking_aerial.awb),'') || '-' || coalesce((tracking_aerial.hwb),'')) as documento,
        0 as ce_number,
        tracking_aerial.user_id,
+       u2."name" as user_name,
+       u2.email as user_email,
        tracking_aerial.created_at,
        tracking_aerial.updated_at,
        tracking_aerial.deleted_at,
@@ -106,10 +120,14 @@ select 'Aereo' as modal,
        tracking_aerial.is_api as is_api,
        qq2.created_at as last_follow_up,
        qq2.comment as last_workflow,
-       qq2.date_time as last_workflow_date
+       qq2.date_time as last_workflow_date,
+       qq3.data_embarque_ets as aereo_data_embarque_ets,
+       qq3.data_hora_chegada as aereo_data_hora_chegada,
+       'aereo_sem_categ' as categoriacarga
 from tracking_aerial
 inner join tracking_aerial_status on tracking_aerial.tracking_aerial_status_id = tracking_aerial_status.id
 inner join tracking_aerial_internal_status on tracking_aerial.internal_status = tracking_aerial_internal_status.id
+left join users u2 on u2.id = tracking_aerial.user_id
 left join (
 select
 fu.tracking_aerial_id,
@@ -125,6 +143,19 @@ from follow_up fu2
 where (fu2.user_id is null or fu2.user_id = 7002) -- usuario utilizado para inserir dados manualmente
 group by 3) as qq1 on qq1.date_time = fu.date_time and qq1.tracking_aerial_id = fu.tracking_aerial_id
 where fu.tracking_aerial_id is not null and (fu.user_id is null or fu.user_id = 7002)) as qq2 on qq2.tracking_aerial_id = tracking_aerial.id
+left join
+          (
+            select list.awb, list.hwb, details.data_hawb as data_embarque_ets, atracacao.data_hora_chegada
+            from aereo.aereo_awb_list list
+            inner join aereo.aereo_awb_details details on details.id_awb_list = list.id
+            inner join aereo.aereo_etapas_atracao atracacao on atracacao.id_awb_details = details.id
+            where atracacao.doc_saida = 'DI/DAS'
+            and details.data_hawb is not null
+            and atracacao.data_hora_chegada is not null
+            and (atracacao.data_hora_chegada - details.data_hawb) < interval '1000 days'
+            and list.awb is not null
+            and list.hwb is not null
+          ) as qq3 on qq3.awb = tracking_aerial.awb and qq3.hwb = tracking_aerial.hwb
 --where tracking_aerial.deleted_at is null
     ;;
 indexes: ["chave"]
@@ -139,6 +170,11 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
   dimension: chave {
     type: string
     sql: ${TABLE}."chave" ;;
+  }
+
+  dimension: categoriacarga {
+    type: string
+    sql: ${TABLE}."categoriacarga" ;;
   }
 
   dimension: tracking_id {
@@ -215,6 +251,16 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
   dimension: user_id {
     type: number
     sql: ${TABLE}."user_id" ;;
+  }
+
+  dimension: user_name {
+    type: string
+    sql: ${TABLE}."user_name" ;;
+  }
+
+  dimension: user_email {
+    type: string
+    sql: ${TABLE}."user_email" ;;
   }
 
   dimension: user_id_null {
@@ -603,10 +649,51 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     sql: ${TABLE}."is_api" ;;
   }
 
+  dimension_group: aereo_data_embarque_ets {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."aereo_data_embarque_ets" ;;
+  }
+
+  dimension_group: aereo_data_hora_chegada {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."aereo_data_hora_chegada" ;;
+  }
+
+  dimension_group: aereo_transit_time {
+    type: duration
+    intervals: [day, hour]
+    sql_start: ${TABLE}."aereo_data_embarque_ets" ;;
+    sql_end: ${TABLE}."aereo_data_hora_chegada";;
+  }
+
+
+  measure: avg_days_transit_time_aereo {
+    type: average
+    sql: ${days_aereo_transit_time} ;;
+  }
+
   measure: count_distinct_users {
     type: count_distinct
     sql: ${user_id} ;;
-    drill_fields: [user_id,customer_id]
+    drill_fields: [user_id,user_email,customer.name,customer_id]
   }
 
   measure: count_api {
@@ -734,12 +821,12 @@ sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) 
     sql: ${days_transit_time} ;;
   }
 
-    set: detail {
-    fields: [customer_id, customer.name, status, internal_status, created_raw, token]
+  set: detail {
+    fields: [customer_id, customer.name, status, internal_status, created_raw, token,documento]
   }
 
-    set: detail_customer {
-      fields: [customer_id, customer.name,force_certificate]
-    }
+  set: detail_customer {
+    fields: [customer_id, customer.name,force_certificate]
+  }
 
 }

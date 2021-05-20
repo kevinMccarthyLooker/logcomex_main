@@ -206,6 +206,11 @@ view: hubspot_cs_deal {
     sql: ${TABLE}."pipeline" ;;
   }
 
+  dimension: customer_classification {
+    type: string
+    sql: ${TABLE}."customer_classification" ;;
+  }
+
   dimension: question_company_challenges {
     type: string
     sql: ${TABLE}."question_company_challenges" ;;

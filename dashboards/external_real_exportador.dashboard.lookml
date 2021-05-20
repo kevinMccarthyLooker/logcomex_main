@@ -10,10 +10,10 @@
     explore: big_data_expo_real_exportador
     type: looker_grid
     fields: [big_data_expo_real_exportador.count_mar_id, big_data_expo_real_exportador.nf_nome_emissor_2]
-    filters:
-      big_data_expo_real_exportador.nf_nome_emissor_2: "-NULL"
+    filters: {}
     sorts: [big_data_expo_real_exportador.count_mar_id desc]
     limit: 500
+    total: true
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -40,8 +40,13 @@
       big_data_expo_real_exportador.count_mar_id:
         is_active: true
         palette:
-          palette_id: 471a8295-662d-46fc-bd2d-2d0acd370c1e
+          palette_id: 3548f388-d316-c608-29b6-a3415a28d90e
           collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+          custom_colors:
+          - "#e0aaff"
+          - "#9d4edd"
+          - "#5a189a"
+        value_display: true
     series_text_format:
       big_data_expo_real_exportador.nf_nome_emissor:
         align: left
@@ -57,7 +62,7 @@
     defaults_version: 1
     note_state: expanded
     note_display: above
-    note_text: 'Dados com o processamento completos: de Agosto a Novembro/2020, para
+    note_text: 'Dados com o processamento completos: de Agosto a Dezembro/2020, para
       cargas FCL (Full Container Load). Acuracidade das informações: até 70%.'
     listen:
       Data Embarque: big_data_expo_real_exportador.data_embarque_month
@@ -82,6 +87,7 @@
       big_data_expo_real_exportador.nome_exportador: "-NULL"
     sorts: [big_data_expo_real_exportador.count_mar_id desc]
     limit: 500
+    total: true
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -107,8 +113,12 @@
       big_data_expo_real_exportador.count_mar_id:
         is_active: true
         palette:
-          palette_id: 471a8295-662d-46fc-bd2d-2d0acd370c1e
+          palette_id: a26e2b9c-08f2-998b-a738-181ba285401a
           collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+          custom_colors:
+          - "#e0aaff"
+          - "#9d4edd"
+          - "#5a189a"
     series_text_format:
       big_data_expo_real_exportador.nf_nome_emissor:
         align: left

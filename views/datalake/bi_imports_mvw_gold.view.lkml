@@ -126,16 +126,6 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.detalhes ;;
   }
 
-  dimension: d.c20 {
-    type: number
-    sql: ${TABLE}.c20 ;;
-  }
-
-  dimension: d.c40 {
-    type: number
-    sql: ${TABLE}.c40 ;;
-  }
-
   dimension: qtde_fcl {
     type: number
     sql: ${TABLE}.qtde_fcl ;;
@@ -181,6 +171,7 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.vlfrete ;;
   }
 
+
 ########################## ----> Itens adicionados / alterados <---- ##########################
 
   dimension: mais_de_um_tipo {
@@ -188,6 +179,37 @@ view: bi_imports_mvw_gold {
     sql:  CASE WHEN (${TABLE}.c20 <> 0 and ${TABLE}.c40 <> 0) THEN "A"
           else "B" end
     ;;
+  }
+
+
+  dimension: nrcemercante {
+    type: number
+    sql: ${TABLE}.nrcemercante ;;
+  }
+
+  dimension: nrcemaster {
+    type: string
+    sql: ${TABLE}.nrcemaster ;;
+  }
+
+  dimension: nrmanifesto {
+    type: string
+    sql: ${TABLE}.nrmanifesto ;;
+  }
+
+  dimension: cdmoedafretetotalbld {
+    type: string
+    sql: ${TABLE}.cdmoedafretetotalbld ;;
+  }
+
+  dimension: vlfretetotalbld {
+    type: string
+    sql: ${TABLE}.vlfretetotalbld ;;
+  }
+
+  dimension: nrblconhecimento {
+    type: string
+    sql: ${TABLE}.nrblconhecimento ;;
   }
 
   measure: mais_de_um_tipo_sim {
@@ -215,6 +237,31 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.c40 ;;
   }
 
+  dimension: d_c20 {
+    type: number
+    sql: ${TABLE}.c20 ;;
+  }
+
+  dimension: c20_parcial {
+    type: number
+    sql: ${TABLE}.c20_parcial ;;
+  }
+
+  dimension: d_c40 {
+    type: number
+    sql: ${TABLE}.c40 ;;
+  }
+
+  dimension: c40_parcial {
+    type: number
+    sql: ${TABLE}.c40_parcial ;;
+  }
+
+  dimension: teus_parcial {
+    type: number
+    sql: ${TABLE}.teus_parcial ;;
+  }
+
   measure: teus {
     type: sum
     sql: ${TABLE}.teus ;;
@@ -230,6 +277,27 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.c40 ;;
   }
 
+  measure: total_teus {
+    type: sum
+    value_format: "#;(#)"
+    sql: ${TABLE}.teus_parcial  ;;
+  }
+
+  measure: total_c20 {
+    type: sum
+    sql: ${TABLE}.c20_parcial  ;;
+  }
+
+  measure: total_c40 {
+    type: sum
+    sql: ${TABLE}.c40_parcial  ;;
+  }
+
+  dimension: rota {
+    type: string
+    sql: ${TABLE}."nmportoorigem"  || ' >> ' ||  ${TABLE}."nmportodestino";;
+  }
+
   measure: vlfrete {
     type: sum
     value_format: "$#.00;($#.00)"
@@ -242,44 +310,45 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}."vlfretetotal" ;;
   }
 
-  measure: vl_frete_por_TEU {
+  measure: media_frete_TEU {
     type: average
     value_format: "$#.00;($#.00)"
     filters: [teus_dimension: ">0"]
-    sql: ${TABLE}.vlfrete /  ${TABLE}."teus" ;;
+    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."teus" ;;
   }
 
-  measure: vl_frete_por_c20 {
+  measure: media_frete_c20 {
     type: average
     value_format: "$#.00;($#.00)"
     filters: [c20_dimension: ">0"]
-    sql: ${TABLE}."vlfrete" /  ${TABLE}."c20" ;;
+    sql: ((${TABLE}."vlfretetotal" /  ${TABLE}."teus") * ${TABLE}."c20") / ${TABLE}."c20";;
   }
 
-  measure: vl_frete_por_c40 {
+  measure: media_frete_c40 {
     type: average
     value_format: "$#.00;($#.00)"
     filters: [c40_dimension: ">0"]
-    sql: ${TABLE}."vlfrete" /  ${TABLE}."c40" ;;
+    sql: (((${TABLE}."vlfretetotal" /  ${TABLE}."teus") * 2) * ${TABLE}."c40") / ${TABLE}."c40";;
   }
 
-  dimension: rota {
-    type: string
-    sql: ${TABLE}."nmportoorigem"  || ' >> ' ||  ${TABLE}."nmportodestino";;
-  }
-
- measure: media_vl_frete_por_c20 {
+    measure: media_frete_TEU_real {
     type: average
     value_format: "$#.00;($#.00)"
-    filters: [c20_dimension: ">0"]
-    sql: ((${TABLE}."vlfrete" /  ${TABLE}."teus") * ${TABLE}."c20") / ${TABLE}."c20";;
+    filters: [teus_parcial: ">0"]
+    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."teus_parcial" ;;
   }
 
-  measure: media_vl_frete_por_c40 {
+  measure: media_frete_c20_real {
     type: average
     value_format: "$#.00;($#.00)"
-    filters: [c40_dimension: ">0"]
-    sql: (((${TABLE}."vlfrete" /  ${TABLE}."teus") * 2) * ${TABLE}."c40") / ${TABLE}."c40";;
+    filters: [c20_parcial: ">0"]
+    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."c20_parcial";;
   }
 
+  measure: media_frete_c40_real {
+    type: average
+    value_format: "$#.00;($#.00)"
+    filters: [c40_parcial: ">0"]
+    sql: ${TABLE}."vlfretetotal" /  ${TABLE}."c40_parcial";;
+  }
 }
