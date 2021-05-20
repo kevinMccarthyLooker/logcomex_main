@@ -78,6 +78,7 @@ include: "/**/clientes_acessos_plataforma.view.lkml"
 include: "/**/usuarios_clientes_acessos_plataforma.view.lkml"
 include: "/**/trials_acessos_plataforma.view.lkml"
 include: "/**/health_score_2021.view.lkml"
+include: "/**/**/status_integracao.view.lkml"
 
 
 datagroup: internal_only_datagroup {
@@ -95,6 +96,7 @@ datagroup: hs_datagroup {
   description: "DG do Health Score, atualiza a cada 12h"
 }
 
+explore: status_integracao {}
 explore: usuarios_clientes_acessos_plataforma {}
 explore: clientes_trials_acessos_plataforma {}
 explore: clientes_acessos_plataforma {}
