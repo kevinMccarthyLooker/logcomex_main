@@ -1,6 +1,6 @@
 view: antaqxmaritimo {
   derived_table: {
-    indexes: ["destino"]
+    indexes: ["dtoperacao"]
     persist_for: "24 hours"
     sql: select destino,  mes,ano,sum(teu) as Teus_Antaq, (SELECT sum(teus) as Teus_Log
                                         from view_AntaqMaritimo
