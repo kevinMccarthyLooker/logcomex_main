@@ -70,6 +70,11 @@ view: status_integracao {
 
   measure: count {
     type: count
+    drill_fields: [details*]
+  }
+
+  set: details {
+    fields: [customer_id,name,id_hubspot_customer,id_omie_customer,tipo_plano]
   }
 
   measure: count_customers {
