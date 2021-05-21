@@ -4,7 +4,6 @@ view: antaqxmaritimo_cab_emb {
                                         from view_AntaqMaritimo
                                         where dtoperacao >='2020-01-01'
                                         and categoriacarga = 'N'
-                                        and tptrafego != "0B"
                                         and cdportocarregamento = c.origem
                                         and LPAD(EXTRACT(MONTH FROM dtoperacao)::TEXT, 2, '0') = a.mes
                                         and extract(year from dtoperacao) = a.ano)
