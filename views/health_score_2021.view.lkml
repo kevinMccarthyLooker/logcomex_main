@@ -66,7 +66,7 @@ view: health_score_2021 {
   dimension: data_consulta_formatted {
     #group_label: "Created" label: "Date"
     sql: ${data_consulta_date} ;;
-    html: {{ rendered_value | date: "%b %d, %y" }};;
+    html: {{ rendered_value | date: "%d/%m/%yyyy" }};;
   }
 
   dimension: pontos_crescimento_cliente {
