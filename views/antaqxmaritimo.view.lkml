@@ -7,7 +7,7 @@ view: antaqxmaritimo {
                                         where dtoperacao >='2020-01-01'
                                         and categoriacarga = 'I'
                                         and cdportodescarregamento like 'BR%'
-                                        and tptrafego != "0B"
+                                        and tptrafego != '0B'
                                         and cdportodescarregamento = c.destino
                                         and LPAD(EXTRACT(MONTH FROM dtoperacao)::TEXT, 2, '0') = a.mes
                                         and extract(year from dtoperacao) = a.ano)
