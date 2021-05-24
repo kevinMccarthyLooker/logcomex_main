@@ -88,13 +88,13 @@ datagroup: internal_only_datagroup {
   description: " DG Principal do Modelo Internal Only"
 }
 
-#datagroup: hs_datagroup {
-#  #sql_trigger: select CURRENT_DATE ;; a cada 24 horas
-#  sql_trigger: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) / (12*60*60)) ;; # a cada 12 horas
-#  max_cache_age: "13 hours"
-#  label: "hs_datagroup"
-#  description: "DG do Health Score, atualiza a cada 12h"
-#}
+datagroup: hs_datagroup {
+  #sql_trigger: select CURRENT_DATE ;; a cada 24 horas
+  sql_trigger: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) / (12*60*60)) ;; # a cada 12 horas
+  max_cache_age: "13 hours"
+  label: "hs_datagroup"
+  description: "DG do Health Score, atualiza a cada 12h"
+}
 
 explore: status_integracao {}
 explore: usuarios_clientes_acessos_plataforma {}
@@ -690,22 +690,21 @@ explore: Robos_Tracking {
 
 }
 
-explore: health_score_2021 {
-  label: "Cs Novo Health Score"
-  #persist_with: hs_datagroup
+explore: cs_novo_health_score {
+  persist_with: hs_datagroup
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
 
   join: customer {
-    sql_on: ${health_score_2021.customer_id} = ${customer.id} ;;
-    relationship: many_to_one
+    sql_on: ${cs_novo_health_score.customer_id} = ${customer.id} ;;
+    relationship: one_to_one
     type: inner
   }
 
- # join: health_score_2021 {
- #    sql_on: ${health_score_2021.customer_id} = ${customer.id} ;;
- #    relationship: one_to_many
- #    type: inner
- #  }
+  join: health_score_2021 {
+     sql_on: ${health_score_2021.customer_id} = ${customer.id} ;;
+     relationship: one_to_many
+     type: inner
+   }
 
   join: customer_info{
     sql_on: ${customer.id}=${customer_info.customer_id} ;;
