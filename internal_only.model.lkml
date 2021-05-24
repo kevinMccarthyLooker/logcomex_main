@@ -691,20 +691,21 @@ explore: Robos_Tracking {
 }
 
 explore: cs_novo_health_score {
+  view_name: health_score_2021
   persist_with: hs_datagroup
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
 
   join: customer {
-    sql_on: ${cs_novo_health_score.customer_id} = ${customer.id} ;;
-    relationship: one_to_one
+    sql_on: ${health_score_2021.customer_id} = ${customer.id} ;;
+    relationship: many_to_one
     type: inner
   }
 
-  join: health_score_2021 {
-     sql_on: ${health_score_2021.customer_id} = ${customer.id} ;;
-     relationship: one_to_many
-     type: inner
-   }
+#  join: health_score_2021 {
+#     sql_on: ${health_score_2021.customer_id} = ${customer.id} ;;
+#     relationship: one_to_many
+#     type: inner
+#   }
 
   join: customer_info{
     sql_on: ${customer.id}=${customer_info.customer_id} ;;
