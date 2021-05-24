@@ -186,7 +186,7 @@ explore: consignee_radar {
   join: certificate {
     #sql_on: ${consignee.cert_id}=${certificate.id}
     #    and ${certificate.customer_id}=${consignee.customer_id};;
-    sql_on: ${}${certificate_consignee_radar.certificate_id} = ${certificate.id}  ;;
+    sql_on: ${certificate_consignee_radar.certificate_id} = ${certificate.id}  ;;
     sql_where: ${certificate.valid_until_date} > now() ;;
     relationship: many_to_one
     type: inner
