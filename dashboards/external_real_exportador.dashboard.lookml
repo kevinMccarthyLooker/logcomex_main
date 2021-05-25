@@ -11,7 +11,7 @@
     type: looker_grid
     fields: [big_data_expo_real_exportador.count_mar_id, big_data_expo_real_exportador.nf_nome_emissor_2]
     filters:
-      big_data_expo_real_exportador.nf_nome_emissor_2: NOT NULL
+      ##big_data_expo_real_exportador.nf_nome_emissor_2: NOT NULL
     sorts: [big_data_expo_real_exportador.count_mar_id desc]
     limit: 500
     total: true
