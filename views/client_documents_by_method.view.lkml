@@ -41,7 +41,11 @@ view: client_documents_by_method {
 
   dimension: api_origem {
     type: string
-    sql: ${TABLE}."api_origem" ;;
+    sql:
+    case
+    when ${TABLE}."api_origem" = 'Outra' then 'No Cache'
+    else 'Cache'
+    end ;;
   }
 
   dimension: api_sucess {
