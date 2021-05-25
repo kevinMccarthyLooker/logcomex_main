@@ -1,6 +1,9 @@
 connection: "googleanalytics"
 
 include: "/**/**/events_20210518.view"
+include: "/**/**/view_events_ga.view"
+
+explore: view_events_ga {}
 
 explore: events_20210518 {
   #hidden: no
