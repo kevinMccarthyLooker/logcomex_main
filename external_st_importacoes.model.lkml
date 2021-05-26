@@ -9,7 +9,9 @@ include: "/**/**/st_estrutura_mercadologica.view"
 #include: "/**/**/st_importacoes_brinquedos.dashboard.lookml"
 #include: "/**/**/st_importacoes_utilidades.dashboard.lookml"
 
-explore: st_estrutura_mercadologica {}
+explore: st_estrutura_mercadologica {
+  sql_always_where: ${dsc_departamento} not in ('CAMA MESA & BANHO') ;;
+}
 
 explore: st_importacoes_fase01 {}
 
