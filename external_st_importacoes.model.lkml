@@ -10,7 +10,7 @@ include: "/**/**/st_estrutura_mercadologica.view"
 #include: "/**/**/st_importacoes_utilidades.dashboard.lookml"
 
 explore: st_estrutura_mercadologica {
-  sql_always_where: ${cod_departamento}_departamento} not in (99);;# ('CAMA MESA & BANHO') ;;
+  sql_always_where: ${cod_departamento} not in (99);;# ('CAMA MESA & BANHO') ;;
 }
 
 explore: st_importacoes_fase01 {}
