@@ -28,6 +28,26 @@ view: hubspot_stage_cs_deal {
     sql: ${TABLE}."contract_time" ;;
   }
 
+  dimension: contract_time_seq {
+    type: number
+    sql:
+    case
+    when ${contract_time} = 'Até 03 meses' then 0
+    when ${contract_time} = '03 - 06 meses' then 1
+    when ${contract_time} = '06 - 1 ano' then 2
+    when ${contract_time} = '1 ano' then 3
+    when ${contract_time} = '1 ano a 1 ano e 06 meses' then 4
+    when ${contract_time} = '1 ano e 06 meses a 2 anos' then 5
+    when ${contract_time} = '2 anos' then 6
+    when ${contract_time} = '2 anos a 2 anos e 06 meses' then 7
+    when ${contract_time} = '2 anos e 06 meses a 3 anos' then 8
+    when ${contract_time} = '3 anos' then 9
+    else null
+    end
+    ;;
+
+  }
+
   dimension: contract_time_made {
     type: string
     sql: ${TABLE}."contract_time_made" ;;
@@ -45,6 +65,20 @@ view: hubspot_stage_cs_deal {
       year
     ]
     sql: ${TABLE}."created_at" ;;
+  }
+
+  dimension_group: deleted {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."deleted_at" ;;
   }
 
   dimension: customer_api_relations_id {

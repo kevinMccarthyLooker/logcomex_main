@@ -25,9 +25,10 @@
         _kind_hint: measure, _type_hint: number}, {table_calculation: mediana_20,
         label: Mediana 20', expression: "(((${bi_exports_mvw_gold.mar_vlfrete}/${bi_exports_mvw_gold.mar_teus})*${bi_exports_mvw_gold.mar_c20})/${bi_exports_mvw_gold.mar_c20})",
         value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
-        _type_hint: number}, {table_calculation: mediana_40, label: Mediana 40', expression: "(((${bi_exports_mvw_gold.mar_vlfrete}/${bi_exports_mvw_gold.mar_teus})*(2*${bi_exports_mvw_gold.mar_c40}))/${bi_exports_mvw_gold.mar_c40})",
+        _type_hint: number, is_disabled: true}, {table_calculation: mediana_40, label: Mediana
+          40', expression: "(((${bi_exports_mvw_gold.mar_vlfrete}/${bi_exports_mvw_gold.mar_teus})*(2*${bi_exports_mvw_gold.mar_c40}))/${bi_exports_mvw_gold.mar_c40})",
         value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
-        _type_hint: number}]
+        _type_hint: number, is_disabled: true}]
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -60,7 +61,9 @@
       bi_exports_mvw_gold.mar_vl_frete_por_TEU: TEU
       bi_exports_mvw_gold.media_vl_frete_por_c20: Média 20'
       bi_exports_mvw_gold.media_vl_frete_por_c40: Média 40'
-    series_column_widths: {}
+    series_column_widths:
+      bi_exports_mvw_gold.media_vl_frete_por_c20: 100
+      bi_exports_mvw_gold.media_vl_frete_por_c40: 100
     series_cell_visualizations:
       bi_exports_mvw_gold.mar_vl_frete_por_c20:
         is_active: false
@@ -144,16 +147,16 @@
     defaults_version: 1
     series_types: {}
     note_state: collapsed
-    note_display: hover
+    note_display: above
     note_text: 'Valores expressados em USD / Apenas containers tipo DRY e REEFER
 
       '
     listen:
       País De Destino: bi_exports_mvw_gold.mvw_pais_de_destino
-      Data Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
       Porto Origem: bi_exports_mvw_gold.mvw_porto_origem
       Porto Destino: bi_exports_mvw_gold.mvw_porto_destino
-    row: 0
+      Data Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
+    row: 8
     col: 0
     width: 13
     height: 6
@@ -172,9 +175,10 @@
     limit: 500
     dynamic_fields: [{table_calculation: mediana_20, label: Mediana 20', expression: "(((${bi_exports_mvw_gold.mar_vlfrete}/${bi_exports_mvw_gold.mar_teus})*${bi_exports_mvw_gold.mar_c20})/${bi_exports_mvw_gold.mar_c20})",
         value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
-        _type_hint: number}, {table_calculation: mediana_40, label: Mediana 40', expression: "(((${bi_exports_mvw_gold.mar_vlfrete}/${bi_exports_mvw_gold.mar_teus})*(2*${bi_exports_mvw_gold.mar_c40}))/${bi_exports_mvw_gold.mar_c40})",
+        _type_hint: number, is_disabled: true}, {table_calculation: mediana_40, label: Mediana
+          40', expression: "(((${bi_exports_mvw_gold.mar_vlfrete}/${bi_exports_mvw_gold.mar_teus})*(2*${bi_exports_mvw_gold.mar_c40}))/${bi_exports_mvw_gold.mar_c40})",
         value_format: !!null '', value_format_name: !!null '', _kind_hint: measure,
-        _type_hint: number}]
+        _type_hint: number, is_disabled: true}]
     show_view_names: false
     show_row_numbers: true
     transpose: false
@@ -204,7 +208,9 @@
       bi_exports_mvw_gold.mar_vl_frete_por_c40: Média 40'
       bi_exports_mvw_gold.mar_vl_frete_por_TEU: TEU
       bi_exports_mvw_gold.mvw_pais_de_destino: País
-    series_column_widths: {}
+    series_column_widths:
+      bi_exports_mvw_gold.mar_vl_frete_por_c20: 100
+      bi_exports_mvw_gold.mar_vl_frete_por_c40: 100
     series_cell_visualizations:
       bi_exports_mvw_gold.mar_vl_frete_por_c20:
         is_active: false
@@ -276,16 +282,16 @@
     defaults_version: 1
     series_types: {}
     note_state: collapsed
-    note_display: hover
+    note_display: above
     note_text: 'Valores expressados em USD / Apenas containers tipo DRY e REEFER
 
       '
     listen:
       País De Destino: bi_exports_mvw_gold.mvw_pais_de_destino
-      Data Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
       Porto Origem: bi_exports_mvw_gold.mvw_porto_origem
       Porto Destino: bi_exports_mvw_gold.mvw_porto_destino
-    row: 0
+      Data Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
+    row: 8
     col: 13
     width: 11
     height: 6
@@ -319,7 +325,7 @@
     stacking: ''
     limit_displayed_rows: false
     legend_position: center
-    point_style: none
+    point_style: circle
     show_value_labels: true
     label_density: 25
     x_axis_scale: auto
@@ -328,32 +334,44 @@
     interpolation: linear
     color_application:
       collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
-      palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825
+      custom:
+        id: 873b29fc-8438-211d-f0bc-5be79d0db70a
+        label: Custom
+        type: continuous
+        stops:
+        - color: "#ffffff"
+          offset: 0
+        - color: "#3EB0D5"
+          offset: 50
+        - color: "#5a189a"
+          offset: 100
       options:
         steps: 5
         reverse: true
-    y_axes: [{label: '', orientation: left, series: [{axisId: bi_exports_mvw_gold.mar_vl_frete_por_c20,
-            id: bi_exports_mvw_gold.mar_vl_frete_por_c20, name: 20&#39;}, {axisId: bi_exports_mvw_gold.mar_vl_frete_por_c40,
-            id: bi_exports_mvw_gold.mar_vl_frete_por_c40, name: 40&#39;}, {axisId: bi_exports_mvw_gold.mar_vl_frete_por_TEU,
-            id: bi_exports_mvw_gold.mar_vl_frete_por_TEU, name: TEU}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}, {label: !!null '', orientation: right, series: [{axisId: bi_exports_mvw_gold.mar_teus,
-            id: bi_exports_mvw_gold.mar_teus, name: TEU&#39;s}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}]
+    y_axes: [{label: '', orientation: left, series: [{axisId: bi_exports_mvw_gold.media_vl_frete_por_c20,
+            id: bi_exports_mvw_gold.media_vl_frete_por_c20, name: Media Vl Frete Por
+              C20}, {axisId: bi_exports_mvw_gold.media_vl_frete_por_c40, id: bi_exports_mvw_gold.media_vl_frete_por_c40,
+            name: Media Vl Frete Por C40}], showLabels: true, showValues: true, unpinAxis: false,
+        tickDensity: default, type: linear}, {label: !!null '', orientation: right,
+        series: [{axisId: bi_exports_mvw_gold.mar_teus, id: bi_exports_mvw_gold.mar_teus,
+            name: TEU&#39;s}], showLabels: true, showValues: true, unpinAxis: false,
+        tickDensity: default, type: linear}]
     x_axis_label: Data de Embarque
     series_types:
       bi_exports_mvw_gold.mar_teus: column
     series_colors:
-      bi_exports_mvw_gold.media_vl_frete_por_c40: "#91beff"
+      bi_exports_mvw_gold.media_vl_frete_por_c40: "#ff6d00"
+      bi_exports_mvw_gold.media_vl_frete_por_c20: "#ff9e00"
     series_labels:
       bi_exports_mvw_gold.mvw_porto_origem: Porto Origem
       bi_exports_mvw_gold.mvw_porto_destino: Porto Destino
       bi_exports_mvw_gold.mar_vl_frete_por_c20: 20'
-      bi_exports_mvw_gold.mar_teus: TEU's
+      bi_exports_mvw_gold.mar_teus: TEUS
       bi_exports_mvw_gold.mar_vl_frete_por_c40: 40'
       bi_exports_mvw_gold.mar_vl_frete_por_TEU: TEU
       bi_exports_mvw_gold.mvw_pais_de_destino: País de Destino
+      bi_exports_mvw_gold.media_vl_frete_por_c20: Média C20
+      bi_exports_mvw_gold.media_vl_frete_por_c40: Média C40
     show_row_numbers: true
     transpose: false
     truncate_text: true
@@ -384,7 +402,7 @@
         align: left
       bi_exports_mvw_gold.mar_vl_frete_por_c20:
         align: left
-      bi_exports_mvw_gold.mar_teus_total:
+      bi_exports_mvw_gold.mar_teus:
         align: left
       bi_exports_mvw_gold.mar_vl_frete_por_TEU:
         align: left
@@ -411,16 +429,16 @@
     totals_color: "#808080"
     defaults_version: 1
     note_state: collapsed
-    note_display: hover
+    note_display: above
     note_text: 'Valores expressados em USD / Apenas containers tipo DRY e REEFER
 
       '
     listen:
       País De Destino: bi_exports_mvw_gold.mvw_pais_de_destino
-      Data Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
       Porto Origem: bi_exports_mvw_gold.mvw_porto_origem
       Porto Destino: bi_exports_mvw_gold.mvw_porto_destino
-    row: 6
+      Data Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
+    row: 0
     col: 0
     width: 24
     height: 8
@@ -428,7 +446,7 @@
   - name: Data Embarque
     title: Data Embarque
     type: field_filter
-    default_value: 3 month
+    default_value: 6 month
     allow_multiple_values: true
     required: false
     ui_config:

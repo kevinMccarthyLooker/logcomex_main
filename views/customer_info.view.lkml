@@ -26,6 +26,26 @@ view: customer_info {
     sql: ${TABLE}."branches_activity" ;;
   }
 
+  dimension: city {
+    type: string
+    sql: ${TABLE}."city" ;;
+  }
+
+  dimension: country {
+    type: string
+    sql: ${TABLE}."country" ;;
+  }
+
+  dimension: doc_number {
+    type: string
+    sql: ${TABLE}."doc_number" ;;
+  }
+
+  dimension: foreign_company {
+    type: yesno
+    sql: ${TABLE}."foreign_company" ;;
+  }
+
   dimension_group: hub_atualizado_em {
     type: time
     timeframes: [

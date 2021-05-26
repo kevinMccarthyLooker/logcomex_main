@@ -28,7 +28,7 @@ include: "/**/customer_api_relations.view.lkml"
 include: "/**/billing_contract_omie.view.lkml"
 include: "/**/service_order_omie.view.lkml"
 include: "/**/financial_securities_omie.view.lkml"
-include: "/**/NPS.view.lkml"
+include: "/**/nps_04_2020.view.lkml"
 include: "/**/nps_08_2020.view.lkml"
 include: "/**/nps_11_2020.view.lkml"
 include: "/**/clientes_ativos_por_mes.view.lkml"
@@ -71,6 +71,15 @@ include: "/**/trials_ativos_mes.view.lkml"
 include: "/**/clientes_sem_exportacao.view.lkml"
 include: "/**/hubspot_stage_cs_deal.view.lkml"
 include: "/**/hubspot_tickets.view.lkml"
+include: "/**/nps_02_2021.view.lkml"
+include: "/**/quick_ratio.view.lkml"
+include: "/**/clientes_trials_acessos_plataforma.view.lkml"
+include: "/**/clientes_acessos_plataforma.view.lkml"
+include: "/**/usuarios_clientes_acessos_plataforma.view.lkml"
+include: "/**/trials_acessos_plataforma.view.lkml"
+include: "/**/health_score_2021.view.lkml"
+include: "/**/**/status_integracao.view.lkml"
+
 
 datagroup: internal_only_datagroup {
   sql_trigger: select count(*) from public.customer_plan ;;
@@ -79,17 +88,23 @@ datagroup: internal_only_datagroup {
   description: " DG Principal do Modelo Internal Only"
 }
 
-datagroup: hs_datagroup {
-  #sql_trigger: select CURRENT_DATE ;; a cada 24 horas
-  sql_trigger: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) / (12*60*60)) ;; # a cada 12 horas
-  max_cache_age: "13 hours"
-  label: "hs_datagroup"
-  description: "DG do Health Score, atualiza a cada 12h"
-}
+#datagroup: hs_datagroup {
+#  #sql_trigger: select CURRENT_DATE ;; a cada 24 horas
+#  sql_trigger: SELECT FLOOR(EXTRACT(epoch from (NOW() - interval '3' hour)) / (12*60*60)) ;; # a cada 12 horas
+#  max_cache_age: "13 hours"
+#  label: "hs_datagroup"
+#  description: "DG do Health Score, atualiza a cada 12h"
+#}
 
-explore: clientes_sem_exportacao{
+explore: status_integracao {}
+explore: usuarios_clientes_acessos_plataforma {}
+explore: clientes_trials_acessos_plataforma {}
+explore: clientes_acessos_plataforma {}
+explore: trials_acessos_plataforma {}
 
-}
+explore: clientes_sem_exportacao{}
+
+explore: quick_ratio {}
 
 explore: follow_up_status {
   label: "Tempo no Status - Tracking"
@@ -169,8 +184,9 @@ explore: consignee_radar {
   }
 
   join: certificate {
-    sql_on: ${consignee.cert_id}=${certificate.id}
-        and ${certificate.customer_id}=${consignee.customer_id};;
+    #sql_on: ${consignee.cert_id}=${certificate.id}
+    #    and ${certificate.customer_id}=${consignee.customer_id};;
+    sql_on: ${certificate_consignee_radar.certificate_id} = ${certificate.id}  ;;
     sql_where: ${certificate.valid_until_date} > now() ;;
     relationship: many_to_one
     type: inner
@@ -373,8 +389,8 @@ explore: usage {
 
   }
 
-  join: nps {
-    sql_on: ${users.email}=${nps.email} ;;
+  join: nps_04_2020 {
+    sql_on: ${users.email}=${nps_04_2020.email} ;;
     relationship: one_to_many
     type: left_outer
   }
@@ -387,6 +403,12 @@ explore: usage {
 
   join: nps_11_2020 {
     sql_on: ${users.email}=${nps_11_2020.email} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: nps_02_2021 {
+    sql_on: ${users.email}=${nps_02_2021.email} ;;
     relationship: one_to_many
     type: left_outer
   }
@@ -630,6 +652,30 @@ explore: Logistica_Internacional {
     type: left_outer
     relationship: one_to_many
   }
+
+  join: tracking_maritimo_aereo {
+    sql_on: ${extra_data_container.bl} = ${tracking_maritimo_aereo.documento} ;;
+    type: left_outer
+    relationship: one_to_many
+  }
+
+  join: customer {
+    sql_on: ${customer.id} = ${tracking_maritimo_aereo.customer_id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
+
+  join: customer_plan {
+    sql_on: ${customer_plan.customer_id} = ${customer.id};;
+    type: left_outer
+    relationship: one_to_many
+  }
+
+  join: plan_complete {
+    sql_on: ${plan_complete.id} = ${customer_plan.plan_complete_id} ;;
+    type: left_outer
+    relationship: many_to_one
+  }
 }
 
 explore: Robos_Tracking {
@@ -645,14 +691,21 @@ explore: Robos_Tracking {
 }
 
 explore: cs_novo_health_score {
-  persist_with: hs_datagroup
+  view_name: health_score_2021
+  #persist_with: hs_datagroup
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
 
   join: customer {
-    sql_on: ${cs_novo_health_score.customer_id} = ${customer.id} ;;
-    relationship: one_to_one
+    sql_on: ${health_score_2021.customer_id} = ${customer.id} ;;
+    relationship: many_to_one
     type: inner
   }
+
+#  join: health_score_2021 {
+#     sql_on: ${health_score_2021.customer_id} = ${customer.id} ;;
+#     relationship: one_to_many
+#     type: inner
+#   }
 
   join: customer_info{
     sql_on: ${customer.id}=${customer_info.customer_id} ;;
@@ -674,6 +727,12 @@ explore: cs_novo_health_score {
 
   join: nps_11_2020 {
     sql_on: ${users.email}=${nps_11_2020.email} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: nps_02_2021 {
+    sql_on: ${users.email}=${nps_02_2021.email} ;;
     relationship: one_to_many
     type: left_outer
   }

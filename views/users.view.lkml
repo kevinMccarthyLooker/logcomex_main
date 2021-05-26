@@ -34,6 +34,50 @@ view: users {
     sql: ${TABLE}."created_at" ;;
   }
 
+  dimension: twofactor_code {
+    type: string
+    sql: ${TABLE}."twofactor_code" ;;
+  }
+
+  dimension_group: twofactor_valid_until {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."twofactor_valid_until" ;;
+  }
+
+  dimension: twofactor_required {
+    type: yesno
+    sql: ${TABLE}."twofactor_required" ;;
+  }
+
+  dimension: twofactor_code_verified {
+    type: string
+    sql: ${TABLE}."twofactor_code_verified" ;;
+  }
+
+  dimension_group: twofactor_verified_at {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."twofactor_verified_at" ;;
+  }
+
+
   dimension: customer_profile_default_id {
     type: number
     sql: ${TABLE}."customer_profile_default_id" ;;

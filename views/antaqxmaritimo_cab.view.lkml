@@ -2,7 +2,7 @@ view: antaqxmaritimo_cab {
   derived_table: {
     sql: select destino,  mes,ano,sum(teu) as Teus_Antaq, (SELECT sum(teus) as Teus_Log
                                         from view_AntaqMaritimo
-                                        where dtoperacao >='2019-01-01'
+                                        where dtoperacao >='2020-01-01'
                                         and categoriacarga = 'N'
                                         and cdportodescarregamento = c.destino
                                         and LPAD(EXTRACT(MONTH FROM dtoperacao)::TEXT, 2, '0') = a.mes

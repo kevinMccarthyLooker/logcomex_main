@@ -1,7 +1,8 @@
 view: consumo_plano_clientes_search_diario {
   # Or, you could make this view a derived table, like this:
   derived_table: {
-    sql:select *,
+    sql:
+      select *,
       (case when qq1.quantidade_de_pesquisas_plano = 0 or quantidade_de_pesquisas_plano = 9999999 then true else false end) as pesquisas_ilimitadas,
       (case when qq1.busca_perfil_empresas_plano = 0 or qq1.busca_perfil_empresas_plano = 9999999 then true else false end) as perfil_ilimitados,
       (case when qq1.periodo between qq1.data_inicio_trial and qq1.data_fim_trial then true else false end) as consulta_trial,
@@ -35,8 +36,9 @@ view: consumo_plano_clientes_search_diario {
       sum(case when fh.total_lines > coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) then 1 else 0 end) as qtd_extrapoled,
       coalesce(avg(case when fh.total_lines > coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit) then fh.total_lines - coalesce(pi_custom.search_lines_limit , pi_default.search_lines_limit)  else null end),0) as avg_extrapoled
       from filter_history fh
-      inner join user_profile_customer upc on upc.user_id = fh.user_id and fh.customer_id = upc.customer_id
+      --inner join user_profile_customer upc on upc.user_id = fh.user_id and fh.customer_id = upc.customer_id
       inner join customer c2 on c2.id = fh.customer_id
+      inner join users u on u.id = fh.user_id
       inner join customer_plan cp on cp.customer_id = c2.id
       inner join plan_complete pc2 on pc2.id = cp.plan_complete_id
       inner join plan on plan.id = pc2.plan_id
@@ -48,8 +50,9 @@ view: consumo_plano_clientes_search_diario {
       and c2.deleted_at is null -- verifica se foi deletado
       and c2.fake_customer is false -- verifica se é cliente teste
       and cp.deleted_at is null -- verifica se o plano foi deletado
-      --and c2.id = 2102  --  portal 316 banrisul
-      and upc.logcomex_fake is false -- nao contabiliza pesquisas de usuarios logcomex
+      --and c2.id = 3163  --  portal 316 banrisul
+      and u.email not like '%@logcomex.com'
+      --and upc.logcomex_fake is false -- nao contabiliza pesquisas de usuarios logcomex
       group by id_table,ano,mes, periodo, fh.customer_id, nome,quantidade_de_pesquisas_plano, busca_perfil_empresas_plano, qtd_excel_plano,
       excel_lines_plano, search_lines_plano, plano, data_inicio, data_fim, data_inicio_trial, data_fim_trial
       order by periodo) qq1

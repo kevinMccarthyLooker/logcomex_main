@@ -106,10 +106,15 @@ view: customer {
     type: string
     sql:  CASE WHEN (customer.executive_id = 39) THEN 'Renan Goncalves'
               WHEN (customer.executive_id = 44) THEN 'Irene Lima'
+              WHEN (customer.executive_id = 23) THEN 'Jonas Martins'
+              WHEN (customer.executive_id = 30) THEN 'Felipe Bezerra'
               WHEN (customer.executive_id = 17) THEN 'Elaine Ribeiro'
               WHEN (customer.executive_id = 16) THEN 'Nickelson'
               WHEN (customer.executive_id = 37) THEN 'Jessica Moreira'
               WHEN (customer.executive_id = 52) THEN 'Mirele Benato'
+              WHEN (customer.executive_id = 56) THEN 'Milena Biffi'
+              WHEN (customer.executive_id = 48) THEN 'Ianaomy Nascimento'
+              WHEN (customer.executive_id = 49) THEN 'Jheniffer Cruz'
               WHEN (customer.executive_id = 59) THEN 'Valeria Antunes'
               WHEN (customer.executive_id = 50) THEN 'Jessica Steinheusen'
               WHEN (customer.executive_id = 10) THEN 'Andreza Sandim'
@@ -117,22 +122,36 @@ view: customer {
               WHEN (customer.executive_id = 55) THEN 'Danilo'
               WHEN (customer.executive_id = 36) THEN 'Gabriela'
               WHEN (customer.executive_id = 72) THEN 'Sthephanny Andrade'
+              WHEN (customer.executive_id = 63) THEN 'Carolyne Rocha'
+              WHEN (customer.executive_id = 64) THEN 'Diego Sandeski'
               WHEN (customer.executive_id = 71) THEN 'Rafael Gehrke'
+              WHEN (customer.executive_id = 19) THEN 'Kamilla Scheidt'
               WHEN (customer.executive_id = 75) THEN 'Maxi Mendes'
               WHEN (customer.executive_id = 76) THEN 'Leandro Oliveira'
+              WHEN (customer.executive_id = 78) THEN 'Luana Nascimento'
               WHEN (customer.executive_id = 11) THEN 'Laryssa Andrade'
               WHEN (customer.executive_id = 12) THEN 'Daniela Vasconcelos'
               WHEN (customer.executive_id = 41) THEN 'Caroline Bilibio'
               WHEN (customer.executive_id = 43) THEN 'Gilson Almeida'
               WHEN (customer.executive_id = 77) THEN 'Bruna Soares'
               WHEN (customer.executive_id = 57) THEN 'Kathia Festa'
+              WHEN (customer.executive_id = 80) THEN 'Bruno Dias'
               WHEN (customer.executive_id = 81) THEN 'Edgar Oliveira'
+              WHEN (customer.executive_id = 84) THEN 'Lucas Mansur'
               WHEN (customer.executive_id = 89) THEN 'Natalia Mariano'
               WHEN (customer.executive_id = 91) THEN 'Clarisse Souza'
               WHEN (customer.executive_id = 92) THEN 'Thais Costa'
               WHEN (customer.executive_id = 93) THEN 'Roberta Miglioli'
               WHEN (customer.executive_id = 94) THEN 'Marina Kaminski'
               WHEN (customer.executive_id = 95) THEN 'Giovanna Welter'
+              WHEN (customer.executive_id = 101) THEN 'Jocimara Siedlecki'
+              WHEN (customer.executive_id = 102) THEN 'Tatiane Rupel'
+              WHEN (customer.executive_id = 105) THEN 'Marcos Filipe'
+              WHEN (customer.executive_id = 106) THEN 'Vinicius Iglesias'
+              WHEN (customer.executive_id = 108) THEN 'Luana Paes'
+              WHEN (customer.executive_id = 109) THEN 'Beatriz Camilo'
+              WHEN (customer.executive_id = 110) THEN 'Allan Schmitt'
+              WHEN (customer.executive_id = 111) THEN 'Leonel Lima'
               when (customer.executive_id is null) then CAST ( customer.executive_id AS TEXT )
           else CAST ( customer.executive_id AS TEXT ) end
     ;;
@@ -140,10 +159,10 @@ view: customer {
 
   dimension: executive_area {
     type: string
-    sql:  CASE WHEN (customer.executive_id in (39, 44, 17, 52, 77, 57, 81, 89, 91, 92, 93, 94, 95, 59, 50, 10, 72, 71, 75, 76)) THEN 'CS'
-               WHEN (customer.executive_id in (11, 12, 41, 43, )) THEN 'Comercial'
+    sql:  CASE WHEN (customer.executive_id in (36,37,39,17, 52, 77,56, 57, 81, 89, 91, 92, 93, 94, 95, 59, 50, 72, 75, 76,102,105,106,108,109,111)) THEN 'CS'
+               WHEN (customer.executive_id in (10,11,12,23,30,41,43,44,48,49,63,64,71,78,80,84,101,110 )) THEN 'Comercial'
                WHEN (customer.executive_id is null) THEN 'Sem Executivo'
-          else CAST ( customer.executive_id AS TEXT ) end
+          else 'Outro' end
     ;;
   }
 
@@ -227,7 +246,10 @@ view: customer {
     fields: [
       id,
       name,
-      executive_name
+      executive_name,
+      executive_area,
+      customer_plan.start,
+      customer_plan.expiration
     ]
   }
 

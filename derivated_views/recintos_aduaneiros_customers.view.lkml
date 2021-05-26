@@ -5,9 +5,9 @@ view: recintos_aduaneiros_customers {
     select *
     from
       (
-        select recinto_aduaneiro, sum(total_reais) as total_reais, sum(total_dolares) as total_dolares
+        select recinto_aduaneiro, sum(total_reais_loc_emb) as total_reais, sum(total_dolares_loc_emb) as total_dolares
         from di_pu
-        where di_pu.data_chegada_carga >= current_date - interval '6' month -- ultimos 6 meses
+        where di_pu.data_chegada_carga >= current_date - interval '12' month -- ultimos 12 meses
         group by 1
       ) as qq1
     left join
@@ -28,6 +28,7 @@ view: recintos_aduaneiros_customers {
         AND cp.deleted_at IS NULL and CURRENT_DATE BETWEEN cp."start" and cp."expiration"
         AND c.cnpj is not null  -- removendo estrangeiras
         AND c.cnpj != ''  -- removendo estrangeiras
+        AND c.cnpj !='00000000000011' -- removendo empresa estrangeira project cargo
         --AND C.customer_type_id in(2,3,4,14,23) -- porto,armazem, terminal, aeroporto, terminal/armazem - recintos aduaneiros
         AND c.id IN -- para pegar apenas um id, quando ha clientes com filiais cadastradas
         (   SELECT qq1.max_id

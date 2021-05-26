@@ -1,8 +1,13 @@
 view: follow_up_status {
-
   derived_table: {
     sql:
 SELECT distinct 'maritimo' as modal,
+(case
+ when t2.tracking_maritime_load_category_id = 1 then 'Importação'
+ when t2.tracking_maritime_load_category_id = 2 then 'Exportação'
+ when t2.tracking_maritime_load_category_id = 3 then 'Cabotagem'
+ else t2.tracking_maritime_load_category_id::text
+ end) as categoriacarga,
 c.id as customer_id,
 c."name" as customer_name,
 tpi.force_certificate as force_certificate,
@@ -40,12 +45,14 @@ inner join tracking t2 on t2.id = fu1.tracking_id
 inner join customer c on c.id = t2.customer_id
 inner join customer_plan cp on cp.customer_id = c.id
 inner join tracking_plan_info tpi on tpi.id = cp.tracking_plan_info_id
+--left join sistema.db_maritimo dbm on dbm.nrcemercante = t2.ce_number
 where fu1.deleted_at is null
 and c.deleted_at is null
 and c.fake_customer is false
 and cp.deleted_at is null
 union
 SELECT distinct 'aereo' as modal,
+'aereo_sem_categ'::text as categoriacarga,
 c.id as customer_id,
 c."name" as customer_name,
 tpi.force_certificate as force_certificate,
@@ -104,6 +111,11 @@ sql_trigger_value: select current_date;;
   dimension: customer_name  {
     type: string
     sql: ${TABLE}.customer_name ;;
+  }
+
+  dimension: categoriacarga {
+    type: string
+    sql: ${TABLE}.categoriacarga ;;
   }
 
   dimension: force_certificate  {
@@ -501,6 +513,66 @@ sql_trigger_value: select current_date;;
   measure: diff_11_min_day  {
     type: min
     sql: ${diff_11_day} ;;
+  }
+
+  measure: diff_00__min_hour {
+    type: min
+    sql: ${diff_00_hour} ;;
+  }
+
+  measure: diff_01__min_hour {
+    type: min
+    sql: ${diff_01_hour} ;;
+  }
+
+  measure: diff_02__min_hour {
+    type: min
+    sql: ${diff_02_hour} ;;
+  }
+
+  measure: diff_03__min_hour {
+    type: min
+    sql: ${diff_03_hour} ;;
+  }
+
+  measure: diff_04__min_hour {
+    type: min
+    sql: ${diff_04_hour} ;;
+  }
+
+  measure: diff_05__min_hour {
+    type: min
+    sql: ${diff_05_hour} ;;
+  }
+
+  measure: diff_06__min_hour {
+    type: min
+    sql: ${diff_06_hour} ;;
+  }
+
+  measure: diff_07__min_hour {
+    type: min
+    sql: ${diff_07_hour} ;;
+  }
+
+  measure: diff_08__min_hour {
+    type: min
+    sql: ${diff_08_hour} ;;
+  }
+
+  measure: diff_09__min_hour {
+    type: min
+    sql: ${diff_09_hour} ;;
+  }
+
+  measure: diff_10__min_hour {
+    type: min
+    sql: ${diff_10_hour} ;;
+  }
+
+  measure: diff_11__min_hour {
+    type: min
+    sql: ${diff_11_hour} ;;
   }
 
 }

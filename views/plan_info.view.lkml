@@ -102,6 +102,41 @@ view: plan_info {
     sql: ${TABLE}."deadline_month_new_data" ;;
   }
 
+  dimension: api_massive_lines {
+    type: yesno
+    sql: ${TABLE}."api_massive_lines" ;;
+  }
+
+  dimension: expo_product_functionality {
+    type: yesno
+    sql: ${TABLE}."expo_product_functionality" ;;
+  }
+
+  dimension: expo_dashboard_chart_year_to_date {
+    type: yesno
+    sql: ${TABLE}."expo_dashbard_chart_year_to_date" ;;
+  }
+
+  dimension: expo_real_exporter_functionality {
+    type: yesno
+    sql: ${TABLE}."expo_real_exporter_functionality" ;;
+  }
+
+  dimension: expo_average_shipment_functionality {
+    type: yesno
+    sql: ${TABLE}."expo_average_shipment_functionality" ;;
+  }
+
+  dimension: upload_size_limit_mb {
+    type: number
+    sql: ${TABLE}."upload_size_limit_mb" ;;
+  }
+
+  dimension: alerts_data_functionality {
+    type: yesno
+    sql: ${TABLE}."alerts_data_functionality" ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, customer_plan.count, plan_complete.count]

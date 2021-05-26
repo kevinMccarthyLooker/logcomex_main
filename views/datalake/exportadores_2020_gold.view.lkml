@@ -33,30 +33,30 @@ view: exportadores_2020_gold {
     sql: ${TABLE}.desc_ncm ;;
   }
 
-  dimension: mar_itemcarga_cdncms {
+  dimension: lista_hscode {
     type: string
-    sql: ${TABLE}.mar_itemcarga_cdncms ;;
+    sql: ${TABLE}.lista_hscode ;;
   }
 
-  dimension: mvw_cnpj_exportador {
+  dimension: cnpj_exportador {
     type: string
-    sql: ${TABLE}.mvw_cnpj_exportador ;;
+    sql: ${TABLE}.cnpj_exportador ;;
   }
 
-  dimension: mvw_cnpj_exportador_8dig {
+  dimension: cnpj_exportador_8dig {
     type: string
-    sql: left(${TABLE}.mvw_cnpj_exportador,8) ;;
+    sql: left(${TABLE}.cnpj_exportador,8) ;;
   }
 
-  dimension: mvw_nome_exportador {
+  dimension: nome_exportador {
     type: string
-    sql: ${TABLE}.mvw_nome_exportador ;;
+    sql: ${TABLE}.nome_exportador ;;
   }
 
-  dimension: mvw_nome_exportador_tratado {
+  dimension: nome_exportador_tratado {
     type: string
-    sql: case when (${TABLE}.mvw_nome_exportador = '' or ${TABLE}.mvw_nome_exportador is null) then 'NÃO ENCONTRADO'
-         else ${TABLE}.mvw_nome_exportador
+    sql: case when (${TABLE}.nome_exportador = '' or ${TABLE}.nome_exportador is null) then 'NÃO ENCONTRADO'
+         else ${TABLE}.nome_exportador
          end ;;
   }
 
@@ -88,19 +88,19 @@ view: exportadores_2020_gold {
 
   measure: count_distinc_imp_name {
     type: count_distinct
-    sql: ${mvw_nome_exportador} ;;
+    sql: ${nome_exportador} ;;
     #drill_fields: [importador_nome]
   }
 
   measure: count_distinc_cnpj {
     type: count_distinct
-    sql: ${mvw_cnpj_exportador} ;;
+    sql: ${cnpj_exportador} ;;
     #drill_fields: [id, name, custom_name]
   }
 
   measure: count_distinc_cnpj_8dig {
     type: count_distinct
-    sql: ${mvw_cnpj_exportador_8dig} ;;
+    sql: ${cnpj_exportador_8dig} ;;
     #drill_fields: [id, name, custom_name]
   }
 
@@ -115,7 +115,7 @@ view: exportadores_2020_gold {
   }
 
   set: details {
-    fields: [customer_id, mvw_nome_exportador, mvw_cnpj_exportador]
+    fields: [customer_id, nome_exportador, cnpj_exportador]
   }
 
 }

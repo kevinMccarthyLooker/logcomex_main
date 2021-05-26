@@ -1,4 +1,4 @@
-view: nps {
+view: nps_04_2020 {
   derived_table: {
   sql:
       select 'sistema.logcomex.io/#/inteligencia/aereo' as page , 'joseane.vilela@expedited-america.com' as email , 7 as nota , 'ja observei informaÃ§Ãµes incompletas' as observacao , 'Pouco impactado' as Impacto union all
@@ -395,32 +395,42 @@ view: nps {
  ;;
 }
   # # Define your dimensions and measures here, like this:
+ dimension: id {
+  primary_key: yes
+  hidden: yes
+  type: string
+  sql: concat(${TABLE}.page,${TABLE}.email,${TABLE}.nota,${TABLE}.observacao) ;;
+ }
 
-   dimension: page {
-     type: string
-     sql: ${TABLE}.page ;;
-   }
+ dimension: page {
+   type: string
+   sql: ${TABLE}.page ;;
+ }
 
-  dimension: email {
-    type: string
-    sql: ${TABLE}.email ;;
-  }
+dimension: email {
+  type: string
+  sql: ${TABLE}.email ;;
+}
 
-  dimension: nota {
-    type: number
-    sql: ${TABLE}.nota ;;
-  }
+dimension: nota {
+  type: number
+  sql: ${TABLE}.nota ;;
+}
 
-  dimension: observacao {
-    type: string
-    sql: ${TABLE}.observacao ;;
-  }
+dimension: observacao {
+  type: string
+  sql: ${TABLE}.observacao ;;
+}
 
-  dimension: Impacto {
-    type: string
-    sql: ${TABLE}.Impacto ;;
-  }
+dimension: Impacto {
+  type: string
+  sql: ${TABLE}.Impacto ;;
+}
 
+measure: media_nota {
+  type: average
+  sql: ${nota} ;;
+}
   #
   # dimension: lifetime_orders {
   #   description: "The total number of orders for each user"

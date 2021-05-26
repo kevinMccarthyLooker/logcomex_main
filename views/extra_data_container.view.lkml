@@ -47,6 +47,11 @@ view: extra_data_container {
     sql: ${TABLE}."destination" ;;
   }
 
+  dimension: destination_port_code {
+    type: string
+    sql: ${TABLE}."destination_port_code" ;;
+  }
+
   dimension: destination_city {
     type: string
     sql: ${TABLE}."destination_city" ;;
@@ -92,6 +97,25 @@ view: extra_data_container {
     sql: ${TABLE}."id_armador" ;;
   }
 
+  dimension: armador_nome {
+    type: string
+    sql:
+    case
+    when ${id_armador} = 185 then 'MSC'
+    when ${id_armador} = 255 then 'Cosco'
+    when ${id_armador} = 405 then 'HamburgSud'
+    when ${id_armador} = 406 then 'HapagLloyd'
+    when ${id_armador} = 514 then 'Maersk'
+    when ${id_armador} = 579 then 'CMA-CGM'
+    when ${id_armador} = 625 then 'PIL'
+    when ${id_armador} = 1712 then 'Evergreen'
+    when ${id_armador} = 1767 then 'Yang Ming'
+    when ${id_armador} = 1879136 then 'One'
+    else 'Outros'
+    end;;
+
+  }
+
   dimension: inserted_updated_by {
     type: string
     sql: ${TABLE}."inserted_updated_by" ;;
@@ -100,6 +124,11 @@ view: extra_data_container {
   dimension: origin {
     type: string
     sql: ${TABLE}."origin" ;;
+  }
+
+  dimension: origin_port_code {
+    type: string
+    sql: ${TABLE}."origin_port_code" ;;
   }
 
   dimension: origin_city {
@@ -135,6 +164,11 @@ view: extra_data_container {
   dimension: transhipment {
     type: string
     sql: ${TABLE}."transhipment" ;;
+  }
+
+  dimension: container_list {
+    type: string
+    sql: ${TABLE}."container_list" ;;
   }
 
   dimension: type_error_id {
@@ -184,5 +218,15 @@ view: extra_data_container {
   measure: count {
     type: count
     drill_fields: [id]
+  }
+
+  measure: distincts_bls {
+    type: count_distinct
+    sql: ${bl} ;;
+    drill_fields: [detail*]
+  }
+
+  set: detail {
+    fields: [armador_nome,bl,container_list,vessel,eta_date,origin_country,destination_country]
   }
 }
