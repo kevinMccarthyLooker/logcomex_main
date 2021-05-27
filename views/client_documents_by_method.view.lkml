@@ -54,7 +54,7 @@ view: client_documents_by_method {
     sql:
     case
     when ${TABLE}."api_sucess" = 'true' then 'Success'
-    else 'Erro'
+    else 'Error'
     end ;;
   }
 
