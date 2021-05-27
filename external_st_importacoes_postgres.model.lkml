@@ -1,4 +1,4 @@
-connection: "st_postgres"
+connection: "st_postgres2"
 
 include: "/**/**/st_importacoes_moda.view"
 include: "/**/**/st_importacoes_brinquedos_psql.view"
