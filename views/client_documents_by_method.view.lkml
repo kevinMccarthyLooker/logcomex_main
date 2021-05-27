@@ -38,7 +38,7 @@ view: client_documents_by_method {
     type: string
     sql:
     case
-    when ${TABLE}."api_method" is true then 'Success'
+    when ${TABLE}."api_method" = 'true' then 'Success'
     else 'Erro'
     end ;;
   }
