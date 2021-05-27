@@ -36,7 +36,11 @@ view: client_documents_by_method {
 
   dimension: api_method {
     type: string
-    sql: ${TABLE}."api_method" ;;
+    sql:
+    case
+    when ${TABLE}."api_method" is true then 'Success'
+    else 'Erro'
+    end ;;
   }
 
   dimension: api_origem {
