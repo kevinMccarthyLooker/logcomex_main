@@ -64,6 +64,13 @@ view: service {
       when: {label: "Automação" sql: ${name} in ('Automação') ;;}
       when: {label: "Log Manager" sql: ${name} in ('Log Manager') ;;}
       when: {label: "LogComex V1" sql: ${name} in ('LogComex V1') ;;}
+      when: {label: "Comex Analytics" sql: ${name} in ('Comex Analytics') ;;}
+      when: {label: "[NOVO] Big Data Impo" sql: ${name} in ('Novo Importação') ;;}
+      when: {label: "Tracking V2" sql: ${name} in ('Tracking V2') ;;}
+      when: {label: "Log Manager" sql: ${name} in ('Log Manager') ;;}
+      when: {label: "LogComex V1" sql: ${name} in ('LogComex V1') ;;}
+      when: {label: "Captação V2" sql: ${name} in ('Captação V2') ;;}
+      when: {label: "Automação" sql: ${name} in ('Automação') ;;}
       else: "Outros BIs"
     }
   }

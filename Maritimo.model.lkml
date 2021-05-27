@@ -29,6 +29,14 @@ include: "/**/db_cad_fcl.view.lkml"
 include: "/**/puc_embarques.view.lkml"
 include: "/**/db_siscarga_basico_erro.view.lkml"
 
+
+datagroup: antaq_datagroup {
+  sql_trigger: SELECT CURRENT_DATE ;;
+  max_cache_age: "24 hours"
+  label: "Antaq"
+  description: "Atualizados a cada 24h"
+}
+
 explore: db_siscarga_basico_erro {
   label: "DB Siscarga Basico Erro"
 }
@@ -53,9 +61,12 @@ explore: health_imp_house_direto {}
 explore: antaqxmaritimo_exp {
   label: "Exp AntaqMaritimo"
 }
+
 explore: antaqxmaritimo {
   label: " Imp AntaqMaritimo"
+  persist_with: antaq_datagroup
 }
+
 
 explore: antaqxmaritimo_cab {
   label: "Cab AntaqMaritimo Desembarcados"

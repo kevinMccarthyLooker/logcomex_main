@@ -9,10 +9,25 @@ view: tracking_air {
     drill_fields: [detail*]
   }
 
+  dimension: id_di {
+    type: number
+    sql: ${TABLE}.id_di ;;
+  }
+
+  dimension: di_number {
+    type: number
+    sql: ${TABLE}.di_number ;;
+  }
+
+  dimension: digit {
+    type: number
+    sql: ${TABLE}.digit ;;
+  }
+
   dimension: pas_de_origem {
     type: string
-    label: "País de origem"
-    sql: ${TABLE}."País de origem" ;;
+    label: "País de Origem"
+    sql: ${TABLE}."País de Origem" ;;
   }
 
   dimension: aeroporto_de_origem {
@@ -21,21 +36,35 @@ view: tracking_air {
     sql: ${TABLE}."Aeroporto de Origem" ;;
   }
 
+  dimension: local_embarque {
+    type: string
+    sql: ${TABLE}.local_embarque ;;
+  }
+
   dimension: aeroporto_de_destino {
     type: string
     label: "Aeroporto de Destino"
     sql: ${TABLE}."Aeroporto de Destino" ;;
   }
 
-  dimension: consignatrio {
+  dimension: urf_despacho {
     type: string
-    sql: ${TABLE}."Consignatário" ;;
+    sql: ${TABLE}.urf_despacho ;;
   }
 
-  dimension: cnpj_do_consignatrio {
+  dimension: urf_entrada_carga {
     type: string
-    label: "CNPJ do Consignatário"
-    sql: ${TABLE}."CNPJ do Consignatário" ;;
+    sql: ${TABLE}.urf_entrada_carga ;;
+  }
+
+  dimension: importador_cnpj {
+    type: string
+    sql: ${TABLE}.importador_cnpj ;;
+  }
+
+  dimension: importador_nome {
+    type: string
+    sql: ${TABLE}.importador_nome ;;
   }
 
   dimension: agente_de_carga {
@@ -44,27 +73,49 @@ view: tracking_air {
     sql: ${TABLE}."Agente de Carga" ;;
   }
 
-  dimension: cnpj_agente_de_carga {
-    type: string
-    label: "CNPJ Agente de Carga"
-    sql: ${TABLE}."CNPJ Agente de Carga" ;;
-  }
-
   dimension: tipo_de_frete {
     type: string
     label: "Tipo de Frete"
-    sql: ${TABLE}."Tipo de Frete" ;;
+    sql: case
+    when ${TABLE}."Tipo de Frete" = 'COLL' then 'Collect'
+    when ${TABLE}."Tipo de Frete" = 'PREP' then 'Prepaid'
+    else 'ERRO'
+    end ;;
   }
 
-  dimension: embalagem {
+  dimension: moeda {
     type: string
-    sql: ${TABLE}.Embalagem ;;
+    sql: ${TABLE}.Moeda ;;
   }
 
-  dimension: companhia_area {
+  dimension_group: data_hora_registro {
+    type: time
+    sql: ${TABLE}.data_hora_registro ;;
+  }
+
+  dimension: valor {
     type: string
-    label: "Companhia Aérea"
-    sql: ${TABLE}."Companhia Aérea" ;;
+    sql: ${TABLE}.valor ;;
+  }
+
+  dimension_group: data_registro_despacho {
+    type: time
+    sql: ${TABLE}.data_registro_despacho ;;
+  }
+
+  dimension_group: data_desembaraco {
+    type: time
+    sql: ${TABLE}.data_desembaraco ;;
+  }
+
+  dimension: modalidade_despacho {
+    type: string
+    sql: ${TABLE}.modalidade_despacho ;;
+  }
+
+  dimension: tipo_declaracao {
+    type: string
+    sql: ${TABLE}.tipo_declaracao ;;
   }
 
   dimension: canal {
@@ -84,140 +135,95 @@ view: tracking_air {
     end ;;
   }
 
-  dimension: di {
-    type: number
-    sql: ${TABLE}.DI ;;
-  }
-
-  dimension_group: data_chegada {
+  dimension_group: data_chegada_carga {
     type: time
-    label: "Data Chegada"
-    sql: ${TABLE}."Data Chegada" ;;
+    sql: ${TABLE}.data_chegada_carga ;;
   }
 
-  dimension_group: data_embarque {
-    type: time
-    label: "Data Embarque"
-    sql: ${TABLE}."Data Embarque" ;;
-  }
-
-  dimension: moeda {
-    type: string
-    sql: ${TABLE}.Moeda ;;
-  }
-
-  dimension: cnpj_consignee {
-    type: string
-    sql: ${TABLE}.cnpj_consignee ;;
-  }
-
-  dimension_group: deleted_consignee {
-    type: time
-    sql: ${TABLE}.deleted_consignee ;;
-  }
-
-  dimension: id_radar {
+  dimension: peso_bruto {
     type: number
-    sql: ${TABLE}.id_radar ;;
+    sql: ${TABLE}.peso_bruto ;;
   }
 
-  dimension: id_radar_certificate {
+  dimension: peso_liquido {
     type: number
-    sql: ${TABLE}.id_radar_certificate ;;
+    sql: ${TABLE}.peso_liquido ;;
   }
 
-  dimension: id_radar_consignee {
+  dimension: embalagem {
+    type: string
+    sql: ${TABLE}.embalagem ;;
+  }
+
+  dimension: qtde_volume {
     type: number
-    sql: ${TABLE}.id_radar_consignee ;;
-  }
-
-  dimension_group: deleted_radar {
-    type: time
-    sql: ${TABLE}.deleted_radar ;;
-  }
-
-  dimension_group: deleted_certificate {
-    type: time
-    sql: ${TABLE}.deleted_certificate ;;
-  }
-
-  dimension: certificate_valid {
-    type: date
-    sql: ${TABLE}.certificate_valid ;;
-  }
-
-  dimension: name {
-    type: string
-    sql: ${TABLE}.name ;;
-  }
-
-  dimension: cpf {
-    type: string
-    sql: ${TABLE}.cpf ;;
-  }
-
-  dimension: id_customer {
-    type: number
-    sql: ${TABLE}.id_customer ;;
-  }
-
-  dimension: name_customer {
-    type: string
-    sql: ${TABLE}.name_customer ;;
-  }
-
-  dimension: cnpj_customer {
-    type: string
-    sql: ${TABLE}.cnpj_customer ;;
-  }
-
-  dimension_group: deleted_customer {
-    type: time
-    sql: ${TABLE}.deleted_customer ;;
-  }
-
-  dimension: id_di {
-    type: number
-    sql: ${TABLE}.id_di ;;
+    sql: ${TABLE}.qtde_volume ;;
   }
 
   dimension: status {
     type: string
-    sql: ${TABLE}.description ;;
+    sql: ${TABLE}.status ;;
   }
 
+  dimension_group: archived_at {
+    type: time
+    sql: ${TABLE}.archived_at ;;
+  }
+
+  dimension_group: deleted_at {
+    type: time
+    sql: ${TABLE}.deleted_at ;;
+  }
+
+  dimension_group: created_at {
+    type: time
+    sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: awb {
+    type: string
+    sql: ${TABLE}.awb ;;
+  }
+
+  dimension: hwb {
+    type: string
+    sql: ${TABLE}.hwb ;;
+  }
 
   set: detail {
     fields: [
+      id_di,
+      di_number,
+      digit,
       pas_de_origem,
       aeroporto_de_origem,
+      local_embarque,
       aeroporto_de_destino,
-      consignatrio,
-      cnpj_do_consignatrio,
+      urf_despacho,
+      urf_entrada_carga,
+      importador_cnpj,
+      importador_nome,
       agente_de_carga,
-      cnpj_agente_de_carga,
       tipo_de_frete,
-      embalagem,
-      companhia_area,
-      canal,
-      di,
-      data_chegada_time,
-      data_embarque_time,
       moeda,
-      cnpj_consignee,
-      deleted_consignee_time,
-      id_radar,
-      id_radar_certificate,
-      id_radar_consignee,
-      deleted_radar_time,
-      deleted_certificate_time,
-      certificate_valid,
-      name,
-      cpf,
-      id_customer,
-      name_customer,
-      cnpj_customer,
-      deleted_customer_time
+      data_hora_registro_time,
+      valor,
+      data_registro_despacho_time,
+      data_desembaraco_time,
+      modalidade_despacho,
+      tipo_declaracao,
+      canal,
+      data_chegada_carga_time,
+      peso_bruto,
+      peso_liquido,
+      embalagem,
+      qtde_volume,
+      status,
+      archived_at_time,
+      deleted_at_time,
+      created_at_time,
+      awb,
+      hwb
     ]
   }
 }

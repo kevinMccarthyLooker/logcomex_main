@@ -1367,8 +1367,8 @@ view: bi_exports_mvw_gold {
   }
 
   dimension: mar_rota {
-  type: string
-  sql: ${TABLE}."mar_nmportoorigem"  || ' >> ' ||  ${TABLE}."mar_nmportodestino";;
+    type: string
+    sql: ${TABLE}."mar_nmportoorigem"  || ' >> ' ||  ${TABLE}."mar_nmportodestino";;
   }
 
   dimension: mar_vlfrete_num {

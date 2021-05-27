@@ -2,10 +2,12 @@ view: trials_ativos_mes {
 
   derived_table: {
     sql:
-    SELECT
+     SELECT
     mes as anomes,
     customer."id" AS customer_id,
     customer."name" as nome,
+    customer_plan.trial_start,
+    customer_plan.trial_end,
     customer."id" AS customer_id_measure,
     customer_plan.id as customer_plan_id,
     case
@@ -60,6 +62,34 @@ view: trials_ativos_mes {
     sql: ${TABLE}."anomes" ;;
   }
 
+  dimension_group: trial_start {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."trial_start" ;;
+  }
+
+  dimension_group: trial_end {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}."trial_end" ;;
+  }
+
   measure: count_ativos_mes {
     type: count_distinct
     sql: ${TABLE}."customer_id_measure" ;;
@@ -67,7 +97,7 @@ view: trials_ativos_mes {
   }
 
   set: detail {
-    fields: [customer_id, nome,customer.executive_name,customer.executive_area, service.name]
+    fields: [customer_id, nome,customer.executive_name,customer.executive_area, service.name, trial_start_date, trial_end_date]
   }
 
 }

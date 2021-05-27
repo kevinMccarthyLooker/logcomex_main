@@ -1,4 +1,4 @@
-- dashboard: st_importacoes_brinquendos_psql
+- dashboard: st_importacoes_brinquedos_psql
   title: Visão de Mercado - Brinquedos
   layout: newspaper
   preferred_viewer: dashboards-next
@@ -214,7 +214,6 @@
       st_importacoes_brinquedos_psql.importador_nome]
     filters:
       st_importacoes_brinquedos_psql.importador_check: 'Yes'
-      st_importacoes_brinquedos_psql.importador_colorido: "-ST IMPORTACOES LTDA"
     sorts: [st_importacoes_brinquedos_psql.fob_sum desc]
     limit: 15
     dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: "${st_importacoes_brinquedos_psql.fob_sum}",
@@ -1408,7 +1407,6 @@
       st_importacoes_brinquedos_psql.fob_sum]
     filters:
       st_importacoes_brinquedos_psql.tp_unid_comerc: UNIDADE
-      st_importacoes_brinquedos_psql.importador_colorido: "-ST IMPORTACOES LTDA"
       st_importacoes_brinquedos_psql.importador_check: 'Yes'
     sorts: [st_importacoes_brinquedos_psql.fob_sum desc]
     limit: 10
@@ -1536,7 +1534,6 @@
       st_importacoes_brinquedos_psql.fob_sum]
     filters:
       st_importacoes_brinquedos_psql.tp_unid_comerc: UNIDADE
-      st_importacoes_brinquedos_psql.importador_colorido: "-ST IMPORTACOES LTDA"
       st_importacoes_brinquedos_psql.importador_check: 'Yes'
     sorts: [st_importacoes_brinquedos_psql.fob_sum desc]
     limit: 10

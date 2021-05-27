@@ -25,8 +25,7 @@ view: active_importers_match_radar {
         c.id = ccr.consignee_id
      --   and ccr.deleted_at is null
     inner join api.certificate c2 on
-        c.cert_id = c2.id
-        and c2.customer_id = c.customer_id
+        c2.id = ccr.certificate_id
         and c2.valid_until > now()
      --   and c2.deleted_at is null
         and char_length(c.cnpj) > 11 -- retirando cpfs

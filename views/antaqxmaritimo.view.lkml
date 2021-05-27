@@ -4,7 +4,7 @@ view: antaqxmaritimo {
     persist_for: "24 hours"
     sql: select destino,  mes,ano,sum(teu) as Teus_Antaq, (SELECT sum(teus) as Teus_Log
                                         from view_AntaqMaritimo
-                                        where dtoperacao >='2019-01-01'
+                                        where dtoperacao >='2020-01-01'
                                         and categoriacarga = 'I'
                                         and cdportodescarregamento like 'BR%'
                                         and cdportodescarregamento = c.destino
