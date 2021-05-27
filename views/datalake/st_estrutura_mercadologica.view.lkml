@@ -33,30 +33,30 @@ view: st_estrutura_mercadologica {
     sql: ${TABLE}.cod_subfamilia ;;
   }
 
-  dimension: dsc_departamento {
+  dimension: departamento {
     type: string
     sql: ${TABLE}.dsc_departamento ;;
   }
 
-  dimension: dsc_departamento_cama {
-    type: yesno
-    sql: case
-         when ${TABLE}.dsc_departamento = 'CAMA MESA & BANHO' then true
-         else false
-         end;;
-  }
+ # dimension: dsc_departamento_cama {
+ #   type: yesno
+ #   sql: case
+ #        when ${TABLE}.dsc_departamento = 'CAMA MESA & BANHO' then true
+ #        else false
+ #        end;;
+ # }
 
-  dimension: dsc_familia {
+  dimension: familia {
     type: string
     sql: ${TABLE}.dsc_familia ;;
   }
 
-  dimension: dsc_linha {
+  dimension: linha {
     type: string
     sql: ${TABLE}.dsc_linha ;;
   }
 
-  dimension: dsc_subfamilia {
+  dimension: subfamilia {
     type: string
     sql: ${TABLE}.dsc_subfamilia ;;
   }
@@ -131,7 +131,7 @@ view: st_estrutura_mercadologica {
     sql: ${TABLE}.sku ;;
   }
 
-  measure: count {
+  measure: Quantidade {
     type: count
     drill_fields: [id]
   }
@@ -139,24 +139,24 @@ view: st_estrutura_mercadologica {
   measure: count_dsc_departamento {
     type: count_distinct
     sql:${TABLE}.dsc_departamento ;;
-    drill_fields: [dsc_departamento]
+    drill_fields: [departamento]
   }
 
   measure: count_dsc_familia {
     type: count_distinct
     sql:${TABLE}.dsc_familia ;;
-    drill_fields: [dsc_familia]
+    drill_fields: [familia]
   }
 
   measure: count_dsc_linha{
     type: count_distinct
     sql:${TABLE}.dsc_linha ;;
-    drill_fields: [dsc_linha]
+    drill_fields: [linha]
   }
 
   measure: count_dsc_subfamilia{
     type: count_distinct
     sql:${TABLE}.dsc_subfamilia ;;
-    drill_fields: [dsc_subfamilia]
+    drill_fields: [subfamilia]
   }
 }
