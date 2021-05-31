@@ -22,7 +22,7 @@ view: hubspot_tickets {
           ) as qq1 ;;
   }
 
-  drill_fields: [id]
+  drill_fields: [id,ticket_id,customer.id,ticket_owner,squad,satisfacao_normalizado,create_date_ticket_date,close_date_ticket_date]
 
   dimension: id {
     primary_key: yes
