@@ -321,6 +321,6 @@ view: hubspot_tickets {
 
   measure: count {
     type: count
-    drill_fields: [id,ticket_id,customer.id,ticket_owner,squad,satisfacao_normalizado,create_date_ticket_date,close_date_ticket_date]
+    drill_fields: [id,ticket_id,customer.name,ticket_owner,squad,satisfacao_normalizado,create_date_ticket_date,close_date_ticket_date]
   }
 }
