@@ -39,6 +39,7 @@ view: client_documents_by_method {
     sql: ${TABLE}."api_method" ;;
   }
 
+
   dimension: api_origem {
     type: string
     sql:
@@ -50,7 +51,11 @@ view: client_documents_by_method {
 
   dimension: api_sucess {
     type: string
-    sql: ${TABLE}."api_sucess" ;;
+    sql:
+    case
+    when ${TABLE}."api_sucess" = 'true' then 'Success'
+    else 'Error'
+    end ;;
   }
 
   dimension: ano_mes {
