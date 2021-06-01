@@ -5,6 +5,7 @@ include: "/**/**/st_importacoes_brinquedos.view"
 include: "/**/**/st_importacoes_utilidades.view"
 include: "/**/**/st_importacoes_estrutura_mercadologica.view"
 include: "/**/**/st_estrutura_mercadologica.view"
+include: "/**/**/st_importacoes_estrutura_merc.dashboard.lookml"
 #include: "/**/**/st_importacao_fase01.dashboard.lookml"  # incluindo o dashs do tipo lkml para ser visualizado
 #include: "/**/**/st_importacoes_brinquedos.dashboard.lookml"
 #include: "/**/**/st_importacoes_utilidades.dashboard.lookml"

@@ -10,7 +10,6 @@
     type: single_value
     fields: [st_estrutura_mercadologica.count_dsc_departamento]
     filters:
-      st_estrutura_mercadologica.dsc_departamento_cama: 'No'
     limit: 500
     custom_color_enabled: true
     show_single_value_title: true
@@ -39,7 +38,6 @@
     type: single_value
     fields: [st_estrutura_mercadologica.count_dsc_linha]
     filters:
-      st_estrutura_mercadologica.dsc_departamento_cama: 'No'
       st_estrutura_mercadologica.ind_desab_linha: '0'
     limit: 500
     custom_color_enabled: true
@@ -69,7 +67,6 @@
     type: single_value
     fields: [st_estrutura_mercadologica.count_dsc_familia]
     filters:
-      st_estrutura_mercadologica.dsc_departamento_cama: 'No'
       st_estrutura_mercadologica.ind_desab_familia: '0'
     limit: 500
     custom_color_enabled: true
@@ -99,7 +96,6 @@
     type: single_value
     fields: [st_estrutura_mercadologica.count_dsc_subfamilia]
     filters:
-      st_estrutura_mercadologica.dsc_departamento_cama: 'No'
       st_estrutura_mercadologica.ind_desab_subfamilia: '0'
     limit: 500
     custom_color_enabled: true
