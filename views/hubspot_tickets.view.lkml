@@ -323,4 +323,10 @@ view: hubspot_tickets {
     type: count
     drill_fields: [id,ticket_id,customer.name,ticket_owner,squad,satisfacao_normalizado,create_date_ticket_date,close_date_ticket_date]
   }
+
+  measure: count_satisfeitos {
+    type: count
+    filters: [nps_score: ">=6"]
+    drill_fields: [id,ticket_id,customer.name,ticket_owner,squad,satisfacao_normalizado,nps_score,create_date_ticket_date,close_date_ticket_date]
+  }
 }
