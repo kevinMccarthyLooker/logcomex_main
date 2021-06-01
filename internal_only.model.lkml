@@ -753,7 +753,7 @@ explore: cs_novo_health_score {
 
 explore: tickets_hubspot {
   view_name: customer
-
+  sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
   join: customer_api_relations{
     sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
     relationship: one_to_many
