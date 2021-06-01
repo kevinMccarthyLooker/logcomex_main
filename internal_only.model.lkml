@@ -241,19 +241,19 @@ explore: usage {
 
   join: hubspot_tickets {
     sql_on: ${customer_api_relations.id} = ${hubspot_tickets.customer_api_relations_id} ;;
-    relationship: one_to_one
-    type: left_outer
+    relationship: one_to_many
+    type: full_outer
   }
 
   join: hubspot_cs_deal {
     sql_on: ${customer_api_relations.id} = ${hubspot_cs_deal.customer_api_relations_id} ;;
-    relationship: one_to_one
+    relationship: one_to_many
     type: left_outer
   }
 
   join: hubspot_stage_cs_deal {
     sql_on: ${customer_api_relations.id} = ${hubspot_stage_cs_deal.customer_api_relations_id} ;;
-    relationship: one_to_one
+    relationship: one_to_many
     type: left_outer
   }
 
