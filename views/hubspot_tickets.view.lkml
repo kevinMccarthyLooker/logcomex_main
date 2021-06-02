@@ -172,10 +172,10 @@ view: hubspot_tickets {
     type: string
     sql: case
          when ${nps_score} is null then 'Sem Resposta'
-         when ${nps_score} between 5 and 6 then 'Satisfeito'
+         when ${nps_score} between 6 and 7 then 'Satisfeito'
          when ${nps_score} between 3 and 5 then 'Neutro'
          when ${nps_score} between 1 and 2 then 'Insatisfeito'
-         else 'Verificar'
+         else ${nps_score}--'Verificar'
          end;;
   }
 
