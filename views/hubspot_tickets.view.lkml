@@ -349,7 +349,7 @@ view: hubspot_tickets {
 
   measure: count_insatisfeitos {
     type: count
-    filters: [nps_score: "1,2,3"]
+    filters: [nps_score: "1,2"]
     drill_fields: [id,ticket_id,customer.name,ticket_owner,squad,satisfacao_normalizado,nps_score,create_date_ticket_date,close_date_ticket_date]
   }
 }
