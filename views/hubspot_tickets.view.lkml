@@ -168,6 +168,16 @@ view: hubspot_tickets {
     sql: ${TABLE}."nps_score" ;;
   }
 
+  dimension: nps_score_type {
+    type: string
+    sql: case
+         when ${nps_score} is null then 'Sem Resposta'
+         when ${nps_score} between 5 and 6 then 'Satisfeito'
+         when ${nps_score} between 3 and 5 then 'Neutro'
+         when ${nps_score} between 1 and 2 then 'Insatisfeito'
+         else 'Verificar';;
+  }
+
   dimension: satisfacao_normalizado {
     type: number
     sql:
