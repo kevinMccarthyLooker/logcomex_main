@@ -175,7 +175,7 @@ view: hubspot_tickets {
          when ${nps_score} between 6 and 7 then 'Satisfeito'
          when ${nps_score} between 3 and 5 then 'Neutro'
          when ${nps_score} between 1 and 2 then 'Insatisfeito'
-         else ${nps_score}--'Verificar'
+         else ${nps_score}::text--'Verificar'
          end;;
   }
 
