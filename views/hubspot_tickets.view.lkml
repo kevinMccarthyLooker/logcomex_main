@@ -175,7 +175,8 @@ view: hubspot_tickets {
          when ${nps_score} between 5 and 6 then 'Satisfeito'
          when ${nps_score} between 3 and 5 then 'Neutro'
          when ${nps_score} between 1 and 2 then 'Insatisfeito'
-         else 'Verificar';;
+         else 'Verificar'
+         end;;
   }
 
   dimension: satisfacao_normalizado {
