@@ -332,24 +332,24 @@ view: hubspot_tickets {
 
   measure: count {
     type: count
-    drill_fields: [id,ticket_id,customer.name,ticket_owner,squad,satisfacao_normalizado,create_date_ticket_date,close_date_ticket_date]
+    drill_fields: [id,ticket_id,customer.name,treated_priority,ticket_owner,squad,nps_score,create_date_ticket_date,close_date_ticket_date]
   }
 
   measure: count_satisfeitos {
     type: count
     filters: [nps_score: "6,7"]
-    drill_fields: [id,ticket_id,customer.name,ticket_owner,squad,satisfacao_normalizado,nps_score,create_date_ticket_date,close_date_ticket_date]
+    drill_fields: [id,ticket_id,customer.name,treated_priority,ticket_owner,squad,nps_score,create_date_ticket_date,close_date_ticket_date]
   }
 
   measure: count_neutros{
     type: count
     filters: [nps_score: "3,4,5"]
-    drill_fields: [id,ticket_id,customer.name,ticket_owner,squad,satisfacao_normalizado,nps_score,create_date_ticket_date,close_date_ticket_date]
+    drill_fields: [id,ticket_id,customer.name,treated_priority,ticket_owner,squad,nps_score,create_date_ticket_date,close_date_ticket_date]
   }
 
   measure: count_insatisfeitos {
     type: count
     filters: [nps_score: "1,2"]
-    drill_fields: [id,ticket_id,customer.name,ticket_owner,squad,satisfacao_normalizado,nps_score,create_date_ticket_date,close_date_ticket_date]
+    drill_fields: [id,ticket_id,customer.name,treated_priority,ticket_owner,squad,nps_score,create_date_ticket_date,close_date_ticket_date]
   }
 }
