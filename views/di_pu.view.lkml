@@ -337,9 +337,9 @@ view: di_pu {
     sql: ${TABLE}."recinto_aduaneiro" ;;
   }
 
-  dimension: reponsavel {
+  dimension: responsavel {
     type: string
-    sql: ${TABLE}."reponsavel" ;;
+    sql: ${TABLE}."responsavel" ;;
   }
 
   dimension: setor {
