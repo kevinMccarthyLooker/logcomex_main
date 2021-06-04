@@ -79,6 +79,8 @@ include: "/**/usuarios_clientes_acessos_plataforma.view.lkml"
 include: "/**/trials_acessos_plataforma.view.lkml"
 include: "/**/health_score_2021.view.lkml"
 include: "/**/**/status_integracao.view.lkml"
+include: "/**/**/tracking_follow_consignee.view.lkml"
+
 
 
 datagroup: internal_only_datagroup {
@@ -197,6 +199,12 @@ explore: consignee_radar {
     relationship: many_to_one
     type: left_outer
     }
+
+  join: tracking_follow_consignee {
+    sql_on:${tracking_follow_consignee.consignee_id} = ${consignee.id};;
+    relationship: one_to_many
+    type: left_outer
+  }
 }
 
 
