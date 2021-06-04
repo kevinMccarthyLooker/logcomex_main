@@ -199,12 +199,6 @@ explore: consignee_radar {
     relationship: many_to_one
     type: left_outer
     }
-
-  join: tracking_follow_consignee {
-    sql_on:${tracking_follow_consignee.consignee_id} = ${consignee.id};;
-    relationship: one_to_many
-    type: left_outer
-  }
 }
 
 explore: consignee_seguir_embarque {
