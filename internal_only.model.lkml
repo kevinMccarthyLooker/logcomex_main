@@ -207,6 +207,22 @@ explore: consignee_radar {
   }
 }
 
+explore: consignee_seguir_embarque {
+  view_name: consignee
+
+  join: customer {
+    sql_on: ${consignee.customer_id}=${customer.id};;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: tracking_follow_consignee {
+    sql_on:${tracking_follow_consignee.consignee_id} = ${consignee.id};;
+    relationship: one_to_many
+    type: left_outer
+  }
+}
+
 
 explore: usage {
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
