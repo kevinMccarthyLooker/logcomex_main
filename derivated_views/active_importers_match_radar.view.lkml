@@ -15,7 +15,7 @@ select
     case when qq1.cpf = qq3.cpf_radar then true else false end as match_cpf
     from(
     select
-    cpf,
+    replace(replace(replace(cpf,'-',''),'/',''),'.','') as cpf,
     replace(replace(replace(importador_cnpj,'-',''),'/',''),'.','') as cnpj_importador,
     count(*) as qtd_importacoes,
     sum(dp.total_dolares_loc_desc) as cif
@@ -37,7 +37,7 @@ left join(
     --and ccr.deleted_at is null
          ) qq2 on qq2.cnpj_radar = qq1.cnpj_importador
 left join(
-    select distinct replace(replace(replace(c2.owner_cpf,'-',''),'/',''),'.','') as cpf_radar,
+    select distinct c2.owner_cpf as cpf_radar,
     c2.owner_name
     from api.consignee c
     inner join api.certificate_consignee_radar ccr on c.id = ccr.consignee_id
