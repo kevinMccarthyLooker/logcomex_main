@@ -2,15 +2,17 @@ view: active_importers_match_radar {
 
   derived_table: {
     sql:
-    select
+select
     ROW_NUMBER() OVER() as id,
     qq1.cpf,
+    qq3.cpf_radar,
     qq1.cnpj_importador,
     qq2.cnpj_radar,
     qq1.qtd_importacoes,
     qq1.cif,
     coalesce(ac.normalizado,cg."name",'Desconhecido')as nome_importador,
-    case when qq1.cnpj_importador = qq2.cnpj_radar then true else false end as match
+    case when qq1.cnpj_importador = qq2.cnpj_radar then true else false end as match,
+    case when qq1.cpf = qq3.cpf_radar then true else false end as match_cpf
     from(
     select
     cpf,
@@ -24,7 +26,7 @@ view: active_importers_match_radar {
     and char_length(replace(replace(replace(importador_cnpj,'-',''),'/',''),'.','')) > 11 -- removendo cpfs
     group by 1,2
     ) qq1
-    left join(
+left join(
     select distinct c.cnpj as cnpj_radar
     from api.consignee c
     inner join api.certificate_consignee_radar ccr on c.id = ccr.consignee_id
@@ -33,9 +35,20 @@ view: active_importers_match_radar {
     and c2.valid_until > now()
     --and c2.deleted_at is null
     --and ccr.deleted_at is null
-        ) qq2 on qq2.cnpj_radar = qq1.cnpj_importador
-    left join aereo.aereo_consignatario ac on ac.id = (select ac2.id from aereo.aereo_consignatario ac2 where ac2.cnpj = qq1.cnpj_importador limit 1)
-    left join api.consignee cg on cg.id = (select cg2.id from api.consignee cg2 where cg2.cnpj = qq1.cnpj_importador limit 1);;
+         ) qq2 on qq2.cnpj_radar = qq1.cnpj_importador
+left join(
+    select distinct replace(replace(replace(c2.owner_cpf,'-',''),'/',''),'.','') as cpf_radar,
+    c2.owner_name
+    from api.consignee c
+    inner join api.certificate_consignee_radar ccr on c.id = ccr.consignee_id
+    inner join api.certificate c2 on c2.id = ccr.certificate_id
+    where char_length(c.cnpj) > 11 -- retirando cpfs
+    and c2.valid_until > now()
+    --and c2.deleted_at is null
+    --and ccr.deleted_at is null
+         ) qq3 on qq3.cpf_radar = qq1.cpf
+left join aereo.aereo_consignatario ac on ac.id = (select ac2.id from aereo.aereo_consignatario ac2 where ac2.cnpj = qq1.cnpj_importador limit 1)
+left join api.consignee cg on cg.id = (select cg2.id from api.consignee cg2 where cg2.cnpj = qq1.cnpj_importador limit 1);;
   indexes: ["cnpj_importador"]
   sql_trigger_value: select current_date ;;
   }
@@ -89,6 +102,16 @@ view: active_importers_match_radar {
             <font color="green">{{ match }}</font>
           {% else %}
             <font color="red">{{ match }}</font>
+          {% endif %};;
+  }
+
+  dimension: match_cpf {
+    type: yesno
+    sql: ${TABLE}.match_cpf ;;
+    html: {% if value == 'Yes' %}
+            <font color="green">{{ match_cpf }}</font>
+          {% else %}
+            <font color="red">{{ match_cpf }}</font>
           {% endif %};;
   }
 
