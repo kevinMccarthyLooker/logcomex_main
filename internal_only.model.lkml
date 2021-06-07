@@ -210,10 +210,22 @@ explore: consignee_seguir_embarque {
     type: left_outer
   }
 
+  join: customer_plan {
+    sql_on: ${customer.id}=${customer_plan.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: plan_complete {
+    sql_on: ${customer_plan.plan_complete_id}=${plan_complete.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
   join: tracking_follow_consignee {
     sql_on:${tracking_follow_consignee.consignee_id} = ${consignee.id};;
     relationship: one_to_many
-    type: left_outer
+    type: inner
   }
 }
 
