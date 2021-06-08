@@ -6,6 +6,7 @@ select
     ROW_NUMBER() OVER() as id,
     qq1.cpf,
     qq3.cpf_radar,
+ --   dp2.responsavel,
     qq1.cnpj_importador,
     qq2.cnpj_radar,
     qq1.qtd_importacoes,
@@ -15,7 +16,7 @@ select
     case when qq1.cpf = qq3.cpf_radar then true else false end as match_cpf
     from(
     select
-    replace(replace(replace(cpf,'-',''),'/',''),'.','') as cpf,
+    replace(replace(replace(left(dp.responsavel,14),'-',''),'/',''),'.','') as cpf,
     replace(replace(replace(importador_cnpj,'-',''),'/',''),'.','') as cnpj_importador,
     count(*) as qtd_importacoes,
     sum(dp.total_dolares_loc_desc) as cif
@@ -24,7 +25,7 @@ select
     and importador_cnpj is not null
     and importador_cnpj not like ''
     and char_length(replace(replace(replace(importador_cnpj,'-',''),'/',''),'.','')) > 11 -- removendo cpfs
-    group by 1,2
+    group by 1,2--,3
     ) qq1
 left join(
     select distinct c.cnpj as cnpj_radar
@@ -48,7 +49,8 @@ left join(
     --and ccr.deleted_at is null
          ) qq3 on qq3.cpf_radar = qq1.cpf
 left join aereo.aereo_consignatario ac on ac.id = (select ac2.id from aereo.aereo_consignatario ac2 where ac2.cnpj = qq1.cnpj_importador limit 1)
-left join api.consignee cg on cg.id = (select cg2.id from api.consignee cg2 where cg2.cnpj = qq1.cnpj_importador limit 1);;
+--left join di_pu dp2 on dp2.id = (select dp3.id from di_pu dp3 where replace(replace(replace(left(dp3.responsavel,14),'-',''),'/',''),'.','') = qq1.cpf limit 1) -- trazer nome unico do despachante
+left join api.consignee cg on cg.id = (select cg2.id from api.consignee cg2 where cg2.cnpj = qq1.cnpj_importador limit 1)
   indexes: ["cnpj_importador"]
   sql_trigger_value: select current_date ;;
   }
