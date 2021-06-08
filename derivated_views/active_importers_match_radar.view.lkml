@@ -20,7 +20,7 @@ select
     replace(replace(replace(importador_cnpj,'-',''),'/',''),'.','') as cnpj_importador,
     count(*) as qtd_importacoes,
     sum(dp.total_dolares_loc_desc) as cif
-    from aereo.di_pu dp
+    from di_pu dp
     where data_hora_registro  >= current_date - interval '180' day
     and importador_cnpj is not null
     and importador_cnpj not like ''
@@ -48,11 +48,11 @@ left join(
     --and c2.deleted_at is null
     --and ccr.deleted_at is null
          ) qq3 on qq3.cpf_radar = qq1.cpf
-left join aereo.aereo_consignatario ac on ac.id = (select ac2.id from aereo.aereo_consignatario ac2 where ac2.cnpj = qq1.cnpj_importador limit 1)
+left join aereo_consignatario ac on ac.id = (select ac2.id from aereo_consignatario ac2 where ac2.cnpj = qq1.cnpj_importador limit 1)
 --left join di_pu dp2 on dp2.id = (select dp3.id from di_pu dp3 where replace(replace(replace(left(dp3.responsavel,14),'-',''),'/',''),'.','') = qq1.cpf limit 1) -- trazer nome unico do despachante
 left join api.consignee cg on cg.id = (select cg2.id from api.consignee cg2 where cg2.cnpj = qq1.cnpj_importador limit 1);;
-  indexes: ["cnpj_importador"]
-  sql_trigger_value: select current_date ;;
+#  indexes: ["cnpj_importador"]
+#  sql_trigger_value: select current_date ;;
   }
 
   dimension: id {
