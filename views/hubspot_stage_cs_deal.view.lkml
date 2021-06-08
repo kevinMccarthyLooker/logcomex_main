@@ -215,6 +215,16 @@ view: hubspot_stage_cs_deal {
     sql: ${TABLE}."was_under_renovation" ;;
   }
 
+  dimension: goal_value {
+    type: number
+    sql: ${TABLE}."goal_value" ;;
+  }
+
+  dimension: loss_amount {
+    type: number
+    sql: ${TABLE}."loss_amount" ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
