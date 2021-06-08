@@ -6,7 +6,7 @@ select
     ROW_NUMBER() OVER() as id,
     qq1.cpf,
     qq3.cpf_radar,
- --   dp2.responsavel,
+    qq1.responsavel,
     qq1.cnpj_importador,
     qq2.cnpj_radar,
     qq1.qtd_importacoes,
@@ -17,6 +17,13 @@ select
     from(
     select
     replace(replace(replace(left(dp.responsavel,14),'-',''),'/',''),'.','') as cpf,
+    case
+    when dp.responsavel = '003.702.169-97 - INDIANARA APARECIDA SILVEIRA SISTE' then '003.702.169-97 - INDIANARA APARECIDA SILVEIRA'
+    when dp.responsavel = '034.092.119-69 - EVELIZE FERNANDES' then '034.092.119-69 - EVELIZE FERNANDES VICENTE'
+    when dp.responsavel = '106.609.637-60 - PEDRO HENRIQUE DA SILVA MORAIS BRANDAO' then '106.609.637-60 - PEDRO HENRIQUE DA SILVA BRANDAO'
+    when dp.responsavel = '346.712.878-54 - DENISE RODRIGUES DE MOURA' then '346.712.878-54 - DENISE RODRIGUES DE MOURA MOREIRA'
+    else dp.responsavel
+    end as responsavel,
     replace(replace(replace(importador_cnpj,'-',''),'/',''),'.','') as cnpj_importador,
     count(*) as qtd_importacoes,
     sum(dp.total_dolares_loc_desc) as cif
@@ -24,8 +31,9 @@ select
     where data_hora_registro  >= current_date - interval '180' day
     and importador_cnpj is not null
     and importador_cnpj not like ''
+    and responsavel is not null
     and char_length(replace(replace(replace(importador_cnpj,'-',''),'/',''),'.','')) > 11 -- removendo cpfs
-    group by 1,2--,3
+    group by 1,2,3
     ) qq1
 left join(
     select distinct c.cnpj as cnpj_radar
@@ -44,15 +52,15 @@ left join(
     inner join api.certificate_consignee_radar ccr on c.id = ccr.consignee_id
     inner join api.certificate c2 on c2.id = ccr.certificate_id
     where char_length(c.cnpj) > 11 -- retirando cpfs
-    and c2.valid_until > now()
+    and c2.valid_until > current_date
     --and c2.deleted_at is null
     --and ccr.deleted_at is null
          ) qq3 on qq3.cpf_radar = qq1.cpf
 left join aereo_consignatario ac on ac.id = (select ac2.id from aereo_consignatario ac2 where ac2.cnpj = qq1.cnpj_importador limit 1)
 --left join di_pu dp2 on dp2.id = (select dp3.id from di_pu dp3 where replace(replace(replace(left(dp3.responsavel,14),'-',''),'/',''),'.','') = qq1.cpf limit 1) -- trazer nome unico do despachante
 left join api.consignee cg on cg.id = (select cg2.id from api.consignee cg2 where cg2.cnpj = qq1.cnpj_importador limit 1);;
-#  indexes: ["cnpj_importador"]
-#  sql_trigger_value: select current_date ;;
+  indexes: ["cnpj_importador"]
+  sql_trigger_value: select current_date ;;
   }
 
   dimension: id {
@@ -97,6 +105,11 @@ left join api.consignee cg on cg.id = (select cg2.id from api.consignee cg2 wher
     sql: ${TABLE}.nome_importador ;;
   }
 
+  dimension: responsavel {
+    type: string
+    sql: ${TABLE}.responsavel ;;
+  }
+
   dimension: match {
     type: yesno
     sql: ${TABLE}.match ;;
@@ -129,6 +142,11 @@ left join api.consignee cg on cg.id = (select cg2.id from api.consignee cg2 wher
   measure: count_distinct_cpf {
     type: count_distinct
     sql: ${cpf} ;;
+  }
+
+  measure: count_distinct_responsavel {
+    type: count_distinct
+    sql: ${responsavel} ;;
   }
 
   measure: sum_cif {
