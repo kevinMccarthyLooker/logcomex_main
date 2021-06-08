@@ -79,6 +79,8 @@ include: "/**/usuarios_clientes_acessos_plataforma.view.lkml"
 include: "/**/trials_acessos_plataforma.view.lkml"
 include: "/**/health_score_2021.view.lkml"
 include: "/**/**/status_integracao.view.lkml"
+include: "/**/**/tracking_follow_consignee.view.lkml"
+
 
 
 datagroup: internal_only_datagroup {
@@ -199,6 +201,34 @@ explore: consignee_radar {
     }
 }
 
+explore: consignee_seguir_embarque {
+  view_name: consignee
+
+  join: customer {
+    sql_on: ${consignee.customer_id}=${customer.id};;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: customer_plan {
+    sql_on: ${customer.id}=${customer_plan.customer_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: plan_complete {
+    sql_on: ${customer_plan.plan_complete_id}=${plan_complete.id} ;;
+    relationship: many_to_one
+    type: left_outer
+  }
+
+  join: tracking_follow_consignee {
+    sql_on:${tracking_follow_consignee.consignee_id} = ${consignee.id};;
+    relationship: one_to_many
+    type: inner
+  }
+}
+
 
 explore: usage {
   sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;;
@@ -241,19 +271,19 @@ explore: usage {
 
   join: hubspot_tickets {
     sql_on: ${customer_api_relations.id} = ${hubspot_tickets.customer_api_relations_id} ;;
-    relationship: one_to_one
+    relationship: one_to_many
     type: left_outer
   }
 
   join: hubspot_cs_deal {
     sql_on: ${customer_api_relations.id} = ${hubspot_cs_deal.customer_api_relations_id} ;;
-    relationship: one_to_one
+    relationship: one_to_many
     type: left_outer
   }
 
   join: hubspot_stage_cs_deal {
     sql_on: ${customer_api_relations.id} = ${hubspot_stage_cs_deal.customer_api_relations_id} ;;
-    relationship: one_to_one
+    relationship: one_to_many
     type: left_outer
   }
 
@@ -750,3 +780,19 @@ explore: cs_novo_health_score {
   }
 
 }
+
+#explore: tickets_hubspot {
+#  view_name: customer
+#  sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;; PROBLEMA ! remove as empresas com null no outer join, limitando os tickets
+#  join: customer_api_relations{
+#    sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
+#    relationship: one_to_many
+#    type: left_outer
+#  }
+#
+#  join: hubspot_tickets {
+#    sql_on: ${customer_api_relations.id} = ${hubspot_tickets.customer_api_relations_id} ;;
+#    relationship: one_to_many
+#    type: full_outer
+#  }
+#}

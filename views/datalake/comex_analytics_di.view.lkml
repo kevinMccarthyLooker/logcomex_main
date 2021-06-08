@@ -445,4 +445,19 @@ view: comex_analytics_di {
     type: string
     sql: replace(replace(${TABLE}."cpf_representante", '.', ''),'-','');;
   }
+
+  dimension_group: presenca_x_registro {
+    type: duration
+    intervals: [day, hour, minute]
+    sql_start: ${TABLE}.data_chegada;;
+    sql_end: ${TABLE}.data_hora_registro;;
+  }
+
+  dimension_group: presenca_x_desembaraco {
+    type: duration
+    intervals: [day, hour, minute]
+    sql_start: ${TABLE}.data_chegada;;
+    sql_end: ${TABLE}.data_desembaraco;;
+  }
+
 }

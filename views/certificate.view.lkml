@@ -178,4 +178,10 @@ view: certificate {
     type: count
     drill_fields: [id,created_date,owner_cpf, owner_name, profile, valid_until_date,customer_id]
   }
+
+  measure: count_distinct_cpf {
+    type: count_distinct
+    sql: ${owner_cpf} ;;
+    drill_fields: [id,created_date,owner_cpf, owner_name, profile, valid_until_date,customer_id]
+  }
 }

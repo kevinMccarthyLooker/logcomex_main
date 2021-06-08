@@ -22,7 +22,7 @@ view: hubspot_tickets {
           ) as qq1 ;;
   }
 
-  drill_fields: [id]
+#  drill_fields: [id]
 
   dimension: id {
     primary_key: yes
@@ -166,6 +166,17 @@ view: hubspot_tickets {
   dimension: nps_score {
     type: number
     sql: ${TABLE}."nps_score" ;;
+  }
+
+  dimension: nps_score_type {
+    type: string
+    sql: case
+         when ${nps_score} is null then 'Sem Resposta'
+         when ${nps_score} between 6 and 7 then 'Satisfeito'
+         when ${nps_score} between 3 and 5 then 'Neutro'
+         when ${nps_score} between 1 and 2 then 'Insatisfeito'
+         else ${nps_score}::text--'Verificar'
+         end;;
   }
 
   dimension: satisfacao_normalizado {
@@ -321,6 +332,24 @@ view: hubspot_tickets {
 
   measure: count {
     type: count
-    drill_fields: [id]
+    drill_fields: [id,ticket_id,customer.name,treated_priority,ticket_owner,squad,nps_score,create_date_ticket_date,close_date_ticket_date]
+  }
+
+  measure: count_satisfeitos {
+    type: count
+    filters: [nps_score: "6,7"]
+    drill_fields: [id,ticket_id,customer.name,treated_priority,ticket_owner,squad,nps_score,create_date_ticket_date,close_date_ticket_date]
+  }
+
+  measure: count_neutros{
+    type: count
+    filters: [nps_score: "3,4,5"]
+    drill_fields: [id,ticket_id,customer.name,treated_priority,ticket_owner,squad,nps_score,create_date_ticket_date,close_date_ticket_date]
+  }
+
+  measure: count_insatisfeitos {
+    type: count
+    filters: [nps_score: "1,2"]
+    drill_fields: [id,ticket_id,customer.name,treated_priority,ticket_owner,squad,nps_score,create_date_ticket_date,close_date_ticket_date]
   }
 }
