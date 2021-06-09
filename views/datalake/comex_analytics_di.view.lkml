@@ -429,12 +429,12 @@ view: comex_analytics_di {
   measure: di_total {
     type: count_distinct
     sql: ${TABLE}."di_completo";;
+    drill_fields: [DI*]
   }
 
   measure: valor_multa_total {
     type: sum
     sql: ${TABLE}."val_multa";;
-    drill_fields: [DI*]
   }
 
   measure: data_hora_registro {
