@@ -434,6 +434,7 @@ view: comex_analytics_di {
   measure: valor_multa_total {
     type: sum
     sql: ${TABLE}."val_multa";;
+    drill_fields: [DI*]
   }
 
   measure: data_hora_registro {
@@ -458,6 +459,16 @@ view: comex_analytics_di {
     intervals: [day, hour, minute]
     sql_start: ${TABLE}.data_chegada;;
     sql_end: ${TABLE}.data_desembaraco;;
+  }
+
+  set: DI {
+    fields: [
+      di_number,
+      cpf_representante,
+      nome_representante,
+      importador_cnpj,
+      importador_nome,
+    ]
   }
 
 }
