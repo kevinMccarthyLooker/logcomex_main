@@ -399,31 +399,37 @@ view: comex_analytics_di {
   measure: valor_vmle_us {
     type: sum
     sql: ${TABLE}."val_vmle_us";;
+    drill_fields: [DI*]
   }
 
   measure: valor_vmle_reais {
     type: sum
     sql: ${TABLE}."val_vmle_reais";;
+    drill_fields: [DI*]
   }
 
   measure: valor_vmld_us {
     type: sum
     sql: ${TABLE}."val_vmld_us";;
+    drill_fields: [DI*]
   }
 
   measure: valor_vmld_reais {
     type: sum
     sql: ${TABLE}."val_vmld_reais";;
+    drill_fields: [DI*]
   }
 
   measure: peso_bruto_total {
     type: sum
     sql: ${TABLE}."peso_bruto";;
+    drill_fields: [DI*]
   }
 
   measure: peso_liquido_total {
     type: sum
     sql: ${TABLE}."peso_liquido";;
+    drill_fields: [DI*]
   }
 
   measure: di_total {
@@ -435,11 +441,13 @@ view: comex_analytics_di {
   measure: valor_multa_total {
     type: sum
     sql: ${TABLE}."val_multa";;
+    drill_fields: [DI*]
   }
 
   measure: data_hora_registro {
     type: date
     sql: MAX (${TABLE}."data_hora_registro");;
+    drill_fields: [DI*]
   }
 
   measure: representante_cpf{
@@ -452,6 +460,7 @@ view: comex_analytics_di {
     intervals: [day, hour, minute]
     sql_start: ${TABLE}.data_chegada;;
     sql_end: ${TABLE}.data_hora_registro;;
+    drill_fields: [DI*]
   }
 
   dimension_group: presenca_x_desembaraco {
@@ -459,6 +468,7 @@ view: comex_analytics_di {
     intervals: [day, hour, minute]
     sql_start: ${TABLE}.data_chegada;;
     sql_end: ${TABLE}.data_desembaraco;;
+    drill_fields: [DI*]
   }
 
   set: DI {
