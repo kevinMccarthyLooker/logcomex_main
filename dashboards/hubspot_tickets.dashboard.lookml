@@ -6,7 +6,7 @@
   - title: Tickets
     name: Tickets
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: looker_grid
     fields: [customer.name, customer.id, customer.executive_name, hubspot_tickets.ticket_owner,
       hubspot_tickets.ticket_id, hubspot_tickets.treated_priority, hubspot_tickets.squad,
@@ -70,7 +70,7 @@
   - title: Squad - Tickets
     name: Squad - Tickets
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: looker_bar
     fields: [hubspot_tickets.squad, hubspot_tickets.count]
     filters:
@@ -139,7 +139,7 @@
   - title: Categoria - Tickets
     name: Categoria - Tickets
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: looker_bar
     fields: [hubspot_tickets.count, hubspot_tickets.category]
     filters:
@@ -208,7 +208,7 @@
   - title: Fechados - Total
     name: Fechados - Total
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: single_value
     fields: [hubspot_tickets.count]
     filters:
@@ -285,7 +285,7 @@
   - title: Abertos - Total
     name: Abertos - Total
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: single_value
     fields: [hubspot_tickets.count]
     filters:
@@ -362,7 +362,7 @@
   - title: Origem - Tickets
     name: Origem - Tickets
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: looker_bar
     fields: [hubspot_tickets.count, hubspot_tickets.source_type]
     filters:
@@ -431,7 +431,7 @@
   - title: "% SLA - Primeira Resposta"
     name: "% SLA - Primeira Resposta"
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: looker_bar
     fields: [hubspot_tickets.count, hubspot_tickets.sla_p_resposta_no_prazo]
     pivots: [hubspot_tickets.sla_p_resposta_no_prazo]
@@ -511,7 +511,7 @@
   - title: "% SLA - Resposta"
     name: "% SLA - Resposta"
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: looker_bar
     fields: [hubspot_tickets.count, hubspot_tickets.sla_resposta_no_prazo, hubspot_tickets.treated_priority]
     pivots: [hubspot_tickets.sla_resposta_no_prazo]
@@ -593,7 +593,7 @@
   - title: Atendimento N1 - Mediana
     name: Atendimento N1 - Mediana
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: single_value
     fields: [median_of_attendance_n1_time]
     filters:
@@ -676,7 +676,7 @@
   - title: Atendimento N2 - Mediana
     name: Atendimento N2 - Mediana
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: single_value
     fields: [median_of_attendance_n2_time]
     filters:
@@ -759,7 +759,7 @@
   - title: Atendimento N3 - Mediana
     name: Atendimento N3 - Mediana
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: single_value
     fields: [median_of_attendance_n3_time]
     filters:
@@ -851,7 +851,7 @@
   - title: Satisfação
     name: Satisfação
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: looker_column
     fields: [hubspot_tickets.nps_score_type, hubspot_tickets.count]
     filters:
@@ -953,7 +953,7 @@
     note_text: 'Merged Result, Filtros não se aplicam nessa visualização. '
     merged_queries:
     - model: internal_only
-      explore: usage
+      explore: tickets_hubspot_with_fake_customers
       type: looker_column
       fields: [hubspot_tickets.create_date_ticket_month, hubspot_tickets.count]
       fill_fields: [hubspot_tickets.create_date_ticket_month]
@@ -994,7 +994,7 @@
       interpolation: linear
       defaults_version: 1
     - model: internal_only
-      explore: usage
+      explore: tickets_hubspot_with_fake_customers
       type: table
       fields: [hubspot_tickets.count, hubspot_tickets.close_date_ticket_month]
       fill_fields: [hubspot_tickets.close_date_ticket_month]
@@ -1051,7 +1051,7 @@
   - title: "% SLA - Resposta (Geral)"
     name: "% SLA - Resposta (Geral)"
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     type: looker_bar
     fields: [hubspot_tickets.count, hubspot_tickets.sla_resposta_no_prazo]
     pivots: [hubspot_tickets.sla_resposta_no_prazo]
@@ -1142,7 +1142,7 @@
       display: inline
       options: []
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     listens_to_filters: []
     field: hubspot_tickets.situation
   - name: Service
@@ -1156,7 +1156,7 @@
       display: popover
       options: []
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     listens_to_filters: []
     field: hubspot_tickets.service
   - name: Customer Name
@@ -1170,7 +1170,7 @@
       display: popover
       options: []
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     listens_to_filters: []
     field: customer.name
   - name: Squad
@@ -1184,7 +1184,7 @@
       display: popover
       options: []
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     listens_to_filters: []
     field: hubspot_tickets.squad
   - name: Ticket Owner
@@ -1198,7 +1198,7 @@
       display: popover
       options: []
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     listens_to_filters: []
     field: hubspot_tickets.ticket_owner
   - name: Guardião
@@ -1212,7 +1212,7 @@
       display: popover
       options: []
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     listens_to_filters: []
     field: customer.executive_name
   - name: Close Date Ticket
@@ -1226,7 +1226,7 @@
       display: popover
       options: []
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     listens_to_filters: []
     field: hubspot_tickets.close_date_ticket_month
   - name: Deleted Date
@@ -1240,6 +1240,6 @@
       display: popover
       options: []
     model: internal_only
-    explore: usage
+    explore: tickets_hubspot_with_fake_customers
     listens_to_filters: []
     field: hubspot_tickets.deleted_date
