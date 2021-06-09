@@ -80,6 +80,7 @@ include: "/**/trials_acessos_plataforma.view.lkml"
 include: "/**/health_score_2021.view.lkml"
 include: "/**/**/status_integracao.view.lkml"
 include: "/**/**/tracking_follow_consignee.view.lkml"
+#include: "/**/**/hubspot_tickets.dashboard.lookml"
 
 
 
@@ -781,18 +782,18 @@ explore: cs_novo_health_score {
 
 }
 
-#explore: tickets_hubspot {
-#  view_name: customer
-#  sql_always_where: ${customer.fake_customer}=false and ${customer.deleted_raw} is null;; PROBLEMA ! remove as empresas com null no outer join, limitando os tickets
-#  join: customer_api_relations{
-#    sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
-#    relationship: one_to_many
-#    type: left_outer
-#  }
-#
-#  join: hubspot_tickets {
-#    sql_on: ${customer_api_relations.id} = ${hubspot_tickets.customer_api_relations_id} ;;
-#    relationship: one_to_many
-#    type: full_outer
-#  }
-#}
+ explore: tickets_hubspot_with_fake_customers { # devido exitir tickets internos "Logcomex S/A", o explore deve permitir a empresa fake dos tickets da Logcomex
+   view_name: customer
+   sql_always_where: ${customer.deleted_raw} is null and (${customer.fake_customer}=false or ${customer.id} in (11,2643));;
+   join: customer_api_relations{
+     sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
+     relationship: one_to_many
+     type: left_outer
+   }
+
+   join: hubspot_tickets {
+     sql_on: ${customer_api_relations.id} = ${hubspot_tickets.customer_api_relations_id} ;;
+     relationship: one_to_many
+     type: left_outer
+   }
+ }
