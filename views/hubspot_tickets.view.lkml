@@ -18,6 +18,7 @@ view: hubspot_tickets {
             end) as tempo_util
             from hubspot_tickets ht
             left join generate_series(date(ht.create_date_ticket) ,date(ht.close_date_ticket), '1 day'::interval) s on true
+            where ht.deleted_at is null
             group by ht.id
           ) as qq1 ;;
   }
