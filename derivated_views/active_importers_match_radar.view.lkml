@@ -42,8 +42,9 @@ left join(
     inner join api.certificate c2 on c2.id = ccr.certificate_id
     where char_length(c.cnpj) > 11 -- retirando cpfs
     and c2.valid_until > now()
-    --and c2.deleted_at is null
-    --and ccr.deleted_at is null
+    and c2.deleted_at is null -- tirando certificados deletados
+    and ccr.deleted_at is null -- tirando deletados do radar
+    and c.deleted_at is null  -- tirando consignees deletados
          ) qq2 on qq2.cnpj_radar = qq1.cnpj_importador
 left join(
     select distinct c2.owner_cpf as cpf_radar,
@@ -53,11 +54,11 @@ left join(
     inner join api.certificate c2 on c2.id = ccr.certificate_id
     where char_length(c.cnpj) > 11 -- retirando cpfs
     and c2.valid_until > current_date
-    --and c2.deleted_at is null
-    --and ccr.deleted_at is null
+    and c2.deleted_at is null -- tirando certificados deletados
+    and ccr.deleted_at is null -- tirando deletados do radar
+    and c.deleted_at is null  -- tirando consignees deletados
          ) qq3 on qq3.cpf_radar = qq1.cpf
 left join aereo_consignatario ac on ac.id = (select ac2.id from aereo_consignatario ac2 where ac2.cnpj = qq1.cnpj_importador limit 1)
---left join di_pu dp2 on dp2.id = (select dp3.id from di_pu dp3 where replace(replace(replace(left(dp3.responsavel,14),'-',''),'/',''),'.','') = qq1.cpf limit 1) -- trazer nome unico do despachante
 left join api.consignee cg on cg.id = (select cg2.id from api.consignee cg2 where cg2.cnpj = qq1.cnpj_importador limit 1);;
   #indexes: ["cnpj_importador"]
   #sql_trigger_value: select current_date ;;
