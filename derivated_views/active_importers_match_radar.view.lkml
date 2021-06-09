@@ -138,6 +138,7 @@ left join api.consignee cg on cg.id = (select cg2.id from api.consignee cg2 wher
   measure: count_distinct_cnpj {
     type: count_distinct
     sql: ${cnpj_importador} ;;
+    drill_fields: [responsavel, cnpj_importador, nome_importador]
   }
 
   measure: count_distinct_cpf {
