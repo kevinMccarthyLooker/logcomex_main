@@ -180,7 +180,7 @@ view: certificate {
   }
 
   measure: count_not_deleted {
-    filters: [deleted_date: "NULL"]
+    filters: [deleted_date: "NULL",is_valid: "yes"]
     type: count
     drill_fields: [id,created_date,owner_cpf, owner_name, profile, valid_until_date,customer_id]
   }
