@@ -259,7 +259,7 @@ view: customer_plan {
 
     ]
   }
-  set: customer_detail2 {
+  set: customer_detail2 {  # detalhe criado para exibir os contratos nao deletados, a principio visualização trials do tracking
     fields: [
       customer_id,
       customer.name,
@@ -269,7 +269,7 @@ view: customer_plan {
       expiration_date,
       trial_start_date,
       trial_end_date,
-      certificate.count
+      certificate.count_not_deleted
     ]
   }
 }

@@ -179,8 +179,8 @@ view: certificate {
     drill_fields: [id,created_date,owner_cpf, owner_name, profile, valid_until_date,customer_id]
   }
 
-  measure: count_actives {  #contabiliza apenas não deletados e não expirados
-    filters: [deleted_date: "NULL",is_valid: "yes"]
+  measure: count_not_deleted {  #contabiliza apenas não deletados
+    filters: [deleted_date: "NULL"]
     type: count
     drill_fields: [id,created_date,owner_cpf, owner_name, profile, valid_until_date,customer_id]
   }
