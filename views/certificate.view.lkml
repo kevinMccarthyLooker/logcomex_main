@@ -179,6 +179,12 @@ view: certificate {
     drill_fields: [id,created_date,owner_cpf, owner_name, profile, valid_until_date,customer_id]
   }
 
+  measure: count_not_deleted {
+    filters: [deleted_date: "NULL"]
+    type: count
+    drill_fields: [id,created_date,owner_cpf, owner_name, profile, valid_until_date,customer_id]
+  }
+
   measure: count_distinct_cpf {
     type: count_distinct
     sql: ${owner_cpf} ;;
