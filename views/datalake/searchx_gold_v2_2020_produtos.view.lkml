@@ -419,6 +419,18 @@ view: searchx_gold_v2_2020_produtos {
     sql: ${TABLE}.Produto ;;
   }
 
+  dimension: produto_2 {
+    type: string
+    sql:
+    case
+    when ${cdncm_compl} = '85167920' then 'Fritadeira Elétrica'
+    when ${cdncm_compl} = '85167910' then 'Panelas'
+    when ${cdncm_compl} = '84184000' then 'Freezer'
+    when ${cdncm_compl} = '85163200' then 'Escova Giratória'
+    else null
+    end;;
+  }
+
   dimension: qtd_comerc {
     type: string
     sql: ${TABLE}.qtd_comerc ;;
