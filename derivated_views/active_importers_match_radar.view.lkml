@@ -60,8 +60,8 @@ left join(
          ) qq3 on qq3.cpf_radar = qq1.cpf
 left join aereo_consignatario ac on ac.id = (select ac2.id from aereo_consignatario ac2 where ac2.cnpj = qq1.cnpj_importador limit 1)
 left join api.consignee cg on cg.id = (select cg2.id from api.consignee cg2 where cg2.cnpj = qq1.cnpj_importador limit 1);;
-  #indexes: ["cnpj_importador"]
-  #sql_trigger_value: select current_date ;;
+indexes: ["cnpj_importador"]
+sql_trigger_value: select current_date ;;
   }
 
   dimension: id {

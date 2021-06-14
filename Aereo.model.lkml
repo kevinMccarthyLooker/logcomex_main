@@ -6,6 +6,7 @@ include: "/views/aereo_awb_details.view.lkml"
 include: "/views/company_info.view.lkml"
 include: "/views/company.view.lkml"
 include: "/views/recinto_aduaneiro.view.lkml"
+include: "/**/active_importers_match_radar.view.lkml"
 
 #explore: aereo_dados_no_tempo {}
 
@@ -33,4 +34,8 @@ explore: aereo_awb_details {
 explore: aereo_details {
   from: aereo_awb_details
   label: "Aereo"
+}
+
+explore: active_importers_match_radar {
+  label: "Importadores Ativos e no Radar"
 }
