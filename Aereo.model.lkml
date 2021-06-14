@@ -7,7 +7,7 @@ include: "/views/company_info.view.lkml"
 include: "/views/company.view.lkml"
 include: "/views/recinto_aduaneiro.view.lkml"
 include: "/**/active_importers_match_radar.view.lkml"
-include: "/**/despachantes.dashboard.lookml"
+#include: "/**/despachantes.dashboard.lookml"
 
 #explore: aereo_dados_no_tempo {}
 
