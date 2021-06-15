@@ -10,9 +10,9 @@ view: status_integracao {
     else null
     end as tipo_plano,
     case
-    when qq1.id in (10,16,77,106) then true
-    else false
-    end as empresa_isenta
+    when qq1.id in (10,16,77,106) then 'Isenta de Pagamento'
+    else 'Não Isenta de Pagamento'
+    end as faturamento
     from
       (
         select distinct customer.id, customer.name, customer_api_relations.id_hubspot_customer, customer_api_relations.id_omie_customer -- empresas com plano e/ou trial ativo
@@ -70,6 +70,11 @@ view: status_integracao {
   dimension: tipo_plano {
     type: string
     sql: ${TABLE}."tipo_plano" ;;
+  }
+
+  dimension: faturamento {
+    type: string
+    sql: ${TABLE}."faturamento" ;;
   }
 
   measure: count {
