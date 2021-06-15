@@ -300,6 +300,10 @@ view: hubspot_tickets {
   dimension: ticket_id {
     type: number
     sql: ${TABLE}."ticket_id" ;;
+    link: {
+      label: "Hubspot"
+      url: "https://app.hubspot.com/contacts/5455473/ticket/{{ value }}"
+    }
   }
 
   dimension: ticket_owner {
