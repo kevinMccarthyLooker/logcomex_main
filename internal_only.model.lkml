@@ -782,18 +782,19 @@ explore: cs_novo_health_score {
 
 }
 
- explore: tickets_hubspot_with_fake_customers { # devido exitir tickets internos "Logcomex S/A", o explore deve permitir a empresa fake dos tickets da Logcomex
-   view_name: customer
-   sql_always_where: ${customer.deleted_raw} is null and (${customer.fake_customer}=false or ${customer.id} in (11,2643));;
+ explore: tickets_hubspot_with_fake_customers { # explore construido para permitir tickets de empresas fakes "Logcomex S/A" e tickets nao associados
+   view_name: hubspot_tickets
+   sql_always_where: ${customer.deleted_raw} is null and ${customer_api_relations.deleted_raw} is null  ;;
+
    join: customer_api_relations{
-     sql_on: ${customer.id}=${customer_api_relations.id_customer} ;;
-     relationship: one_to_many
+     sql_on: ${hubspot_tickets.customer_api_relations_id}=${customer_api_relations.id} ;;
+     relationship: many_to_one
      type: left_outer
    }
 
-   join: hubspot_tickets {
-     sql_on: ${customer_api_relations.id} = ${hubspot_tickets.customer_api_relations_id} ;;
-     relationship: one_to_many
+   join: customer {
+     sql_on: ${customer_api_relations.id_customer} = ${customer.id} ;;
+     relationship: many_to_one
      type: left_outer
    }
  }
