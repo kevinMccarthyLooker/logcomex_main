@@ -240,6 +240,12 @@ view: customer_plan {
     filters: [trial: "Yes", plan_complete.service_id: "5"]
   }
 
+  measure: active_trial_c_analytics_count { # medida para contabilizar apenas trials comex analytics
+    type: count
+    drill_fields: [customer_detail*]
+    filters: [trial: "Yes", plan_complete.service_id: "20"]
+  }
+
   measure: count_distinct_customers {
     type: count_distinct
     sql: ${customer_id} ;;
