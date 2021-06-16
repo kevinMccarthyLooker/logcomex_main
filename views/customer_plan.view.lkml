@@ -234,6 +234,12 @@ view: customer_plan {
     filters: [trial: "Yes"]
   }
 
+  measure: active_trial_tracking_count { # medida para contabilizar apenas trials tracking
+    type: count
+    drill_fields: [customer_detail*]
+    filters: [trial: "Yes", plan_complete.service_id: "5"]
+  }
+
   measure: count_distinct_customers {
     type: count_distinct
     sql: ${customer_id} ;;
