@@ -10,8 +10,8 @@ view: comex_analytics_di {
 
   dimension: di_number {
     type: number
-    sql: ${TABLE}.di_completo
-    sql: replace(${TABLE}."di_number", '.', '');;
+   ## sql: ${TABLE}.di_completo
+    sql: replace(${TABLE}."di_completo", '.', '');;
   }
 
   dimension_group: data_hora_registro {
