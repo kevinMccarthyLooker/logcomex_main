@@ -80,7 +80,6 @@ include: "/**/trials_acessos_plataforma.view.lkml"
 include: "/**/health_score_2021.view.lkml"
 include: "/**/**/status_integracao.view.lkml"
 include: "/**/**/tracking_follow_consignee.view.lkml"
-#include: "/**/**/hubspot_tickets.dashboard.lookml"
 
 
 
