@@ -10,8 +10,7 @@ view: comex_analytics_di {
 
   dimension: di_number {
     type: number
-   ## sql: ${TABLE}.di_completo
-    sql: replace(${TABLE}."di_completo", '.', '');;
+    sql: ${TABLE}.di_completo
   }
 
   dimension_group: data_hora_registro {
@@ -327,7 +326,6 @@ view: comex_analytics_di {
   set: detail {
     fields: [
       di_number,
-      data_hora_registro_time,
       cpf_representante,
       nome_representante,
       tipo_recolhimento,
