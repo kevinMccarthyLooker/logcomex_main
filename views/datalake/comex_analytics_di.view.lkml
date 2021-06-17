@@ -10,7 +10,8 @@ view: comex_analytics_di {
 
   dimension: di_number {
     type: number
-    sql: ${TABLE}.di_completo ;;
+    sql: ${TABLE}.di_completo
+    sql: replace(${TABLE}."di_number", '.', '');;
   }
 
   dimension_group: data_hora_registro {
@@ -399,25 +400,21 @@ view: comex_analytics_di {
   measure: valor_vmle_us {
     type: sum
     sql: ${TABLE}."val_vmle_us";;
-    drill_fields: [DI*]
   }
 
   measure: valor_vmle_reais {
     type: sum
     sql: ${TABLE}."val_vmle_reais";;
-    drill_fields: [DI*]
   }
 
   measure: valor_vmld_us {
     type: sum
     sql: ${TABLE}."val_vmld_us";;
-    drill_fields: [DI*]
   }
 
   measure: valor_vmld_reais {
     type: sum
     sql: ${TABLE}."val_vmld_reais";;
-    drill_fields: [DI*]
   }
 
   measure: peso_bruto_total {
