@@ -916,11 +916,13 @@ view: search_estrutura_atrib_st {
   measure: qtde_comerc_sum {
     type: sum
     sql: ${qtd_comerc};;
+    value_format: "#,##0.00"
   }
 
   measure: val_fob_un_us_sum {
     type: sum
     sql: ${val_fob_un_us}" ;;
+    value_format: "$#,##0.00;($#,##0.00)"
   }
 
   measure: val_fob_un_us_num_avg {
