@@ -647,17 +647,17 @@ view: search_estrutura_atrib_st {
     sql: ${TABLE}."desc_prodt" ;;
   }
 
-  dimension: dsc_departamento {
+  dimension: departamento {
     type: string
     sql: ${TABLE}."dsc_departamento" ;;
   }
 
-  dimension: dsc_familia {
+  dimension: familia {
     type: string
     sql: ${TABLE}."dsc_familia" ;;
   }
 
-  dimension: dsc_linha {
+  dimension: linha {
     type: string
     sql: ${TABLE}."dsc_linha" ;;
   }
