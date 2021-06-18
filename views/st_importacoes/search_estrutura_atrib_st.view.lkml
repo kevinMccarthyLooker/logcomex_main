@@ -918,6 +918,11 @@ view: search_estrutura_atrib_st {
     sql: ${qtd_comerc};;
   }
 
+  measure: val_fob_un_us_sum {
+    type: sum
+    sql: ${val_fob_un_us}" ;;
+  }
+
   measure: val_fob_un_us_num_avg {
     type: average
     sql: ${val_fob_un_us};;
