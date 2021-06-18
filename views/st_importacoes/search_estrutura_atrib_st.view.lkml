@@ -662,7 +662,7 @@ view: search_estrutura_atrib_st {
     sql: ${TABLE}."dsc_linha" ;;
   }
 
-  dimension: dsc_subfamilia {
+  dimension: subfamilia {
     type: string
     sql: ${TABLE}."dsc_subfamilia" ;;
   }
