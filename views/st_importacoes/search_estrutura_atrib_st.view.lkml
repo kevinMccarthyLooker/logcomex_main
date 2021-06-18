@@ -897,7 +897,7 @@ view: search_estrutura_atrib_st {
         end;;
   }
 
-  measure: count {
+  measure: Registros {
     type: count
     drill_fields: []
   }
@@ -910,7 +910,7 @@ view: search_estrutura_atrib_st {
   measure: Valor_FOB {
     type: sum
     sql: ${val_vmle_us_subitem};;
-    value_format: "$0;($0)"
+    value_format: "$#,##0.00;($#,##0.00)"
   }
 
   measure: qtde_comerc_sum {
