@@ -907,9 +907,10 @@ view: search_estrutura_atrib_st {
 #    sql: ${val_vmld_us_subitem};;
 #  }
 
-  measure: fob_sum {
+  measure: Valor_FOB {
     type: sum
     sql: ${val_vmle_us_subitem};;
+    value_format: "$0;($0)"
   }
 
   measure: qtde_comerc_sum {
