@@ -919,11 +919,11 @@ view: search_estrutura_atrib_st {
     value_format: "#,##0.00"
   }
 
-  measure: val_fob_un_us_sum {
-    type: sum
-    sql: ${val_fob_un_us};;
-    value_format: "$#,##0.00;($#,##0.00)"
-  }
+#  measure: val_fob_un_us_sum {
+#    type: sum
+#    sql: ${val_fob_un_us};;
+#    value_format: "$#,##0.00;($#,##0.00)"
+#  }
 
   measure: val_fob_un_us_num_avg {
     type: average
