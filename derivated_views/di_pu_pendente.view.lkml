@@ -2,7 +2,7 @@ view: di_pu_pendente {
   derived_table: {
     sql: SELECT
             di_control.data_hora_registro AS data_hora_registro,
-            count(1)
+            count(1) as num_di_pu_pend
          FROM di_control
          LEFT JOIN di_control_pu ON di_control.di_number = di_control_pu.di_number
          WHERE di_control.data_hora_registro >= '2021/04/01'
