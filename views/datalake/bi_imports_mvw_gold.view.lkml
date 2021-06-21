@@ -351,4 +351,17 @@ view: bi_imports_mvw_gold {
     filters: [c40_parcial: ">0"]
     sql: ${TABLE}."vlfretetotal" /  ${TABLE}."c40_parcial";;
   }
+
+  measure: minfrete {
+    type: number
+    value_format: "$#.00;($#.00)"
+    sql: MIN ${TABLE}."vlfretetotal" ;;
+  }
+
+  measure: maxfrete {
+    type: number
+    value_format: "$#.00;($#.00)"
+    sql: MAX ${TABLE}."vlfretetotal" ;;
+  }
+
 }

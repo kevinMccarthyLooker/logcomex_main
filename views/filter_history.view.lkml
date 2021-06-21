@@ -136,6 +136,20 @@ view: filter_history {
     drill_fields: [id]
   }
 
+  measure: count_consulta_last_60_days {
+    type: count_distinct
+    filters: [created_date: "60 days"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
+
+  measure: count_consulta_last_90_days {
+    type: count_distinct
+    filters: [created_date: "90 days"]
+    sql: ${source_hash} ;;
+    drill_fields: [id]
+  }
+
   measure: count_consulta_this_month {
     type: count_distinct
     filters: [created_date: "this month"]

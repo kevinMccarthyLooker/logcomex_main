@@ -8,7 +8,11 @@ view: status_integracao {
     when (qq2.id is not null and qq3.id is not null) then 'Plano e Trial Ativo'
     when (qq2.id is null and qq3.id is not null) then 'Apenas Trial Ativo'
     else null
-    end as tipo_plano
+    end as tipo_plano,
+    case
+    when qq1.id in (10,16,77,106) then 'Isenta de Pagamento'
+    else 'Não Isenta de Pagamento'
+    end as faturamento
     from
       (
         select distinct customer.id, customer.name, customer_api_relations.id_hubspot_customer, customer_api_relations.id_omie_customer -- empresas com plano e/ou trial ativo
@@ -66,6 +70,11 @@ view: status_integracao {
   dimension: tipo_plano {
     type: string
     sql: ${TABLE}."tipo_plano" ;;
+  }
+
+  dimension: faturamento {
+    type: string
+    sql: ${TABLE}."faturamento" ;;
   }
 
   measure: count {

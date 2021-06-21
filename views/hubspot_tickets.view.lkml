@@ -18,11 +18,12 @@ view: hubspot_tickets {
             end) as tempo_util
             from hubspot_tickets ht
             left join generate_series(date(ht.create_date_ticket) ,date(ht.close_date_ticket), '1 day'::interval) s on true
+            where ht.deleted_at is null
             group by ht.id
           ) as qq1 ;;
   }
 
-  drill_fields: [id]
+#  drill_fields: [id]
 
   dimension: id {
     primary_key: yes
@@ -168,6 +169,17 @@ view: hubspot_tickets {
     sql: ${TABLE}."nps_score" ;;
   }
 
+  dimension: nps_score_type {
+    type: string
+    sql: case
+         when ${nps_score} is null then 'Sem Resposta'
+         when ${nps_score} between 6 and 7 then 'Satisfeito'
+         when ${nps_score} between 3 and 5 then 'Neutro'
+         when ${nps_score} between 1 and 2 then 'Insatisfeito'
+         else ${nps_score}::text--'Verificar'
+         end;;
+  }
+
   dimension: satisfacao_normalizado {
     type: number
     sql:
@@ -288,6 +300,10 @@ view: hubspot_tickets {
   dimension: ticket_id {
     type: number
     sql: ${TABLE}."ticket_id" ;;
+    link: {
+      label: "Hubspot"
+      url: "https://app.hubspot.com/contacts/5455473/ticket/{{ value }}"
+    }
   }
 
   dimension: ticket_owner {
@@ -321,6 +337,24 @@ view: hubspot_tickets {
 
   measure: count {
     type: count
-    drill_fields: [id]
+    drill_fields: [id,ticket_id,customer.name,treated_priority,ticket_owner,squad,nps_score,create_date_ticket_date,close_date_ticket_date]
+  }
+
+  measure: count_satisfeitos {
+    type: count
+    filters: [nps_score: "6,7"]
+    drill_fields: [id,ticket_id,customer.name,treated_priority,ticket_owner,squad,nps_score,create_date_ticket_date,close_date_ticket_date]
+  }
+
+  measure: count_neutros{
+    type: count
+    filters: [nps_score: "3,4,5"]
+    drill_fields: [id,ticket_id,customer.name,treated_priority,ticket_owner,squad,nps_score,create_date_ticket_date,close_date_ticket_date]
+  }
+
+  measure: count_insatisfeitos {
+    type: count
+    filters: [nps_score: "1,2"]
+    drill_fields: [id,ticket_id,customer.name,treated_priority,ticket_owner,squad,nps_score,create_date_ticket_date,close_date_ticket_date]
   }
 }

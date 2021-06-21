@@ -234,6 +234,24 @@ view: customer_plan {
     filters: [trial: "Yes"]
   }
 
+  measure: active_trial_tracking_count { # medida para contabilizar apenas trials tracking
+    type: count
+    drill_fields: [customer_detail*]
+    filters: [trial: "Yes", plan_complete.service_id: "5"]
+  }
+
+  measure: active_trial_c_analytics_count { # medida para contabilizar apenas trials ativos comex analytics
+    type: count
+    drill_fields: [customer_detail*]
+    filters: [trial: "Yes", plan_complete.service_id: "20"]
+  }
+
+  measure: active_plan_c_analytics_count { # medida para contabilizar apenas planos ativos comex analytics
+    type: count
+    drill_fields: [customer_detail*]
+    filters: [active: "Yes", plan_complete.service_id: "20"]
+  }
+
   measure: count_distinct_customers {
     type: count_distinct
     sql: ${customer_id} ;;
@@ -259,7 +277,7 @@ view: customer_plan {
 
     ]
   }
-  set: customer_detail2 {
+  set: customer_detail2 {  # detalhe criado para exibir os contratos nao deletados, a principio visualização trials do tracking
     fields: [
       customer_id,
       customer.name,
@@ -269,7 +287,7 @@ view: customer_plan {
       expiration_date,
       trial_start_date,
       trial_end_date,
-      certificate.count
+      certificate.count_not_deleted
     ]
   }
 }

@@ -419,30 +419,62 @@ view: comex_analytics_di {
   measure: peso_bruto_total {
     type: sum
     sql: ${TABLE}."peso_bruto";;
+    drill_fields: [DI*]
   }
 
   measure: peso_liquido_total {
     type: sum
     sql: ${TABLE}."peso_liquido";;
+    drill_fields: [DI*]
   }
 
   measure: di_total {
     type: count_distinct
     sql: ${TABLE}."di_completo";;
+    drill_fields: [DI*]
   }
 
   measure: valor_multa_total {
     type: sum
     sql: ${TABLE}."val_multa";;
+    drill_fields: [DI*]
   }
 
   measure: data_hora_registro {
     type: date
     sql: MAX (${TABLE}."data_hora_registro");;
+    drill_fields: [DI*]
   }
 
   measure: representante_cpf{
     type: string
     sql: replace(replace(${TABLE}."cpf_representante", '.', ''),'-','');;
   }
+
+  dimension_group: presenca_x_registro {
+    type: duration
+    intervals: [day, hour, minute]
+    sql_start: ${TABLE}.data_chegada;;
+    sql_end: ${TABLE}.data_hora_registro;;
+    drill_fields: [DI*]
+  }
+
+  dimension_group: presenca_x_desembaraco {
+    type: duration
+    intervals: [day, hour, minute]
+    sql_start: ${TABLE}.data_chegada;;
+    sql_end: ${TABLE}.data_desembaraco;;
+    drill_fields: [DI*]
+  }
+
+  set: DI {
+    fields: [
+      di_number,
+      cpf_representante,
+      nome_representante,
+      importador_cnpj,
+      importador_nome,
+    ]
+  }
+
 }
