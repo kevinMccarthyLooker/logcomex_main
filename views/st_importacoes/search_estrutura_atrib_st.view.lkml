@@ -881,6 +881,7 @@ view: search_estrutura_atrib_st {
     type: string
     sql: case
        when ${TABLE}.via_transp = 'MARíTIMA' then 'MARÍTIMO'
+       when ${TABLE}.via_transp = 'MARÍTIMA' then 'MARÍTIMO'
        when ${TABLE}.via_transp = 'AÉREA' then 'AÉREO'
        when ${TABLE}.via_transp = 'RODOVIÁRIA' then 'RODOVIÁRIO'
        when ${TABLE}.via_transp = '' or ${TABLE}.via_transp is null then 'NÃO IDENTIFICADO'
