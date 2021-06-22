@@ -6,6 +6,7 @@ view: pct_siscori {
              SELECT DISTINCT anomes,
                              num_ord
              FROM di_commodities
+             WHERE anomes >= 201901
              GROUP BY 1, 2
              ORDER BY 1, 2) as sel_siscori
 GROUP BY 1
