@@ -9,7 +9,7 @@ include: "/**/**/search_estrutura_atrib_st.view"
 include: "/**/**/st_importacoes_moda.dashboard.lookml"
 include: "/**/**/st_importacoes_brinquedos_psql.dashboard.lookml"
 include: "/**/**/st_importacoes_utilidades_psql.dashboard.lookml"
-include: "/**/**/st_importacoes_fase01_unificado.dashboard.lookml"
+#include: "/**/**/st_importacoes_fase01_unificado.dashboard.lookml"
 
 
 explore: st_importacoes_utilidades_psql {}
