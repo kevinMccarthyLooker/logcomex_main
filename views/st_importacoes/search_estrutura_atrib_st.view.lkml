@@ -939,10 +939,11 @@ view: search_estrutura_atrib_st {
 #    value_format: "$#,##0.00;($#,##0.00)"
 #  }
 
-  measure: val_fob_un_us_num_avg_unid {
+  measure: Media_Valor_FOB_Unitario {
     type: average
     sql: ${val_fob_un_us};;
     filters: [tp_unid_comerc: "UNIDADE"]
+    value_format: "$#,##0.000;($#,##0.000)"
   }
 
   measure: val_fob_un_us_num_avg_not_unid {
