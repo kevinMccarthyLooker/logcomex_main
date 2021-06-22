@@ -910,7 +910,7 @@ view: search_estrutura_atrib_st {
   measure: Valor_FOB {
     type: sum
     sql: ${val_vmle_us_subitem};;
-    value_format: "$#,##0.00;($#,##0.00)"
+    value_format: "$#,##0.00"
   }
 
   measure: percent_of_total_valor_FOB {
@@ -948,7 +948,7 @@ view: search_estrutura_atrib_st {
     type: average
     sql: ${val_fob_un_us};;
     filters: [tp_unid_comerc: "UNIDADE"]
-    value_format: "$#,##0.000;($#,##0.000)"
+    value_format: "$#,##0.00"
   }
 
   measure: val_fob_un_us_num_avg_not_unid {
