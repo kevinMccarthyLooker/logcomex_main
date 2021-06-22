@@ -602,7 +602,7 @@
     type: looker_grid
     fields: [search_estrutura_atrib_st.produto, search_estrutura_atrib_st.tp_unid_comerc,
       search_estrutura_atrib_st.qtde_comerc_sum, search_estrutura_atrib_st.fob_sum,
-      search_estrutura_atrib_st.val_fob_un_us_num_avg]
+      search_estrutura_atrib_st.val_fob_un_us_avg]
     filters:
       search_estrutura_atrib_st.tp_unid_comerc: "-EMPTY"
     sorts: [search_estrutura_atrib_st.qtde_comerc_sum desc]
@@ -628,7 +628,7 @@
     show_sql_query_menu_options: false
     column_order: ["$$$_row_numbers_$$$", search_estrutura_atrib_st.produto,
       search_estrutura_atrib_st.qtde_comerc_sum, search_estrutura_atrib_st.tp_unid_comerc,
-      search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_num_avg]
+      search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_avg]
     show_totals: true
     show_row_totals: true
     series_labels:
@@ -636,7 +636,7 @@
       search_estrutura_atrib_st.desc_prodt: Produto
       search_estrutura_atrib_st.tp_unid_comerc: Tipo Unidade
       search_estrutura_atrib_st.qtde_comerc_sum: Quantidade
-      search_estrutura_atrib_st.val_fob_un_us_num_avg: Média Ponderada
+      search_estrutura_atrib_st.val_fob_un_us_avg: Média Ponderada
       search_estrutura_atrib_st.fob_sum: Valor FOB Total
     series_cell_visualizations:
       search_estrutura_atrib_st.qtde_comerc_sum:
@@ -656,13 +656,13 @@
         align: left
       search_estrutura_atrib_st.qtde_comerc_sum:
         align: left
-      search_estrutura_atrib_st.val_fob_un_us_num_avg:
+      search_estrutura_atrib_st.val_fob_un_us_avg:
         align: left
       media_simples:
         align: left
     series_value_format:
       search_estrutura_atrib_st.fob_sum: "$#,##0"
-      search_estrutura_atrib_st.val_fob_un_us_num_avg:
+      search_estrutura_atrib_st.val_fob_un_us_avg:
         name: usd
         format_string: "$#,##0.00"
         label: U.S. Dollars (2)
@@ -1320,8 +1320,8 @@
       search_estrutura_atrib_st.material, search_estrutura_atrib_st.modelo,
       search_estrutura_atrib_st.nm_pais_origem, search_estrutura_atrib_st.ncm_desc,
       search_estrutura_atrib_st.desc_prodt, search_estrutura_atrib_st.produto,
-      search_estrutura_atrib_st.qtd_comerc_num, search_estrutura_atrib_st.val_fob_un_us_num,
-      search_estrutura_atrib_st.val_vmle_us_subitem_num, search_estrutura_atrib_st.cdncm_compl,
+      search_estrutura_atrib_st.qtd_comerc, search_estrutura_atrib_st.val_fob_un_us,
+      search_estrutura_atrib_st.val_vmle_us_subitem, search_estrutura_atrib_st.cdncm_compl,
       search_estrutura_atrib_st.tamanho]
     sorts: [search_estrutura_atrib_st.id_import]
     limit: 500
@@ -1359,11 +1359,11 @@
         reverse: true
     show_sql_query_menu_options: false
     column_order: ["$$$_row_numbers_$$$", search_estrutura_atrib_st.via_transp_norm,
-      search_estrutura_atrib_st.id_import, search_estrutura_atrib_st.qtd_comerc_num,
-      search_estrutura_atrib_st.val_fob_un_us_num, search_estrutura_atrib_st.exportador_nome,
+      search_estrutura_atrib_st.id_import, search_estrutura_atrib_st.qtd_comerc,
+      search_estrutura_atrib_st.val_fob_un_us, search_estrutura_atrib_st.exportador_nome,
       search_estrutura_atrib_st.cdncm_compl, search_estrutura_atrib_st.tp_unid_comerc,
       search_estrutura_atrib_st.desc_prodt, search_estrutura_atrib_st.nm_pais_origem,
-      search_estrutura_atrib_st.val_vmle_us_subitem_num, search_estrutura_atrib_st.importador_nome,
+      search_estrutura_atrib_st.val_vmle_us_subitem, search_estrutura_atrib_st.importador_nome,
       search_estrutura_atrib_st.anomes_norm, search_estrutura_atrib_st.tamanho,
       search_estrutura_atrib_st.material, search_estrutura_atrib_st.modelo,
       search_estrutura_atrib_st.ncm_desc, search_estrutura_atrib_st.produto]
@@ -1381,14 +1381,14 @@
       search_estrutura_atrib_st.ncm_desc: NCM Desc
       search_estrutura_atrib_st.desc_prodt: Desc Produto
       search_estrutura_atrib_st.produto: Produto
-      search_estrutura_atrib_st.qtd_comerc_num: Quantidade
-      search_estrutura_atrib_st.val_fob_un_us_num: Valor FOB Unidade
-      search_estrutura_atrib_st.val_vmle_us_subitem_num: Valor FOB
+      search_estrutura_atrib_st.qtd_comerc: Quantidade
+      search_estrutura_atrib_st.val_fob_un_us: Valor FOB Unidade
+      search_estrutura_atrib_st.val_vmle_us_subitem: Valor FOB
       search_estrutura_atrib_st.cdncm_compl: NCM
     series_column_widths:
-      search_estrutura_atrib_st.qtd_comerc_num: 115
+      search_estrutura_atrib_st.qtd_comerc: 115
       search_estrutura_atrib_st.id_import: 104
-      search_estrutura_atrib_st.val_fob_un_us_num: 157
+      search_estrutura_atrib_st.val_fob_un_us: 157
       search_estrutura_atrib_st.exportador_nome: 151
       search_estrutura_atrib_st.ncm_desc: 112
       search_estrutura_atrib_st.cdncm_compl: 94
@@ -1396,7 +1396,7 @@
       search_estrutura_atrib_st.tp_unid_comerc: 150
       search_estrutura_atrib_st.desc_prodt: 135
       search_estrutura_atrib_st.nm_pais_origem: 142
-      search_estrutura_atrib_st.val_vmle_us_subitem_num: 120
+      search_estrutura_atrib_st.val_vmle_us_subitem: 120
       search_estrutura_atrib_st.anomes_norm: 107
       search_estrutura_atrib_st.material: 137
       search_estrutura_atrib_st.modelo: 94
@@ -1506,26 +1506,26 @@
     model: external_st_importacoes_postgres
     explore: search_estrutura_atrib_st
     type: looker_boxplot
-    fields: [search_estrutura_atrib_st.importador_nome, search_estrutura_atrib_st.val_fob_un_us_num_min,
-      search_estrutura_atrib_st.val_fob_un_us_num_p25, search_estrutura_atrib_st.val_fob_un_us_num_med,
-      search_estrutura_atrib_st.val_fob_un_us_num_p75, search_estrutura_atrib_st.val_fob_un_us_num_max,
+    fields: [search_estrutura_atrib_st.importador_nome, search_estrutura_atrib_st.val_fob_un_us_min,
+      search_estrutura_atrib_st.val_fob_un_us_p25, search_estrutura_atrib_st.val_fob_un_us_med,
+      search_estrutura_atrib_st.val_fob_un_us_p75, search_estrutura_atrib_st.val_fob_un_us_max,
       search_estrutura_atrib_st.fob_sum]
     filters:
       search_estrutura_atrib_st.tp_unid_comerc: UNIDADE
       search_estrutura_atrib_st.importador_check: 'Yes'
     sorts: [search_estrutura_atrib_st.fob_sum desc]
     limit: 10
-    dynamic_fields: [{table_calculation: valores, label: 'Valores:', expression: "${search_estrutura_atrib_st.val_fob_un_us_num_min}",
+    dynamic_fields: [{table_calculation: valores, label: 'Valores:', expression: "${search_estrutura_atrib_st.val_fob_un_us_min}",
         value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number},
       {_kind_hint: measure, table_calculation: p25_calc, _type_hint: number, category: table_calculation,
-        expression: "${search_estrutura_atrib_st.val_fob_un_us_num_p25}", label: p25_calc,
+        expression: "${search_estrutura_atrib_st.val_fob_un_us_p25}", label: p25_calc,
         value_format: !!null '', value_format_name: decimal_2}, {_kind_hint: measure,
         table_calculation: med_calc, _type_hint: number, category: table_calculation,
-        expression: "${search_estrutura_atrib_st.val_fob_un_us_num_med}", label: med_calc,
+        expression: "${search_estrutura_atrib_st.val_fob_un_us_med}", label: med_calc,
         value_format: !!null '', value_format_name: usd}, {_kind_hint: measure, table_calculation: p75_calc,
-        _type_hint: number, category: table_calculation, expression: "${search_estrutura_atrib_st.val_fob_un_us_num_p75}",
+        _type_hint: number, category: table_calculation, expression: "${search_estrutura_atrib_st.val_fob_un_us_p75}",
         label: p75_calc, value_format: !!null '', value_format_name: decimal_2}, {
-        table_calculation: max_calc, label: max_calc, expression: "${search_estrutura_atrib_st.val_fob_un_us_num_max}",
+        table_calculation: max_calc, label: max_calc, expression: "${search_estrutura_atrib_st.val_fob_un_us_max}",
         value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
     x_axis_gridlines: false
     y_axis_gridlines: false
@@ -1591,9 +1591,9 @@
     value_labels: legend
     label_type: labPer
     defaults_version: 1
-    hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_num_min, search_estrutura_atrib_st.val_fob_un_us_num_max,
-      search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_num_p25,
-      search_estrutura_atrib_st.val_fob_un_us_num_med, search_estrutura_atrib_st.val_fob_un_us_num_p75]
+    hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_min, search_estrutura_atrib_st.val_fob_un_us_max,
+      search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_p25,
+      search_estrutura_atrib_st.val_fob_un_us_med, search_estrutura_atrib_st.val_fob_un_us_p75]
     note_state: collapsed
     note_display: below
     note_text: Considera apenas o tipo UNIDADE.
@@ -1616,26 +1616,26 @@
     model: external_st_importacoes_postgres
     explore: search_estrutura_atrib_st
     type: looker_grid
-    fields: [search_estrutura_atrib_st.importador_nome, search_estrutura_atrib_st.val_fob_un_us_num_min,
-      search_estrutura_atrib_st.val_fob_un_us_num_p25, search_estrutura_atrib_st.val_fob_un_us_num_med,
-      search_estrutura_atrib_st.val_fob_un_us_num_p75, search_estrutura_atrib_st.val_fob_un_us_num_max,
+    fields: [search_estrutura_atrib_st.importador_nome, search_estrutura_atrib_st.val_fob_un_us_min,
+      search_estrutura_atrib_st.val_fob_un_us_p25, search_estrutura_atrib_st.val_fob_un_us_med,
+      search_estrutura_atrib_st.val_fob_un_us_p75, search_estrutura_atrib_st.val_fob_un_us_max,
       search_estrutura_atrib_st.fob_sum]
     filters:
       search_estrutura_atrib_st.tp_unid_comerc: UNIDADE
       search_estrutura_atrib_st.importador_check: 'Yes'
     sorts: [search_estrutura_atrib_st.fob_sum desc]
     limit: 10
-    dynamic_fields: [{table_calculation: valores, label: 'Valores:', expression: "${search_estrutura_atrib_st.val_fob_un_us_num_min}",
+    dynamic_fields: [{table_calculation: valores, label: 'Valores:', expression: "${search_estrutura_atrib_st.val_fob_un_us_min}",
         value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number},
       {_kind_hint: measure, table_calculation: p25_calc, _type_hint: number, category: table_calculation,
-        expression: "${search_estrutura_atrib_st.val_fob_un_us_num_p25}", label: p25_calc,
+        expression: "${search_estrutura_atrib_st.val_fob_un_us_p25}", label: p25_calc,
         value_format: !!null '', value_format_name: decimal_2}, {_kind_hint: measure,
         table_calculation: med_calc, _type_hint: number, category: table_calculation,
-        expression: "${search_estrutura_atrib_st.val_fob_un_us_num_med}", label: med_calc,
+        expression: "${search_estrutura_atrib_st.val_fob_un_us_med}", label: med_calc,
         value_format: !!null '', value_format_name: usd}, {_kind_hint: measure, table_calculation: p75_calc,
-        _type_hint: number, category: table_calculation, expression: "${search_estrutura_atrib_st.val_fob_un_us_num_p75}",
+        _type_hint: number, category: table_calculation, expression: "${search_estrutura_atrib_st.val_fob_un_us_p75}",
         label: p75_calc, value_format: !!null '', value_format_name: decimal_2}, {
-        table_calculation: max_calc, label: max_calc, expression: "${search_estrutura_atrib_st.val_fob_un_us_num_max}",
+        table_calculation: max_calc, label: max_calc, expression: "${search_estrutura_atrib_st.val_fob_un_us_max}",
         value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
     show_view_names: false
     show_row_numbers: true
@@ -1722,9 +1722,9 @@
     value_labels: legend
     label_type: labPer
     defaults_version: 1
-    hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_num_min, search_estrutura_atrib_st.val_fob_un_us_num_max,
-      search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_num_p25,
-      search_estrutura_atrib_st.val_fob_un_us_num_med, search_estrutura_atrib_st.val_fob_un_us_num_p75]
+    hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_min, search_estrutura_atrib_st.val_fob_un_us_max,
+      search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_p25,
+      search_estrutura_atrib_st.val_fob_un_us_med, search_estrutura_atrib_st.val_fob_un_us_p75]
     note_state: collapsed
     note_display: below
     note_text: Considera apenas o tipo UNIDADE.
@@ -1765,26 +1765,26 @@
     model: external_st_importacoes_postgres
     explore: search_estrutura_atrib_st
     type: looker_boxplot
-    fields: [search_estrutura_atrib_st.val_fob_un_us_num_min, search_estrutura_atrib_st.val_fob_un_us_num_p25,
-      search_estrutura_atrib_st.val_fob_un_us_num_med, search_estrutura_atrib_st.val_fob_un_us_num_p75,
-      search_estrutura_atrib_st.val_fob_un_us_num_max, search_estrutura_atrib_st.fob_sum,
+    fields: [search_estrutura_atrib_st.val_fob_un_us_min, search_estrutura_atrib_st.val_fob_un_us_p25,
+      search_estrutura_atrib_st.val_fob_un_us_med, search_estrutura_atrib_st.val_fob_un_us_p75,
+      search_estrutura_atrib_st.val_fob_un_us_max, search_estrutura_atrib_st.fob_sum,
       search_estrutura_atrib_st.produto]
     filters:
       search_estrutura_atrib_st.tp_unid_comerc: UNIDADE
       search_estrutura_atrib_st.produto_check: 'Yes'
     sorts: [search_estrutura_atrib_st.fob_sum desc]
     limit: 10
-    dynamic_fields: [{table_calculation: valores, label: 'Valores:', expression: "${search_estrutura_atrib_st.val_fob_un_us_num_min}",
+    dynamic_fields: [{table_calculation: valores, label: 'Valores:', expression: "${search_estrutura_atrib_st.val_fob_un_us_min}",
         value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number},
       {_kind_hint: measure, table_calculation: p25_calc, _type_hint: number, category: table_calculation,
-        expression: "${search_estrutura_atrib_st.val_fob_un_us_num_p25}", label: p25_calc,
+        expression: "${search_estrutura_atrib_st.val_fob_un_us_p25}", label: p25_calc,
         value_format: !!null '', value_format_name: decimal_2}, {_kind_hint: measure,
         table_calculation: med_calc, _type_hint: number, category: table_calculation,
-        expression: "${search_estrutura_atrib_st.val_fob_un_us_num_med}", label: med_calc,
+        expression: "${search_estrutura_atrib_st.val_fob_un_us_med}", label: med_calc,
         value_format: !!null '', value_format_name: usd}, {_kind_hint: measure, table_calculation: p75_calc,
-        _type_hint: number, category: table_calculation, expression: "${search_estrutura_atrib_st.val_fob_un_us_num_p75}",
+        _type_hint: number, category: table_calculation, expression: "${search_estrutura_atrib_st.val_fob_un_us_p75}",
         label: p75_calc, value_format: !!null '', value_format_name: decimal_2}, {
-        table_calculation: max_calc, label: max_calc, expression: "${search_estrutura_atrib_st.val_fob_un_us_num_max}",
+        table_calculation: max_calc, label: max_calc, expression: "${search_estrutura_atrib_st.val_fob_un_us_max}",
         value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
     x_axis_gridlines: false
     y_axis_gridlines: false
@@ -1850,9 +1850,9 @@
     value_labels: legend
     label_type: labPer
     defaults_version: 1
-    hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_num_min, search_estrutura_atrib_st.val_fob_un_us_num_max,
-      search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_num_p25,
-      search_estrutura_atrib_st.val_fob_un_us_num_med, search_estrutura_atrib_st.val_fob_un_us_num_p75]
+    hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_min, search_estrutura_atrib_st.val_fob_un_us_max,
+      search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_p25,
+      search_estrutura_atrib_st.val_fob_un_us_med, search_estrutura_atrib_st.val_fob_un_us_p75]
     note_state: collapsed
     note_display: below
     note_text: Considera apenas o tipo UNIDADE.
@@ -1902,26 +1902,26 @@
     model: external_st_importacoes_postgres
     explore: search_estrutura_atrib_st
     type: looker_grid
-    fields: [search_estrutura_atrib_st.val_fob_un_us_num_min, search_estrutura_atrib_st.val_fob_un_us_num_p25,
-      search_estrutura_atrib_st.val_fob_un_us_num_med, search_estrutura_atrib_st.val_fob_un_us_num_p75,
-      search_estrutura_atrib_st.val_fob_un_us_num_max, search_estrutura_atrib_st.fob_sum,
+    fields: [search_estrutura_atrib_st.val_fob_un_us_min, search_estrutura_atrib_st.val_fob_un_us_p25,
+      search_estrutura_atrib_st.val_fob_un_us_med, search_estrutura_atrib_st.val_fob_un_us_p75,
+      search_estrutura_atrib_st.val_fob_un_us_max, search_estrutura_atrib_st.fob_sum,
       search_estrutura_atrib_st.produto]
     filters:
       search_estrutura_atrib_st.tp_unid_comerc: UNIDADE
       search_estrutura_atrib_st.produto_check: 'Yes'
     sorts: [search_estrutura_atrib_st.fob_sum desc]
     limit: 10
-    dynamic_fields: [{table_calculation: valores, label: 'Valores:', expression: "${search_estrutura_atrib_st.val_fob_un_us_num_min}",
+    dynamic_fields: [{table_calculation: valores, label: 'Valores:', expression: "${search_estrutura_atrib_st.val_fob_un_us_min}",
         value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number},
       {_kind_hint: measure, table_calculation: p25_calc, _type_hint: number, category: table_calculation,
-        expression: "${search_estrutura_atrib_st.val_fob_un_us_num_p25}", label: p25_calc,
+        expression: "${search_estrutura_atrib_st.val_fob_un_us_p25}", label: p25_calc,
         value_format: !!null '', value_format_name: decimal_2}, {_kind_hint: measure,
         table_calculation: med_calc, _type_hint: number, category: table_calculation,
-        expression: "${search_estrutura_atrib_st.val_fob_un_us_num_med}", label: med_calc,
+        expression: "${search_estrutura_atrib_st.val_fob_un_us_med}", label: med_calc,
         value_format: !!null '', value_format_name: usd}, {_kind_hint: measure, table_calculation: p75_calc,
-        _type_hint: number, category: table_calculation, expression: "${search_estrutura_atrib_st.val_fob_un_us_num_p75}",
+        _type_hint: number, category: table_calculation, expression: "${search_estrutura_atrib_st.val_fob_un_us_p75}",
         label: p75_calc, value_format: !!null '', value_format_name: decimal_2}, {
-        table_calculation: max_calc, label: max_calc, expression: "${search_estrutura_atrib_st.val_fob_un_us_num_max}",
+        table_calculation: max_calc, label: max_calc, expression: "${search_estrutura_atrib_st.val_fob_un_us_max}",
         value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
     show_view_names: false
     show_row_numbers: true
@@ -2008,9 +2008,9 @@
     value_labels: legend
     label_type: labPer
     defaults_version: 1
-    hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_num_min, search_estrutura_atrib_st.val_fob_un_us_num_max,
-      search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_num_p25,
-      search_estrutura_atrib_st.val_fob_un_us_num_med, search_estrutura_atrib_st.val_fob_un_us_num_p75]
+    hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_min, search_estrutura_atrib_st.val_fob_un_us_max,
+      search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_p25,
+      search_estrutura_atrib_st.val_fob_un_us_med, search_estrutura_atrib_st.val_fob_un_us_p75]
     note_state: collapsed
     note_display: below
     note_text: Considera apenas o tipo UNIDADE.

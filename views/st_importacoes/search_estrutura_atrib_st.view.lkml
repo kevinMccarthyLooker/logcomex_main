@@ -854,7 +854,20 @@ view: search_estrutura_atrib_st {
 
   dimension: tamanho {
     type: string
-    sql: ${TABLE}."tamanho" ;;
+    sql:
+    case
+    when ${TABLE}.tamanho is null or ${TABLE}.tamanho = '' then 'NÃO IDENTIFICADO'
+    else ${TABLE}.tamanho
+    end;;
+  }
+
+  dimension: tamanho_check {
+    type: yesno
+    sql:
+    case
+    when ${tamanho} = 'NÃO IDENTIFICADO' then false
+    else true
+    end;;
   }
 
   dimension: tp_unid_comerc {
@@ -898,7 +911,12 @@ view: search_estrutura_atrib_st {
         end;;
   }
 
-  measure: Registros {
+  measure: count {
+    type: count
+    drill_fields: []
+  }
+
+  measure: Registros { #count usada na tabela dinamica
     type: count
     drill_fields: []
   }
@@ -908,7 +926,12 @@ view: search_estrutura_atrib_st {
 #    sql: ${val_vmld_us_subitem};;
 #  }
 
-  measure: Valor_FOB {
+  measure: fob_sum {
+    type: sum
+    sql: ${val_vmle_us_subitem};;
+  }
+
+  measure: Valor_FOB { # soma do valor fob usado na tabela dinamica
     type: sum
     sql: ${val_vmle_us_subitem};;
     value_format: "$#,##0.00"
@@ -945,7 +968,12 @@ view: search_estrutura_atrib_st {
 #    value_format: "$#,##0.00;($#,##0.00)"
 #  }
 
-  measure: Media_Valor_FOB_Unitario {
+  measure: val_fob_un_us_avg {
+    type: average
+    sql: ${val_fob_un_us};;
+  }
+
+  measure: Media_Valor_FOB_Unitario {  #media valor fob unitaria usado na tabela dinamica
     type: average
     sql: ${val_fob_un_us};;
     filters: [tp_unid_comerc: "UNIDADE"]
@@ -958,28 +986,28 @@ view: search_estrutura_atrib_st {
     filters: [tp_unid_comerc: "-UNIDADE"]
   }
 
-  measure: val_fob_un_us_num_med{
+  measure: val_fob_un_us_med{
     type: median
     sql: ${val_fob_un_us};;
   }
 
-  measure: val_fob_un_us_num_min {
+  measure: val_fob_un_us_min {
     type: min
     sql: ${val_fob_un_us};;
   }
 
-  measure: val_fob_un_us_num_max {
+  measure: val_fob_un_us_max {
     type: max
     sql: ${val_fob_un_us};;
   }
 
-  measure: val_fob_un_us_num_p25 {
+  measure: val_fob_un_us_p25 {
     type: percentile
     percentile: 25
     sql: ${val_fob_un_us};;
   }
 
-  measure: val_fob_un_us_num_p75 {
+  measure: val_fob_un_us_p75 {
     type: percentile
     percentile: 75
     sql: ${val_fob_un_us};;
