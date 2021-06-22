@@ -58,6 +58,19 @@ view: di_captation_item_ctrl {
     sql: ${TABLE}."status" ;;
   }
 
+  dimension: status_dsc {
+    type: string
+    sql: case
+         when ${TABLE}."status" = 0 then 'Pendente'
+         when ${TABLE}."status" = 1 then 'Processando'
+         when ${TABLE}."status" = 2 then 'Erro'
+         when ${TABLE}."status" = 3 then 'Processado'
+         when ${TABLE}."status" = 4 then 'Agendado'
+         when ${TABLE}."status" = 5 then 'Abortado'
+         else 'VERIFICAR'
+         end;;
+  }
+
   dimension: status_message {
     type: string
     sql: ${TABLE}."status_message" ;;
