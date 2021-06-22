@@ -881,6 +881,7 @@ view: search_estrutura_atrib_st {
     type: string
     sql: case
        when ${TABLE}.via_transp = 'MARíTIMA' then 'MARÍTIMO'
+       when ${TABLE}.via_transp = 'MARÍTIMA' then 'MARÍTIMO'
        when ${TABLE}.via_transp = 'AÉREA' then 'AÉREO'
        when ${TABLE}.via_transp = 'RODOVIÁRIA' then 'RODOVIÁRIO'
        when ${TABLE}.via_transp = '' or ${TABLE}.via_transp is null then 'NÃO IDENTIFICADO'
@@ -910,12 +911,31 @@ view: search_estrutura_atrib_st {
   measure: Valor_FOB {
     type: sum
     sql: ${val_vmle_us_subitem};;
-    value_format: "$#,##0.00;($#,##0.00)"
+    value_format: "$#,##0.00"
+  }
+
+  measure: percent_of_total_valor_FOB {
+    type: percent_of_total
+    sql: ${Valor_FOB} ;;
   }
 
   measure: qtde_comerc_sum {
     type: sum
     sql: ${qtd_comerc};;
+    value_format: "#,##0.00"
+  }
+
+  measure: qtde_comerc_sum_unid {
+    type: sum
+    sql: ${qtd_comerc};;
+    filters: [tp_unid_comerc: "UNIDADE"]
+    value_format: "#,##0.00"
+  }
+
+  measure: qtde_comerc_sum_not_unid {
+    type: sum
+    sql: ${qtd_comerc};;
+    filters: [tp_unid_comerc: "-UNIDADE"]
     value_format: "#,##0.00"
   }
 
@@ -925,9 +945,17 @@ view: search_estrutura_atrib_st {
 #    value_format: "$#,##0.00;($#,##0.00)"
 #  }
 
-  measure: val_fob_un_us_num_avg {
+  measure: Media_Valor_FOB_Unitario {
     type: average
     sql: ${val_fob_un_us};;
+    filters: [tp_unid_comerc: "UNIDADE"]
+    value_format: "$#,##0.00"
+  }
+
+  measure: val_fob_un_us_num_avg_not_unid {
+    type: average
+    sql: ${val_fob_un_us};;
+    filters: [tp_unid_comerc: "-UNIDADE"]
   }
 
   measure: val_fob_un_us_num_med{
