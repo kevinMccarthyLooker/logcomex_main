@@ -913,6 +913,11 @@ view: search_estrutura_atrib_st {
     value_format: "$#,##0.00;($#,##0.00)"
   }
 
+  measure: percent_of_total_valor_FOB {
+    type: percent_of_total
+    sql: ${Valor_FOB} ;;
+  }
+
   measure: qtde_comerc_sum {
     type: sum
     sql: ${qtd_comerc};;
