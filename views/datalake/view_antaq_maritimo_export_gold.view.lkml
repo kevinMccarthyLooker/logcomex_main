@@ -29,6 +29,7 @@ view: view_antaq_maritimo_export_gold {
 
   measure: teus_parcial {
     type: sum
+    value_format: "0"
     sql: ${TABLE}.teus_parcial ;;
   }
 

@@ -17,8 +17,8 @@ view: view_antaq_maritimo_import_gold {
     sql: ${TABLE}.mes_antaq ;;
   }
 
-  dimension: teus_antaq {
-    type: number
+  measure: teus_antaq {
+    type: sum
     sql: ${TABLE}.teus_antaq ;;
   }
 
