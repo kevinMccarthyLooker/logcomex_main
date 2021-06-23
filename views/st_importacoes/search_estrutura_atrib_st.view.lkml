@@ -856,20 +856,22 @@ view: search_estrutura_atrib_st {
     type: string
     sql:
     case
-    when ${TABLE}.tamanho is null or ${TABLE}.tamanho = '' then null --'NÃO IDENTIFICADO'
+    when ${TABLE}.tamanho = '' then null
     else ${TABLE}.tamanho
     end;;
   }
+
+  #when ${TABLE}.tamanho is null or --'NÃO IDENTIFICADO'
 
   dimension: tamanho_check {
     type: yesno
     sql:
     case
-    --when ${tamanho} = 'NÃO IDENTIFICADO' then false
     when ${tamanho} is null then false
     else true
     end;;
   }
+ #--when ${tamanho} = 'NÃO IDENTIFICADO' then false
 
   dimension: tp_unid_comerc {
     type: string
