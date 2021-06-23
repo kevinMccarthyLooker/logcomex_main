@@ -833,7 +833,7 @@ view: search_estrutura_atrib_st {
     type: string
     sql:
         case
-        when ${TABLE}.produto is null or ${TABLE}.produto = '' then 'NÃO IDENTIFICADO'
+        when ${TABLE}.produto = '' then null
         else ${TABLE}.produto
         end;;
   }
@@ -842,7 +842,7 @@ view: search_estrutura_atrib_st {
     type: yesno
     sql:
         case
-        when ${produto} = 'NÃO IDENTIFICADO' then false
+        when ${produto} is null then false
         else true
         end;;
   }
