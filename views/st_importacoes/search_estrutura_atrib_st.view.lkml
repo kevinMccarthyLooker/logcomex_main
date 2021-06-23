@@ -856,7 +856,7 @@ view: search_estrutura_atrib_st {
     type: string
     sql:
     case
-    when ${TABLE}.tamanho is null or ${TABLE}.tamanho = '' then 'NÃO IDENTIFICADO'
+    when ${TABLE}.tamanho is null or ${TABLE}.tamanho = '' then null --'NÃO IDENTIFICADO'
     else ${TABLE}.tamanho
     end;;
   }
@@ -865,7 +865,8 @@ view: search_estrutura_atrib_st {
     type: yesno
     sql:
     case
-    when ${tamanho} = 'NÃO IDENTIFICADO' then false
+    --when ${tamanho} = 'NÃO IDENTIFICADO' then false
+    when ${tamanho} is null then false
     else true
     end;;
   }
