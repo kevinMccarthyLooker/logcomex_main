@@ -689,7 +689,7 @@ view: search_estrutura_atrib_st {
     type: string
     sql:
     case
-    when ${TABLE}.genero is null or ${TABLE}.genero = '' then 'NÃO IDENTIFICADO'
+    when ${TABLE}.genero = '' then null
     else ${TABLE}.genero
     end ;;
   }
@@ -698,7 +698,7 @@ view: search_estrutura_atrib_st {
     type: yesno
     sql:
     case
-    when ${genero} = 'NÃO IDENTIFICADO' then false
+    when ${genero} is null then false
     else true
     end;;
   }
@@ -777,7 +777,7 @@ view: search_estrutura_atrib_st {
     type: string
     sql:
     case
-    when ${TABLE}.material is null or ${TABLE}.material = '' then 'NÃO IDENTIFICADO'
+    when ${TABLE}.material = '' then null
     else ${TABLE}.material
     end;;
   }
@@ -786,7 +786,7 @@ view: search_estrutura_atrib_st {
     type: yesno
     sql:
     case
-    when ${material} = 'NÃO IDENTIFICADO' then false
+    when ${material} is null then false
     else true
     end;;
   }
@@ -833,7 +833,7 @@ view: search_estrutura_atrib_st {
     type: string
     sql:
         case
-        when ${TABLE}.produto = '' then null
+        when ${TABLE}.produto is null or ${TABLE}.produto = '' then 'NÃO IDENTIFICADO'
         else ${TABLE}.produto
         end;;
   }
@@ -842,7 +842,7 @@ view: search_estrutura_atrib_st {
     type: yesno
     sql:
         case
-        when ${produto} is null then false
+        when ${produto} = 'NÃO IDENTIFICADO' then false
         else true
         end;;
   }
