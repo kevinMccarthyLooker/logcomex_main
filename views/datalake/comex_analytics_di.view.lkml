@@ -70,7 +70,14 @@ view: comex_analytics_di {
 
   dimension: canal {
     type: string
-    sql: ${TABLE}.canal ;;
+    sql: case
+      when ${TABLE}.canal = '-' then 'Ag. Processamento'
+      when ${TABLE}.canal = 'Verde' then 'Verde'
+      when ${TABLE}.canal = 'Amarelo' then 'Amarelo'
+      when ${TABLE}.canal = 'Cinza' then 'Cinza'
+      when ${TABLE}.canal = 'Vermelho' then 'Vermelho'
+      else 'ERRO'
+    end ;;
   }
 
   dimension: importador_cnpj {
