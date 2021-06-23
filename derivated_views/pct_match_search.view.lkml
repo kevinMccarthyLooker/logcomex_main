@@ -8,6 +8,7 @@ view: pct_match_search {
                SUM(CASE WHEN tp_match IS NOT NULL THEN 1 ELSE 0 END) AS qtde_com_match,
                COUNT(*) AS qtde_total
                FROM "di_commodities"
+               WHERE anomes >= 201901
                GROUP BY 1) AS sel_di
  ;;
   }

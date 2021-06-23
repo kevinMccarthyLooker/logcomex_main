@@ -21,7 +21,7 @@ view: pct_di_pu {
                  ELSE 0 END) AS num_di_match
              FROM di_control
         LEFT JOIN di_pu ON di_control.di_number = di_pu.di_number
-        WHERE di_control.data_hora_registro >= '2018/01/01'
+        WHERE di_control.data_hora_registro >= '2019/01/01'
         and (di_control.via_transporte <> 'N/A' or di_control.via_transporte is null or di_control.via_transporte <> 'DI INEXISTENTE')
         GROUP BY 1
         ORDER BY 1) as sel_di
