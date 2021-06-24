@@ -256,6 +256,7 @@ view: log_customer_plan {
               WHEN (${user_id} = 10) THEN 'Andreza Sandim'
               WHEN (${user_id} = 4) THEN 'Helmuth'
               WHEN (${user_id} = 55) THEN 'Danilo'
+              WHEN (${user_id} = 54) THEN 'Esdras Castro'
               WHEN (${user_id} = 36) THEN 'Gabriela'
               WHEN (${user_id} = 72) THEN 'Sthephanny Andrade'
               WHEN (${user_id} = 63) THEN 'Carolyne Rocha'
