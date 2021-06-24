@@ -354,14 +354,13 @@ view: bi_imports_mvw_gold {
 
   measure: minfrete {
     type: number
+    sql: MIN ${vlfretetotal} ;;
     value_format: "$#.00;($#.00)"
-    sql: MIN ${TABLE}."vlfretetotal" ;;
   }
 
   measure: maxfrete {
     type: number
+    sql: MAX ${vlfretetotal} ;;
     value_format: "$#.00;($#.00)"
-    sql: MAX ${TABLE}."vlfretetotal" ;;
   }
-
 }

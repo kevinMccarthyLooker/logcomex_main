@@ -14,7 +14,6 @@
       bi_exports_mvw_gold.mar_c20, bi_exports_mvw_gold.mar_c40, bi_exports_mvw_gold.mar_vlfrete]
     filters:
       bi_exports_mvw_gold.mvw_moeda_frete: DOLAR DOS EUA
-      bi_exports_mvw_gold.mvw_tipo_fcl: DRY,REEFER
     sorts: [bi_exports_mvw_gold.mar_teus desc]
     limit: 500
     dynamic_fields: [{table_calculation: calculation_1, label: Calculation 1, expression: 'mean(pivot_row(${bi_exports_mvw_gold.mar_vlfrete}))',
@@ -148,7 +147,7 @@
     series_types: {}
     note_state: collapsed
     note_display: above
-    note_text: 'Valores expressados em USD / Apenas containers tipo DRY e REEFER
+    note_text: 'Apenas fretes pagos em USD / Apenas containers tipo DRY e REEFER
 
       '
     listen:
@@ -156,10 +155,12 @@
       Porto Origem: bi_exports_mvw_gold.mvw_porto_origem
       Porto Destino: bi_exports_mvw_gold.mvw_porto_destino
       Data Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
+      Tipo Container: bi_exports_mvw_gold.mvw_tipo_fcl
+      Pagamento: bi_exports_mvw_gold.mvw_pagamento
     row: 8
     col: 0
     width: 13
-    height: 6
+    height: 8
   - title: País de Destino
     name: País de Destino
     model: Dados_Expo_Datalake
@@ -170,7 +171,6 @@
       bi_exports_mvw_gold.mar_c40, bi_exports_mvw_gold.mar_vlfrete]
     filters:
       bi_exports_mvw_gold.mvw_moeda_frete: DOLAR DOS EUA
-      bi_exports_mvw_gold.mvw_tipo_fcl: DRY,REEFER
     sorts: [bi_exports_mvw_gold.mar_teus desc]
     limit: 500
     dynamic_fields: [{table_calculation: mediana_20, label: Mediana 20', expression: "(((${bi_exports_mvw_gold.mar_vlfrete}/${bi_exports_mvw_gold.mar_teus})*${bi_exports_mvw_gold.mar_c20})/${bi_exports_mvw_gold.mar_c20})",
@@ -283,7 +283,7 @@
     series_types: {}
     note_state: collapsed
     note_display: above
-    note_text: 'Valores expressados em USD / Apenas containers tipo DRY e REEFER
+    note_text: 'Apenas fretes pagos em USD / Apenas containers tipo DRY e REEFER
 
       '
     listen:
@@ -291,21 +291,22 @@
       Porto Origem: bi_exports_mvw_gold.mvw_porto_origem
       Porto Destino: bi_exports_mvw_gold.mvw_porto_destino
       Data Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
+      Tipo Container: bi_exports_mvw_gold.mvw_tipo_fcl
+      Pagamento: bi_exports_mvw_gold.mvw_pagamento
     row: 8
     col: 13
     width: 11
-    height: 6
+    height: 8
   - title: Valor Frete Médio
     name: Valor Frete Médio
     model: Dados_Expo_Datalake
     explore: bi_exports_mvw_gold
     type: looker_line
-    fields: [bi_exports_mvw_gold.mar_teus, bi_exports_mvw_gold.mvw_data_embarque_month,
-      bi_exports_mvw_gold.media_vl_frete_por_c20, bi_exports_mvw_gold.media_vl_frete_por_c40]
+    fields: [bi_exports_mvw_gold.mvw_data_embarque_month, bi_exports_mvw_gold.media_vl_frete_por_c20,
+      bi_exports_mvw_gold.media_vl_frete_por_c40]
     fill_fields: [bi_exports_mvw_gold.mvw_data_embarque_month]
     filters:
       bi_exports_mvw_gold.mvw_moeda_frete: DOLAR DOS EUA
-      bi_exports_mvw_gold.mvw_tipo_fcl: DRY,REEFER
     sorts: [bi_exports_mvw_gold.mvw_data_embarque_month desc]
     limit: 500
     x_axis_gridlines: false
@@ -315,7 +316,7 @@
     show_y_axis_ticks: true
     y_axis_tick_density: default
     y_axis_tick_density_custom: 5
-    show_x_axis_label: true
+    show_x_axis_label: false
     show_x_axis_ticks: true
     y_axis_scale_mode: linear
     x_axis_reversed: false
@@ -360,7 +361,7 @@
     series_types:
       bi_exports_mvw_gold.mar_teus: column
     series_colors:
-      bi_exports_mvw_gold.media_vl_frete_por_c40: "#ff6d00"
+      bi_exports_mvw_gold.media_vl_frete_por_c40: "#5a189a"
       bi_exports_mvw_gold.media_vl_frete_por_c20: "#ff9e00"
     series_labels:
       bi_exports_mvw_gold.mvw_porto_origem: Porto Origem
@@ -438,6 +439,8 @@
       Porto Origem: bi_exports_mvw_gold.mvw_porto_origem
       Porto Destino: bi_exports_mvw_gold.mvw_porto_destino
       Data Embarque: bi_exports_mvw_gold.mvw_data_embarque_month
+      Tipo Container: bi_exports_mvw_gold.mvw_tipo_fcl
+      Pagamento: bi_exports_mvw_gold.mvw_pagamento
     row: 0
     col: 0
     width: 24
@@ -496,3 +499,35 @@
     explore: bi_exports_mvw_gold
     listens_to_filters: []
     field: bi_exports_mvw_gold.mvw_pais_de_destino
+  - name: Tipo Container
+    title: Tipo Container
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: button_group
+      display: inline
+      options:
+      - DRY
+      - REEFER
+    model: Dados_Expo_Datalake
+    explore: bi_exports_mvw_gold
+    listens_to_filters: []
+    field: bi_exports_mvw_gold.mvw_tipo_fcl
+  - name: Pagamento
+    title: Pagamento
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: button_group
+      display: inline
+      options:
+      - COLLECT
+      - PREPAID
+    model: Dados_Expo_Datalake
+    explore: bi_exports_mvw_gold
+    listens_to_filters: []
+    field: bi_exports_mvw_gold.mvw_pagamento
