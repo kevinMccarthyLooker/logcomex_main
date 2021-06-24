@@ -1,5 +1,9 @@
 view: search_estrutura_atrib_st {
-  sql_table_name: public.search_estrutura_atrib_st ;;
+  #sql_table_name: public.search_estrutura_atrib_st ;;
+
+  derived_table: {
+    sql: select * from public.search_estrutura_atrib_st limit 5000  ;;
+  }
 
   dimension: anomes {
     type: number
@@ -948,7 +952,7 @@ view: search_estrutura_atrib_st {
   measure: qtde_comerc_sum {
     type: sum
     sql: ${qtd_comerc};;
-    value_format: "#,##0.00"
+    value_format: "#,##0"
   }
 
   measure: qtde_comerc_sum_unid {
