@@ -15,4 +15,6 @@ include: "/**/**/st_importacoes_utilidades_psql.dashboard.lookml"
 explore: st_importacoes_utilidades_psql {}
 explore: st_importacoes_brinquedos_psql {}
 explore: st_importacoes_moda {}
-explore: search_estrutura_atrib_st {}
+explore: search_estrutura_atrib_st {
+  persist_for: "12 hours"
+}
