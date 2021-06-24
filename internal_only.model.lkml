@@ -80,6 +80,9 @@ include: "/**/trials_acessos_plataforma.view.lkml"
 include: "/**/health_score_2021.view.lkml"
 include: "/**/**/status_integracao.view.lkml"
 include: "/**/**/tracking_follow_consignee.view.lkml"
+include: "/**/**/log_customer_plan.view.lkml"
+include: "/**/**/log_plan_info.view.lkml"
+include: "/**/**/log_tracking_plan_info.view.lkml"
 
 
 
@@ -501,6 +504,24 @@ explore: usage {
   join: customer_plan {
     sql_on: ${customer.id}=${customer_plan.customer_id} ;;
     relationship: one_to_many
+    type: left_outer
+  }
+
+  join: log_customer_plan {
+    sql_on: ${customer_plan.id}=${log_customer_plan.customer_plan_id} ;;
+    relationship: one_to_many
+    type: left_outer
+  }
+
+  join: log_plan_info {
+    sql_on: ${log_customer_plan.plan_info_id}=${log_plan_info.plan_info_id} ;;
+    relationship: many_to_many
+    type: left_outer
+  }
+
+  join: log_tracking_plan_info {
+    sql_on: ${log_customer_plan.tracking_plan_info_id}=${log_tracking_plan_info.tracking_plan_info_id} ;;
+    relationship: many_to_many
     type: left_outer
   }
 
