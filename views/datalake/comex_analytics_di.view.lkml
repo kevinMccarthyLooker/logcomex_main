@@ -71,7 +71,7 @@ view: comex_analytics_di {
   dimension: canal {
     type: string
     sql: case
-      when ${TABLE}.canal = '-' then 'Ag. Processamento*'
+      when ${TABLE}.canal = '-' then 'Ag. Processamento'
       when ${TABLE}.canal = 'Verde' then 'Verde'
       when ${TABLE}.canal = 'Amarelo' then 'Amarelo'
       when ${TABLE}.canal = 'Cinza' then 'Cinza'
