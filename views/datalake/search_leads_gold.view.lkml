@@ -108,10 +108,11 @@ view: search_leads_gold {
 
   dimension: importador_classificacao {
     type: string
-    sql: case when ${cliente} is true and ${lead} is false then 'Customer'
-         case when ${cliente} is false and ${lead} is true then 'Lead'
-         case when ${cliente} is false and ${lead} is false then 'Free'
-         case when ${cliente} is true and ${lead} is true then 'Ambiguo'
+    sql: case
+         when ${cliente} is true and ${lead} is false then "Customer"
+         when ${cliente} is false and ${lead} is true then 'Lead'
+         when ${cliente} is false and ${lead} is false then 'Free'
+         when ${cliente} is true and ${lead} is true then 'Ambiguo'
          else 'Error'
          end;;
   }
