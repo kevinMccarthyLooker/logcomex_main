@@ -6,20 +6,20 @@ view: search_leads_gold {
     sql: ${TABLE}.cnpj_norm ;;
   }
 
-  dimension: cliente {
+  dimension: lead {
     type: yesno
     sql: case when ${TABLE}.cnpj_norm is null then false
          else true
          end;;
   }
 
-  dimension: cliente_match {
+  dimension: lead_match {
     type: yesno
-    sql: ${cliente} ;;
+    sql: ${lead} ;;
     html: {% if value == 'Yes' %}
-            <font color="green">{{ cliente }}</font>
+            <font color="green">{{ lead }}</font>
           {% else %}
-            <font color="red">{{ cliente }}</font>
+            <font color="red">{{ lead }}</font>
           {% endif %};;
   }
 
@@ -73,9 +73,53 @@ view: search_leads_gold {
     sql: ${TABLE}.valor ;;
   }
 
+  dimension: customer_name {
+    type: string
+    sql: ${TABLE}.customer_name ;;
+  }
+
+  dimension: cnpj_customer {
+    type: string
+    sql: ${TABLE}.cnpj_customer ;;
+  }
+
+
+  dimension: customer_id {
+    type: number
+    sql: ${TABLE}.customer_id ;;
+  }
+
+  dimension: cliente {
+    type: yesno
+    sql: case when ${TABLE}.customer_id is null then false
+         else true
+         end;;
+  }
+
+  dimension: cliente_match {
+    type: yesno
+    sql: ${cliente} ;;
+    html: {% if value == 'Yes' %}
+            <font color="green">{{ cliente }}</font>
+          {% else %}
+            <font color="red">{{ cliente }}</font>
+          {% endif %};;
+  }
+
+  dimension: branches_activity {
+    type: string
+    sql: ${TABLE}.branches_activity ;;
+  }
+
   measure: count_distinc_cnpj {
     type: count_distinct
     sql: ${importador_cnpj} ;;
+    #drill_fields: [id, name, custom_name]
+  }
+
+  measure: count_distinc_customer_id {
+    type: count_distinct
+    sql: ${customer_id} ;;
     #drill_fields: [id, name, custom_name]
   }
 
