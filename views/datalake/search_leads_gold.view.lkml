@@ -106,6 +106,16 @@ view: search_leads_gold {
           {% endif %};;
   }
 
+  dimension: importador_classificacao {
+    type: string
+    sql: case when ${cliente} is true and ${lead} is false then 'Customer'
+         case when ${cliente} is false and ${lead} is true then 'Lead'
+         case when ${cliente} is false and ${lead} is false then 'Free'
+         case when ${cliente} is true and ${lead} is true then 'Ambiguo'
+         else 'Error'
+         end;;
+  }
+
   dimension: branches_activity {
     type: string
     sql: ${TABLE}.branches_activity ;;
