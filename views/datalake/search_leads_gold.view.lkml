@@ -1,0 +1,108 @@
+view: search_leads_gold {
+  sql_table_name: comercial_leads.search_leads_gold ;;
+
+  dimension: cnpj_norm {
+    type: string
+    sql: ${TABLE}.cnpj_norm ;;
+  }
+
+  dimension: cliente {
+    type: yesno
+    sql: case when ${TABLE}.cnpj_norm is null then false
+         else true
+         end;;
+  }
+
+  dimension: cliente_match {
+    type: yesno
+    sql: ${cliente} ;;
+    html: {% if value == 'Yes' %}
+            <font color="green">{{ cliente }}</font>
+          {% else %}
+            <font color="red">{{ cliente }}</font>
+          {% endif %};;
+  }
+
+  dimension: company_id {
+    type: string
+    sql: ${TABLE}.company_id ;;
+  }
+
+  dimension: deal_id {
+    type: string
+    sql: ${TABLE}.deal_id ;;
+  }
+
+  dimension: deal_name {
+    type: string
+    sql: ${TABLE}.deal_name ;;
+  }
+
+  dimension: deal_stage {
+    type: string
+    sql: ${TABLE}.deal_stage ;;
+  }
+
+  dimension: importador_cnpj {
+    type: string
+    sql: ${TABLE}.importador_cnpj ;;
+  }
+
+  dimension: importador_cnpj_8dig {
+    type: string
+    sql: left(${TABLE}.importador_cnpj,8) ;;
+  }
+
+  dimension: importador_nome {
+    type: string
+    sql: ${TABLE}.importador_nome ;;
+  }
+
+  dimension: name_lead {
+    type: string
+    sql: ${TABLE}.name_lead ;;
+  }
+
+  dimension: qtd_registros {
+    type: number
+    sql: ${TABLE}.qtd_registros ;;
+  }
+
+  dimension: valor {
+    type: number
+    sql: ${TABLE}.valor ;;
+  }
+
+  measure: count_distinc_cnpj {
+    type: count_distinct
+    sql: ${importador_cnpj} ;;
+    #drill_fields: [id, name, custom_name]
+  }
+
+  measure: count_distinc_cnpj_leads {
+    type: count_distinct
+    sql: ${cnpj_norm} ;;
+    #drill_fields: [id, name, custom_name]
+  }
+
+  measure: count_distinc_cnpj_8dig {
+    type: count_distinct
+    sql: ${importador_cnpj_8dig} ;;
+    #drill_fields: [id, name, custom_name]
+  }
+
+  measure: sum_valor_cif {
+    type: sum
+    sql: ${valor} ;;
+  }
+
+  measure: sum_qtd_registros {
+    type: sum
+    sql: ${qtd_registros} ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [deal_name]
+  }
+}

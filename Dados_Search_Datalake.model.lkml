@@ -7,6 +7,7 @@ include: "/**/searchx_gold_v2_2020_produtos.view.lkml"
 include: "/**/valor_cif_2020_gold.view.lkml"
 include: "/**/st_importacoes_06_12_2020.view.lkml"
 include: "/**/searchx_gold_v2_completa.view.lkml"
+include: "/**/search_leads_gold.view.lkml"
 
 
 datagroup: valor_cif_datagroup {
@@ -37,3 +38,5 @@ explore:searchx_gold  {
 explore: searchx_gold_v2_completa {}
 
 explore:searchx_gold_v2  {}
+
+explore:search_leads_gold  {}
