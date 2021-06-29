@@ -292,11 +292,12 @@
     model: Dados_Impo_Datalake
     explore: bi_imports_mvw_gold
     type: looker_line
-    fields: [bi_imports_mvw_gold.data_operacao_month, bi_imports_mvw_gold.media_frete_c20_real,
-      bi_imports_mvw_gold.media_frete_c40_real]
+    fields: [bi_imports_mvw_gold.media_frete_c20_real, bi_imports_mvw_gold.media_frete_c40_real,
+      bi_imports_mvw_gold.data_embarque_month]
+    fill_fields: [bi_imports_mvw_gold.data_embarque_month]
     filters:
       bi_imports_mvw_gold.nmmoedafrete: DOLAR DOS EUA
-    sorts: [bi_imports_mvw_gold.data_operacao_month desc]
+    sorts: [bi_imports_mvw_gold.data_embarque_month desc]
     limit: 500
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -305,7 +306,7 @@
     show_y_axis_ticks: true
     y_axis_tick_density: default
     y_axis_tick_density_custom: 5
-    show_x_axis_label: true
+    show_x_axis_label: false
     show_x_axis_ticks: true
     y_axis_scale_mode: linear
     x_axis_reversed: false
@@ -439,7 +440,7 @@
     show_y_axis_ticks: true
     y_axis_tick_density: default
     y_axis_tick_density_custom: 5
-    show_x_axis_label: true
+    show_x_axis_label: false
     show_x_axis_ticks: true
     y_axis_scale_mode: linear
     x_axis_reversed: false
