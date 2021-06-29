@@ -129,7 +129,7 @@
       Tipo de Embarque: bi_imports_mvw_gold.embarque
       Tipo de Conteiner: bi_imports_mvw_gold.tipo_fcl
       Pagamento: bi_imports_mvw_gold.pagamento
-      Data Embarque: bi_imports_mvw_gold.data_embarque
+      Data Embarque: bi_imports_mvw_gold.data_embarque_month
     row: 17
     col: 0
     width: 12
@@ -282,7 +282,7 @@
       Tipo de Embarque: bi_imports_mvw_gold.embarque
       Tipo de Conteiner: bi_imports_mvw_gold.tipo_fcl
       Pagamento: bi_imports_mvw_gold.pagamento
-      Data Embarque: bi_imports_mvw_gold.data_embarque
+      Data Embarque: bi_imports_mvw_gold.data_embarque_month
     row: 9
     col: 0
     width: 12
@@ -416,7 +416,7 @@
       Tipo de Embarque: bi_imports_mvw_gold.embarque
       Tipo de Conteiner: bi_imports_mvw_gold.tipo_fcl
       Pagamento: bi_imports_mvw_gold.pagamento
-      Data Embarque: bi_imports_mvw_gold.data_embarque
+      Data Embarque: bi_imports_mvw_gold.data_embarque_month
     row: 2
     col: 0
     width: 12
@@ -870,7 +870,7 @@
     model: Dados_Impo_Datalake
     explore: bi_imports_mvw_gold
     listens_to_filters: []
-    field: bi_imports_mvw_gold.data_embarque
+    field: bi_imports_mvw_gold.data_embarque_month
   - name: Data de Operação
     title: Data de Operação
     type: field_filter

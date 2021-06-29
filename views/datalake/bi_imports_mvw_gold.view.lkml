@@ -17,8 +17,18 @@ view: bi_imports_mvw_gold {
     sql: ${TABLE}.tipo_carga ;;
   }
 
-  dimension: data_embarque {
-    type: date
+  dimension_group: data_embarque {
+    type: time
+    timeframes: [
+      raw,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.data_embarque ;;
   }
 
