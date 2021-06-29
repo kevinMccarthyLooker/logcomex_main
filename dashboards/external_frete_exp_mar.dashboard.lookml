@@ -431,7 +431,7 @@
     defaults_version: 1
     note_state: collapsed
     note_display: above
-    note_text: 'Valores expressados em USD / Apenas containers tipo DRY e REEFER
+    note_text: 'Apenas fretes pagos em USD / Apenas containers tipo DRY e REEFER
 
       '
     listen:
