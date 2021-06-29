@@ -50,7 +50,7 @@ view: search_leads_gold {
 
   dimension: importador_cnpj_8dig {
     type: string
-    sql: left(${TABLE}.importador_cnpj,8) ;;
+    sql: left(${TABLE}.importador_cnpj,10) ;;  #utiliza 10 caracteres, pois tem os pontos da mascara do cnpj
   }
 
   dimension: importador_nome {
