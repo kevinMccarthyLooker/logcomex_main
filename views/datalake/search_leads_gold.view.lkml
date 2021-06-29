@@ -58,6 +58,13 @@ view: search_leads_gold {
     sql: ${TABLE}.importador_nome ;;
   }
 
+  dimension: importador_nome_tratado {
+    type: string
+    sql: case when (${TABLE}.importador_nome = '' or ${TABLE}.importador_nome is null) then 'NÃO ENCONTRADO'
+         else ${TABLE}.importador_nome
+         end ;;
+  }
+
   dimension: name_lead {
     type: string
     sql: ${TABLE}.name_lead ;;
