@@ -119,7 +119,7 @@ view: search_leads_gold {
          when ${cliente} is true and ${lead} is false then 'Customer'
          when ${cliente} is false and ${lead} is true then 'Lead'
          when ${cliente} is false and ${lead} is false then 'Free'
-         when ${cliente} is true and ${lead} is true then 'Ambiguo'
+         when ${cliente} is true and ${lead} is true then 'Customer'
          else 'Error'
          end;;
   }
