@@ -10,3 +10,5 @@ explore: consumo_customers_excel {}
 explore: st_importacoes_segmentacao_excel {}
 
 explore: metrica_extracao_excel {}
+
+explore: metrica_search_fob {}
