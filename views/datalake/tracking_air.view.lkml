@@ -9,6 +9,11 @@ view: tracking_air {
     drill_fields: [detail*]
   }
 
+  dimension: id {
+    type: number
+    sql: ${TABLE}.id ;;
+  }
+
   dimension: id_di {
     type: number
     sql: ${TABLE}.id_di ;;
@@ -192,6 +197,7 @@ view: tracking_air {
 
   set: detail {
     fields: [
+      id,
       id_di,
       di_number,
       digit,
