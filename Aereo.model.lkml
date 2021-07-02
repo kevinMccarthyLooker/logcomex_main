@@ -3,6 +3,7 @@ connection: "aereo"
 include: "/views/aereo_dados_no_tempo.view.lkml"
 include: "/views/aereo_consignatario.view.lkml"
 include: "/views/aereo_awb_details.view.lkml"
+include: "/views/aereo_awb_list.view.lkml"
 include: "/views/company_info.view.lkml"
 include: "/views/company.view.lkml"
 include: "/views/recinto_aduaneiro.view.lkml"
@@ -31,6 +32,8 @@ explore: aereo_awb_details {
     sql_on: ${aereo_awb_details.id_recinto_aduaneiro} = ${recinto_aduaneiro.id} ;;
   }
 }
+
+explore: aereo_awb_list  {}
 
 explore: aereo_details {
   from: aereo_awb_details
