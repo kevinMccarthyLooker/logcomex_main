@@ -32,6 +32,15 @@ view: aereo_awb_list {
     sql: ${TABLE}."details_status" ;;
   }
 
+  dimension: processado { #retira os vinculados ao tracking, e veriricada se ja foi processado ou nao
+    type: yesno
+    sql:
+    case
+    when ${TABLE}.details_status = 'pending' and (source_file not in ('TRACKING', 'MANUAL_TRACKING') or source_file is null) then false
+    else true
+    end;;
+
+  }
   dimension: di_id {
     type: number
     sql: ${TABLE}."di_id" ;;
@@ -102,9 +111,10 @@ view: aereo_awb_list {
     drill_fields: [id]
   }
 
-  measure: count_pending {
-    type: count
-    filters: [source_file: "-TRACKING,-MANUAL_TRACKING",details_status: "pending"]
-    drill_fields: [id]
-  }
+#  measure: count_pending {
+#    type: count
+#    filters: [source_file: "-TRACKING,-MANUAL_TRACKING",details_status: "pending"]
+#    drill_fields: [id]
+#  }
+
 }
