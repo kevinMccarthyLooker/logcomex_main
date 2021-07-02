@@ -101,4 +101,10 @@ view: aereo_awb_list {
     type: count
     drill_fields: [id]
   }
+
+  measure: count_pending {
+    type: count
+    filters: [source_file: "-TRACKING,-MANUAL_TRACKING",details_status: "pending"]
+    drill_fields: [id]
+  }
 }
