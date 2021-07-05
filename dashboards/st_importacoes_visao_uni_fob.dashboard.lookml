@@ -21,8 +21,8 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     value_format: "$#,##0"
-    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#3EB0D5",
-        font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
+    conditional_formatting: [{type: greater than, value: 0, background_color: "#aaf52d",
+        font_color: "#000000", color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
           palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825}, bold: false, italic: false,
         strikethrough: false, fields: !!null ''}]
     show_view_names: false
@@ -73,8 +73,8 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     value_format: ''
-    conditional_formatting: [{type: equal to, value: !!null '', background_color: "#3EB0D5",
-        font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
+    conditional_formatting: [{type: greater than, value: 0, background_color: "#AAF52D",
+        font_color: "#000000", color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
           palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825}, bold: false, italic: false,
         strikethrough: false, fields: !!null ''}]
     show_view_names: false

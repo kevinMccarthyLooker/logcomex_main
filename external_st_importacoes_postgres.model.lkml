@@ -10,7 +10,7 @@ include: "/**/**/st_importacoes_moda.dashboard.lookml"
 include: "/**/**/st_importacoes_brinquedos_psql.dashboard.lookml"
 include: "/**/**/st_importacoes_utilidades_psql.dashboard.lookml"
 #include: "/**/**/st_importacoes_fase01_unificado.dashboard.lookml" #primeiro dash criado pra repetir os gráficos, apagar apos validar novo dash unificado
-#include: "/**/**/st_importacoes_visao_uni_vol.dashboard.lookml"
+include: "/**/**/st_importacoes_visao_uni_vol.dashboard.lookml"
 #include: "/**/**/st_importacoes_visao_uni_fob.dashboard.lookml"
 
 
