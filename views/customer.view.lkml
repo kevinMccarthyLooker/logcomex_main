@@ -29,6 +29,7 @@ view: customer {
   }
 
   dimension_group: created {
+    label: "created_customer"
     type: time
     timeframes: [
       raw,

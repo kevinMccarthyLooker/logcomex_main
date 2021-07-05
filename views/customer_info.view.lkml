@@ -15,6 +15,20 @@ view: customer_info {
     sql: ${TABLE}."customer_id" ;;
   }
 
+  dimension: customer_origin_id {
+    type: number
+    sql: ${TABLE}."customer_origin_id" ;;
+  }
+
+  dimension: customer_origin {
+    type: string
+    sql:  CASE WHEN (customer_info.customer_origin_id = 1) THEN 'CS'
+              WHEN (customer_info.customer_origin_id = 2) THEN 'Plataforma'
+              WHEN (customer_info.customer_origin_id = 3) THEN 'Hubspot'
+          else 'Outros' end
+    ;;
+  }
+
   dimension: total_valor_pag {
     type: number
     sql: ${TABLE}."total_valor_pag" ;;
