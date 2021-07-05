@@ -2,6 +2,8 @@ connection: "dremio_datalake"
 
 include: "/**/tracking_air.view.lkml"
 include: "/**/tracking_sea.view.lkml"
+include: "/**/tracking_air.dashboard"
+include: "/**/tracking_sea.dashboard"
 
 datagroup: tracking_embed_datagroup {
   sql_trigger: SELECT CURRENT_DATE ;;
