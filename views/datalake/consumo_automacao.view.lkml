@@ -86,6 +86,12 @@ view: consumo_automacao {
     sql: ${TABLE}.used_at ;;
   }
 
+  dimension: used_formatted {
+    #group_label: "Created" label: "Date"
+    sql: ${used_date} ;;
+    html: {{ rendered_value | date: "%d/%m/%Y" }};;
+  }
+
   measure: count {
     type: count
     drill_fields: [id]
