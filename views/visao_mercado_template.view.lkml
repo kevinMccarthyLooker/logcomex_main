@@ -1,9 +1,8 @@
 view: visao_mercado_template {
-  #sql_table_name: public.search_estrutura_atrib_st ;;
 
-  # derived_table: {
-  #    sql: select * from public.search_estrutura_atrib_st limit 50000  ;;
-  # }
+  derived_table: {
+    sql: select * from public.matview_search_estrutura_template ;;
+  }
 
   dimension: anomes {
     type: number
