@@ -1,9 +1,9 @@
-view: search_estrutura_atrib_st {
-  sql_table_name: public.search_estrutura_atrib_st ;;
+view: visao_mercado_template {
+  #sql_table_name: public.search_estrutura_atrib_st ;;
 
- # derived_table: {
- #    sql: select * from public.search_estrutura_atrib_st limit 50000  ;;
- # }
+  # derived_table: {
+  #    sql: select * from public.search_estrutura_atrib_st limit 50000  ;;
+  # }
 
   dimension: anomes {
     type: number
@@ -875,7 +875,7 @@ view: search_estrutura_atrib_st {
     else true
     end;;
   }
- #--when ${tamanho} = 'NÃO IDENTIFICADO' then false
+  #--when ${tamanho} = 'NÃO IDENTIFICADO' then false
 
   dimension: tp_unid_comerc {
     type: string
