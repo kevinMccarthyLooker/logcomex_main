@@ -2447,7 +2447,7 @@
       options: []
     model: external_st_importacoes_postgres
     explore: search_estrutura_atrib_st
-    listens_to_filters: []
+    listens_to_filters: [Departamento]
     field: search_estrutura_atrib_st.cdncm_compl
   - name: Produto
     title: Produto
