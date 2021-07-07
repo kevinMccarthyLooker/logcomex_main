@@ -99,8 +99,8 @@ view: search_estrutura_atrib_st {
   }
 
   dimension: cdncm_compl {
-    type: number
-    sql: ${TABLE}."cdncm_compl" ;;
+    type: string
+    sql: cast(${TABLE}."cdncm_compl" as text) ;;
   }
 
   dimension: cdpaisorigem {
