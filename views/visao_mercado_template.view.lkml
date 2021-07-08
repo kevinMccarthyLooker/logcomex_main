@@ -780,7 +780,7 @@ view: visao_mercado_template {
     type: string
     sql:
     case
-    when ${TABLE}.material = '' then null
+    when ${TABLE}.material is null or ${TABLE}.material = '' then 'NÃO IDENTIFICADO'
     else ${TABLE}.material
     end;;
   }
