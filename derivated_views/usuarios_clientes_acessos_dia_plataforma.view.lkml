@@ -36,12 +36,12 @@ view: usuarios_clientes_acessos_dia_plataforma {
         inner join user_profile_customer upc on upc.customer_id = customer.id
         inner join users u on u.id = upc.user_id
         inner JOIN public.customer_plan  AS customer_plan ON (customer."id")=(customer_plan."customer_id")
-        inner JOIN (select (current_date - interval '31' day) + (interval '1' day * generate_series(0,31)) as dia) as dias on 1 = 1
+        inner JOIN (select (current_date - interval '61' day) + (interval '1' day * generate_series(0,61)) as dia) as dias on 1 = 1
         where (date(dias.dia) between (date(customer_plan."start")) and date((customer_plan."expiration")))
           and (customer."fake_customer")=false
           and customer.deleted_at is null
           and customer_plan.deleted_at is null
-          and dia >= current_date - interval '31' day
+          and dia >= current_date - interval '61' day
           and upc.deleted_at is null
           and u.deleted_at is null
           --and customer.id = 1259
@@ -59,7 +59,7 @@ view: usuarios_clientes_acessos_dia_plataforma {
         inner join customer c2 on c2.id = al.customer_id
         inner join customer_plan cp on cp.customer_id = c2.id
         where (date(al.created_at) between cp."start" and cp.expiration or date(al.created_at) between cp.trial_start and cp.trial_end)
-        and al.created_at >= current_date - interval '31 days'
+        and al.created_at >= current_date - interval '61 days'
         and c2.fake_customer is false and c2.deleted_at is null
         and cp.deleted_at is null
         group by 1,2,3
