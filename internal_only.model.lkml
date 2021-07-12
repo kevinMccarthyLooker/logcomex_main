@@ -85,6 +85,7 @@ include: "/**/**/log_plan_info.view.lkml"
 include: "/**/**/log_tracking_plan_info.view.lkml"
 include: "/**/**/customer_origin.view.lkml"
 include: "/**/**/type_of_contract.view.lkml"
+include: "/**/**/usuarios_clientes_acessos_dia_plataforma.view.lkml"
 
 
 
@@ -107,6 +108,7 @@ explore: status_integracao {}
 explore: usuarios_clientes_acessos_plataforma {}
 explore: clientes_trials_acessos_plataforma {}
 explore: clientes_acessos_plataforma {}
+explore: usuarios_clientes_acessos_dia_plataforma {}
 explore: trials_acessos_plataforma {}
 
 explore: clientes_sem_exportacao{}
