@@ -1,7 +1,14 @@
 view: clientes_ativos_por_mes {
   derived_table: {
     sql:
-    SELECT
+    select qq1.*,
+    case
+    when qq2.customer_id is null then false
+    else true
+    end as acessou_tracking
+    from
+      (
+      SELECT
       date(mes) as anomes,
       customer."name" as customer_name,
       customer."id" AS customer_id,
@@ -9,11 +16,25 @@ view: clientes_ativos_por_mes {
       customer_plan.id as customer_plan_id
       FROM public.customer  AS customer
       LEFT JOIN public.customer_plan  AS customer_plan ON (customer."id")=(customer_plan."customer_id")
-      LEFT JOIN (select last_day(date '2019-06-01' + (interval '1' month * generate_series(0,30))) as mes) as meses on 1 = 1
+      LEFT JOIN (select last_day(date '2019-06-01' + (interval '1' month * generate_series(0,35))) as mes) as meses on 1 = 1
       where (date(meses.mes) between (date(customer_plan."start")) and date((customer_plan."expiration"))
       and (customer_plan."deleted_at") is null)
       AND (customer."fake_customer")=false
-;;
+      ) as qq1
+    left join
+      (
+        select
+        last_day(t.created_at) as anomes,
+        customer_id
+        from tracking t
+        group by 1,2
+        union
+        select
+        last_day(ta.created_at) as anomes,
+        customer_id
+        from tracking_aerial ta
+        group by 1,2
+      ) as qq2 on qq2.anomes = qq1.anomes and qq2.customer_id = qq1.customer_id;;
   }
 
   dimension: customer_id {
@@ -24,6 +45,11 @@ view: clientes_ativos_por_mes {
   dimension: customer_name{
     type: string
     sql: ${TABLE}."customer_name" ;;
+  }
+
+  dimension: acessou_tracking{
+    type: yesno
+    sql: ${TABLE}."acessou_tracking" ;;
   }
 
   dimension: customer_plan_id {
