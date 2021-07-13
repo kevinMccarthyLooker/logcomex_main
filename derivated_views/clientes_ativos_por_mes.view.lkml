@@ -5,7 +5,8 @@ view: clientes_ativos_por_mes {
     case
     when qq2.customer_id is null then false
     else true
-    end as acessou_tracking
+    end as acessou_tracking,
+    qq2.modal as modal_tracking
     from
       (
       SELECT
@@ -24,17 +25,19 @@ view: clientes_ativos_por_mes {
     left join
       (
         select
+        'Maritimo' as modal,
         last_day(t.created_at) as anomes,
         customer_id
         from tracking t
         where (t.tracking_maritime_load_category_id = 1 or t.tracking_maritime_load_category_id is null)
-        group by 1,2
+        group by 1,2,3
         union
         select
+        'Aereo' as modal,
         last_day(ta.created_at) as anomes,
         customer_id
         from tracking_aerial ta
-        group by 1,2
+        group by 1,2,3
       ) as qq2 on qq2.anomes = qq1.anomes and qq2.customer_id = qq1.customer_id;;
   }
 
@@ -46,6 +49,11 @@ view: clientes_ativos_por_mes {
   dimension: customer_name{
     type: string
     sql: ${TABLE}."customer_name" ;;
+  }
+
+  dimension: modal_tracking{
+    type: string
+    sql: ${TABLE}."modal_tracking" ;;
   }
 
   dimension: acessou_tracking{
