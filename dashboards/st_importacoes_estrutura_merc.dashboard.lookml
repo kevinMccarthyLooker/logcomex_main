@@ -9,7 +9,6 @@
     explore: st_estrutura_mercadologica
     type: single_value
     fields: [st_estrutura_mercadologica.count_dsc_departamento]
-    filters:
     limit: 500
     custom_color_enabled: true
     show_single_value_title: true
@@ -17,9 +16,13 @@
     comparison_type: value
     comparison_reverse_colors: false
     show_comparison_label: true
-    enable_conditional_formatting: false
+    enable_conditional_formatting: true
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: greater than, value: -1, background_color: "#aaf52d",
+        font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
+          palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
     series_types: {}
     defaults_version: 1
     listen:
@@ -28,9 +31,9 @@
       Família: st_estrutura_mercadologica.familia
       Subfamília: st_estrutura_mercadologica.subfamilia
     row: 0
-    col: 0
-    width: 6
-    height: 5
+    col: 8
+    width: 4
+    height: 4
   - title: Linha
     name: Linha
     model: external_st_importacoes
@@ -46,9 +49,13 @@
     comparison_type: value
     comparison_reverse_colors: false
     show_comparison_label: true
-    enable_conditional_formatting: false
+    enable_conditional_formatting: true
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: greater than, value: -1, background_color: "#aaf52d",
+        font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
+          palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
     series_types: {}
     defaults_version: 1
     listen:
@@ -57,9 +64,9 @@
       Família: st_estrutura_mercadologica.familia
       Subfamília: st_estrutura_mercadologica.subfamilia
     row: 0
-    col: 6
-    width: 6
-    height: 5
+    col: 12
+    width: 4
+    height: 4
   - title: Família
     name: Família
     model: external_st_importacoes
@@ -75,9 +82,13 @@
     comparison_type: value
     comparison_reverse_colors: false
     show_comparison_label: true
-    enable_conditional_formatting: false
+    enable_conditional_formatting: true
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: greater than, value: -1, background_color: "#aaf52d",
+        font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
+          palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
     series_types: {}
     defaults_version: 1
     listen:
@@ -86,9 +97,9 @@
       Família: st_estrutura_mercadologica.familia
       Subfamília: st_estrutura_mercadologica.subfamilia
     row: 0
-    col: 12
-    width: 6
-    height: 5
+    col: 16
+    width: 4
+    height: 4
   - title: SubFamília
     name: SubFamília
     model: external_st_importacoes
@@ -104,9 +115,13 @@
     comparison_type: value
     comparison_reverse_colors: false
     show_comparison_label: true
-    enable_conditional_formatting: false
+    enable_conditional_formatting: true
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
+    conditional_formatting: [{type: greater than, value: -1, background_color: "#aaf52d",
+        font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
+          palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
     series_types: {}
     defaults_version: 1
     listen:
@@ -115,9 +130,9 @@
       Família: st_estrutura_mercadologica.familia
       Subfamília: st_estrutura_mercadologica.subfamilia
     row: 0
-    col: 18
-    width: 6
-    height: 5
+    col: 20
+    width: 4
+    height: 4
   - title: Tabela Dinâmica
     name: Tabela Dinâmica
     model: external_st_importacoes
@@ -165,10 +180,19 @@
       Linha: st_estrutura_mercadologica.linha
       Família: st_estrutura_mercadologica.familia
       Subfamília: st_estrutura_mercadologica.subfamilia
-    row: 5
+    row: 4
     col: 0
     width: 24
     height: 10
+  - name: ''
+    type: text
+    title_text: ''
+    subtitle_text: ''
+    body_text: <img src="https://drive.google.com/uc?export=view&id=1NpOJPe-eAjUY7w5qHgn4ndPyEu0baTDI"/>
+    row: 0
+    col: 0
+    width: 8
+    height: 4
   filters:
   - name: Departamento
     title: Departamento
