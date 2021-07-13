@@ -27,6 +27,7 @@ view: clientes_ativos_por_mes {
         last_day(t.created_at) as anomes,
         customer_id
         from tracking t
+        where (t.tracking_maritime_load_category_id = 1 or t.tracking_maritime_load_category_id is null)
         group by 1,2
         union
         select
