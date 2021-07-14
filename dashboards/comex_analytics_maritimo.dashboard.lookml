@@ -12,7 +12,7 @@
     filters:
       comex_analytics_di.via_transp: MARÍTIMA,MARíTIMA
     sorts: [comex_analytics_di.di_total desc]
-    limit: 5000
+    limit: 50000
     dynamic_fields: [{measure: count_of_di_number, based_on: comex_analytics_di.di_number,
         expression: '', label: Count of Di Number, type: count_distinct, _kind_hint: measure,
         _type_hint: number}]
@@ -46,7 +46,7 @@
     fields: [sum_of_peso_bruto]
     filters:
       comex_analytics_di.via_transp: MARÍTIMA,MARíTIMA
-    limit: 500
+    limit: 50000
     dynamic_fields: [{measure: sum_of_peso_bruto, based_on: comex_analytics_di.peso_bruto,
         expression: '', label: Sum of Peso Bruto, type: sum, _kind_hint: measure,
         _type_hint: number}]
@@ -81,7 +81,7 @@
     fields: [comex_analytics_di.valor_vmle_reais]
     filters:
       comex_analytics_di.via_transp: MARÍTIMA,MARíTIMA
-    limit: 500
+    limit: 50000
     custom_color_enabled: true
     show_single_value_title: true
     show_comparison: false
@@ -113,7 +113,7 @@
     fields: [comex_analytics_di.valor_vmld_reais]
     filters:
       comex_analytics_di.via_transp: MARÍTIMA,MARíTIMA
-    limit: 500
+    limit: 50000
     custom_color_enabled: true
     show_single_value_title: true
     show_comparison: false
@@ -145,7 +145,7 @@
     fields: [comex_analytics_di.valor_multa_total]
     filters:
       comex_analytics_di.via_transp: MARÍTIMA,MARíTIMA
-    limit: 500
+    limit: 50000
     custom_color_enabled: true
     show_single_value_title: true
     show_comparison: false
@@ -178,7 +178,7 @@
     filters:
       comex_analytics_di.via_transp: MARÍTIMA,MARíTIMA
     sorts: [comex_analytics_di.di_total desc]
-    limit: 500
+    limit: 50000
     dynamic_fields: [{measure: count_of_di_number, based_on: comex_analytics_di.di_number,
         expression: '', label: Count of Di Number, type: count_distinct, _kind_hint: measure,
         _type_hint: number}]
@@ -289,7 +289,7 @@
       comex_analytics_di.via_transp: MARÍTIMA,MARíTIMA
       comex_analytics_di.data_hora_registro: NOT NULL
     sorts: [comex_analytics_di.di_total desc]
-    limit: 500
+    limit: 50000
     dynamic_fields: [{measure: count_of_di_number, based_on: comex_analytics_di.di_number,
         expression: '', label: Count of Di Number, type: count_distinct, _kind_hint: measure,
         _type_hint: number}, {measure: count_of_canal, based_on: comex_analytics_di.canal,
@@ -434,7 +434,7 @@
     fields: [sum_of_val_frete_reais]
     filters:
       comex_analytics_di.via_transp: MARÍTIMA,MARíTIMA
-    limit: 500
+    limit: 50000
     dynamic_fields: [{measure: sum_of_val_frete_reais, based_on: comex_analytics_di.val_frete_reais,
         expression: '', label: Sum of Val Frete Reais, type: sum, _kind_hint: measure,
         _type_hint: number}]
@@ -469,7 +469,7 @@
     fields: [sum_of_val_frete_us]
     filters:
       comex_analytics_di.via_transp: MARÍTIMA,MARíTIMA
-    limit: 500
+    limit: 50000
     dynamic_fields: [{measure: sum_of_val_frete_reais, based_on: comex_analytics_di.val_frete_reais,
         expression: '', label: Sum of Val Frete Reais, type: sum, _kind_hint: measure,
         _type_hint: number}, {measure: sum_of_val_frete_us, based_on: comex_analytics_di.val_frete_us,
@@ -507,7 +507,7 @@
     filters:
       comex_analytics_di.via_transp: MARÍTIMA,MARíTIMA
     sorts: [comex_analytics_di.di_total desc]
-    limit: 500
+    limit: 50000
     dynamic_fields: [{measure: count_of_di_number, based_on: comex_analytics_di.di_number,
         expression: '', label: Count of Di Number, type: count_distinct, _kind_hint: measure,
         _type_hint: number}]
