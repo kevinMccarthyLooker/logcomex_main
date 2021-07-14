@@ -80,7 +80,7 @@ view: trials_ativos_mes {
   }
 
   dimension: modal_tracking {
-    type: yesno
+    type: string
     sql: ${TABLE}."modal_tracking" ;;
   }
 
