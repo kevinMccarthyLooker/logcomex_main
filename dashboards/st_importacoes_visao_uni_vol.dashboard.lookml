@@ -2295,9 +2295,6 @@
     label_type: labPer
     defaults_version: 1
     hidden_fields: []
-    note_state: expanded
-    note_display: below
-    note_text: Considera apenas o tipo UNIDADE.
     listen:
       NCM: search_estrutura_atrib_st.cdncm_compl
       Produto: search_estrutura_atrib_st.produto
