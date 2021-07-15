@@ -799,7 +799,7 @@ view: visao_mercado_template {
     type: yesno
     sql:
     case
-    when ${material} is null then false
+    when ${TABLE}.material is null or ${TABLE}.material = '' then false
     else true
     end;;
   }
