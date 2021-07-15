@@ -11,7 +11,7 @@
     fields: [search_estrutura_atrib_st.departamento, search_estrutura_atrib_st.linha,
       search_estrutura_atrib_st.familia, search_estrutura_atrib_st.subfamilia, search_estrutura_atrib_st.produto,
       search_estrutura_atrib_st.Registros, search_estrutura_atrib_st.Media_Valor_FOB_Unitario,
-      search_estrutura_atrib_st.Valor_FOB]
+      search_estrutura_atrib_st.Estimativa_Valor_Total]
     sorts: [search_estrutura_atrib_st.Registros desc]
     limit: 500
     hidden_fields: [search_estrutura_atrib_st.fob_sum]
@@ -63,10 +63,10 @@
     model: external_st_importacoes_postgres
     explore: search_estrutura_atrib_st
     type: looker_column
-    fields: [search_estrutura_atrib_st.Valor_FOB, search_estrutura_atrib_st.nm_pais_origem]
-    sorts: [search_estrutura_atrib_st.Valor_FOB desc]
+    fields: [search_estrutura_atrib_st.Estimativa_Valor_Total, search_estrutura_atrib_st.nm_pais_origem]
+    sorts: [search_estrutura_atrib_st.Estimativa_Valor_Total desc]
     limit: 3
-    dynamic_fields: [{_kind_hint: measure, table_calculation: valor_fob, _type_hint: number,
+    dynamic_fields: [{_kind_hint: measure, table_calculation: Estimativa_Valor_Total, _type_hint: number,
         category: table_calculation, expression: "${search_estrutura_atrib_st.fob_sum}",
         label: Valor FOB, value_format: !!null '', value_format_name: usd_0, is_disabled: true},
       {_kind_hint: measure, table_calculation: volume, _type_hint: number, category: table_calculation,
@@ -99,8 +99,8 @@
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
-    y_axes: [{label: '', orientation: left, series: [{axisId: search_estrutura_atrib_st.Valor_FOB,
-            id: search_estrutura_atrib_st.Valor_FOB, name: Valor FOB}], showLabels: false,
+    y_axes: [{label: '', orientation: left, series: [{axisId: search_estrutura_atrib_st.Estimativa_Valor_Total,
+            id: search_estrutura_atrib_st.Estimativa_Valor_Total, name: Valor FOB}], showLabels: false,
         showValues: false, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
         type: linear}]
     limit_displayed_rows_values:
@@ -109,7 +109,7 @@
       num_rows: '5'
     series_types: {}
     series_colors:
-      search_estrutura_atrib_st.Valor_FOB: "#9BDA32"
+      search_estrutura_atrib_st.Estimativa_Valor_Total: "#9BDA32"
       CN: "#aaf52d"
       BR: "#525252"
     series_labels: {}
@@ -135,12 +135,12 @@
     model: external_st_importacoes_postgres
     explore: search_estrutura_atrib_st
     type: looker_column
-    fields: [search_estrutura_atrib_st.Valor_FOB, search_estrutura_atrib_st.exportador_nome]
+    fields: [search_estrutura_atrib_st.Estimativa_Valor_Total, search_estrutura_atrib_st.exportador_nome]
     filters:
       search_estrutura_atrib_st.exportador_check: 'Yes'
-    sorts: [search_estrutura_atrib_st.Valor_FOB desc]
+    sorts: [search_estrutura_atrib_st.Estimativa_Valor_Total desc]
     limit: 500
-    dynamic_fields: [{_kind_hint: measure, table_calculation: valor_fob, _type_hint: number,
+    dynamic_fields: [{_kind_hint: measure, table_calculation: Estimativa_Valor_Total, _type_hint: number,
         category: table_calculation, expression: "${search_estrutura_atrib_st.fob_sum}",
         label: Valor FOB, value_format: !!null '', value_format_name: usd_0, is_disabled: true},
       {_kind_hint: measure, table_calculation: volume, _type_hint: number, category: table_calculation,
@@ -173,8 +173,8 @@
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
-    y_axes: [{label: '', orientation: left, series: [{axisId: search_estrutura_atrib_st.Valor_FOB,
-            id: search_estrutura_atrib_st.Valor_FOB, name: Valor FOB}], showLabels: false,
+    y_axes: [{label: '', orientation: left, series: [{axisId: search_estrutura_atrib_st.Estimativa_Valor_Total,
+            id: search_estrutura_atrib_st.Estimativa_Valor_Total, name: Valor FOB}], showLabels: false,
         showValues: false, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
         type: linear}]
     limit_displayed_rows_values:
@@ -183,7 +183,7 @@
       num_rows: '5'
     series_types: {}
     series_colors:
-      search_estrutura_atrib_st.Valor_FOB: "#9BDA32"
+      search_estrutura_atrib_st.Estimativa_Valor_Total: "#9BDA32"
     series_labels: {}
     theme: classic
     show_full_field_name: false
@@ -205,10 +205,10 @@
     model: external_st_importacoes_postgres
     explore: search_estrutura_atrib_st
     type: looker_column
-    fields: [search_estrutura_atrib_st.Valor_FOB, search_estrutura_atrib_st.via_transp_norm,
+    fields: [search_estrutura_atrib_st.Estimativa_Valor_Total, search_estrutura_atrib_st.via_transp_norm,
       search_estrutura_atrib_st.percent_of_total_valor_FOB]
-    sorts: [search_estrutura_atrib_st.Valor_FOB desc]
-    dynamic_fields: [{_kind_hint: measure, table_calculation: valor_fob, _type_hint: number,
+    sorts: [search_estrutura_atrib_st.Estimativa_Valor_Total desc]
+    dynamic_fields: [{_kind_hint: measure, table_calculation: Estimativa_Valor_Total, _type_hint: number,
         category: table_calculation, expression: "${search_estrutura_atrib_st.fob_sum}",
         label: Valor FOB, value_format: !!null '', value_format_name: usd_0, is_disabled: true},
       {_kind_hint: measure, table_calculation: volume, _type_hint: number, category: table_calculation,
@@ -241,8 +241,8 @@
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
-    y_axes: [{label: '', orientation: left, series: [{axisId: search_estrutura_atrib_st.Valor_FOB,
-            id: search_estrutura_atrib_st.Valor_FOB, name: Valor FOB}], showLabels: false,
+    y_axes: [{label: '', orientation: left, series: [{axisId: search_estrutura_atrib_st.Estimativa_Valor_Total,
+            id: search_estrutura_atrib_st.Estimativa_Valor_Total, name: Valor FOB}], showLabels: false,
         showValues: false, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
         type: linear}]
     limit_displayed_rows_values:
@@ -251,7 +251,7 @@
       num_rows: '3'
     series_types: {}
     series_colors:
-      search_estrutura_atrib_st.Valor_FOB: "#7a7a7a"
+      search_estrutura_atrib_st.Estimativa_Valor_Total: "#7a7a7a"
       MARÍTIMO: "#aaf52d"
       ENTRADA/SAÍDA FICTA: "#525252"
       AÉREO: "#848484"
@@ -271,7 +271,7 @@
     truncate_text: true
     size_to_fit: true
     series_cell_visualizations:
-      search_estrutura_atrib_st.Valor_FOB:
+      search_estrutura_atrib_st.Estimativa_Valor_Total:
         is_active: true
     table_theme: white
     enable_conditional_formatting: false
@@ -282,7 +282,7 @@
     conditional_formatting_include_nulls: false
     theme: classic
     show_full_field_name: false
-    hidden_fields: [search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.Valor_FOB]
+    hidden_fields: [search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.Estimativa_Valor_Total]
     hidden_points_if_no: []
     defaults_version: 1
     hide_totals: false
@@ -302,12 +302,12 @@
     model: external_st_importacoes_postgres
     explore: search_estrutura_atrib_st
     type: looker_column
-    fields: [search_estrutura_atrib_st.Valor_FOB, search_estrutura_atrib_st.importador_nome]
+    fields: [search_estrutura_atrib_st.Estimativa_Valor_Total, search_estrutura_atrib_st.importador_nome]
     filters:
       search_estrutura_atrib_st.importador_check: 'Yes'
-    sorts: [search_estrutura_atrib_st.Valor_FOB desc]
+    sorts: [search_estrutura_atrib_st.Estimativa_Valor_Total desc]
     limit: 500
-    dynamic_fields: [{_kind_hint: measure, table_calculation: valor_fob, _type_hint: number,
+    dynamic_fields: [{_kind_hint: measure, table_calculation: Estimativa_Valor_Total, _type_hint: number,
         category: table_calculation, expression: "${search_estrutura_atrib_st.fob_sum}",
         label: Valor FOB, value_format: !!null '', value_format_name: usd_0, is_disabled: true},
       {_kind_hint: measure, table_calculation: volume, _type_hint: number, category: table_calculation,
@@ -340,8 +340,8 @@
     show_totals_labels: false
     show_silhouette: false
     totals_color: "#808080"
-    y_axes: [{label: '', orientation: left, series: [{axisId: search_estrutura_atrib_st.Valor_FOB,
-            id: search_estrutura_atrib_st.Valor_FOB, name: Valor FOB}], showLabels: false,
+    y_axes: [{label: '', orientation: left, series: [{axisId: search_estrutura_atrib_st.Estimativa_Valor_Total,
+            id: search_estrutura_atrib_st.Estimativa_Valor_Total, name: Valor FOB}], showLabels: false,
         showValues: false, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
         type: linear}]
     limit_displayed_rows_values:
@@ -350,7 +350,7 @@
       num_rows: '5'
     series_types: {}
     series_colors:
-      search_estrutura_atrib_st.Valor_FOB: "#7a7a7a"
+      search_estrutura_atrib_st.Estimativa_Valor_Total: "#7a7a7a"
     series_labels: {}
     theme: classic
     show_full_field_name: false

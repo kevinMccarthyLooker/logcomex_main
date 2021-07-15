@@ -938,7 +938,7 @@ view: search_estrutura_atrib_st {
     sql: ${val_vmle_us_subitem};;
   }
 
-  measure: Valor_FOB { # soma do valor fob usado na tabela dinamica
+  measure: Estimativa_Valor_Total{ # soma do valor fob usado na tabela dinamica
     type: sum
     sql: ${val_vmle_us_subitem};;
     value_format: "$#,##0.00"
@@ -946,7 +946,7 @@ view: search_estrutura_atrib_st {
 
   measure: percent_of_total_valor_FOB {
     type: percent_of_total
-    sql: ${Valor_FOB} ;;
+    sql: ${Estimativa_Valor_Total} ;;
   }
 
   measure: qtde_comerc_sum {
