@@ -11,7 +11,7 @@ view: comex_analytics_di {
   dimension: di_number {
     type: number
     sql: ${TABLE}.di_completo ;;
-    value_format: "##-########-#"
+    value_format: "#-########-##"
   }
 
   dimension_group: data_hora_registro {
@@ -444,8 +444,9 @@ view: comex_analytics_di {
 
   measure: valor_multa_total {
     type: sum
+    filters: [val_multa: ">0"]
     sql: ${TABLE}."val_multa";;
-    drill_fields: [DI*]
+    drill_fields: [DI_multa*]
   }
 
   measure: data_hora_registro {
@@ -482,6 +483,17 @@ view: comex_analytics_di {
       nome_representante,
       importador_cnpj,
       importador_nome,
+    ]
+  }
+
+  set: DI_multa {
+    fields: [
+      di_number,
+      cpf_representante,
+      nome_representante,
+      importador_cnpj,
+      importador_nome,
+      valor_multa_total
     ]
   }
 
