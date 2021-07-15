@@ -11,7 +11,7 @@ view: comex_analytics_di {
   dimension: di_number {
     type: number
     sql: ${TABLE}.di_completo ;;
-    value_format: "##/########-#"
+    value_format: "##'/'########'-'#"
   }
 
   dimension_group: data_hora_registro {
