@@ -1,6 +1,6 @@
 view: norm_cpf_di_pu {
   derived_table: {
-    sql: SELECT * FROM di_sistema.norm_cpf_di_pu_bronze LIMIT 10
+    sql: SELECT * FROM di_sistema.norm_cpf_di_pu_bronze
       ;;
   }
 
