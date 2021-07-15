@@ -853,8 +853,6 @@
     value_labels: legend
     label_type: labPer
     defaults_version: 1
-    note_state: collapsed
-    note_display: below
     listen:
       NCM: search_estrutura_atrib_st.cdncm_compl
       Produto: search_estrutura_atrib_st.produto
@@ -930,9 +928,6 @@
     label_type: labPer
     defaults_version: 1
     hidden_fields: [search_estrutura_atrib_st.qtde_comerc_sum, search_estrutura_atrib_st.fob_sum]
-    note_state: collapsed
-    note_display: below
-    note_text: Considera apenas o tipo UNIDADE.
     listen:
       NCM: search_estrutura_atrib_st.cdncm_compl
       Produto: search_estrutura_atrib_st.produto
@@ -1668,9 +1663,6 @@
     hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_min, search_estrutura_atrib_st.val_fob_un_us_max,
       search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_p25,
       search_estrutura_atrib_st.val_fob_un_us_med, search_estrutura_atrib_st.val_fob_un_us_p75]
-    note_state: collapsed
-    note_display: below
-    note_text: Considera apenas o tipo UNIDADE.
     listen:
       NCM: search_estrutura_atrib_st.cdncm_compl
       Produto: search_estrutura_atrib_st.produto
@@ -1802,9 +1794,6 @@
     hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_min, search_estrutura_atrib_st.val_fob_un_us_max,
       search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_p25,
       search_estrutura_atrib_st.val_fob_un_us_med, search_estrutura_atrib_st.val_fob_un_us_p75]
-    note_state: collapsed
-    note_display: below
-    note_text: Considera apenas o tipo UNIDADE.
     listen:
       NCM: search_estrutura_atrib_st.cdncm_compl
       Produto: search_estrutura_atrib_st.produto
@@ -1927,9 +1916,6 @@
     hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_min, search_estrutura_atrib_st.val_fob_un_us_max,
       search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_p25,
       search_estrutura_atrib_st.val_fob_un_us_med, search_estrutura_atrib_st.val_fob_un_us_p75]
-    note_state: collapsed
-    note_display: below
-    note_text: Considera apenas o tipo UNIDADE.
     listen:
       NCM: search_estrutura_atrib_st.cdncm_compl
       Produto: search_estrutura_atrib_st.produto
@@ -2061,9 +2047,6 @@
     hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_min, search_estrutura_atrib_st.val_fob_un_us_max,
       search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_p25,
       search_estrutura_atrib_st.val_fob_un_us_med, search_estrutura_atrib_st.val_fob_un_us_p75]
-    note_state: collapsed
-    note_display: below
-    note_text: Considera apenas o tipo UNIDADE.
     listen:
       NCM: search_estrutura_atrib_st.cdncm_compl
       Produto: search_estrutura_atrib_st.produto
@@ -2407,9 +2390,6 @@
     hidden_fields: [search_estrutura_atrib_st.val_fob_un_us_min, search_estrutura_atrib_st.val_fob_un_us_max,
       search_estrutura_atrib_st.fob_sum, search_estrutura_atrib_st.val_fob_un_us_p25,
       search_estrutura_atrib_st.val_fob_un_us_med, search_estrutura_atrib_st.val_fob_un_us_p75]
-    note_state: collapsed
-    note_display: below
-    note_text: Considera apenas o tipo UNIDADE.
     listen:
       NCM: search_estrutura_atrib_st.cdncm_compl
       Produto: search_estrutura_atrib_st.produto
