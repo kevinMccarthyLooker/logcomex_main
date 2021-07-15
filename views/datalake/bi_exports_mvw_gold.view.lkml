@@ -1349,7 +1349,7 @@ view: bi_exports_mvw_gold {
     drill_fields: []
   }
 
-########################## ----> Itens adicionados / alterados <---- ##########################
+########################## ----> Itens adicionados / alterados <---- #############################
 
   dimension: mar_teus_dimension {
     type: number
