@@ -2449,7 +2449,7 @@
   - name: Tipo Unidade
     title: Tipo Unidade
     type: field_filter
-    default_value: ''
+    default_value: UNIDADE
     allow_multiple_values: true
     required: true
     ui_config:

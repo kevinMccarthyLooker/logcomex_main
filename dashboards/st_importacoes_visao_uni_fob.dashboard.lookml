@@ -1,4 +1,4 @@
-- dashboard: st_importacoes_visao_uni_fob
+- dashboard: viso_de_mercado_unificado__valor_fob
   title: Visão de Mercado Unificado - Valor FOB
   layout: newspaper
   preferred_viewer: dashboards-next
@@ -2257,9 +2257,6 @@
     label_type: labPer
     defaults_version: 1
     hidden_fields: [search_estrutura_atrib_st.fob_sum]
-    note_state: expanded
-    note_display: below
-    note_text: Considera apenas o tipo UNIDADE.
     listen:
       NCM: search_estrutura_atrib_st.cdncm_compl
       Produto: search_estrutura_atrib_st.produto
