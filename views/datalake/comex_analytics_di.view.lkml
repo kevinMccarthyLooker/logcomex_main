@@ -444,7 +444,7 @@ view: comex_analytics_di {
 
   measure: valor_multa_total {
     type: sum
-    filters: [val_multa: ">0"]
+    ##filters: [val_multa: ">0"]
     sql: ${TABLE}."val_multa";;
     drill_fields: [DI_multa*]
   }
