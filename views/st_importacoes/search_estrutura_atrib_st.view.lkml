@@ -1019,4 +1019,28 @@ view: search_estrutura_atrib_st {
     percentile: 75
     sql: ${val_fob_un_us};;
   }
+
+  measure: count_dsc_departamento {
+    type: count_distinct
+    sql:${TABLE}.dsc_departamento ;;
+    drill_fields: [departamento]
+  }
+
+  measure: count_dsc_familia {
+    type: count_distinct
+    sql:${TABLE}.dsc_familia ;;
+    drill_fields: [familia]
+  }
+
+  measure: count_dsc_linha{
+    type: count_distinct
+    sql:${TABLE}.dsc_linha ;;
+    drill_fields: [linha]
+  }
+
+  measure: count_dsc_subfamilia{
+    type: count_distinct
+    sql:${TABLE}.dsc_subfamilia ;;
+    drill_fields: [subfamilia]
+  }
 }
