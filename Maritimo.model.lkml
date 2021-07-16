@@ -64,6 +64,11 @@ explore: antaqxmaritimo_exp {
   label: "Exp AntaqMaritimo"
 }
 
+explore: teste_health_data {}
+explore: teste_health_data_exp{}
+
+
+
 explore: antaqxmaritimo {
   label: " Imp AntaqMaritimo"
   persist_with: antaq_datagroup
