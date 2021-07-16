@@ -52,6 +52,11 @@ view: comex_a_logdrive_up {
     sql: ${TABLE}.size ;;
   }
 
+  dimension: size_num {
+    type: string
+    sql: ${TABLE}.size_num ;;
+  }
+
   dimension: type {
     type: string
     sql: ${TABLE}.type ;;
@@ -83,6 +88,6 @@ view: comex_a_logdrive_up {
 
   measure: sum_size {
     type: sum
-    sql: ${size} ;;
+    sql: ${size_num} ;;
   }
 }
