@@ -161,6 +161,6 @@ view: comex_a_extraction {
 
   measure: count {
     type: count
-    drill_fields: [id, customer_name]
+    drill_fields: [id, customer_name,certificate_v2_id,user_email,dsc_status,created_date]
   }
 }

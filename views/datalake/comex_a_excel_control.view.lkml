@@ -1,5 +1,5 @@
-view: comex_a_logdrive_up {
-  sql_table_name: comex_a_consumo.comex_a_logdrive_up ;;
+view: comex_a_excel_control {
+  sql_table_name: comex_a_consumo.comex_a_excel_control ;;
   drill_fields: [id]
 
   dimension: id {
@@ -29,32 +29,40 @@ view: comex_a_logdrive_up {
 
   dimension: customer_name {
     type: string
-    sql: ${TABLE}.customer_name ;;
-  }
-
-  dimension: email {
-    type: string
-    sql: ${TABLE}.email ;;
-  }
-
-  dimension: extension {
-    type: string
-    sql: ${TABLE}.extension ;;
-  }
-
-  dimension: name {
-    type: string
     sql: ${TABLE}.name ;;
   }
 
-  dimension: size {
+  dimension: pid {
     type: string
-    sql: ${TABLE}.size ;;
+    sql: ${TABLE}.pid ;;
   }
 
-  dimension: type {
+  dimension: status {
+    type: number
+    sql: ${TABLE}.status ;;
+  }
+
+  dimension: dsc_status {
     type: string
-    sql: ${TABLE}.type ;;
+    sql:
+    case
+    when ${TABLE}.status = 0 then 'Pending'
+    when ${TABLE}.status = 1 then 'Processing'
+    when ${TABLE}.status = 2 then 'Processed'
+    when ${TABLE}.status = 3 then 'Error'
+    when ${TABLE}.status = 4 then 'Success'
+    else cast(${TABLE}.status as text)
+    end;;
+  }
+
+  dimension: submodule {
+    type: string
+    sql: ${TABLE}.submodule ;;
+  }
+
+  dimension: token {
+    type: string
+    sql: ${TABLE}.token ;;
   }
 
   dimension_group: updated {
@@ -71,6 +79,11 @@ view: comex_a_logdrive_up {
     sql: ${TABLE}.updated_at ;;
   }
 
+  dimension: user_email {
+    type: string
+    sql: ${TABLE}.user_email ;;
+  }
+
   dimension: user_id {
     type: number
     sql: ${TABLE}.user_id ;;
@@ -78,11 +91,6 @@ view: comex_a_logdrive_up {
 
   measure: count {
     type: count
-    drill_fields: [id, customer_name, email, size, created_date]
-  }
-
-  measure: sum_size {
-    type: sum
-    sql: ${size} ;;
+    drill_fields: [id, customer_name, user_email,dsc_status,created_date]
   }
 }
