@@ -108,6 +108,7 @@ from (
       valor_reais,
       recinto_aduaneiro_destino
 FROM bi_imports_mvw
+WHERE data_operacao >= DATE(current_date - interval '90 days')
 ) as t
   cross join jsonb_each_text(to_jsonb(t)) as d(col, value)
 group by d.col,t.data_operacao,t.tipoconhecimento
