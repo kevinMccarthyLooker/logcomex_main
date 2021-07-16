@@ -110,7 +110,7 @@ from (
 FROM bi_imports_mvw
 ) as t
   cross join jsonb_each_text(to_jsonb(t)) as d(col, value)
-group by d.col,t.dtoperacao,t.tipoconhecimento
+group by d.col,t.data_operacao,t.tipoconhecimento
  ;;
     #sql_trigger_value: SELECT FLOOR(EXTRACT(epoch from NOW())/(168*60*60)) ;;
     }
