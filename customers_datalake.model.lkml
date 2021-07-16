@@ -8,6 +8,7 @@ include: "/**/metrica_tracking.view.lkml"
 include: "/**/consumo_automacao.view.lkml"
 include: "/**/comex_a_logdrive_up.view.lkml"
 include: "/**/comex_a_extraction.view.lkml"
+include: "/**/comex_a_excel_control.view.lkml"
 
 explore: consumo_automacao {} # consumo da api de automacao do logbot por certificado e empresa
 
@@ -21,6 +22,8 @@ explore: metrica_tracking {}
 
 explore: metrica_search_fob {}
 
-explore: comex_a_extraction {}
+explore: comex_a_extraction {} # siscomex restituicao
 
-explore: comex_a_logdrive_up {}
+explore: comex_a_logdrive_up {} #logdrive
+
+explore: comex_a_excel_control {} # extracao de DIs
