@@ -44,15 +44,7 @@ view: comex_a_excel_control {
 
   dimension: dsc_status {
     type: string
-    sql:
-    case
-    when ${TABLE}.status = 0 then 'Pending'
-    when ${TABLE}.status = 1 then 'Processing'
-    when ${TABLE}.status = 2 then 'Processed'
-    when ${TABLE}.status = 3 then 'Error'
-    when ${TABLE}.status = 4 then 'Success'
-    else cast(${TABLE}.status as text)
-    end;;
+    sql: ${TABLE}.dsc_status;;
   }
 
   dimension: submodule {
