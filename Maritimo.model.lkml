@@ -13,6 +13,7 @@ include: "/views/db_siscori_cod_ncm.view.lkml"
 include: "/views/db_siscori_incoterm.view.lkml"
 include: "/**/client_documents_by_method.view.lkml"
 include: "/views/health_imp_house_direto.view.lkml"
+include: "/views/teste_health_imp_house_direto.view.lkml"
 include: "/views/health_data_exp.view.lkml"
 include: "/views/teste_health_data_exp.view.lkml"
 include: "/views/health_nome_exp.view.lkml"
@@ -81,7 +82,10 @@ persist_with: health_datagroup
   label:"health_data_exp_mvw"
 }
 
-
+explore: teste_health_imp_house_direto {
+  persist_with: health_datagroup
+  label:"health_imp_house_direto_mvw"
+}
 
 explore: antaqxmaritimo {
   label: " Imp AntaqMaritimo"

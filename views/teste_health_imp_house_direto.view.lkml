@@ -1,69 +1,77 @@
 view: teste_health_imp_house_direto {
-  # # You can specify the table name if it's different from the view name:
-  # sql_table_name: my_schema_name.tester ;;
-  #
-  # # Define your dimensions and measures here, like this:
-  # dimension: user_id {
-  #   description: "Unique ID for each user that has ordered"
-  #   type: number
-  #   sql: ${TABLE}.user_id ;;
-  # }
-  #
-  # dimension: lifetime_orders {
-  #   description: "The total number of orders for each user"
-  #   type: number
-  #   sql: ${TABLE}.lifetime_orders ;;
-  # }
-  #
-  # dimension_group: most_recent_purchase {
-  #   description: "The date when each user last ordered"
-  #   type: time
-  #   timeframes: [date, week, month, year]
-  #   sql: ${TABLE}.most_recent_purchase_at ;;
-  # }
-  #
-  # measure: total_lifetime_orders {
-  #   description: "Use this for counting lifetime orders across many users"
-  #   type: sum
-  #   sql: ${lifetime_orders} ;;
-  # }
-}
+  derived_table: {
+    sql: select
 
-# view: teste_health_imp_house_direto {
-#   # Or, you could make this view a derived table, like this:
-#   derived_table: {
-#     sql: SELECT
-#         user_id as user_id
-#         , COUNT(*) as lifetime_orders
-#         , MAX(orders.created_at) as most_recent_purchase_at
-#       FROM orders
-#       GROUP BY user_id
-#       ;;
-#   }
-#
-#   # Define your dimensions and measures here, like this:
-#   dimension: user_id {
-#     description: "Unique ID for each user that has ordered"
-#     type: number
-#     sql: ${TABLE}.user_id ;;
-#   }
-#
-#   dimension: lifetime_orders {
-#     description: "The total number of orders for each user"
-#     type: number
-#     sql: ${TABLE}.lifetime_orders ;;
-#   }
-#
-#   dimension_group: most_recent_purchase {
-#     description: "The date when each user last ordered"
-#     type: time
-#     timeframes: [date, week, month, year]
-#     sql: ${TABLE}.most_recent_purchase_at ;;
-#   }
-#
-#   measure: total_lifetime_orders {
-#     description: "Use this for counting lifetime orders across many users"
-#     type: sum
-#     sql: ${lifetime_orders} ;;
-#   }
-# }
+                   d.col,
+                   count(*) filter (where value is null) as null_count,
+                   count(*) filter (where value is not null) as not_null_count
+            from (
+                 select
+
+                 data_saida AS "SAÍDA PORTO",
+                 recinto_aduaneiro_destino as "LOCAL DE LIBERAÇÃO"
+
+            FROM bi_imports_mvw
+            WHERE data_operacao >= DATE(current_date - interval '90 days')
+            AND tipoconhecimento in ('10','12')
+                ) as t
+              cross join jsonb_each_text(to_jsonb(t)) as d(col, value)
+            group by d.col
+
+            UNION ALL
+
+            select
+
+                   d.col,
+                   count(*) filter (where value is null) as null_count,
+                   count(*) filter (where value is not null) as not_null_count
+            from (
+                 select
+
+                      cdnotifypart AS "NOTIFICADO"
+
+            FROM bi_imports_mvw
+            WHERE data_operacao >= DATE(current_date - interval '90 days')
+            AND tipoconhecimento in ('10','12')
+            and (nmconsignatario like '% TRADE %' or nmconsignatario like '% TRADING %')
+                 ) as t
+              cross join jsonb_each_text(to_jsonb(t)) as d(col, value)
+            group by d.col
+
+            UNION ALL
+
+            select  armazem_destino,
+                    release_location AS "LOCAL DE LIBERACAO"
+            from bi_imports_mvw
+              WHERE tipoconhecimento in ('10','12')
+              AND data_operacao >= DATE(current_date - interval '90 days')
+             ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [detail*]
+  }
+
+  dimension: col {
+    type: string
+    sql: ${TABLE}."col" ;;
+    label: "Coluna"
+  }
+
+  dimension: null_count {
+    type: number
+    sql: ${TABLE}."null_count" ;;
+    label: "Nulo"
+  }
+
+  dimension: not_null_count {
+    type: number
+    sql: ${TABLE}."not_null_count" ;;
+    label: "Preenchido"
+  }
+
+  set: detail {
+    fields: [col, null_count, not_null_count]
+  }
+}
