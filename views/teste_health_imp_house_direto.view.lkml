@@ -43,7 +43,7 @@ view: teste_health_imp_house_direto {
             select  armazem_destino,
                     release_location AS "LOCAL DE LIBERACAO"
             from bi_imports_mvw
-              and tipoconhecimento in ('10','12')
+              WHERE tipoconhecimento in ('10','12')
               AND data_operacao >= DATE(current_date - interval '90 days')
              ;;
   }
