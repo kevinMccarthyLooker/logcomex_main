@@ -14,7 +14,7 @@ from (
       id  ,
       ano_mes ,
       tipo_carga AS "TIPO CARGA" ,
-      data_embarque AS "dtoperacao",
+      data_embarque ,
       embarque  ,
       embarque_id AS "EMBARQUE",
       navio AS "NAVIO",
