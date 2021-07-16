@@ -5,7 +5,7 @@ view: teste_health_data {
     sql: select
        --CASE t.tipoconhecimento WHEN '10' THEN 'DIRETO' WHEN '11' THEN 'MASTER' WHEN '12' THEN 'HOUSE' WHEN '15' THEN 'SUB' ELSE '' END,
        t.tipoconhecimento,
-       t.dtoperacao,
+       t.data_operacao,
        d.col,
        count(*) filter (where value is null) as null_count,
        count(*) filter (where value is not null) as not_null_count,
