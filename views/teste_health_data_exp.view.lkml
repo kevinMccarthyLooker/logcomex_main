@@ -88,6 +88,7 @@ from (
       cdshipper
       FROM bi_exports_mvw
       WHERE data_embarque >= DATE(current_date - interval '90 days')
+      AND tipoconhecimento in ('10','11')
     ) as t
   cross join jsonb_each_text(to_jsonb(t)) as d(col, value)
 group by d.col,t.data_embarque,t.tipoconhecimento

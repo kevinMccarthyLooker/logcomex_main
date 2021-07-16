@@ -9,9 +9,8 @@ view: comex_analytics_di {
   }
 
   dimension: di_number {
-    type: number
+    type: string
     sql: ${TABLE}.di_completo ;;
-    value_format: "#-########-##"
   }
 
   dimension_group: data_hora_registro {

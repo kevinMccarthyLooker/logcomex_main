@@ -73,10 +73,12 @@ datagroup: health_datagroup {
 
 explore: teste_health_data {
   persist_with: health_datagroup
+  label:"health_data_mvw"
 }
 
 explore: teste_health_data_exp{
 persist_with: health_datagroup
+  label:"health_data_exp_mvw"
 }
 
 
