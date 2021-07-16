@@ -106,7 +106,7 @@ from (
       tipo_dta,
       valor_dolar,
       valor_reais,
-      recinto_aduaneiro_destino,
+      recinto_aduaneiro_destino
 FROM bi_imports_mvw
 ) as t
   cross join jsonb_each_text(to_jsonb(t)) as d(col, value)

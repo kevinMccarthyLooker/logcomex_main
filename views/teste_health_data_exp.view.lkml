@@ -85,7 +85,7 @@ from (
       agente_internacional  ,
       ano_operacao  ,
       tipoconhecimento  ,
-      cdshipper ,
+      cdshipper
       FROM bi_exports_mvw
     ) as t
   cross join jsonb_each_text(to_jsonb(t)) as d(col, value)
