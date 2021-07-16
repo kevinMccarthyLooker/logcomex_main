@@ -679,6 +679,16 @@ view: visao_mercado_template {
     end ;;
   }
 
+  dimension: exportador_colorido {
+    type: string
+    sql: ${exportador_nome} ;;
+    html: {% if value == 'ST IMPORTACOES LTDA' %}
+            <font color="green">{{ exportador_nome }}</font>
+          {% else %}
+            <font color="black">{{ exportador_nome }}</font>
+          {% endif %};;
+  }
+
   dimension: exportador_check {
     type: yesno
     sql:
@@ -789,7 +799,7 @@ view: visao_mercado_template {
     type: yesno
     sql:
     case
-    when ${material} is null then false
+    when ${TABLE}.material is null or ${TABLE}.material = '' then false
     else true
     end;;
   }
