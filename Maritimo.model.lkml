@@ -64,8 +64,20 @@ explore: antaqxmaritimo_exp {
   label: "Exp AntaqMaritimo"
 }
 
-explore: teste_health_data {}
-explore: teste_health_data_exp{}
+
+datagroup: health_datagroup {
+  sql_trigger: SELECT CURRENT_DATE ;;
+  max_cache_age: "24 hours"
+  label: "health_datagroup"
+}
+
+explore: teste_health_data {
+  persist_with: health_datagroup
+}
+
+explore: teste_health_data_exp{
+persist_with: health_datagroup
+}
 
 
 
